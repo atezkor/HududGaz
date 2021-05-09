@@ -7,7 +7,6 @@
     <title>HududGaz | Yangi foydalanuvchi</title>
     <link rel="shortcut icon" href="{{'/img/favicon.png'}}" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- CSS links -->
     <link rel="stylesheet" href="{{'/css/adminlte.min.css'}}">
     <!-- This is link for checkbox -->
@@ -26,7 +25,6 @@
             <form action="" method="POST">
                 @csrf
                 <div class="input-group mb-3">
-                    {{-- old funksiyasi tasdiqlanmagan maydonni qayta to'ldrish uchun kerak --}}
                     <input type="email" name="email" value="{{old('email')}}" class="form-control" placeholder="E-pochta">
                     <div class="input-group-append">
                         <div class="input-group-text">

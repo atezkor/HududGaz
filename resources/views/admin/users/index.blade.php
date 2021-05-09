@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-{{--                    @include('voyager::alerts')--}}
+{{--                    @include('components.alerts')--}}
                     <div class="card">
                         <div class="card-header">
                             @can('add_users')
@@ -69,4 +69,12 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('javascript')
+    // <script>
+//         $('#search').keyup(function() {
+//
+//         })
+//     </script>
 @endsection

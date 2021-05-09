@@ -1,4 +1,15 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <style>
+        .nav-link.logout {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link.logout i {
+            margin-right: 2px;
+        }
+    </style>
+
     <!-- navbar left -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -39,8 +50,8 @@
                     <img src="{{'/img/profile/user1.jpg'}}" class="img-circle elevation-2" alt="img">
                 </div>
                 <div class="info">
-                    <a href="/" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
-                        user->name
+                    <a href="{{route('login')}}" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
+                        {{auth()->user()->name}}
                     </a>
                 </div>
             </div>
@@ -54,15 +65,5 @@
                 </button>
             </form>
         </li>
-        <style>
-            .nav-link.logout {
-                display: flex;
-                align-items: center;
-            }
-
-            .nav-link.logout i {
-                margin-right: 2px;
-            }
-        </style>
     </ul>
 </nav>
