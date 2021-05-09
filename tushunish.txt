@@ -22,3 +22,7 @@
 git status -- git dagi fayllar holati
 git remote -- masofaviy serverga ulanganini tekshirish
 git config
+
+
+/* Laravelda mavjud jadvalga ustun qo'shish */
+php artisan make:migration add_column_to_user --table="users"  //
