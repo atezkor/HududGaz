@@ -4,20 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller {
 
-    public function login(): Factory|View|Application|RedirectResponse {
+    public function login(): View|RedirectResponse {
         if (auth()->user())
             return redirect()->route('dashboard');
 
         return view('login');
+    }
+
+    /*
+     * This function for logout
+    */
+    public function logout(): RedirectResponse {
+        auth()->logout();
+        return redirect('/');
     }
 
     public function postLogin(UserRequest $request): RedirectResponse {
@@ -34,7 +39,7 @@ class AuthController extends Controller {
         return redirect()->route('login');
     }
 
-    public function Registration(UserRequest $request): Redirector|Application|RedirectResponse {
+    public function Registration(UserRequest $request): RedirectResponse {
         if (auth()->user())
             return redirect('/');
 
@@ -48,7 +53,7 @@ class AuthController extends Controller {
         return redirect()->route('login');
     }
 
-    public function regPage(): View|Factory|RedirectResponse|Application {
+    public function regPage(): View|RedirectResponse {
         if (auth()->user())
             return redirect()->route('dashboard');
 
