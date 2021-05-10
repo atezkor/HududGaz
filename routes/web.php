@@ -12,15 +12,23 @@ Route::post('/reg', [AuthController::class, 'Registration'])->name('regPost');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin routes
-Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/', function() {return redirect('/');});
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+    Route::get('/equipments', [UserController::class, 'index'])->name('admin.equipments');
+    Route::get('/designers', [UserController::class, 'index'])->name('admin.designers');
+    Route::get('/mounters', [UserController::class, 'index'])->name('admin.mounters');
+    Route::get('/settings', [UserController::class, 'index'])->name('admin.settings');
+    Route::get('/regions', [UserController::class, 'index'])->name('admin.regions');
+    Route::get('/statuses', [UserController::class, 'index'])->name('admin.statuses');
+    Route::get('/activity-type', [UserController::class, 'index'])->name('admin.activities');
+    Route::get('/timetable', [UserController::class, 'index'])->name('admin.timetable');
+});
 
 # main route - in route distribution by to roles
-Route::get('/', function () {
+Route::get('/', function() {
     if (auth()->user() == null)
         return redirect()->route('login');
 
-//    $role_name = auth()->user()->getAuthPassword();
-
     return redirect()->route('admin.users');
-//    return redirect()->route('login');
 })->name('dashboard');

@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
 
     <!-- CSS links -->
+    <link rel="stylesheet" href="{{'/css/sans-pro.css'}}">
     <link rel="stylesheet" href="{{'/css/adminlte.min.css'}}">
     <link rel="stylesheet" href="{{'/css/font-awesome-all.min.css'}}">
     <!-- Additional CSS files -->
@@ -17,13 +18,12 @@
     <div class="preloader flex-column justify-content-center align-items-center">
         <img src="{{'/img/logo.png'}}" alt="logo" class="animation__shake" width="30%">
     </div>
-    <div class="wrapper">
-        @include('components.navbar')
-        @include('components.sidebar')
+    @include('components.navbar')
+    @include('components.sidebar')
 
-        <div class="content-wrapper">
-            @yield('content')
-        </div>
+    <!-- <div class="wrapper"></div>-->
+    <div class="content-wrapper">
+        @yield('content')
     </div>
 
     <script src="{{'/js/jquery.min.js'}}"></script>

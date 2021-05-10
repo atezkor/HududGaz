@@ -14,10 +14,11 @@ class UserController extends Controller {
 
     public function index(): View|Factory|RedirectResponse|Application {
 //        try {
-//            $this->authorize('browse_user');
+//            $this->authorize('browse_users');
 //        } catch (AuthorizationException) {
-//            return redirect()->route('dashboard');
+//            return redirect('')->route('dashboard');
 //        }
+
         App::setLocale('uz');
 //        session()->put('locale', 'uz');
 

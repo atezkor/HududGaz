@@ -72,9 +72,12 @@
 @endsection
 
 @section('javascript')
-    // <script>
-//         $('#search').keyup(function() {
-//
-//         })
-//     </script>
+    <script>
+        $('#search').keyup(function() {
+            let qiymat = $(this).val();
+            $('tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(qiymat) > -1)
+            })
+        })
+     </script>
 @endsection

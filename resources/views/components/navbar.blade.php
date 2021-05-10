@@ -51,7 +51,7 @@
                 </div>
                 <div class="info">
                     <a href="{{route('login')}}" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
-                        {{auth()->user()->name}}
+                        {{auth()->user()->name ?? ''}}
                     </a>
                 </div>
             </div>
