@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,11 +14,11 @@ use Illuminate\Support\Facades\App;
 class UserController extends Controller {
 
     public function index(): View|Factory|RedirectResponse|Application {
-//        try {
-//            $this->authorize('browse_users');
-//        } catch (AuthorizationException) {
-//            return redirect('')->route('dashboard');
-//        }
+        try {
+            $this->authorize('show', UserController::class);
+        } catch (AuthorizationException) {
+            // return redirect('/logout');
+        }
 
         App::setLocale('uz');
 //        session()->put('locale', 'uz');

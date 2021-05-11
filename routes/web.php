@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,15 +15,17 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Admin routes
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', function() {return redirect('/');});
-    Route::get('/users', [UserController::class, 'index'])->name('admin.users');
-    Route::get('/equipments', [UserController::class, 'index'])->name('admin.equipments');
-    Route::get('/designers', [UserController::class, 'index'])->name('admin.designers');
-    Route::get('/mounters', [UserController::class, 'index'])->name('admin.mounters');
-    Route::get('/settings', [UserController::class, 'index'])->name('admin.settings');
-    Route::get('/regions', [UserController::class, 'index'])->name('admin.regions');
-    Route::get('/statuses', [UserController::class, 'index'])->name('admin.statuses');
-    Route::get('/activity-type', [UserController::class, 'index'])->name('admin.activities');
-    Route::get('/timetable', [UserController::class, 'index'])->name('admin.timetable');
+    resource('users', UserController::class, 'admin.users');
+    resource('equipments', EquipmentController::class, 'admin.equipments');
+    resource('designers', UserController::class, 'admin.designers');
+    resource('mounters', UserController::class, 'admin.mounters');
+    resource('regions', UserController::class, 'admin.regions');
+    resource('statuses', UserController::class, 'admin.statuses');
+    resource('activity-types', UserController::class, 'admin.activities');
+
+    Route::get('equipment-types', [EquipmentController::class, 'show'])->name('admin.equipment_type');
+    Route::get('timetable', [UserController::class, 'admin.timetable'])->name('admin.timetable');
+    Route::get('settings', [UserController::class, 'admin.settings'])->name('admin.settings');
 });
 
 # main route - in route distribution by to roles
@@ -30,5 +33,5 @@ Route::get('/', function() {
     if (auth()->user() == null)
         return redirect()->route('login');
 
-    return redirect()->route('admin.users');
+    return redirect()->route('admin.users.index');
 })->name('dashboard');

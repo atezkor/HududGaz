@@ -18,3 +18,6 @@
 2. `en` papakasidagi yangi papkaga ko'chiriladi
 3. Yangi ma'lumotlarni saqlash uchun yangi fayl yaratladi (table.php)
 
+### Yangi fayllar
+- Xizmatchi sinflarni `app` papkasinign ixitiyoriy joyiga yartib, undan foydalanish mumkin.
+  `namespace App\{Papka nomi};` degan qo'shimha qoo'shilsa yetarli
