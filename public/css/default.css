@@ -1,0 +1,24 @@
+.form {
+    margin-top: -5px;
+}
+
+.data-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.data-form > div {
+    flex-basis: 45%;
+}
+
+.custom-file label::after {
+    content: none;
+}
+
+.custom-file label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    padding-right: 0;
+}

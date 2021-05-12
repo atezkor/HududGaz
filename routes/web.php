@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +24,13 @@ Route::group(['prefix' => 'admin'], function() {
     resource('statuses', UserController::class, 'admin.statuses');
     resource('activity-types', UserController::class, 'admin.activities');
 
-    Route::get('equipment-types', [EquipmentController::class, 'show'])->name('admin.equipment_type');
+    Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');
+    Route::post('equipments/{equipment}/equipment-types', [EquipmentController::class, 'add'])->name('admin.equip_type.add');
+    Route::post('equipments/{equipment}/equipment-types/{type}', [EquipmentController::class, 'renew'])->name('admin.equip_type.renew');
+    Route::post('equipment-types/{type}', [EquipmentController::class, 'del'])->name('admin.equip_type.del');
     Route::get('timetable', [UserController::class, 'admin.timetable'])->name('admin.timetable');
-    Route::get('settings', [UserController::class, 'admin.settings'])->name('admin.settings');
+    Route::get('settings', [OrganizationController::class, 'index'])->name('admin.settings');
+    Route::post('settings', [OrganizationController::class, 'set'])->name('admin.settings.set');
 });
 
 # main route - in route distribution by to roles
@@ -33,5 +38,17 @@ Route::get('/', function() {
     if (auth()->user() == null)
         return redirect()->route('login');
 
-    return redirect()->route('admin.users.index');
+    $role_name = auth()->user()->name ?? '';
+
+    switch ($role_name) {
+        case "admin": return redirect()->route('admin.users.index');
+        case "technic": return redirect()->route('admin.setting');
+        case "region": return redirect()->route('admin.timetable');
+        case "designer": return redirect()->route('admin.equipments.index');
+        case "engineer": return redirect()->route('admin.equipments.create');
+        case "director": return redirect()->route('admin.timetable.index');
+        case "mounter": return redirect()->route('admin.timetable.none');
+    }
+
+    return redirect()->route('login');
 })->name('dashboard');

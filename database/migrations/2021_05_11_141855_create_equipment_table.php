@@ -11,9 +11,8 @@ class CreateEquipmentTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('equipment', function (Blueprint $table) {
+    public function up() {
+        Schema::create('equipments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -25,8 +24,7 @@ class CreateEquipmentTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('equipment');
     }
 }

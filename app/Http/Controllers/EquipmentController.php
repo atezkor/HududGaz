@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EquipmentRequest;
 use App\Models\Equipment;
+use App\Models\EquipmentType;
 use App\Services\EquipmentService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class EquipmentController extends Controller {
 
@@ -54,16 +56,6 @@ class EquipmentController extends Controller {
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param Equipment $equipment
-     * @return void
-     */
-    public function show(Equipment $equipment) {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Equipment $equipment
@@ -98,5 +90,60 @@ class EquipmentController extends Controller {
     public function destroy(Equipment $equipment): RedirectResponse {
         $this->service->delete($equipment);
         return redirect()->route('admin.equipments.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Equipment $equipment
+     * @return Application|Factory|View
+     */
+    public function show(Equipment $equipment): View|Factory|Application {
+        app()->setLocale('uz');
+
+        $models = $equipment->types()->get();
+        return view('admin.equipments.types', ['equipment' => $equipment, 'method' => 'PUT', 'models' => $models]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Equipment $equipment
+     * @return RedirectResponse
+     */
+    public function add(Request $request, Equipment $equipment): RedirectResponse {
+        $data = [
+            'equipment_id' => $equipment->getAttribute('id'),
+            'type' => $request->get('type'),
+            'order' => $request->get('order'),
+        ];
+
+        $this->service->typeChange(new EquipmentType(), $data);
+        return redirect()->route('admin.equip_type', ['equipment' => $equipment->getAttribute('id')]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Equipment $equipment
+     * @param EquipmentType $type
+     * @return RedirectResponse
+     */
+    public function renew(Request $request, Equipment $equipment, EquipmentType $type): RedirectResponse {
+        $data = [
+            'equipment_id' => $equipment->getAttribute('id'),
+            'type' => $request->get('type'),
+            'order' => $request->get('order'),
+        ];
+
+        $this->service->typeChange($type, $data);
+        return redirect()->route('admin.equip_type', ['equipment' => $equipment->getAttribute('id')]);
+    }
+
+    /**
+     * @param EquipmentType $type
+     * @return RedirectResponse
+     */
+    public function del(EquipmentType $type): RedirectResponse {
+        $type->delete();
+        return redirect()->route('admin.equip_type', ['equipment' => $type->getAttribute('equipment_id')]);
     }
 }

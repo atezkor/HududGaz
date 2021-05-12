@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{'/css/font-awesome-all.min.css'}}">
     <link rel="stylesheet" href="{{'/css/sweetalert2.css'}}">
     <!-- Additional CSS files -->
-    @yield('css')
+    @yield('link')
 </head>
 <body>
     <div class="preloader flex-column justify-content-center align-items-center">

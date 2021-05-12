@@ -6,8 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class UsersSeeder extends Seeder
-{
+class UsersSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
@@ -20,7 +19,7 @@ class UsersSeeder extends Seeder
         $this->creator(4, 'designer', 'designer@gmail.com', 'admin');
         $this->creator(5, 'engineer', 'engineer@gmail.com', 'admin');
         $this->creator(6, 'director', 'director@gmail.com', 'admin', 'uz', 'profile.jpg');
-        $this->creator(7, 'montage_firm', 'montage_firm@gmail.com', 'admin');
+        $this->creator(7, 'mounter', 'mounter@gmail.com', 'admin');
     }
 
     private function creator($role_id, $name, $email, $password = "123456", $locale = 'uzk', $avatar = 'profile.png') {

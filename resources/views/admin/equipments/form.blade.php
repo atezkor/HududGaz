@@ -6,14 +6,14 @@
 
 @section('content')
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
 
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">
-                            @if($method)
+                            @if($method == 'POST')
                                 {{__('table.equipments.heading_create')}}
                             @else
                                 {{__('table.equipments.heading_edit')}}

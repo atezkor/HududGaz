@@ -13,6 +13,10 @@ function resource($url, $controller, $name = null) {
     ]);
 }
 
+function getName(): string {
+    return "HududGaz ta\u{2019}minoti Xorazm filiali";
+}
+
 function MenuItems(): array {
     return [
         'users' => [
@@ -42,7 +46,7 @@ function MenuItems(): array {
     ];
 }
 
-function MenuItemChildrens() {
+function MenuItemChildrens(): array {
     return [
         'settings' => [
             'menu_id' => 1,

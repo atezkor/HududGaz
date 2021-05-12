@@ -9,7 +9,7 @@
 {{--                @include('voyager::alerts')--}}
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('admin.equipments.create')}}" class="btn btn-success">{{__('table.equipments.btn_add')}}</a>
+                        <a href="{{route('admin.equipments.create')}}" class="btn btn-info">{{__('table.equipments.btn_add')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" id="search" class="form-control float-right"
@@ -40,14 +40,14 @@
                                             @csrf
                                             @method('DELETE')
                                             <a class="btn btn-info mr-2"
-                                               href="{{route('admin.equipment_type')}}">
+                                               href="{{route('admin.equip_type', ['equipment' => $model])}}">
                                                 {{__('table.equipments.equip_type')}}
                                             </a>
                                             <a class="btn btn-warning" title="{{__('table.btn_edit')}}"
                                                    href="{{route('admin.equipments.edit', ['equipment' => $model])}}"
                                                    role="button"><i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <button type="button" class="btn btn-danger" role="button" onclick="Delete('form-{{$model->id}}')"
+                                            <button type="button" class="btn btn-danger" role="button" onclick="remove('form-{{$model->id}}')"
                                                     data-toggle="tooltip" title="{{__('table.btn_delete')}}">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
@@ -73,7 +73,7 @@
         })
     });
 
-    function Delete(form) {
+    function remove(form) {
         Swal.fire({
             title: '{{__('table.equipments.alert_message')}}',
             text: "{{__('table.equipments.alert_text')}}",
