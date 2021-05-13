@@ -16,6 +16,10 @@
             'alert_text' => "O\u{2018}chirish uchun tasdiqlang",
             'select' => "Tanlang",
             'col_email' => "E-pochta",
+            'col_org_name' => "Tashkilot nomi",
+            'col_org_leader' => "Tashkilot rahbari",
+            'col_period_activity' => "Faoliyat davri",
+            'col_address' => "Manzili",
             'fax' => "Fax"
         ],
         'organization' => [
@@ -89,5 +93,19 @@
             'address' => "Manzil (krillcha)",
             'fax' => "Tashkilot faksi",
             'alert_message' => "Tashkilotni o\u{2018}chirib tashlamoqchimisiz?",
+        ],
+        'designers' => [
+            'heading_create' => "Tashkilot qo\u{2018}shish",
+            'heading_edit' => "Tashkilot ma\u{2019}lumotlarini yangilash",
+            'org_name' => "Tashkilot nomi",
+            'leader' => "Tashkilot rahbari",
+            'region' => "Tashkilot joylashgan tuman (shahar)",
+            'address' => "Tashkilot manzili (qayerda joylashgan)",
+            'address_krill' => "Tashkilot manzili (krillcha)",
+            'date_created' => "Ro\u{2018}yxatga olingan sana",
+            'date_expired' => "Amal qilish muddati (gacha)",
+            'phone_number' => "Telefon raqami (har birini alohida qatorga yozing)",
+            'document' => "Tashkilotning rasmiy hujjatini yuklang",
+            'file_upload' => "Hujjatni yuklang"
         ]
     ];

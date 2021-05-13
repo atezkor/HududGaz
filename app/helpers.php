@@ -17,6 +17,11 @@ function getName(): string {
     return "HududGaz ta\u{2019}minoti Xorazm filiali";
 }
 
+function formatDate($date): string {
+    $res = date_create($date);
+    return date_format($res, 'd.m.Y');
+}
+
 function MenuItems(): array {
     return [
         'users' => [

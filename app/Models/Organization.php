@@ -34,8 +34,8 @@ class Organization {
 
         $cache = Cache::get('organization')->logo ?? '';
         if (isset($data['logo'])) {
-            $this->delete($cache);
             $this->logo = $this->filePath($data['logo']);
+            $this->delete($cache);
         } else {
             $this->logo = $cache;
         }

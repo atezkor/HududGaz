@@ -23,7 +23,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: block;">
+                    <ul class="nav nav-treeview" style="display: none;">
                         @foreach(MenuItemChildrens() as $menu)
                             <li class="nav-item">
                                 <a href="{{route($menu['href'])}}" class="nav-link">
