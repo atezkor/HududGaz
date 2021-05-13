@@ -21,13 +21,13 @@
                                 <div class="form-group">
                                     <label for="shareholder_name">{{__('table.organization.shareholder_name')}}</label>
                                     <input type="text" name="shareholder_name" id="shareholder_name" class="form-control"
-                                           value="{{$data['shareholder_name'] ?? ''}}"
+                                           value="{{$model->shareholder_name}}"
                                            placeholder="{{__('table.organization.shareholder_name')}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="branch_name">{{__('table.organization.branch_name')}}</label>
                                     <input type="text" name="branch_name" id="branch_name" class="form-control"
-                                           value="{{$data['branch_name'] ?? ''}}"
+                                           value="{{$model->branch_name}}"
                                            placeholder="{{__('table.organization.branch_name')}}">
                                 </div>
                             </div>
@@ -35,28 +35,28 @@
                             <div class="data-form">
                                 <div class="form-group">
                                     <label for="engineer">{{__('table.organization.engineer')}}</label>
-                                    <input type="text" name="engineer_name" id="engineer_name" class="form-control"
-                                           value="{{$data['engineer_name'] ?? ''}}"
+                                    <input type="text" name="engineer" id="engineer" class="form-control"
+                                           value="{{$model->engineer}}"
                                            placeholder="{{__('table.organization.full_name')}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">{{__('table.organization.helper')}}</label>
-                                    <input type="text" name="helper_name" id="helper_name" class="form-control"
-                                           value="{{$data['helper_name'] ?? ''}}"
+                                    <label for="helper_engineer">{{__('table.organization.helper')}}</label>
+                                    <input type="text" name="helper_engineer" id="helper_engineer" class="form-control"
+                                           value="{{$model->helper_engineer}}"
                                            placeholder="{{__('table.organization.full_name')}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">{{__('table.organization.phone')}}</label>
-                                <textarea type="tel" name="phone" id="phone" class="form-control">{{$data['phone'] ?? ''}}</textarea>
+                                <textarea type="tel" name="phone" id="phone" class="form-control">{{$model->phone}}</textarea>
                             </div>
                             <hr><br>
                             <div class="form-group row">
                                 <label for="reg_num" class="col-sm-2 col-form-label">{{__('table.organization.org_num')}}</label>
                                 <div class="col-sm-10">
                                     <input type="number" name="reg_num" id="reg_num" class="form-control"
-                                           value="{{$data['reg_num'] ?? ''}}"
+                                           value="{{$model->reg_num}}"
                                            placeholder="0000">
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                 <label for="address_latin" class="col-sm-2 col-form-label">{{__('table.organization.address_latin')}}</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="address_latin" id="address_latin" class="form-control"
-                                           value="{{$data['address_latin'] ?? ''}}"
+                                           value="{{$model->address_latin}}"
                                            placeholder="{{__('table.organization.address_latin')}}">
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                                 <label for="address" class="col-sm-2 col-form-label">{{__('table.organization.address')}}</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="address" id="address" class="form-control"
-                                           value="{{$data['address'] ?? ''}}"
+                                           value="{{$model->address}}"
                                            placeholder="{{__('table.organization.address')}}">
                                 </div>
                             </div>
@@ -80,21 +80,20 @@
                                 <label for="email" class="col-sm-2 col-form-label">{{__('table.organization.email')}}</label>
                                 <div class="col-sm-10">
                                     <input type="email" name="email" id="email" class="form-control"
-                                           value="{{$data['email'] ?? ''}}"
+                                           value="{{$model->email}}"
                                            placeholder="{{__('table.organization.email')}}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="fax" class="col-sm-2 col-form-label">{{__('table.organization.fax')}}</label>
+                                <label for="fax" class="col-sm-2 col-form-label">{{__('table.general.fax')}}</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="fax" id="fax" class="form-control"
-                                           value="{{$data['fax'] ?? ''}}"
-                                           placeholder="{{__('table.organization.fax')}}">
+                                           value="{{$model->fax}}"
+                                           placeholder="{{__('table.general.fax')}}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div id="preview" class="col-sm-2 col-form-label">
-
                                 </div>
                                 <div class="col-sm-10">
                                     <div class="custom-file">

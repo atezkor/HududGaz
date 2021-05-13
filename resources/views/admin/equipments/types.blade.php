@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Types')
+@section('title', getName())
 @section('link')
     <link rel="stylesheet" href="{{'/css/default.css'}}">
 @endsection
@@ -29,8 +29,8 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="col-1">Turi</th>
-                                    <th class="col-5">Tartibi</th>
+                                    <th class="col-1">{{__('table.equipments.equip_type')}}</th>
+                                    <th class="col-5">{{__('table.equipments.equip_order')}}</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -48,8 +48,8 @@
                                                         '{{route('admin.equip_type.renew', ['equipment' => $equipment, 'type' => $model])}}')" role="button">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
-                                            <button type="button" class="btn btn-danger" role="button" onclick="remove('form-{{$model->id}}')"
-                                                    data-toggle="tooltip" title="{{__('table.btn_delete')}}">
+                                            <button type="button" class="btn btn-danger" onclick="remove('form-{{$model->id}}')"
+                                                    data-toggle="tooltip" title="{{__('table.btn_del')}}" role="button" >
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -63,11 +63,12 @@
                     <div class="modal fade" id="modal" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header bg-purple" style="font-family: unset">
-                                    <h4 id="header" class="modal-title">Tur qo'shish</h4>
+                                <div class="modal-header bg-purple">
+                                    <h4 id="header" class="modal-title">{{__('table.equipments.add_type')}}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="form" action="{{route('admin.equip_type.add', ['equipment' => $equipment])}}" method="POST">
+                                    <form action="{{route('admin.equip_type.add', ['equipment' => $equipment])}}"
+                                          method="POST" id="form">
                                         @csrf
                                         <div class="form-group">
                                             <label for="type">{{__('table.equipments.equip_type')}}</label>
@@ -107,7 +108,7 @@
         function remove(form) {
             Swal.fire({
                 title: '{{__('table.equipments.alert_type_msg')}}',
-                text: "{{__('table.equipments.alert_text')}}",
+                text: "{{__('table.general.alert_text')}}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#dd3333',

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @yield('meta')
     <title>@yield('title')</title>
+    <link rel="shortcut icon" href="{{'/img/favicon.png'}}" type="image/x-icon">
 
     <!-- CSS links -->
     <link rel="stylesheet" href="{{'/css/sans-pro.css'}}">

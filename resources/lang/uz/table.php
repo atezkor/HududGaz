@@ -6,11 +6,18 @@
         'btn_cancel' => "Bekor qilish",
         'btn_back' => "Ortga qaytish",
         'btn_reset' => "Maydonlarni tozlash",
+        'btn_add' => "Qo\u{2018}shish",
         'btn_edit' => "O\u{2018}zgartirish",
-        'btn_delete' => "O\u{2018}chirish",
+        'btn_del' => "O\u{2018}chirish",
         'btn_yes' => "Ha",
         'btn_no' => "Yo\u{2018}q",
         'del_process' => "O\u{2018}chirilmoqda ...",
+        'general' => [
+            'alert_text' => "O\u{2018}chirish uchun tasdiqlang",
+            'select' => "Tanlang",
+            'col_email' => "E-pochta",
+            'fax' => "Fax"
+        ],
         'organization' => [
             'title' => "Ma\u{2019}lumotlarni yangilash",
             'shareholder_name' => "Aksiyadorlik jamiyati nomi",
@@ -23,14 +30,27 @@
             'org_num' => "Tashkilot №",
             'email' => "Elektron pochta manzili",
             'address_latin' => "Manzili",
-            'address' => "Manzili (krillcha)",
-            'fax' => "Fax",
+            'address' => "Manzili (krillcha)"
+        ],
+        'district' => [
+            'urgench_city' => "Urganch shahri",
+            'urgench' => "Urganch tumani",
+            'khiva_city' => "Xiva shahri",
+            'khiva' => "Xiva tumani",
+            'khonqa' => "Xonqa tumani",
+            'bagat' => "Bog\u{2018}ot tumani",
+            'yangiariq' => "Yangiariq tumani",
+            'yangibozor' => "Yangibozor tumani",
+            'khazorasp' => "Xozarasp tumani",
+            'shavat' => "Shovot tumani",
+            'gurlan' => "Gurlan tumani",
+            'kushkupir' => "Qo\u{2018}shko\u{2018}pir tumani",
+            'tupraq-kala' => "Tuproq-qa\u{2019}la tumani"
         ],
         'users' => [
             'col_num' => "Tr",
             'col_name' => "Ismi",
             'col_position' => "Lavozimi",
-            'col_email' => "E-pochta",
             'col_role' => "O\u{2018}rni"
         ],
         'equipments' => [
@@ -41,7 +61,6 @@
             'equip_type' => "Jihoz turi",
             'equip_order' => "Tartibi",
             'alert_message' => "Jihozni o\u{2018}chirib tashlamoqchimisiz?",
-            'alert_text' => "O\u{2018}chirish uchun tasdiqlang",
             'add_type' => "Tur qo\u{2018}shish",
             'edit_type' => "Turni o\u{2018}zgartirish",
             'alert_type_msg' => "Turni o\u{2018}chirib tashlamoqchimisiz?",
@@ -49,5 +68,26 @@
             // Buttons
             'btn_add' => "Qo\u{2018}shish",
             'btn_del' => "O\u{2018}chirish",
+        ],
+        'districts' => [
+            'btn_new' => "Tashkilot qo\u{2018}shish",
+            'col_num' => "Tashkilot raqami",
+            'col_name' => "Nomi",
+            'col_engineer' => "Bosh muhandis",
+            'col_phone' => "Telefon",
+            'col_address' => "Manzil",
+            'heading_create' => "Tashkilot qo\u{2018}shish",
+            'heading_edit' => "Tashkilot ma\u{2019}lumotlarini yangilash",
+            'org_num' => "Tashkilot raqami",
+            'region_select' => "Tuman (shahar)",
+            'org_name' => "Tashkilot nomi",
+            'engineer' => "Bosh muhandis",
+            'section_leader' => "Bo\u{2018}lim boshlig\u{2018}i",
+            'email' => "Elektron pochta manzili",
+            'phone' => "Telefon raqami",
+            'address_latin' => "Manzil",
+            'address' => "Manzil (krillcha)",
+            'fax' => "Tashkilot faksi",
+            'alert_message' => "Tashkilotni o\u{2018}chirib tashlamoqchimisiz?",
         ]
     ];

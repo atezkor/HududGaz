@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Equipment extends Model {
     use HasFactory;
 
-    protected $table = 'equipments';
+    protected $table = 'equipments'; // Bu jadval nomi equipment emas, equipments bo'lishi uchun kerak
     protected $fillable = ['name'];
 
     public function types(): HasMany {

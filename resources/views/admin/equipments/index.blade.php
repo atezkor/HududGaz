@@ -35,20 +35,19 @@
                                 <tr>
                                     <td>{{$model->name}}</td>
                                     <td>
-                                        <form method="post" id="form-{{$model->id}}"
-                                              action="{{route('admin.equipments.delete', ['equipment' => $model])}}">
+                                        <form action="{{route('admin.equipments.delete', ['equipment' => $model])}}" method="post"
+                                              id="form-{{$model->id}}">
                                             @csrf
                                             @method('DELETE')
-                                            <a class="btn btn-info mr-2"
-                                               href="{{route('admin.equip_type', ['equipment' => $model])}}">
+                                            <a href="{{route('admin.equip_type', ['equipment' => $model])}}" class="btn btn-info mr-2">
                                                 {{__('table.equipments.equip_type')}}
                                             </a>
-                                            <a class="btn btn-warning" title="{{__('table.btn_edit')}}"
-                                                   href="{{route('admin.equipments.edit', ['equipment' => $model])}}"
-                                                   role="button"><i class="fas fa-pencil-alt"></i>
+                                            <a href="{{route('admin.equipments.edit', ['equipment' => $model])}}" class="btn btn-warning"
+                                               title="{{__('table.btn_edit')}}">
+                                                <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <button type="button" class="btn btn-danger" role="button" onclick="remove('form-{{$model->id}}')"
-                                                    data-toggle="tooltip" title="{{__('table.btn_delete')}}">
+                                            <button type="button" class="btn btn-danger" onclick="remove('form-{{$model->id}}')"
+                                                    title="{{__('table.btn_del')}}" role="button">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -76,7 +75,7 @@
     function remove(form) {
         Swal.fire({
             title: '{{__('table.equipments.alert_message')}}',
-            text: "{{__('table.equipments.alert_text')}}",
+            text: "{{__('table.general.alert_text')}}",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd3333',
@@ -92,6 +91,7 @@
                     showConfirmButton: false,
                 })
             }
-        })}
+        })
+    }
 </script>
 @endsection

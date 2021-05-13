@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,7 @@ Route::group(['prefix' => 'admin'], function() {
     resource('equipments', EquipmentController::class, 'admin.equipments');
     resource('designers', UserController::class, 'admin.designers');
     resource('mounters', UserController::class, 'admin.mounters');
-    resource('regions', UserController::class, 'admin.regions');
+    resource('regions', RegionController::class, 'admin.regions');
     resource('statuses', UserController::class, 'admin.statuses');
     resource('activity-types', UserController::class, 'admin.activities');
 
@@ -42,12 +43,12 @@ Route::get('/', function() {
 
     switch ($role_name) {
         case "admin": return redirect()->route('admin.users.index');
-        case "technic": return redirect()->route('admin.setting');
         case "region": return redirect()->route('admin.timetable');
+        case "technic": return redirect()->route('admin.setting');
+        case "mounter": return redirect()->route('admin.timetable.none');
         case "designer": return redirect()->route('admin.equipments.index');
         case "engineer": return redirect()->route('admin.equipments.create');
         case "director": return redirect()->route('admin.timetable.index');
-        case "mounter": return redirect()->route('admin.timetable.none');
     }
 
     return redirect()->route('login');
