@@ -22,8 +22,6 @@ class MounterController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $models = Mounter::all();
         return view('admin.mounters.index', ['models' => $models]);
     }
@@ -34,8 +32,6 @@ class MounterController extends Controller {
      * @return View|RedirectResponse
      */
     public function create(): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $model = new Mounter();
         return view('admin.mounters.form', ['action' => route('admin.mounters.store'),
             'method' => 'POST', 'model' => $model, 'districts' => Base::districts()]);
@@ -60,8 +56,6 @@ class MounterController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Mounter $mounter): View|RedirectResponse {
-        app()->setLocale('uz');
-
         return view('admin.mounters.form', ['action' => route('admin.mounters.update', ['mounter' => $mounter]),
             'method' => 'PUT', 'model' => $mounter, 'districts' => Base::districts()]);
     }

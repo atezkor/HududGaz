@@ -21,8 +21,6 @@ class StatusController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $models = Status::all();
         return view('admin.statuses.index', ['models' => $models]);
     }
@@ -34,8 +32,6 @@ class StatusController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Status $status): View|RedirectResponse {
-        app()->setLocale('uz');
-
         return view('admin.statuses.form', ['action' => route('admin.statuses.update', ['status' => $status]),
             'model' => $status]);
     }

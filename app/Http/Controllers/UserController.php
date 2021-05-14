@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\App;
 
 class UserController extends Controller {
 
@@ -17,9 +16,6 @@ class UserController extends Controller {
         } catch (AuthorizationException) {
             // return redirect('/logout');
         }
-
-        App::setLocale('uz');
-//        session()->put('locale', 'uz');
 
         $models = User::query()->where('role_id', '<>', 1)->get();
         return view('admin.users.index', ['models' => $models]);

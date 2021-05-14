@@ -14,7 +14,7 @@ use App\Http\Controllers\StatusController;
 
 // Authentication routes
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'auth'])->name('auth');
+Route::post('/login', [AuthController::class, 'entry'])->name('auth');
 Route::get('/reg', [AuthController::class, 'create'])->name('create');
 Route::post('/reg', [AuthController::class, 'store'])->name('store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

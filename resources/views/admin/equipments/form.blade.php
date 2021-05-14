@@ -9,7 +9,6 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">
@@ -23,7 +22,8 @@
                     <form action="{{$action}}" method="post">
                         @csrf
                         @method($method)
-{{--                        @includeFirst(['voyager::components.errors'],['errors' => $errors])--}}
+                        @include('components.errors')
+
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">{{__('table.equipments.name')}}</label>

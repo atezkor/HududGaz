@@ -11,8 +11,6 @@ use Illuminate\View\View;
 
 class OrganizationController extends Controller {
     public function index(): View {
-        app()->setLocale('uz');
-
         $model = Cache::get('organization') ?: new Organization();
         return view('admin.settings', ['model' => $model]);
     }

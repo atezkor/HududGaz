@@ -22,8 +22,6 @@ class DesignerController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $models = Designer::all();
         return view('admin.designers.index', ['models' => $models]);
     }
@@ -34,8 +32,6 @@ class DesignerController extends Controller {
      * @return View|RedirectResponse
      */
     public function create(): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $model = new Designer();
         return view('admin.designers.form', ['action' => route('admin.designers.store'),
             'method' => 'POST', 'model' => $model]);
@@ -60,8 +56,6 @@ class DesignerController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Designer $designer): View|RedirectResponse {
-        app()->setLocale('uz');
-
         return view('admin.designers.form', ['action' => route('admin.designers.update', ['designer' => $designer]),
             'method' => 'PUT', 'model' => $designer]);
     }

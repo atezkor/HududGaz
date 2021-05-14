@@ -16,8 +16,6 @@ class ActivityController extends Controller {
     }
 
     public function index(): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $models = Activity::all();
         return view('admin.activities', ['models' => $models]);
     }

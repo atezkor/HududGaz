@@ -23,8 +23,6 @@ class FitterController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(Request $request): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $firm = $request->get('firm');
         $models = Fitter::query()->where('firm_id', '=', $firm)->get();
         return view('admin.mounters.workers', ['models' => $models, 'firm_id' => $firm]);
@@ -37,8 +35,6 @@ class FitterController extends Controller {
      * @return View|RedirectResponse
      */
     public function create(Request $request): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $model = new Fitter();
         $firm = $request->get('firm');
         return view('admin.mounters.manage', ['action' => route('admin.fitters.store'),
@@ -66,8 +62,6 @@ class FitterController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Fitter $fitter): View|RedirectResponse {
-        app()->setLocale('uz');
-
         return view('admin.mounters.manage', ['action' => route('admin.fitters.update', ['fitter' => $fitter]),
             'method' => 'PUT', 'model' => $fitter]);
     }

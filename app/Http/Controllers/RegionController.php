@@ -18,15 +18,11 @@ class RegionController extends Controller {
     }
 
     public function index(): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $models = Region::all();
         return view('admin.regions.index', ['models' => $models]);
     }
 
     public function create(): View|RedirectResponse {
-        app()->setLocale('uz');
-
         $model = new Region();
         return view('admin.regions.form', ['action' => route('admin.regions.store'), 'method' => 'POST',
             'model' => $model, 'regions' => Base::districts()]);
@@ -39,8 +35,6 @@ class RegionController extends Controller {
     }
 
     public function edit(Region $region): View|RedirectResponse {
-        app()->setLocale('uz');
-
         return view('admin.regions.form', ['action' => route('admin.regions.update', ['region' => $region]),
             'method' => 'PUT', 'model' => $region, 'regions' => Base::districts()]);
     }

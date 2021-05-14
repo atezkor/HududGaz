@@ -24,8 +24,6 @@ class EquipmentController extends Controller {
      * @return Factory|View|Application
      */
     public function index(): Factory|View|Application {
-        app()->setLocale('uz');
-
         $models = Equipment::all();
         return view('admin.equipments.index', ['models' => $models]);
     }
@@ -36,8 +34,6 @@ class EquipmentController extends Controller {
      * @return Application|Factory|View
      */
     public function create(): View|Factory|Application {
-        app()->setLocale('uz');
-
         return view('admin.equipments.form', ['action' => route('admin.equipments.store'),
             'method' => 'POST', 'model' => new Equipment()]);
     }
@@ -62,7 +58,6 @@ class EquipmentController extends Controller {
      * @return Application|Factory|View
      */
     public function edit(Equipment $equipment): View|Factory|Application {
-        app()->setLocale('uz');
         return view('admin.equipments.form', ['action' => route('admin.equipments.update', ['equipment' => $equipment]),
             'method' => 'PUT', 'model' => $equipment]);
     }
@@ -99,8 +94,6 @@ class EquipmentController extends Controller {
      * @return Application|Factory|View
      */
     public function show(Equipment $equipment): View|Factory|Application {
-        app()->setLocale('uz');
-
         $models = $equipment->types()->get();
         return view('admin.equipments.types', ['equipment' => $equipment, 'method' => 'PUT', 'models' => $models]);
     }

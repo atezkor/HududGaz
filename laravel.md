@@ -37,6 +37,11 @@
             <td>Model, Boshqaruvchi va model uchun manbali funksiyalarni yaratish</td>
             <td>php artisan make:model Name -mrc</td>
         </tr>
+        <tr>
+            <td>6</td>
+            <td>Middleware yaratish</td>
+            <td>php artisan make:middleware Name</td>
+        </tr>
     </tbody>
 </table>
 

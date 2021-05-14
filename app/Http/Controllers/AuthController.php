@@ -25,7 +25,7 @@ class AuthController extends Controller {
         return redirect('/');
     }
 
-    public function auth(UserRequest $request): RedirectResponse {
+    public function entry(UserRequest $request): RedirectResponse {
         $data = $request->validated();
         $user = User::query()->where('email', '=', $data['email'])->get()->first();
 
