@@ -73,7 +73,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="phone" class="col-3">{{__('table.districts.phone')}}</label>
+                                    <label for="phone" class="col-3">{{__('table.general.phone')}}</label>
                                     <div class="col-9">
                                         <input type="tel" name="phone" id="phone" value="{{ $model->phone }}" class="form-control">
                                     </div>

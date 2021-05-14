@@ -16,7 +16,7 @@ class CreateDesignersTable extends Migration {
             $table->string('org_name');
             $table->string('leader');
             $table->string('address');
-            $table->string('address_krill');
+            $table->string('address_krill')->nullable();
             $table->string('phone');
             $table->date('date_reg');
             $table->date('date_end');

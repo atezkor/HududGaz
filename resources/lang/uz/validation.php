@@ -2,6 +2,7 @@
 
 return [
 
+    'date_invalid' => "Sanalar noto\u{2018}g\u{2018}ri kiritilgan",
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines

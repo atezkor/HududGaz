@@ -23,6 +23,8 @@
                         <form action="{{$action}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method($method)
+                            @include('components.errors')
+
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="org_name">{{__('table.general.org_name')}}</label>

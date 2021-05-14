@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-
+                @include('components.errors')
                 <div class="card">
                     <div class="card-header">
                         <button class="btn btn-info" onclick="show()">{{__('table.equipments.btn_add')}}</button>

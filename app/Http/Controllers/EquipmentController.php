@@ -10,7 +10,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class EquipmentController extends Controller {
 
@@ -99,33 +98,27 @@ class EquipmentController extends Controller {
     }
 
     /**
-     * @param Request $request
+     * @param EquipmentRequest $request
      * @param Equipment $equipment
      * @return RedirectResponse
      */
-    public function add(Request $request, Equipment $equipment): RedirectResponse {
-        $data = [
-            'equipment_id' => $equipment->getAttribute('id'),
-            'type' => $request->get('type'),
-            'order' => $request->get('order'),
-        ];
-
+    public function add(EquipmentRequest $request, Equipment $equipment): RedirectResponse {
+        $data = $request->validated();
+        $data['equipment_id'] = $equipment->getAttribute('id');
         $this->service->typeChange(new EquipmentType(), $data);
+
         return redirect()->route('admin.equip_type', ['equipment' => $equipment->getAttribute('id')]);
     }
 
     /**
-     * @param Request $request
+     * @param EquipmentRequest $request
      * @param Equipment $equipment
      * @param EquipmentType $type
      * @return RedirectResponse
      */
-    public function renew(Request $request, Equipment $equipment, EquipmentType $type): RedirectResponse {
-        $data = [
-            'equipment_id' => $equipment->getAttribute('id'),
-            'type' => $request->get('type'),
-            'order' => $request->get('order'),
-        ];
+    public function renew(EquipmentRequest $request, Equipment $equipment, EquipmentType $type): RedirectResponse {
+        $data = $request->validated();
+        $data['equipment_id'] = $equipment->getAttribute('id');
 
         $this->service->typeChange($type, $data);
         return redirect()->route('admin.equip_type', ['equipment' => $equipment->getAttribute('id')]);

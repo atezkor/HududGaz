@@ -27,9 +27,9 @@
                                 <thead>
                                     <tr>
                                         <th>№</th>
-                                        <th>{{__('table.general.col_org_name')}}</th>
-                                        <th>{{__('table.general.col_org_leader')}}</th>
-                                        <th>{{__('table.general.col_address')}}</th>
+                                        <th>{{__('table.general.org_name')}}</th>
+                                        <th>{{__('table.general.org_leader')}}</th>
+                                        <th>{{__('table.general.address')}}</th>
                                         <th>{{__('table.general.col_period_activity')}}</th>
                                         <th></th>
                                     </tr>

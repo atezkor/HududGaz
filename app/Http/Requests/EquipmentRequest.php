@@ -20,6 +20,14 @@ class EquipmentRequest extends FormRequest {
      * @return array
      */
     public function rules(): array {
+        /* For equipment types */
+        if ($this->request->has('type')) {
+            return [
+                'type' => ['required'],
+                'order' => ['required']
+            ];
+        }
+
         return [
             'name' => ['required']
         ];
@@ -27,7 +35,9 @@ class EquipmentRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'name' => __('table.equipments.name')
+            'name' => __('table.equipments.name'),
+            'type' => __('table.equipments.equip_type'),
+            'order' => __('table.equipments.equip_order')
         ];
     }
 }
