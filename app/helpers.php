@@ -22,6 +22,14 @@ function reducer($url, $controller, $name) {
     ]);
 }
 
+function readonly($url, $controller, $name) {
+    Route::resource($url, $controller)->names([
+        'index' => $name . '.index',
+        'edit' => $name . '.edit',
+        'update' => $name . '.update'
+    ]);
+}
+
 function getName(): string {
     return "HududGaz ta\u{2019}minoti Xorazm filiali";
 }

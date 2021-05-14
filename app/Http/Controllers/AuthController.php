@@ -25,7 +25,7 @@ class AuthController extends Controller {
         return redirect('/');
     }
 
-    public function postLogin(UserRequest $request): RedirectResponse {
+    public function auth(UserRequest $request): RedirectResponse {
         $data = $request->validated();
         $user = User::query()->where('email', '=', $data['email'])->get()->first();
 
@@ -39,7 +39,7 @@ class AuthController extends Controller {
         return redirect()->route('login');
     }
 
-    public function Registration(UserRequest $request): RedirectResponse {
+    public function store(UserRequest $request): RedirectResponse {
         if (auth()->user())
             return redirect('/');
 
@@ -53,7 +53,7 @@ class AuthController extends Controller {
         return redirect()->route('login');
     }
 
-    public function regPage(): View|RedirectResponse {
+    public function create(): View|RedirectResponse {
         if (auth()->user())
             return redirect()->route('dashboard');
 

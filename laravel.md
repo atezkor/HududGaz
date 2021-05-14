@@ -45,7 +45,7 @@
 1. ``php artisan migrate`` bazaga jadval yaratish
 2. ``php artisan migrate:fresh`` bazadagi barcha jadvalni o'chirib qaytadan yaratish
 3. ``php artisan migrate:fresh --seed`` ma'lumot joylash
-4. ``php artisan migrate:seeder NamesSeeder`` Jo'natuvchi yaratish
+4. ``php artisan make:seeder NamesSeeder`` Jo'natuvchi yaratish
 5. ``php artisan db:seed {--class=UserSeeder}`` Jo'natuvchini ishlatish {} bu dinamik parametr
 6. ``php artisan make:migration add_column_to_user --table="users"`` mavjud jadvalga ustun qo'shish (bu yerda users jadvaliga)
 

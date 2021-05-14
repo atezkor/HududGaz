@@ -31,7 +31,7 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>{{__('table.activities.col_index')}}</th>
+                                        <th>{{__('table.general.col_index')}}</th>
                                         <th>{{__('table.activities.col_activity')}}</th>
                                         <th style="width: 1px;"></th>
                                     </tr>
