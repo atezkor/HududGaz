@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td>5</td>
-            <td>Model, Boshqaruvchi va Tasdiqlovchini birgalikda yaratish</td>
+            <td>Model, Boshqaruvchi va model uchun manbali funksiyalarni yaratish</td>
             <td>php artisan make:model Name -mrc</td>
         </tr>
     </tbody>

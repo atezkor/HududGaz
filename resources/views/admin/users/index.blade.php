@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         @can('add_users')
-                            <a class="btn btn-success" href="{{route('admin.employees.create')}}" role="button">{{__('table.add')}}</a>
+                            <a href="{{route('admin.employees.create')}}" class="btn btn-success">{{__('table.add')}}</a>
                         @endcan
                         <div class="card-tools mt-2">
                             <div class="input-group input-group-sm" style="width: 150px;">

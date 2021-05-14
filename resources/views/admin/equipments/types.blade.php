@@ -12,7 +12,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a class="btn btn-info" onclick="show()">{{__('table.equipments.btn_add')}}</a>
+                        <button class="btn btn-info" onclick="show()">{{__('table.equipments.btn_add')}}</button>
                         <div class="card-tools mt-2">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" id="search" class="form-control float-right"
@@ -29,9 +29,9 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="col-1">{{__('table.equipments.equip_type')}}</th>
-                                    <th class="col-5">{{__('table.equipments.equip_order')}}</th>
-                                    <th></th>
+                                    <th>{{__('table.equipments.equip_type')}}</th>
+                                    <th>{{__('table.equipments.equip_order')}}</th>
+                                    <th style="width: 1px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <button type="submit" class="btn btn-success">{{__('table.btn_save')}}</button>
-                                            <button type="button" class="btn btn-danger btn-default" data-dismiss="modal">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">
                                                 {{__('table.btn_cancel')}}
                                             </button>
                                         </div>

@@ -9,7 +9,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <a class="btn btn-info" href="{{ route('admin.designers.create') }}" role="button">{{__('table.districts.btn_new')}}</a>
+                            <a href="{{route('admin.designers.create')}}" class="btn btn-info">{{__('table.districts.btn_new')}}</a>
                             <div class="card-tools mt-2">
                                 <div class="input-group input-group-sm" style="width: 150px; font-size: 14px;">
                                     <input type="text" id="search" class="form-control float-right"

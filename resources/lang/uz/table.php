@@ -146,5 +146,14 @@
             'add_worker' => "Yangi ishchi qo\u{2018}shish",
             'edit_worker' => "Ishchi ma\u{2019}lumotlarini o\u{2018}zgartirish",
             'document' => "Hujjatning elektron shakli"
+        ],
+        'activities' => [
+            'col_index' => "Tr",
+            'col_activity' => "Faoliyat turi",
+            'activity' => "Faoliyat turi",
+            'btn_add' => "Faoliyat qo\u{2018}shish",
+            'add_activity' => "Faoliyat qo\u{2018}shish",
+            'edit_activity' => "Faoliyatni o\u{2018}zgartirish",
+            'alert_message' => "Faoliyatni o\u{2018}chirib tashlamoqchimisiz?",
         ]
     ];

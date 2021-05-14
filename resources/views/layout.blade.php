@@ -21,14 +21,14 @@
     <div class="preloader flex-column justify-content-center align-items-center">
         <img src="{{'/img/logo.png'}}" alt="logo" class="animation__shake" width="30%">
     </div>
-    @include('components.navbar')
-    @include('components.sidebar')
-
-    <!-- <div class="wrapper"></div>-->
-    <div class="content-wrapper">
-        @yield('content')
+    <!-- This div for sidebar height equal full height -->
+    <div class="wrapper">
+        @include('components.navbar')
+        @include('components.sidebar')
+        <div class="content-wrapper">
+            @yield('content')
+        </div>
     </div>
-
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{'/js/adminlte.min.js'}}"></script> {{-- Preloader in this --}}
     <script src="{{'/js/sweetalert2.js'}}"></script>

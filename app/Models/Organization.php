@@ -25,7 +25,7 @@ class Organization {
         $this->branch_name = $data['branch_name'] ?: '';
         $this->engineer = $data['engineer'] ?: '';
         $this->helper_engineer = $data['helper_engineer'] ?: '';
-        $this->reg_num = $data['reg_num'] ?: 1;
+        $this->reg_num = $data['reg_num'];
         $this->phone = $data['phone'] ?: '';
         $this->address = $data['address'] ?: '';
         $this->address_latin = $data['address_latin'] ?: '';

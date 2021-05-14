@@ -13,6 +13,15 @@ function resource($url, $controller, $name = null) {
     ]);
 }
 
+function reducer($url, $controller, $name) {
+    Route::resource($url, $controller)->names([
+        'index' => $name . '.index',
+        'store' => $name . '.store',
+        'update' => $name . '.update',
+        'destroy' => $name . '.delete',
+    ]);
+}
+
 function getName(): string {
     return "HududGaz ta\u{2019}minoti Xorazm filiali";
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DesignerController;
 use App\Http\Controllers\EquipmentController;
@@ -27,7 +28,8 @@ Route::group(['prefix' => 'admin'], function() {
     resource('regions', RegionController::class, 'admin.regions');
     resource('statuses', UserController::class, 'admin.statuses');
     resource('fitters', FitterController::class, 'admin.fitters');
-    resource('activity-types', UserController::class, 'admin.activities');
+
+    reducer('activity-types', ActivityController::class, 'admin.activities');
 
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');
     Route::post('equipments/{equipment}/equipment-types', [EquipmentController::class, 'add'])->name('admin.equip_type.add');
