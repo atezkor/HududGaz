@@ -1,5 +1,8 @@
 @extends('layout')
 @section('title', getName())
+@section('link')
+    <link rel="stylesheet" href="{{'/css/default.css'}}">
+@endsection
 
 @section('content')
     <section class="content">
@@ -9,7 +12,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <a class="btn btn-info" href="{{ route('admin.designers.create') }}" role="button">{{__('table.districts.btn_new')}}</a>
+                            <a class="btn btn-info" href="{{ route('admin.mounters.create') }}" role="button">{{__('table.districts.btn_new')}}</a>
                             <div class="card-tools mt-2">
                                 <div class="input-group input-group-sm" style="width: 150px; font-size: 14px;">
                                     <input type="text" id="search" class="form-control float-right"
@@ -38,16 +41,19 @@
                                 @foreach($models as $model)
                                     <tr>
                                         <td>{{$loop->index + 1}}</td>
-                                        <td>{{$model->org_name}}</td>
+                                        <td>{{$model->short_name}}</td>
                                         <td>{{$model->leader}}</td>
                                         <td>{{$model->address}}</td>
-                                        <td>{{formatDate($model->date_end)}} - {{formatDate($model->date_reg)}}</td>
+                                        <td>{{formatDate($model->date_created)}} - {{formatDate($model->date_expired)}}</td>
                                         <td>
-                                            <form action="{{route('admin.designers.delete', ['designer' => $model])}}"
-                                                  method="post" id="form-{{$model->id}}">
+                                            <form action="{{route('admin.mounters.delete', ['mounter' => $model])}}"
+                                                  method="post" id="form-{{$model->id}}" class="form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a href="{{route('admin.designers.edit', ['designer' => $model])}}" class="btn btn-warning"
+                                                <a href="{{route('admin.fitters.index', ['firm' => $model->id])}}" class="btn btn-outline-info mr-2">
+                                                    {{__('table.mounters.workers')}}
+                                                </a>
+                                                <a href="{{route('admin.mounters.edit', ['mounter' => $model])}}" class="btn btn-warning"
                                                    title="{{__('table.btn_edit')}}">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>

@@ -39,7 +39,7 @@
                                               id="form-{{$model->id}}">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{route('admin.equip_type', ['equipment' => $model])}}" class="btn btn-info mr-2">
+                                            <a href="{{route('admin.equip_type', ['equipment' => $model])}}" class="btn btn-outline-info mr-2">
                                                 {{__('table.equipments.equip_type')}}
                                             </a>
                                             <a href="{{route('admin.equipments.edit', ['equipment' => $model])}}" class="btn btn-warning"

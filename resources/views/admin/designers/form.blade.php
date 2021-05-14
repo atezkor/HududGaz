@@ -25,7 +25,7 @@
                             @method($method)
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="org_name">{{__('table.designers.org_name')}}</label>
+                                    <label for="org_name">{{__('table.general.org_name')}}</label>
                                     <input type="text" name="org_name" id="org_name" value="{{$model->org_name}}" class="form-control">
                                 </div>
 
@@ -51,22 +51,22 @@
 
                                 <div class="form-group data-form">
                                     <div>
-                                        <label for="date_reg">{{__('table.designers.date_created')}}</label>
+                                        <label for="date_reg">{{__('table.general.date_created')}}</label>
                                         <input type="date" name="date_reg" id="date_reg" value="{{$model->date_reg}}" class="form-control">
                                     </div>
                                     <div>
-                                        <label for="date_end">{{__('table.designers.date_expired')}}</label>
+                                        <label for="date_end">{{__('table.general.date_expired')}}</label>
                                         <input type="date" name="date_end" id="date_end" value="{{$model->date_end}}" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="document">{{__('table.designers.document')}}</label>
+                                    <label for="document">{{__('table.general.document')}}</label>
                                     <div class="custom-file">
                                         <input type="file" name="document" id="document" class="custom-file-input"
                                                @if($method == "POST") required @endif>
                                         <label class="custom-file-label" for="document">
-                                            <span id="document_label">{{__('table.designers.file_upload')}}</span>
+                                            <span id="document_label">{{__('table.general.doc_upload')}}</span>
                                             <span class="btn btn-info"><i class="far fa-file-pdf"></i></span>
                                         </label>
                                     </div>
@@ -93,7 +93,7 @@
         })
 
         $('#reset').on('click', function () {
-            $('#document_label').text('{{__('table.designers.file_upload')}}');
+            $('#document_label').text('{{__('table.general.doc_upload')}}');
         });
     </script>
 @endsection

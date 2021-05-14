@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DesignerController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\FitterController;
+use App\Http\Controllers\MounterController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\UserController;
@@ -21,9 +23,10 @@ Route::group(['prefix' => 'admin'], function() {
     resource('users', UserController::class, 'admin.users');
     resource('equipments', EquipmentController::class, 'admin.equipments');
     resource('designers', DesignerController::class, 'admin.designers');
-    resource('mounters', UserController::class, 'admin.mounters');
+    resource('mounters', MounterController::class, 'admin.mounters');
     resource('regions', RegionController::class, 'admin.regions');
     resource('statuses', UserController::class, 'admin.statuses');
+    resource('fitters', FitterController::class, 'admin.fitters');
     resource('activity-types', UserController::class, 'admin.activities');
 
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');

@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateMountersTable extends Migration {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up() {
+        Schema::create('mounters', function (Blueprint $table) {
+            $table->id();
+            $table->integer('rec_num');
+            $table->integer('reg_num');
+            $table->string('full_name');
+            $table->string('short_name');
+            $table->string('leader');
+            $table->integer('region');
+            $table->string('address');
+            $table->string('taxpayer_stir');
+            $table->string('legal_form');
+            $table->string('given_by');
+            $table->date('date_created');
+            $table->date('date_expired');
+            $table->string('permission_to', 500);
+            $table->string('implement_for', 500);
+            $table->string('document')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down() {
+        Schema::dropIfExists('mounters');
+    }
+}

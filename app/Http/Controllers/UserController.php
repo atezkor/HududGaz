@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
 
 class UserController extends Controller {
 
-    public function index(): View|Factory|RedirectResponse|Application {
+    public function index(): View|RedirectResponse {
         try {
             $this->authorize('show', UserController::class);
         } catch (AuthorizationException) {

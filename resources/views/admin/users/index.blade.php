@@ -32,7 +32,7 @@
                                     <th>{{__('table.users.col_num')}}</th>
                                     <th>{{__('table.users.col_name')}}</th>
                                     <th>{{__('table.users.col_position')}}</th>
-                                    <th>{{__('table.users.col_email')}}</th>
+                                    <th>{{__('table.general.col_email')}}</th>
                                     <th>{{__('table.users.col_role')}}</th>
                                     <th></th>
                                 </tr>

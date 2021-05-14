@@ -13,7 +13,7 @@ class Organization {
     public string $engineer = '';
     public string $helper_engineer = '';
     public string $phone = '';
-    public int $reg_num = 0;
+    public ?int $reg_num = null;
     public string $address = '';
     public string $address_latin = '';
     public string $email = '';
@@ -34,20 +34,20 @@ class Organization {
 
         $cache = Cache::get('organization')->logo ?? '';
         if (isset($data['logo'])) {
-            $this->logo = $this->filePath($data['logo']);
-            $this->delete($cache);
+            $this->logo = $this->fileCreate($data['logo']);
+            $this->fileDelete($cache);
         } else {
             $this->logo = $cache;
         }
     }
 
-    private function filePath($file): string {
+    private function fileCreate($file): string {
         $name = time() . '.' . $file->extension();
         $file->move('storage/images', $name);
         return $name;
     }
 
-    private function delete($path) {
+    private function fileDelete($path) {
         File::delete('storage/images/' . $path);
     }
 }
