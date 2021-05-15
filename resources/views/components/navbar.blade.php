@@ -1,15 +1,4 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <style>
-        .nav-link.logout {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-link.logout i {
-            margin-right: 2px;
-        }
-    </style>
-
     <!-- navbar left -->
     <ul class="navbar-nav">
         <li class="nav-item">

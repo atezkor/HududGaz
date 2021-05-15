@@ -22,3 +22,13 @@
     background-color: transparent;
     padding-right: 0;
 }
+
+/* For logout button */
+.nav-link.logout {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link.logout i {
+    margin-right: 2px;
+}

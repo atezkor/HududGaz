@@ -6,7 +6,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -20,6 +19,7 @@
                         <form action="{{$action}}" method="post">
                             @csrf
                             @method($method)
+                            @include('components.errors')
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label for="org_number" class="col-3">{{__('table.districts.org_num')}}</label>
@@ -35,8 +35,7 @@
                                             <option>{{__('table.general.select')}}</option>
                                             @foreach($regions as $key => $region)
                                                 <option value="{{$key}}"
-                                                        @if ($key == $model->region) selected @endif
-                                                >
+                                                        @if ($key == $model->region) selected @endif>
                                                     {{$region}}
                                                 </option>
                                             @endforeach
@@ -80,16 +79,16 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="address_latin" class="col-3">{{__('table.districts.address_latin')}}</label>
+                                    <label for="address" class="col-3">{{__('table.districts.address')}}</label>
                                     <div class="col-9">
-                                        <input type="text" name="address_latin" id="address_latin" value="{{ $model->address_latin }}" class="form-control">
+                                        <input type="text" name="address" id="address" value="{{ $model->address }}" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="address" class="col-3">{{__('table.districts.address')}}</label>
+                                    <label for="address_krill" class="col-3">{{__('table.districts.address_krill')}}</label>
                                     <div class="col-9">
-                                        <input type="text" name="address" id="address" value="{{ $model->address }}" class="form-control">
+                                        <input type="text" name="address_krill" id="address_krill" value="{{ $model->address_krill }}" class="form-control">
                                     </div>
                                 </div>
 

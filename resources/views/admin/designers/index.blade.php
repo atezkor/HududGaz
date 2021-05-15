@@ -11,14 +11,9 @@
                         <div class="card-header">
                             <a href="{{route('admin.designers.create')}}" class="btn btn-info">{{__('table.districts.btn_new')}}</a>
                             <div class="card-tools mt-2">
-                                <div class="input-group input-group-sm" style="width: 150px; font-size: 14px;">
-                                    <input type="text" id="search" class="form-control float-right"
+                                <div class="input-group w-75 ml-auto">
+                                    <input type="search" id="search" class="form-control"
                                            placeholder="{{__('table.search')}}">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <small><i class="fas fa-search"></i></small>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>

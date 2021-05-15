@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', getName())
 @section('link')
-    <link rel="stylesheet" href="{{'/css/default.css'}}">
+<link rel="stylesheet" href="{{'/css/default.css'}}">
 @endsection
 
 @section('content')
@@ -9,7 +9,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -23,6 +22,7 @@
                         <form action="{{$action}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method($method)
+                            @include('components.errors')
                             <div class="card-body">
                                 <input type="hidden" name="firm_id" value="{{$firm_id ?? $model->firm_id}}">
                                 <div class="form-group row">
@@ -71,13 +71,6 @@
                                     <label for="specialization" class="col-2">{{__('table.mounters.specialized')}}</label>
                                     <div class="col-10">
                                         <input type="text" name="specialization" id="specialization" value="{{$model->specialization}}" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="function" class="col-2">{{__('table.mounters.function')}}</label>
-                                    <div class="col-10">
-                                        <input type="text" name="function" id="function" value="{{$model->function}}" class="form-control">
                                     </div>
                                 </div>
 

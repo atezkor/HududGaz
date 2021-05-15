@@ -18,8 +18,8 @@ class CreateRegionsTable extends Migration {
             $table->string('section_leader');
             $table->integer('region');
             $table->string('org_name');
-            $table->string('address_latin');
             $table->string('address');
+            $table->string('address_krill');
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('fax')->nullable();

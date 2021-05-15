@@ -1,7 +1,7 @@
 <?php
     return [
         'login' => "Kirish",
-        'search' => "Qidirish",
+        'search' => "Qidiruv",
         'btn_save' => "Saqlash",
         'btn_cancel' => "Bekor qilish",
         'btn_back' => "Ortga qaytish",
@@ -94,8 +94,8 @@
             'engineer' => "Bosh muhandis",
             'section_leader' => "Bo\u{2018}lim boshlig\u{2018}i",
             'email' => "Elektron pochta manzili",
-            'address_latin' => "Manzil",
-            'address' => "Manzil (krillcha)",
+            'address' => "Manzil",
+            'address_krill' => "Manzil (krillcha)",
             'fax' => "Tashkilot faksi",
             'alert_message' => "Tashkilotni o\u{2018}chirib tashlamoqchimisiz?",
         ],
@@ -125,6 +125,7 @@
             'implements_for' => "Amalga oshiriladi",
 
             // Worker side
+            'firm' => "Tashkilot tanlanmagan. Dasturdan foydalanishda o\u{2018}z tartibi bo\u{2018}yicha ishlang.",
             'workers' => "Ishchilar",
             'btn_add' => "Ishchi qo\u{2018}shish",
             'col_org' => "Tashkilot",
@@ -139,7 +140,6 @@
             'diploma_number' => "Diplom raqami",
             'passport_series' => "Pasport seriyasi",
             'specialized' => "Mutaxasisligi",
-            'function' => "Vazifasi",
             'experience' => "Ish tajribasi",
             'date_contract' => "Shartnoma tuzilgan sana",
             'date_contract_end' => "Amal qilish muddati (gacha)",

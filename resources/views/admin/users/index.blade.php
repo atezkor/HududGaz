@@ -9,18 +9,13 @@
 {{--                    @include('components.alerts')--}}
                 <div class="card">
                     <div class="card-header">
-                        @can('add_users')
-                            <a href="{{route('admin.employees.create')}}" class="btn btn-success">{{__('table.add')}}</a>
-                        @endcan
+                    @can('add_users')
+                        <a href="{{route('admin.employees.create')}}" class="btn btn-success">{{__('table.add')}}</a>
+                    @endcan
                         <div class="card-tools mt-2">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" id="search" class="form-control float-right"
-                                       placeholder="{{__('table.search')}}">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
+                            <div class="card-tools mt-2">
+                                <div class="input-group w-75 ml-auto">
+                                    <input type="search" id="search" class="form-control" placeholder="{{__('table.search')}}">
                                 </div>
                             </div>
                         </div>
@@ -46,17 +41,21 @@
                                     <td>{{$user->position}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>
-                                        <form method="post" id="form-{{$user->id}}" action="">
-                                            @can('edit_users')
-                                                <a class="btn btn-warning" title="{{__('table.montage.button_edit')}}"
-                                                   href="#" role="button"><i class="fas fa-pencil-alt"></i></a>
-                                            @endcan
-                                            @can('delete_users')
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" onclick="confirm()" title="{{__('table.montage.button_delete')}}" class="btn btn-danger"
-                                                        role="button"><i class="far fa-trash-alt"></i></button>
-                                            @endcan
+                                        <form action="{{route('admin.users.delete', ['user' => $user])}}" method="post" id="form-{{$user->id}}">
+                                        @can('edit_users')
+                                            <a href="{{route('admin.users.edit', ['user' => $user])}}" class="btn btn-warning"
+                                               title="{{__('table.montage.button_edit')}}">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                        @endcan
+                                        @can('delete_users')
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" onclick="confirm()" class="btn btn-danger"
+                                                    title="{{__('table.montage.button_delete')}}" role="button">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        @endcan
                                         </form>
                                     </td>
                                 </tr>

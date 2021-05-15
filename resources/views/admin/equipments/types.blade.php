@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', getName())
 @section('link')
-    <link rel="stylesheet" href="{{'/css/default.css'}}">
+<link rel="stylesheet" href="{{'/css/default.css'}}">
 @endsection
 
 @section('content')
@@ -14,14 +14,9 @@
                     <div class="card-header">
                         <button class="btn btn-info" onclick="show()">{{__('table.equipments.btn_add')}}</button>
                         <div class="card-tools mt-2">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" id="search" class="form-control float-right"
+                            <div class="input-group w-75 ml-auto">
+                                <input type="search" id="search" class="form-control"
                                        placeholder="{{__('table.search')}}">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -31,7 +26,7 @@
                                 <tr>
                                     <th>{{__('table.equipments.equip_type')}}</th>
                                     <th>{{__('table.equipments.equip_order')}}</th>
-                                    <th style="width: 1px;"></th>
+                                    <th style="width: 1px"></th>
                                 </tr>
                             </thead>
                             <tbody>

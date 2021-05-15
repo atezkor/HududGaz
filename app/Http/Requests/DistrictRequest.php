@@ -21,16 +21,30 @@ class DistrictRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'org_number' => [],
-            'lead_engineer' => [],
-            'section_leader' => [],
-            'region' => [],
-            'org_name' => [],
-            'address_latin' => [],
-            'address' => [],
-            'email' => [],
-            'phone' => [],
+            'org_number' => ['required'],
+            'lead_engineer' => ['required'],
+            'section_leader' => ['required'],
+            'region' => ['required'],
+            'org_name' => ['required'],
+            'address' => ['required'],
+            'address_krill' => ['required'],
+            'email' => ['required'],
+            'phone' => ['required'],
             'fax' => []
+        ];
+    }
+
+    public function attributes(): array {
+        return [
+            'org_number' => __('table.districts.org_num'),
+            'lead_engineer' => __('table.districts.engineer'),
+            'section_leader' => __('table.districts.section_leader'),
+            'region' => __('table.districts.region'),
+            'org_name' => __('table.general.org_name'),
+            'address' => __('table.districts.address'),
+            'address_krill' => __('table.districts.address_krill'),
+            'email' => __('table.districts.email'),
+            'phone' => __('table.general.phone')
         ];
     }
 }

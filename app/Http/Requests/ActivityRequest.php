@@ -21,7 +21,13 @@ class ActivityRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'activity' => []
+            'activity' => ['required']
+        ];
+    }
+
+    public function attributes(): array{
+        return [
+            'activity' => __('table.activities.activity')
         ];
     }
 }

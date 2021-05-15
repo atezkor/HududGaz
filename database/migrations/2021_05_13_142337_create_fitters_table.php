@@ -23,8 +23,7 @@ class CreateFittersTable extends Migration {
             $table->integer('diploma_number');
             $table->string('passport_series');
             $table->string('specialization');
-            $table->string('function');
-            $table->double('experience', 4);
+            $table->double('experience', 4)->nullable();
             $table->string('document')->nullable();
             $table->timestamps();
 

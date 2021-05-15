@@ -20,13 +20,13 @@ class CreateMountersTable extends Migration {
             $table->string('leader');
             $table->integer('region');
             $table->string('address');
-            $table->string('taxpayer_stir');
-            $table->string('legal_form');
-            $table->string('given_by');
+            $table->string('taxpayer_stir')->nullable();
+            $table->string('legal_form')->nullable();
             $table->date('date_created');
             $table->date('date_expired');
-            $table->string('permission_to', 500);
-            $table->string('implement_for', 500);
+            $table->string('given_by');
+            $table->string('permission_to', 500)->nullable();
+            $table->string('implement_for', 500)->nullable();
             $table->string('document')->nullable();
             $table->timestamps();
         });
