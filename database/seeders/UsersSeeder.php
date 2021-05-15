@@ -18,11 +18,11 @@ class UsersSeeder extends Seeder {
         $this->creator(3, 'region', 'region@gmail.com', 'admin');
         $this->creator(4, 'designer', 'designer@gmail.com', 'admin');
         $this->creator(5, 'engineer', 'engineer@gmail.com', 'admin');
-        $this->creator(6, 'director', 'director@gmail.com', 'admin', 'uz', 'profile.jpg');
-        $this->creator(7, 'mounter', 'mounter@gmail.com', 'admin');
+        $this->creator(6, 'director', 'director@gmail.com', 'admin', 'uzk', 'profile.jpg');
+        $this->creator(7, 'mounter', 'mounter@gmail.com', 'admin', 'uzk');
     }
 
-    private function creator($role_id, $name, $email, $password = "123456", $locale = 'uzk', $avatar = 'profile.png') {
+    private function creator($role_id, $name, $email, $password = "123456", $locale = 'uz', $avatar = 'profile.png') {
         User::query()->firstOrCreate([
             'role_id' => $role_id,
             'name' => $name,

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Jihozlar')
+@section('title', getName())
 
 @section('content')
 <section class="content">

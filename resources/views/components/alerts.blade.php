@@ -2,7 +2,7 @@
     @foreach ($alerts as $alert)
         <div class="alert alert-{{ $alert->type }} alert-name-{{ $alert->name }}">
             @foreach($alert->components as $component)
-                {{--<?= $component->render(); ?>--}}
+                {{$component->render()}}
             @endforeach
         </div>
     @endforeach

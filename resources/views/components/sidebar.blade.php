@@ -5,35 +5,38 @@
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @foreach(MenuItems() as $menu)
+                @php($items = MenuItems())
+                @foreach($items as $menu)
+                    @if ($menu->href == '#')
                     <li class="nav-item">
-                        <a href="{{route($menu['href'])}}" class="nav-link">
-                            <i class="{{$menu['icons']}}"></i>
-                            <p>{{$menu['title']}}</p>
+                        <a href="#" class="nav-link">
+                            <i class="{{$menu->icon}}"></i>
+                            <p>
+                                <span>@lang($menu->title)</span>
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <!-- Dropdown menu -->
+                        <ul class="nav nav-treeview" style="display: none;">
+                            @for($i = $loop->index + 1; $i < $loop->count; $i ++)
+                                <li class="nav-item">
+                                    <a href="{{route($items[$i]->href)}}" class="nav-link">
+                                        <i class="{{$items[$i]->icon}}"></i>
+                                        <p>@lang($items[$i]->title)</p>
+                                    </a>
+                                </li>
+                            @endfor
+                        </ul>
+                        @break
+                    </li>
+                    @endif
+                    <li class="nav-item">
+                        <a href="{{route($menu->href)}}" class="nav-link">
+                            <i class="{{$menu->icon}}"></i>
+                            <p>@lang($menu->title)</p>
                         </a>
                     </li>
                 @endforeach
-
-                <li class="nav-item">
-                    <!-- Dropdown menu -->
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-line"></i>
-                        <p>
-                            Sozlamalar
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview" style="display: none;">
-                        @foreach(MenuItemChildrens() as $menu)
-                            <li class="nav-item">
-                                <a href="{{route($menu['href'])}}" class="nav-link">
-                                    <i class="{{$menu['icons']}}"></i>
-                                    <p>{{$menu['title']}}</p>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </li>
             </ul>
         </nav>
     </div>

@@ -40,7 +40,7 @@
 
 ### Yangi fayllar
 - Xizmatchi sinflarni `app` papkasinign ixitiyoriy joyiga yartib, undan foydalanish mumkin.
-  `namespace App\{Papka nomi};` degan qo'shimha qoo'shilsa yetarli
+  `namespace App\{Papka nomi};` degan qo'shimha qo'shilsa yetarli
 
 <pre>
 public function index($locale): RedirectResponse {

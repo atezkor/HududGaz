@@ -21,7 +21,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin routes
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('/', function() {return redirect('/');});
+    Route::get('', function() {
+        return redirect()->route('admin.users.index');
+    });
 
     resource('users', UserController::class, 'admin.users');
     resource('equipments', EquipmentController::class, 'admin.equipments');
@@ -52,16 +54,13 @@ Route::get('/', function() {
     if (auth()->user() == null)
         return redirect()->route('login');
 
-    $role_name = auth()->user()->name ?? '';
-
-    switch ($role_name) {
-        case "admin": return redirect()->route('admin.users.index');
-        case "region": return redirect()->route('admin.timetable');
-        case "technic": return redirect()->route('admin.setting');
-        case "mounter": return redirect()->route('admin.timetable.none');
-        case "designer": return redirect()->route('admin.equipments.index');
-        case "engineer": return redirect()->route('admin.equipments.create');
-        case "director": return redirect()->route('admin.timetable.index');
+    $role = auth()->user()->role_id ?? 0;
+    switch ($role) {
+        case 1: return redirect('/admin');
+        case 2: return redirect('/technic');
+        case 3: return redirect('/region');
+        case 4: return redirect('/designer');
+        case 5: return redirect('/engineer');
     }
 
     return redirect()->route('login');
