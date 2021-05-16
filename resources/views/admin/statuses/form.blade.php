@@ -2,58 +2,57 @@
 @section('title', getName())
 
 @section('content')
-    <section class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                {{__('table.statuses.heading_edit')}}
-                            </h3>
-                        </div>
-                        <form action="{{$action}}" method="post">
-                            @csrf
-                            @method('PUT')
-                            <div class="card-body">
-                                <div class="form-group row">
-                                    <label for="code" class="col-2">{{__('table.statuses.code')}}</label>
-                                    <div class="col-10">
-                                        <input type="number" name="code" id="code" value="{{$model->code}}" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="description" class="col-2">{{__('table.statuses.description')}}</label>
-                                    <div class="col-10">
-                                        <input type="text" name="description" id="description" value="{{$model->description}}" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="transitions" class="col-2">{{__('table.statuses.transitions')}}</label>
-                                    <div class="col-10">
-                                        <input type="text" name="transitions" id="transitions" value="{{$model->transitions}}" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="term" class="col-2">{{__('table.statuses.term')}}</label>
-                                    <div class="col-10">
-                                        <input type="number" name="term" id="term" value="{{$model->term}}" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary mr-2">{{__('table.btn_renew')}}</button>
-                                <a href="{{route('admin.statuses.index')}}" class="btn btn-outline-secondary">{{__('table.btn_back')}}</a>
-                                <button type="reset" class="btn btn-default float-right">{{__('table.btn_reset')}}</button>
-                            </div>
-                        </form>
+<section class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            {{__('table.statuses.heading_edit')}}
+                        </h3>
                     </div>
+                    <form action="{{$action}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="code" class="col-2">{{__('table.statuses.code')}}</label>
+                                <div class="col-10">
+                                    <input type="number" name="code" id="code" value="{{$model->code}}" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="description" class="col-2">{{__('table.statuses.description')}}</label>
+                                <div class="col-10">
+                                    <input type="text" name="description" id="description" value="{{$model->description}}" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="transitions" class="col-2">{{__('table.statuses.transitions')}}</label>
+                                <div class="col-10">
+                                    <input type="text" name="transitions" id="transitions" value="{{$model->transitions}}" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="term" class="col-2">{{__('table.statuses.term')}}</label>
+                                <div class="col-10">
+                                    <input type="number" name="term" id="term" value="{{$model->term}}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary mr-2">{{__('table.btn_renew')}}</button>
+                            <a href="{{route('admin.statuses.index')}}" class="btn btn-outline-secondary">{{__('table.btn_back')}}</a>
+                            <button type="reset" class="btn btn-default float-right">{{__('table.btn_reset')}}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection

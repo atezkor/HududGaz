@@ -13,6 +13,14 @@ class CreatePropositionsTable extends Migration {
     public function up() {
         Schema::create('propositions', function (Blueprint $table) {
             $table->id();
+            $table->integer('number');
+            $table->integer('district');
+            $table->integer('activity_type');
+            $table->tinyInteger('build_type');
+            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('type');
+            $table->string('file')->nullable();
+            $table->date('delete_at')->nullable();
             $table->timestamps();
         });
     }

@@ -41,7 +41,7 @@
 ### Yangi fayllar
 - Xizmatchi sinflarni `app` papkasinign ixitiyoriy joyiga yartib, undan foydalanish mumkin.
   `namespace App\{Papka nomi};` degan qo'shimha qo'shilsa yetarli
-
+- ViewModel larni ulash `composer require spatie/laravel-view-models`
 <pre>
 public function index($locale): RedirectResponse {
     app()->setLocale($locale);

@@ -32,3 +32,12 @@
 .nav-link.logout i {
     margin-right: 2px;
 }
+
+.tap-pane {
+    display: none;
+}
+
+.table-center td:last-child,
+.table-center th:last-child {
+    text-align: center;
+}

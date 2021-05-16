@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PropositionRequest;
+use App\Models\Activity;
+use App\Models\Base;
 use App\Models\Proposition;
-use App\Models\User;
-use App\Services\Service;
+use App\Services\PropositionService;
+use App\ViewModels\PropositionListViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class PropositionController extends Controller {
 
-    private Service $service;
+    private PropositionService $service;
 
-    public function __construct() {
-        $this->service = new Service(new Proposition());
+    public function __construct(PropositionService $service) {
+        $this->service = $service;
     }
 
     /**
@@ -23,8 +25,7 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        $models = User::all();
-        return view('propositions.index', ['models' => $models]);
+        return view('propositions.index', new PropositionListViewModel());
     }
 
     /**
@@ -33,7 +34,10 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function create(): View|RedirectResponse {
-        return view('propositions.test');
+        $model = new Proposition();
+
+        return view('propositions.form', ['action' => route('propositions.store'), 'method' => 'POST',
+            'model' => $model, 'districts' => Base::districts(), 'activities' => Activity::all()]);
     }
 
     /**
@@ -45,17 +49,17 @@ class PropositionController extends Controller {
     public function store(PropositionRequest $request): RedirectResponse {
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('technic.index');
+        return redirect()->route('propositions.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param Proposition $proposition
-     * @return View|RedirectResponse
+     * @return RedirectResponse
      */
-    public function show(Proposition $proposition): View|RedirectResponse {
-        return view('propositions.index', ['model' => $proposition]);
+    public function show(Proposition $proposition): RedirectResponse {
+        return $this->service->show($proposition);
     }
 
     /**
@@ -65,7 +69,8 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Proposition $proposition): View|RedirectResponse {
-        return view('technic', ['model' => $proposition]);
+        return view('propositions.form', ['action' => route('propositions.store'), 'method' => 'POST',
+            'model' => $proposition, 'districts' => Base::districts(), 'activities' => Activity::all()]);
     }
 
     /**
@@ -78,7 +83,7 @@ class PropositionController extends Controller {
     public function update(PropositionRequest $request, Proposition $proposition): RedirectResponse {
         $data = $request->validated();
         $this->service->update($data, $proposition);
-        return redirect()->route('technic.index');
+        return redirect()->route('propositions.index');
     }
 
     /**
@@ -89,6 +94,6 @@ class PropositionController extends Controller {
      */
     public function destroy(Proposition $proposition): RedirectResponse {
         $this->service->delete($proposition);
-        return redirect()->route('technic.index');
+        return redirect()->route('propositions.index');
     }
 }

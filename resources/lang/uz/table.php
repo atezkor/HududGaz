@@ -43,21 +43,6 @@
             'address_latin' => "Manzili",
             'address' => "Manzili (krillcha)"
         ],
-        'district' => [
-            'urgench_city' => "Urganch shahri",
-            'urgench' => "Urganch tumani",
-            'khiva_city' => "Xiva shahri",
-            'khiva' => "Xiva tumani",
-            'khonqa' => "Xonqa tumani",
-            'bagat' => "Bog\u{2018}ot tumani",
-            'yangiariq' => "Yangiariq tumani",
-            'yangibozor' => "Yangibozor tumani",
-            'khazorasp' => "Xozarasp tumani",
-            'shavat' => "Shovot tumani",
-            'gurlan' => "Gurlan tumani",
-            'kushkupir' => "Qo\u{2018}shko\u{2018}pir tumani",
-            'tupraq-kala' => "Tuproq-qa\u{2019}la tumani"
-        ],
         'users' => [
             'col_num' => "Tr",
             'col_name' => "Ismi",
