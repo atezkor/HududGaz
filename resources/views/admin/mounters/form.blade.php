@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label for="region">{{__('table.mounters.region')}}</label>
                                     <select name="region" id="region" class="custom-select" required>
-                                        <option>{{__('table.general.select')}}</option>
+                                        <option value="">{{__('table.general.select')}}</option>
                                         @foreach($districts as $key => $district)
                                             <option value="{{$key}}"
                                                     @if ($key == $model->region) selected @endif

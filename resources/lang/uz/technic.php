@@ -27,6 +27,7 @@
         'col_action' => "Amal",
         'col_limit' => "Vaqt qoldig\u{2018}i",
         'propositions' => [
+            'heading_edit' => "Ariza ma\u{2019}lumotlarini yangilash",
             'individual' => "Jismoniy shaxs",
             'legal' => "Yuridik shaxs",
             'stir' => "STIR",

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PropositionRequest;
 use App\Models\Activity;
 use App\Models\Base;
+use App\Models\Individual;
 use App\Models\Proposition;
 use App\Services\PropositionService;
 use App\ViewModels\PropositionListViewModel;
@@ -35,9 +36,9 @@ class PropositionController extends Controller {
      */
     public function create(): View|RedirectResponse {
         $model = new Proposition();
-
         return view('propositions.form', ['action' => route('propositions.store'), 'method' => 'POST',
-            'model' => $model, 'districts' => Base::districts(), 'activities' => Activity::all()]);
+            'model' => $model, 'districts' => Base::districts(),
+            'activities' => Activity::all(), 'applicant' => new Individual()]);
     }
 
     /**
@@ -69,8 +70,14 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Proposition $proposition): View|RedirectResponse {
-        return view('propositions.form', ['action' => route('propositions.store'), 'method' => 'POST',
-            'model' => $proposition, 'districts' => Base::districts(), 'activities' => Activity::all()]);
+        if ($proposition->getAttribute('type') === 1)
+            $applicant = $proposition->individual();
+        else
+            $applicant = $proposition->legal();
+
+        return view('propositions.form', ['action' => route('propositions.update', ['proposition' => $proposition]),
+            'method' => 'PUT', 'model' => $proposition, 'districts' => Base::districts(),
+            'activities' => Activity::all(), 'applicant' => $applicant]);
     }
 
     /**

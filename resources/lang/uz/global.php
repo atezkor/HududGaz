@@ -1,5 +1,6 @@
 <?php
     return [
+        'hour' => "soat",
         'districts' => [
             '1' => "Urganch shahri",
             '2' => "Urganch tumani",

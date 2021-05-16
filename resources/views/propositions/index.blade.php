@@ -65,7 +65,12 @@
                                                 </a>
                                             </td>
                                             <td>{{$model->created_at}}</td>
-                                            <td>{{$model->limit}}</td>
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="{{progressColor($model->percent())}}" style="width: {{$model->percent()}}%"></div>
+                                                </div>
+                                                <div class="text-center">{{$model->limit()}} @lang('global.hour')</div>
+                                            </td>
                                             <td>
                                                 <form action="{{route('propositions.delete', ['proposition' => $model])}}"
                                                       method="post" id="form-{{$model->id}}">
@@ -114,7 +119,12 @@
                                                 </a>
                                             </td>
                                             <td>{{$model->created_at}}</td>
-                                            <td>{{$model->limit}}</td>
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="{{progressColor($model->percent())}}" style="width: {{$model->percent()}}%"></div>
+                                                </div>
+                                                <div class="text-center">{{$model->limit()}} @lang('global.hour')</div>
+                                            </td>
                                             <td>
                                                 <form action="{{route('propositions.delete', ['proposition' => $model])}}"
                                                       method="post" id="legal-form-{{$model->id}}">

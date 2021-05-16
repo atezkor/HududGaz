@@ -32,7 +32,7 @@
                                     <label for="region" class="col-3">{{__('table.districts.select_hint')}}</label>
                                     <div class="col-9">
                                         <select name="region" id="region" class="custom-select">
-                                            <option>{{__('table.general.select')}}</option>
+                                            <option value="">{{__('table.general.select')}}</option>
                                             @foreach($regions as $key => $region)
                                                 <option value="{{$key}}"
                                                         @if ($key == $model->region) selected @endif>

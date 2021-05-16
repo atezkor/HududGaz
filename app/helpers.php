@@ -46,3 +46,13 @@ function formatDate($date): string {
 function MenuItems(): Collection|array {
     return MenuItem::items(auth()->user())->orderBy('parent_id')->get();
 }
+
+function progressColor($percent): string {
+    if ($percent > 75)
+        return 'progress-bar bg-primary';
+    if ($percent > 25)
+        return 'progress-bar bg-warning';
+    if ($percent > 0)
+        return 'progress-bar bg-danger';
+    return 'progress-bar bg-transparent';
+}

@@ -11,6 +11,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+                    @if ($method == "POST")
                         <div class="row">
                             <div class="col">
                                 <ul class="nav nav-pills">
@@ -27,9 +28,13 @@
                                 </ul>
                             </div>
                         </div>
+                    @else
+                        <h3>@lang('technic.propositions.heading_edit')</h3>
+                    @endif
                     </div>
                     <form action="{{$action}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method($method)
                         @include('components.errors')
                         <div class="card-body">
                             <div class="form-group row">
@@ -44,21 +49,21 @@
                                     <div class="form-group row">
                                         <label for="stir" class="col-2">{{__('technic.propositions.stir')}}</label>
                                         <div class="col-10">
-                                            <input type="number" name="stir" id="stir" value="{{$model->stir}}" class="form-control">
+                                            <input type="number" name="stir" id="stir" value="{{$applicant->stir}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="passport" class="col-2">{{__('technic.propositions.passport')}}</label>
                                         <div class="col-10">
-                                            <input type="text" name="passport" id="passport" value="{{$model->passport}}" class="form-control">
+                                            <input type="text" name="passport" id="passport" value="{{$applicant->passport}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="full_name" class="col-2">{{__('technic.propositions.full_name')}}</label>
                                         <div class="col-10">
-                                            <input type="text" name="full_name" id="full_name" value="{{$model->full_name}}" class="form-control">
+                                            <input type="text" name="full_name" id="full_name" value="{{$applicant->full_name}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -66,35 +71,35 @@
                                     <div class="form-group row">
                                         <label for="legal_stir" class="col-2">{{__('technic.propositions.legal_stir')}}</label>
                                         <div class="col-10">
-                                            <input type="number" name="legal_stir" id="legal_stir" value="{{$model->legal_stir}}" class="form-control">
+                                            <input type="number" name="legal_stir" id="legal_stir" value="{{$applicant->legal_stir}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="legal_name" class="col-2">{{__('technic.propositions.legal_name')}}</label>
                                         <div class="col-10">
-                                            <input type="text" name="legal_name" id="legal_name" value="{{$model->legal_name}}" class="form-control">
+                                            <input type="text" name="legal_name" id="legal_name" value="{{$applicant->legal_name}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="leader" class="col-2">{{__('technic.propositions.leader')}}</label>
                                         <div class="col-10">
-                                            <input type="text" name="leader" id="leader" value="{{$model->leader}}" class="form-control">
+                                            <input type="text" name="leader" id="leader" value="{{$applicant->leader}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="leader_stir" class="col-2">{{__('technic.propositions.leader_stir')}}</label>
                                         <div class="col-10">
-                                            <input type="number" name="leader_stir" id="leader_stir" value="{{$model->leader_stir}}" class="form-control">
+                                            <input type="number" name="leader_stir" id="leader_stir" value="{{$applicant->leader_stir}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="email" class="col-2">{{__('technic.propositions.email')}}</label>
                                         <div class="col-10">
-                                            <input type="email" name="email" id="email" value="{{$model->email}}" class="form-control">
+                                            <input type="email" name="email" id="email" value="{{$applicant->email}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +108,7 @@
                             <div class="form-group row">
                                 <label for="phone" class="col-2">{{__('technic.propositions.phone')}}</label>
                                 <div class="col-10">
-                                    <input type="tel" name="phone" id="phone" value="{{$model->phone}}" class="form-control">
+                                    <input type="tel" name="phone" id="phone" value="{{$applicant->phone}}" class="form-control">
                                 </div>
                             </div>
 
@@ -179,7 +184,7 @@
         try {
             $('#document_label').text(input.target.files[0].name)
         } catch (e) {}
-    })
+    });
 
     $('#reset').on('click', function () {
         $('#document_label').text('{{__('technic.propositions.file_hint')}}');
@@ -188,5 +193,13 @@
     function changeType(type) {
         $('#type').val(type);
     }
+
+    $(document).ready(function() {
+        if ({{$model->type}} === 2) {
+            $('#legal_entity').tab('show');
+            $('#individual').removeClass('active');
+            $('#type').val(2);
+        }
+    });
 </script>
 @endsection

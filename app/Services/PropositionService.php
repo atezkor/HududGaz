@@ -33,6 +33,12 @@ class PropositionService extends CrudService {
             $this->deleteFile($model->file);
         }
         parent::update($data, $model);
+        if ((int) $model->type === 1)
+            $applicant = $model->individual();
+        else
+            $applicant = $model->legal();
+        $applicant->fill($data);
+        $applicant->save();
     }
 
     public function delete($model) {
