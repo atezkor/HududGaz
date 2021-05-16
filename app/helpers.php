@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\MenuItem;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -49,10 +50,15 @@ function MenuItems(): Collection|array {
 
 function progressColor($percent): string {
     if ($percent > 75)
-        return 'progress-bar bg-primary';
+        return 'progress-bar bg-success';
     if ($percent > 25)
         return 'progress-bar bg-warning';
     if ($percent > 0)
         return 'progress-bar bg-danger';
     return 'progress-bar bg-transparent';
+}
+
+/* This is function for application term */
+function term($limit): Collection|array {
+    return Status::query()->offset(0)->limit($limit)->get();
 }

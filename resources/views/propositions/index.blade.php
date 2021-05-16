@@ -53,6 +53,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @php($limit = term(4))
                                     @foreach($individuals as $model)
                                         <tr>
                                             <td>{{$loop->index + 1}}</td>
@@ -67,9 +68,10 @@
                                             <td>{{$model->created_at}}</td>
                                             <td>
                                                 <div class="progress progress-xs">
-                                                    <div class="{{progressColor($model->percent())}}" style="width: {{$model->percent()}}%"></div>
+                                                    <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"
+                                                         style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>
                                                 </div>
-                                                <div class="text-center">{{$model->limit()}} @lang('global.hour')</div>
+                                                <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
                                             </td>
                                             <td>
                                                 <form action="{{route('propositions.delete', ['proposition' => $model])}}"
@@ -121,9 +123,10 @@
                                             <td>{{$model->created_at}}</td>
                                             <td>
                                                 <div class="progress progress-xs">
-                                                    <div class="{{progressColor($model->percent())}}" style="width: {{$model->percent()}}%"></div>
+                                                    <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"
+                                                         style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>
                                                 </div>
-                                                <div class="text-center">{{$model->limit()}} @lang('global.hour')</div>
+                                                <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
                                             </td>
                                             <td>
                                                 <form action="{{route('propositions.delete', ['proposition' => $model])}}"

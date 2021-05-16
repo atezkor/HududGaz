@@ -18,13 +18,9 @@ class Proposition extends Model {
         return $this->hasOne(Legal::class)->first();
     }
 
-    function limit(): int {
-        return Status::query()->find($this->getAttribute('status'))->getAttribute('term');
-    }
-
-    function percent(): string {
+    function percent($term = 72): string {
         $now = time() - date_timestamp_get($this->getAttribute('updated_at'));
-        $percent = 100 - $now / (3600 * $this->limit()) * 100;
+        $percent = 100 - $now / (3600 * $term) * 100;
         return number_format($percent, 0, '.', '');
     }
 }

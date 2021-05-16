@@ -48,7 +48,7 @@
             'file' => "Ariza nusxasi",
             'file_hint' => "Arizani yuklash",
             'show' => "Arizani ko\u{2018}rish",
-            'alert_message' => "Arizani o\u{2018}chirmoqchimisiz?",
+            'alert_message' => "Arizani o\u{2018}chirib tashlamoqchimisiz?",
             'alert_text' => "O\u{2018}chirish uchun tasdiqlang"
         ]
     ];

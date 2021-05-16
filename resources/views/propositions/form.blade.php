@@ -195,7 +195,7 @@
     }
 
     $(document).ready(function() {
-        if ({{$model->type}} === 2) {
+        if ({{$model->type ?? 1}} === 2) {
             $('#legal_entity').tab('show');
             $('#individual').removeClass('active');
             $('#type').val(2);
