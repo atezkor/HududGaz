@@ -1,18 +1,6 @@
 <?php
     return [
         'login' => "Kirish",
-        'search' => "Qidiruv",
-        'btn_save' => "Saqlash",
-        'btn_cancel' => "Bekor qilish",
-        'btn_back' => "Ortga qaytish",
-        'btn_reset' => "Maydonlarni tozlash",
-        'btn_add' => "Qo\u{2018}shish",
-        'btn_edit' => "O\u{2018}zgartirish",
-        'btn_renew' => "Yangilash",
-        'btn_del' => "O\u{2018}chirish",
-        'btn_yes' => "Ha",
-        'btn_no' => "Yo\u{2018}q",
-        'del_process' => "O\u{2018}chirilmoqda ...",
         'general' => [
             'col_index' => "Tr",
             'select' => "Tanlang",
@@ -142,12 +130,10 @@
             'alert_message' => "Faoliyatni o\u{2018}chirib tashlamoqchimisiz?",
         ],
         'statuses' => [
-            'col_code' => "Kodi",
             'col_description' => "Tavsifi",
             'col_transition' => "O\u{2018}tishlar",
             'col_expired' => "Muddati",
             'heading_edit' => "Ariza bosqichi holatini o\u{2018}zgartirish",
-            'code' => "Holat kodi",
             'description' => "Holat tavsifi",
             'transitions' => "O\u{2018}tishlar",
             'term' => "Bajarish muddati (soat)",

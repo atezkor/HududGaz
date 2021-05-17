@@ -17,13 +17,6 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="code" class="col-2">{{__('table.statuses.code')}}</label>
-                                <div class="col-10">
-                                    <input type="number" name="code" id="code" value="{{$model->code}}" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="description" class="col-2">{{__('table.statuses.description')}}</label>
                                 <div class="col-10">
                                     <input type="text" name="description" id="description" value="{{$model->description}}" class="form-control">

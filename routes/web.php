@@ -49,6 +49,10 @@ Route::prefix('technic')->group(function() {
     require_once 'technic.php';
 });
 
+Route::prefix('district')->group(function() {
+    require_once 'district.php';
+});
+
 # main route - in route distribution by to roles
 Route::get('/', function() {
     if (auth()->user() == null)
@@ -58,7 +62,7 @@ Route::get('/', function() {
     switch ($role) {
         case 1: return redirect('/admin');
         case 2: return redirect('/technic');
-        case 3: return redirect('/region');
+        case 3: return redirect('/district');
         case 4: return redirect('/designer');
         case 5: return redirect('/engineer');
     }

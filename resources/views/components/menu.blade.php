@@ -1,0 +1,50 @@
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+    <div class="container-fluid" style="width: 90%">
+        <a href="{{route('dashboard')}}" class="navbar-brand col-md-3">
+            <img src="{{'/img/logo.png'}}" alt="{{getName()}}" class="col-md-12">
+        </a>
+        <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+            <ul class="navbar-nav">
+            @php($items = MenuItems())
+            @foreach($items as $menu)
+                <li class="nav-item">
+                    <a href="{{route($menu->href)}}" class="nav-link">
+                        <p>
+                            <span>@lang($menu->title)</span>
+                            <span class="{{$menu->icon}}">1</span>
+                        </p>
+                    </a>
+                </li>
+            @endforeach
+            </ul>
+        </div>
+
+        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+            <li class="nav-item">
+                <div class="user-panel d-flex" style="margin-top: 3px">
+                    <div class="image">
+                        <img src="{{'/img/profile/user1.jpg'}}" class="img-circle elevation-2" alt="img">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
+                            {{auth()->user()->name ?? ''}}
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <button class="nav-link logout btn" data-toggle="tooltip" title="@lang('global.logout')">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>@lang('global.logout')</span>
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>

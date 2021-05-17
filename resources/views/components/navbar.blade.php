@@ -48,9 +48,9 @@
         <li class="nav-item">
             <form action="{{route('logout')}}" method="post">
                 @csrf
-                <button class="nav-link logout btn">
+                <button class="nav-link logout btn" data-toggle="tooltip" title="@lang('global.logout')">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span>Chiqish</span>
+                    <span>@lang('global.logout')</span>
                 </button>
             </form>
         </li>

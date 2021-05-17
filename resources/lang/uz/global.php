@@ -1,6 +1,20 @@
 <?php
     return [
+        'logout' => "Chiqish",
+        'search' => "Qidiruv",
+        'btn_save' => "Saqlash",
+        'btn_cancel' => "Bekor qilish",
+        'btn_back' => "Ortga qaytish",
+        'btn_reset' => "Maydonlarni tozlash",
+        'btn_add' => "Qo\u{2018}shish",
+        'btn_edit' => "O\u{2018}zgartirish",
+        'btn_renew' => "Yangilash",
+        'btn_del' => "O\u{2018}chirish",
+        'btn_yes' => "Ha",
+        'btn_no' => "Yo\u{2018}q",
+        'del_process' => "O\u{2018}chirilmoqda ...",
         'hour' => "soat",
+        'index' => "Tr",
         'districts' => [
             '1' => "Urganch shahri",
             '2' => "Urganch tumani",

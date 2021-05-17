@@ -19,7 +19,6 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 1px;">@lang('table.general.col_index')</th>
-                                        <th>@lang('table.statuses.col_code')</th>
                                         <th>@lang('table.statuses.col_description')</th>
                                         <th>@lang('table.statuses.col_transition')</th>
                                         <th>@lang('table.statuses.col_expired')</th>
@@ -30,7 +29,6 @@
                                 @foreach($models as $model)
                                     <tr>
                                         <td>{{$loop->index + 1}}</td>
-                                        <td>{{$model->code}}</td>
                                         <td>{{$model->description}}</td>
                                         <td>{{$model->transitions}}</td>
                                         <td>{{$model->term}}</td>

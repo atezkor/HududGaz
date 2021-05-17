@@ -14,10 +14,11 @@ class MenuItemSeeder extends Seeder {
     public function run() {
         $this->adminMenu();
         $this->technicMenu();
+        $this->district();
     }
 
     private function adminMenu() {
-        $this->CreateMenuItem(1, 'admin.menu_users', 'admin.users.index', 'nav-icon fas fa-users', 1);
+        $this->CreateMenuItem(1, 'admin.menu_users', 'admin.users.index', 'nav-icon fas fa-users');
         $this->CreateMenuItem(1, 'admin.menu_equips', 'admin.equipments.index', 'nav-icon fas fa-drafting-compass', 2);
         $this->CreateMenuItem(1, 'admin.menu_designers', 'admin.designers.index', 'nav-icon fas fa-pencil-ruler', 3);
         $this->CreateMenuItem(1, 'admin.menu_mounters', 'admin.mounters.index', 'nav-icon fas fa-network-wired', 4);
@@ -31,7 +32,7 @@ class MenuItemSeeder extends Seeder {
     }
 
     private function technicMenu() {
-        $this->CreateMenuItem(2, 'technic.props', 'propositions.index', 'nav-icon fas fa-file-alt', 1);
+        $this->CreateMenuItem(2, 'technic.props', 'propositions.index', 'nav-icon fas fa-file-alt');
         $this->CreateMenuItem(2, 'technic.recommends', 'propositions.index', 'nav-icon fas fa-paste', 2);
         $this->CreateMenuItem(2, 'technic.tech_conditions', 'propositions.index', 'nav-icon fas fa-paste', 3);
         $this->CreateMenuItem(2, 'technic.reports', '#', 'nav-icon fas fa-chart-line', 4);
@@ -40,7 +41,14 @@ class MenuItemSeeder extends Seeder {
         $this->CreateMenuItem(2, 'more_sec', 'propositions.index', 'nav-icon far fa-circle', 3, 4);
     }
 
-    private function CreateMenuItem($role, $title, $href, $icon, $order, $parent_id = null) {
+    private function district() {
+        $this->CreateMenuItem(3, 'district.propositions', 'district.propositions', 'badge bg-primary');
+        $this->CreateMenuItem(3, 'district.recommendations', 'district.recommendations', 'badge bg-info');
+        $this->CreateMenuItem(3, 'district.cancelled', 'district.recommendations.cancelled', 'badge bg-danger');
+        $this->CreateMenuItem(3, 'district.archive', 'district.recommendations.archive', 'badge bg-secondary');
+    }
+
+    private function CreateMenuItem($role, $title, $href, $icon, $order = 1, $parent_id = null) {
         MenuItem::query()->firstOrCreate([
             'role' => $role,
             'title' => $title,

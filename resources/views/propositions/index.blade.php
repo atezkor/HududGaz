@@ -3,7 +3,6 @@
 @section('link')
 <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
 <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/buttons.bootstrap4.min.css'}}">
 <link rel="stylesheet" href="{{'/css/default.css'}}">
 @endsection
 
@@ -162,7 +161,6 @@
 <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>
 <script src="{{'/js/datatable/datatables.bootstrap4.min.js'}}"></script>
 <script src="{{'/js/datatable/datatables.responsive.min.js'}}"></script>
-<script src="{{'/js/datatable/datatables.buttons.min.js'}}"></script>
 <script>
     $(function () {
         let lang = {
@@ -195,7 +193,7 @@
             searching: true,
             language: lang
         });
-    })
+    });
 
     function remove(form) {
         Swal.fire({
@@ -214,9 +212,9 @@
                     title: '{{__('technic.del_process')}}',
                     icon: 'success',
                     showConfirmButton: false,
-                })
+                });
             }
-        })
+        });
     }
 </script>
 @endsection
