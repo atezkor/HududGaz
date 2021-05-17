@@ -78,11 +78,11 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{route('propositions.edit', ['proposition' => $model])}}" class="btn btn-outline-info"
-                                                       title="@lang('technic.btn_edit')">
+                                                       title="@lang('global.btn_edit')">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-outline-danger"
-                                                            title="@lang('technic.btn_del')" role="button">
+                                                            title="@lang('global.btn_del')" role="button">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>
@@ -133,11 +133,11 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{route('propositions.edit', ['proposition' => $model])}}" class="btn btn-outline-info"
-                                                       title="@lang('technic.btn_edit')">
+                                                       title="@lang('global.btn_edit')">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" onclick="remove('legal-form-{{$model->id}}')" class="btn btn-outline-danger"
-                                                            title="@lang('technic.btn_del')" role="button">
+                                                            title="@lang('global.btn_del')" role="button">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>
@@ -171,7 +171,8 @@
                 sPrevious: "@lang('global.datatables.previous')",
                 sNext: "@lang('global.datatables.next')",
             },
-            sInfo: "@lang('global.datatables.info')"
+            sInfo: "@lang('global.datatables.info')",
+            sZeroRecords: "@lang('global.datatables.zeroRecords')"
         }
 
         $("#table1").DataTable({
@@ -203,13 +204,13 @@
             showCancelButton: true,
             confirmButtonColor: '#dd3333',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: '{{__('technic.btn_yes')}}',
-            cancelButtonText: '{{__('technic.btn_no')}}'
+            confirmButtonText: '{{__('global.btn_yes')}}',
+            cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
                 $(`#${form}`).submit()
                 Swal.fire({
-                    title: '{{__('technic.del_process')}}',
+                    title: '{{__('global.del_process')}}',
                     icon: 'success',
                     showConfirmButton: false,
                 });

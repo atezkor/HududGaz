@@ -36,6 +36,7 @@
             'next' => "Keyingi",
             'emptyTable' => "Jadvalda ma\u{2019}lumotlar mavjud emas",
             'infoEmpty' => "Ko\u{2018}rish uchun 0 ta ma\u{2019}lumot taqdim etilgan",
-            'info' => "Ko\u{2018}rish uchun _TOTAL_ ma\u{2019}lumotdan taqdim etilgan. _START_ dan _END_ gacha ",
+            'info' => "Ko\u{2018}rish uchun _TOTAL_ ma\u{2019}lumotdan taqdim etilgan. _START_ dan _END_ gacha",
+            'zeroRecords' => "Mos keladigan ma\u{2019}lumotlar topilmadi",
         ]
     ];

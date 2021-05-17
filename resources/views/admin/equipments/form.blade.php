@@ -30,9 +30,9 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary mr-2">{{__('table.btn_save')}}</button>
-                            <a href="{{route('admin.equipments.index')}}" class="btn btn-outline-secondary">{{__('table.btn_back')}}</a>
-                            <button type="reset" class="btn btn-default float-right">{{__('table.btn_reset')}}</button>
+                            <button type="submit" class="btn btn-primary mr-2">{{__('global.btn_save')}}</button>
+                            <a href="{{route('admin.equipments.index')}}" class="btn btn-outline-secondary">{{__('global.btn_back')}}</a>
+                            <button type="reset" class="btn btn-default float-right">{{__('global.btn_reset')}}</button>
                         </div>
                     </form>
                 </div>

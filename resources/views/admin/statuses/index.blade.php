@@ -10,7 +10,7 @@
                         <div class="card-header">
                             <div class="card-tools mt-2">
                                 <div class="input-group w-75 ml-auto">
-                                    <input type="search" id="search" class="form-control" placeholder="{{__('table.search')}}">
+                                    <input type="search" id="search" class="form-control" placeholder="{{__('global.search')}}">
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                                         <td>{{$model->term}}</td>
                                         <td>
                                             <a href="{{route('admin.statuses.edit', ['status' => $model])}}"
-                                               class="btn btn-info" title="{{__('table.btn_edit')}}">
+                                               class="btn btn-info" title="{{__('global.btn_edit')}}">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </td>

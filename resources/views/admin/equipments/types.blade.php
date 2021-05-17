@@ -16,7 +16,7 @@
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" class="form-control"
-                                       placeholder="{{__('table.search')}}">
+                                       placeholder="{{__('global.search')}}">
                             </div>
                         </div>
                     </div>
@@ -38,13 +38,13 @@
                                         <form action="{{route('admin.equip_type.del', ['type' => $model])}}" method="post"
                                               id="form-{{$model->id}}" class="form">
                                             @csrf
-                                            <button type="button" class="btn btn-warning" title="{{__('table.btn_edit')}}"
+                                            <button type="button" class="btn btn-warning" title="{{__('global.btn_edit')}}"
                                                     onclick="show('{{$model->type}}', {{$model->order}},
                                                         '{{route('admin.equip_type.renew', ['equipment' => $equipment, 'type' => $model])}}')" role="button">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger" onclick="remove('form-{{$model->id}}')"
-                                                    data-toggle="tooltip" title="{{__('table.btn_del')}}" role="button" >
+                                                    data-toggle="tooltip" title="{{__('global.btn_del')}}" role="button" >
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -74,9 +74,9 @@
                                             <input type="number" name="order" id="order" class="form-control">
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <button type="submit" class="btn btn-success">{{__('table.btn_save')}}</button>
+                                            <button type="submit" class="btn btn-success">{{__('global.btn_save')}}</button>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                {{__('table.btn_cancel')}}
+                                                {{__('global.btn_cancel')}}
                                             </button>
                                         </div>
                                     </form>
@@ -108,13 +108,13 @@
                 showCancelButton: true,
                 confirmButtonColor: '#dd3333',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: '{{__('table.btn_yes')}}',
-                cancelButtonText: '{{__('table.btn_no')}}'
+                confirmButtonText: '{{__('global.btn_yes')}}',
+                cancelButtonText: '{{__('global.btn_no')}}'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $(`#${form}`).submit()
                     Swal.fire({
-                        title: '{{__('table.del_process')}}',
+                        title: '{{__('global.del_process')}}',
                         icon: 'success',
                         showConfirmButton: false,
                     })

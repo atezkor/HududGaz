@@ -15,7 +15,7 @@
                         <div class="card-tools mt-2">
                             <div class="card-tools mt-2">
                                 <div class="input-group w-75 ml-auto">
-                                    <input type="search" id="search" class="form-control" placeholder="{{__('table.search')}}">
+                                    <input type="search" id="search" class="form-control" placeholder="{{__('global.search')}}">
                                 </div>
                             </div>
                         </div>

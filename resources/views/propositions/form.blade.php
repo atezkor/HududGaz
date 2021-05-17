@@ -166,9 +166,9 @@
                             <input type="hidden" name="type" id="type" value="1">
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary mr-2">@lang('technic.btn_save')</button>
-                            <a href="{{route('propositions.index')}}" class="btn btn-outline-secondary">@lang('technic.btn_back')</a>
-                            <button type="reset" id="reset" class="btn btn-default float-right">@lang('table.btn_reset')</button>
+                            <button type="submit" class="btn btn-primary mr-2">@lang('global.btn_save')</button>
+                            <a href="{{route('propositions.index')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
+                            <button type="reset" id="reset" class="btn btn-default float-right">@lang('global.btn_reset')</button>
                         </div>
                     </form>
                 </div>

@@ -145,7 +145,8 @@
                 sPrevious: "@lang('global.datatables.previous')",
                 sNext: "@lang('global.datatables.next')",
             },
-            sInfo: "@lang('global.datatables.info')"
+            sInfo: "@lang('global.datatables.info')",
+            sZeroRecords: "@lang('global.datatables.zeroRecords')"
         }
 
         $("#table1").DataTable({

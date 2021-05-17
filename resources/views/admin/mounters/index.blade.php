@@ -15,7 +15,7 @@
                             <div class="card-tools mt-2">
                                 <div class="input-group w-75 ml-auto">
                                     <input type="search" id="search" class="form-control"
-                                           placeholder="{{__('table.search')}}">
+                                           placeholder="{{__('global.search')}}">
                                 </div>
                             </div>
                         </div>
@@ -48,11 +48,11 @@
                                                     {{__('table.mounters.workers')}}
                                                 </a>
                                                 <a href="{{route('admin.mounters.edit', ['mounter' => $model])}}" class="btn btn-warning"
-                                                   title="{{__('table.btn_edit')}}">
+                                                   title="{{__('global.btn_edit')}}">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
                                                 <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
-                                                        title="{{__('table.btn_del')}}" role="button">
+                                                        title="{{__('global.btn_del')}}" role="button">
                                                     <i class="far fa-trash-alt"></i>
                                                 </button>
                                             </form>
@@ -86,13 +86,13 @@
             showCancelButton: true,
             confirmButtonColor: '#dd3333',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: '{{__('table.btn_yes')}}',
-            cancelButtonText: '{{__('table.btn_no')}}'
+            confirmButtonText: '{{__('global.btn_yes')}}',
+            cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
                 $(`#${form}`).submit()
                 Swal.fire({
-                    title: '{{__('table.del_process')}}',
+                    title: '{{__('global.del_process')}}',
                     icon: 'success',
                     showConfirmButton: false,
                 })
