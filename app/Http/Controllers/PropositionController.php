@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PropositionRequest;
 use App\Models\Activity;
-use App\Models\Base;
 use App\Models\Individual;
 use App\Models\Proposition;
+use App\Models\Region;
 use App\Services\PropositionService;
 use App\ViewModels\PropositionListViewModel;
 use Illuminate\Http\RedirectResponse;
@@ -36,8 +36,9 @@ class PropositionController extends Controller {
      */
     public function create(): View|RedirectResponse {
         $model = new Proposition();
+        $organs = Region::query()->get(['id', 'org_name']);
         return view('propositions.form', ['action' => route('propositions.store'), 'method' => 'POST',
-            'model' => $model, 'districts' => Base::districts(),
+            'model' => $model, 'organs' => $organs,
             'activities' => Activity::all(), 'applicant' => new Individual()]);
     }
 
@@ -75,8 +76,9 @@ class PropositionController extends Controller {
         else
             $applicant = $proposition->legal();
 
+        $organs = Region::query()->get(['id', 'org_name']);
         return view('propositions.form', ['action' => route('propositions.update', ['proposition' => $proposition]),
-            'method' => 'PUT', 'model' => $proposition, 'districts' => Base::districts(),
+            'method' => 'PUT', 'model' => $proposition, 'organs' => $organs,
             'activities' => Activity::all(), 'applicant' => $applicant]);
     }
 

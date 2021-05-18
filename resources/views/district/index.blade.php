@@ -64,11 +64,11 @@
                                     </td>
                                     <td>
                                         <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'accept'])}}"
-                                           class="btn btn-outline-info" title="@lang('district.proposition.accept')">
+                                           class="btn btn-outline-info" title="@lang('district.accept')">
                                             <i class="fas fa-check"></i>
                                         </a>
                                         <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'fail'])}}"
-                                           class="btn btn-outline-danger" title="@lang('district.proposition.cancel')">
+                                           class="btn btn-outline-danger" title="@lang('district.cancel')">
                                             <i class="fas fa-minus"></i>
                                         </a>
                                     </td>
@@ -111,10 +111,12 @@
                                         <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-outline-info" title="@lang('district.proposition.accept')">
+                                        <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'accept'])}}"
+                                           class="btn btn-outline-info" title="@lang('district.accept')">
                                             <i class="fas fa-check"></i>
                                         </a>
-                                        <a href="#" class="btn btn-outline-danger" title="@lang('district.proposition.cancel')">
+                                        <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'fail'])}}"
+                                           class="btn btn-outline-danger" title="@lang('district.cancel')">
                                             <i class="fas fa-minus"></i>
                                         </a>
                                     </td>

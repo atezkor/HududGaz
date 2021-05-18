@@ -25,8 +25,15 @@ class RecommendationRequest extends FormRequest {
             'fail' => $this->fail(),
         ];
 
+        return $rules[$this->input('type')];
+    }
+
+    public function attributes(): array {
         return [
-            $rules[$this->input('type')]
+            'address' => __('district.recommendation.address'),
+            'access_point' => __('district.recommendation.access_point'),
+            'description' => __('district.recommendation.description'),
+            'additional' => __('district.recommendation.additional')
         ];
     }
 
@@ -34,10 +41,24 @@ class RecommendationRequest extends FormRequest {
         return [
             'address' => ['required'],
             'access_point' => ['required'],
+            'above_len' => [],
+            'under_len' => [],
+            'diameter' => [],
+            'depth' => [],
+            'capability' => [],
+            'real_capacity' => [],
+            'pressure_win' => [],
+            'pressure_sum' => [],
+            'grc' => [],
+            'consumption' => [],
+            'additional' => []
         ];
     }
 
     private function fail(): array {
-        return [];
+        return [
+            'description' => ['required'],
+            'additional' => ['required']
+        ];
     }
 }

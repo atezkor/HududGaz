@@ -134,13 +134,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="district" class="col-2">@lang('technic.proposition.district')</label>
+                                <label for="organ" class="col-2">@lang('technic.proposition.organ')</label>
                                 <div class="col-10">
-                                    <select name="district" id="district" class="form-control">
-                                        <option value="">@lang('technic.proposition.district_select')</option>
-                                        @foreach($districts as $key => $district)
-                                        <option value="{{$key}}" @if($model->district == $key) selected @endif>
-                                            {{$district}}
+                                    <select name="organ" id="organ" class="form-control">
+                                        <option value="">@lang('technic.proposition.organ_select')</option>
+                                        @foreach($organs as $organ)
+                                        <option value="{{$organ->id}}" @if($organ->id == $model->organ) selected @endif>
+                                            {{$organ->org_name}}
                                         </option>
                                         @endforeach
                                     </select>

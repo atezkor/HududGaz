@@ -48,7 +48,7 @@ class RecommendationController extends Controller {
     public function store(RecommendationRequest $request): RedirectResponse {
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('district.index');
+        return redirect()->route('district.recommendations');
     }
 
     /**
@@ -81,7 +81,7 @@ class RecommendationController extends Controller {
     public function update(RecommendationRequest $request, Recommendation $recommendation): RedirectResponse {
         $data = $request->validated();
         $this->service->update($data, $recommendation);
-        return redirect()->route('admin.index');
+        return redirect()->route('district.recommendations');
     }
 
     /**
@@ -92,6 +92,6 @@ class RecommendationController extends Controller {
      */
     public function destroy(Recommendation $recommendation): RedirectResponse {
         $this->service->delete($recommendation);
-        return redirect()->route('');
+        return redirect()->route('district.recommendations');
     }
 }

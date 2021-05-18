@@ -30,25 +30,25 @@ class PropositionRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'number' => __('technic.prop_num'),
-            'stir' => __('technic.propositions.stir'),
-            'passport' => __('technic.propositions.passport'),
-            'full_name' => __('technic.propositions.full_name'),
-            'legal_stir' => __('technic.propositions.legal_stir'),
-            'legal_name' => __('technic.propositions.legal_name'),
-            'leader' => __('technic.propositions.leader'),
-            'leader_stir' => __('technic.propositions.leader_stir'),
-            'email' => __('technic.propositions.email'),
-            'activity_type' => __('technic.propositions.activity_type'),
-            'district' => __('technic.propositions.district'),
-            'phone' => __('technic.propositions.phone')
+            'number' => __('global.proposition.number'),
+            'stir' => __('technic.proposition.stir'),
+            'passport' => __('technic.proposition.passport'),
+            'full_name' => __('technic.proposition.full_name'),
+            'legal_stir' => __('technic.proposition.legal_stir'),
+            'legal_name' => __('technic.proposition.legal_name'),
+            'leader' => __('technic.proposition.leader'),
+            'leader_stir' => __('technic.proposition.leader_stir'),
+            'email' => __('technic.proposition.email'),
+            'activity_type' => __('technic.proposition.activity_type'),
+            'organ' => __('technic.proposition.organ'),
+            'phone' => __('technic.proposition.phone')
         ];
     }
 
     private function individual(): array {
         return [
             'number' => ['required'],
-            'district' => ['required'],
+            'organ' => ['required'],
             'activity_type' => ['required'],
             'build_type' => [],
             'type' => ['required'],
@@ -67,7 +67,7 @@ class PropositionRequest extends FormRequest {
     private function legal(): array {
         return [
             'number' => ['required'],
-            'district' => ['required'],
+            'organ' => ['required'],
             'activity_type' => ['required'],
             'build_type' => [],
             'type' => ['required'],

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Proposition extends Model {
     use HasFactory;
 
-    protected $fillable = ['number', 'district', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
+    protected $fillable = ['number', 'organ', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
 
     function individual(): Individual|Model {
         return $this->hasOne(Individual::class)->first();

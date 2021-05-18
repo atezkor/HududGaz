@@ -5,9 +5,9 @@
         'progress' => "Jarayonda",
         'cancelled' => "Bekor qilinganlar",
         'archive' => "Arxiv",
-        'proposition' => [
-            'accept' => "Qa\u{2019}bul qilish",
-            'cancel' => "Bekor qilish",
+        'accept' => "Qa\u{2019}bul qilish",
+        'cancel' => "Bekor qilish",
+        'recommendation' => [
             'heading' => "Maydonlarni to\u{2018}ldiring",
             'heading_create' => "Tavsiyanoma qo\u{2018}shish",
             'heading_edit' => "Tavsiyanomani yangilash",
@@ -18,7 +18,7 @@
             'diameter' => "Gaz quvurining daimetri",
             'depth' => "Ulanish nuqtasining chuqurligi",
             'capability' => "Quvurning o\u{2018}tkazish qobiliyati",
-            'real_capability' => "Haqiqiy o\u{2018}tkazish qobiliyati",
+            'real_capacity' => "Haqiqiy o\u{2018}tkazish qobiliyati",
             'pressure_win' => "O\u{2018}rtacha qishgi bosim",
             'pressure_sum' => "O\u{2018}rtacha yozgi bosim",
             'grc' => "Qaysi GRSdan beriladi?",
@@ -36,5 +36,9 @@
             'grc_hint' => "GRSni kiriting",
             'consume_hint' => "Talab qilinadigan gaz hajmini kiriting",
             'add_equipment' => "Jihoz qo\u{2018}shish",
+            'description' => "Sababi",
+            'additional' => "Qo\u{2018}shimcha ma\u{2019}lumot",
+            'desc_hint' => "Bekor qilish sababini kiriting",
+            'required' => "Ushbu maydon to\u{2018}ldirilishi kerak",
         ],
     ];

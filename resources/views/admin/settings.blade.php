@@ -1,15 +1,11 @@
 @extends('layout')
 @section('title', getName())
-@section('link')
-    <link rel="stylesheet" href="{{'/css/default.css'}}">
-@endsection
 
 @section('content')
 <section class="content">
     <div class="container">
         <div class="row">
             <div class="col-12">
-
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">{{__('table.organization.title')}}</h3>
@@ -120,31 +116,31 @@
 </section>
 @endsection
 @section('javascript')
-    <script>
-        $('#logo').change(function(input) {
-            try {
-                $('#path_label').text(input.target.files[0].name);
-                let reader = new FileReader();
-                reader.readAsDataURL(input.target.files[0]);
-                reader.onload = function () {
-                    $("#preview").html(`<img src="${reader.result}" class="img-thumbnail" alt="img">`);
+<script>
+    $('#logo').change(function(input) {
+        try {
+            $('#path_label').text(input.target.files[0].name);
+            let reader = new FileReader();
+            reader.readAsDataURL(input.target.files[0]);
+            reader.onload = function() {
+                $("#preview").html(`<img src="${reader.result}" class="img-thumbnail" alt="img">`);
 
-                    setTimeout(() => {
-                        $('.custom-file').css({
-                            marginTop: ($("#preview").height() / 2.5)
-                        });
-                    }, 1)
-                }
-            } catch (e) {}
+                setTimeout(() => {
+                    $('.custom-file').css({
+                        marginTop: ($("#preview").height() / 2.5)
+                    });
+                }, 1);
+            }
+        } catch (e) {}
+    });
+
+    $('#reset').on('click', function() {
+        $('.custom-file').css({
+            marginTop: 0
         });
+        $("#preview").html('');
 
-        $('#reset').on('click', function () {
-            $('.custom-file').css({
-                marginTop: 0
-            });
-            $("#preview").html('');
-
-            $('#path_label').text('{{__('table.organization.upload_image')}}');
-        });
-    </script>
+        $('#path_label').text('{{__('table.organization.upload_image')}}');
+    });
+</script>
 @endsection

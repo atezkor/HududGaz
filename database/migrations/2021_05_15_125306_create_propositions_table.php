@@ -14,7 +14,7 @@ class CreatePropositionsTable extends Migration {
         Schema::create('propositions', function (Blueprint $table) {
             $table->id();
             $table->integer('number');
-            $table->integer('district');
+            $table->integer('organ');
             $table->integer('activity_type');
             $table->tinyInteger('build_type');
             $table->tinyInteger('status')->default(1);

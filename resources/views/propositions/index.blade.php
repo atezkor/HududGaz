@@ -39,16 +39,16 @@
                             <div id="individual" class="tab-pane active">
                                 <table id="table1" class="table table-bordered table-striped table-center">
                                     <thead>
-                                        <tr>
-                                            <th>@lang('global.index')</th>
-                                            <th>@lang('global.proposition.number')</th>
-                                            <th>@lang('global.proposition.stir')</th>
-                                            <th>@lang('technic.district')</th>
-                                            <th>@lang('global.proposition.name')</th>
-                                            <th>@lang('global.proposition.date')</th>
-                                            <th>@lang('global.proposition.limit')</th>
-                                            <th>@lang('global.proposition.action')</th>
-                                        </tr>
+                                    <tr>
+                                        <th>@lang('global.index')</th>
+                                        <th>@lang('global.proposition.number')</th>
+                                        <th>@lang('global.proposition.stir')</th>
+                                        <th>@lang('technic.organ')</th>
+                                        <th>@lang('global.proposition.name')</th>
+                                        <th>@lang('global.proposition.date')</th>
+                                        <th>@lang('global.proposition.limit')</th>
+                                        <th>@lang('global.proposition.action')</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
                                     @php($limit = term(4))
@@ -57,7 +57,7 @@
                                             <td>{{$loop->index + 1}}</td>
                                             <td>{{$model->number}}</td>
                                             <td>{{$physicals[$loop->index]->stir}}</td>
-                                            <td>{{$district($model->district)}}</td>
+                                            <td>{{$organ($model->organ - 1)}}</td>
                                             <td>
                                                 <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
                                                     @lang('global.proposition.show')
@@ -95,16 +95,16 @@
                             <div id="legal_entity" class="tap-pane">
                                 <table id="table2" class="table table-bordered table-striped table-center">
                                     <thead>
-                                        <tr>
-                                            <th>@lang('global.index')</th>
-                                            <th>@lang('global.proposition.number')</th>
-                                            <th>@lang('global.proposition.legal_stir')</th>
-                                            <th>@lang('technic.district')</th>
-                                            <th>@lang('global.proposition.name')</th>
-                                            <th>@lang('global.proposition.date')</th>
-                                            <th>@lang('global.proposition.limit')</th>
-                                            <th>@lang('global.proposition.action')</th>
-                                        </tr>
+                                    <tr>
+                                        <th>@lang('global.index')</th>
+                                        <th>@lang('global.proposition.number')</th>
+                                        <th>@lang('global.proposition.legal_stir')</th>
+                                        <th>@lang('technic.organ')</th>
+                                        <th>@lang('global.proposition.name')</th>
+                                        <th>@lang('global.proposition.date')</th>
+                                        <th>@lang('global.proposition.limit')</th>
+                                        <th>@lang('global.proposition.action')</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($legalEntities as $model)
@@ -112,7 +112,7 @@
                                             <td>{{$loop->index + 1}}</td>
                                             <td>{{$model->number}}</td>
                                             <td>{{$legals[$loop->index]->legal_stir}}</td>
-                                            <td>{{$district($model->district)}}</td>
+                                            <td>{{$organ($model->organ - 1)}}</td>
                                             <td>
                                                 <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
                                                     @lang('global.proposition.show')
@@ -198,8 +198,8 @@
 
     function remove(form) {
         Swal.fire({
-            title: '{{__('technic.propositions.alert_message')}}',
-            text: "{{__('technic.propositions.alert_text')}}",
+            title: '{{__('technic.proposition.alert_message')}}',
+            text: "{{__('technic.proposition.alert_text')}}",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd3333',

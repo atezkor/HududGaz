@@ -134,11 +134,11 @@
 <script>
     $('#document').change(function(input) {
         try {
-            $('#document_label').text(input.target.files[0].name)
+            $('#document_label').text(input.target.files[0].name);
         } catch (e) {}
     })
 
-    $('#reset').on('click', function () {
+    $('#reset').on('click', function() {
         $('#document_label').text('{{__('table.general.doc_upload')}}');
     });
 </script>
