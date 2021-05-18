@@ -1,5 +1,6 @@
 <?php
     return [
+        'login' => "Kirish",
         'logout' => "Chiqish",
         'search' => "Qidiruv",
         'btn_save' => "Saqlash",
@@ -13,8 +14,9 @@
         'btn_yes' => "Ha",
         'btn_no' => "Yo\u{2018}q",
         'del_process' => "O\u{2018}chirilmoqda ...",
-        'hour' => "soat",
         'index' => "Tr",
+        'hour' => "soat",
+        'propositions' => "Arizalar",
         'districts' => [
             '1' => "Urganch shahri",
             '2' => "Urganch tumani",
@@ -30,6 +32,19 @@
             '12' => "Qo\u{2018}shko\u{2018}pir tumani",
             '13' => "Tuproq-qa\u{2019}la tumani"
         ],
+        'proposition' => [
+            'name' => "Ariza",
+            'number' => "Ariza raqami",
+            'stir' => "Arizachi STIRi",
+            'legal_stir' => "Yuridik shaxs STIRi",
+            'date' => "Yaratildi",
+            'action' => "Amal",
+            'limit' => "Vaqt qoldig\u{2018}i",
+            'show' => "Arizani ko\u{2018}rish",
+            'individual' => "Jismoniy shaxs",
+            'legal_entity' => "Yuridik shaxs",
+        ]
+        ,
         'datatables' => [
             'search' => "Qidiruv",
             'previous' => "Oldingi",
@@ -38,5 +53,6 @@
             'infoEmpty' => "Ko\u{2018}rish uchun 0 ta ma\u{2019}lumot taqdim etilgan",
             'info' => "Ko\u{2018}rish uchun _TOTAL_ ma\u{2019}lumotdan taqdim etilgan. _START_ dan _END_ gacha",
             'zeroRecords' => "Mos keladigan ma\u{2019}lumotlar topilmadi",
+            'infoFiltered' => "(_MAX_ ta ma'lumotdan saralanganlari)",
         ]
     ];

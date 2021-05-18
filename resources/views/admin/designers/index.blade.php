@@ -4,60 +4,55 @@
 @section('content')
     <section class="content">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="{{route('admin.designers.create')}}" class="btn btn-info">{{__('table.districts.btn_new')}}</a>
-                            <div class="card-tools mt-2">
-                                <div class="input-group w-75 ml-auto">
-                                    <input type="search" id="search" class="form-control"
-                                           placeholder="{{__('global.search')}}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>№</th>
-                                        <th>{{__('table.general.org_name')}}</th>
-                                        <th>{{__('table.general.org_leader')}}</th>
-                                        <th>{{__('table.general.address')}}</th>
-                                        <th>{{__('table.general.col_period_activity')}}</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($models as $model)
-                                    <tr>
-                                        <td>{{$loop->index + 1}}</td>
-                                        <td>{{$model->org_name}}</td>
-                                        <td>{{$model->leader}}</td>
-                                        <td>{{$model->address}}</td>
-                                        <td>{{formatDate($model->date_end)}} - {{formatDate($model->date_reg)}}</td>
-                                        <td>
-                                            <form action="{{route('admin.designers.delete', ['designer' => $model])}}"
-                                                  method="post" id="form-{{$model->id}}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="{{route('admin.designers.edit', ['designer' => $model])}}" class="btn btn-warning"
-                                                   title="{{__('global.btn_edit')}}">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
-                                                        title="{{__('global.btn_del')}}" role="button">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+            <div class="card">
+                <div class="card-header">
+                    <a href="{{route('admin.designers.create')}}" class="btn btn-info">{{__('table.districts.btn_new')}}</a>
+                    <div class="card-tools mt-2">
+                        <div class="input-group w-75 ml-auto">
+                            <input type="search" id="search" class="form-control"
+                                   placeholder="{{__('global.search')}}">
                         </div>
                     </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>{{__('table.general.org_name')}}</th>
+                            <th>{{__('table.general.org_leader')}}</th>
+                            <th>{{__('table.general.address')}}</th>
+                            <th>{{__('table.general.col_period_activity')}}</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($models as $model)
+                            <tr>
+                                <td>{{$loop->index + 1}}</td>
+                                <td>{{$model->org_name}}</td>
+                                <td>{{$model->leader}}</td>
+                                <td>{{$model->address}}</td>
+                                <td>{{formatDate($model->date_end)}} - {{formatDate($model->date_reg)}}</td>
+                                <td>
+                                    <form action="{{route('admin.designers.delete', ['designer' => $model])}}"
+                                          method="post" id="form-{{$model->id}}" class="form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{route('admin.designers.edit', ['designer' => $model])}}" class="btn btn-warning"
+                                           title="{{__('global.btn_edit')}}">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
+                                                title="{{__('global.btn_del')}}" role="button">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -65,11 +60,11 @@
 @endsection
 @section('javascript')
 <script>
-    $('#search').keyup(function () {
+    $('#search').keyup(function() {
         let value = this.value.toLowerCase();
-        $('tbody tr').filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        })
+        $('tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
     });
 
     function remove(form) {
@@ -84,7 +79,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#${form}`).submit()
+                $(`#${form}`).submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

@@ -3,7 +3,6 @@
 @section('link')
 <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
 <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/default.css'}}">
 @endsection
 
 @section('content')
@@ -18,12 +17,12 @@
                                 <ul class="nav nav-pills">
                                     <li class="nav-item">
                                         <a href="#individual" class="nav-link active" data-toggle="tab">
-                                            @lang('technic.propositions.individual')
+                                            @lang('global.proposition.individual')
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#legal_entity" class="nav-link" data-toggle="tab">
-                                            @lang('technic.propositions.legal')
+                                            @lang('global.proposition.legal_entity')
                                         </a>
                                     </li>
                                 </ul>
@@ -41,14 +40,14 @@
                                 <table id="table1" class="table table-bordered table-striped table-center">
                                     <thead>
                                         <tr>
-                                            <th>№</th>
-                                            <th>@lang('technic.prop_num')</th>
-                                            <th>@lang('technic.col_stir')</th>
+                                            <th>@lang('global.index')</th>
+                                            <th>@lang('global.proposition.number')</th>
+                                            <th>@lang('global.proposition.stir')</th>
                                             <th>@lang('technic.district')</th>
-                                            <th>@lang('technic.col_prop')</th>
-                                            <th>@lang('technic.col_date')</th>
-                                            <th>@lang('technic.col_limit')</th>
-                                            <th>@lang('technic.col_action')</th>
+                                            <th>@lang('global.proposition.name')</th>
+                                            <th>@lang('global.proposition.date')</th>
+                                            <th>@lang('global.proposition.limit')</th>
+                                            <th>@lang('global.proposition.action')</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,7 +60,7 @@
                                             <td>{{$district($model->district)}}</td>
                                             <td>
                                                 <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
-                                                    @lang('technic.propositions.show')
+                                                    @lang('global.proposition.show')
                                                 </a>
                                             </td>
                                             <td>{{$model->created_at}}</td>
@@ -97,14 +96,14 @@
                                 <table id="table2" class="table table-bordered table-striped table-center">
                                     <thead>
                                         <tr>
-                                            <th>@lang('technic.index')</th>
-                                            <th>@lang('technic.prop_num')</th>
-                                            <th>@lang('technic.col_legal_stir')</th>
+                                            <th>@lang('global.index')</th>
+                                            <th>@lang('global.proposition.number')</th>
+                                            <th>@lang('global.proposition.legal_stir')</th>
                                             <th>@lang('technic.district')</th>
-                                            <th>@lang('technic.col_prop')</th>
-                                            <th>@lang('technic.col_date')</th>
-                                            <th>@lang('technic.col_limit')</th>
-                                            <th>@lang('technic.col_action')</th>
+                                            <th>@lang('global.proposition.name')</th>
+                                            <th>@lang('global.proposition.date')</th>
+                                            <th>@lang('global.proposition.limit')</th>
+                                            <th>@lang('global.proposition.action')</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -116,7 +115,7 @@
                                             <td>{{$district($model->district)}}</td>
                                             <td>
                                                 <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
-                                                    @lang('technic.propositions.show')
+                                                    @lang('global.proposition.show')
                                                 </a>
                                             </td>
                                             <td>{{$model->created_at}}</td>
@@ -172,7 +171,8 @@
                 sNext: "@lang('global.datatables.next')",
             },
             sInfo: "@lang('global.datatables.info')",
-            sZeroRecords: "@lang('global.datatables.zeroRecords')"
+            sZeroRecords: "@lang('global.datatables.zeroRecords')",
+            sInfoFiltered: "@lang('global.datatables.infoFiltered')"
         }
 
         $("#table1").DataTable({

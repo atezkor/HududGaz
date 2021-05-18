@@ -71,11 +71,11 @@
 @section('javascript')
 <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
 <script>
-    $('#search').keyup(function () {
+    $('#search').keyup(function() {
         let value = this.value.toLowerCase();
-        $('tbody tr').filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        })
+        $('tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
     });
 
     function remove(form) {
@@ -90,14 +90,14 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#${form}`).submit()
+                $(`#${form}`).submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',
                     showConfirmButton: false,
-                })
+                });
             }
-        })
+        });
     }
 </script>
 @endsection

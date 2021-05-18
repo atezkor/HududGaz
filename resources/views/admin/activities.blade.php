@@ -1,8 +1,5 @@
 @extends('layout')
 @section('title', getName())
-@section('link')
-    <link rel="stylesheet" href="{{'/css/default.css'}}">
-@endsection
 
 @section('content')
 <section class="content">
@@ -24,7 +21,7 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>{{__('table.general.col_index')}}</th>
+                                    <th>{{__('global.index')}}</th>
                                     <th>{{__('table.activities.col_activity')}}</th>
                                     <th style="width: 1px;"></th>
                                 </tr>
@@ -89,44 +86,44 @@
 </section>
 @endsection
 @section('javascript')
-    <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
-    <script>
-        $('#search').keyup(function () {
-            let value = this.value.toLowerCase();
-            $('tbody tr').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            })
+<script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+<script>
+    $('#search').keyup(function() {
+        let value = this.value.toLowerCase();
+        $('tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
+    });
 
-        function show(activity = '', route) {
-            $('#form').attr('action', route ? route : '{{route('admin.activities.store')}}');
-            $('#header').text(activity ? "{{__('table.activities.edit_activity')}}" : "{{__('table.activities.add_activity')}}");
-            $('#activity').val(activity);
-            $('#_method').val(activity ? 'PUT' : 'POST');
+    function show(activity = '', route) {
+        $('#form').attr('action', route ? route : '{{route('admin.activities.store')}}');
+        $('#header').text(activity ? "{{__('table.activities.edit_activity')}}" : "{{__('table.activities.add_activity')}}");
+        $('#activity').val(activity);
+        $('#_method').val(activity ? 'PUT' : 'POST');
 
-            $('#modal').modal();
-        }
+        $('#modal').modal();
+    }
 
-        function remove(form) {
-            Swal.fire({
-                title: '{{__('table.activities.alert_message')}}',
-                text: "{{__('table.general.alert_text')}}",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#dd3333',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: '{{__('global.btn_yes')}}',
-                cancelButtonText: '{{__('global.btn_no')}}'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(`#${form}`).submit()
-                    Swal.fire({
-                        title: '{{__('global.del_process')}}',
-                        icon: 'success',
-                        showConfirmButton: false,
-                    });
-                }
-            });
-        }
-    </script>
+    function remove(form) {
+        Swal.fire({
+            title: '{{__('table.activities.alert_message')}}',
+            text: "{{__('table.general.alert_text')}}",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dd3333',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: '{{__('global.btn_yes')}}',
+            cancelButtonText: '{{__('global.btn_no')}}'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(`#${form}`).submit();
+                Swal.fire({
+                    title: '{{__('global.del_process')}}',
+                    icon: 'success',
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+</script>
 @endsection

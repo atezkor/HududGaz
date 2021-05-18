@@ -18,7 +18,7 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th style="width: 1px;">@lang('table.general.col_index')</th>
+                                        <th style="width: 1px;">@lang('global.index')</th>
                                         <th>@lang('table.statuses.col_description')</th>
                                         <th>@lang('table.statuses.col_transition')</th>
                                         <th>@lang('table.statuses.col_expired')</th>
@@ -34,7 +34,7 @@
                                         <td>{{$model->term}}</td>
                                         <td>
                                             <a href="{{route('admin.statuses.edit', ['status' => $model])}}"
-                                               class="btn btn-info" title="{{__('global.btn_edit')}}">
+                                               class="btn btn-info" title="@lang('global.btn_edit')">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </td>
@@ -50,12 +50,12 @@
     </section>
 @endsection
 @section('javascript')
-    <script>
-        $('#search').keyup(function () {
-            let value = this.value.toLowerCase();
-            $('tbody tr').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            })
+<script>
+    $('#search').keyup(function() {
+        let value = this.value.toLowerCase();
+        $('tbody tr').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
-    </script>
+    });
+</script>
 @endsection

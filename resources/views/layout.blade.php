@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{'/css/sweetalert2.css'}}">
     <!-- Additional CSS files -->
     @yield('link')
+
+    <link rel="stylesheet" href="{{'/css/default.css'}}">
 </head>
 <body>
     <div class="preloader flex-column justify-content-center align-items-center">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TimetableController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -34,8 +35,8 @@ Route::group(['prefix' => 'admin'], function() {
 
     readonly('statuses', StatusController::class, 'admin.statuses');
     reducer('activity-types', ActivityController::class, 'admin.activities');
-    reducer('timetable', UserController::class, 'admin.timetable');
-    Route::get('timetable', [UserController::class, 'admin.timetable'])->name('admin.timetable');
+//    reducer('timetable', UserController::class, 'admin.timetable');
+    Route::get('timetable', [TimetableController::class, 'index'])->name('admin.timetable');
 
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');
     Route::post('equipments/{equipment}/equipment-types', [EquipmentController::class, 'add'])->name('admin.equip_type.add');

@@ -9,17 +9,9 @@
         'more_sec' => "Batafsil",
         'btn_new' => "Ariza qo\u{2018}shish",
         'district' => "Tuman",
-        'prop_num' => "Ariza raqami",
-        'col_stir' => "Arizachi STIRi",
-        'col_legal_stir' => "Yuridik shaxs STIRi",
-        'col_prop' => "Ariza",
-        'col_date' => "Yaratildi",
-        'col_action' => "Amal",
-        'col_limit' => "Vaqt qoldig\u{2018}i",
-        'propositions' => [
+        'proposition' => [
             'heading_edit' => "Ariza ma\u{2019}lumotlarini yangilash",
-            'individual' => "Jismoniy shaxs",
-            'legal' => "Yuridik shaxs",
+            'prop_num' => "Ariza raqami",
             'stir' => "STIR",
             'passport' => "Pasport seriya va raqami",
             'full_name' => "To\u{2018}liq ism",
@@ -37,7 +29,6 @@
             'non_residential' => "Noturar",
             'file' => "Ariza nusxasi",
             'file_hint' => "Arizani yuklash",
-            'show' => "Arizani ko\u{2018}rish",
             'alert_message' => "Arizani o\u{2018}chirib tashlamoqchimisiz?",
             'alert_text' => "O\u{2018}chirish uchun tasdiqlang"
         ]

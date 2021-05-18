@@ -2,7 +2,6 @@
     return [
         'login' => "Kirish",
         'general' => [
-            'col_index' => "Tr",
             'select' => "Tanlang",
             'col_email' => "E-pochta",
             'address' => "Manzili",

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', __('menu.districts'))
+@section('title', getName())
 
 @section('content')
 <section class="content">
@@ -69,11 +69,11 @@
 @endsection
 @section('javascript')
 <script>
-    $('#search').keyup(function () {
+    $('#search').keyup(function() {
         let value = this.value.toLowerCase();
-        $('tbody tr').filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        })
+        $('tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
     });
 
     function remove(form) {

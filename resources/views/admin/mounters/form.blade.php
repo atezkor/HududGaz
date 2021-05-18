@@ -1,15 +1,11 @@
 @extends('layout')
 @section('title', getName())
-@section('link')
-<link rel="stylesheet" href="{{'/css/default.css'}}">
-@endsection
 
 @section('content')
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">

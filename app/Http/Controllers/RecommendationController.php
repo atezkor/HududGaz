@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DistrictRequest;
 use App\Http\Requests\RecommendationRequest;
 use App\Models\Proposition;
 use App\Models\Recommendation;
@@ -42,11 +41,11 @@ class RecommendationController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param DistrictRequest $request
+     * @param RecommendationRequest $request
      * @return RedirectResponse
      */
 
-    public function store(DistrictRequest $request): RedirectResponse {
+    public function store(RecommendationRequest $request): RedirectResponse {
         $data = $request->validated();
         $this->service->create($data);
         return redirect()->route('district.index');

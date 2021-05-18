@@ -75,8 +75,8 @@
         $('#search').keyup(function() {
             let value = $(this).val();
             $('tbody tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            })
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
         })
      </script>
 @endsection

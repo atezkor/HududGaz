@@ -1,8 +1,5 @@
 @extends('layout')
 @section('title', getName())
-@section('link')
-<link rel="stylesheet" href="{{'/css/default.css'}}">
-@endsection
 
 @section('content')
 <section class="content">
@@ -17,19 +14,19 @@
                                 <ul class="nav nav-pills">
                                     <li class="nav-item">
                                         <a href="#individual" class="nav-link active" onclick="changeType(1)" data-toggle="tab">
-                                            {{__('technic.propositions.individual')}}
+                                            @lang('global.proposition.individual')
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#legal_entity" class="nav-link" onclick="changeType(2)" data-toggle="tab">
-                                            {{__('technic.propositions.legal')}}
+                                            @lang('global.proposition.legal_entity')
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     @else
-                        <h3>@lang('technic.propositions.heading_edit')</h3>
+                        <h3>@lang('technic.proposition.heading_edit')</h3>
                     @endif
                     </div>
                     <form action="{{$action}}" method="post" enctype="multipart/form-data">
@@ -38,7 +35,7 @@
                         @include('components.errors')
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="number" class="col-2">{{__('technic.prop_num')}}</label>
+                                <label for="number" class="col-2">@lang('technic.proposition.prop_num')</label>
                                 <div class="col-10">
                                     <input type="number" name="number" id="number" value="{{$model->number}}" class="form-control">
                                 </div>
@@ -47,21 +44,21 @@
                             <div class="tab-content">
                                 <div id="individual" class="tap-pane active">
                                     <div class="form-group row">
-                                        <label for="stir" class="col-2">{{__('technic.propositions.stir')}}</label>
+                                        <label for="stir" class="col-2">@lang('technic.proposition.stir')</label>
                                         <div class="col-10">
                                             <input type="number" name="stir" id="stir" value="{{$applicant->stir}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="passport" class="col-2">{{__('technic.propositions.passport')}}</label>
+                                        <label for="passport" class="col-2">@lang('technic.proposition.passport')</label>
                                         <div class="col-10">
                                             <input type="text" name="passport" id="passport" value="{{$applicant->passport}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="full_name" class="col-2">{{__('technic.propositions.full_name')}}</label>
+                                        <label for="full_name" class="col-2">@lang('technic.proposition.full_name')</label>
                                         <div class="col-10">
                                             <input type="text" name="full_name" id="full_name" value="{{$applicant->full_name}}" class="form-control">
                                         </div>
@@ -69,35 +66,35 @@
                                 </div>
                                 <div id="legal_entity" class="tap-pane">
                                     <div class="form-group row">
-                                        <label for="legal_stir" class="col-2">{{__('technic.propositions.legal_stir')}}</label>
+                                        <label for="legal_stir" class="col-2">@lang('technic.proposition.legal_stir')</label>
                                         <div class="col-10">
                                             <input type="number" name="legal_stir" id="legal_stir" value="{{$applicant->legal_stir}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="legal_name" class="col-2">{{__('technic.propositions.legal_name')}}</label>
+                                        <label for="legal_name" class="col-2">@lang('technic.proposition.legal_name')</label>
                                         <div class="col-10">
                                             <input type="text" name="legal_name" id="legal_name" value="{{$applicant->legal_name}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="leader" class="col-2">{{__('technic.propositions.leader')}}</label>
+                                        <label for="leader" class="col-2">@lang('technic.proposition.leader')</label>
                                         <div class="col-10">
                                             <input type="text" name="leader" id="leader" value="{{$applicant->leader}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="leader_stir" class="col-2">{{__('technic.propositions.leader_stir')}}</label>
+                                        <label for="leader_stir" class="col-2">@lang('technic.proposition.leader_stir')</label>
                                         <div class="col-10">
                                             <input type="number" name="leader_stir" id="leader_stir" value="{{$applicant->leader_stir}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="email" class="col-2">{{__('technic.propositions.email')}}</label>
+                                        <label for="email" class="col-2">@lang('technic.proposition.email')</label>
                                         <div class="col-10">
                                             <input type="email" name="email" id="email" value="{{$applicant->email}}" class="form-control">
                                         </div>
@@ -106,17 +103,17 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="phone" class="col-2">{{__('technic.propositions.phone')}}</label>
+                                <label for="phone" class="col-2">@lang('technic.proposition.phone')</label>
                                 <div class="col-10">
                                     <input type="tel" name="phone" id="phone" value="{{$applicant->phone}}" class="form-control">
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="activity_type" class="col-2">{{__('technic.propositions.activity_type')}}</label>
+                                <label for="activity_type" class="col-2">@lang('technic.proposition.activity_type')</label>
                                 <div class="col-10">
                                     <select name="activity_type" id="activity_type" class="form-control">
-                                        <option value="">@lang('technic.propositions.activity_type')</option>
+                                        <option value="">@lang('technic.proposition.activity_type')</option>
                                         @foreach($activities as $key => $activity)
                                         <option value="{{$key + 1}}" @if($model->activity_type == $key + 1) selected @endif>
                                             {{$activity->activity}}
@@ -127,20 +124,20 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="build_type" class="col-2">{{__('technic.propositions.build_type')}}</label>
+                                <label for="build_type" class="col-2">@lang('technic.proposition.build_type')</label>
                                 <div class="col-10">
                                     <select name="build_type" id="build_type" class="form-control">
-                                        <option value="1">@lang('technic.propositions.residential')</option>
-                                        <option value="2">@lang('technic.propositions.non_residential')</option>
+                                        <option value="1">@lang('technic.proposition.residential')</option>
+                                        <option value="2">@lang('technic.proposition.non_residential')</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="district" class="col-2">{{__('technic.propositions.district')}}</label>
+                                <label for="district" class="col-2">@lang('technic.proposition.district')</label>
                                 <div class="col-10">
                                     <select name="district" id="district" class="form-control">
-                                        <option value="">@lang('technic.propositions.district_select')</option>
+                                        <option value="">@lang('technic.proposition.district_select')</option>
                                         @foreach($districts as $key => $district)
                                         <option value="{{$key}}" @if($model->district == $key) selected @endif>
                                             {{$district}}
@@ -151,13 +148,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="document" class="col-2">@lang('technic.propositions.file')</label>
+                                <label for="document" class="col-2">@lang('technic.proposition.file')</label>
                                 <div class="col-10">
                                     <div class="custom-file">
                                         <input type="file" name="file" id="document" class="custom-file-input"
                                                @if($method == "POST") required @endif>
                                         <label class="custom-file-label" for="document">
-                                            <span id="document_label">@lang('technic.propositions.file_hint')</span>
+                                            <span id="document_label">@lang('technic.proposition.file_hint')</span>
                                             <span class="btn btn-info"><i class="far fa-file-pdf"></i></span>
                                         </label>
                                     </div>
@@ -187,7 +184,7 @@
     });
 
     $('#reset').on('click', function () {
-        $('#document_label').text('{{__('technic.propositions.file_hint')}}');
+        $('#document_label').text('@lang('technic.proposition.file_hint')');
     });
 
     function changeType(type) {

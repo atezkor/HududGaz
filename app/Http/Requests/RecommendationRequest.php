@@ -20,8 +20,24 @@ class RecommendationRequest extends FormRequest {
      * @return array
      */
     public function rules(): array {
-        return [
-            //
+        $rules = [
+            'accept' => $this->accept(),
+            'fail' => $this->fail(),
         ];
+
+        return [
+            $rules[$this->input('type')]
+        ];
+    }
+
+    private function accept(): array {
+        return [
+            'address' => ['required'],
+            'access_point' => ['required'],
+        ];
+    }
+
+    private function fail(): array {
+        return [];
     }
 }
