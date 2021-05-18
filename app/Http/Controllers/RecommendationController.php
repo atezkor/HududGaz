@@ -35,7 +35,7 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function create(Proposition $proposition, $type): View|RedirectResponse {
-        return view("district.$type", ['model' => $proposition]);
+        return view("district.create", ['model' => $proposition, 'type' => $type]);
     }
 
     /**
