@@ -1,9 +1,7 @@
 <?php
     return [
-        'login' => "Kirish",
         'general' => [
             'select' => "Tanlang",
-            'col_email' => "E-pochta",
             'address' => "Manzili",
             'org_name' => "Tashkilot nomi",
             'org_leader' => "Tashkilot rahbari",
@@ -14,27 +12,6 @@
             'document' => "Tashkilotning rasmiy hujjatini yuklang",
             'doc_upload' => "Hujjatni yuklang",
             'phone' => "Telefon raqami",
-            'fax' => "Fax"
-        ],
-        'organization' => [
-            'title' => "Ma\u{2019}lumotlarni yangilash",
-            'shareholder_name' => "Aksiyadorlik jamiyati nomi",
-            'branch_name' => "Gazta\u{2019}minot filiali nomi",
-            'engineer' => "Bosh muhandis",
-            'full_name' => "Ismi, Otasining ismi, Familiyasi (I.O.Familiyasi)",
-            'helper' => "Muhandis yordamchisi",
-            'upload_image' => "Rasmni yuklang",
-            'phone' => "Telefon raqami (har birini alohida qatorga yozing)",
-            'org_num' => "Tashkilot №",
-            'email' => "Elektron pochta manzili",
-            'address_latin' => "Manzili",
-            'address' => "Manzili (krillcha)"
-        ],
-        'users' => [
-            'col_num' => "Tr",
-            'col_name' => "Ismi",
-            'col_position' => "Lavozimi",
-            'col_role' => "O\u{2018}rni"
         ],
         'equipments' => [
             'col_name' => "Jihoz nomi",

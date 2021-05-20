@@ -23,10 +23,10 @@
                                     <th>{{__('table.districts.col_num')}}</th>
                                     <th>{{__('table.districts.col_name')}}</th>
                                     <th>{{__('table.districts.col_engineer')}}</th>
-                                    <th>{{__('table.general.col_email')}}</th>
+                                    <th>{{__('admin.email')}}</th>
                                     <th>{{__('table.districts.col_phone')}}</th>
                                     <th>{{__('table.districts.col_address')}}</th>
-                                    <th>{{__('table.general.fax')}}</th>
+                                    <th>{{__('admin.fax')}}</th>
                                     <th></th>
                                 </tr>
                             </thead>

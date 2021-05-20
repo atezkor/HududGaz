@@ -13,7 +13,16 @@ return [
     'alert_text' => "O\u{2018}chirish uchun tasdiqlang",
     'uz' => "O\u{2018}zbekcha",
     'uzk' => "Ўзбекча",
+    'email' => "E-pochta",
+    'fax' => "Fax",
+    'users' => [
+
+    ],
     'user' => [
+        'col_num' => "Tr",
+        'col_name' => "Ismi",
+        'col_position' => "Lavozimi",
+        'col_role' => "O\u{2018}rni",
         'heading_create' => "Foydalanuvchi qo\u{2018}shish",
         'heading_edit' => "Foydalanuvchi ma\u{2018}lumotlarini yangilash",
         'btn_add' => "Foydalanuvchi qo\u{2018}shish",
@@ -29,5 +38,19 @@ return [
         'position' => "Lavozimi",
         'select_role' => "Foydalunivchining o\u{2018}rnini tanlang",
         'select_organ' => "Tashkilotni tanlang",
-    ]
+    ],
+    'organization' => [
+        'title' => "Ma\u{2019}lumotlarni yangilash",
+        'shareholder_name' => "Aksiyadorlik jamiyati nomi",
+        'branch_name' => "Gazta\u{2019}minot filiali nomi",
+        'engineer' => "Bosh muhandis",
+        'full_name' => "Ismi, Otasining ismi, Familiyasi (I.O.Familiyasi)",
+        'helper' => "Muhandis yordamchisi",
+        'upload_image' => "Rasmni yuklang",
+        'phone' => "Telefon raqami (har birini alohida qatorga yozing)",
+        'org_num' => "Tashkilot №",
+        'email' => "Elektron pochta manzili",
+        'address_latin' => "Manzili",
+        'address' => "Manzili (krillcha)"
+    ],
 ];

@@ -58,7 +58,7 @@
                         </div>
                         <div class="modal-body">
                             <form action="{{route('admin.equip_type.add', ['equipment' => $equipment])}}"
-                                  method="POST" id="form">
+                                  method="POST" id="form" onsubmit="submit.disabled = true">
                                 @csrf
                                 <div class="form-group">
                                     <label for="type">{{__('table.equipments.equip_type')}}</label>
@@ -69,7 +69,7 @@
                                     <input type="number" name="order" id="order" class="form-control">
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="submit" class="btn btn-success">{{__('global.btn_save')}}</button>
+                                    <button type="submit" id="submit" class="btn btn-success">{{__('global.btn_save')}}</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">
                                         {{__('global.btn_cancel')}}
                                     </button>

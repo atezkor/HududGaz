@@ -21,11 +21,11 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>{{__('table.users.col_num')}}</th>
-                                    <th>{{__('table.users.col_name')}}</th>
-                                    <th>{{__('table.users.col_position')}}</th>
-                                    <th>{{__('table.general.col_email')}}</th>
-                                    <th>{{__('table.users.col_role')}}</th>
+                                    <th>{{__('admin.user.col_num')}}</th>
+                                    <th>{{__('admin.user.col_name')}}</th>
+                                    <th>{{__('admin.user.col_position')}}</th>
+                                    <th>{{__('admin.email')}}</th>
+                                    <th>{{__('admin.user.col_role')}}</th>
                                     <th></th>
                                 </tr>
                             </thead>

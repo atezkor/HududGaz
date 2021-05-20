@@ -60,8 +60,8 @@
                                     <h4 id="header" class="modal-title">{{__('table.activities.add_activity')}}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{route('admin.activities.store')}}"
-                                          method="POST" id="form">
+                                    <form action="{{route('admin.activities.store')}}" method="POST"
+                                          id="form" onsubmit="submit.disabled = true">
                                         @csrf
                                         <input type="hidden" name="_method" id="_method" value="POST">
                                         <div class="form-group">
@@ -69,7 +69,7 @@
                                             <input type="text" name="activity" id="activity" class="form-control">
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <button type="submit" class="btn btn-success">{{__('global.btn_save')}}</button>
+                                            <button type="submit" id="submit" class="btn btn-success">{{__('global.btn_save')}}</button>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">
                                                 {{__('global.btn_cancel')}}
                                             </button>
