@@ -13,6 +13,7 @@ class CreateRecommendationsTable extends Migration {
     public function up() {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('proposition_id')->index();
             $table->string('address');
             $table->string('access_point');
             $table->integer('above_len');
@@ -27,7 +28,13 @@ class CreateRecommendationsTable extends Migration {
             $table->integer('consumption');
             $table->string('description')->nullable();
             $table->text('additional')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
+
+            $table->foreign('proposition_id')
+                ->references('id')
+                ->on('propositions')
+                ->onDelete('cascade');
         });
     }
 

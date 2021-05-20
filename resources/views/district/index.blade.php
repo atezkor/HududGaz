@@ -1,5 +1,8 @@
 @extends('secondary')
 @section('title', getName())
+@section('meta')
+<meta name="csrf-token" content="{{csrf_token()}}">
+@endsection
 @section('link')
 <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
 <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
@@ -10,22 +13,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a href="#individual" class="nav-link active" data-toggle="tab">
-                                    @lang('global.proposition.individual')
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#legal_entity" class="nav-link" data-toggle="tab">
-                                    @lang('global.proposition.legal_entity')
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
             </div>
             <div class="card-body">
                 <div class="tab-content">
@@ -35,8 +23,8 @@
                             <tr>
                                 <th>@lang('global.index')</th>
                                 <th>@lang('global.proposition.number')</th>
-                                <th>@lang('global.proposition.stir')</th>
-                                <th>@lang('global.proposition.name')</th>
+                                <th>@lang('global.consumer')</th>
+                                <th>@lang('district.recommendation.name')</th>
                                 <th>@lang('global.proposition.date')</th>
                                 <th>@lang('global.proposition.limit')</th>
                                 <th>@lang('global.proposition.action')</th>
@@ -44,81 +32,25 @@
                             </thead>
                             <tbody>
                             @php($limit = term(4))
-                            @foreach($individuals as $model)
+                            @foreach($models as $model)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->number}}</td>
-                                    <td>{{$physicals[$loop->index]->stir}}</td>
+                                    <td>123</td>
                                     <td>
-                                        <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
-                                            @lang('global.proposition.show')
+                                        <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
+                                            @lang('district.show')
                                         </a>
                                     </td>
                                     <td>{{$model->created_at}}</td>
+                                    <td>1</td>
                                     <td>
-                                        <div class="progress progress-xs">
-                                            <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"
-                                                 style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>
-                                        </div>
-                                        <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'accept'])}}"
-                                           class="btn btn-outline-info" title="@lang('district.accept')">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                        <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'fail'])}}"
-                                           class="btn btn-outline-danger" title="@lang('district.cancel')">
-                                            <i class="fas fa-minus"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="legal_entity" class="tap-pane fade">
-                        <table id="table2" class="table table-bordered table-striped table-center">
-                            <thead>
-                            <tr>
-                                <th>@lang('global.index')</th>
-                                <th>@lang('global.proposition.number')</th>
-                                <th>@lang('global.proposition.legal_stir')</th>
-                                <th>@lang('global.proposition.name')</th>
-                                <th>@lang('global.proposition.date')</th>
-                                <th>@lang('global.proposition.limit')</th>
-                                <th>@lang('global.proposition.action')</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($legalEntities as $model)
-                                <tr>
-                                    <td>{{$loop->index + 1}}</td>
-                                    <td>{{$model->number}}</td>
-                                    <td>{{$legals[$loop->index]->legal_stir}}</td>
-                                    <td>
-                                        <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
-                                            @lang('global.proposition.show')
-                                        </a>
-                                    </td>
-                                    <td>{{$model->created_at}}</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"
-                                                 style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>
-                                        </div>
-                                        <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'accept'])}}"
-                                           class="btn btn-outline-info" title="@lang('district.accept')">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                        <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'fail'])}}"
-                                           class="btn btn-outline-danger" title="@lang('district.cancel')">
-                                            <i class="fas fa-minus"></i>
-                                        </a>
+                                        <input type="file" id="file" class="d-none"
+                                               onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $model])}}')">
+                                        <label for="file" class="btn btn-outline-info text-bold">
+                                            <i class="fas fa-file-medical"></i>
+                                            <span>@lang('global.btn_upload')</span>
+                                        </label>
                                     </td>
                                 </tr>
                             @endforeach
@@ -160,17 +92,30 @@
             searching: true,
             language: lang
         });
-
-        $('#table2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            searching: true,
-            language: lang
-        });
     });
+
+    function upload(el, url) {
+        let form = new FormData();
+        form.append('file', el.files[0]);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            method: 'POST',
+            processData: false, // important
+            // contentType: false, // important,
+            cache: false,
+            dataType: 'html',
+            data: form,
+            success: function(data, status) {
+                console.log(status)
+                // location.reload();
+            }
+        });
+    }
 </script>
 @endsection

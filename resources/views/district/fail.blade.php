@@ -25,6 +25,6 @@
 
     <div class="col-12 mt-5">
         <label for="additional">@lang('district.recommendation.additional')</label>
-        <div id="additional"></div>
+        <textarea id="additional" name="additional"></textarea>
     </div>
 </div>

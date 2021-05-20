@@ -19,7 +19,7 @@ class Proposition extends Model {
     }
 
     function percent($term = 72): string {
-        $now = time() - date_timestamp_get($this->getAttribute('updated_at'));
+        $now = time() - date_timestamp_get(date_create($this->getAttribute('updated_at')));
         $percent = 100 - $now / (3600 * $term) * 100;
         return number_format($percent, 0, '.', '');
     }

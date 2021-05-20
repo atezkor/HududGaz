@@ -39,6 +39,7 @@ class RecommendationRequest extends FormRequest {
 
     private function accept(): array {
         return [
+            'proposition_id' => ['required'],
             'address' => ['required'],
             'access_point' => ['required'],
             'above_len' => [],
@@ -57,6 +58,7 @@ class RecommendationRequest extends FormRequest {
 
     private function fail(): array {
         return [
+            'proposition_id' => ['required'],
             'description' => ['required'],
             'additional' => ['required']
         ];

@@ -7,7 +7,9 @@
         'archive' => "Arxiv",
         'accept' => "Qa\u{2019}bul qilish",
         'cancel' => "Bekor qilish",
+        'show' => "Tavsiyanomani ko\u{2018}rish",
         'recommendation' => [
+            'name' => "Tavsiyanoma",
             'heading' => "Maydonlarni to\u{2018}ldiring",
             'heading_create' => "Tavsiyanoma qo\u{2018}shish",
             'heading_edit' => "Tavsiyanomani yangilash",

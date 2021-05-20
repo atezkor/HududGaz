@@ -16,9 +16,9 @@ class UserRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'name' => "Ism",
-            'email' => "Elektron pochta",
-            'password' => "Parol"
+            'name' => __('admin.user.name'),
+            'email' => __('admin.user.email'),
+            'password' => __('admin.user.password'),
         ];
     }
 
@@ -29,13 +29,15 @@ class UserRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'email' => ['required'],
-            'password' => ['required'],
-            'name' => [],
+            'name' => ['required'],
             'lastname' => [],
             'patronymic' => [],
-            'position' => [],
+            'role' => [],
+            'organ' => [],
+            'email' => ['required'],
+            'password' => ['required'],
             'locale' => [],
+            'position' => [],
             'mac_address' => []
         ];
     }

@@ -8,6 +8,7 @@ use App\Models\Recommendation;
 use App\Services\Service;
 use App\ViewModels\PropositionListViewModel;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class RecommendationController extends Controller {
@@ -24,7 +25,15 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        return view('district.index', new PropositionListViewModel());
+        $models = Recommendation::all();
+        return view('district.index', ['models' => $models]);
+    }
+
+    /**
+     * @return View|RedirectResponse
+     */
+    public function propositions(): View|RedirectResponse {
+        return view('district.propositions', new PropositionListViewModel());
     }
 
     /**
@@ -52,13 +61,24 @@ class RecommendationController extends Controller {
     }
 
     /**
+     * void
+     */
+    public function upload(Request $request, Recommendation $recommendation) {
+        return $recommendation->getAttribute($request->get('recommendation'));
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Recommendation $recommendation
-     * @return View|RedirectResponse
+     * @return RedirectResponse
      */
-    public function show(Recommendation $recommendation): View|RedirectResponse {
-        return view('', ['r' => $recommendation]);
+    public function show(Recommendation $recommendation): RedirectResponse {
+        return redirect('/storage/recommendations/' . $recommendation->getAttribute('file'));
+    }
+
+    public function proposition(Proposition $proposition): RedirectResponse {
+        return redirect('/storage/propositions/' . $proposition->getAttribute('file'));
     }
 
     /**

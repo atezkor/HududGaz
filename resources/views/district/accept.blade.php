@@ -74,7 +74,8 @@
     </div>
 
     <div class="card-body col-12 px-0">
-        <div id="additional"></div>
+        <label for="additional">@lang('district.recommendation.additional')</label>
+        <textarea id="additional" name="additional"></textarea>
     </div>
 
     <div class="col-12 px-0">

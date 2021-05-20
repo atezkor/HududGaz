@@ -59,7 +59,7 @@ Route::get('/', function() {
     if (auth()->user() == null)
         return redirect()->route('login');
 
-    $role = auth()->user()->role_id ?? 0;
+    $role = auth()->user()->role ?? 0;
     switch ($role) {
         case 1: return redirect('/admin');
         case 2: return redirect('/technic');

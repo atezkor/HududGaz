@@ -62,3 +62,14 @@ function progressColor($percent): string {
 function term($limit): Collection|array {
     return Status::query()->offset(0)->limit($limit)->get();
 }
+
+function roles(): array {
+    return [
+      1 => __('global.roles.admin'),
+      2 => __('global.roles.technic'),
+      3 => __('global.roles.district'),
+      5 => __('global.roles.designer'),
+      4 => __('global.roles.engineer'),
+      6 => __('global.roles.mounter'),
+    ];
+}

@@ -23,6 +23,7 @@
                                 </div>
                                 <div class="card-body">
                                     @include("district.$type")
+                                    <input type="hidden" name="proposition_id" value="{{$model->id}}">
                                     <input type="hidden" name="type" value="{{$type}}">
                                 </div>
                             </div>
@@ -58,5 +59,6 @@
             }
         })
     });
+    console.log($('#additional').summernote('code'));
 </script>
 @endsection

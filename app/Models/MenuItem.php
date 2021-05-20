@@ -10,6 +10,6 @@ class MenuItem extends Model {
     use HasFactory;
 
     public static function items($user): Builder {
-        return self::query()->where('role', '=', $user->role_id);
+        return self::query()->where('role', '=', $user->role);
     }
 }
