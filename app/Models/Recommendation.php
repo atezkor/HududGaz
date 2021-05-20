@@ -10,4 +10,8 @@ class Recommendation extends Model {
 
     protected $fillable = ['proposition_id', 'address', 'access_point', 'above_len', 'under_len', 'diameter', 'depth', 'capability',
         'real_capacity', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'description', 'additional', 'file'];
+
+    function proposition(): Proposition|Model {
+        return $this->belongsTo(Proposition::class)->first();
+    }
 }

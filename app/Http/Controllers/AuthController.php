@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\AuthRequest;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -19,13 +19,13 @@ class AuthController extends Controller {
 
     /*
      * This function for logout
-    */
+     */
     public function logout(): RedirectResponse {
         auth()->logout();
         return redirect('/');
     }
 
-    public function entry(UserRequest $request): RedirectResponse {
+    public function entry(AuthRequest $request): RedirectResponse {
         $data = $request->validated();
         $user = User::query()->where('email', '=', $data['email'])->get()->first();
 
@@ -36,10 +36,20 @@ class AuthController extends Controller {
             return redirect()->route('login');
 
         auth()->login($user);
-        return redirect()->route('login');
+        return redirect()->route('dashboard');
     }
 
-    public function store(UserRequest $request): RedirectResponse {
+    private function checkPass($pass, $pass_database): bool {
+        return HASH::check($pass, $pass_database);
+    }
+}
+
+/* For create super user
+ * Route::get('/reg', [AuthController::class, 'create'])->name('create');
+ * Route::post('/reg', [AuthController::class, 'store'])->name('store');
+ */
+/*
+    public function store(AuthRequest $request): RedirectResponse {
         if (auth()->user())
             return redirect('/');
 
@@ -63,8 +73,4 @@ class AuthController extends Controller {
     private function hashPass($pass): string {
         return Hash::make($pass);
     }
-
-    private function checkPass($pass, $pass_database): bool {
-        return HASH::check($pass, $pass_database);
-    }
-}
+*/

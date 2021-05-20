@@ -5,18 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RecommendationRequest;
 use App\Models\Proposition;
 use App\Models\Recommendation;
-use App\Services\Service;
+use App\Services\PropositionService;
+use App\Services\RecommendationService;
 use App\ViewModels\PropositionListViewModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class RecommendationController extends Controller {
 
-    private Service $service;
+    private RecommendationService $service;
+    private PropositionService $service_prop;
 
-    public function __construct() {
-        $this->service = new Service(new Recommendation());
+    public function __construct(RecommendationService $service, PropositionService $service_prop) {
+        $this->service = $service;
+        $this->service_prop = $service_prop;
     }
 
     /**
@@ -33,7 +37,7 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function propositions(): View|RedirectResponse {
-        return view('district.propositions', new PropositionListViewModel());
+        return view('district.propositions', new PropositionListViewModel($this->service_prop, [1, 2]));
     }
 
     /**
@@ -56,7 +60,9 @@ class RecommendationController extends Controller {
 
     public function store(RecommendationRequest $request): RedirectResponse {
         $data = $request->validated();
+
         $this->service->create($data);
+        $this->service_prop->show($this->getProposition($data['proposition_id']), 3);
         return redirect()->route('district.recommendations');
     }
 
@@ -64,7 +70,8 @@ class RecommendationController extends Controller {
      * void
      */
     public function upload(Request $request, Recommendation $recommendation) {
-        return $recommendation->getAttribute($request->get('recommendation'));
+        $this->service->upload($request);
+        $this->service_prop->show($recommendation->proposition(), 4);
     }
 
     /**
@@ -74,11 +81,11 @@ class RecommendationController extends Controller {
      * @return RedirectResponse
      */
     public function show(Recommendation $recommendation): RedirectResponse {
-        return redirect('/storage/recommendations/' . $recommendation->getAttribute('file'));
+        return $this->service->show($recommendation);
     }
 
     public function proposition(Proposition $proposition): RedirectResponse {
-        return redirect('/storage/propositions/' . $proposition->getAttribute('file'));
+        return $this->service_prop->show($proposition, 2);
     }
 
     /**
@@ -113,5 +120,9 @@ class RecommendationController extends Controller {
     public function destroy(Recommendation $recommendation): RedirectResponse {
         $this->service->delete($recommendation);
         return redirect()->route('district.recommendations');
+    }
+
+    private function getProposition($id): Proposition|Model {
+        return Proposition::query()->find($id);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Individual;
 use App\Models\Legal;
 use App\Models\Proposition;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +17,10 @@ class PropositionService extends CrudService {
         $this->model = $model;
     }
 
-    public function show($proposition): RedirectResponse {
+    public function show($proposition, int $status = 0): RedirectResponse {
+        if ($status) {
+            $this->update(['status' => $status], $proposition);
+        }
         return redirect($this->path . '/' . $proposition->file);
     }
 
@@ -66,5 +70,11 @@ class PropositionService extends CrudService {
 
     private function deleteFile($file) {
         File::delete($this->path . '/' . $file);
+    }
+
+    public function filter(int $type, array $statuses): Collection {
+        return $this->model->query()->where('type', '=', $type)
+            ->whereIn('status', $statuses)
+            ->get();
     }
 }

@@ -26,7 +26,7 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        return view('propositions.index', new PropositionListViewModel());
+        return view('propositions.index', new PropositionListViewModel($this->service));
     }
 
     /**

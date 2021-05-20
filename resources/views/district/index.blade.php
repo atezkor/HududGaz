@@ -111,9 +111,8 @@
             cache: false,
             dataType: 'html',
             data: form,
-            success: function(data, status) {
-                console.log(status)
-                // location.reload();
+            success: function() {
+                location.reload();
             }
         });
     }
