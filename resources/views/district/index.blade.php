@@ -107,7 +107,7 @@
             url: url,
             method: 'POST',
             processData: false, // important
-            // contentType: false, // important,
+            // contentType: false,
             cache: false,
             dataType: 'html',
             data: form,

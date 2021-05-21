@@ -18,6 +18,10 @@ class Proposition extends Model {
         return $this->hasOne(Legal::class)->first();
     }
 
+    function consumer($type = 1): Model {
+        return $type == 1 ? $this->individual() : $this->legal();
+    }
+
     function percent($term = 72): string {
         $now = time() - date_timestamp_get(date_create($this->getAttribute('updated_at')));
         $percent = 100 - $now / (3600 * $term) * 100;

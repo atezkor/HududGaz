@@ -14,4 +14,8 @@ class Recommendation extends Model {
     function proposition(): Proposition|Model {
         return $this->belongsTo(Proposition::class)->first();
     }
+
+    function organ($id): Region|Model {
+        return Region::query()->find($id);
+    }
 }

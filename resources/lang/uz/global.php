@@ -53,8 +53,7 @@
             'show' => "Arizani ko\u{2018}rish",
             'individual' => "Jismoniy shaxs",
             'legal_entity' => "Yuridik shaxs",
-        ]
-        ,
+        ],
         'datatables' => [
             'search' => "Qidiruv",
             'previous' => "Oldingi",

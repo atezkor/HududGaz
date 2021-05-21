@@ -39,9 +39,9 @@ function getName(): string {
     return Cache::get('organization')->branch_name ?? "";
 }
 
-function formatDate($date): string {
+function formatDate($date, $format = 'd.m.Y'): string {
     $res = date_create($date);
-    return date_format($res, 'd.m.Y');
+    return date_format($res, $format);
 }
 
 function MenuItems(): Collection|array {
@@ -71,5 +71,12 @@ function roles(): array {
       5 => __('global.roles.designer'),
       4 => __('global.roles.engineer'),
       6 => __('global.roles.mounter'),
+    ];
+}
+
+function buildType(): array {
+    return [
+        1 => __('district.build_type.residential'),
+        2 => __('district.build_type.non_residential')
     ];
 }

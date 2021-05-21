@@ -42,10 +42,5 @@
 - Xizmatchi sinflarni `app` papkasinign ixitiyoriy joyiga yartib, undan foydalanish mumkin.
   `namespace App\{Papka nomi};` degan qo'shimha qo'shilsa yetarli
 - ViewModel larni ulash `composer require spatie/laravel-view-models`
-<pre>
-public function index($locale): RedirectResponse {
-    app()->setLocale($locale);
-    session()->put('locale', $locale);
-    return redirect()->back();
-}
-</pre>
+
+6. PDF uchun `composer require barryvdh/laravel-dompdf`
