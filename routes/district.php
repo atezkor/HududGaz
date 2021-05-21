@@ -8,6 +8,7 @@ Route::get('', function() {
 });
 Route::get('recommendations', [RecommendationController::class, 'index'])->name('district.recommendations');
 Route::get('propositions', [RecommendationController::class, 'propositions'])->name('district.propositions');
+Route::get('recommendations/progress', [RecommendationController::class, 'index'])->name('district.recommendations.progress');
 Route::get('recommendations/cancelled', [RecommendationController::class, 'index'])->name('district.recommendations.cancelled');
 Route::get('recommendations/archive', [RecommendationController::class, 'index'])->name('district.recommendations.archive');
 

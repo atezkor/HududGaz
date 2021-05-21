@@ -30,7 +30,7 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        $models = Recommendation::all();
+        $models = Recommendation::query()->where('status', '=', 1)->get();
         return view('district.index', ['models' => $models]);
     }
 
@@ -71,7 +71,7 @@ class RecommendationController extends Controller {
      * void
      */
     public function upload(Request $request, Recommendation $recommendation) {
-        $this->service->upload($request);
+        $this->service->upload($request, $recommendation);
         $this->service_prop->show($recommendation->proposition(), 4);
     }
 

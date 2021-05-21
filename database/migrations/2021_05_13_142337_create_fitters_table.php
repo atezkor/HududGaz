@@ -14,13 +14,13 @@ class CreateFittersTable extends Migration {
         Schema::create('fitters', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('firm_id')->index();
-            $table->integer('statement_number');
+            $table->smallInteger('statement_number');
             $table->string('first_name');
             $table->string('second_name');
             $table->string('last_name');
             $table->date('date_contract');
             $table->date('date_contract_end');
-            $table->integer('diploma_number');
+            $table->smallInteger('diploma_number');
             $table->string('passport_series');
             $table->string('specialization');
             $table->double('experience', 4)->nullable();

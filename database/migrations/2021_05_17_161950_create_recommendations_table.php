@@ -14,6 +14,7 @@ class CreateRecommendationsTable extends Migration {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
+            $table->tinyInteger('status')->default(1);
             $table->string('address');
             $table->string('access_point');
             $table->integer('above_len');

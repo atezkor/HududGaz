@@ -12,7 +12,7 @@ class AddColumnToUser extends Migration {
      */
     public function up() {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('role');
+            $table->tinyInteger('role');
             $table->string('lastname')->nullable();
             $table->string('patronymic')->nullable();
             $table->integer('organ')->nullable();

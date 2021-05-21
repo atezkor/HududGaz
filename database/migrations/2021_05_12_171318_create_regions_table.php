@@ -16,7 +16,7 @@ class CreateRegionsTable extends Migration {
             $table->integer('org_number')->unique();
             $table->string('lead_engineer');
             $table->string('section_leader');
-            $table->integer('region');
+            $table->tinyInteger('region');
             $table->string('org_name');
             $table->string('address');
             $table->string('address_krill');

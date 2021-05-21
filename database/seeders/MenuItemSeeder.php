@@ -44,6 +44,7 @@ class MenuItemSeeder extends Seeder {
     private function district() {
         $this->CreateMenuItem(3, 'district.propositions', 'district.propositions', 'badge bg-primary');
         $this->CreateMenuItem(3, 'district.recommendations', 'district.recommendations', 'badge bg-info');
+        $this->CreateMenuItem(3, 'district.progress', 'district.recommendations.progress', 'badge bg-danger');
         $this->CreateMenuItem(3, 'district.cancelled', 'district.recommendations.cancelled', 'badge bg-danger');
         $this->CreateMenuItem(3, 'district.archive', 'district.recommendations.archive', 'badge bg-secondary');
     }

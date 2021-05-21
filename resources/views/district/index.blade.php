@@ -36,7 +36,7 @@
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->number}}</td>
-                                    <td>123</td>
+                                    <td>{{$model->comsume}}</td>
                                     <td>
                                         <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
                                             @lang('district.show')
@@ -106,8 +106,8 @@
         $.ajax({
             url: url,
             method: 'POST',
-            processData: false, // important
-            // contentType: false,
+            processData: false, // important for send file
+            contentType: false, // important for send as file
             cache: false,
             dataType: 'html',
             data: form,

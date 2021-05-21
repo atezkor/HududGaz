@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 
 class RecommendationService extends CrudService {
 
-//    private string $path = 'storage/recommendations';
+    private string $path = 'storage/recommendations';
     private PDF $pdf;
 
     public function __construct(Recommendation $model, PDF $pdf) {
@@ -23,8 +23,10 @@ class RecommendationService extends CrudService {
         return $this->createPDF($recommendation);
     }
 
-    public function upload($request) {
-
+    public function upload($request, Recommendation $recommendation) {
+        $recommendation->setAttribute('status', 2);
+        $recommendation->setAttribute('file', $this->createFile($request));
+        $recommendation->update();
     }
 
     private function createPDF($recommendation): Response {
@@ -39,5 +41,10 @@ class RecommendationService extends CrudService {
         return $this->pdf->download(time() . '.pdf');
     }
 
-//    File::makeDirectory($this->path, 0777, true, true);
+    private function createFile($request): string {
+        // File::makeDirectory($this->path, 0777, true, true);
+        $file = $request->file('file');
+        $request->file('file')->store($this->path);
+        return $file->getClientOriginalName();
+    }
 }
