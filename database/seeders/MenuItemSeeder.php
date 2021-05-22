@@ -14,7 +14,7 @@ class MenuItemSeeder extends Seeder {
     public function run() {
         $this->adminMenu();
         $this->technicMenu();
-        $this->district();
+        $this->districtMenu();
     }
 
     private function adminMenu() {
@@ -33,15 +33,15 @@ class MenuItemSeeder extends Seeder {
 
     private function technicMenu() {
         $this->CreateMenuItem(2, 'technic.props', 'propositions.index', 'nav-icon fas fa-file-alt');
-        $this->CreateMenuItem(2, 'technic.recommends', 'propositions.index', 'nav-icon fas fa-paste', 2);
+        $this->CreateMenuItem(2, 'technic.recommends', 'technic.recommendations', 'nav-icon fas fa-paste', 2);
         $this->CreateMenuItem(2, 'technic.tech_conditions', 'propositions.index', 'nav-icon fas fa-paste', 3);
         $this->CreateMenuItem(2, 'technic.reports', '#', 'nav-icon fas fa-chart-line', 4);
         $this->CreateMenuItem(2, 'technic.region_sec', 'propositions.index', 'nav-icon far fa-circle', 1, 4);
         $this->CreateMenuItem(2, 'technic.district_sec', 'propositions.index', 'nav-icon far fa-circle', 2, 4);
-        $this->CreateMenuItem(2, 'more_sec', 'propositions.index', 'nav-icon far fa-circle', 3, 4);
+        $this->CreateMenuItem(2, 'technic.more_sec', 'propositions.index', 'nav-icon far fa-circle', 3, 4);
     }
 
-    private function district() {
+    private function districtMenu() {
         $this->CreateMenuItem(3, 'district.propositions', 'district.propositions', 'badge bg-primary');
         $this->CreateMenuItem(3, 'district.recommendations', 'district.recommendations', 'badge bg-info');
         $this->CreateMenuItem(3, 'district.progress', 'district.recommendations.progress', 'badge bg-danger');

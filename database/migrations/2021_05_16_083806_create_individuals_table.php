@@ -18,6 +18,7 @@ class CreateIndividualsTable extends Migration {
             $table->string('phone');
             $table->string('passport');
             $table->integer('stir');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
 
             $table->foreign('proposition_id')

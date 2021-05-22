@@ -32,18 +32,24 @@
                             </thead>
                             <tbody>
                             @php($limit = term(4))
-                            @foreach($models as $model)
+                            @foreach($models as $key => $model)
                                 <tr>
-                                    <td>{{$loop->index + 1}}</td>
-                                    <td>{{$model->number}}</td>
-                                    <td>{{$model->comsume}}</td>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$individuals[$key]->number}}</td>
+                                    <td>{{$physicals[$key]->full_name}}</td>
                                     <td>
                                         <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
                                             @lang('district.show')
                                         </a>
                                     </td>
                                     <td>{{$model->created_at}}</td>
-                                    <td>1</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="{{progressColor($individuals[$key]->percent($limit[$individuals[$key]->status - 1]->term))}}"
+                                                 style="width: {{$individuals[$key]->percent($limit[$individuals[$key]->status - 1]->term)}}%"></div>
+                                        </div>
+                                        <div class="text-center">{{$limit[$individuals[$key]->status - 1]->term}} @lang('global.hour')</div>
+                                    </td>
                                     <td>
                                         <input type="file" id="file" class="d-none"
                                                onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $model])}}')">

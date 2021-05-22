@@ -8,6 +8,7 @@ use App\Models\Recommendation;
 use App\Services\PropositionService;
 use App\Services\RecommendationService;
 use App\ViewModels\PropositionListViewModel;
+use App\ViewModels\RecommendationViewModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,8 +31,7 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        $models = Recommendation::query()->where('status', '=', 1)->get();
-        return view('district.index', ['models' => $models]);
+        return view('district.index', new RecommendationViewModel($this->service));
     }
 
     /**
@@ -61,8 +61,8 @@ class RecommendationController extends Controller {
 
     public function store(RecommendationRequest $request): RedirectResponse {
         $data = $request->validated();
-
         $this->service->create($data);
+
         $this->service_prop->show($this->getProposition($data['proposition_id']), 3);
         return redirect()->route('district.recommendations');
     }

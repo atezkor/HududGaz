@@ -20,6 +20,7 @@ class CreateLegalsTable extends Migration {
             $table->string('leader_stir');
             $table->string('email');
             $table->string('phone');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
 
             $table->foreign('proposition_id')

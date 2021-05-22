@@ -29,6 +29,7 @@ class CreateRecommendationsTable extends Migration {
             $table->integer('consumption');
             $table->string('description')->nullable();
             $table->text('additional')->nullable();
+            $table->char('type', 10)->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
 

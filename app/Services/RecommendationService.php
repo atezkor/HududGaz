@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\Base;
 use App\Models\Recommendation;
 use Barryvdh\DomPDF\PDF;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 
 
@@ -16,7 +18,6 @@ class RecommendationService extends CrudService {
     public function __construct(Recommendation $model, PDF $pdf) {
         $this->model = $model;
         $this->pdf = $pdf;
-
     }
 
     public function show($recommendation): Response {
@@ -24,7 +25,7 @@ class RecommendationService extends CrudService {
     }
 
     public function upload($request, Recommendation $recommendation) {
-        $recommendation->setAttribute('status', 2);
+        $recommendation->setAttribute('status', $recommendation->getAttribute('status') + 1);
         $recommendation->setAttribute('file', $this->createFile($request));
         $recommendation->update();
     }
@@ -46,5 +47,14 @@ class RecommendationService extends CrudService {
         $file = $request->file('file');
         $request->file('file')->store($this->path);
         return $file->getClientOriginalName();
+    }
+
+    function filter($status): Collection {
+       return $this->model->query()->where('status', '=', $status)->orderBy('type')->get();
+    }
+
+    function propositions(Builder $model, int $type, array $status): Collection {
+        return $model->where('type', '=', $type)
+            ->whereIn('status', $status)->get();
     }
 }

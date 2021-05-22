@@ -39,16 +39,16 @@
                             <div id="individual" class="tab-pane active">
                                 <table id="table1" class="table table-bordered table-striped table-center">
                                     <thead>
-                                    <tr>
-                                        <th>@lang('global.index')</th>
-                                        <th>@lang('global.proposition.number')</th>
-                                        <th>@lang('global.proposition.stir')</th>
-                                        <th>@lang('technic.organ')</th>
-                                        <th>@lang('global.proposition.name')</th>
-                                        <th>@lang('global.proposition.date')</th>
-                                        <th>@lang('global.proposition.limit')</th>
-                                        <th>@lang('global.proposition.action')</th>
-                                    </tr>
+                                        <tr>
+                                            <th>@lang('global.index')</th>
+                                            <th>@lang('global.proposition.number')</th>
+                                            <th>@lang('global.proposition.stir')</th>
+                                            <th>@lang('technic.organ')</th>
+                                            <th>@lang('global.proposition.name')</th>
+                                            <th>@lang('global.proposition.date')</th>
+                                            <th>@lang('global.proposition.limit')</th>
+                                            <th>@lang('global.proposition.action')</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     @php($limit = term(4))

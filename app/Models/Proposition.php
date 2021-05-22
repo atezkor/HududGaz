@@ -18,6 +18,10 @@ class Proposition extends Model {
         return $this->hasOne(Legal::class)->first();
     }
 
+    function applicant(): Model {
+        return (int) $this->getAttribute('type') === 1 ? $this->individual() : $this->legal();
+    }
+
     function consumer($type = 1): Model {
         return $type == 1 ? $this->individual() : $this->legal();
     }

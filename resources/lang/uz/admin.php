@@ -36,7 +36,7 @@ return [
         'password' => "Yashirin so\u{2018}z",
         'locale' => "Mahalliy til",
         'position' => "Lavozimi",
-        'select_role' => "Foydalunivchining o\u{2018}rnini tanlang",
+        'select_role' => "Foydalanuvchining o\u{2018}rnini tanlang",
         'select_organ' => "Tashkilotni tanlang",
     ],
     'organization' => [

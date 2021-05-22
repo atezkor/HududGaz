@@ -71,10 +71,7 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Proposition $proposition): View|RedirectResponse {
-        if ($proposition->getAttribute('type') === 1)
-            $applicant = $proposition->individual();
-        else
-            $applicant = $proposition->legal();
+        $applicant = $proposition->applicant();
 
         $organs = Region::query()->get(['id', 'org_name']);
         return view('propositions.form', ['action' => route('propositions.update', ['proposition' => $proposition]),

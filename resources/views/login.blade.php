@@ -22,7 +22,7 @@
                 <p>GAZ TA&#8217;MINOTI FILIALI</p>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Кириш учун шахсий логин ва паролингизни киритинг</p>
+                <p class="login-box-msg">Kirish uchun shaxsiy login va parolingizdan foydalaning</p>
                 <form action="" method="POST">
                     @csrf
                     <div class="input-group mb-3">

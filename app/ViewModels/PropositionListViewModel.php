@@ -4,6 +4,7 @@ namespace App\ViewModels;
 
 use App\Models\Region;
 use App\Services\PropositionService;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\ViewModels\ViewModel;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Individual;
@@ -24,19 +25,23 @@ class PropositionListViewModel extends ViewModel {
         return $this->service->filter(1, $this->statuses);
     }
 
-    function physicals(): Collection {
-        return Individual::all();
-    }
-
     function legalEntities(): Collection {
         return $this->service->filter(2, $this->statuses);
     }
 
+    function physicals(): Collection {
+        return $this->filter(Individual::query());
+    }
+
     function legals(): Collection {
-        return Legal::all();
+        return $this->filter(Legal::query());
     }
 
     function organ($organ): string {
         return $this->organs[$organ]->org_name;
+    }
+
+    private function filter(Builder $builder): Collection {
+        return $builder->whereIn('status', $this->statuses)->get();
     }
 }

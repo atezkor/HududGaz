@@ -17,18 +17,11 @@ class PropositionService extends CrudService {
         $this->model = $model;
     }
 
-    public function show($proposition, int $status = 0): RedirectResponse {
-        if ($status) {
-            $this->update(['status' => $status], $proposition);
-        }
-        return redirect($this->path . '/' . $proposition->file);
-    }
-
     public function create($data) {
         $data['file'] = $this->createFile($data['file']);
         parent::create($data);
         $data['proposition_id'] = $this->model->getAttribute('id');
-        $this->createProposition($data);
+        $this->createApplicant($data);
     }
 
     public function update($data, $model) {
@@ -37,27 +30,43 @@ class PropositionService extends CrudService {
             $this->deleteFile($model->file);
         }
         parent::update($data, $model);
-        if ((int) $model->type === 1)
-            $applicant = $model->individual();
-        else
-            $applicant = $model->legal();
+
+        $applicant = $model->applicant();
         $applicant->fill($data);
         $applicant->save();
     }
 
     public function delete($model) {
-        parent::delete($model);
+        $this->deleteApplicant($model);
         $this->deleteFile($model->file);
+        parent::delete($model);
     }
 
-    private function createProposition($data) {
-        if (intval($data['type']) == 1) {
+    public function show($proposition, int $status = 0): RedirectResponse {
+        if ($status) {
+            $this->update(['status' => $status], $proposition);
+
+            $applicant = $proposition->applicant();
+            $applicant->status = $status;
+            $applicant->update();
+        }
+        return redirect($this->path . '/' . $proposition->file);
+    }
+
+    private function createApplicant(array $data) {
+        if (intval($data['type']) === 1) {
             $model = new Individual();
         } else {
             $model = new Legal();
         }
         $model->fill($data);
         $model->save();
+    }
+
+    private function deleteApplicant($model) {
+        $applicant = $model->applicant();
+        $this->deleteFile($applicant->getAttribute('file'));
+        $applicant->delete();
     }
 
     private function createFile($file): string {
