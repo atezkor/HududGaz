@@ -44,3 +44,6 @@
 - ViewModel larni ulash `composer require spatie/laravel-view-models`
 
 6. PDF uchun `composer require barryvdh/laravel-dompdf`
+
+## Saqlash papkasi
+1. `php artisan storage:link` havolaga ega bo'lgan papka yaratiladi, bu papka mahalliy xotiraadi saqlangan fayllarga murojaat qiladi

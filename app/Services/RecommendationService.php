@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 
 class RecommendationService extends CrudService {
 
-    private string $path = 'storage/recommendations';
+    private string $path = 'public/recommendations';
     private PDF $pdf;
 
     public function __construct(Recommendation $model, PDF $pdf) {
@@ -23,7 +24,7 @@ class RecommendationService extends CrudService {
 
     public function show($recommendation, $action = null): Response|RedirectResponse {
         if ($action)
-            return redirect($this->path . '/');
+            return redirect(Storage::url($this->path . '/' . $recommendation->file));
         return $this->createPDF($recommendation);
     }
 
@@ -41,14 +42,14 @@ class RecommendationService extends CrudService {
         view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
             'consumer' => $applicant, 'district' => $district]);
 
-        $this->pdf->loadView('district.pdf.accept');
+        $this->pdf->loadView('district.pdf.' . $recommendation->type);
         return $this->pdf->download(time() . '.pdf');
     }
 
     private function createFile($request): string {
         // File::makeDirectory($this->path, 0777, true, true);
         $file = $request->file('file');
-        $request->file('file')->store($this->path);
+        $request->file('file')->storeAs($this->path, $file->getClientOriginalName());
         return $file->getClientOriginalName();
     }
 
@@ -59,6 +60,6 @@ class RecommendationService extends CrudService {
 
     function propositions(Builder $model, int $status): Collection {
         return $model->where('status', '=', $status)
-            ->get(['id', 'number', 'type', 'status']);
+            ->get(['id', 'number', 'type', 'status', 'created_at']);
     }
 }
