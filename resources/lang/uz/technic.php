@@ -33,6 +33,8 @@
             'alert_text' => "O\u{2018}chirish uchun tasdiqlang"
         ],
         'recommendation' => [
+            'name' => "Tavsiyanoma",
+            'show' => "Tavsiyanomani ko\u{2018}rish",
             'btn_back' => "Tumanga qaytarish",
             'alert_title' => "Nima uchun tumanga qaytarmoqchisiz?",
             'alert_text' => "Sababini kiriting",

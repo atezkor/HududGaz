@@ -19,7 +19,7 @@
                                 <th>@lang('global.index')</th>
                                 <th>@lang('global.proposition.number')</th>
                                 <th>@lang('global.consumer')</th>
-                                <th>@lang('district.recommendation.name')</th>
+                                <th>@lang('technic.recommendation.name')</th>
                                 <th>@lang('technic.organ')</th>
                                 <th>@lang('global.proposition.date')</th>
                                 <th>@lang('global.proposition.limit')</th>
@@ -36,8 +36,8 @@
                                 <td>{{$model->number}}</td>
                                 <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
                                 <td>
-                                    <a href="{{route('technic.recommendation.show', ['recommendation' => $model])}}" target="_blank">
-                                        @lang('district.show')
+                                    <a href="{{route('technic.recommendation.show', ['recommendation' => $models[$key]])}}" target="_blank">
+                                        @lang('technic.recommendation.show')
                                     </a>
                                 </td>
                                 <td>{{1}}</td>

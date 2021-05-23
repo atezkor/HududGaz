@@ -23,8 +23,10 @@ class RecommendationService extends CrudService {
     }
 
     public function show($recommendation, $action = null): Response|RedirectResponse {
-        if ($action)
+        if ($action) {
+//            $this->update(['status' => 5], $recommendation->proposition);
             return redirect(Storage::url($this->path . '/' . $recommendation->file));
+        }
         return $this->createPDF($recommendation);
     }
 
