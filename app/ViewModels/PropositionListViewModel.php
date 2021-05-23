@@ -15,7 +15,7 @@ class PropositionListViewModel extends ViewModel {
     private Collection $organs;
     private PropositionService $service;
     private array $statuses;
-    public function __construct(PropositionService $service, $statuses = [1, 2, 3]) {
+    public function __construct(PropositionService $service, $statuses = [1, 2]) {
         $this->organs = Region::query()->get(['id', 'org_name']);
         $this->service = $service;
         $this->statuses = $statuses;

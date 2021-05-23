@@ -34,6 +34,16 @@ class RecommendationService extends CrudService {
         $recommendation->update();
     }
 
+    public function accept() {
+
+    }
+
+    public function back(Recommendation $recommendation, string $comment) {
+        $recommendation->setAttribute('comment', $comment);
+        $recommendation->update(['status' => 3]);
+        $recommendation->proposition()->update(['status' => 6]);
+    }
+
     private function createPDF($recommendation): Response {
         $proposition = $recommendation->proposition();
         $organ = $recommendation->organ($proposition->organ);

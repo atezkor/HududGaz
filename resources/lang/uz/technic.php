@@ -31,5 +31,13 @@
             'file_hint' => "Arizani yuklash",
             'alert_message' => "Arizani o\u{2018}chirib tashlamoqchimisiz?",
             'alert_text' => "O\u{2018}chirish uchun tasdiqlang"
+        ],
+        'recommendation' => [
+            'btn_back' => "Tumanga qaytarish",
+            'alert_title' => "Nima uchun tumanga qaytarmoqchisiz?",
+            'alert_text' => "Sababini kiriting",
+            'error' => "Xatolik yuz berdi. Qaytadan urunib ko\u{2018}ring",
+            'process' => "Tumanga qaytarilmoqda ...",
+            'wait' => "Xatolik yuz berganda sahifa qayta yuklanmaydi ...",
         ]
     ];

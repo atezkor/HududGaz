@@ -16,4 +16,4 @@ Route::get('recommendations/{proposition}/create/{type}', [RecommendationControl
 Route::post('recommendation/create/{type}', [RecommendationController::class, 'store'])->name('district.recommendation.store');
 Route::post('recommendations/{recommendation}/upload', [RecommendationController::class, 'upload'])->name('district.recommendation.upload');
 Route::get('recommendations/{recommendation}', [RecommendationController::class, 'show'])->name('district.recommendation.show');
-Route::get('propositions/{proposition}/show', [RecommendationController::class, 'proposition'])->name('district.proposition.show');
+Route::get('propositions/{proposition}', [RecommendationController::class, 'proposition'])->name('district.proposition.show');
