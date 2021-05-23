@@ -52,7 +52,8 @@ class RecommendationRequest extends FormRequest {
             'pressure_sum' => [],
             'grc' => [],
             'consumption' => [],
-            'additional' => []
+            'additional' => [],
+            'type' => ['required']
         ];
     }
 
@@ -60,7 +61,8 @@ class RecommendationRequest extends FormRequest {
         return [
             'proposition_id' => ['required'],
             'description' => ['required'],
-            'additional' => ['required']
+            'additional' => ['required'],
+            'type' => ['required']
         ];
     }
 }

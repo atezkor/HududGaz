@@ -87,7 +87,7 @@
     <div class="body mt-20">
         <div>
             <span class="f-l">{{formatDate($model->created_at)}} - @lang('district.pdf.year')</span>
-            <strong class="f-r">{{$districts[$organ->region]}}</strong>
+            <strong class="f-r">{{$district}}</strong>
             <div class="clear"></div>
         </div>
 

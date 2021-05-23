@@ -7,6 +7,7 @@ use App\Models\Recommendation;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 
@@ -20,7 +21,9 @@ class RecommendationService extends CrudService {
         $this->pdf = $pdf;
     }
 
-    public function show($recommendation): Response {
+    public function show($recommendation, $action = null): Response|RedirectResponse {
+        if ($action)
+            return redirect($this->path . '/');
         return $this->createPDF($recommendation);
     }
 
@@ -33,10 +36,10 @@ class RecommendationService extends CrudService {
     private function createPDF($recommendation): Response {
         $proposition = $recommendation->proposition();
         $organ = $recommendation->organ($proposition->organ);
-        $consumer = $proposition->consumer($proposition->type);
-        $districts = Base::districts();
+        $applicant = $proposition->applicant();
+        $district = Base::districts()[$organ->region];
         view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
-            'consumer' => $consumer, 'districts' => $districts]);
+            'consumer' => $applicant, 'district' => $district]);
 
         $this->pdf->loadView('district.pdf.accept');
         return $this->pdf->download(time() . '.pdf');
@@ -49,12 +52,13 @@ class RecommendationService extends CrudService {
         return $file->getClientOriginalName();
     }
 
-    function filter($status): Collection {
-       return $this->model->query()->where('status', '=', $status)->orderBy('type')->get();
+    function filter($status = 1): Collection {
+       return $this->model->query()->where('status', '=', $status)
+           ->get(['id', 'created_at']);
     }
 
-    function propositions(Builder $model, int $type, array $status): Collection {
-        return $model->where('type', '=', $type)
-            ->whereIn('status', $status)->get();
+    function propositions(Builder $model, int $status): Collection {
+        return $model->where('status', '=', $status)
+            ->get(['id', 'number', 'type', 'status']);
     }
 }

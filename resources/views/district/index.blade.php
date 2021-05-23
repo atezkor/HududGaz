@@ -16,54 +16,52 @@
 
             </div>
             <div class="card-body">
-                <div class="tab-content">
-                    <div id="individual" class="tab-pane active">
-                        <table id="table1" class="table table-bordered table-striped table-center">
-                            <thead>
-                            <tr>
-                                <th>@lang('global.index')</th>
-                                <th>@lang('global.proposition.number')</th>
-                                <th>@lang('global.consumer')</th>
-                                <th>@lang('district.recommendation.name')</th>
-                                <th>@lang('global.proposition.date')</th>
-                                <th>@lang('global.proposition.limit')</th>
-                                <th>@lang('global.proposition.action')</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @php($limit = term(4))
-                            @foreach($models as $key => $model)
-                                <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$individuals[$key]->number}}</td>
-                                    <td>{{$physicals[$key]->full_name}}</td>
-                                    <td>
-                                        <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
-                                            @lang('district.show')
-                                        </a>
-                                    </td>
-                                    <td>{{$model->created_at}}</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="{{progressColor($individuals[$key]->percent($limit[$individuals[$key]->status - 1]->term))}}"
-                                                 style="width: {{$individuals[$key]->percent($limit[$individuals[$key]->status - 1]->term)}}%"></div>
-                                        </div>
-                                        <div class="text-center">{{$limit[$individuals[$key]->status - 1]->term}} @lang('global.hour')</div>
-                                    </td>
-                                    <td>
-                                        <input type="file" id="file" class="d-none"
-                                               onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $model])}}')">
-                                        <label for="file" class="btn btn-outline-info text-bold">
-                                            <i class="fas fa-file-medical"></i>
-                                            <span>@lang('global.btn_upload')</span>
-                                        </label>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <table id="table" class="table table-bordered table-striped table-center">
+                    <thead>
+                        <tr>
+                            <th>@lang('global.index')</th>
+                            <th>@lang('global.proposition.number')</th>
+                            <th>@lang('global.consumer')</th>
+                            <th>@lang('district.recommendation.name')</th>
+                            <th>@lang('global.proposition.date')</th>
+                            <th>@lang('global.proposition.limit')</th>
+                            <th>@lang('global.proposition.action')</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @php($limit = term(4))
+                    @php($l = 0)
+                    @php($p = 0)
+                    @foreach($propositions as $key => $model)
+                        <tr>
+                            <td>{{$key + 1}}</td>
+                            <td>{{$model->number}}</td>
+                            <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
+                            <td>
+                                <a href="{{route('district.recommendation.show', ['recommendation' => $models[$key]])}}" target="_blank">
+                                    @lang('district.show')
+                                </a>
+                            </td>
+                            <td>{{$models[$key]->created_at}}</td>
+                            <td>
+                                <div class="progress progress-xs">
+                                    <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"
+                                         style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>
+                                </div>
+                                <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
+                            </td>
+                            <td>
+                                <input type="file" id="file" class="d-none"
+                                       onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $models[$key]])}}')">
+                                <label for="file" class="btn btn-outline-info text-bold">
+                                    <i class="fas fa-file-medical"></i>
+                                    <span>@lang('global.btn_upload')</span>
+                                </label>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -90,7 +88,7 @@
             sInfoFiltered: "@lang('global.datatables.infoFiltered')"
         }
 
-        $("#table1").DataTable({
+        $("#table").DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,

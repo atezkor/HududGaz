@@ -10,3 +10,4 @@ Route::get('', function() {
 });
 resource('propositions', PropositionController::class, 'propositions');
 Route::get('recommendations', [TechnicController::class, 'index'])->name('technic.recommendations');
+Route::get('recommendations/{recommendation}', [TechnicController::class, 'show'])->name('technic.recommendation.show');

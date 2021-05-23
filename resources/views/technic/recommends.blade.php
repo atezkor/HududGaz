@@ -32,18 +32,26 @@
                                 </thead>
                                 <tbody>
                                 @php($limit = term(4))
-                                @foreach($models as $model)
+                                @php($l = 0)
+                                @php($p = 0)
+                                @foreach($propositions as $key => $model)
                                     <tr>
-                                        <td>{{$loop->index + 1}}</td>
+                                        <td>{{$key + 1}}</td>
                                         <td>{{$model->number}}</td>
-                                        <td>{{$model->comsume}}</td>
+                                        <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
                                         <td>
-                                            <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
+                                            <a href="{{route('technic.recommendation.show', ['recommendation' => $model])}}" target="_blank">
                                                 @lang('district.show')
                                             </a>
                                         </td>
-                                        <td>{{$model->created_at}}</td>
-                                        <td>1</td>
+                                        <td>{{$models[$key]->created_at}}</td>
+                                        <td>
+                                            <div class="progress progress-xs">
+                                                <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"
+                                                     style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>
+                                            </div>
+                                            <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
+                                        </td>
                                         <td>
                                             <form action="" method="post">
                                                 <a href="{{"tech-condition"}}" class="btn btn-outline-info">

@@ -30,18 +30,19 @@ class PropositionListViewModel extends ViewModel {
     }
 
     function physicals(): Collection {
-        return $this->filter(Individual::query());
+        return $this->filter(Individual::query(), ['stir']);
     }
 
     function legals(): Collection {
-        return $this->filter(Legal::query());
+        return $this->filter(Legal::query(), ['legal_stir']);
     }
 
     function organ($organ): string {
         return $this->organs[$organ]->org_name;
     }
 
-    private function filter(Builder $builder): Collection {
-        return $builder->whereIn('status', $this->statuses)->get();
+    private function filter(Builder $builder, array $attributes = ['*']): Collection {
+        return $builder->whereIn('status', $this->statuses)
+            ->get($attributes);
     }
 }

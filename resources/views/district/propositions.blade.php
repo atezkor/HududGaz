@@ -96,11 +96,12 @@
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->number}}</td>
+
                                     <td>{{$legals[$loop->index]->legal_stir}}</td>
                                     <td>
-{{--                                        <a href="{{route('district.proposition.show', ['proposition' => $model])}}" target="_blank">--}}
-{{--                                            @lang('global.proposition.show')--}}
-{{--                                        </a>--}}
+                                        <a href="{{route('district.proposition.show', ['proposition' => $model])}}" target="_blank">
+                                            @lang('global.proposition.show')
+                                        </a>
                                     </td>
                                     <td>{{$model->created_at}}</td>
                                     <td>
