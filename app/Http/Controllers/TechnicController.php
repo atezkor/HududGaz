@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Recommendation;
 use App\Services\RecommendationService;
 use App\ViewModels\RecommendationViewModel;
+use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class TechnicController extends Controller {
     private RecommendationService $rec_service;

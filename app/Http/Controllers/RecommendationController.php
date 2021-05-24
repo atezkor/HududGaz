@@ -9,11 +9,11 @@ use App\Services\PropositionService;
 use App\Services\RecommendationService;
 use App\ViewModels\PropositionListViewModel;
 use App\ViewModels\RecommendationViewModel;
+use Illuminate\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\View\View;
 
 class RecommendationController extends Controller {
 
@@ -69,6 +69,8 @@ class RecommendationController extends Controller {
 
     /**
      * void
+     * @param Request $request
+     * @param Recommendation $recommendation
      */
     public function upload(Request $request, Recommendation $recommendation) {
         $this->service->upload($request, $recommendation);
