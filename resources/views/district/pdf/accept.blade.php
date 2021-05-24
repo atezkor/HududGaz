@@ -95,7 +95,7 @@
             <ol>
                 <li>
                     <strong>@lang('district.pdf.object_name')</strong>: {{$model->address}}@lang('district.pdf.in_the')
-                    {{$consumer->full_name}}@lang('district.pdf.to') @lang('district.pdf.belong_to') {{buildType()[$proposition->build_type]}}
+                    {{$consumer->full_name ?? $consumer->leader}}@lang('district.pdf.to') @lang('district.pdf.belong_to') {{buildType()[$proposition->build_type]}}
                     @lang('district.pdf.gas_connect')
                 </li>
                 <li>

@@ -12,15 +12,17 @@ use Spatie\ViewModels\ViewModel;
 
 class RecommendationViewModel extends ViewModel {
     private RecommendationService $service;
-    private int $status;
+    private array $status;
+    private int $status_rec;
 
-    public function __construct(RecommendationService $service, $status = 3) {
+    public function __construct(RecommendationService $service, array $status = [3], int $status_rec = 1) {
         $this->service = $service;
         $this->status = $status;
+        $this->status_rec = $status_rec;
     }
 
     public function models(): Collection {
-        return $this->service->filter($this->status - 2);
+        return $this->service->filter($this->status_rec);
     }
 
     public function propositions(): Collection {
@@ -44,6 +46,6 @@ class RecommendationViewModel extends ViewModel {
     }
 
     private function filter(Builder $builder, array $attr = ['*']): Collection {
-        return $builder->where('status', '=', $this->status)->get($attr);
+        return $builder->whereIn('status', $this->status)->get($attr);
     }
 }

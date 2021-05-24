@@ -65,13 +65,13 @@ class RecommendationService extends CrudService {
         return $file->getClientOriginalName();
     }
 
-    function filter($status = 1): Collection {
+    function filter(int $status): Collection {
        return $this->model->query()->where('status', '=', $status)
-           ->get(['id', 'created_at']);
+           ->orderBy('proposition_id')->get(['id', 'created_at', 'comment']);
     }
 
-    function propositions(Builder $model, int $status): Collection {
-        return $model->where('status', '=', $status)
+    function propositions(Builder $model, array $status): Collection {
+        return $model->whereIn('status', $status)
             ->get(['id', 'number', 'type', 'status', 'created_at']);
     }
 }

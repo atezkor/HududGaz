@@ -8,6 +8,7 @@
         'accept' => "Qa\u{2019}bul qilish",
         'cancel' => "Bekor qilish",
         'show' => "Tavsiyanomani ko\u{2018}rish",
+        'btn_correction' => "To\u{2018}g\u{2018}rilash",
         'recommendation' => [
             'name' => "Tavsiyanoma",
             'heading' => "Maydonlarni to\u{2018}ldiring",

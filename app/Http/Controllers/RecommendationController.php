@@ -26,6 +26,13 @@ class RecommendationController extends Controller {
     }
 
     /**
+     * @return View|RedirectResponse
+     */
+    public function propositions(): View|RedirectResponse {
+        return view('district.propositions', new PropositionListViewModel($this->service_prop, [1, 2]));
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return View|RedirectResponse
@@ -34,11 +41,12 @@ class RecommendationController extends Controller {
         return view('district.index', new RecommendationViewModel($this->service));
     }
 
-    /**
-     * @return View|RedirectResponse
-     */
-    public function propositions(): View|RedirectResponse {
-        return view('district.propositions', new PropositionListViewModel($this->service_prop, [1, 2]));
+    public function cancelled(): View|RedirectResponse {
+        return view('district.cancelled', new RecommendationViewModel($this->service, [6], 3));
+    }
+
+    public function archives(): View|RedirectResponse {
+        return view('district.archives');
     }
 
     /**
@@ -49,7 +57,7 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function create(Proposition $proposition, $type): View|RedirectResponse {
-        return view("district.create", ['model' => $proposition, 'type' => $type]);
+        return view("district.upsert", ['model' => $proposition, 'type' => $type]);
     }
 
     /**
@@ -98,7 +106,7 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Recommendation $recommendation): View|RedirectResponse {
-        return view('', ['model' => $recommendation]);
+        return view('district.upsert', ['model' => $recommendation, 'type' => $recommendation->getAttribute('type')]);
     }
 
     /**
