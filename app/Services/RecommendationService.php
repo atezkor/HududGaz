@@ -22,11 +22,15 @@ class RecommendationService extends CrudService {
         $this->pdf = $pdf;
     }
 
-    public function show($recommendation, $action = null): Response|RedirectResponse {
+    public function show(Recommendation $recommendation, $action = null): Response|RedirectResponse {
         if ($action) {
-//            $this->update(['status' => 5], $recommendation->proposition);
-            return redirect(Storage::url($this->path . '/' . $recommendation->file));
+            $proposition = $recommendation->proposition();
+            $proposition->update(['status' => 5]);
+            $proposition->applicant()->update(['status' => 5]);
+
+            return redirect(Storage::url($this->path . '/' . $recommendation->getAttribute('file')));
         }
+
         return $this->createPDF($recommendation);
     }
 
@@ -42,8 +46,16 @@ class RecommendationService extends CrudService {
 
     public function back(Recommendation $recommendation, string $comment) {
         $recommendation->setAttribute('comment', $comment);
-        $recommendation->update(['status' => 3]);
+        $recommendation->setAttribute('status', 3);
+        $recommendation->update();
+
         $recommendation->proposition()->update(['status' => 6]);
+        $recommendation->proposition()->applicant()->update(['status' => 6]);
+    }
+
+    public function update($data, $model) {
+        $data['status'] = 2;
+        parent::update($data, $model);
     }
 
     private function createPDF($recommendation): Response {
@@ -72,6 +84,6 @@ class RecommendationService extends CrudService {
 
     function propositions(Builder $model, array $status): Collection {
         return $model->whereIn('status', $status)
-            ->get(['id', 'number', 'type', 'status', 'created_at']);
+            ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);
     }
 }

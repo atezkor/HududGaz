@@ -5,10 +5,12 @@ namespace App\ViewModels;
 use App\Models\Individual;
 use App\Models\Legal;
 use App\Models\Proposition;
+use App\Models\Region;
 use App\Services\RecommendationService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\ViewModels\ViewModel;
+
 
 class RecommendationViewModel extends ViewModel {
     private RecommendationService $service;
@@ -43,6 +45,10 @@ class RecommendationViewModel extends ViewModel {
         }
 
         return $legals[$l ++]->leader;
+    }
+
+    public function organs(): Collection {
+        return Region::query()->get(['org_name']);
     }
 
     private function filter(Builder $builder, array $attr = ['*']): Collection {

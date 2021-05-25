@@ -13,8 +13,9 @@ Route::get('recommendations/cancelled', [RecommendationController::class, 'cance
 Route::get('recommendations/archive', [RecommendationController::class, 'archives'])->name('district.recommendations.archive');
 
 Route::get('recommendations/{proposition}/create/{type}', [RecommendationController::class, 'create'])->name('district.recommendation.create');
-Route::post('recommendation/create/{type}', [RecommendationController::class, 'store'])->name('district.recommendation.store');
+Route::post('recommendation/store/{type}', [RecommendationController::class, 'store'])->name('district.recommendation.store');
 Route::post('recommendations/{recommendation}/upload', [RecommendationController::class, 'upload'])->name('district.recommendation.upload');
+Route::get('recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('district.recommendation.edit');
+Route::post('recommendations/{recommendation}/update', [RecommendationController::class, 'update'])->name('district.recommendation.update');
 Route::get('recommendations/{recommendation}', [RecommendationController::class, 'show'])->name('district.recommendation.show');
 Route::get('propositions/{proposition}', [RecommendationController::class, 'proposition'])->name('district.proposition.show');
-Route::get('recommendation/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('district.recommendation.edit');

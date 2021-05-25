@@ -27,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = term(4))
+                        @php($limit = term(5))
                         @php($l = 0)
                         @php($p = 0)
                         @foreach($propositions as $key => $model)
@@ -40,7 +40,7 @@
                                         @lang('technic.recommendation.show')
                                     </a>
                                 </td>
-                                <td>{{1}}</td>
+                                <td>{{$organs[$model->organ - 1]->org_name}}</td>
                                 <td>{{$models[$key]->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">

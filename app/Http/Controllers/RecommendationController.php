@@ -53,11 +53,12 @@ class RecommendationController extends Controller {
      * Show the form for creating a new resource.
      *
      * @param Proposition $proposition
-     * @param $type
+     * @param string $type
      * @return View|RedirectResponse
      */
-    public function create(Proposition $proposition, $type): View|RedirectResponse {
-        return view("district.upsert", ['model' => $proposition, 'type' => $type]);
+    public function create(Proposition $proposition, string $type): View|RedirectResponse {
+        return view("district.control.upsert", ['model' => $proposition, 'type' => $type,
+            'action' => route('district.recommendation.store', ['type' => $type]), 'back' => route('district.propositions')]);
     }
 
     /**
@@ -106,7 +107,9 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Recommendation $recommendation): View|RedirectResponse {
-        return view('district.upsert', ['model' => $recommendation, 'type' => $recommendation->getAttribute('type')]);
+        $type = $recommendation->getAttribute('type');
+        return view('district.control.upsert', ['model' => $recommendation, 'type' => $type,
+            'action' => route('district.recommendation.update', ['recommendation' => $recommendation]), 'back' => route('district.recommendations.cancelled')]);
     }
 
     /**
@@ -118,8 +121,10 @@ class RecommendationController extends Controller {
      */
     public function update(RecommendationRequest $request, Recommendation $recommendation): RedirectResponse {
         $data = $request->validated();
+
         $this->service->update($data, $recommendation);
-        return redirect()->route('district.recommendations');
+        $this->service_prop->update(['status' => 5], $recommendation->proposition());
+        return redirect()->route('district.recommendations.cancelled');
     }
 
     /**

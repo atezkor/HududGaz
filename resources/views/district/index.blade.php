@@ -51,9 +51,9 @@
                                 <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
                             </td>
                             <td>
-                                <input type="file" id="file" class="d-none"
+                                <input type="file" id="file-{{$key}}" class="d-none"
                                        onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $models[$key]])}}')">
-                                <label for="file" class="btn btn-outline-info text-bold">
+                                <label for="file-{{$key}}" class="btn btn-outline-info text-bold">
                                     <i class="fas fa-file-medical"></i>
                                     <span>@lang('global.btn_upload')</span>
                                 </label>

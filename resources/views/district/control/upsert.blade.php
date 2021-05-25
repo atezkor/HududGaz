@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <h3>@lang('district.recommendation.heading_create')</h3>
                     </div>
-                    <form id="form" action="{{route('district.recommendation.store', ['type' => $type])}}" method="post">
+                    <form id="form" action="{{$action}}" method="post">
                         @csrf
                         @include('components.errors')
                         <div class="card-body">
@@ -22,15 +22,15 @@
                                     <h3 class="card-title">@lang('district.recommendation.heading')</h3>
                                 </div>
                                 <div class="card-body">
-                                    @include("district.$type")
-                                    <input type="hidden" name="proposition_id" value="{{$model->id}}">
+                                    @include("district.control.$type")
+                                    <input type="hidden" name="proposition_id" value="{{$model->proposition()->id}}">
                                     <input type="hidden" name="type" value="{{$type}}">
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary mr-2">@lang('global.btn_save')</button>
-                            <a href="{{route('district.propositions')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
+                            <a href="{{$back}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
                             <button type="reset" id="reset" class="btn btn-default float-right">@lang('global.btn_reset')</button>
                         </div>
                     </form>
