@@ -24,7 +24,7 @@ class RecommendationService extends CrudService {
 
     public function show(Recommendation $recommendation, $action = null): Response|RedirectResponse {
         if ($action) {
-            $proposition = $recommendation->proposition();
+            $proposition = $recommendation->proposition;
             $proposition->update(['status' => 5]);
             $proposition->applicant()->update(['status' => 5]);
 
@@ -49,8 +49,8 @@ class RecommendationService extends CrudService {
         $recommendation->setAttribute('status', 3);
         $recommendation->update();
 
-        $recommendation->proposition()->update(['status' => 6]);
-        $recommendation->proposition()->applicant()->update(['status' => 6]);
+        $recommendation->proposition->update(['status' => 6]);
+        $recommendation->proposition->applicant()->update(['status' => 6]);
     }
 
     public function update($data, $model) {
@@ -58,11 +58,11 @@ class RecommendationService extends CrudService {
         parent::update($data, $model);
     }
 
-    private function createPDF($recommendation): Response {
-        $proposition = $recommendation->proposition();
+    private function createPDF(Recommendation $recommendation): Response {
+        $proposition = $recommendation->proposition;
         $organ = $recommendation->organ($proposition->organ);
         $applicant = $proposition->applicant();
-        $district = Base::districts()[$organ->region];
+        $district = Base::districts()[$organ->getAttribute('region')];
         view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
             'consumer' => $applicant, 'district' => $district]);
 

@@ -4,22 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * @property mixed individual
+ * @property mixed legal
+ */
 class Proposition extends Model {
     use HasFactory;
 
     protected $fillable = ['number', 'organ', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
 
-    function individual(): Individual|Model {
-        return $this->hasOne(Individual::class)->first();
+    function individual(): HasOne {
+        return $this->hasOne(Individual::class);
     }
 
-    function legal(): Legal|Model {
-        return $this->hasOne(Legal::class)->first();
+    function legal(): HasOne {
+        return $this->hasOne(Legal::class);
     }
 
     function applicant(): Model {
-        return (int) $this->getAttribute('type') === 1 ? $this->individual() : $this->legal();
+        return (int) $this->getAttribute('type') === 1 ? $this->individual : $this->legal;
     }
 
     function percent($term = 72): string {

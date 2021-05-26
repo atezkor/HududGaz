@@ -3,7 +3,7 @@
         <div class="form-group row">
             <label for="number" class="col-4 col-form-label">@lang('global.proposition.number')</label>
             <div class="col-8">
-                <input type="text" id="number" class="form-control" value="{{$model->proposition()->id}}" disabled>
+                <input type="text" id="number" class="form-control" value="{{$proposition}}" disabled>
             </div>
         </div>
     </div>

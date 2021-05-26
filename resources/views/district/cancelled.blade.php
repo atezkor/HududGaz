@@ -30,7 +30,6 @@
                         @php($l = 0)
                         @php($p = 0)
                         @foreach($propositions as $key => $model)
-                            {{$models}}
                             <tr>
                                 <td>{{$key + 1}}</td>
                                 <td>{{$model->number}}</td>
