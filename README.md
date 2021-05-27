@@ -1,7 +1,7 @@
 ## Loyihani yuklash
-- git clone https://github.com/Anvar-Avenger/HududGaz.git
-- cd HududGaz
-- composer install
+- `git clone https://github.com/Anvar-Avenger/HududGaz.git`
+- `cd HududGaz`
+- `composer install`
 - .env faylini yaratilsin (.env.example ni nusxash orqali)<br>
   ```
   DB_DATABASE=hududgaz
@@ -9,7 +9,7 @@
   DB_PASSWORD={parol}
   ```
 - `hududgaz` nomli baza yaratish
-- php artisan migrate key:generate
+- `php artisan key:generate`
 
 ## Ishlatish
 - php artisan migrate --seed
