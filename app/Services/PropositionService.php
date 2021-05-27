@@ -31,7 +31,7 @@ class PropositionService extends CrudService {
         }
         parent::update($data, $model);
 
-        $applicant = $model->applicant();
+        $applicant = $model->applicant;
         $applicant->fill($data);
         $applicant->save();
     }
@@ -42,15 +42,15 @@ class PropositionService extends CrudService {
         parent::delete($model);
     }
 
-    public function show($proposition, int $status = 0): RedirectResponse {
+    public function show(Proposition $proposition, int $status = 0): RedirectResponse {
         if ($status) {
             $this->update(['status' => $status], $proposition);
 
-            $applicant = $proposition->applicant();
+            $applicant = $proposition->applicant;
             $applicant->status = $status;
             $applicant->update();
         }
-        return redirect($this->path . '/' . $proposition->file);
+        return redirect($this->path . '/' . $proposition->getAttribute('file'));
     }
 
     private function createApplicant(array $data) {
@@ -64,8 +64,8 @@ class PropositionService extends CrudService {
     }
 
     private function deleteApplicant($model) {
-        $applicant = $model->applicant();
-        $this->deleteFile($applicant->getAttribute('file'));
+        $applicant = $model->applicant;
+        $this->deleteFile($applicant->file);
         $applicant->delete();
     }
 

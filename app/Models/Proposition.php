@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * @property mixed individual
  * @property mixed legal
+ * @property mixed type
+ * @property mixed applicant
  */
 class Proposition extends Model {
     use HasFactory;
@@ -23,8 +25,8 @@ class Proposition extends Model {
         return $this->hasOne(Legal::class);
     }
 
-    function applicant(): Model {
-        return (int) $this->getAttribute('type') === 1 ? $this->individual : $this->legal;
+    function applicant(): HasOne {
+        return (int) $this->type === 1 ? $this->individual() : $this->legal();
     }
 
     function percent($term = 72): string {

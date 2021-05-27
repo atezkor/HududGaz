@@ -109,7 +109,7 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Recommendation $recommendation): View|RedirectResponse {
-        $type = $recommendation->getAttribute('type');
+        $type = $recommendation->type;
         return view('district.control.upsert', ['model' => $recommendation, 'proposition' => $recommendation->proposition->id,
             'type' => $type, 'action' => route('district.recommendation.update', ['recommendation' => $recommendation]),
             'back' => route('district.recommendations.cancelled')]);
@@ -141,7 +141,7 @@ class RecommendationController extends Controller {
         return redirect()->route('district.recommendations');
     }
 
-    private function getProposition($id): Proposition|Model {
+    private function getProposition(int $id): Proposition|Model {
         return Proposition::query()->find($id);
     }
 }

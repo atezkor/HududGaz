@@ -26,7 +26,7 @@ class RecommendationService extends CrudService {
         if ($action) {
             $proposition = $recommendation->proposition;
             $proposition->update(['status' => 5]);
-            $proposition->applicant()->update(['status' => 5]);
+            $proposition->applicant->update(['status' => 5]);
 
             return redirect(Storage::url($this->path . '/' . $recommendation->getAttribute('file')));
         }
@@ -50,7 +50,7 @@ class RecommendationService extends CrudService {
         $recommendation->update();
 
         $recommendation->proposition->update(['status' => 6]);
-        $recommendation->proposition->applicant()->update(['status' => 6]);
+        $recommendation->proposition->applicant->update(['status' => 6]);
     }
 
     public function update($data, $model) {
@@ -61,7 +61,7 @@ class RecommendationService extends CrudService {
     private function createPDF(Recommendation $recommendation): Response {
         $proposition = $recommendation->proposition;
         $organ = $recommendation->organ($proposition->organ);
-        $applicant = $proposition->applicant();
+        $applicant = $proposition->applicant;
         $district = Base::districts()[$organ->getAttribute('region')];
         view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
             'consumer' => $applicant, 'district' => $district]);

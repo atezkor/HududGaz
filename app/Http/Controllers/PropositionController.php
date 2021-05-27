@@ -71,7 +71,7 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Proposition $proposition): View|RedirectResponse {
-        $applicant = $proposition->applicant();
+        $applicant = $proposition->applicant;
 
         $organs = Region::query()->get(['id', 'org_name']);
         return view('propositions.form', ['action' => route('propositions.update', ['proposition' => $proposition]),

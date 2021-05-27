@@ -29,6 +29,6 @@ class TechnicController extends Controller {
     }
 
     public function back(Request $request, Recommendation $recommendation) {
-        $this->rec_service->back($recommendation, $request->get('comment'));
+        $this->rec_service->back($recommendation, $request['comment']);
     }
 }
