@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @php($limit = limit(4))
+                    @php($limit = limit(3, 2)[0]->term)
                     @php($l = 0)
                     @php($p = 0)
                     @foreach($propositions as $key => $model)
@@ -45,10 +45,10 @@
                             <td>{{$models[$key]->created_at}}</td>
                             <td>
                                 <div class="progress progress-xs">
-                                    <div class="{{progressColor($model->percent($model->limit($limit)))}}"
-                                         style="width: {{$model->percent($model->limit($limit))}}%"></div>
+                                    <div class="{{progressColor($model->percent($limit))}}"
+                                         style="width: {{$model->percent($limit)}}%"></div>
                                 </div>
-                                <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+                                <div class="text-center">{{$limit}} @lang('global.hour')</div>
                             </td>
                             <td>
                                 <input type="file" id="file-{{$key}}" class="d-none"
