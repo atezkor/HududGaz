@@ -59,7 +59,7 @@ function progressColor($percent): string {
 }
 
 /* This is function for application term */
-function term(int $limit, int $offset = 0): Collection {
+function limit(int $limit, int $offset = 0): Collection {
     return Status::query()->offset($offset)->limit($limit - $offset)->get(['term']);
 }
 

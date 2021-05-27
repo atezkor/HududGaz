@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property mixed applicant
  */
 class Proposition extends Model {
+
     use HasFactory;
 
     protected $fillable = ['number', 'organ', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
@@ -33,5 +34,9 @@ class Proposition extends Model {
         $now = time() - date_timestamp_get(date_create($this->getAttribute('created_at')));
         $percent = 100 - $now / (3600 * $term) * 100;
         return number_format($percent, 0, '.', '');
+    }
+
+    function limit($limit) {
+        return $limit[$this->getAttribute('status') - 1]->term;
     }
 }

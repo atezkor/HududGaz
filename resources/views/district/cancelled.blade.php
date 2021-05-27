@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = term(5, 4))
+                        @php($limit = limit(6, 5)[0]->term)
                         @php($l = 0)
                         @php($p = 0)
                         @foreach($propositions as $key => $model)
@@ -42,10 +42,10 @@
                                 <td>{{$models[$key]->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($limit[0]->term))}}"
-                                             style="width: {{$model->percent($limit[0]->term)}}%"></div>
+                                        <div class="{{progressColor($model->percent($limit))}}"
+                                             style="width: {{$model->percent($limit)}}%"></div>
                                     </div>
-                                    <div class="text-center">{{$limit[0]->term}} @lang('global.hour')</div>
+                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
                                     <a href="{{route('district.recommendation.edit', ['recommendation' => $models[$key]])}}"

@@ -27,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = term(5))
+                        @php($limit = limit(5))
                         @php($l = 0)
                         @php($p = 0)
                         @foreach($propositions as $key => $model)
@@ -44,10 +44,10 @@
                                 <td>{{$models[$key]->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"
-                                             style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>
+                                        <div class="{{progressColor($model->percent($model->limit($limit)))}}"
+                                             style="width: {{$model->percent($model->limit($limit))}}%"></div>
                                     </div>
-                                    <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>
+                                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                 </td>
                                 <td>
                                     <a href="{{"tech-condition"}}" class="btn btn-outline-info">
