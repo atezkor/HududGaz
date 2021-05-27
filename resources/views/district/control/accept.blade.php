@@ -73,12 +73,12 @@
         </div>
     </div>
 
-    <div class="card-body col-12 px-0">
+    <div class="card-body col-12 px-2">
         <label for="additional">@lang('district.recommendation.additional')</label>
         <textarea id="additional" name="additional"></textarea>
     </div>
 
-    <div class="col-12 px-0">
+    <div class="col-12 px-2">
         <button type="button" class="btn btn-block btn-outline-info">
             @lang('district.recommendation.add_equipment')
         </button>

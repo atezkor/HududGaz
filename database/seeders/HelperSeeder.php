@@ -54,7 +54,7 @@ class HelperSeeder extends Seeder {
     private function insertProposition() {
         foreach (['Anvar', 'Abror', 'Olloshukur', 'Bekdiyor'] as $key => $applicant) {
             Proposition::query()->create([
-                'number' => rand(1000, 5000),
+                'number' => rand(1000, 5000) + rand(100, 500),
                 'organ' => $key + 1,
                 'activity_type' => $key + 1,
                 'build_type' => rand(1, 2),
@@ -65,7 +65,7 @@ class HelperSeeder extends Seeder {
 
             Legal::query()->create([
                 'proposition_id' => $key + 1,
-                'legal_stir' => rand(1000, 5000) + rand(1000, 5000),
+                'legal_stir' => rand(1000, 5000) + rand(100, 500),
                 'legal_name' => $applicant . ' Industries',
                 'email' => strtolower($applicant) . '@mail.uz',
                 'leader' => $applicant,
@@ -76,7 +76,7 @@ class HelperSeeder extends Seeder {
 
         foreach (['Bekzod', 'Mirzabek', 'Dilshod', 'Temur'] as $key => $applicant) {
             Proposition::query()->create([
-                'number' => rand(100, 500),
+                'number' => rand(1000, 5000) + rand(100, 500),
                 'organ' => $key + 5,
                 'activity_type' => $key + 1,
                 'build_type' => rand(1, 2),

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -35,8 +36,8 @@ class RecommendationService extends CrudService {
     }
 
     public function upload($request, Recommendation $recommendation) {
-        $recommendation->setAttribute('status', $recommendation->getAttribute('status') + 1);
-        $recommendation->setAttribute('file', $this->createFile($request));
+        $recommendation->setAttribute('status', 2);
+        $recommendation->setAttribute('file', $this->createFile($request->file('file')));
         $recommendation->update();
     }
 
@@ -55,6 +56,8 @@ class RecommendationService extends CrudService {
 
     public function update($data, $model) {
         $data['status'] = 2;
+        $this->deleteFile($model->file);
+        $this->createFile($data['file']);
         parent::update($data, $model);
     }
 
@@ -70,11 +73,14 @@ class RecommendationService extends CrudService {
         return $this->pdf->download(time() . '.pdf');
     }
 
-    private function createFile($request): string {
+    private function createFile($file): string {
         // File::makeDirectory($this->path, 0777, true, true);
-        $file = $request->file('file');
-        $request->file('file')->storeAs($this->path, $file->getClientOriginalName());
+        $file->storeAs($this->path, $file->getClientOriginalName());
         return $file->getClientOriginalName();
+    }
+
+    private function deleteFile($file) {
+        File::delete($this->path . '/' . $file);
     }
 
     function filter(int $status): Collection {

@@ -45,7 +45,7 @@ function formatDate($date, $format = 'd.m.Y'): string {
 }
 
 function MenuItems(): Collection|array {
-    return MenuItem::items(auth()->user())->orderBy('parent_id')->get();
+    return MenuItem::items(auth()->user())->get();
 }
 
 function progressColor($percent): string {

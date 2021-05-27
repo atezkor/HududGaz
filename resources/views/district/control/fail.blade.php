@@ -23,7 +23,7 @@
                placeholder="@lang('district.recommendation.desc_hint')" required>
     </div>
 
-    <div class="col-12 mt-5">
+    <div class="col-12 mt-4">
         <label for="additional">@lang('district.recommendation.additional')</label>
         <textarea id="additional" name="additional">{{$model->additional}}</textarea>
     </div>

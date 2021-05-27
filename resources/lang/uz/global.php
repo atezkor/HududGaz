@@ -9,6 +9,7 @@
         'btn_reset' => "Maydonlarni tozlash",
         'btn_add' => "Qo\u{2018}shish",
         'btn_edit' => "O\u{2018}zgartirish",
+        'btn_upd' => "Yangilash",
         'btn_renew' => "Yangilash",
         'btn_del' => "O\u{2018}chirish",
         'btn_yes' => "Ha",

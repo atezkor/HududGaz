@@ -9,3 +9,5 @@ resource('propositions', App\Http\Controllers\PropositionController::class, 'pro
 Route::get('recommendations', [App\Http\Controllers\TechnicController::class, 'recommendations'])->name('technic.recommendations');
 Route::get('recommendations/{recommendation}', [App\Http\Controllers\TechnicController::class, 'show'])->name('technic.recommendation.show');
 Route::post('recommendations/{recommendation}/back', [App\Http\Controllers\TechnicController::class, 'back'])->name('technic.recommendation.back');
+
+Route::get('tech-conditions', [App\Http\Controllers\TechnicController::class, 'index'])->name('technic.index');

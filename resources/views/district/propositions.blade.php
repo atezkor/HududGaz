@@ -81,15 +81,15 @@
                     <div id="legal_entity" class="tap-pane fade">
                         <table id="table2" class="table table-bordered table-striped table-center">
                             <thead>
-                            <tr>
-                                <th>@lang('global.index')</th>
-                                <th>@lang('global.proposition.number')</th>
-                                <th>@lang('global.proposition.legal_stir')</th>
-                                <th>@lang('global.proposition.name')</th>
-                                <th>@lang('global.proposition.date')</th>
-                                <th>@lang('global.proposition.limit')</th>
-                                <th>@lang('global.proposition.action')</th>
-                            </tr>
+                                <tr>
+                                    <th>@lang('global.index')</th>
+                                    <th>@lang('global.proposition.number')</th>
+                                    <th>@lang('global.proposition.legal_stir')</th>
+                                    <th>@lang('global.proposition.name')</th>
+                                    <th>@lang('global.proposition.date')</th>
+                                    <th>@lang('global.proposition.limit')</th>
+                                    <th>@lang('global.proposition.action')</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($legalEntities as $model)

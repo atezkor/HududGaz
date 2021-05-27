@@ -26,26 +26,26 @@ class RecommendationController extends Controller {
     }
 
     /**
-     * @return View|RedirectResponse
+     * @return View
      */
-    public function propositions(): View|RedirectResponse {
+    public function propositions(): View {
         return view('district.propositions', new PropositionListViewModel($this->service_prop, [1, 2]));
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return View|RedirectResponse
+     * @return View
      */
-    public function index(): View|RedirectResponse {
+    public function index(): View {
         return view('district.index', new RecommendationViewModel($this->service));
     }
 
-    public function cancelled(): View|RedirectResponse {
+    public function cancelled(): View {
         return view('district.cancelled', new RecommendationViewModel($this->service, [6], 3));
     }
 
-    public function archives(): View|RedirectResponse {
+    public function archives(): View {
         return view('district.archives');
     }
 
@@ -54,9 +54,9 @@ class RecommendationController extends Controller {
      *
      * @param int $proposition
      * @param string $type
-     * @return View|RedirectResponse
+     * @return View
      */
-    public function create(int $proposition, string $type): View|RedirectResponse {
+    public function create(int $proposition, string $type): View {
         $recommendation = new Recommendation();
         return view("district.control.upsert", ['model' => $recommendation, 'proposition' => $proposition,
             'type' => $type, 'action' => route('district.recommendation.store', ['type' => $type]),
@@ -106,9 +106,9 @@ class RecommendationController extends Controller {
      * Show the form for editing the specified resource.
      *
      * @param Recommendation $recommendation
-     * @return View|RedirectResponse
+     * @return View
      */
-    public function edit(Recommendation $recommendation): View|RedirectResponse {
+    public function edit(Recommendation $recommendation): View {
         $type = $recommendation->type;
         return view('district.control.upsert', ['model' => $recommendation, 'proposition' => $recommendation->proposition->id,
             'type' => $type, 'action' => route('district.recommendation.update', ['recommendation' => $recommendation]),

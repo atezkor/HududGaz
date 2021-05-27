@@ -26,7 +26,7 @@ class Proposition extends Model {
     }
 
     function applicant(): HasOne {
-        return (int) $this->type === 1 ? $this->individual() : $this->legal();
+        return $this->type == 1 ? $this->individual() : $this->legal();
     }
 
     function percent($term = 72): string {

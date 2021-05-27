@@ -16,7 +16,7 @@ class TechnicController extends Controller {
         $this->rec_service = $service;
     }
 
-    public function recommendations(): View|RedirectResponse {
+    public function recommendations(): View {
         return view('technic.recommends', new RecommendationViewModel($this->rec_service, [4, 5], 2));
     }
 
@@ -30,5 +30,9 @@ class TechnicController extends Controller {
 
     public function back(Request $request, Recommendation $recommendation) {
         $this->rec_service->back($recommendation, $request['comment']);
+    }
+
+    public function index(): View {
+        return view('technic.index');
     }
 }

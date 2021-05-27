@@ -53,7 +53,8 @@ class RecommendationRequest extends FormRequest {
             'grc' => [],
             'consumption' => [],
             'additional' => [],
-            'type' => ['required']
+            'type' => ['required'],
+            'file' => []
         ];
     }
 
@@ -62,7 +63,8 @@ class RecommendationRequest extends FormRequest {
             'proposition_id' => ['required'],
             'description' => ['required'],
             'additional' => ['required'],
-            'type' => ['required']
+            'type' => ['required'],
+            'file' => []
         ];
     }
 }

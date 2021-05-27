@@ -9,6 +9,8 @@
         'cancel' => "Bekor qilish",
         'show' => "Tavsiyanomani ko\u{2018}rish",
         'btn_correction' => "To\u{2018}g\u{2018}rilash",
+        'file' => "Imzolangan hujjat",
+        'file_hint' => "Imzolangan hujjatni yuklang",
         'recommendation' => [
             'name' => "Tavsiyanoma",
             'heading' => "Maydonlarni to\u{2018}ldiring",
