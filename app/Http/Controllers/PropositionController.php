@@ -33,13 +33,14 @@ class PropositionController extends Controller {
      * Show the form for creating a new resource.
      *
      * @return View|RedirectResponse
+     * If Query -> All => pluck return Models
      */
     public function create(): View|RedirectResponse {
         $model = new Proposition();
         $organs = Region::query()->pluck('org_name', 'id');
         return view('propositions.form', ['action' => route('propositions.store'), 'method' => 'POST',
             'model' => $model, 'organs' => $organs,
-            'activities' => Activity::all()->pluck('activity', 'id'), 'applicant' => new Individual()]);
+            'activities' => Activity::query()->pluck('activity', 'id'), 'applicant' => new Individual()]);
     }
 
     /**
