@@ -76,7 +76,7 @@ class PropositionController extends Controller {
         $organs = Region::query()->pluck('org_name', 'id');
         return view('propositions.form', ['action' => route('propositions.update', ['proposition' => $proposition]),
             'method' => 'PUT', 'model' => $proposition, 'organs' => $organs,
-            'activities' => Activity::all()->pluck('activity', 'id'), 'applicant' => $applicant]);
+            'activities' => Activity::query()->pluck('activity', 'id'), 'applicant' => $applicant]);
     }
 
     /**
