@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -36,7 +37,7 @@ class Proposition extends Model {
         return number_format($percent, 0, '.', '');
     }
 
-    function limit($limit) {
-        return $limit[$this->getAttribute('status') - 1]->term;
+    function limit(Collection $limit, int $offset = 0) {
+        return $limit[$this->getAttribute('status') - ($offset + 1)]->term;
     }
 }

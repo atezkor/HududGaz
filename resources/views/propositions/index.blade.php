@@ -51,13 +51,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @php($limit = limit(4))
+                                    @php($limit = limit(3))
                                     @foreach($individuals as $model)
                                         <tr>
                                             <td>{{$loop->index + 1}}</td>
                                             <td>{{$model->number}}</td>
                                             <td>{{$physicals[$loop->index]->stir}}</td>
-                                            <td>{{$organ($model->organ - 1)}}</td>
+                                            <td>{{$organ($model->organ)}}</td>
                                             <td>
                                                 <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
                                                     @lang('global.proposition.show')
@@ -67,7 +67,8 @@
                                             <td>
                                                 <div class="progress progress-xs">
                                                     <div class="{{progressColor($model->percent($model->limit($limit)))}}"
-                                                         style="width: {{$model->percent($model->limit($limit))}}%"></div>
+                                                         style="width: {{$model->percent($model->limit($limit))}}%">
+                                                    </div>
                                                 </div>
                                                 <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                             </td>
@@ -112,7 +113,7 @@
                                             <td>{{$loop->index + 1}}</td>
                                             <td>{{$model->number}}</td>
                                             <td>{{$legals[$loop->index]->legal_stir}}</td>
-                                            <td>{{$organ($model->organ - 1)}}</td>
+                                            <td>{{$organ($model->organ)}}</td>
                                             <td>
                                                 <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
                                                     @lang('global.proposition.show')
@@ -122,7 +123,8 @@
                                             <td>
                                                 <div class="progress progress-xs">
                                                     <div class="{{progressColor($model->percent($model->limit($limit)))}}"
-                                                         style="width: {{$model->percent($model->limit($limit))}}%"></div>
+                                                         style="width: {{$model->percent($model->limit($limit))}}%">
+                                                    </div>
                                                 </div>
                                                 <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                             </td>

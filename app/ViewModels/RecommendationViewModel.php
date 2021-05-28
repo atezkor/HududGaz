@@ -47,8 +47,8 @@ class RecommendationViewModel extends ViewModel {
         return $legals[$l ++]->leader;
     }
 
-    public function organs(): Collection {
-        return Region::query()->get(['org_name']);
+    public function organs(): \Illuminate\Support\Collection {
+        return Region::query()->pluck('org_name', 'id');
     }
 
     private function filter(Builder $builder, array $attr = ['*']): Collection {

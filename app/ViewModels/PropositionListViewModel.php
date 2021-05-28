@@ -12,11 +12,11 @@ use App\Models\Legal;
 
 class PropositionListViewModel extends ViewModel {
 
-    private Collection $organs;
+    private \Illuminate\Support\Collection $organs;
     private PropositionService $service;
     private array $statuses;
-    public function __construct(PropositionService $service, $statuses = [1, 2]) {
-        $this->organs = Region::query()->get(['id', 'org_name']);
+    public function __construct(PropositionService $service, $statuses = [1, 2, 3]) {
+        $this->organs = Region::query()->pluck('org_name', 'id');
         $this->service = $service;
         $this->statuses = $statuses;
     }
@@ -38,7 +38,7 @@ class PropositionListViewModel extends ViewModel {
     }
 
     function organ($organ): string {
-        return $this->organs[$organ]->org_name;
+        return $this->organs[$organ];
     }
 
     private function filter(Builder $builder, array $attributes = ['*']): Collection {

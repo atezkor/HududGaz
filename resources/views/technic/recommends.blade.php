@@ -27,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = limit(5))
+                        @php($limit = limit(5, 3))
                         @php($l = 0)
                         @php($p = 0)
                         @foreach($propositions as $key => $model)
@@ -40,14 +40,15 @@
                                         @lang('technic.recommendation.show')
                                     </a>
                                 </td>
-                                <td>{{$organs[$model->organ - 1]->org_name}}</td>
+                                <td>{{$organs[$model->organ]}}</td>
                                 <td>{{$models[$key]->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($model->limit($limit)))}}"
-                                             style="width: {{$model->percent($model->limit($limit))}}%"></div>
+                                        <div class="{{progressColor($model->percent($model->limit($limit, 3)))}}"
+                                             style="width: {{$model->percent($model->limit($limit, 3))}}%">
+                                        </div>
                                     </div>
-                                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+                                    <div class="text-center">{{$model->limit($limit, 3)}} @lang('global.hour')</div>
                                 </td>
                                 <td>
                                     <a href="{{"tech-condition"}}" class="btn btn-outline-info">
