@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = limit(6, 5)[0]->term)
+                        @php($limit = limit(6, 5)[6])
                         @php($l = 0)
                         @php($p = 0)
                         @foreach($propositions as $key => $model)

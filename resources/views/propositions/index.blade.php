@@ -51,7 +51,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                     @php($limit = limit(3))
                                     @foreach($individuals as $model)
                                         <tr>

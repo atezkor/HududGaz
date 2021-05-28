@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @php($limit = limit(3, 2)[0]->term)
+                    @php($limit = limit(3, 2)[3])
                     @php($l = 0)
                     @php($p = 0)
                     @foreach($propositions as $key => $model)

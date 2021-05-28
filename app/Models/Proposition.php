@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -12,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property mixed legal
  * @property mixed type
  * @property mixed applicant
+ * @property mixed status
  */
 class Proposition extends Model {
 
@@ -37,7 +37,7 @@ class Proposition extends Model {
         return number_format($percent, 0, '.', '');
     }
 
-    function limit(Collection $limit, int $offset = 0) {
-        return $limit[$this->getAttribute('status') - ($offset + 1)]->term;
+    function limit($limit, int $offset = 0) {
+        return $limit[$this->status - $offset];
     }
 }

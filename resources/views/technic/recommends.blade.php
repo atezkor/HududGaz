@@ -44,11 +44,11 @@
                                 <td>{{$models[$key]->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($model->limit($limit, 3)))}}"
-                                             style="width: {{$model->percent($model->limit($limit, 3))}}%">
+                                        <div class="{{progressColor($model->percent($model->limit($limit)))}}"
+                                             style="width: {{$model->percent($model->limit($limit))}}%">
                                         </div>
                                     </div>
-                                    <div class="text-center">{{$model->limit($limit, 3)}} @lang('global.hour')</div>
+                                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                 </td>
                                 <td>
                                     <a href="{{"tech-condition"}}" class="btn btn-outline-info">
