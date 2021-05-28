@@ -23,16 +23,21 @@ class RecommendationService extends CrudService {
         $this->pdf = $pdf;
     }
 
-    public function show(Recommendation $recommendation, $action = null): Response|RedirectResponse {
-        if ($action) {
-            $proposition = $recommendation->proposition;
+    public function show(Recommendation $recommendation): Response {
+        return $this->createPDF($recommendation);
+    }
+
+    /**
+     * This function allows the person to see the file
+     */
+    public function techShow(Recommendation $recommendation): RedirectResponse {
+        $proposition = $recommendation->proposition;
+        if ($proposition->status == 4) {
             $proposition->update(['status' => 5]);
             $proposition->applicant->update(['status' => 5]);
-
-            return redirect(Storage::url($this->path . '/' . $recommendation->getAttribute('file')));
         }
 
-        return $this->createPDF($recommendation);
+        return redirect(Storage::url($this->path . '/' . $recommendation->getAttribute('file')));
     }
 
     public function upload($request, Recommendation $recommendation) {
@@ -45,6 +50,10 @@ class RecommendationService extends CrudService {
 
     }
 
+
+    /**
+     * This function for back recommendation to District
+     */
     public function back(Recommendation $recommendation, string $comment) {
         $recommendation->setAttribute('comment', $comment);
         $recommendation->setAttribute('status', 3);
@@ -55,9 +64,9 @@ class RecommendationService extends CrudService {
     }
 
     public function update($data, $model) {
-        $data['status'] = 2;
         $this->deleteFile($model->file);
-        $this->createFile($data['file']);
+        $data['status'] = 2;
+        $data['file'] = $this->createFile($data['file']);
         parent::update($data, $model);
     }
 

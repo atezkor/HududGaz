@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>PDF</title>
+    <meta http-equiv="Content-Type" content="charset=utf-8" />
     <style>
         * {
             padding: 0;
@@ -11,18 +12,14 @@
             box-sizing: border-box;
         }
 
+        @page {
+            size: A4;
+        }
+
         body {
             padding: 20mm 15mm 20mm 30mm;
             text-align: justify;
-        }
-
-        .body {
             line-height: 1.3;
-        }
-
-        @page {
-            size: A4;
-            margin: 0;
         }
 
         .section {
@@ -73,6 +70,7 @@
 </head>
 <body>
     <div class="text-right">
+        ЙФФФФВВВВВ
         <h4>
             <span class="uppercase">&#8220;@lang('district.pdf.confirmation')&#8221;</span><br>
             <span>&#8220;{{$organ->org_name}}&#8221; @lang('district.pdf.section')</span><br>
@@ -81,7 +79,7 @@
     </div>
     <div class="text-center section">
         <div class="uppercase">@lang('district.pdf.recommendation')</div>
-        <strong>№ {{$proposition->number}}</strong>
+        <b>Tr {{$proposition->number}}</b>
     </div>
 
     <div class="body mt-20">

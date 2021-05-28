@@ -21,7 +21,7 @@ class TechnicController extends Controller {
     }
 
     public function show(Recommendation $recommendation): RedirectResponse {
-        return $this->rec_service->show($recommendation, 1);
+        return $this->rec_service->techShow($recommendation);
     }
 
     public function accept() {
