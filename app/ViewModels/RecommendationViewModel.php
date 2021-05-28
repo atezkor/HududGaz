@@ -7,9 +7,9 @@ use App\Models\Legal;
 use App\Models\Proposition;
 use App\Models\Region;
 use App\Services\RecommendationService;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Spatie\ViewModels\ViewModel;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class RecommendationViewModel extends ViewModel {
@@ -23,35 +23,35 @@ class RecommendationViewModel extends ViewModel {
         $this->status_rec = $status_rec;
     }
 
-    public function models(): Collection {
+    public function models(): \Illuminate\Database\Eloquent\Collection {
         return $this->service->filter($this->status_rec);
     }
 
-    public function propositions(): Collection {
+    public function propositions(): \Illuminate\Database\Eloquent\Collection {
         return $this->service->propositions(Proposition::query(), $this->status);
     }
 
     function physicals(): Collection {
-        return $this->filter(Individual::query(), ['full_name']);
+        return $this->filter(Individual::query(), 'full_name');
     }
 
     function legals(): Collection {
-        return $this->filter(Legal::query(), ['leader']);
+        return $this->filter(Legal::query(), 'leader');
     }
 
     public function applicant($physicals, $legals, &$p, &$l, $type): string {
         if ($type == 1) {
-            return $physicals[$p ++]->full_name;
+            return $physicals[$p ++];
         }
 
-        return $legals[$l ++]->leader;
+        return $legals[$l ++];
     }
 
-    public function organs(): \Illuminate\Support\Collection {
+    public function organs(): Collection {
         return Region::query()->pluck('org_name', 'id');
     }
 
-    private function filter(Builder $builder, array $attr = ['*']): Collection {
-        return $builder->whereIn('status', $this->status)->get($attr);
+    private function filter(Builder $builder, string $attr): Collection {
+        return $builder->whereIn('status', $this->status)->pluck($attr);
     }
 }

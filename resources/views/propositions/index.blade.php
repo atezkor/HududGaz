@@ -51,13 +51,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                     @php($limit = limit(3))
                                     @foreach($individuals as $model)
                                         <tr>
                                             <td>{{$loop->index + 1}}</td>
                                             <td>{{$model->number}}</td>
-                                            <td>{{$physicals[$loop->index]->stir}}</td>
-                                            <td>{{$organ($model->organ)}}</td>
+                                            <td>{{$physicals[$loop->index]}}</td>
+                                            <td>{{$organs[$model->organ]}}</td>
                                             <td>
                                                 <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
                                                     @lang('global.proposition.show')
@@ -92,7 +93,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             <div id="legal_entity" class="tap-pane">
                                 <table id="table2" class="table table-bordered table-striped table-center">
                                     <thead>
@@ -112,8 +112,8 @@
                                         <tr>
                                             <td>{{$loop->index + 1}}</td>
                                             <td>{{$model->number}}</td>
-                                            <td>{{$legals[$loop->index]->legal_stir}}</td>
-                                            <td>{{$organ($model->organ)}}</td>
+                                            <td>{{$legals[$loop->index]}}</td>
+                                            <td>{{$organs[$model->organ]}}</td>
                                             <td>
                                                 <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
                                                     @lang('global.proposition.show')

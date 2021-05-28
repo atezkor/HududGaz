@@ -115,9 +115,9 @@
                                     <select name="activity_type" id="activity_type" class="form-control">
                                         <option value="">@lang('technic.proposition.activity_type')</option>
                                         @foreach($activities as $key => $activity)
-                                        <option value="{{$key + 1}}" @if($model->activity_type == $key + 1) selected @endif>
-                                            {{$activity->activity}}
-                                        </option>
+                                            <option value="{{$key}}" @if($model->activity_type == $key) selected @endif>
+                                                {{$activity}}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -138,9 +138,9 @@
                                 <div class="col-10">
                                     <select name="organ" id="organ" class="form-control">
                                         <option value="">@lang('technic.proposition.organ_select')</option>
-                                        @foreach($organs as $organ)
-                                        <option value="{{$organ->id}}" @if($organ->id == $model->organ) selected @endif>
-                                            {{$organ->org_name}}
+                                        @foreach($organs as $key => $organ)
+                                        <option value="{{$key}}" @if($model->organ == $key) selected @endif>
+                                            {{$organ}}
                                         </option>
                                         @endforeach
                                     </select>

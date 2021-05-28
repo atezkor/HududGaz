@@ -48,7 +48,7 @@
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->number}}</td>
-                                    <td>{{$physicals[$loop->index]->stir}}</td>
+                                    <td>{{$physicals[$loop->index]}}</td>
                                     <td>
                                         <a href="{{route('district.proposition.show', ['proposition' => $model])}}" target="_blank">
                                             @lang('global.proposition.show')
@@ -97,8 +97,7 @@
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->number}}</td>
-
-                                    <td>{{$legals[$loop->index]->legal_stir}}</td>
+                                    <td>{{$legals[$loop->index]}}</td>
                                     <td>
                                         <a href="{{route('district.proposition.show', ['proposition' => $model])}}" target="_blank">
                                             @lang('global.proposition.show')

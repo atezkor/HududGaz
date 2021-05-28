@@ -36,10 +36,10 @@ class PropositionController extends Controller {
      */
     public function create(): View|RedirectResponse {
         $model = new Proposition();
-        $organs = Region::query()->get(['id', 'org_name']);
+        $organs = Region::query()->pluck('org_name', 'id');
         return view('propositions.form', ['action' => route('propositions.store'), 'method' => 'POST',
             'model' => $model, 'organs' => $organs,
-            'activities' => Activity::all(), 'applicant' => new Individual()]);
+            'activities' => Activity::all()->pluck('activity', 'id'), 'applicant' => new Individual()]);
     }
 
     /**
@@ -73,10 +73,10 @@ class PropositionController extends Controller {
     public function edit(Proposition $proposition): View|RedirectResponse {
         $applicant = $proposition->applicant;
 
-        $organs = Region::query()->get(['id', 'org_name']);
+        $organs = Region::query()->pluck('org_name', 'id');
         return view('propositions.form', ['action' => route('propositions.update', ['proposition' => $proposition]),
             'method' => 'PUT', 'model' => $proposition, 'organs' => $organs,
-            'activities' => Activity::all(), 'applicant' => $applicant]);
+            'activities' => Activity::all()->pluck('activity', 'id'), 'applicant' => $applicant]);
     }
 
     /**
