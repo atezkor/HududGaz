@@ -44,7 +44,7 @@ function formatDate($date, $format = 'd.m.Y'): string {
     return date_format($res, $format);
 }
 
-function MenuItems(): Collection|array {
+function MenuItems(): Collection {
     return MenuItem::items(auth()->user())->get();
 }
 
