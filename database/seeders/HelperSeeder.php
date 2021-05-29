@@ -2,13 +2,12 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
+use App\Models\Region;
 use App\Models\Activity;
-use App\Models\Base;
+use App\Models\Proposition;
 use App\Models\Individual;
 use App\Models\Legal;
-use App\Models\Proposition;
-use App\Models\Region;
-use Illuminate\Database\Seeder;
 
 class HelperSeeder extends Seeder {
     /**
@@ -23,13 +22,13 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertOrgan() {
-        foreach (Base::districts() as $key => $organ) {
+        foreach (districts() as $key => $organ) {
             $district = explode(' ', $organ);
             $name = $district[0][0] . '.' . strtoupper($district[1][0]) . '.' . $district[0];
             $suffix = $district[0][strlen($district[0]) - 1] == 'a' ? "yev" : "ov";
             $name .= $suffix;
             Region::query()->create([
-                'org_number' => rand(100, 500),
+                'org_number' => rand(100, 500) + rand(100, 500),
                 'lead_engineer' =>  $name,
                 'section_leader' => $name,
                 'region' => $key,

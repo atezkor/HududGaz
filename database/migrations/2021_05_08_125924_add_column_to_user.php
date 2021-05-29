@@ -15,7 +15,7 @@ class AddColumnToUser extends Migration {
             $table->tinyInteger('role');
             $table->string('lastname')->nullable();
             $table->string('patronymic')->nullable();
-            $table->integer('organ')->nullable();
+            $table->integer('organ')->default(0);
             $table->string('position')->nullable();
             $table->string('locale')->default('uzk');
             $table->string('avatar')->default('profile.png');

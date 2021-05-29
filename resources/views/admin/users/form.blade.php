@@ -39,17 +39,17 @@
 
                                 <div class="form-group">
                                     <label for="email">{{__('admin.user.email')}}</label>
-                                    <input type="text" name="email" id="email" value="{{$model->email}}" class="form-control">
+                                    <input type="email" name="email" id="email" value="{{$model->email}}" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">{{__('admin.user.password')}}</label>
-                                    <input type="text" name="password" id="password" value="{{$model->password}}" class="form-control">
+                                    <input type="password" name="password" id="password" value="{{$model->password}}" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="role">{{__('admin.user.role')}}</label>
-                                    <select name="role" id="role" class="form-control">
+                                    <select name="role" id="role" onchange="changeRole(this.value)" class="form-control">
                                         <option value="">{{__('admin.user.select_role')}}</option>
                                         @foreach(roles() as $key => $role)
                                             <option value="{{$key}}"
@@ -59,13 +59,10 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                                <div id="organs" class="form-group" style="display: none">
                                     <label for="organ">{{__('admin.user.organ')}}</label>
                                     <select name="organ" id="organ" class="form-control">
                                         <option value="">{{__('admin.user.select_organ')}}</option>
-                                        @foreach(roles() as $key => $role)
-                                            <option value="{{$key}}">{{$role}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
 
@@ -99,4 +96,55 @@
             </div>
         </div>
     </section>
+@endsection
+@section('javascript')
+    <script>
+        let organs = $('#organs');
+        let organ_id = {{$model->organ}};
+        function changeRole(role) {
+            if (!role || [1, 2, 5].includes(parseInt(role))) {
+                organs.hide(250);
+                return;
+            }
+
+            organs.show(250);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            });
+            $.ajax({
+                url: '{{route('admin.change_role')}}' + `/${role}`,
+                method: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    dynamicSelect(data);
+                }
+            });
+        }
+
+        function dynamicSelect(data) {
+            let organ = $('#organ');
+            $(organ).children().each((index, e) => {
+                if (index !== 0) {
+                    e.remove();
+                }
+            });
+
+            for (let i in data) {
+                let option = document.createElement('option');
+                if (organ_id === parseInt(i))
+                    option.selected = true;
+
+                option.value = i;
+                option.text = data[i];
+                organ.append(option);
+            }
+        }
+
+        $(document).ready(function() {
+            changeRole({{$model->role}});
+        })
+    </script>
 @endsection

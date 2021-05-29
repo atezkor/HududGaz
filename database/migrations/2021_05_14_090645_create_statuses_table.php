@@ -16,7 +16,6 @@ class CreateStatusesTable extends Migration {
             $table->string('description');
             $table->integer('term')->default(72);
             $table->string('transitions')->nullable();
-            $table->timestamps();
         });
     }
 

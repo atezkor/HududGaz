@@ -28,7 +28,6 @@ class CreateMountersTable extends Migration {
             $table->string('permission_to', 500)->nullable();
             $table->string('implement_for', 500)->nullable();
             $table->string('document')->nullable();
-            $table->timestamps();
         });
     }
 

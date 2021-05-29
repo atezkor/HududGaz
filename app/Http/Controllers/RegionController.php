@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DistrictRequest;
-use App\Models\Base;
-use App\Models\Region;
-use App\Services\DistrictService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\DistrictRequest;
+use App\Services\DistrictService;
+use App\Models\Region;
 
 class RegionController extends Controller {
 
@@ -25,7 +24,7 @@ class RegionController extends Controller {
     public function create(): View|RedirectResponse {
         $model = new Region();
         return view('admin.regions.form', ['action' => route('admin.regions.store'), 'method' => 'POST',
-            'model' => $model, 'regions' => Base::districts()]);
+            'model' => $model, 'regions' => districts()]);
     }
 
     public function store(DistrictRequest $request): RedirectResponse {
@@ -36,7 +35,7 @@ class RegionController extends Controller {
 
     public function edit(Region $region): View|RedirectResponse {
         return view('admin.regions.form', ['action' => route('admin.regions.update', ['region' => $region]),
-            'method' => 'PUT', 'model' => $region, 'regions' => Base::districts()]);
+            'method' => 'PUT', 'model' => $region, 'regions' => districts()]);
     }
 
     public function update(DistrictRequest $request, Region $region): RedirectResponse {

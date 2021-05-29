@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MounterRequest;
-use App\Models\Base;
-use App\Models\Mounter;
-use App\Services\MounterService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\MounterRequest;
+use App\Models\Mounter;
+use App\Services\MounterService;
 
 class MounterController extends Controller {
     private MounterService $service;
@@ -34,7 +33,7 @@ class MounterController extends Controller {
     public function create(): View|RedirectResponse {
         $model = new Mounter();
         return view('admin.mounters.form', ['action' => route('admin.mounters.store'),
-            'method' => 'POST', 'model' => $model, 'districts' => Base::districts()]);
+            'method' => 'POST', 'model' => $model, 'districts' => districts()]);
     }
 
     /**
@@ -57,7 +56,7 @@ class MounterController extends Controller {
      */
     public function edit(Mounter $mounter): View|RedirectResponse {
         return view('admin.mounters.form', ['action' => route('admin.mounters.update', ['mounter' => $mounter]),
-            'method' => 'PUT', 'model' => $mounter, 'districts' => Base::districts()]);
+            'method' => 'PUT', 'model' => $mounter, 'districts' => districts()]);
     }
 
     /**

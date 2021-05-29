@@ -13,14 +13,14 @@
                     <form method="post" enctype="multipart/form-data" class="form-horizontal">
                         @csrf
                         <div class="card-body">
-                            <div class="data-form">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
                                     <label for="shareholder_name">{{__('admin.organization.shareholder_name')}}</label>
                                     <input type="text" name="shareholder_name" id="shareholder_name" class="form-control"
                                            value="{{$model->shareholder_name}}"
                                            placeholder="{{__('admin.organization.shareholder_name')}}">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-6 pl-5">
                                     <label for="branch_name">{{__('admin.organization.branch_name')}}</label>
                                     <input type="text" name="branch_name" id="branch_name" class="form-control"
                                            value="{{$model->branch_name}}"
@@ -28,19 +28,41 @@
                                 </div>
                             </div>
 
-                            <div class="data-form">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
                                     <label for="engineer">{{__('admin.organization.engineer')}}</label>
                                     <input type="text" name="engineer" id="engineer" class="form-control"
                                            value="{{$model->engineer}}"
                                            placeholder="{{__('admin.organization.full_name')}}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="helper_engineer">{{__('admin.organization.helper')}}</label>
+                                <div class="form-group col-6 pl-5">
+                                    <label for="helper_engineer">{{__('admin.organization.helper_name')}}</label>
                                     <input type="text" name="helper_engineer" id="helper_engineer" class="form-control"
                                            value="{{$model->helper_engineer}}"
                                            placeholder="{{__('admin.organization.full_name')}}">
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
+                                    <label for="tech_section">{{__('admin.organization.tech_section')}}</label>
+                                    <input type="text" name="tech_section" id="tech_section" class="form-control"
+                                           value="{{$model->tech_section}}"
+                                           placeholder="{{__('admin.organization.full_name')}}">
+                                </div>
+                                <div class="form-group col-6 pl-5">
+                                    <label for="legal_section">{{__('admin.organization.legal_section')}}</label>
+                                    <input type="text" name="legal_section" id="legal_section" class="form-control"
+                                           value="{{$model->legal_section}}"
+                                           placeholder="{{__('admin.organization.full_name')}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
+                                    <label for="met_section">{{__('admin.organization.met_section')}}</label>
+                                    <input type="text" name="met_section" id="met_section" class="form-control"
+                                           value="{{$model->met_section}}"
+                                           placeholder="{{__('admin.organization.full_name')}}">                                </div>
                             </div>
 
                             <div class="form-group">

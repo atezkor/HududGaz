@@ -68,9 +68,27 @@ function roles(): array {
       1 => __('global.roles.admin'),
       2 => __('global.roles.technic'),
       3 => __('global.roles.district'),
-      5 => __('global.roles.designer'),
-      4 => __('global.roles.engineer'),
+      4 => __('global.roles.designer'),
+      5 => __('global.roles.engineer'),
       6 => __('global.roles.mounter'),
+    ];
+}
+
+function districts(): array { # The reason for giving the key is to start from order 1
+    return [
+        1 => __('global.districts.1'),
+        2 => __('global.districts.2'),
+        3 => __('global.districts.3'),
+        4 => __('global.districts.4'),
+        5 => __('global.districts.5'),
+        6 => __('global.districts.6'),
+        7 => __('global.districts.7'),
+        8 => __('global.districts.8'),
+        9 => __('global.districts.9'),
+        10 => __('global.districts.10'),
+        11 => __('global.districts.11'),
+        12 => __('global.districts.12'),
+        13 => __('global.districts.13')
     ];
 }
 

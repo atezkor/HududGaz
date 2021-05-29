@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class MenuItem extends Model {
     use HasFactory;
 
+    public $timestamps = false;
+
     public static function items($user): Builder {
         return self::query()->where('role', '=', $user->role);
     }

@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\UserRequest;
+use App\Models\Designer;
+use App\Models\Mounter;
+use App\Models\Region;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Collection;
 
 class UserController extends Controller {
 
@@ -32,6 +36,20 @@ class UserController extends Controller {
     public function create(): View|RedirectResponse {
         return view('admin.users.form', ['model' => new User(),
             'action' => route('admin.users.store'), 'method' => 'POST']);
+    }
+
+
+    public function checkFirmOrOrgan(int $role): Collection|null {
+        switch ($role) {
+            case 3:
+                return Region::query()->pluck('org_name', 'id');
+            case 4:
+                return Designer::query()->pluck('org_name', 'id');
+            case 6:
+                return Mounter::query()->pluck('short_name', 'id');
+        }
+
+        return null;
     }
 
     public function store(UserRequest $request): RedirectResponse {
