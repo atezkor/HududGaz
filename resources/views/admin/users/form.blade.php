@@ -132,7 +132,7 @@
                 }
             });
 
-            let j = 0;
+            let j = 0; // Only not showing warnings. It's working less 'j'
             for (let i in data) {
                 j = i;
                 let option = document.createElement('option');
