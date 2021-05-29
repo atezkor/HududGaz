@@ -18,7 +18,6 @@ class CreateMenuItemsTable extends Migration {
             $table->string('href');
             $table->string('icon')->nullable();
             $table->string('url')->nullable();
-            $table->timestamps();
         });
     }
 

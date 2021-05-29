@@ -35,11 +35,11 @@
                                 <td>{{$model->number}}</td>
                                 <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
                                 <td>
-                                    <a href="{{route('district.recommendation.show', ['recommendation' => $models[$key]])}}" target="_blank">
+                                    <a href="{{route('district.recommendation.show', ['recommendation' => $recommendations[$key]])}}" target="_blank">
                                         @lang('district.show')
                                     </a>
                                 </td>
-                                <td>{{$models[$key]->created_at}}</td>
+                                <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">
                                         <div class="{{progressColor($model->percent($limit))}}"
@@ -49,7 +49,7 @@
                                     <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <a href="{{route('district.recommendation.edit', ['recommendation' => $models[$key]])}}"
+                                    <a href="{{route('district.recommendation.edit', ['recommendation' => $recommendations[$key]])}}"
                                        class="btn btn-outline-info">
                                         <i class="fas fa-tools"></i>
                                         <span>@lang('district.btn_correction')</span>

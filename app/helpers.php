@@ -80,3 +80,25 @@ function buildType(): array {
         2 => __('district.build_type.non_residential')
     ];
 }
+
+function dateFull($date): string {
+    $months = [
+        __('district.january'),
+        __('district.february'),
+        __('district.march'),
+        __('district.april'),
+        __('district.may'),
+        __('district.june'),
+        __('district.july'),
+        __('district.august'),
+        __('district.september'),
+        __('district.october'),
+        __('district.november'),
+        __('district.december'),
+    ];
+    $date = date_create($date);
+    $day = date_format($date, 'd');
+    $month = date_format($date, 'n');
+    $year = date_format($date, 'Y');
+    return $day . ' - ' . $months[$month - 1] . ', ' . $year . ' - ' . __('global.year');
+}

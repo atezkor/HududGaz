@@ -20,6 +20,7 @@
         'hour' => "soat",
         'propositions' => "Arizalar",
         'consumer' => "Iste\u{2019}molchi",
+        'year' => "yil",
         'districts' => [
             '1' => "Urganch shahri",
             '2' => "Urganch tumani",

@@ -38,11 +38,11 @@
                             <td>{{$model->number}}</td>
                             <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
                             <td>
-                                <a href="{{route('district.recommendation.show', ['recommendation' => $models[$key]])}}" target="_blank">
+                                <a href="{{route('district.recommendation.show', ['recommendation' => $recommendations[$key]])}}" target="_blank">
                                     @lang('district.show')
                                 </a>
                             </td>
-                            <td>{{$models[$key]->created_at}}</td>
+                            <td>{{$model->created_at}}</td>
                             <td>
                                 <div class="progress progress-xs">
                                     <div class="{{progressColor($model->percent($limit))}}"
@@ -53,7 +53,7 @@
                             </td>
                             <td>
                                 <input type="file" id="file-{{$key}}" class="d-none"
-                                       onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $models[$key]])}}')">
+                                       onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $recommendations[$key]])}}')">
                                 <label for="file-{{$key}}" class="btn btn-outline-info text-bold">
                                     <i class="fas fa-file-medical"></i>
                                     <span>@lang('global.btn_upload')</span>

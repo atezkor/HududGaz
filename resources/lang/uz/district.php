@@ -11,6 +11,20 @@
         'btn_correction' => "To\u{2018}g\u{2018}rilash",
         'file' => "Imzolangan hujjat",
         'file_hint' => "Imzolangan hujjatni yuklang",
+
+        // Months
+        'january' => "Yanvar",
+        'february' => "Fevral",
+        'march' => "Mart",
+        'april' => "Aprel",
+        'may' => "May",
+        'june' => "Iyun",
+        'july' => "Iyul",
+        'august' => "Avgust",
+        'september' => "Sentyabr",
+        'october' => "Oktyabr",
+        'november'=> "Noyabr",
+        'december' => "Dekabr",
         'recommendation' => [
             'name' => "Tavsiyanoma",
             'heading' => "Maydonlarni to\u{2018}ldiring",

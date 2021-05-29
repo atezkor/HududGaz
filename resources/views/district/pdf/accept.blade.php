@@ -42,6 +42,10 @@
             text-transform: uppercase;
         }
 
+        .lowercase {
+            text-transform: lowercase;
+        }
+
         .f-l {
             float: left;
         }
@@ -84,7 +88,7 @@
 
     <div class="body mt-20">
         <div>
-            <span class="f-l">{{formatDate($model->created_at)}} - @lang('district.pdf.year')</span>
+            <span class="f-l lowercase">{{dateFull($model->created_at)}}</span>
             <strong class="f-r">{{$district}}</strong>
             <div class="clear"></div>
         </div>
