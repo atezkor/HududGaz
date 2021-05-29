@@ -25,7 +25,6 @@ class CreateFittersTable extends Migration {
             $table->string('specialization');
             $table->double('experience', 4)->nullable();
             $table->string('document')->nullable();
-            $table->timestamps();
 
             $table->foreign('firm_id')
                 ->references('id')

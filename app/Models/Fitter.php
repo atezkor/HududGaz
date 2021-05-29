@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Fitter extends Model {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = ['firm_id', 'statement_number', 'first_name', 'second_name', 'last_name', 'date_contract',
         'date_contract_end', 'diploma_number', 'passport_series', 'specialization', 'experience', 'document'];

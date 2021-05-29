@@ -21,7 +21,6 @@ class CreateLegalsTable extends Migration {
             $table->string('email');
             $table->string('phone');
             $table->tinyInteger('status')->default(1);
-            $table->timestamps();
 
             $table->foreign('proposition_id')
                 ->references('id')

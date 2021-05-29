@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Legal extends Model {
     use HasFactory;
+    public $timestamps = false;
     protected $fillable = ['proposition_id', 'legal_stir', 'legal_name', 'email', 'leader', 'leader_stir', 'phone', 'status'];
 }
