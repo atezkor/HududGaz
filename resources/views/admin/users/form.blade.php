@@ -100,7 +100,7 @@
 @section('javascript')
     <script>
         let organs = $('#organs');
-        let organ_id = {{$model->organ}};
+        let organ_id = {{$model->organ + 0}};
         function changeRole(role) {
             if (!role || [1, 2, 5].includes(parseInt(role))) {
                 organs.hide(250);
@@ -132,13 +132,15 @@
                 }
             });
 
+            let j = 0;
             for (let i in data) {
+                j = i;
                 let option = document.createElement('option');
-                if (organ_id === parseInt(i))
+                if (organ_id === parseInt(j))
                     option.selected = true;
 
-                option.value = i;
-                option.text = data[i];
+                option.value = j;
+                option.text = data[j];
                 organ.append(option);
             }
         }
