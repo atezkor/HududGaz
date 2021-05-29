@@ -20,6 +20,7 @@
                                 <th>@lang('global.proposition.number')</th>
                                 <th>@lang('global.consumer')</th>
                                 <th>@lang('district.recommendation.name')</th>
+                                <th>@lang('district.recommendation.reason')</th>
                                 <th>@lang('global.proposition.date')</th>
                                 <th>@lang('global.proposition.limit')</th>
                                 <th>@lang('global.proposition.action')</th>
@@ -39,6 +40,7 @@
                                         @lang('district.show')
                                     </a>
                                 </td>
+                                <td>{{$recommendations[$key]->comment}}</td>
                                 <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">

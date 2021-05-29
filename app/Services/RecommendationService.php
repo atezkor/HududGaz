@@ -6,9 +6,9 @@ use App\Models\Base;
 use App\Models\Recommendation;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -93,11 +93,13 @@ class RecommendationService extends CrudService {
     }
 
     function filter(int $status): Collection {
-       return $this->model->query()->where('status', '=', $status)
-           ->orderBy('proposition_id')->get(['id', 'created_at', 'comment']);
+        $add = request()->route()->getName() == "district.recommendations.cancelled";
+        $models = $this->model->query()->where('status', '=', $status)
+            ->orderBy('proposition_id');
+       return $add ? $models->get(['id', 'comment']) : $models->pluck('id');
     }
 
-    function propositions(Builder $model, array $status): Collection {
+    function propositions(Builder $model, array $status): \Illuminate\Database\Eloquent\Collection {
         return $model->whereIn('status', $status)
             ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);
     }

@@ -23,7 +23,7 @@ class RecommendationViewModel extends ViewModel {
         $this->status_rec = $status_rec;
     }
 
-    public function recommendations(): \Illuminate\Database\Eloquent\Collection {
+    public function recommendations(): Collection {
         return $this->service->filter($this->status_rec);
     }
 
