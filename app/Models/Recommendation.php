@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Recommendation extends Model {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = ['proposition_id', 'status', 'address', 'access_point', 'above_len', 'under_len', 'diameter', 'depth', 'capability',
         'real_capacity', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'description', 'additional', 'type', 'file', 'comment'];
 

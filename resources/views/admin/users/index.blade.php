@@ -26,7 +26,7 @@
                                     <th>{{__('admin.user.col_position')}}</th>
                                     <th>{{__('admin.email')}}</th>
                                     <th>{{__('admin.user.col_role')}}</th>
-                                    <th></th>
+                                    <th style="width: 1px;"></th>
                                 </tr>
                             </thead>
                             <tbody>

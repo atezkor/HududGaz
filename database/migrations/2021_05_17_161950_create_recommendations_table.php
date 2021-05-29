@@ -32,7 +32,6 @@ class CreateRecommendationsTable extends Migration {
             $table->char('type', 10)->nullable();
             $table->string('file')->nullable();
             $table->string('comment')->nullable();
-            $table->timestamps();
 
             $table->foreign('proposition_id')
                 ->references('id')
