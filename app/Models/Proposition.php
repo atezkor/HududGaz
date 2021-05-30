@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property mixed individual
- * @property mixed legal
- * @property mixed type
- * @property mixed applicant
- * @property mixed status
+ * @property HasOne individual
+ * @property HasOne legal
+ * @property int type
+ * @property-read HasOne applicant
+ * @property int status
+ * @property int id
  */
 class Proposition extends Model {
 

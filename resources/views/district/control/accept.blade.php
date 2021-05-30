@@ -78,9 +78,13 @@
         <textarea id="additional" name="additional"></textarea>
     </div>
 
+    <div id="equipments" class="col-12"></div>
+    <input type="hidden" name="equipments" id="equips">
+
     <div class="col-12 px-2">
-        <button type="button" class="btn btn-block btn-outline-info">
-            @lang('district.recommendation.add_equipment')
+        <button type="button" onclick="addEquipment()" class="btn btn-block btn-outline-info text-bold">
+            <i class="fas fa-plus"></i>
+            <span>@lang('district.recommendation.add_equipment')</span>
         </button>
     </div>
 </div>

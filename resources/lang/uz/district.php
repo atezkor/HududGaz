@@ -96,5 +96,14 @@
         'build_type' => [
             'residential' => "turar",
             'non_residential' => "noturar"
+        ],
+        'equipment' => [
+            'name' => "Jihoz nomi",
+            'name_hint' => "Jihozni tanlang",
+            'type' => "Jihoz turi",
+            'type_hint' => "Jihoz turini tanlang",
+            'number' => "Soni",
+            'number_hint' => "Sonini kiriting",
+            'warning' => "Oxidan boshlab o\u{2018}chiring",
         ]
     ];

@@ -54,7 +54,8 @@ class RecommendationRequest extends FormRequest {
             'consumption' => [],
             'additional' => [],
             'type' => ['required'],
-            'file' => []
+            'file' => [],
+            'equipments' => []
         ];
     }
 

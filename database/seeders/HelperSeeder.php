@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Equipment;
 use Illuminate\Database\Seeder;
 use App\Models\Region;
 use App\Models\Activity;
@@ -19,6 +20,7 @@ class HelperSeeder extends Seeder {
         $this->insertOrgan();
         $this->insertActivity();
         $this->insertProposition();
+        $this->insertEquipment();
     }
 
     private function insertOrgan() {
@@ -28,7 +30,7 @@ class HelperSeeder extends Seeder {
             $suffix = $district[0][strlen($district[0]) - 1] == 'a' ? "yev" : "ov";
             $name .= $suffix;
             Region::query()->create([
-                'org_number' => rand(100, 500) + rand(100, 500),
+                'org_number' => rand(100, 500) + rand(100, 500) + rand(100, 500),
                 'lead_engineer' =>  $name,
                 'section_leader' => $name,
                 'region' => $key,
@@ -90,6 +92,18 @@ class HelperSeeder extends Seeder {
                 'phone' => "+998 99 555 15 55",
                 'passport' => "AB8674" . rand(101, 999),
                 'stir' => rand(1000, 5000) + rand(1000, 5000),
+            ]);
+        }
+    }
+
+    private function insertEquipment() {
+        Equipment::query()->create([
+            'name' => "Gaz-hisoblagich",
+        ]);
+
+        foreach (['Gaz quvuri', "Jo\u{2018}mrak", 'Gaz qozoni'] as $equip) {
+            Equipment::query()->create([
+                'name' => $equip,
             ]);
         }
     }

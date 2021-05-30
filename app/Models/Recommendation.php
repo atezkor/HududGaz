@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property mixed proposition
- * @property mixed type
+ * @property Proposition proposition
+ * @property string type
  */
 class Recommendation extends Model {
     use HasFactory;
