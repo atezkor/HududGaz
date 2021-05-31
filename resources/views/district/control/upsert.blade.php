@@ -29,6 +29,7 @@
                                     @include("district.control.$type")
                                     <input type="hidden" name="proposition_id" value="{{$proposition}}">
                                     <input type="hidden" name="type" value="{{$type}}">
+                                    <input type="hidden" name="organ" value="{{auth()->user()->organ ?? ''}}">
 
                                     @if ($model->status == 3)
                                     <div class="col-12 mt-5">

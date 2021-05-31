@@ -16,19 +16,26 @@ class RecommendationViewModel extends ViewModel {
     private RecommendationService $service;
     private array $status;
     private int $status_rec;
+    private string $operator = '>';
+    private int $organ;
 
-    public function __construct(RecommendationService $service, array $status = [3], int $status_rec = 1) {
+    public function __construct(RecommendationService $service, int $organ = 0, array $status = [3], int $status_rec = 1) {
         $this->service = $service;
         $this->status = $status;
         $this->status_rec = $status_rec;
+
+        $this->organ = $organ;
+        if ($organ) {
+            $this->operator = '=';
+        }
     }
 
     public function recommendations(): Collection {
-        return $this->service->filter($this->status_rec);
+        return $this->service->filter($this->status_rec, $this->operator, $this->organ);
     }
 
     public function propositions(): \Illuminate\Database\Eloquent\Collection {
-        return $this->service->propositions(Proposition::query(), $this->status);
+        return $this->service->propositions(Proposition::query(), $this->status, $this->operator, $this->organ);
     }
 
     function physicals(): Collection {
@@ -52,6 +59,7 @@ class RecommendationViewModel extends ViewModel {
     }
 
     private function filter(Builder $builder, string $attr): Collection {
-        return $builder->whereIn('status', $this->status)->pluck($attr);
+        return $builder->where('organ', $this->operator, $this->organ)
+            ->whereIn('status', $this->status)->pluck($attr);
     }
 }

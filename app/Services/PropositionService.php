@@ -81,9 +81,9 @@ class PropositionService extends CrudService {
         File::delete($this->path . '/' . $file);
     }
 
-    public function filter(int $type, array $statuses): Collection {
-        return $this->model->query()->where('type', '=', $type)
-//            ->where('organ', '2')
+    public function filter(int $type, array $statuses, string $operator, int $organ): Collection {
+        return $this->model->query()->where('organ', $operator, $organ)
+            ->where('type', '=', $type)
             ->whereIn('status', $statuses)
             ->get();
     }

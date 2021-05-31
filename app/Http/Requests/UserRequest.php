@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest {
     /**
@@ -17,8 +18,9 @@ class UserRequest extends FormRequest {
     public function attributes(): array {
         return [
             'name' => __('admin.user.name'),
+            'role' => __('admin.user.role'),
             'email' => __('admin.user.email'),
-            'password' => __('admin.user.password'),
+            'password' => __('admin.user.password')
         ];
     }
 
@@ -32,13 +34,21 @@ class UserRequest extends FormRequest {
             'name' => ['required'],
             'lastname' => [],
             'patronymic' => [],
-            'role' => [],
+            'role' => ['required'],
             'organ' => [],
-            'email' => ['required'],
-            'password' => ['required'],
+            'email' => ['required',
+                Rule::unique('users', 'email')->ignore($this->route('user'))
+            ],
+            'password' => ['required', 'min:6'],
             'locale' => [],
             'position' => [],
             'mac_address' => []
+        ];
+    }
+
+    public function messages(): array {
+        return [
+            'email.unique' => __('admin.user.uniq_login')
         ];
     }
 }

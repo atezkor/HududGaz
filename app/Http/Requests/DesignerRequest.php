@@ -42,7 +42,7 @@ class DesignerRequest extends FormRequest {
         ];
     }
 
-    public function attributes() {
+    public function attributes(): array {
         return [
           'phone' => __('table.general.phone'),
           'org_name' => __('table.general.org_name'),

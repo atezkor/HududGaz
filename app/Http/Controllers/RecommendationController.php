@@ -31,7 +31,7 @@ class RecommendationController extends Controller {
      * @return View
      */
     public function propositions(): View {
-        return view('district.propositions', new PropositionListViewModel($this->service_prop, [1, 2]));
+        return view('district.propositions', new PropositionListViewModel($this->service_prop, [1, 2], auth()->user()->organ ?? 0));
     }
 
     /**
@@ -40,11 +40,11 @@ class RecommendationController extends Controller {
      * @return View
      */
     public function index(): View {
-        return view('district.index', new RecommendationViewModel($this->service));
+        return view('district.index', new RecommendationViewModel($this->service, auth()->user()->organ ?? 0));
     }
 
     public function cancelled(): View {
-        return view('district.cancelled', new RecommendationViewModel($this->service, [6], 3));
+        return view('district.cancelled', new RecommendationViewModel($this->service, auth()->user()->organ ?? 0, [6], 3));
     }
 
     public function archives(): View {

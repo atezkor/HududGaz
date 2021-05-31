@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Designer;
 use App\Models\Equipment;
 use Illuminate\Database\Seeder;
 use App\Models\Region;
@@ -21,6 +22,7 @@ class HelperSeeder extends Seeder {
         $this->insertActivity();
         $this->insertProposition();
         $this->insertEquipment();
+        $this->insertDesigner();
     }
 
     private function insertOrgan() {
@@ -106,6 +108,21 @@ class HelperSeeder extends Seeder {
         foreach (['Gaz quvuri', "Jo\u{2018}mrak", 'Gaz qozoni'] as $equip) {
             Equipment::query()->create([
                 'name' => $equip,
+            ]);
+        }
+    }
+
+    private function insertDesigner() {
+        foreach (['Ideal Tarmoq Loyiha'] as $designer) {
+            Designer::query()->create([
+                'org_name' => $designer,
+                'leader' => 'L.L.Loyihachi',
+                'phone' => '+998 99 555 15 55',
+                'address' => 'Mahalla',
+                'address_krill' => 'Mahalla',
+                'date_reg' => strtotime("now"),
+                'date_end' => strtotime("+1 year", strtotime('now')),
+                'document' => 'abdefg.pdf'
             ]);
         }
     }

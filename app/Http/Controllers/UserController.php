@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Collection;
 use App\Http\Requests\UserRequest;
+use App\Services\UserService;
 use App\Models\Designer;
 use App\Models\Mounter;
 use App\Models\Region;
 use App\Models\User;
-use App\Services\UserService;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Collection;
+
 
 class UserController extends Controller {
 

@@ -17,7 +17,7 @@ class TechnicController extends Controller {
     }
 
     public function recommendations(): View {
-        return view('technic.recommends', new RecommendationViewModel($this->rec_service, [4, 5], 2));
+        return view('technic.recommends', new RecommendationViewModel($this->rec_service, 0, [4, 5], 2));
     }
 
     public function show(Recommendation $recommendation): RedirectResponse {

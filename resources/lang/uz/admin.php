@@ -38,6 +38,7 @@ return [
         'position' => "Lavozimi",
         'select_role' => "Foydalanuvchining o\u{2018}rnini tanlang",
         'select_organ' => "Tashkilotni tanlang",
+        'uniq_login' => "Bunday nomli foydalanuvchi mavjud."
     ],
     'organization' => [
         'title' => "Ma\u{2019}lumotlarni yangilash",

@@ -91,15 +91,17 @@ class RecommendationService extends CrudService {
         File::delete($this->path . '/' . $file);
     }
 
-    function filter(int $status): Collection {
+    function filter(int $status, string $operator, int $organ): Collection {
         $add = request()->route()->getName() == "district.recommendations.cancelled";
-        $models = $this->model->query()->where('status', '=', $status)
+        $models = $this->model->query()->where('organ', $operator, $organ)
+            ->where('status', '=', $status)
             ->orderBy('proposition_id');
        return $add ? $models->get(['id', 'comment']) : $models->pluck('id');
     }
 
-    function propositions(Builder $model, array $status): \Illuminate\Database\Eloquent\Collection {
-        return $model->whereIn('status', $status)
+    function propositions(Builder $model, array $status, string $operator, int $organ): \Illuminate\Database\Eloquent\Collection {
+        return $model->where('organ', $operator, $organ)
+            ->whereIn('status', $status)
             ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);
     }
 }
