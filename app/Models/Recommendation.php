@@ -15,7 +15,7 @@ class Recommendation extends Model {
 
     public $timestamps = false;
 
-    protected $fillable = ['proposition_id', 'status', 'address', 'access_point', 'above_len', 'under_len', 'diameter', 'depth', 'capability',
+    protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'above_len', 'under_len', 'diameter', 'depth', 'capability',
         'real_capacity', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'description', 'additional', 'type', 'file', 'comment'];
 
     public function proposition(): BelongsTo {

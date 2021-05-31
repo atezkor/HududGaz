@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property HasOne individual
  * @property HasOne legal
  * @property int type
- * @property-read HasOne applicant
+ * @property-read $applicant
  * @property int status
  * @property int id
+ * @property int organ
  */
 class Proposition extends Model {
 

@@ -14,6 +14,7 @@ class CreateLegalsTable extends Migration {
         Schema::create('legals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
+            $table->integer('organ');
             $table->integer('legal_stir');
             $table->string('legal_name');
             $table->string('leader');

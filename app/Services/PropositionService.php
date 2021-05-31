@@ -83,6 +83,7 @@ class PropositionService extends CrudService {
 
     public function filter(int $type, array $statuses): Collection {
         return $this->model->query()->where('type', '=', $type)
+//            ->where('organ', '2')
             ->whereIn('status', $statuses)
             ->get();
     }

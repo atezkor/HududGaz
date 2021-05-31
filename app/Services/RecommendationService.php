@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Base;
 use App\Models\Recommendation;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Database\Eloquent\Builder;
@@ -74,7 +73,7 @@ class RecommendationService extends CrudService {
         $proposition = $recommendation->proposition;
         $organ = $recommendation->organ($proposition->organ);
         $applicant = $proposition->applicant;
-        $district = Base::districts()[$organ->getAttribute('region')];
+        $district = districts()[$organ->getAttribute('region')];
         view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
             'consumer' => $applicant, 'district' => $district]);
 

@@ -14,6 +14,7 @@ class CreateIndividualsTable extends Migration {
         Schema::create('individuals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
+            $table->integer('organ');
             $table->string('full_name');
             $table->string('phone');
             $table->string('passport');
