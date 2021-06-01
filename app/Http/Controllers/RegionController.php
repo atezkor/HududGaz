@@ -24,7 +24,7 @@ class RegionController extends Controller {
     public function create(): View|RedirectResponse {
         $model = new Region();
         return view('admin.regions.form', ['action' => route('admin.regions.store'), 'method' => 'POST',
-            'model' => $model, 'regions' => districts()]);
+            'model' => $model, 'districts' => districts()]);
     }
 
     public function store(DistrictRequest $request): RedirectResponse {
@@ -35,7 +35,7 @@ class RegionController extends Controller {
 
     public function edit(Region $region): View|RedirectResponse {
         return view('admin.regions.form', ['action' => route('admin.regions.update', ['region' => $region]),
-            'method' => 'PUT', 'model' => $region, 'regions' => districts()]);
+            'method' => 'PUT', 'model' => $region, 'districts' => districts()]);
     }
 
     public function update(DistrictRequest $request, Region $region): RedirectResponse {

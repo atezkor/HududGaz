@@ -7,7 +7,7 @@
         @include('components.errors')
         <div class="card">
             <div class="card-header">
-                <button class="btn btn-info" onclick="show()">{{__('table.equipments.btn_add')}}</button>
+                <button class="btn btn-info" onclick="show()">{{__('admin.equipment.add_type')}}</button>
                 <div class="card-tools mt-2">
                     <div class="input-group w-75 ml-auto">
                         <input type="search" id="search" class="form-control"
@@ -19,8 +19,8 @@
                 <table class="table table-hover text-nowrap">
                     <thead>
                     <tr>
-                        <th>{{__('table.equipments.equip_type')}}</th>
-                        <th>{{__('table.equipments.equip_order')}}</th>
+                        <th>{{__('admin.equipment.equip_type')}}</th>
+                        <th>{{__('admin.equipment.equip_order')}}</th>
                         <th style="width: 1px"></th>
                     </tr>
                     </thead>
@@ -54,18 +54,18 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header bg-purple">
-                            <h4 id="header" class="modal-title">{{__('table.equipments.add_type')}}</h4>
+                            <h4 id="header" class="modal-title">{{__('admin.equipment.add_type')}}</h4>
                         </div>
                         <div class="modal-body">
                             <form action="{{route('admin.equip_type.add', ['equipment' => $equipment])}}"
                                   method="POST" id="form" onsubmit="submit.disabled = true">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="type">{{__('table.equipments.equip_type')}}</label>
+                                    <label for="type">{{__('admin.equipment.equip_type')}}</label>
                                     <input type="text" name="type" id="type" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="order">{{__('table.equipments.equip_order')}}</label>
+                                    <label for="order">{{__('admin.equipment.equip_order')}}</label>
                                     <input type="number" name="order" id="order" class="form-control">
                                 </div>
                                 <div class="d-flex justify-content-between">
@@ -95,8 +95,8 @@
 
         function remove(form) {
             Swal.fire({
-                title: '{{__('table.equipments.alert_type_msg')}}',
-                text: "{{__('table.general.alert_text')}}",
+                title: '{{__('admin.equipment.alert_type_msg')}}',
+                text: "{{__('admin.alert_text')}}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#dd3333',
@@ -117,7 +117,7 @@
 
         function show(type = '', order = '', route) {
             $('#form').attr('action', route ? route : '{{route('admin.equip_type.add', ['equipment' => $equipment])}}');
-            $('#header').text(type ? "{{__('table.equipments.edit_type')}}" : "{{__('table.equipments.add_type')}}");
+            $('#header').text(type ? "{{__('admin.equipment.edit_type')}}" : "{{__('admin.equipment.add_type')}}");
             $('#type').val(type);
             $('#order').val(order);
 

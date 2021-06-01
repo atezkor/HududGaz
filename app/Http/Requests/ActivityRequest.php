@@ -27,7 +27,7 @@ class ActivityRequest extends FormRequest {
 
     public function attributes(): array{
         return [
-            'activity' => __('table.activities.activity')
+            'activity' => __('admin.activity.activity')
         ];
     }
 }

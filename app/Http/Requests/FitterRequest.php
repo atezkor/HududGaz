@@ -44,19 +44,19 @@ class FitterRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'first_name' => __('table.mounters.first_name'),
-            'second_name' => __('table.mounters.second_name'),
-            'last_name' => __('table.mounters.last_name'),
-            'diploma_number' => __('table.mounters.diploma_number'),
-            'passport_series' => __('table.mounters.passport_series'),
-            'specialization' => __('table.mounters.specialized')
+            'first_name' => __('admin.mounter.first_name'),
+            'second_name' => __('admin.mounter.second_name'),
+            'last_name' => __('admin.mounter.last_name'),
+            'diploma_number' => __('admin.mounter.diploma_number'),
+            'passport_series' => __('admin.mounter.passport_series'),
+            'specialization' => __('admin.mounter.specialized')
         ];
     }
 
     public function messages(): array {
         return [
             'date_contract.email' => __('validation.date_invalid'),
-            'firm_id.required' => __('table.mounters.firm')
+            'firm_id.required' => __('admin.mounter.firm')
         ];
     }
 }

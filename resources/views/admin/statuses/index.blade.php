@@ -19,9 +19,9 @@
                             <thead>
                                 <tr>
                                     <th style="width: 1px;">@lang('global.index')</th>
-                                    <th>@lang('table.statuses.col_description')</th>
-                                    <th>@lang('table.statuses.col_transition')</th>
-                                    <th>@lang('table.statuses.col_expired')</th>
+                                    <th>@lang('admin.status.col_description')</th>
+                                    <th>@lang('admin.status.col_transition')</th>
+                                    <th>@lang('admin.status.col_expired')</th>
                                     <th></th>
                                 </tr>
                             </thead>

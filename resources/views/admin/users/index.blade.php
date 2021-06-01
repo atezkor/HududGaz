@@ -21,7 +21,7 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>{{__('admin.user.col_num')}}</th>
+                                    <th>{{__('global.index')}}</th>
                                     <th>{{__('admin.user.col_name')}}</th>
                                     <th>{{__('admin.user.col_position')}}</th>
                                     <th>{{__('admin.email')}}</th>

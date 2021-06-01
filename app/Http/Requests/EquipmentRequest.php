@@ -35,9 +35,9 @@ class EquipmentRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'name' => __('table.equipments.name'),
-            'type' => __('table.equipments.equip_type'),
-            'order' => __('table.equipments.equip_order')
+            'name' => __('admin.equipment.name'),
+            'type' => __('admin.equipment.equip_type'),
+            'order' => __('admin.equipment.equip_order')
         ];
     }
 }

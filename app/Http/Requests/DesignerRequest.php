@@ -44,10 +44,10 @@ class DesignerRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-          'phone' => __('table.general.phone'),
-          'org_name' => __('table.general.org_name'),
-          'leader' => __('table.general.org_leader'),
-          'address' => __('table.general.address')
+          'phone' => __('admin.phone'),
+          'org_name' => __('admin.org_name'),
+          'leader' => __('admin.org_leader'),
+          'address' => __('admin.address')
         ];
     }
 

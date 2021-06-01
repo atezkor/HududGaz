@@ -26,7 +26,6 @@ return [
     'email' => "E-pochta",
     'fax' => "Fax",
     'user' => [
-        'col_num' => "Tr",
         'col_name' => "Ismi",
         'col_position' => "Lavozimi",
         'col_role' => "O\u{2018}rni",
@@ -63,6 +62,36 @@ return [
         'email' => "Elektron pochta manzili",
         'address_latin' => "Manzili",
         'address' => "Manzili (krillcha)"
+    ],
+    'organ' => [
+        'btn_new' => "Tashkilot qo\u{2018}shish",
+        'col_num' => "Tashkilot raqami",
+        'col_name' => "Nomi",
+        'col_engineer' => "Bosh muhandis",
+        'col_phone' => "Telefon",
+        'col_address' => "Manzil",
+        'heading_create' => "Tashkilot qo\u{2018}shish",
+        'heading_edit' => "Tashkilot ma\u{2019}lumotlarini yangilash",
+        'org_num' => "Tashkilot raqami",
+        'select_hint' => "Tuman (shahar)",
+        'engineer' => "Bosh muhandis",
+        'section_leader' => "Bo\u{2018}lim boshlig\u{2018}i",
+        'email' => "Elektron pochta manzili",
+        'address' => "Manzil",
+        'address_krill' => "Manzil (krillcha)",
+        'fax' => "Tashkilot faksi",
+        'alert_title' => "Tashkilotni o\u{2018}chirib tashlamoqchimisiz?",
+    ],
+    'equipment' => [
+        'heading_create' => "Jihoz qo\u{2018}shish",
+        'heading_edit' => "Jihoz nomini o\u{2018}zgartirish",
+        'name' => "Jihoz nomi",
+        'equip_type' => "Jihoz turi",
+        'equip_order' => "Tartibi",
+        'alert_title' => "Jihozni o\u{2018}chirib tashlamoqchimisiz?",
+        'add_type' => "Tur qo\u{2018}shish",
+        'edit_type' => "Turni o\u{2018}zgartirish",
+        'alert_type_msg' => "Turni o\u{2018}chirib tashlamoqchimisiz?"
     ],
     'designer' => [
         'btn_new' => "Tashkilot qo\u{2018}shish",
@@ -115,5 +144,22 @@ return [
         'add_worker' => "Yangi ishchi qo\u{2018}shish",
         'edit_worker' => "Ishchi ma\u{2019}lumotlarini o\u{2018}zgartirish",
         'document' => "Hujjatning elektron shakli"
+    ],
+    'activity' => [
+        'col_activity' => "Faoliyat turi",
+        'activity' => "Faoliyat turi",
+        'btn_add' => "Faoliyat qo\u{2018}shish",
+        'add_activity' => "Faoliyat qo\u{2018}shish",
+        'edit_activity' => "Faoliyatni o\u{2018}zgartirish",
+        'alert_title' => "Faoliyatni o\u{2018}chirib tashlamoqchimisiz?",
+    ],
+    'status' => [
+        'col_description' => "Tavsifi",
+        'col_transition' => "O\u{2018}tishlar",
+        'col_expired' => "Muddati",
+        'heading_edit' => "Ariza bosqichi holatini o\u{2018}zgartirish",
+        'description' => "Holat tavsifi",
+        'transitions' => "O\u{2018}tishlar",
+        'term' => "Bajarish muddati (soat)",
     ]
 ];

@@ -4,12 +4,13 @@
 @section('content')
 <section class="content">
     <div class="container">
+        @include('components.errors')
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <button class="btn btn-info" onclick="show()" role="button">
-                            {{__('table.activities.btn_add')}}
+                            {{__('admin.activity.btn_add')}}
                         </button>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
@@ -22,7 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>{{__('global.index')}}</th>
-                                    <th>{{__('table.activities.col_activity')}}</th>
+                                    <th>{{__('admin.activity.col_activity')}}</th>
                                     <th style="width: 1px;"></th>
                                 </tr>
                             </thead>
@@ -57,7 +58,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header bg-purple">
-                                    <h4 id="header" class="modal-title">{{__('table.activities.add_activity')}}</h4>
+                                    <h4 id="header" class="modal-title">{{__('admin.activity.add_activity')}}</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="{{route('admin.activities.store')}}" method="POST"
@@ -65,7 +66,7 @@
                                         @csrf
                                         <input type="hidden" name="_method" id="_method" value="POST">
                                         <div class="form-group">
-                                            <label for="activity">{{__('table.activities.activity')}}</label>
+                                            <label for="activity">{{__('admin.activity.activity')}}</label>
                                             <input type="text" name="activity" id="activity" class="form-control">
                                         </div>
                                         <div class="d-flex justify-content-between">
@@ -97,7 +98,7 @@
 
     function show(activity = '', route) {
         $('#form').attr('action', route ? route : '{{route('admin.activities.store')}}');
-        $('#header').text(activity ? "{{__('table.activities.edit_activity')}}" : "{{__('table.activities.add_activity')}}");
+        $('#header').text(activity ? "{{__('admin.activity.edit_activity')}}" : "{{__('admin.activity.add_activity')}}");
         $('#activity').val(activity);
         $('#_method').val(activity ? 'PUT' : 'POST');
 
@@ -106,8 +107,8 @@
 
     function remove(form) {
         Swal.fire({
-            title: '{{__('table.activities.alert_message')}}',
-            text: "{{__('table.general.alert_text')}}",
+            title: '{{__('admin.activity.alert_title')}}',
+            text: "{{__('admin.alert_text')}}",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd3333',

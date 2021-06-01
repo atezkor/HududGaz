@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('admin.regions.create')}}" class="btn btn-info">{{__('table.districts.btn_new')}}</a>
+                        <a href="{{route('admin.regions.create')}}" class="btn btn-info">{{__('admin.organ.btn_new')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" class="form-control" placeholder="{{__('global.search')}}">
@@ -20,12 +20,12 @@
                             <thead>
                                 <tr>
                                     <th>№</th>
-                                    <th>{{__('table.districts.col_num')}}</th>
-                                    <th>{{__('table.districts.col_name')}}</th>
-                                    <th>{{__('table.districts.col_engineer')}}</th>
+                                    <th>{{__('admin.organ.col_num')}}</th>
+                                    <th>{{__('admin.organ.col_name')}}</th>
+                                    <th>{{__('admin.organ.col_engineer')}}</th>
                                     <th>{{__('admin.email')}}</th>
-                                    <th>{{__('table.districts.col_phone')}}</th>
-                                    <th>{{__('table.districts.col_address')}}</th>
+                                    <th>{{__('admin.organ.col_phone')}}</th>
+                                    <th>{{__('admin.organ.col_address')}}</th>
                                     <th>{{__('admin.fax')}}</th>
                                     <th></th>
                                 </tr>
@@ -78,8 +78,8 @@
 
     function remove(form) {
         Swal.fire({
-            title: '{{__('table.districts.alert_message')}}',
-            text: "{{__('table.general.alert_text')}}",
+            title: '{{__('admin.organ.alert_title')}}',
+            text: "{{__('admin.alert_text')}}",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd3333',

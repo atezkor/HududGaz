@@ -6,7 +6,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <a href="{{route('admin.equipments.create')}}" class="btn btn-info">{{__('table.equipments.btn_add')}}</a>
+                <a href="{{route('admin.equipments.create')}}" class="btn btn-info">{{__('admin.equipment.heading_create')}}</a>
                 <div class="card-tools mt-2">
                     <div class="input-group w-75 ml-auto">
                         <input type="search" id="search" class="form-control"
@@ -17,10 +17,10 @@
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                     <thead>
-                    <tr>
-                        <th class="col-6">{{__('table.equipments.col_name')}}</th>
-                        <th></th>
-                    </tr>
+                        <tr>
+                            <th class="col-12">{{__('admin.equipment.name')}}</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach($models as $model)
@@ -32,7 +32,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <a href="{{route('admin.equip_type', ['equipment' => $model])}}" class="btn btn-outline-info mr-2">
-                                        {{__('table.equipments.equip_type')}}
+                                        {{__('admin.equipment.equip_type')}}
                                     </a>
                                     <a href="{{route('admin.equipments.edit', ['equipment' => $model])}}" class="btn btn-warning"
                                        title="{{__('global.btn_edit')}}">
@@ -64,8 +64,8 @@
 
     function remove(form) {
         Swal.fire({
-            title: '{{__('table.equipments.alert_message')}}',
-            text: "{{__('table.general.alert_text')}}",
+            title: '{{__('admin.equipment.alert_title')}}',
+            text: "{{__('admin.alert_text')}}",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd3333',

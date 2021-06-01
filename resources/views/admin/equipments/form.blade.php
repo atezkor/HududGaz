@@ -8,9 +8,9 @@
             <div class="card-header">
                 <h3 class="card-title">
                     @if($method == 'POST')
-                        {{__('table.equipments.heading_create')}}
+                        {{__('admin.equipment.heading_create')}}
                     @else
-                        {{__('table.equipments.heading_edit')}}
+                        {{__('admin.equipment.heading_edit')}}
                     @endif
                 </h3>
             </div>
@@ -20,7 +20,7 @@
                 @include('components.errors')
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">{{__('table.equipments.name')}}</label>
+                        <label for="name">{{__('admin.equipment.name')}}</label>
                         <input type="text" name="name" id="name" class="form-control" value="{{$model->name}}">
                     </div>
                 </div>

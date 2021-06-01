@@ -51,14 +51,14 @@ class MounterRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-          'leader' => __('table.mounters.leader'),
-          'rec_num' => __('table.mounters.rec_num'),
-          'reg_num' => __('table.mounters.reg_num'),
-          'full_name' => __('table.mounters.full_name'),
-          'short_name' => __('table.mounters.short_name'),
-          'region' => __('table.mounters.region'),
-          'address' => __('table.mounters.address'),
-          'taxpayer_stir' => __('table.mounters.taxpayer_stir')
+          'leader' => __('admin.mounter.leader'),
+          'rec_num' => __('admin.mounter.rec_num'),
+          'reg_num' => __('admin.mounter.reg_num'),
+          'full_name' => __('admin.mounter.full_name'),
+          'short_name' => __('admin.mounter.short_name'),
+          'region' => __('admin.mounter.district'),
+          'address' => __('admin.mounter.address'),
+          'taxpayer_stir' => __('admin.mounter.taxpayer_stir')
         ];
     }
 

@@ -36,15 +36,15 @@ class DistrictRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'org_number' => __('table.districts.org_num'),
-            'lead_engineer' => __('table.districts.engineer'),
-            'section_leader' => __('table.districts.section_leader'),
-            'region' => __('table.districts.region'),
-            'org_name' => __('table.general.org_name'),
-            'address' => __('table.districts.address'),
-            'address_krill' => __('table.districts.address_krill'),
-            'email' => __('table.districts.email'),
-            'phone' => __('table.general.phone')
+            'org_number' => __('admin.organ.org_num'),
+            'lead_engineer' => __('admin.organ.engineer'),
+            'section_leader' => __('admin.organ.section_leader'),
+            'region' => __('admin.organ.select_hint'),
+            'org_name' => __('admin.org_name'),
+            'address' => __('admin.organ.address'),
+            'address_krill' => __('admin.organ.address_krill'),
+            'email' => __('admin.organ.email'),
+            'phone' => __('admin.phone')
         ];
     }
 }
