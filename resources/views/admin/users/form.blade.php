@@ -104,6 +104,7 @@
         function changeRole(role) {
             if (!role || [1, 2, 5].includes(parseInt(role))) {
                 organs.hide(250);
+                $('#organ').attr('required', false);
                 return;
             }
 
@@ -126,6 +127,7 @@
 
         function dynamicSelect(data) {
             let organ = $('#organ');
+            organ.attr('required', true);
             $(organ).children().each((index, e) => {
                 if (index !== 0) {
                     e.remove();

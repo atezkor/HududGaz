@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Designer;
 use App\Models\Equipment;
+use App\Models\Mounter;
 use Illuminate\Database\Seeder;
 use App\Models\Region;
 use App\Models\Activity;
@@ -23,6 +24,7 @@ class HelperSeeder extends Seeder {
         $this->insertProposition();
         $this->insertEquipment();
         $this->insertDesigner();
+        $this->insertMontageFirm();
     }
 
     private function insertOrgan() {
@@ -113,16 +115,39 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertDesigner() {
-        foreach (['Ideal Tarmoq Loyiha'] as $designer) {
+        foreach (['IDEAL TARMOQ LOYIHA'] as $designer) {
             Designer::query()->create([
                 'org_name' => $designer,
                 'leader' => 'L.L.Loyihachi',
                 'phone' => '+998 99 555 15 55',
                 'address' => 'Mahalla',
                 'address_krill' => 'Mahalla',
-                'date_reg' => strtotime("now"),
-                'date_end' => strtotime("+1 year", strtotime('now')),
-                'document' => 'abdefg.pdf'
+                'date_reg' => now(),
+                'date_end' => date('Y-m-d', time() + 3600 * 24 * 356),
+                'document' => 'qwerty.pdf'
+            ]);
+        }
+    }
+
+    private function insertMontageFirm() {
+        foreach (['MONTAJ SERVICE SIFAT'] as $montage_firm) {
+            Mounter::query()->create([
+                'rec_num' => rand(1000, 5000) + rand(100, 500),
+                'reg_num' => rand(1000, 5000) + rand(100, 500),
+                'full_name' => $montage_firm,
+                'short_name' => $montage_firm,
+                'leader' => 'M.M.Montajchi',
+                'district' => rand(1, 13),
+                'phone' => '+998 99 555 15 55',
+                'address' => 'Mahalla',
+                'taxpayer_stir' => rand(1000, 5000) + rand(100, 500),
+                'legal_form' => 'Mahalla',
+                'date_created' => now(),
+                'date_expired' => date('Y-m-d', time() + 3600 * 24 * 356),
+                'given_by' => 'Davlat xizmatlari markazi',
+                'permission_to' => "barcha gaz inshootlarini o\'rnatish va ta'mirlash, gaz quvurlarini ishlatish tekshirish",
+                'implement_for' => "yuqori, o'rta va past bosimli gaz inshootlarining yer osti va usti gaz quvurlarini ishga tushirish zamin quvurlarini o'rnatish, ta'mirlash ishlari",
+                'document' => 'qwerty.pdf'
             ]);
         }
     }

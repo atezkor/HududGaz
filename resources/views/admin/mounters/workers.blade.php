@@ -3,12 +3,12 @@
 
 @section('content')
 <section class="content">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('admin.fitters.create', ['firm' => $firm_id]) }}" class="btn btn-info">{{__('table.mounters.btn_add')}}</a>
+                        <a href="{{ route('admin.fitters.create', ['firm' => $firm_id]) }}" class="btn btn-info">{{__('admin.mounter.btn_add')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" class="form-control"
@@ -20,13 +20,13 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>№</th>
-                                    <th>{{__('table.mounters.col_org')}}</th>
-                                    <th>{{__('table.mounters.col_name')}}</th>
-                                    <th>{{__('table.mounters.col_function')}}</th>
-                                    <th>{{__('table.mounters.col_experience')}}</th>
-                                    <th>{{__('table.mounters.col_period_activity')}}</th>
-                                    <th></th>
+                                    <th>{{__('global.index')}}</th>
+                                    <th>{{__('admin.mounter.col_org')}}</th>
+                                    <th>{{__('admin.mounter.col_name')}}</th>
+                                    <th>{{__('admin.mounter.col_function')}}</th>
+                                    <th>{{__('admin.mounter.col_experience')}}</th>
+                                    <th>{{__('admin.mounter.col_period_activity')}}</th>
+                                    <th style="width: 1px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,33 +66,33 @@
 @endsection
 @section('javascript')
 <script>
-$('#search').keyup(function() {
-    let value = this.value.toLowerCase();
-    $('tbody tr').filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    $('#search').keyup(function() {
+        let value = this.value.toLowerCase();
+        $('tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
     });
-});
 
-function remove(form) {
-    Swal.fire({
-        title: '{{__('table.mounters.alert_message')}}',
-        text: "{{__('table.general.alert_text')}}",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#dd3333',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: '{{__('global.btn_yes')}}',
-        cancelButtonText: '{{__('global.btn_no')}}'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $(`#${form}`).submit()
-            Swal.fire({
-                title: '{{__('global.del_process')}}',
-                icon: 'success',
-                showConfirmButton: false,
-            });
-        }
-    });
-}
+    function remove(form) {
+        Swal.fire({
+            title: '{{__('admin.mounter.worker_delete')}}',
+            text: "{{__('admin.alert_text')}}",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dd3333',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: '{{__('global.btn_yes')}}',
+            cancelButtonText: '{{__('global.btn_no')}}'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(`#${form}`).submit()
+                Swal.fire({
+                    title: '{{__('global.del_process')}}',
+                    icon: 'success',
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
 </script>
 @endsection

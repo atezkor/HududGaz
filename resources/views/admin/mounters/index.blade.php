@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('admin.mounters.create')}}" class="btn btn-info">{{__('table.districts.btn_new')}}</a>
+                        <a href="{{route('admin.mounters.create')}}" class="btn btn-info">{{__('admin.mounter.btn_new')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" class="form-control"
@@ -21,11 +21,11 @@
                             <thead>
                                 <tr>
                                     <th>№</th>
-                                    <th>{{__('table.general.org_name')}}</th>
-                                    <th>{{__('table.general.org_leader')}}</th>
-                                    <th>{{__('table.general.address')}}</th>
-                                    <th>{{__('table.general.col_period_activity')}}</th>
-                                    <th></th>
+                                    <th>{{__('admin.org_name')}}</th>
+                                    <th>{{__('admin.org_leader')}}</th>
+                                    <th>{{__('admin.address')}}</th>
+                                    <th>{{__('admin.period_activity')}}</th>
+                                    <th style="width: 1px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +42,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <a href="{{route('admin.fitters.index', ['firm' => $model->id])}}" class="btn btn-outline-info mr-2">
-                                                {{__('table.mounters.workers')}}
+                                                {{__('admin.mounter.workers')}}
                                             </a>
                                             <a href="{{route('admin.mounters.edit', ['mounter' => $model])}}" class="btn btn-warning"
                                                title="{{__('global.btn_edit')}}">
@@ -77,8 +77,8 @@
 
     function remove(form) {
         Swal.fire({
-            title: '{{__('table.districts.alert_message')}}',
-            text: "{{__('table.general.alert_text')}}",
+            title: '{{__('admin.mounter.alert_title')}}',
+            text: "{{__('admin.alert_text')}}",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd3333',

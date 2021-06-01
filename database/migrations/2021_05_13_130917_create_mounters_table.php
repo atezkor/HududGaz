@@ -18,7 +18,8 @@ class CreateMountersTable extends Migration {
             $table->string('full_name');
             $table->string('short_name');
             $table->string('leader');
-            $table->tinyInteger('region');
+            $table->tinyInteger('district');
+            $table->string('phone')->nullable();
             $table->string('address');
             $table->string('taxpayer_stir')->nullable();
             $table->string('legal_form')->nullable();
