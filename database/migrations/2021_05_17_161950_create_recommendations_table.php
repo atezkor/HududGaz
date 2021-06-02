@@ -28,8 +28,9 @@ class CreateRecommendationsTable extends Migration {
             $table->integer('pressure_sum');
             $table->string('grc');
             $table->integer('consumption');
-            $table->string('description')->nullable();
+            $table->json('equipments')->nullable();
             $table->text('additional')->nullable();
+            $table->string('description')->nullable();
             $table->char('type', 10)->nullable();
             $table->string('file')->nullable();
             $table->string('comment')->nullable();

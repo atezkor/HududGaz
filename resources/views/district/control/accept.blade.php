@@ -75,10 +75,12 @@
 
     <div class="card-body col-12 px-2">
         <label for="additional">@lang('district.recommendation.additional')</label>
-        <textarea id="additional" name="additional"></textarea>
+        <textarea id="additional" name="additional">{{$model->additional}}</textarea>
     </div>
 
-    <div id="equipments" class="col-12"></div>
+    <div id="equipments" class="col-12">
+        <input type="hidden" id="equip_data" value="{{$model->equipments ?? "[]"}}">
+    </div>
     <input type="hidden" name="equipments" id="equips">
 
     <div class="col-12 px-2">

@@ -44,7 +44,8 @@
 
                                 <div class="form-group">
                                     <label for="password">{{__('admin.user.password')}}</label>
-                                    <input type="password" name="password" id="password" value="{{$model->password}}" class="form-control">
+                                    <input type="password" name="password" id="password" class="form-control"
+                                        @if($model->password) placeholder="******" @endif>
                                 </div>
 
                                 <div class="form-group">

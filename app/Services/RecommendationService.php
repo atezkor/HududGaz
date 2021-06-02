@@ -65,7 +65,9 @@ class RecommendationService extends CrudService {
     public function update($data, $model) {
         $this->deleteFile($model->file);
         $data['status'] = 2;
-        $data['file'] = $this->createFile($data['file']);
+        if (isset($data['file']))
+            $data['file'] = $this->createFile($data['file']);
+
         parent::update($data, $model);
     }
 

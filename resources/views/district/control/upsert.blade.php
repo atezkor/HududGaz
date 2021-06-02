@@ -36,7 +36,7 @@
                                         <div class="form-group">
                                             <label for="file">@lang('district.file')</label>
                                             <div class="custom-file">
-                                                <input type="file" name="file" id="file" class="custom-file-input" required>
+                                                <input type="file" name="file" id="file" class="custom-file-input">
                                                 <label class="custom-file-label" for="file">
                                                     <span id="file_hint">@lang('district.file_hint')</span>
                                                     <span class="btn btn-info"><i class="far fa-file-pdf"></i></span>
@@ -64,41 +64,23 @@
     </div>
 </section>
 @stop
-
 @section('javascript')
 <!-- For text editor -->
 <script src="{{'/js/jquery.min.js'}}"></script>
 <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
 <script src="{{'/js/extra/summernote.min.js'}}"></script>
 <script>
+    // You must rewrite this code!
     let count = 0;
     let equips_input = $('#equips');
+    let submit = $('#submit');
+    let equips = [];
     class Equipment {
         constructor() {
             this.equipment = '';
             this.type = '';
-            this.number = 0;
+            this.number = null;
         }
-    }
-
-    let equips = [];
-
-    let submit = $('#submit');
-    $(function() {
-        if ('{{$type}}' === 'accept') {
-            submit.attr('disabled', true);
-        }
-    });
-
-    submit.on('click', function() {
-        equips_input.val(JSON.stringify(equips));
-    });
-
-    function addEquipment() {
-        submit.attr('disabled', false);
-        ajax("{{route('district.equipment.add')}}", function(data) {
-            create(data);
-        });
     }
 
     function ajax(url, callback) {
@@ -111,7 +93,15 @@
         });
     }
 
-    function create(data) {
+    function addEquipment(equips_data = new Equipment()) {
+        submit.attr('disabled', false);
+        ajax("{{route('district.equipment.add')}}", function(data) {
+            create(data, equips_data);
+        });
+    }
+
+    function create(data, equips_data) {
+        equips.push(new Equipment());
         let equipments = $('#equipments');
         let row = document.createElement('div');
         let row2 = document.createElement('div');
@@ -127,18 +117,18 @@
         append(number, 'number', "@lang('district.equipment.number')", "@lang('district.equipment.number_hint')");
         append(btn, '', '', '', 'btn btn-danger', '');
 
-        fill(equipment, data, "@lang('district.equipment.name_hint')");
-        fill(type, [], "@lang('district.equipment.type_hint')");
+        fillSelect(equipment, data, "@lang('district.equipment.name_hint')", equips_data.equipment);
+        fillSelect(type, [], "@lang('district.equipment.type_hint')", equips_data.type);
 
-        equipment.onchange = function(e) {
-            if (!e.target.value)
-                return;
-
+        equipment.onchange = change;
+        function change(use = false) {
             $(type).empty();
-            equips[equipment.hint][equipment.name] = equipment.value;
-            equips[equipment.hint][type.name] = '';
-            ajax("{{route('district.equipment.type')}}" + `/${e.target.value}`, function(data) {
-                fill(type, data, "@lang('district.equipment.type_hint')");
+            equips[equipment.hint]['equipment'] = equipment.value;
+            if (!use)
+                equips[equipment.hint]['type'] = '';
+
+            ajax("{{route('district.equipment.type')}}" + `/${equipment.value}`, function(data) {
+                fillSelect(type, data, "@lang('district.equipment.type_hint')", equips_data.type);
             });
         }
 
@@ -154,7 +144,9 @@
         col.append(row2);
         equipments.append(row);
         $(`#row-${count}`).show(300);
-        equips.push(new Equipment());
+
+        /* For updating data */
+        change(true);
 
         function append(element, name, label, placeholder, classes = 'form-control') {
             let div = document.createElement('div');
@@ -166,7 +158,7 @@
                 div.append(l);
             }
 
-            setProperty(element, name, placeholder);
+            setProperty(element, name, placeholder, equips_data);
 
             for (let cls of classes.split(' ')) {
                 element.classList.add(cls);
@@ -181,65 +173,99 @@
                 col2.append(div);
             }
         }
+    }
 
-        function setProperty(element, name, placeholder) {
-            if (name) {
-                element.name = name;
-                element.id = name + '-' + (count + 1);
-                element.placeholder = placeholder;
-                element.required = true;
-                element.hint = count;
-                element.onchange = function() {
-                    equips[element.hint][name] = element.value;
-                    equips_input.val(JSON.stringify(equips));
-                }
-
-                element.onkeyup = function() {
-                    equips_input.val(JSON.stringify(equips));
-                }
-            } else {
-                element.innerHTML = '<i class="fas fa-minus"></i>';
-                element.title = "@lang('global.btn_del')";
-                element.type = 'button';
-                element.id = count + 1;
-                element.onclick = function() {
-                    if (count === parseInt(element.id)) {
-                        $(`#row-${element.id}`).hide(300, function() {
-                            $(this).remove();
-                            equips.pop();
-                            count --;
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: "@lang('district.equipment.warning')",
-                            confirmButtonText: "<i class='fas fa-check'></i>"
-                        });
-                    }
-                };
+    function setProperty(element, name, placeholder, data = {}) {
+        if (name) {
+            element.id = name + '-' + (count + 1);
+            element.placeholder = placeholder;
+            element.required = true;
+            element.hint = count;
+            element.name = name;
+            element.onchange = function() {
+                equips[element.hint][name] = element.value;
+                equips_input.val(JSON.stringify(equips));
             }
 
-            if (name === 'number') {
-                element.type = name;
+            equips[element.hint][name] = data[name];
+        } else {
+            element.innerHTML = '<i class="fas fa-minus"></i>';
+            element.title = "@lang('global.btn_del')";
+            element.type = 'button';
+            element.id = count + 1;
+            element.onclick = function() {
+                if (count === parseInt(element.id)) {
+                    $(`#row-${element.id}`).hide(300, function() {
+                        $(this).remove();
+                        equips.pop();
+                        count --;
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: "@lang('district.equipment.warning')",
+                        confirmButtonText: "<i class='fas fa-check'></i>"
+                    });
+                }
+
+                if (count === 1) {
+                    submit.attr('disabled', true);
+                }
             }
         }
 
-        function fill(element, data, first = '') {
-            let option = document.createElement('option');
-            option.value = '';
-            option.text = first;
-            element.append(option);
-
-            let j = 0;
-            for (let i in data) {
-                j = i;
-                option = document.createElement('option');
-                option.value = j;
-                option.text = data[j];
-                element.append(option);
+        if (name === 'number') {
+            element.type = name;
+            element.value = data[name];
+            element.onkeyup = function() {
+                equips[element.hint][name] = element.value;
+                equips_input.val(JSON.stringify(equips));
             }
         }
     }
+
+    function fillSelect(element, data, first, value = '') {
+        let option = document.createElement('option');
+        option.value = '';
+        option.text = first;
+        element.append(option);
+
+        let j = 0;
+        for (let i in data) {
+            j = i;
+            option = document.createElement('option');
+            option.value = j;
+            option.text = data[j];
+            if (value === j) {
+                option.selected = true;
+            }
+            element.append(option);
+        }
+    }
+
+    function changeEquips() {
+        let data = JSON.parse($('#equip_data').val());
+        data.forEach(equip => {
+            addEquipment(equip);
+        });
+
+        if (data.length) {
+            submit.attr('disabled', false);
+        }
+
+        equips_input.val(JSON.stringify(data));
+    }
+    // You must rewrite this code!
+
+    $(function() {
+        if ('{{$type}}' === 'accept') {
+            submit.attr('disabled', true);
+        }
+
+        setTimeout(() => {
+            changeEquips();
+        })
+    });
 
     $(document).ready(function() {
         $('#additional').summernote();
@@ -251,7 +277,12 @@
             this.oninput = () => {
                 this.setCustomValidity('');
             }
-        })
+        });
+
+        submit.on('click', async () => {
+            await equips_input.val(JSON.stringify(equips));
+            $('#form').submit();
+        });
     });
 
     $('#file').change(function(input) {

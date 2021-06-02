@@ -87,6 +87,7 @@ return [
         'heading_edit' => "Jihoz nomini o\u{2018}zgartirish",
         'name' => "Jihoz nomi",
         'equip_type' => "Jihoz turi",
+        'equip_types' => "Jihoz turlari",
         'equip_order' => "Tartibi",
         'alert_title' => "Jihozni o\u{2018}chirib tashlamoqchimisiz?",
         'add_type' => "Tur qo\u{2018}shish",

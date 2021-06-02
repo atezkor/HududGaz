@@ -16,7 +16,7 @@ class Recommendation extends Model {
     public $timestamps = false;
 
     protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'above_len', 'under_len', 'diameter', 'depth', 'capability',
-        'real_capacity', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'description', 'additional', 'type', 'file', 'comment'];
+        'real_capacity', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'equipments', 'additional', 'description', 'type', 'file', 'comment'];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);

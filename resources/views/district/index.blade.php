@@ -54,9 +54,8 @@
                             <td>
                                 <input type="file" id="file-{{$key}}" class="d-none"
                                        onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $recommendations[$key]])}}')">
-                                <label for="file-{{$key}}" class="btn btn-outline-info text-bold">
-                                    <i class="fas fa-file-medical"></i>
-                                    <span>@lang('global.btn_upload')</span>
+                                <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
+                                    <i class="fas fa-upload"></i>
                                 </label>
                             </td>
                         </tr>

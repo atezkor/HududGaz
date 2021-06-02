@@ -32,7 +32,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <a href="{{route('admin.equip_type', ['equipment' => $model])}}" class="btn btn-outline-info mr-2">
-                                        {{__('admin.equipment.equip_type')}}
+                                        {{__('admin.equipment.equip_types')}}
                                     </a>
                                     <a href="{{route('admin.equipments.edit', ['equipment' => $model])}}" class="btn btn-warning"
                                        title="{{__('global.btn_edit')}}">
