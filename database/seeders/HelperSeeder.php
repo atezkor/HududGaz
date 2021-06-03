@@ -2,15 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Designer;
-use App\Models\Equipment;
-use App\Models\Mounter;
 use Illuminate\Database\Seeder;
 use App\Models\Region;
 use App\Models\Activity;
 use App\Models\Proposition;
 use App\Models\Individual;
 use App\Models\Legal;
+use App\Models\Equipment;
+use App\Models\EquipmentType;
+use App\Models\Designer;
+use App\Models\Mounter;
 
 class HelperSeeder extends Seeder {
     /**
@@ -25,6 +26,7 @@ class HelperSeeder extends Seeder {
         $this->insertEquipment();
         $this->insertDesigner();
         $this->insertMontageFirm();
+        $this->insertEquipmentTypes();
     }
 
     private function insertOrgan() {
@@ -148,6 +150,16 @@ class HelperSeeder extends Seeder {
                 'permission_to' => "barcha gaz inshootlarini o\'rnatish va ta'mirlash, gaz quvurlarini ishlatish tekshirish",
                 'implement_for' => "yuqori, o'rta va past bosimli gaz inshootlarining yer osti va usti gaz quvurlarini ishga tushirish zamin quvurlarini o'rnatish, ta'mirlash ishlari",
                 'document' => 'qwerty.pdf'
+            ]);
+        }
+    }
+
+    private function insertEquipmentTypes() {
+        foreach (['PRINTS-G10'] as $key => $type) {
+            EquipmentType::query()->create([
+                'type' => $type,
+                'equipment_id' => $key + 1,
+                'order' => 1
             ]);
         }
     }

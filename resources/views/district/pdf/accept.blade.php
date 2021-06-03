@@ -74,7 +74,6 @@
 </head>
 <body>
     <div class="text-right">
-        ЙФФФФВВВВВ
         <h4>
             <span class="uppercase">&#8220;@lang('district.pdf.confirmation')&#8221;</span><br>
             <span>&#8220;{{$organ->org_name}}&#8221; @lang('district.pdf.section')</span><br>
@@ -83,7 +82,7 @@
     </div>
     <div class="text-center section">
         <div class="uppercase">@lang('district.pdf.recommendation')</div>
-        <b>Tr {{$proposition->number}}</b>
+        <b><span style="font-family: DejaVuSans, sans-serif">&#8470;</span> {{$proposition->number}}</b>
     </div>
 
     <div class="body mt-20">
@@ -114,22 +113,22 @@
                 </li>
                 <li>
                     <strong>@lang('district.pdf.diameter_and_depth'):</strong>
-                    {{$model->diameter}}, {{$model->depth}} @lang('district.pdf.meter')
+                    {{$model->diameter}} @lang('district.pdf.meter'), {{$model->depth}} @lang('district.pdf.meter')
                 </li>
                 <li>
                     <strong>@lang('district.pdf.gas_pressure'):</strong>
                     <table>
                         <tr>
-                            <td>@lang('district.recommendation.pressure_win'): {{$model->pressure_win}}</td>
-                            <td>@lang('district.recommendation.pressure_sum'): {{$model->pressure_sum}}</td>
+                            <td>@lang('district.recommendation.pressure_win'): {{$model->pressure_win}} @lang('district.pdf.atm')</td>
+                            <td>@lang('district.recommendation.pressure_sum'): {{$model->pressure_sum}} @lang('district.pdf.atm')</td>
                         </tr>
                     </table>
                 </li>
                 <li>
                     <strong>@lang('district.pdf.pipe_capability'):</strong>
-                        <u>{{$model->capability}} </u>@lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.santi')<sup>3</sup> @lang('district.pdf.year') <br>
+                        <u>{{$model->capability}} </u>@lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.second') @lang('district.pdf.year') <br>
                     <span>@lang('district.pdf.pipe_real_capacity'):</span>
-                        <u>{{$model->real_capacity}}</u> @lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.santi')<sup>3</sup> @lang('district.pdf.year')
+                        <u>{{$model->real_capacity}}</u> @lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.second') @lang('district.pdf.year')
                 </li>
                 <li>
                     <span>@lang('district.pdf.grc'):</span> {{$model->grc}}
@@ -139,12 +138,19 @@
                 </li>
                 <li>
                     <span>@lang('district.pdf.gas_consume'):</span>
-                    {{$model->consumption}} @lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.santi')<sup>3</sup>
+                    {{$model->consumption}} @lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.second')
                 </li>
                 <li>
                     <span>@lang('district.pdf.purpose_for_use'):</span>
                 </li>
-                <li></li>
+                <li>
+                    Texnik tavsiyanoma loyihalash uchun asos bo'la olmaydi
+                </li>
+                <li>
+                    <span>"Xorazm GTF" GTFga qarashli</span>
+                    <br>
+                    <span>"Gurlan tumani bo'limi bosh muhandisi: M. M</span>
+                </li>
             </ol>
         </div>
     </div>
