@@ -39,7 +39,6 @@ class MounterRequest extends FormRequest {
             'region' => ['required'],
             'address' => ['required'],
             'taxpayer_stir' => ['required'],
-            'legal_form' => [],
             'given_by' => [],
             'date_created' => ['required'],
             'date_expired' => ['required'],

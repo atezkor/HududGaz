@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Equipment;
+use App\Models\Organization;
 use App\Models\Recommendation;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Database\Eloquent\Builder;
@@ -76,8 +78,16 @@ class RecommendationService extends CrudService {
         $organ = $recommendation->organ($proposition->organ);
         $applicant = $proposition->applicant;
         $district = districts()[$organ->getAttribute('region')];
+        $organization = Organization::Data();
         view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
-            'consumer' => $applicant, 'district' => $district]);
+            'consumer' => $applicant, 'district' => $district, 'organization' => $organization]);
+
+        $equipments = json_decode($recommendation->getAttribute('equipments'), true);
+        foreach ($equipments as $equipment) {
+            $eq = Equipment::query()->where('id', '=', $equipment['equipment']);
+            $equipment['equipment'] = $eq->pluck('name');
+//            $equipment['type'] = $eq->first();
+        }
 
         $this->pdf->loadView('district.pdf.' . $recommendation->type);
         return $this->pdf->download(time() . '.pdf');

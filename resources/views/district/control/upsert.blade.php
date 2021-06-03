@@ -80,6 +80,7 @@
             this.equipment = '';
             this.type = '';
             this.number = null;
+            this.note = null;
         }
     }
 
@@ -111,11 +112,13 @@
         let equipment = document.createElement('select');
         let type = document.createElement('select');
         let number = document.createElement('input');
+        let note = document.createElement('input');
         let btn = document.createElement('button');
-        append(equipment, 'equipment', "@lang('district.equipment.name')");
-        append(type, 'type', "@lang('district.equipment.type')");
-        append(number, 'number', "@lang('district.equipment.number')", "@lang('district.equipment.number_hint')");
-        append(btn, '', '', '', 'btn btn-danger', '');
+        append(row2, equipment, 'equipment', null, "@lang('district.equipment.name')");
+        append(row2, type, 'type', null,"@lang('district.equipment.type')");
+        append(row2, number, 'number', 'number', "@lang('district.equipment.number')", "@lang('district.equipment.number_hint')");
+        append(row2, note, 'note', 'text', "@lang('district.equipment.note')", "@lang('district.equipment.note_hint')");
+        append(col2, btn, '', null, '', '', 'btn btn-danger');
 
         fillSelect(equipment, data, "@lang('district.equipment.name_hint')", equips_data.equipment);
         fillSelect(type, [], "@lang('district.equipment.type_hint')", equips_data.type);
@@ -123,7 +126,7 @@
         equipment.onchange = change;
         function change(use = false) {
             $(type).empty();
-            equips[equipment.hint]['equipment'] = equipment.value;
+            equips[equipment.hint]['equipment'] = parseInt(equipment.value);
             if (!use)
                 equips[equipment.hint]['type'] = '';
 
@@ -148,9 +151,11 @@
         /* For updating data */
         change(true);
 
-        function append(element, name, label, placeholder, classes = 'form-control') {
+        function append(root, element, name, type, label, placeholder, classes = 'form-control') {
             let div = document.createElement('div');
-            div.classList.add('col-4');
+            div.classList.add('col-3');
+
+            setProperty(element, name, type, placeholder, equips_data);
             if (label) {
                 let l = document.createElement('label');
                 l.textContent = label;
@@ -158,41 +163,51 @@
                 div.append(l);
             }
 
-            setProperty(element, name, placeholder, equips_data);
-
             for (let cls of classes.split(' ')) {
                 element.classList.add(cls);
             }
 
-            div.append(element);
-            if (label) {
-                row2.append(div);
-            } else {
-                div.classList.remove('col-4');
+            if (!label) {
+                div.classList.remove('col-3');
                 div.classList.add('row', 'justify-content-end', 'pr-3');
-                col2.append(div);
             }
+
+            div.append(element);
+            root.append(div);
         }
     }
 
-    function setProperty(element, name, placeholder, data = {}) {
+    function setProperty(element, name, type, placeholder, data = {}) {
+        if (type) {
+            element.type = type;
+            element.value = data[name];
+            element.onkeyup = function() {
+                if (type === 'number') {
+                    equips[element.hint][name] = parseInt(element.value);
+                } else {
+                    equips[element.hint][name] = element.value;
+                }
+                Stringify(equips);
+            }
+        }
+
         if (name) {
             element.id = name + '-' + (count + 1);
-            element.placeholder = placeholder;
-            element.required = true;
-            element.hint = count;
             element.name = name;
+            element.placeholder = placeholder;
+            element.hint = count;
+            element.required = true;
             element.onchange = function() {
-                equips[element.hint][name] = element.value;
-                equips_input.val(JSON.stringify(equips));
+                equips[element.hint][name] = parseInt(element.value);
+                Stringify(equips);
             }
 
             equips[element.hint][name] = data[name];
         } else {
-            element.innerHTML = '<i class="fas fa-minus"></i>';
-            element.title = "@lang('global.btn_del')";
             element.type = 'button';
             element.id = count + 1;
+            element.innerHTML = '<i class="fas fa-minus"></i>';
+            element.title = "@lang('global.btn_del')";
             element.onclick = function() {
                 if (count === parseInt(element.id)) {
                     $(`#row-${element.id}`).hide(300, function() {
@@ -211,15 +226,6 @@
                 if (count === 1) {
                     submit.attr('disabled', true);
                 }
-            }
-        }
-
-        if (name === 'number') {
-            element.type = name;
-            element.value = data[name];
-            element.onkeyup = function() {
-                equips[element.hint][name] = element.value;
-                equips_input.val(JSON.stringify(equips));
             }
         }
     }
@@ -253,6 +259,10 @@
             submit.attr('disabled', false);
         }
 
+        Stringify(data)
+    }
+
+    function Stringify(data) {
         equips_input.val(JSON.stringify(data));
     }
     // You must rewrite this code!
@@ -277,11 +287,6 @@
             this.oninput = () => {
                 this.setCustomValidity('');
             }
-        });
-
-        submit.on('click', async () => {
-            await equips_input.val(JSON.stringify(equips));
-            $('#form').submit();
         });
     });
 

@@ -115,8 +115,8 @@ function dateFull($date): string {
         __('district.december'),
     ];
     $date = date_create($date);
-    $day = date_format($date, 'd');
+    $day = date_format($date, 'j');
     $month = date_format($date, 'n');
     $year = date_format($date, 'Y');
-    return $day . ' - ' . $months[$month - 1] . ', ' . $year . ' - ' . __('global.year');
+    return $day . '-' . $months[$month - 1] . ', ' . $year . '-' . __('global.year');
 }

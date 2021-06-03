@@ -63,8 +63,11 @@
         ],
         'pdf' => [
             'confirmation' => "Tasdiqlayman",
-            'section' => "bo\u{2018}limi",
+            'section' => "gaz ta\u{2019}minoti bo\u{2018}limi",
+            'sec' => "bo\u{2018}limi",
             'engineer' => "bosh muhandisi",
+            'gft' => "GFTga qarashli",
+            'leader' => "boshlig\u{2018}i",
             'recommendation' => "Texnik tavsiyanoma",
             'number' => "Tr",
             'year' => "yil",
@@ -74,7 +77,7 @@
             'to' => "ga",
             'belong_to' => "qarashli",
             'gas_connect' => "binosini tabiiy gaz ta\u{2019}minotiga ulash",
-            'full_address' => "ulash nuqtasining aniq manzili",
+            'full_address' => "ulashnish nuqtasining aniq manzili",
             'above_len' => "yer usti uzunligi",
             'under_len' => "Yer osti uzunligi",
             'full_len' => "ulash nuqtasidan gaz tarmog\u{2018}igacha bo\u{2018}lgan masofa",
@@ -89,11 +92,12 @@
             'grc' => "Loyihada gaz ta\u{2019}minoti qaysi qaysi GRSdan beriladi",
             'gas_network' => "Keltiruvchi gaz tarmog\u{2018}i nomi ___ past bosimli yer osti ___",
             'gas_consume' => "O\u{2018}rtacha talab qilinadigan gaz hajmi",
-            'purpose_for_use' => "Tabiiy gaz qanday maqsadlarda ishlatiladi",
+            'purpose_for_use' => "Tabiiy gaz qanday maqsadda ishlatiladi",
             'order_condition' => "Buyurtma uchun alohida shartlar",
             'customer_address' => "Buyurtmachi manzili",
             'installed_equipments' => "O\u{2018}rnatilgan gaz asboblari",
-            'note' => "Texnik tavsiyanoma loyihalash uchun asos bo\u{2018}la olmaydi"
+            'note' => "Texnik tavsiyanoma loyihalash uchun asos bo\u{2018}la olmaydi",
+            'type' => "(rusumi, soni)",
         ],
         'build_type' => [
             'residential' => "turar",
@@ -106,6 +110,8 @@
             'type_hint' => "Jihoz turini tanlang",
             'number' => "Soni",
             'number_hint' => "Sonini kiriting",
+            'note' => "Izoh",
+            'note_hint' => "Izohni kiriting",
             'warning' => "Oxidan boshlab o\u{2018}chiring",
         ]
     ];

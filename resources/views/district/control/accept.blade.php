@@ -75,7 +75,23 @@
 
     <div class="card-body col-12 px-2">
         <label for="additional">@lang('district.recommendation.additional')</label>
-        <textarea id="additional" name="additional">{{$model->additional}}</textarea>
+        <textarea id="additional" name="additional">
+        @if ($model->status == 3)
+            {{$model->additional}}
+        @else
+            <ol start="9">
+                <li>
+                    <span>@lang('district.pdf.purpose_for_use'):</span>
+                </li>
+                <li>
+                    <span>Buyurtmachi uchun alohida shartlar:</span>
+                </li>
+                <li>
+                    <span>Buyurtmachi manzili:</span>
+                </li>
+            </ol>
+        @endif
+        </textarea>
     </div>
 
     <div id="equipments" class="col-12">

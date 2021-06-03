@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class OrganizationController extends Controller {
     public function index(): View {
-        $model = Cache::get('organization') ?: new Organization();
+        $model = Organization::Data();
         return view('admin.settings', ['model' => $model]);
     }
 

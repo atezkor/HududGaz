@@ -38,13 +38,17 @@ class Organization {
         $this->email = $data['email'] ?: '';
         $this->fax = $data['fax'] ?: '';
 
-        $cache = Cache::get('organization')->logo ?? '';
+        $logo = Cache::get('organization')->logo ?? '';
         if (isset($data['logo'])) {
             $this->logo = $this->fileCreate($data['logo']);
-            $this->fileDelete($cache);
+            $this->fileDelete($logo);
         } else {
-            $this->logo = $cache;
+            $this->logo = $logo;
         }
+    }
+
+    public static function Data(): Organization {
+        return Cache::get('organization') ?: new Organization();
     }
 
     private function fileCreate($file): string {

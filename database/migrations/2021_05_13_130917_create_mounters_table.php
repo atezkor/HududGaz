@@ -22,7 +22,6 @@ class CreateMountersTable extends Migration {
             $table->string('phone')->nullable();
             $table->string('address');
             $table->string('taxpayer_stir')->nullable();
-            $table->string('legal_form')->nullable();
             $table->date('date_created');
             $table->date('date_expired');
             $table->string('given_by');
