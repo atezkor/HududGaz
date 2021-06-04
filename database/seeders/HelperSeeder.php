@@ -143,7 +143,6 @@ class HelperSeeder extends Seeder {
                 'phone' => '+998 99 555 15 55',
                 'address' => 'Mahalla',
                 'taxpayer_stir' => rand(1000, 5000) + rand(100, 500),
-                'legal_form' => 'Mahalla',
                 'date_created' => now(),
                 'date_expired' => date('Y-m-d', time() + 3600 * 24 * 356),
                 'given_by' => 'Davlat xizmatlari markazi',

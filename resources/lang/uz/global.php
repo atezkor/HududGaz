@@ -65,5 +65,22 @@
             'info' => "Ko\u{2018}rish uchun _TOTAL_ ma\u{2019}lumotdan taqdim etilgan. _START_ dan _END_ gacha",
             'zeroRecords' => "Mos keladigan ma\u{2019}lumotlar topilmadi",
             'infoFiltered' => "(_MAX_ ta ma'lumotdan saralanganlari)",
+        ],
+        'profile' => [
+            'main' => "Asosiy o\u{2018}zgarishlar",
+            'extra' => "Qo\u{2018}shimcha o\u{2018}zgarishlar",
+            'username' => "Foydalanuvchi nomi",
+            'name' => "Ismi",
+            'lastname' => "Familiyasi",
+            'patronymic' => "Otasining ismi",
+            'position' => "Lavozimi",
+            'locale' => "Til",
+            'old_pass' => "Eski parol",
+            'password' => "Yangi parol",
+            'confirm_pass' => "Tasdiqlovchi parol",
+            'uz' => "O\u{2018}zbekcha",
+            'uzk' => "Ўзбекча",
+            'img' => "Rasmni yuklang",
+            'not_confirm' => "Yashirin so\u{2018}z tasdiqlanmadi",
         ]
     ];

@@ -27,6 +27,7 @@
     </ul>
 
     <!-- navbar right -->
+    @php($user = auth()->user())
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -36,10 +37,10 @@
         <li class="nav-item">
             <div class="user-panel d-flex" style="margin-top: 3px">
                 <div class="image">
-                    <img src="{{'/img/profile/user1.jpg'}}" class="img-circle elevation-2" alt="img">
+                    <img src="{{setImage($user)}}" class="img-circle elevation-2" alt="img">
                 </div>
                 <div class="info">
-                    <a href="{{route('login')}}" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
+                    <a href="{{route('profile.edit', ['user' => $user->getAuthIdentifier()])}}" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
                         {{auth()->user()->name ?? ''}}
                     </a>
                 </div>

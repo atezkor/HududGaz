@@ -32,7 +32,7 @@ class UserRequest extends FormRequest {
     public function rules(): array {
         return [
             'name' => ['required'],
-            'lastname' => [],
+            'lastname' => ['required'],
             'patronymic' => [],
             'role' => ['required'],
             'organ' => [],

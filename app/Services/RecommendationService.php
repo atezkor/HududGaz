@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Equipment;
+use App\Models\EquipmentType;
 use App\Models\Organization;
 use App\Models\Recommendation;
 use Barryvdh\DomPDF\PDF;
@@ -79,15 +80,16 @@ class RecommendationService extends CrudService {
         $applicant = $proposition->applicant;
         $district = districts()[$organ->getAttribute('region')];
         $organization = Organization::Data();
-        view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
-            'consumer' => $applicant, 'district' => $district, 'organization' => $organization]);
 
         $equipments = json_decode($recommendation->getAttribute('equipments'), true);
-        foreach ($equipments as $equipment) {
-            $eq = Equipment::query()->where('id', '=', $equipment['equipment']);
-            $equipment['equipment'] = $eq->pluck('name');
-//            $equipment['type'] = $eq->first();
+        foreach ($equipments as $key => $equipment) {
+            $equipments[$key]['equipment'] = Equipment::query()->where('id', '=', $equipment['equipment'])->pluck('name')[0];
+            $equipments[$key]['type'] = EquipmentType::query()->where('id','=', $equipment['type'])->pluck('type')[0];
         }
+
+        view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
+            'consumer' => $applicant, 'district' => $district, 'organization' => $organization,
+            'equipments' => $equipments]);
 
         $this->pdf->loadView('district.pdf.' . $recommendation->type);
         return $this->pdf->download(time() . '.pdf');

@@ -18,8 +18,9 @@ class AddColumnToUser extends Migration {
             $table->integer('organ')->default(0);
             $table->string('position')->nullable();
             $table->string('locale')->default('uzk');
-            $table->string('avatar')->default('profile.png');
+            $table->string('avatar')->nullable();
             $table->json('mac_address')->nullable();
+            $table->timestamps();
         });
     }
 

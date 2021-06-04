@@ -7,6 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        @php($user = auth()->user())
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav">
             @php($items = MenuItems())
@@ -27,11 +28,11 @@
             <li class="nav-item">
                 <div class="user-panel d-flex" style="margin-top: 3px">
                     <div class="image">
-                        <img src="{{'/img/profile/user1.jpg'}}" class="img-circle elevation-2" alt="img">
+                        <img src="{{setImage($user)}}" class="img-circle elevation-2" alt="img">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
-                            {{auth()->user()->name ?? ''}}
+                        <a href="{{route('profile.edit', ['user' => $user->getAuthIdentifier()])}}" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
+                            {{$user->name ?? ''}}
                         </a>
                     </div>
                 </div>

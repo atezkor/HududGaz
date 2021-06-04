@@ -117,7 +117,7 @@
                                     <div class="custom-file">
                                         <input type="file" name="logo" id="logo" accept=".jpg, .png, .svg" class="custom-file-input">
                                         <label class="custom-file-label" for="logo">
-                                            <span id="path_label">{{__('admin.organization.upload_image')}}</span>
+                                            <span id="file_hint">{{__('admin.organization.upload_image')}}</span>
                                                 <span class="btn btn-info"><i class="far fa-file-image"></i></span>
                                         </label>
                                     </div>
@@ -141,7 +141,7 @@
 <script>
     $('#logo').change(function(input) {
         try {
-            $('#path_label').text(input.target.files[0].name);
+            $('#file_hint').text(input.target.files[0].name);
             let reader = new FileReader();
             reader.readAsDataURL(input.target.files[0]);
             reader.onload = function() {
@@ -162,7 +162,7 @@
         });
         $("#preview").html('');
 
-        $('#path_label').text('{{__('admin.organization.upload_image')}}');
+        $('#file_hint').text('{{__('admin.organization.upload_image')}}');
     });
 </script>
 @endsection

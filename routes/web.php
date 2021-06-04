@@ -18,6 +18,10 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'entry'])->name('auth');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Profile
+Route::get('profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('profile/{user}/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
 // Admin routes
 Route::group(['prefix' => 'admin'], function() {
     Route::get('', function() {

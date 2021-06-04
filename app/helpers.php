@@ -39,6 +39,13 @@ function getName(): string {
     return Cache::get('organization')->branch_name ?? "";
 }
 
+function setImage($user): string {
+    if ($user->avatar)
+        return '/storage/users/' . $user->avatar;
+
+    return '/img/avatar.svg';
+}
+
 function formatDate($date, $format = 'd.m.Y'): string {
     $res = date_create($date);
     return date_format($res, $format);

@@ -165,7 +165,13 @@
             {!! $model->additional !!}
             <ol start="12">
                 <li>
-                    <span><b>@lang('district.pdf.installed_equipments')</b>: {!! $model->equipments !!}</span>
+                    <span><b>@lang('district.pdf.installed_equipments')</b>: </span>
+                    @foreach ($equipments as $equipment)
+                    <span>{{$equipment['number']}} ta</span>
+                    <span>{{$equipment['type']}} </span>
+                    <span class="lowercase">{{$equipment['equipment']}} </span>
+                    <span>{{$equipment['note']}}</span>,
+                    @endforeach
                     <div class="text-center">
                         @lang('district.pdf.type')
                     </div>
