@@ -26,7 +26,7 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
-        return view('propositions.index', new PropositionListViewModel($this->service));
+        return view('technic.propositions', new PropositionListViewModel($this->service));
     }
 
     /**
@@ -38,7 +38,7 @@ class PropositionController extends Controller {
     public function create(): View|RedirectResponse {
         $model = new Proposition();
         $organs = Region::query()->pluck('org_name', 'id');
-        return view('propositions.form', ['action' => route('propositions.store'), 'method' => 'POST',
+        return view('technic.form', ['action' => route('propositions.store'), 'method' => 'POST',
             'model' => $model, 'organs' => $organs,
             'activities' => Activity::query()->pluck('activity', 'id'), 'applicant' => new Individual()]);
     }
@@ -75,7 +75,7 @@ class PropositionController extends Controller {
         $applicant = $proposition->applicant;
 
         $organs = Region::query()->pluck('org_name', 'id');
-        return view('propositions.form', ['action' => route('propositions.update', ['proposition' => $proposition]),
+        return view('technic.form', ['action' => route('propositions.update', ['proposition' => $proposition]),
             'method' => 'PUT', 'model' => $proposition, 'organs' => $organs,
             'activities' => Activity::query()->pluck('activity', 'id'), 'applicant' => $applicant]);
     }

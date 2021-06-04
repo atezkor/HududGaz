@@ -71,7 +71,7 @@
                                     <label for="locale">{{__('admin.user.locale')}}</label>
                                     <select name="locale" id="locale" class="form-control">
                                         <option value="uz">{{__('admin.uz')}}</option>
-                                        <option value="uzk">{{__('admin.uzk')}}</option>
+                                        <option value="uzk" @if($model->locale == 'uzk') selected @endif>{{__('admin.uzk')}}</option>
                                     </select>
                                 </div>
 

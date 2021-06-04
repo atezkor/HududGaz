@@ -18,12 +18,12 @@ class CreateRecommendationsTable extends Migration {
             $table->tinyInteger('status')->default(1);
             $table->string('address');
             $table->string('access_point');
+            $table->string('gas_network');
             $table->integer('above_len');
             $table->integer('under_len');
             $table->integer('diameter');
             $table->integer('depth');
             $table->integer('capability');
-            $table->integer('real_capacity');
             $table->integer('pressure_win');
             $table->integer('pressure_sum');
             $table->string('grc');

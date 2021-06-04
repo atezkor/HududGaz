@@ -20,7 +20,8 @@ class UserRequest extends FormRequest {
             'name' => __('admin.user.name'),
             'role' => __('admin.user.role'),
             'email' => __('admin.user.email'),
-            'password' => __('admin.user.password')
+            'password' => __('admin.user.password'),
+            'lastname' => __('admin.user.lastname')
         ];
     }
 
@@ -30,6 +31,11 @@ class UserRequest extends FormRequest {
      * @return array
      */
     public function rules(): array {
+        $pass = [
+            'POST' => ['required', 'min:6'],
+            'PUT' => []
+        ];
+
         return [
             'name' => ['required'],
             'lastname' => ['required'],
@@ -39,7 +45,7 @@ class UserRequest extends FormRequest {
             'email' => ['required',
                 Rule::unique('users', 'email')->ignore($this->route('user'))
             ],
-            'password' => ['required', 'min:6'],
+            'password' => $pass[$this->input('_method')],
             'locale' => [],
             'position' => [],
             'mac_address' => []

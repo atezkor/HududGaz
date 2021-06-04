@@ -28,9 +28,9 @@
             margin-top: 20px;
         }
 
-        .my-20 {
-            margin-top: 20px;
-            margin-bottom: 20px;
+        .my-15 {
+            margin-top: 15px;
+            margin-bottom: 15px;
         }
 
         .text-left {
@@ -95,7 +95,7 @@
     </div>
     <div class="text-center section">
         <div class="uppercase">@lang('district.pdf.recommendation')</div>
-        <b><span style="font-family: DejaVuSans, sans-serif">&#8470;</span> {{$proposition->number}}</b>
+        <b># {{$proposition->number}}</b>
     </div>
 
     <div class="body mt-20">
@@ -126,7 +126,7 @@
                 </li>
                 <li>
                     <strong>@lang('district.pdf.diameter_and_depth'):</strong>
-                    {{$model->diameter}} @lang('district.pdf.meter'), {{$model->depth}} @lang('district.pdf.meter')
+                    {{$model->diameter}} @lang('district.pdf.millimeter'), {{$model->depth}} @lang('district.pdf.meter')
                 </li>
                 <li>
                     <strong>@lang('district.pdf.gas_pressure'):</strong>
@@ -147,19 +147,28 @@
                     <table class="text-right">
                         <tr>
                             <td class="text-center"><strong>@lang('district.pdf.pipe_real_capacity'):</strong></td>
-                            <td><u>{{$model->real_capacity}}</u> @lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.second') @lang('district.pdf.year')</td>
+                            <td><u>{{$model->capability}}</u> @lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.second') @lang('district.pdf.year')</td>
+                        </tr>
+                    </table>
+                </li>
+                <li class="text-left">
+                    <strong>@lang('district.pdf.grc'):</strong> <span class="f-r">{{$model->grc}}</span>
+                    <div class="clear"></div>
+                    <table class="text-right">
+                        <tr>
+                            <td class="text-center"><strong>@lang('district.pdf.pipe_real_capacity'):</strong></td>
+                            <td>{{$model->grc}}</td>
                         </tr>
                     </table>
                 </li>
                 <li>
-                    <span>@lang('district.pdf.grc'):</span> {{$model->grc}}
+                    <strong>@lang('district.pdf.gas_network') </strong>
+                    <span>{{$model->gas_network}} </span>
+                    <span>@lang('district.pdf.noname')</span>
                 </li>
                 <li>
-                    <span>@lang('district.pdf.gas_network'):</span>
-                </li>
-                <li>
-                    <span>@lang('district.pdf.gas_consume'):</span>
-                    {{$model->consumption}} @lang('district.pdf.meter')<sup>3</sup>
+                    <strong>@lang('district.pdf.gas_consume'):</strong>
+                    {{$model->consumption}} @lang('district.pdf.meter')<sup>3</sup>.
                 </li>
             </ol>
             {!! $model->additional !!}
@@ -169,8 +178,8 @@
                     @foreach ($equipments as $equipment)
                     <span>{{$equipment['number']}} ta</span>
                     <span>{{$equipment['type']}} </span>
-                    <span class="lowercase">{{$equipment['equipment']}} </span>
-                    <span>{{$equipment['note']}}</span>,
+                    <span class="lowercase">{{$equipment['equipment']}}</span>
+                    <span>{{$equipment['note']}}</span>@if($loop->index < $loop->last - 1){{','}}@else{{'.'}}@endif
                     @endforeach
                     <div class="text-center">
                         @lang('district.pdf.type')
@@ -179,7 +188,7 @@
             </ol>
         </div>
 
-        <div class="text-center uppercase my-20">
+        <div class="text-center uppercase my-15">
             <strong style="font-size: 14px;">@lang('district.pdf.note')</strong>
         </div>
 

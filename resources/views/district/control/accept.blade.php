@@ -13,6 +13,12 @@
         </div>
 
         <div class="form-group">
+            <label for="gas_network">@lang('district.recommendation.gas_network')<span class="required">*</span></label>
+            <input type="text" name="gas_network" id="gas_network" value="{{$model->gas_network}}"
+                   class="form-control" placeholder="@lang('district.recommendation.gas_network')@lang('district.recommendation.input')" required>
+        </div>
+
+        <div class="form-group">
             <label for="above_len">@lang('district.recommendation.above_len')<span class="required">*</span></label>
             <input type="number" name="above_len" id="above_len" value="{{$model->above_len}}"
                    class="form-control" placeholder="@lang('district.recommendation.above_hint')" required>
@@ -28,24 +34,18 @@
             <input type="number" name="diameter" id="diameter" step="0.01" value="{{$model->diameter}}"
                    class="form-control" placeholder="@lang('district.recommendation.diameter_hint')" required>
         </div>
-
+    </div>
+    <div class="col-6 pl-3">
         <div class="form-group">
             <label for="depth">@lang('district.recommendation.depth')<span class="required">*</span></label>
             <input type="number" name="depth" id="depth" value="{{$model->depth}}"
                    class="form-control" placeholder="@lang('district.recommendation.depth_hint')" required>
         </div>
-    </div>
-    <div class="col-6 pl-3">
+
         <div class="form-group">
             <label for="capability">@lang('district.recommendation.capability')<span class="required">*</span></label>
             <input type="number" name="capability" id="capability" step="0.1" value="{{$model->capability}}"
                    class="form-control" placeholder="@lang('district.recommendation.capacity_hint')" required>
-        </div>
-
-        <div class="form-group">
-            <label for="real_capacity">@lang('district.recommendation.real_capacity')<span class="required">*</span></label>
-            <input type="number" name="real_capacity" id="real_capacity" step="0.1" value="{{$model->real_capacity}}"
-                   class="form-control" placeholder="@lang('district.recommendation.real_hint')" required>
         </div>
 
         <div class="form-group">
@@ -81,13 +81,13 @@
         @else
             <ol start="9">
                 <li>
-                    <span>@lang('district.pdf.purpose_for_use'):</span>
+                    <span class="text-bold">@lang('district.pdf.purpose_for_use'):</span>
                 </li>
                 <li>
-                    <span>Buyurtmachi uchun alohida shartlar:</span>
+                    <span class="text-bold">Buyurtmachi uchun alohida shartlar:</span>
                 </li>
                 <li>
-                    <span>Buyurtmachi manzili:</span>
+                    <span class="text-bold">Buyurtmachi manzili:</span>
                 </li>
             </ol>
         @endif

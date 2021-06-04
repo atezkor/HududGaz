@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\File;
 
 class DesignerService extends CrudService {
 
-    public function __construct() {
-        $this->model = new Designer();
+    public function __construct(Designer $designer) {
+        $this->model = $designer;
     }
 
     public function create($data) {

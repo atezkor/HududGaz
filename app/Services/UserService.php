@@ -20,8 +20,8 @@ class UserService extends CrudService {
     }
 
     public function update($data, $model) {
-        $data['email'] = $data['username'];
-        unset($data['username']);
+//        $data['email'] = $data['username'];
+//        unset($data['username']);
 
         if (isset($data['password']))
             $data['password'] = $this->hashed($data['password']);
