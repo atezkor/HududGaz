@@ -94,10 +94,8 @@
         </textarea>
     </div>
 
-    <div id="equipments" class="col-12">
-        <input type="hidden" id="equip_data" value="{{$model->equipments ?? "[]"}}">
-    </div>
-    <input type="hidden" name="equipments" id="equips">
+    <div id="equipments" class="col-12"></div>
+    <input type="hidden" name="equipments" id="equips" value="{{$model->equipments ?? "[]"}}">
 
     <div class="col-12 px-2">
         <button type="button" onclick="addEquipment()" class="btn btn-block btn-outline-info text-bold">

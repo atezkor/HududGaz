@@ -94,7 +94,7 @@
         });
     }
 
-    function addEquipment(equips_data = new Equipment()) {
+    function addEquipment(equips_data = new Equipment()) { // equips_data - for select necessary options and input fields
         submit.attr('disabled', false);
         ajax("{{route('district.equipment.add')}}", function(data) {
             create(data, equips_data);
@@ -229,6 +229,7 @@
             }
         }
     }
+    // You must rewrite this code!
 
     function fillSelect(element, data, first, value = '') {
         let option = document.createElement('option');
@@ -240,9 +241,9 @@
         for (let i in data) {
             j = i;
             option = document.createElement('option');
-            option.value = j;
+            option.value = i;
             option.text = data[j];
-            if (value === j) {
+            if (i === value.toString()) {
                 option.selected = true;
             }
             element.append(option);
@@ -250,7 +251,7 @@
     }
 
     function changeEquips() {
-        let data = JSON.parse($('#equip_data').val());
+        let data = JSON.parse(equips_input.val());
         data.forEach(equip => {
             addEquipment(equip);
         });
@@ -258,14 +259,11 @@
         if (data.length) {
             submit.attr('disabled', false);
         }
-
-        Stringify(data)
     }
 
     function Stringify(data) {
         equips_input.val(JSON.stringify(data));
     }
-    // You must rewrite this code!
 
     $(function() {
         if ('{{$type}}' === 'accept') {
