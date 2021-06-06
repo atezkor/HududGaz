@@ -2,17 +2,17 @@
 
 namespace App\Services;
 
-use App\Models\Equipment;
-use App\Models\EquipmentType;
-use App\Models\Organization;
-use App\Models\Recommendation;
-use Barryvdh\DomPDF\PDF;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Equipment;
+use App\Models\EquipmentType;
+use App\Models\Organization;
+use App\Models\Recommendation;
+use Barryvdh\DomPDF\PDF;
 
 
 class RecommendationService extends CrudService {
@@ -67,7 +67,7 @@ class RecommendationService extends CrudService {
 
     public function update($data, $model) {
         $this->deleteFile($model->file);
-        $data['status'] = 2;
+        $data['status'] = 1;
         if (isset($data['file']))
             $data['file'] = $this->createFile($data['file']);
 
@@ -81,18 +81,23 @@ class RecommendationService extends CrudService {
         $district = districts()[$organ->getAttribute('region')];
         $organization = Organization::Data();
 
-        $equipments = json_decode($recommendation->getAttribute('equipments'), true);
-        foreach ($equipments as $key => $equipment) {
-            $equipments[$key]['equipment'] = Equipment::query()->where('id', '=', $equipment['equipment'])->pluck('name')[0];
-            $equipments[$key]['type'] = EquipmentType::query()->where('id','=', $equipment['type'])->pluck('type')[0];
+        $data = ['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ, 'consumer' => $applicant,
+            'district' => $district, 'organization' => $organization];
+
+        if ($recommendation->type == 'accept') {
+            $equipments = json_decode($recommendation->getAttribute('equipments'), true);
+            foreach ($equipments as $key => $equipment) {
+                $equipments[$key]['equipment'] = Equipment::query()->where('id', '=', $equipment['equipment'])->pluck('name')[0];
+                $equipments[$key]['type'] = EquipmentType::query()->where('id','=', $equipment['type'])->pluck('type')[0];
+            }
+
+            $data['equipments'] = $equipments;
         }
 
-        view()->share(['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ,
-            'consumer' => $applicant, 'district' => $district, 'organization' => $organization,
-            'equipments' => $equipments]);
+        view()->share($data);
 
         $this->pdf->loadView('district.pdf.' . $recommendation->type);
-        return $this->pdf->download(time() . '.pdf');
+        return $this->pdf->stream(time() . '.pdf');
     }
 
     private function createFile($file): string {

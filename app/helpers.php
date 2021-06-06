@@ -106,7 +106,7 @@ function buildType(): array {
     ];
 }
 
-function dateFull($date): string {
+function dateFull($date, bool $reverse = false): string {
     $months = [
         __('district.january'),
         __('district.february'),
@@ -121,9 +121,13 @@ function dateFull($date): string {
         __('district.november'),
         __('district.december'),
     ];
+
     $date = date_create($date);
     $day = date_format($date, 'j');
     $month = date_format($date, 'n');
     $year = date_format($date, 'Y');
+
+    if ($reverse)
+        return $year . '-' . __('global.year') . ' ' . $day . '-' . $months[$month - 1];
     return $day . '-' . $months[$month - 1] . ', ' . $year . '-' . __('global.year');
 }

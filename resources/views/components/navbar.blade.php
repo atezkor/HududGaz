@@ -37,7 +37,7 @@
         <li class="nav-item">
             <div class="user-panel d-flex" style="margin-top: 3px">
                 <div class="image">
-                    <img src="{{setImage($user)}}" class="img-circle elevation-2" alt="img">
+                    <img src="{{setImage($user)}}" class="img-circle elevation-1" alt="img">
                 </div>
                 <div class="info">
                     <a href="{{route('profile.edit', ['user' => $user->getAuthIdentifier()])}}" class="d-block" style="color: rgba(0, 0, 0, 0.5)">

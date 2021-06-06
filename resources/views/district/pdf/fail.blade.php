@@ -4,30 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>PDF</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        @page {
+            size: A4;
+        }
+
+        body {
+            padding: 20mm 15mm 20mm 30mm;
+            text-align: justify;
+            line-height: 1.3;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        /*.my-15 {*/
+        /*    margin-top: 15px;*/
+        /*    margin-bottom: 15px;*/
+        /*}*/
+
+        /*.text-left {*/
+        /*    text-align: left;*/
+        /*}*/
+
+        .text-right {
+            text-align: right;
+        }
+
+        /*.text-center {
+            text-align: center;
+        }*/
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        /*.uppercase {
+            text-transform: uppercase;
+        }*/
+
+        .lowercase {
+            text-transform: lowercase;
+        }
+
+        .f-l {
+            float: left;
+        }
+
+        .f-r {
+            float: right;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #000000;
+        }
+
+        li {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="text-right">
-    <h4>
-        <span class="uppercase">&#8220;@lang('district.pdf.confirmation')&#8221;</span><br>
-        <span>&#8220;{{$organ->org_name}}&#8221; @lang('district.pdf.section')</span><br>
-        <span>@lang('district.pdf.engineer') {{$organ->lead_engineer}}</span>
-    </h4>
-</div>
-<div class="text-center section">
-    <div class="uppercase">@lang('district.pdf.recommendation')</div>
-    <strong>№ {{$proposition->number}}</strong>
-</div>
-
-<div class="body mt-20">
-    <div>
-        <span class="f-l">{{formatDate($model->created_at)}} - @lang('district.pdf.year')</span>
-        <strong class="f-r">{{$district}}</strong>
-        <div class="clear"></div>
+    <div class="d-flex">
+        <span class="f-l"># 190</span>
+        <span class="f-r">{{formatDate($model->created_at)}}</span>
+    </div>
+    <div class="clear">
+        <br><br>
+    </div>
+    <div class="text-right">
+        <h4>
+            <span>Davlat xizmlatlari agentligi</span><br>
+            <span>Xorazm viloyati boshqarmasi</span><br>
+            <span>{{$district}} markaziga</span>
+        </h4>
     </div>
 
     <div class="mt-20">
-
+        <div>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&#8220;{{$organization->shareholder_name}}&#8221; AJ &#8220;{{$organization->branch_name}}&#8221;
+                GTF &#8220;{{$organ->org_name}}&#8221; gaz ta&#8217;minot bo&#8216;limi,
+                sizning <span class="lowercase">{{dateFull($proposition->created_at, true)}}dagi</span> {{$proposition->number}}-sonli xatingizga javoban quyidagilarni ma&#8217;lum qiladi.</span>
+        </div>
     </div>
-</div>
+
+    <div class="mt-20">
+        {!! $model->additional !!}
+    </div>
+
+    <div class="mt-20">
+        <span>&#8220;{{$organ->org_name}}&#8221; gaz ta&#8217;minoti</span><br>
+        <span>bo&#8216;limi bosh muhandisi</span>
+        <span class="f-r">{{$organ->lead_engineer}}</span>
+    </div>
+
+    <table class="mt-20 text-bold" style="font-size: 12px">
+        <tr>
+            <td>
+                <span>{{$organ->org_number}}, {{$organ->address}}.</span><br>
+                <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
+                <span>Elektron pochta: {{$organ->email}}</span>
+            </td>
+            <td>
+                <div class="f-r">
+                    <span>{{$organ->org_number}}, {{$organ->address_krill}}.</span><br>
+                    <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
+                    <span>Elektron pochta: {{$organ->email}}</span>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

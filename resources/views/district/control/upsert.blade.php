@@ -30,21 +30,6 @@
                                     <input type="hidden" name="proposition_id" value="{{$proposition}}">
                                     <input type="hidden" name="type" value="{{$type}}">
                                     <input type="hidden" name="organ" value="{{auth()->user()->organ ?? ''}}">
-
-                                    @if ($model->status == 3)
-                                    <div class="col-12 mt-5">
-                                        <div class="form-group">
-                                            <label for="file">@lang('district.file')</label>
-                                            <div class="custom-file">
-                                                <input type="file" name="file" id="file" class="custom-file-input">
-                                                <label class="custom-file-label" for="file">
-                                                    <span id="file_hint">@lang('district.file_hint')</span>
-                                                    <span class="btn btn-info"><i class="far fa-file-pdf"></i></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -136,7 +136,7 @@ class RecommendationController extends Controller {
         $data = $request->validated();
 
         $this->service->update($data, $recommendation);
-        $this->service_prop->update(['status' => 5], $recommendation->proposition);
+        $this->service_prop->update(['status' => 3], $recommendation->proposition);
         return redirect()->route('district.recommendations.cancelled');
     }
 
