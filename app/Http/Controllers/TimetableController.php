@@ -8,7 +8,7 @@ use Illuminate\View\View;
 
 class TimetableController extends Controller {
     public function index(): View|RedirectResponse {
-        return redirect()->route('admin.users.index');
+        return view('admin.timetable');
     }
 
     public function update(Request $request): RedirectResponse {

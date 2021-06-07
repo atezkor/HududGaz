@@ -20,9 +20,9 @@ class StatusSeeder extends Seeder {
 
         $this->createStatus("Texnik tavsiyanomani ochib ko\u{2018}rdi",60);
         $this->createStatus("Texnik tavsiyanomani bekor qildi",60);
-        $this->createStatus("Texnik arizani bekor qildi",60);
         $this->createStatus("Texnik texnik shartni yaratdi",60);
         $this->createStatus("Texnik imzolangan texnik shartni yukladi",60);
+        $this->createStatus("Texnik arizani bekor qildi",60);
 
         $this->createStatus("Loyihachi texnik shartni ochib ko\u{2018}rdi",72);
         $this->createStatus("Loyihachi muhandisga loyihani yukladi",72);

@@ -43,6 +43,10 @@ class RecommendationController extends Controller {
         return view('district.index', new RecommendationViewModel($this->service, auth()->user()->organ ?? 0));
     }
 
+    public function progress(): View {
+        return view('district.progress', new RecommendationViewModel($this->service, auth()->user()->organ ?? 0, [4, 5], 2));
+    }
+
     public function cancelled(): View {
         return view('district.cancelled', new RecommendationViewModel($this->service, auth()->user()->organ ?? 0, [6], 3));
     }

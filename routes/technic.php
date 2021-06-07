@@ -11,3 +11,7 @@ Route::get('recommendations/{recommendation}', [App\Http\Controllers\TechnicCont
 Route::post('recommendations/{recommendation}/back', [App\Http\Controllers\TechnicController::class, 'back'])->name('technic.recommendation.back');
 
 Route::get('tech-conditions', [App\Http\Controllers\TechnicController::class, 'index'])->name('technic.index');
+Route::get('recommendations/{recommendation}/create', [App\Http\Controllers\TechnicController::class, 'create'])->name('technic.tech_condition.create');
+Route::post('recommendation/store', [App\Http\Controllers\TechnicController::class, 'store'])->name('technic.tech_condition.store');
+Route::get('recommendations/{recommendation}/edit', [App\Http\Controllers\TechnicController::class, 'edit'])->name('technic.tech_condition.edit');
+Route::post('recommendations/{recommendation}/update', [App\Http\Controllers\TechnicController::class, 'update'])->name('technic.tech_condition.update');

@@ -51,7 +51,7 @@
                                 <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                             </td>
                             <td>
-                                <a href="{{"tech-condition"}}" class="btn btn-outline-info">
+                                <a href="{{route('technic.tech_condition.create', ['recommendation' => $recommendations[$key]])}}" class="btn btn-outline-info">
                                     <i class="fas fa-plus"></i>
                                 </a>
                                 <button type="button" onclick="back('{{route('technic.recommendation.back', ['recommendation' => $recommendations[$key]])}}')"

@@ -162,5 +162,14 @@ return [
         'description' => "Holat tavsifi",
         'transitions' => "O\u{2018}tishlar",
         'term' => "Bajarish muddati (soat)",
+    ],
+    'timetable' => [
+        'holiday_days' => "Bayram kunlari",
+        'extra_work_days' => "Qo\u{2018}shimcha ish kunlari",
+        'create' => "Yaratish",
+        'name' => "Nomi",
+        'start' => "Boshi",
+        'end' => "Oxiri",
+        'alert_title' => "Ushbu sanani o\u{2018}chirib tashlamoqchimisiz?"
     ]
 ];

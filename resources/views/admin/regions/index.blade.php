@@ -26,7 +26,6 @@
                                     <th>{{__('admin.email')}}</th>
                                     <th>{{__('admin.organ.col_phone')}}</th>
                                     <th>{{__('admin.organ.col_address')}}</th>
-                                    <th>{{__('admin.fax')}}</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -40,7 +39,6 @@
                                     <td>{{$model->email}}</td>
                                     <td>{{$model->phone}}</td>
                                     <td>{{$model->address}}</td>
-                                    <td>{{$model->fax}}</td>
                                     <td>
                                         <form action="{{route('admin.regions.delete', ['region' => $model])}}"
                                               method="post" id="form-{{$model->id}}">

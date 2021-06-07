@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recommendation;
-use App\Services\RecommendationService;
-use App\ViewModels\RecommendationViewModel;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Models\Recommendation;
+use App\Services\RecommendationService;
+use App\ViewModels\RecommendationViewModel;
 
 class TechnicController extends Controller {
     private RecommendationService $rec_service;
@@ -24,8 +24,20 @@ class TechnicController extends Controller {
         return $this->rec_service->techShow($recommendation);
     }
 
-    public function accept() {
-        $this->rec_service->accept();
+    public function create(Recommendation $recommendation): View {
+        return view("technic.control.$recommendation->type");
+    }
+
+    public function store(Recommendation $recommendation): View {
+        return view("technic.pdf.$recommendation->type");
+    }
+
+    public function edit() {
+
+    }
+
+    public function update() {
+        $this->cancel();
     }
 
     public function back(Request $request, Recommendation $recommendation) {
@@ -34,5 +46,14 @@ class TechnicController extends Controller {
 
     public function index(): View {
         return view('technic.index');
+    }
+
+    private function accept() {
+        $this->rec_service->accept();
+    }
+
+    private function cancel() {
+        $this->rec_service->accept();
+        $this->accept();
     }
 }
