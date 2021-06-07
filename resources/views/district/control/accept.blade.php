@@ -19,15 +19,19 @@
         </div>
 
         <div class="form-group">
-            <label for="above_len">@lang('district.recommendation.above_len')<span class="required">*</span></label>
-            <input type="number" name="above_len" id="above_len" value="{{$model->above_len}}"
-                   class="form-control" placeholder="@lang('district.recommendation.above_hint')" required>
+            <label for="pipeline">@lang('district.recommendation.pipeline')<span class="required">*</span></label>
+            <select name="pipeline" id="pipeline" class="custom-select">
+                <option value="under_len">@lang('district.recommendation.under_len')</option>
+                <option value="above_len" @if($model->pipeline == 'above_len') selected @endif>
+                    @lang('district.recommendation.above_len')
+                </option>
+            </select>
         </div>
 
         <div class="form-group">
-            <label for="under_len">@lang('district.recommendation.under_len')<span class="required">*</span></label>
-            <input type="number" name="under_len" id="under_len" value="{{$model->under_len}}"
-                   class="form-control" placeholder="@lang('district.recommendation.under_hint')" required>
+            <label for="length">@lang('district.recommendation.length')<span class="required">*</span></label>
+            <input type="number" name="length" id="length" value="{{$model->length}}"
+                   class="form-control" placeholder="@lang('district.recommendation.len_hint')" required>
         </div>
         <div class="form-group">
             <label for="diameter">@lang('district.recommendation.diameter')<span class="required">*</span></label>
@@ -82,20 +86,23 @@
             <ol start="9">
                 <li>
                     <span class="text-bold">@lang('district.pdf.purpose_for_use'):</span>
+                    <span>&nbsp;</span>
                 </li>
                 <li>
                     <span class="text-bold">Buyurtmachi uchun alohida shartlar:</span>
+                    <span>&nbsp;</span>
                 </li>
                 <li>
                     <span class="text-bold">Buyurtmachi manzili:</span>
+                    <span>&nbsp;</span>
                 </li>
             </ol>
         @endif
         </textarea>
     </div>
 
-    <div id="equipments" class="col-12"></div>
-    <input type="hidden" name="equipments" id="equips" value="{{$model->equipments ?? "[]"}}">
+    <div id="equipment-part" class="col-12"></div>
+    <input type="hidden" name="equipments" id="equipments" value="{{$model->equipments ?? "[]"}}">
 
     <div class="col-12 px-2">
         <button type="button" onclick="addEquipment()" class="btn btn-block btn-outline-info text-bold">

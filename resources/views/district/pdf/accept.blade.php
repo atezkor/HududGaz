@@ -118,8 +118,7 @@
                     <div class="text-center">(@lang('district.pdf.full_address'))</div>
                     <br>
                     <div class="text-center">
-                        @lang('district.pdf.under_len'): {{$model->under_len}} @lang('district.pdf.meter'),
-                        @lang('district.pdf.above_len'): {{$model->above_len}} @lang('district.pdf.meter')
+                        <span>@lang("district.pdf.$model->pipeline"): {{$model->length}} @lang('district.pdf.meter')</span>
                     </div>
                     <hr>
                     <div class="text-center">(@lang('district.pdf.full_len'))</div>

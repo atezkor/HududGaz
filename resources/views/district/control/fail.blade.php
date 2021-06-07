@@ -3,7 +3,7 @@
         <div class="form-group row">
             <label for="number" class="col-4 col-form-label">@lang('global.proposition.number')</label>
             <div class="col-8">
-                <input type="text" id="number" class="form-control" value="{{$proposition}}" disabled>
+                <input type="text" id="number" class="form-control" value="{{$proposition->number}}" disabled>
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
         <div class="form-group row">
             <label for="date" class="col-4 col-form-label">@lang('global.proposition.date')</label>
             <div class="col-8">
-                <input type="date" name="date" class="form-control" value="{{now()->format('Y-m-d')}}" disabled>
+                <input type="date" name="date" class="form-control" value="{{formatDate($proposition->data_created, 'Y-m-d')}}" disabled>
             </div>
         </div>
     </div>

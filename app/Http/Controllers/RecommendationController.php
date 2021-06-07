@@ -58,11 +58,11 @@ class RecommendationController extends Controller {
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $proposition
+     * @param Proposition $proposition
      * @param string $type
      * @return View
      */
-    public function create(int $proposition, string $type): View {
+    public function create(Proposition $proposition, string $type): View {
         $recommendation = new Recommendation();
         return view("district.control.upsert", ['model' => $recommendation, 'proposition' => $proposition,
             'type' => $type, 'action' => route('district.recommendation.store', ['type' => $type]),
@@ -124,7 +124,7 @@ class RecommendationController extends Controller {
      */
     public function edit(Recommendation $recommendation): View {
         $type = $recommendation->type;
-        return view('district.control.upsert', ['model' => $recommendation, 'proposition' => $recommendation->proposition->id,
+        return view('district.control.upsert', ['model' => $recommendation, 'proposition' => $recommendation->proposition,
             'type' => $type, 'action' => route('district.recommendation.update', ['recommendation' => $recommendation]),
             'back' => route('district.recommendations.cancelled')]);
     }

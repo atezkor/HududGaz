@@ -17,7 +17,7 @@
                         <h3>@lang('district.recommendation.heading_create')</h3>
                     @endif
                     </div>
-                    <form id="form" action="{{$action}}" method="post" enctype="multipart/form-data">
+                    <form id="form" action="{{$action}}" method="post">
                         @csrf
                         @include('components.errors')
                         <div class="card-body">
@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="card-body">
                                     @include("district.control.$type")
-                                    <input type="hidden" name="proposition_id" value="{{$proposition}}">
+                                    <input type="hidden" name="proposition_id" value="{{$proposition->id}}">
                                     <input type="hidden" name="type" value="{{$type}}">
                                     <input type="hidden" name="organ" value="{{auth()->user()->organ ?? ''}}">
                                 </div>
@@ -57,9 +57,9 @@
 <script>
     // You must rewrite this code!
     let count = 0;
-    let equips_input = $('#equips');
+    let equips = $('#equipments');
     let submit = $('#submit');
-    let equips = [];
+    let equipments = [];
     class Equipment {
         constructor() {
             this.equipment = '';
@@ -79,16 +79,16 @@
         });
     }
 
-    function addEquipment(equips_data = new Equipment()) { // equips_data - for select necessary options and input fields
+    function addEquipment(update_data = new Equipment()) { // update_data - for select necessary options and input fields
         submit.attr('disabled', false);
         ajax("{{route('district.equipment.add')}}", function(data) {
-            create(data, equips_data);
+            create(data, update_data);
         });
     }
 
-    function create(data, equips_data) {
-        equips.push(new Equipment());
-        let equipments = $('#equipments');
+    function create(data, update_data) {
+        equipments.push(new Equipment());
+        let equipment_part = $('#equipment-part');
         let row = document.createElement('div');
         let row2 = document.createElement('div');
         let col = document.createElement('div');
@@ -105,18 +105,20 @@
         append(row2, note, 'note', 'text', "@lang('district.equipment.note')", "@lang('district.equipment.note_hint')");
         append(col2, btn, '', null, '', '', 'btn btn-danger');
 
-        fillSelect(equipment, data, "@lang('district.equipment.name_hint')", equips_data.equipment);
-        fillSelect(type, [], "@lang('district.equipment.type_hint')", equips_data.type);
+        fillSelect(equipment, data, "@lang('district.equipment.name_hint')", update_data.equipment);
+        fillSelect(type, [], "@lang('district.equipment.type_hint')", update_data.type);
 
         equipment.onchange = change;
         function change(use = false) {
             $(type).empty();
-            equips[equipment.hint]['equipment'] = parseInt(equipment.value);
-            if (!use)
-                equips[equipment.hint]['type'] = '';
+            equipments[equipment.hint]['equipment'] = parseInt(equipment.value);
+            if (use !== true) {
+                equipments[equipment.hint]['type'] = '';
+                update_data.type = ''; // This after changed equipment, forget equipment-type data come from update data.
+            }
 
             ajax("{{route('district.equipment.type')}}" + `/${equipment.value}`, function(data) {
-                fillSelect(type, data, "@lang('district.equipment.type_hint')", equips_data.type);
+                fillSelect(type, data, "@lang('district.equipment.type_hint')", update_data.type);
             });
         }
 
@@ -130,7 +132,7 @@
 
         row.append(col, col2);
         col.append(row2);
-        equipments.append(row);
+        equipment_part.append(row);
         $(`#row-${count}`).show(300);
 
         /* For updating data */
@@ -140,7 +142,7 @@
             let div = document.createElement('div');
             div.classList.add('col-3');
 
-            setProperty(element, name, type, placeholder, equips_data);
+            setProperty(element, name, type, placeholder, update_data);
             if (label) {
                 let l = document.createElement('label');
                 l.textContent = label;
@@ -168,11 +170,11 @@
             element.value = data[name];
             element.onkeyup = function() {
                 if (type === 'number') {
-                    equips[element.hint][name] = parseInt(element.value);
+                    equipments[element.hint][name] = parseInt(element.value);
                 } else {
-                    equips[element.hint][name] = element.value;
+                    equipments[element.hint][name] = element.value;
                 }
-                Stringify(equips);
+                Stringify(equipments);
             }
         }
 
@@ -183,11 +185,11 @@
             element.hint = count;
             element.required = true;
             element.onchange = function() {
-                equips[element.hint][name] = parseInt(element.value);
-                Stringify(equips);
+                equipments[element.hint][name] = parseInt(element.value);
+                Stringify(equipments);
             }
 
-            equips[element.hint][name] = data[name];
+            equipments[element.hint][name] = data[name];
         } else {
             element.type = 'button';
             element.id = count + 1;
@@ -197,7 +199,7 @@
                 if (count === parseInt(element.id)) {
                     $(`#row-${element.id}`).hide(300, function() {
                         $(this).remove();
-                        equips.pop();
+                        equipments.pop();
                         count --;
                     });
                 } else {
@@ -236,7 +238,7 @@
     }
 
     function changeEquips() {
-        let data = JSON.parse(equips_input.val());
+        let data = JSON.parse(equips.val());
         data.forEach(equip => {
             addEquipment(equip);
         });
@@ -247,7 +249,7 @@
     }
 
     function Stringify(data) {
-        equips_input.val(JSON.stringify(data));
+        equips.val(JSON.stringify(data));
     }
 
     $(function() {
@@ -257,12 +259,16 @@
 
         setTimeout(() => {
             changeEquips();
-        })
+        });
     });
 
     $(document).ready(function() {
         $('#additional').summernote();
 
+        CustomValidity();
+    });
+
+    function CustomValidity() {
         $('input').each(function(){
             this.oninvalid = () => {
                 this.setCustomValidity("@lang('district.recommendation.required')");
@@ -271,16 +277,6 @@
                 this.setCustomValidity('');
             }
         });
-    });
-
-    $('#file').change(function(input) {
-        try {
-            $('#file_hint').text(input.target.files[0].name);
-        } catch (e) {}
-    })
-
-    $('#reset').on('click', function() {
-        $('#file_hint').text("@lang('district.file_hint')");
-    });
+    }
 </script>
 @endsection

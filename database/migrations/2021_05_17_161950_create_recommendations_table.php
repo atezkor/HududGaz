@@ -19,8 +19,8 @@ class CreateRecommendationsTable extends Migration {
             $table->string('address');
             $table->string('access_point');
             $table->string('gas_network');
-            $table->integer('above_len');
-            $table->integer('under_len');
+            $table->string('pipeline');
+            $table->integer('length');
             $table->integer('diameter');
             $table->integer('depth');
             $table->integer('capability');
