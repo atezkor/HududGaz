@@ -82,8 +82,8 @@
 </head>
 <body>
     <div class="d-flex">
-        <span class="f-l"># 190</span>
-        <span class="f-r">{{formatDate($model->created_at)}}</span>
+        <span class="f-l"># {{$proposition->id}}</span>
+        <span class="f-r">{{formatDate($proposition->created_at)}}</span>
     </div>
     <div class="clear">
         <br><br>

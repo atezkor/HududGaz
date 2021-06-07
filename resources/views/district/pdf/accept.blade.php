@@ -79,8 +79,8 @@
         }
 
         li {
-            margin-top: 10px;
-            margin-bottom: 10px;
+            margin-top: 8px;
+            margin-bottom: 8px;
         }
     </style>
 </head>
@@ -95,7 +95,7 @@
     </div>
     <div class="text-center section">
         <div class="uppercase">@lang('district.pdf.recommendation')</div>
-        <b># {{$proposition->number}}</b>
+        <b># {{$model->id}}</b>
     </div>
 
     <div class="body mt-20">
@@ -173,12 +173,12 @@
             {!! $model->additional !!}
             <ol start="12">
                 <li>
-                    <span><b>@lang('district.pdf.installed_equipments')</b>: </span>
+                    <span><b>@lang('district.pdf.installed_equipments')</b>:</span>
                     @foreach ($equipments as $equipment)
                     <span>{{$equipment['number']}} ta</span>
-                    <span>{{$equipment['type']}} </span>
+                    <span>{{$equipment['type']}}</span>
                     <span class="lowercase">{{$equipment['equipment']}}</span>
-                    <span>{{$equipment['note']}}</span>@if($loop->index < $loop->last - 1){{','}}@else{{'.'}}@endif
+                    <span>{{$equipment['note']}}</span>@if($loop->last){{'.'}}@else{{','}}@endif
                     @endforeach
                     <div class="text-center">
                         @lang('district.pdf.type')

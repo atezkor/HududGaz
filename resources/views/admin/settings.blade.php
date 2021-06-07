@@ -138,6 +138,7 @@
 </section>
 @endsection
 @section('javascript')
+<script src="{{'/js/typographer.js'}}"></script>
 <script>
     $('#logo').change(function(input) {
         try {
@@ -164,5 +165,12 @@
 
         $('#file_hint').text('{{__('admin.organization.upload_image')}}');
     });
+
+    $('input').each((i, input) => {
+        typographer(input);
+        input.oninput = function() {
+            typographer(input);
+        }
+    })
 </script>
 @endsection

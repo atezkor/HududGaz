@@ -39,8 +39,7 @@ Route::group(['prefix' => 'admin'], function() {
 
     readonly('statuses', StatusController::class, 'admin.statuses');
     reducer('activity-types', ActivityController::class, 'admin.activities');
-//    reducer('timetable', TimetableController::class, 'admin.timetable');
-    Route::get('timetable', [TimetableController::class, 'index'])->name('admin.timetable');
+    resource('timetable', TimetableController::class, 'admin.timetable');
 
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');
     Route::post('equipments/{equipment}/equipment-types', [EquipmentController::class, 'add'])->name('admin.equip_type.add');

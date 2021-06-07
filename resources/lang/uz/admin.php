@@ -170,6 +170,8 @@ return [
         'name' => "Nomi",
         'start' => "Boshi",
         'end' => "Oxiri",
+        'type' => "Oxiri",
+        'interval' => "Vaqt oralig\u{2018}i",
         'alert_title' => "Ushbu sanani o\u{2018}chirib tashlamoqchimisiz?"
     ]
 ];

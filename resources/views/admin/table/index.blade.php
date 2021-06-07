@@ -24,7 +24,7 @@
                                     </ul>
                                 </div>
                                 <div class="col-1">
-                                    <a href="" class="btn btn-info">@lang('admin.timetable.create')</a>
+                                    <a href="{{route('admin.timetable.create')}}" class="btn btn-info">@lang('admin.timetable.create')</a>
                                 </div>
                             </div>
                         </div>
@@ -34,28 +34,30 @@
                                 <div id="holiday" class="tab-pane active">
                                     <table class="table table-hover text-nowrap">
                                         <thead>
-                                        <tr>
-                                            <th>@lang('admin.timetable.name')</th>
-                                            <th>@lang('admin.timetable.start')</th>
-                                            <th>@lang('admin.timetable.end')</th>
-                                            <th style="width: 1px"></th>
-                                        </tr>
+                                            <tr>
+                                                <th>@lang('admin.timetable.name')</th>
+                                                <th>@lang('admin.timetable.start')</th>
+                                                <th>@lang('admin.timetable.end')</th>
+                                                <th style="width: 1px"></th>
+                                            </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($holidays as $model)
                                         <tr>
-                                            <td>Bosh</td>
-                                            <td>2021</td>
-                                            <td>2022</td>
+                                            <td>{{$model->name}}</td>
+                                            <td>{{$model->start}}</td>
+                                            <td>{{$model->end}}</td>
                                             <td>
-                                                <form action="" method="post" id="h">
+                                                <form action="{{route('admin.timetable.delete', ['timetable' => $model])}}" method="post" id="h-{{$model->id}}">
                                                     {{$csrf}}
                                                     @method('DELETE')
-                                                    <button type="button" onclick="remove()" class="btn btn-danger" title="@lang('global.btn_del')">
+                                                    <button type="button" onclick="remove('h-{{$model->id}}')" class="btn btn-danger" title="@lang('global.btn_del')">
                                                         <i class="fas fa-calendar-times"></i>
                                                     </button>
                                                 </form>
                                             </td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -70,20 +72,22 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Bosh</td>
-                                            <td>2021</td>
-                                            <td>2022</td>
-                                            <td>
-                                                <form action="" method="post" id="e">
-                                                    {{$csrf}}
-                                                    @method('DELETE')
-                                                    <button type="button" onclick="remove()" class="btn btn-danger" title="@lang('global.btn_del')">
-                                                        <i class="fas fa-calendar-times"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                        @foreach($extra_days as $model)
+                                            <tr>
+                                                <td>{{$model->name}}</td>
+                                                <td>{{$model->start}}</td>
+                                                <td>{{$model->end}}</td>
+                                                <td>
+                                                    <form action="{{route('admin.timetable.delete', ['timetable' => $model])}}" method="post" id="h-{{$model->id}}">
+                                                        {{$csrf}}
+                                                        @method('DELETE')
+                                                        <button type="button" onclick="remove('h-{{$model->id}}')" class="btn btn-danger" title="@lang('global.btn_del')">
+                                                            <i class="fas fa-calendar-times"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
