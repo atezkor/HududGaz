@@ -41,5 +41,9 @@
             'error' => "Xatolik yuz berdi. Qaytadan urunib ko\u{2018}ring",
             'process' => "Tumanga qaytarilmoqda ...",
             'wait' => "Xatolik yuz berganda sahifa qayta yuklanmaydi ...",
+        ],
+        'tech_condition' => [
+            'heading_create' => "Texnik shartni yaratish",
+            'cond_content' => "Texnik shart tarkibi"
         ]
     ];

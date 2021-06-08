@@ -62,7 +62,14 @@
                                     <label for="met_section">{{__('admin.organization.met_section')}}</label>
                                     <input type="text" name="met_section" id="met_section" class="form-control"
                                            value="{{$model->met_section}}"
-                                           placeholder="{{__('admin.organization.full_name')}}">                                </div>
+                                           placeholder="{{__('admin.organization.full_name')}}">
+                                </div>
+                                <div class="form-group col-6 pl-5">
+                                    <label for="exploitation_section">{{__('admin.organization.exploitation_section')}}</label>
+                                    <input type="text" name="exploitation_section" id="exploitation_section" class="form-control"
+                                           value="{{$model->exploitation_section}}"
+                                           placeholder="{{__('admin.organization.full_name')}}">
+                                </div>
                             </div>
 
                             <div class="form-group">

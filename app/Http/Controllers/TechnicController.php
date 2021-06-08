@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\TechConditionService;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -10,10 +11,13 @@ use App\Services\RecommendationService;
 use App\ViewModels\RecommendationViewModel;
 
 class TechnicController extends Controller {
+
+    private TechConditionService $service;
     private RecommendationService $rec_service;
 
-    public function __construct(RecommendationService $service) {
-        $this->rec_service = $service;
+    public function __construct(TechConditionService $service, RecommendationService $rec_service) {
+        $this->service = $service;
+        $this->rec_service = $rec_service;
     }
 
     public function recommendations(): View {
@@ -25,11 +29,23 @@ class TechnicController extends Controller {
     }
 
     public function create(Recommendation $recommendation): View {
-        return view("technic.control.$recommendation->type");
+        $equipments = json_decode($recommendation->getAttribute('equipments'));
+        foreach ($equipments as $equipment) {
+            $equipment->equipment = $recommendation->equipment($equipment->equipment);
+            $equipment->type = $recommendation->equipType($equipment->type);
+        }
+
+        return view("technic.control.$recommendation->type", ['recommendation' => $recommendation,
+            'proposition' => $recommendation->proposition, 'method' => 'POST',
+            'action' => route('technic.tech_condition.store', ['recommendation' => $recommendation]),
+            'equipments' => $equipments]);
     }
 
-    public function store(Recommendation $recommendation): View {
-        return view("technic.pdf.$recommendation->type");
+    public function store(Request $request, Recommendation $recommendation): View {
+        $data = $request['data'];
+        return $this->service->store($data, $recommendation);
+
+//        return redirect()->route('technic.tech_conditions.index');
     }
 
     public function edit() {

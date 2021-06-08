@@ -48,10 +48,15 @@
                                             <td>{{$model->start}}</td>
                                             <td>{{$model->end}}</td>
                                             <td>
-                                                <form action="{{route('admin.timetable.delete', ['timetable' => $model])}}" method="post" id="h-{{$model->id}}">
+                                                <form action="{{route('admin.timetable.delete', ['timetable' => $model])}}" method="post" id="form-{{$model->id}}">
                                                     {{$csrf}}
                                                     @method('DELETE')
-                                                    <button type="button" onclick="remove('h-{{$model->id}}')" class="btn btn-danger" title="@lang('global.btn_del')">
+                                                    <a href="{{route('admin.timetable.edit', ['timetable' => $model])}}" class="btn btn-info"
+                                                       title="@lang('global.btn_edit')">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
+                                                            title="@lang('global.btn_del')">
                                                         <i class="fas fa-calendar-times"></i>
                                                     </button>
                                                 </form>
@@ -78,10 +83,15 @@
                                                 <td>{{$model->start}}</td>
                                                 <td>{{$model->end}}</td>
                                                 <td>
-                                                    <form action="{{route('admin.timetable.delete', ['timetable' => $model])}}" method="post" id="h-{{$model->id}}">
+                                                    <form action="{{route('admin.timetable.delete', ['timetable' => $model])}}" method="post" id="form-{{$model->id}}">
                                                         {{$csrf}}
                                                         @method('DELETE')
-                                                        <button type="button" onclick="remove('h-{{$model->id}}')" class="btn btn-danger" title="@lang('global.btn_del')">
+                                                        <a href="{{route('admin.timetable.edit', ['timetable' => $model])}}" class="btn btn-info"
+                                                           title="@lang('global.btn_edit')">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
+                                                                title="@lang('global.btn_del')">
                                                             <i class="fas fa-calendar-times"></i>
                                                         </button>
                                                     </form>

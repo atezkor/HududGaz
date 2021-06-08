@@ -56,6 +56,7 @@ return [
         'tech_section' => "Texnik ishlab chiqarish bo\u{2018}limi yetakchi muhandisi",
         'legal_section' => "Yuridik shaxslarga gaz yetkazish bo\u{2018}limi boshlig\u{2018}i",
         'met_section' => "Metrologiya bo\u{2018}limi boshlig\u{2018}i",
+        'exploitation_section' => "Gaz tarmoqlarini ekspluatatsiya qilish bo\u{2018}limi boshlig\u{2018}i",
         'upload_image' => "Rasmni yuklang",
         'phone' => "Telefon raqami (har birini alohida qatorga yozing)",
         'org_num' => "Tashkilot №",

@@ -18,7 +18,9 @@ class TimetableController extends Controller {
 
     public function index(): View|RedirectResponse {
         $models = Timetable::all();
-        return view('admin.table.index', ['holidays' => $models, 'extra_days' => $models]);
+        $holidays = $models->where('type', 1);
+        $extra_days = $models->where('type', 2);
+        return view('admin.table.index', ['holidays' => $holidays, 'extra_days' => $extra_days]);
     }
 
     public function create(): View {
@@ -35,7 +37,8 @@ class TimetableController extends Controller {
     }
 
     public function edit(Timetable $timetable): View {
-        return view('admin.table.form', ['model' => $timetable]);
+        return view('admin.table.form', ['model' => $timetable, 'method' => 'PUT',
+            'action' => route('admin.timetable.update', ['timetable'=> $timetable])]);
     }
 
     public function update(Request $request, Timetable $timetable): RedirectResponse {

@@ -29,7 +29,7 @@
                                     @include("district.control.$type")
                                     <input type="hidden" name="proposition_id" value="{{$proposition->id}}">
                                     <input type="hidden" name="type" value="{{$type}}">
-                                    <input type="hidden" name="organ" value="{{auth()->user()->organ ?? ''}}">
+                                    <input type="hidden" name="organ" value="{{$proposition->organ}}">
                                 </div>
                             </div>
                         </div>

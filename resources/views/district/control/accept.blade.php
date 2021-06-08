@@ -79,7 +79,7 @@
 
     <div class="card-body col-12 px-2">
         <label for="additional">@lang('district.recommendation.additional')</label>
-        <textarea id="additional" name="additional">
+        <textarea name="additional" id="additional">
         @if ($model->status == 3)
             {{$model->additional}}
         @else

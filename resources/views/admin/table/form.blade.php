@@ -40,14 +40,14 @@
                                     <div class="col-9">
                                         <select name="type" id="type" class="custom-select">
                                             <option value="1">@lang('admin.timetable.holiday_days')</option>
-                                            <option value="2">@lang('admin.timetable.extra_work_days')</option>
+                                            <option value="2" @if($model->type == 2) selected @endif>@lang('admin.timetable.extra_work_days')</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary mr-2">@lang('global.btn_save')</button>
-                                <a href="{{route('admin.regions.index')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
+                                <a href="{{route('admin.timetable.index')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
                                 <button type="reset" class="btn btn-default float-right">@lang('global.btn_reset')</button>
                             </div>
                         </form>

@@ -22,7 +22,15 @@ class Recommendation extends Model {
         return $this->belongsTo(Proposition::class);
     }
 
-    function organ($id): Region|Model {
-        return Region::query()->find($id);
+    public function org(): BelongsTo {
+        return $this->belongsTo(Region::class, 'organ');
+    }
+
+    public function equipment(int $id): string {
+        return Equipment::query()->find($id)->getAttribute('name');
+    }
+
+    public function equipType(int $id): string {
+        return EquipmentType::query()->find($id)->getAttribute('type');
     }
 }
