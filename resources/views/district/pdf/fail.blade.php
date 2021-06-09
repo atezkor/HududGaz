@@ -69,6 +69,10 @@
             width: 100%;
         }
 
+        td {
+            vertical-align: top;
+        }
+
         hr {
             border: 0;
             border-top: 1px solid #000000;
@@ -81,7 +85,7 @@
     </style>
 </head>
 <body>
-    <div class="d-flex">
+    <div>
         <span class="f-l"># {{$proposition->id}}</span>
         <span class="f-r">{{formatDate($proposition->created_at)}}</span>
     </div>
@@ -108,11 +112,17 @@
         {!! $model->additional !!}
     </div>
 
-    <div class="mt-20">
-        <span>&#8220;{{$organ->org_name}}&#8221; gaz ta&#8217;minoti</span><br>
-        <span>bo&#8216;limi bosh muhandisi</span>
-        <span class="f-r">{{$organ->lead_engineer}}</span>
-    </div>
+    <table class="mt-20">
+        <tr>
+            <td>
+                <span>&#8220;{{$organ->org_name}}&#8221; gaz ta&#8217;minoti</span><br>
+                <span>bo&#8216;limi bosh muhandisi</span>
+            </td>
+            <td>
+                <span class="f-r">{{$organ->lead_engineer}}</span>
+            </td>
+        </tr>
+    </table>
 
     <table class="mt-20 text-bold" style="font-size: 12px">
         <tr>

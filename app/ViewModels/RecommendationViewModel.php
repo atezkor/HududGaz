@@ -43,7 +43,7 @@ class RecommendationViewModel extends ViewModel {
     }
 
     function legals(): Collection {
-        return $this->filter(Legal::query(), 'leader');
+        return $this->filter(Legal::query(), 'legal_name');
     }
 
     public function applicant($physicals, $legals, &$p, &$l, $type): string {

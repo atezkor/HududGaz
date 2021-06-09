@@ -8,8 +8,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Equipment;
-use App\Models\EquipmentType;
 use App\Models\Organization;
 use App\Models\Recommendation;
 use Barryvdh\DomPDF\PDF;
@@ -48,11 +46,6 @@ class RecommendationService extends CrudService {
         $recommendation->update();
     }
 
-    public function accept() {
-
-    }
-
-
     /**
      * This function for back recommendation to District
      */
@@ -76,19 +69,25 @@ class RecommendationService extends CrudService {
 
     private function createPDF(Recommendation $recommendation): Response {
         $proposition = $recommendation->proposition;
-        $organ = $recommendation->organ($proposition->organ);
+        $organ = $recommendation->org;
         $applicant = $proposition->applicant;
         $district = districts()[$organ->getAttribute('region')];
         $organization = Organization::Data();
 
-        $data = ['model' => $recommendation, 'proposition' => $proposition, 'organ' => $organ, 'consumer' => $applicant,
-            'district' => $district, 'organization' => $organization];
+        $data = [
+            'model' => $recommendation,
+            'proposition' => $proposition,
+            'organ' => $organ,
+            'consumer' => $applicant,
+            'district' => $district,
+            'organization' => $organization
+        ];
 
         if ($recommendation->type == 'accept') {
             $equipments = json_decode($recommendation->getAttribute('equipments'), true);
             foreach ($equipments as $key => $equipment) {
-                $equipments[$key]['equipment'] = Equipment::query()->where('id', '=', $equipment['equipment'])->pluck('name')[0];
-                $equipments[$key]['type'] = EquipmentType::query()->where('id','=', $equipment['type'])->pluck('type')[0];
+                $equipments[$key]['equipment'] = $recommendation->equipment($equipment['equipment']);
+                $equipments[$key]['type'] = $recommendation->equipType($equipment['type']);
             }
 
             $data['equipments'] = $equipments;

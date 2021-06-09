@@ -33,10 +33,10 @@
             </li>
             <li>
                 zamonaviy sertifikatlangan energiyatejamkor va foydali ish quvvati yuqori bo&#8216;lgan gaz jihozlari va yondirgichlarni o&#8216;rnatish,
-                gazdan foydalanish uskunasi va gaz goralkali qurilmalarga qo&#8216;yiladigan talablar (turar va soni), muvofiqlik sertifikatining mavjudligi;
+                gazdan foydalanish uskunasi va gaz gorelkali qurilmalarga qo&#8216;yiladigan talablar (turar va soni), muvofiqlik sertifikatining mavjudligi;
             </li>
             <li>
-                gaz taqsimlash shahobchasi (keyingi o&#8216;rinlarda GTSH deb ataladi) inshootini qurish zarurligi, GTSHga ega boxo&#8216;lgan texnik talablar,
+                gaz taqsimlash shahobchasi (keyingi o&#8216;rinlarda GTSH deb ataladi) inshootini qurish zarurligi, GTSHga ega bo&#8216;lgan texnik talablar,
                 avtomatika turi, gaz quvurlari soni va ularning har biridagi tabiiy gaz bosimi, chiqishdan himoyalash chora-tadbirlari va boshqalar;
             </li>
             <li>qo&#8216;shimcha gaz quvurlarini qurish ishalari;</li>

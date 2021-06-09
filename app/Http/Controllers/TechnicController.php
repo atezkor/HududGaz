@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TechCondition;
 use App\Services\TechConditionService;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -30,7 +31,7 @@ class TechnicController extends Controller {
 
     public function create(Recommendation $recommendation): View {
         $equipments = json_decode($recommendation->getAttribute('equipments'));
-        foreach ($equipments as $equipment) {
+        foreach ($equipments ?? [] as $equipment) {
             $equipment->equipment = $recommendation->equipment($equipment->equipment);
             $equipment->type = $recommendation->equipType($equipment->type);
         }
@@ -41,11 +42,11 @@ class TechnicController extends Controller {
             'equipments' => $equipments]);
     }
 
-    public function store(Request $request, Recommendation $recommendation): View {
+    public function store(Request $request, Recommendation $recommendation): RedirectResponse {
         $data = $request['data'];
-        return $this->service->store($data, $recommendation);
+        $this->service->store($data, $recommendation);
 
-//        return redirect()->route('technic.tech_conditions.index');
+        return redirect()->route('technic.index');
     }
 
     public function edit() {
@@ -53,7 +54,7 @@ class TechnicController extends Controller {
     }
 
     public function update() {
-        $this->cancel();
+
     }
 
     public function back(Request $request, Recommendation $recommendation) {
@@ -61,15 +62,7 @@ class TechnicController extends Controller {
     }
 
     public function index(): View {
-        return view('technic.index');
-    }
-
-    private function accept() {
-        $this->rec_service->accept();
-    }
-
-    private function cancel() {
-        $this->rec_service->accept();
-        $this->accept();
+        $tech_conditions = TechCondition::all();
+        return view('technic.index', ['models' => $tech_conditions]);
     }
 }

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property Proposition proposition
  * @property string type
+ * @property Region org
+ *
  */
 class Recommendation extends Model {
     use HasFactory;

@@ -43,7 +43,12 @@
             'wait' => "Xatolik yuz berganda sahifa qayta yuklanmaydi ...",
         ],
         'tech_condition' => [
+            'name' => "Texnik shart",
+            'show' => "Texnik shartni ko\u{2018}rish",
             'heading_create' => "Texnik shartni yaratish",
-            'cond_content' => "Texnik shart tarkibi"
+            'cond_content' => "Texnik shart tarkibi",
+            'reference' => "Ma\u{2018}lumotnomani yozing",
+            'reason' => "Bekor qilish sababi",
+            'reason_hind' => "Bekor qilish sababini kiriting (qisqacha)",
         ]
     ];

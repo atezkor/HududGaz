@@ -4,30 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>PDF</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: A4;
+        }
+
+        body {
+            text-align: justify;
+            padding: 20mm 15mm 20mm 30mm;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .lowercase {
+            text-transform: lowercase;
+        }
+
+        .f-l {
+            float: left;
+        }
+
+        .f-r {
+            float: right;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            vertical-align: top;
+        }
+    </style>
 </head>
 <body>
-<div class="text-right">
-    <h4>
-        <span class="uppercase">&#8220;@lang('district.pdf.confirmation')&#8221;</span><br>
-        <span>&#8220;{{$organ->org_name}}&#8221; @lang('district.pdf.section')</span><br>
-        <span>@lang('district.pdf.engineer') {{$organ->lead_engineer}}</span>
-    </h4>
-</div>
-<div class="text-center section">
-    <div class="uppercase">@lang('district.pdf.recommendation')</div>
-    <strong>№ {{$proposition->number}}</strong>
-</div>
-
-<div class="body mt-20">
     <div>
-        <span class="f-l">{{formatDate($model->created_at)}} - @lang('district.pdf.year')</span>
-        <strong class="f-r">{{$district}}</strong>
-        <div class="clear"></div>
+        <span class="f-l"># {{$proposition->id}}</span>
+        <span class="f-r">{{formatDate($proposition->created_at)}}</span>
+    </div>
+    <div class="clear">
+        <br><br>
+    </div>
+
+    <div class="text-right">
+        <h4>
+            <span>Davlat xizmlatlari agentligi</span><br>
+            <span>Xorazm viloyati boshqarmasi</span><br>
+            <span>{{$district}} markaziga</span>
+        </h4>
+    </div>
+
+    <div class="text-center mt-20">
+        <strong class="uppercase">Ma&#8217;lumotnoma</strong>
     </div>
 
     <div class="mt-20">
-
+        <div>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&#8220;{{$organization->branch_name}}&#8221; gaz ta&#8217;minoti filiali,
+                sizning <span class="lowercase">{{dateFull($proposition->created_at, true)}}dagi</span>
+                <b>{{$proposition->number}}</b>-sonli arizangizga javoban quyidagilarni ma&#8217;lum qiladi.</span>
+        </div>
     </div>
-</div>
+
+    <div class="mt-20">
+        {!! $reference !!}
+    </div>
+
+    <table class="mt-20 text-bold">
+        <tr>
+            <td>
+                <span>&#8220;{{$organ->org_name}}&#8221; gaz ta&#8217;minoti</span><br>
+                <span>bo&#8216;limi bosh muhandisi</span>
+            </td>
+            <td>
+                <span class="f-r">{{$organ->lead_engineer}}</span>
+            </td>
+        </tr>
+    </table>
+
+    <table class="mt-20 text-bold" style="font-size: 12px">
+        <tr>
+            <td>
+                <span>{{$organ->org_number}}, {{$organ->address}}.</span><br>
+                <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
+                <span>Elektron pochta: {{$organ->email}}</span>
+            </td>
+            <td>
+                <div class="f-r">
+                    <span>{{$organ->org_number}}, {{$organ->address_krill}}.</span><br>
+                    <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
+                    <span>Elektron pochta: {{$organ->email}}</span>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

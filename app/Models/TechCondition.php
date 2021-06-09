@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TechCondition extends Model {
     use HasFactory;
 
-    protected $fillable = ['proposition_id', 'qrcode','organ', 'file'];
+    protected $fillable = ['proposition_id', 'qrcode', 'organ', 'file'];
 }

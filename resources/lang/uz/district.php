@@ -59,6 +59,7 @@
             'description' => "Sababi",
             'reason' => "Sabab",
             'additional' => "Qo\u{2018}shimcha ma\u{2019}lumot",
+            'notification' => "Bildirishnomani yozing",
             'desc_hint' => "Bekor qilish sababini kiriting",
             'required' => "Ushbu maydon to\u{2018}ldirilishi kerak",
             'select_required' => "Ro\u{2018}yxatdagi narsalardan birini tanlang",

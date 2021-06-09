@@ -1,5 +1,9 @@
 function typographer(input) {
-    let value = input.value;
+    // console.log(input)
+    input.value = fixer(input.value);
+}
+
+function fixer(value) {
     if (value.match("o'") || value.match("o`") || value.match("O'") || value.match("O`")) {
         value = value.replace("'", "\u2018");
         value = value.replace("`", "\u2018");
@@ -15,5 +19,5 @@ function typographer(input) {
         value = value.replace("`", "\u2019");
     }
 
-    input.value = value;
+    return value;
 }

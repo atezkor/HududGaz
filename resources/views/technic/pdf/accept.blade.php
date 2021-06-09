@@ -15,9 +15,9 @@
         }
 
         body {
-            padding: 5mm 5mm 10mm 15mm;
+            padding: 20mm 15mm 20mm 30mm;
             text-align: justify;
-            line-height: 1.5;
+            line-height: 1.3;
             font-size: 12px;
         }
 
@@ -41,17 +41,12 @@
            text-transform: lowercase;
        }
 
-        /*.clear {*/
-        /*    clear: both;*/
-        /*}*/
-
         table {
             width: 100%;
             vertical-align: text-top;
         }
 
         table td {
-            text-align: right;
             vertical-align: top;
         }
 
@@ -61,6 +56,7 @@
         }
 
         td:last-child {
+            text-align: right;
             width: 30%;
         }
     </style>

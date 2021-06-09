@@ -15,7 +15,7 @@ class CreateTechConditionsTable extends Migration {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
             $table->string('qrcode')->nullable();
-            $table->tinyInteger('organ');
+            $table->tinyInteger('organ')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
         });

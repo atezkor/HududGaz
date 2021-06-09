@@ -178,6 +178,12 @@
         input.oninput = function() {
             typographer(input);
         }
-    })
+    });
+
+    $('textarea').each(function(i, textarea) {
+        textarea.oninput = function() {
+            typographer(textarea);
+        }
+    });
 </script>
 @endsection

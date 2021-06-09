@@ -19,7 +19,7 @@
                                 <th>@lang('global.index')</th>
                                 <th>@lang('global.proposition.number')</th>
                                 <th>@lang('global.consumer')</th>
-                                <th>@lang('technic.recommendation.name')</th>
+                                <th>@lang('technic.tech_condition.name')</th>
                                 <th>@lang('technic.organ')</th>
                                 <th>@lang('global.proposition.date')</th>
                                 <th>@lang('global.proposition.limit')</th>
@@ -30,36 +30,34 @@
 {{--                        @php($limit = term(5))--}}
 {{--                        @php($l = 0)--}}
 {{--                        @php($p = 0)--}}
-{{--                        @foreach($propositions as $key => $model)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{$key + 1}}</td>--}}
-{{--                                <td>{{$model->number}}</td>--}}
+                        @foreach($models as $key => $model)
+                            <tr>
+                                <td>{{$key + 1}}</td>
+                                <td>{{$model->number}}</td>
 {{--                                <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>--}}
-{{--                                <td>--}}
-{{--                                    <a href="{{route('technic.recommendation.show', ['recommendation' => $models[$key]])}}" target="_blank">--}}
-{{--                                        @lang('technic.recommendation.show')--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
+                                <td>1</td>
+                                <td>
+                                    <a href="{{route('technic.tech_condition.show', ['tech_condition' => $model])}}" target="_blank">
+                                        @lang('technic.tech_condition.show')
+                                    </a>
+                                </td>
 {{--                                <td>{{$organs[$model->organ - 1]->org_name}}</td>--}}
-{{--                                <td>{{$models[$key]->created_at}}</td>--}}
-{{--                                <td>--}}
+                                <td>1</td>
+                                <td>{{$model->created_at}}</td>
+                                <td>
 {{--                                    <div class="progress progress-xs">--}}
 {{--                                        <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"--}}
 {{--                                             style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>--}}
-{{--                                </td>--}}
-{{--                                <td>--}}
-{{--                                    <a href="{{"tech-condition"}}" class="btn btn-outline-info">--}}
-{{--                                        <i class="fas fa-plus"></i>--}}
-{{--                                    </a>--}}
-{{--                                    <button type="button" onclick="back('{{route('technic.recommendation.back', ['recommendation' => $models[$key]])}}')"--}}
-{{--                                            class="btn btn-outline-secondary">--}}
-{{--                                        <i class="fas fa-undo"></i>--}}
-{{--                                    </button>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-info">
+                                        <i class="fas fa-upload"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

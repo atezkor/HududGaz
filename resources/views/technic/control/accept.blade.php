@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="above">@lang('technic.tech_condition.cond_content')</label>
-                                    <div class="list-group-item">
+                                    <div id="above" class="list-group-item">
                                         @include('technic.control.above')
                                     </div>
                                 </div>
@@ -49,7 +49,6 @@
     <script src="{{'/js/extra/summernote.min.js'}}"></script>
     <script>
         $(document).ready(function() {
-           $('#above').summernote('disable');
            $('#data').summernote();
         });
     </script>

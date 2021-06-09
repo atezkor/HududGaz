@@ -54,6 +54,7 @@
 <script src="{{'/js/jquery.min.js'}}"></script>
 <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
 <script src="{{'/js/extra/summernote.min.js'}}"></script>
+<script src="{{'/js/typographer.js'}}"></script>
 <script>
     // You must rewrite this code!
     let count = 0;
@@ -183,7 +184,8 @@
             element.name = name;
             element.placeholder = placeholder;
             element.hint = count;
-            element.required = true;
+            if (type !== 'text')
+                element.required = true;
             element.onchange = function() {
                 equipments[element.hint][name] = parseInt(element.value);
                 Stringify(equipments);
@@ -256,14 +258,19 @@
         if ('{{$type}}' === 'accept') {
             submit.attr('disabled', true);
         }
-
+        @if($type == 'accept')
         setTimeout(() => {
             changeEquips();
         });
+        @endif
     });
 
     $(document).ready(function() {
-        $('#additional').summernote();
+        $('#additional').summernote({
+        @if($type == 'fail')
+            minHeight: 150
+        @endif
+        });
 
         CustomValidity();
     });
