@@ -29,7 +29,7 @@
     </div>
 
     <div class="col-12 mt-4">
-        <label for="additional">@lang('district.recommendation.notification')</label>
+        <label for="additional">@lang('district.recommendation.notification') <span class="required">*</span></label>
         <textarea id="additional" name="additional">{{$model->additional}}</textarea>
     </div>
 </div>

@@ -56,7 +56,7 @@
             'grc_hint' => "GRSni kiriting",
             'consume_hint' => "Talab qilinadigan gaz hajmini kiriting",
             'add_equipment' => "Jihoz qo\u{2018}shish",
-            'description' => "Sababi",
+            'description' => "Bekor qilish sababi",
             'reason' => "Sabab",
             'additional' => "Qo\u{2018}shimcha ma\u{2019}lumot",
             'notification' => "Bildirishnomani yozing",

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TechCondition;
-use App\Services\TechConditionService;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Models\TechCondition;
+use App\Services\TechConditionService;
 use App\Models\Recommendation;
 use App\Services\RecommendationService;
 use App\ViewModels\RecommendationViewModel;
+use App\ViewModels\TechConditionViewModel;
 
 class TechnicController extends Controller {
 
@@ -19,6 +20,10 @@ class TechnicController extends Controller {
     public function __construct(TechConditionService $service, RecommendationService $rec_service) {
         $this->service = $service;
         $this->rec_service = $rec_service;
+    }
+
+    public function index(): View {
+        return view('technic.index', new TechConditionViewModel());
     }
 
     public function recommendations(): View {
@@ -49,20 +54,16 @@ class TechnicController extends Controller {
         return redirect()->route('technic.index');
     }
 
-    public function edit() {
-
-    }
-
-    public function update() {
-
+    public function show_condition(TechCondition $condition): RedirectResponse {
+        return redirect($this->service->show($condition));
     }
 
     public function back(Request $request, Recommendation $recommendation) {
         $this->rec_service->back($recommendation, $request['comment']);
     }
 
-    public function index(): View {
-        $tech_conditions = TechCondition::all();
-        return view('technic.index', ['models' => $tech_conditions]);
-    }
+
+    public function edit() {}
+
+    public function update() {}
 }

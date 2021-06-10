@@ -100,7 +100,6 @@ class RecommendationService extends CrudService {
     }
 
     private function createFile($file): string {
-        // File::makeDirectory($this->path, 0777, true, true);
         $file->storeAs($this->path, $file->getClientOriginalName());
         return $file->getClientOriginalName();
     }

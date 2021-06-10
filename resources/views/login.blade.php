@@ -27,15 +27,15 @@
                     @csrf
                     <div class="input-group mb-3">
                         {{-- old funksiyasi tasdiqlanmagan maydonni qayta to'ldrish uchun kerak --}}
-                        <input type="email" name="email" value="{{old('email')}}" class="form-control" placeholder="E-pochta">
+                        <input type="text" name="email" value="{{old('email')}}" class="form-control" placeholder="Foydalanuvchi nomi">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
+                                <i class="fas fa-user"></i>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Parol">
+                        <input type="password" name="password" class="form-control" placeholder="Yashirin so&#8216;z">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i class="fas fa-lock"></i>
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <script src="{{"/js/jquery.min.js"}}"></script>
+    <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{"/js/bootstrap.bundle.min.js"}}"></script>
     <script src="{{asset('js/adminlte.min.js')}}"></script>
 </body>

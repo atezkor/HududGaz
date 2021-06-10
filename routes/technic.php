@@ -16,4 +16,4 @@ Route::post('recommendation/{recommendation}/store', [App\Http\Controllers\Techn
 Route::get('recommendations/{recommendation}/edit', [App\Http\Controllers\TechnicController::class, 'edit'])->name('technic.tech_condition.edit');
 Route::post('recommendations/{recommendation}/update', [App\Http\Controllers\TechnicController::class, 'update'])->name('technic.tech_condition.update');
 
-Route::get('tech-conditions/{tech_condition}/show', [App\Http\Controllers\TechnicController::class, 'show'])->name('technic.tech_condition.show');
+Route::get('tech-conditions/{condition}/show', [App\Http\Controllers\TechnicController::class, 'show_condition'])->name('technic.tech_condition.show');

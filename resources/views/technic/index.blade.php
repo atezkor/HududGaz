@@ -27,34 +27,34 @@
                             </tr>
                         </thead>
                         <tbody>
-{{--                        @php($limit = term(5))--}}
-{{--                        @php($l = 0)--}}
-{{--                        @php($p = 0)--}}
-                        @foreach($models as $key => $model)
+                        @php($l = 0)
+                        @php($p = 0)
+                        @foreach($propositions as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
                                 <td>{{$model->number}}</td>
-{{--                                <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>--}}
-                                <td>1</td>
+                                <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
                                 <td>
-                                    <a href="{{route('technic.tech_condition.show', ['tech_condition' => $model])}}" target="_blank">
+                                    <a href="{{route('technic.tech_condition.show', ['condition' => $conditions[$key]])}}" target="_blank">
                                         @lang('technic.tech_condition.show')
                                     </a>
                                 </td>
-{{--                                <td>{{$organs[$model->organ - 1]->org_name}}</td>--}}
-                                <td>1</td>
+                                <td>{{$organs[$model->organ]}}</td>
                                 <td>{{$model->created_at}}</td>
                                 <td>
-{{--                                    <div class="progress progress-xs">--}}
-{{--                                        <div class="{{progressColor($model->percent($limit[$model->status - 1]->term))}}"--}}
-{{--                                             style="width: {{$model->percent($limit[$model->status - 1]->term)}}%"></div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="text-center">{{$limit[$model->status - 1]->term}} @lang('global.hour')</div>--}}
+                                    <div class="progress progress-xs">
+                                        <div class="{{progressColor($model->percent($limit))}}"
+                                             style="width: {{$model->percent($limit)}}%">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <button class="btn btn-outline-info">
+                                    <input type="file" id="file-{{$key}}" class="d-none"
+                                           onchange="upload(this, '{{route('technic.tech_condition.show', ['condition' => $conditions[$key]])}}')">
+                                    <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
                                         <i class="fas fa-upload"></i>
-                                    </button>
+                                    </label>
                                 </td>
                             </tr>
                         @endforeach
@@ -95,5 +95,28 @@
                 language: lang
             });
         });
+
+        function upload(el, url) {
+            let form = new FormData();
+            form.append('file', el.files[0]);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: url,
+                method: 'POST',
+                processData: false, // important for send file
+                contentType: false, // important for send as file
+                cache: false,
+                dataType: 'html',
+                data: form,
+                success: function() {
+                    location.reload();
+                }
+            });
+        }
     </script>
 @endsection
