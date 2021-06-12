@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int status
  * @property int id
  * @property int organ
+ * @property-read Recommendation recommendation
  */
 class Proposition extends Model {
 
@@ -41,5 +42,9 @@ class Proposition extends Model {
 
     function limit($limit, int $offset = 0) {
         return $limit[$this->status - $offset];
+    }
+
+    function recommendation(): HasOne {
+        return $this->hasOne(Recommendation::class);
     }
 }

@@ -50,11 +50,14 @@
                                     <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <input type="file" id="file-{{$key}}" class="d-none"
-                                           onchange="upload(this, '{{route('technic.tech_condition.show', ['condition' => $conditions[$key]])}}')">
-                                    <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
-                                        <i class="fas fa-upload"></i>
-                                    </label>
+                                    <form action="{{route('technic.tech_condition.upload', ['condition' => $conditions[$key]])}}" method="post"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">
+                                        <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
+                                            <i class="fas fa-upload"></i>
+                                        </label>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -95,28 +98,5 @@
                 language: lang
             });
         });
-
-        function upload(el, url) {
-            let form = new FormData();
-            form.append('file', el.files[0]);
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: url,
-                method: 'POST',
-                processData: false, // important for send file
-                contentType: false, // important for send as file
-                cache: false,
-                dataType: 'html',
-                data: form,
-                success: function() {
-                    location.reload();
-                }
-            });
-        }
     </script>
 @endsection

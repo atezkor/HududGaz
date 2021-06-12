@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Models\Individual;
-use App\Models\Legal;
-use App\Models\Proposition;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
+use App\Models\Proposition;
+use App\Models\Individual;
+use App\Models\Legal;
 
 
 class PropositionService extends CrudService {
@@ -20,7 +20,8 @@ class PropositionService extends CrudService {
     public function create($data) {
         $data['file'] = $this->createFile($data['file']);
         parent::create($data);
-        $data['proposition_id'] = $this->model->getAttribute('id');
+
+        $data['proposition_id'] = $this->model->id; // getAttribute('id')
         $this->createApplicant($data);
     }
 
@@ -64,9 +65,7 @@ class PropositionService extends CrudService {
     }
 
     private function deleteApplicant($model) {
-        $applicant = $model->applicant;
-        $this->deleteFile($applicant->file);
-        $applicant->delete();
+        $model->applicant->delete();
     }
 
     private function createFile($file): string {

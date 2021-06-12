@@ -46,7 +46,6 @@ class MounterService extends CrudService {
 
     public function deleteWorker($model) {
         $this->fileDelete($model->document, 'workers/');
-
         $model->delete();
     }
 

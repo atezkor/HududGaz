@@ -62,8 +62,8 @@ class TechnicController extends Controller {
         $this->rec_service->back($recommendation, $request['comment']);
     }
 
-
-    public function edit() {}
-
-    public function update() {}
+    public function upload(Request $request, TechCondition $condition): RedirectResponse {
+        $this->service->upload($request, $condition);
+        return redirect()->route('technic.index');
+    }
 }

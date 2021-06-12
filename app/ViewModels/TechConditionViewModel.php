@@ -16,7 +16,7 @@ class TechConditionViewModel extends ViewModel {
     public function __construct() {}
 
     function conditions(): Collection {
-        return TechCondition::query()->orderBy('proposition_id')->get();
+        return TechCondition::query()->where('status', 1)->orderBy('proposition_id')->pluck('id');
     }
 
     function propositions(): Collection {
