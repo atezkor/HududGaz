@@ -103,21 +103,21 @@
                                         <div class="form-group row">
                                             <label for="old_pass" class="col-2">@lang('global.profile.old_pass')</label>
                                             <div class="col-10">
-                                                <input type="password" name="old_pass" id="old_pass" class="form-control">
+                                                <input type="password" name="old_pass" id="old_pass" value="{{old('old_pass')}}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="password" class="col-2">@lang('global.profile.password')</label>
                                             <div class="col-10">
-                                                <input type="password" name="password" id="password" class="form-control">
+                                                <input type="password" name="password" id="password" value="{{old('password')}}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="confirm_pass" class="col-2">@lang('global.profile.confirm_pass')</label>
                                             <div class="col-10">
-                                                <input type="password" name="confirm_pass" id="confirm_pass" class="form-control">
+                                                <input type="password" name="confirm_pass" id="confirm_pass" value="{{old('confirm_pass')}}"  class="form-control">
                                             </div>
                                         </div>
                                     </div>

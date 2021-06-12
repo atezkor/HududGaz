@@ -82,5 +82,6 @@
             'uzk' => "Ўзбекча",
             'img' => "Rasmni yuklang",
             'not_confirm' => "Yashirin so\u{2018}z tasdiqlanmadi",
+            'wrong_pass' => "Noto\u{2018}g\u{2018}ri parol kiritilgan"
         ]
     ];

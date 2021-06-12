@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int id
  * @property int organ
  * @property-read Recommendation recommendation
+ * @property-read string file
  */
 class Proposition extends Model {
 

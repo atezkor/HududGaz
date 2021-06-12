@@ -19,13 +19,13 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="description">@lang('technic.tech_condition.reason')</label>
-                                    <input type="text" name="description" id="description" value="{{''}}" class="form-control"
+                                    <input type="text" name="description" id="description" class="form-control"
                                            placeholder="@lang('technic.tech_condition.reason_hind')" required>
                                 </div>
 
                                 <div class="form-group mt-5">
                                     <label for="text">@lang('technic.tech_condition.reference')</label>
-                                    <textarea name="data" id="reference" >{{''}}</textarea>
+                                    <textarea name="data" id="reference"></textarea>
                                 </div>
                             </div>
                             <div class="card-footer">

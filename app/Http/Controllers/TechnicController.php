@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,9 +48,17 @@ class TechnicController extends Controller {
             'equipments' => $equipments]);
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function store(Request $request, Recommendation $recommendation): RedirectResponse {
-        $data = $request['data'];
-        $this->service->store($data, $recommendation);
+        $data = $this->validate($request, [
+            'description' => [],
+            'data' => ['required']
+        ], [], [
+            'data' => __('technic.tech_condition.ref')
+        ]);
+        $this->service->create($data, $recommendation);
 
         return redirect()->route('technic.index');
     }

@@ -11,6 +11,8 @@
         'btn_correction' => "To\u{2018}g\u{2018}rilash",
         'file' => "Imzolangan hujjat",
         'file_hint' => "Imzolangan hujjatni yuklang",
+        'tech_condition' => "Texnik shart",
+        'btn_open' => "Ochish",
 
         // Months
         'january' => "Yanvar",

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Proposition proposition
  * @property string type
  * @property Region org
+ * @property string file
  *
  */
 class Recommendation extends Model {

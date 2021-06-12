@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileRequest extends FormRequest {
     /**
@@ -20,10 +21,15 @@ class ProfileRequest extends FormRequest {
      * @return array
      */
     public function rules(): array {
-        if ($this->input('password') != $this->input('password') &&
-            ($this->input('old_pass') && $this->input('password') && $this->input('confirm_pass')))
+        if (!$this->check($this->input('old_pass'), auth()->user()->getAuthPassword()))
             return [
                 "old_pass" => ['email']
+            ];
+
+        if ($this->input('password') != $this->input('confirm_pass') &&
+            ($this->input('old_pass') && $this->input('password') && $this->input('confirm_pass')))
+            return [
+                "password" => ['email']
             ];
 
         if ($this->input('old_pass') || $this->input('password') || $this->input('confirm_pass'))
@@ -57,7 +63,12 @@ class ProfileRequest extends FormRequest {
 
     public function messages(): array {
         return [
-            'old_pass.email' => __('global.profile.not_confirm')
+            'old_pass.email' => __('global.profile.wrong_pass'),
+            'password.email' => __('global.profile.not_confirm'),
         ];
+    }
+
+    private function check($pass, $db_pass): bool {
+        return Hash::check($pass, $db_pass);
     }
 }

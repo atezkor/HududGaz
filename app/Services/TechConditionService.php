@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\CancelledProposition;
+use App\Models\Proposition;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Organization;
@@ -20,7 +22,7 @@ class TechConditionService extends CrudService {
         $this->pdf = $pdf;
     }
 
-    public function store($text, Recommendation $model) {
+    public function create($data, Recommendation $model = null) {
         $proposition = $model->proposition;
         $filename = time() . '.pdf';
         $attr = [
@@ -33,12 +35,12 @@ class TechConditionService extends CrudService {
         $tech_condition->save();
         $proposition->update(['status' => 7]);
         $proposition->applicant->update(['status' => 7]);
-        $model->update(['status' => 4]);
+        $model->update(['status' => 4, 'description' => $data['description']]);
 
         $this->createPDF($model, [
             'proposition' => $proposition,
             'filename' => $filename,
-            'text' => $text
+            'text' => $data['data']
         ]);
     }
 
@@ -49,15 +51,14 @@ class TechConditionService extends CrudService {
     public function upload($request, TechCondition $condition) {
         $proposition = $condition->proposition;
         $recommendation = $proposition->recommendation;
-        $this->deleteFile($this->path, $condition->file);
+        $this->deleteFile($condition->file);
         $condition->fill([
             'file' => $this->uploadFile($request->file('file')),
             'status' => 2
         ]);
 
         if ($recommendation->type == 'fail') {
-            $this->cancel($proposition, $recommendation);
-            $this->delete($condition);
+            $this->cancel($proposition, $recommendation, $condition);
             return;
         }
 
@@ -95,27 +96,42 @@ class TechConditionService extends CrudService {
         $this->pdf->save($this->path . $addition['filename']);
     }
 
-    public function delete($model) {
-        $this->deleteFile($this->path, $model->file);
-        parent::delete($model);
-    }
-
     private function uploadFile($file): string {
         $filename = time() . '.pdf';
         $file->storeAs('public/tech_conditions', $filename);
         return $filename;
     }
 
-    private function deleteFile($path, $file) {
-        File::delete($path . $file);
+    private function deleteFile($file) {
+        File::delete($this->path . $file);
     }
 
-    private function cancel($proposition, $recommendation) {
-        $this->move('propositions/', $proposition->file, 'propositions1/');
-        $this->move('recommendations/', $recommendation->file, 'recommendations1/');
+    private function cancel(Proposition $proposition, Recommendation $recommendation, TechCondition $condition) {
+        $cancelled = new CancelledProposition();
+        $applicant = $proposition->applicant;
+        $cancelled->fill([
+            'prop_num' => $proposition->getAttribute('number'),
+            'applicant' => $applicant->full_name ?? $applicant->legal_name,
+            'proposition' => 'p' . $proposition->file,
+            'recommendation' => 'r' . $recommendation->file,
+            'condition' => 'c' . $condition->file,
+            'reason' => $recommendation->getAttribute('description')
+        ]);
+
+
+        $this->delete($condition);
+        $this->move('tech_conditions/', $condition->file, 'c');
+
+        $this->delete($recommendation);
+        $this->move('recommendations/', $recommendation->file, 'r');
+
+        $this->delete($proposition);
+        $this->move('propositions/', $proposition->file, 'p');
+
+        $cancelled->save();
     }
 
-    private function move($path, $file, $new) {
-        Storage::move('public/' . $path . $file, 'public/' . $new . $file);
+    private function move(string $path, string $file, string $suffix) {
+        Storage::move("public/$path" . $file, "public/cancelled/$suffix" . $file);
     }
 }

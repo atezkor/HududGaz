@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CancelledProposition;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -52,7 +53,11 @@ class RecommendationController extends Controller {
     }
 
     public function archives(): View {
-        return view('district.archives');
+        $models = CancelledProposition::all();
+        $provider = function($file): string {
+            return '/storage/cancelled/' . $file;
+        };
+        return view('district.archives', ['models' => $models, 'provider' => $provider]);
     }
 
     /**

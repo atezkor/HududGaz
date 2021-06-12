@@ -15,7 +15,7 @@ use Barryvdh\DomPDF\PDF;
 
 class RecommendationService extends CrudService {
 
-    private string $path = 'public/recommendations';
+    private string $path = 'public/recommendations/';
     private PDF $pdf;
 
     public function __construct(Recommendation $model, PDF $pdf) {
@@ -37,7 +37,7 @@ class RecommendationService extends CrudService {
             $proposition->applicant->update(['status' => 5]);
         }
 
-        return redirect(Storage::url($this->path . '/' . $recommendation->getAttribute('file')));
+        return redirect(Storage::url($this->path . $recommendation->getAttribute('file')));
     }
 
     public function upload($request, Recommendation $recommendation) {
@@ -100,12 +100,13 @@ class RecommendationService extends CrudService {
     }
 
     private function createFile($file): string {
-        $file->storeAs($this->path, $file->getClientOriginalName());
-        return $file->getClientOriginalName();
+        $filename = time() . '.pdf';
+        $file->storeAs($this->path, $filename);
+        return $filename;
     }
 
     private function deleteFile($file) {
-        File::delete($this->path . '/' . $file);
+        File::delete($this->path . $file);
     }
 
     function filter(int $status, string $operator, int $organ): Collection {

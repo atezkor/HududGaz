@@ -47,6 +47,7 @@
             'show' => "Texnik shartni ko\u{2018}rish",
             'heading_create' => "Texnik shartni yaratish",
             'cond_content' => "Texnik shart tarkibi",
+            'ref' => "Ma\u{2018}lumotnomani",
             'reference' => "Ma\u{2018}lumotnomani yozing",
             'reason' => "Bekor qilish sababi",
             'reason_hind' => "Bekor qilish sababini kiriting (qisqacha)",
