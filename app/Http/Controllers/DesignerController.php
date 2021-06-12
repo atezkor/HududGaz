@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DesignerRequest;
-use App\Models\Designer;
-use App\Services\DesignerService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Designer;
+use App\Http\Requests\DesignerRequest;
+use App\Services\DesignerService;
 
 class DesignerController extends Controller {
 

@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EquipmentRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
 use App\Services\EquipmentService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\EquipmentRequest;
 
 class EquipmentController extends Controller {
 
@@ -20,21 +18,11 @@ class EquipmentController extends Controller {
     }
 
     /**
-     * @return Factory|View|Application
+     * @return View
      */
-    public function index(): Factory|View|Application {
+    public function index(): View {
         $models = Equipment::all();
         return view('admin.equipments.index', ['models' => $models]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function create(): View|Factory|Application {
-        return view('admin.equipments.form', ['action' => route('admin.equipments.store'),
-            'method' => 'POST', 'model' => new Equipment()]);
     }
 
     /**
@@ -48,17 +36,6 @@ class EquipmentController extends Controller {
         $this->service->create($data);
 
         return redirect()->route('admin.equipments.index');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Equipment $equipment
-     * @return Application|Factory|View
-     */
-    public function edit(Equipment $equipment): View|Factory|Application {
-        return view('admin.equipments.form', ['action' => route('admin.equipments.update', ['equipment' => $equipment]),
-            'method' => 'PUT', 'model' => $equipment]);
     }
 
     /**
@@ -90,9 +67,9 @@ class EquipmentController extends Controller {
      * Display the specified resource.
      *
      * @param Equipment $equipment
-     * @return Application|Factory|View
+     * @return View
      */
-    public function show(Equipment $equipment): View|Factory|Application {
+    public function show(Equipment $equipment): View {
         $models = $equipment->types()->get();
         return view('admin.equipments.types', ['equipment' => $equipment, 'method' => 'PUT', 'models' => $models]);
     }

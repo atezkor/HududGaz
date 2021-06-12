@@ -15,8 +15,8 @@ class CreateCancelledPropositionsTable extends Migration {
             $table->id();
             $table->integer('prop_num');
             $table->string('applicant');
-            $table->string('recommendation');
             $table->string('proposition');
+            $table->string('recommendation');
             $table->string('condition');
             $table->string('reason');
             $table->timestamps();

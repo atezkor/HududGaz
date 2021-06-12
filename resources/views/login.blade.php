@@ -27,7 +27,7 @@
                     @csrf
                     <div class="input-group mb-3">
                         {{-- old funksiyasi tasdiqlanmagan maydonni qayta to'ldrish uchun kerak --}}
-                        <input type="text" name="email" value="{{old('email')}}" class="form-control" placeholder="Foydalanuvchi nomi">
+                        <input type="text" name="username" value="{{old('username')}}" class="form-control" placeholder="Foydalanuvchi nomi">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i class="fas fa-user"></i>

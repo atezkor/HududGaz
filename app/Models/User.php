@@ -10,29 +10,13 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable {
     use HasFactory, Notifiable;
 
-//    public function role(): string {
-////        return $this->belongsTo('user_roles');
-//        return 'admin';
-//    }
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'role',
-        'organ',
-        'email',
-        'lastname',
-        'patronymic',
-        'password',
-        'locale',
-        'position',
-        'avatar',
-        'mac_address'
-    ];
+    protected $fillable = ['name', 'role', 'organ', 'username', 'lastname', 'patronymic', 'password', 'locale',
+        'position', 'avatar', 'mac_address'];
 
     /**
      * The attributes that should be hidden for arrays.

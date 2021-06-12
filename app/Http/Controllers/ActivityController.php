@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ActivityRequest;
-use App\Models\Activity;
-use App\Services\Service;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use App\Models\Activity;
+use App\Http\Requests\ActivityRequest;
+use App\Services\Service;
 
 class ActivityController extends Controller {
     private Service $service;

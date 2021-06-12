@@ -15,6 +15,7 @@ class MenuItemSeeder extends Seeder {
         $this->adminMenu();
         $this->technicMenu();
         $this->districtMenu();
+        $this->designer();
     }
 
     private function adminMenu() {
@@ -47,6 +48,12 @@ class MenuItemSeeder extends Seeder {
         $this->CreateMenuItem(3, 'district.progress', 'district.recommendations.progress', 'badge bg-danger');
         $this->CreateMenuItem(3, 'district.cancelled', 'district.recommendations.cancelled', 'badge bg-danger');
         $this->CreateMenuItem(3, 'district.archive', 'district.recommendations.archive', 'badge bg-secondary');
+    }
+
+    private function designer() {
+        $this->CreateMenuItem(4, 'designer.projects', 'designer.projects', 'badge bg-primary');
+        $this->CreateMenuItem(4, 'designer.progress', 'designer.projects.progress', 'badge bg-info');
+        $this->CreateMenuItem(4, 'designer.cancelled', 'designer.projects.cancelled', 'badge bg-success');
     }
 
     private function CreateMenuItem($role, $title, $href, $icon) {

@@ -6,7 +6,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <a href="{{route('admin.equipments.create')}}" class="btn btn-info">{{__('admin.equipment.heading_create')}}</a>
+                <button onclick="addEquipment()" class="btn btn-info">{{__('admin.equipment.heading_create')}}</button>
                 <div class="card-tools mt-2">
                     <div class="input-group w-75 ml-auto">
                         <input type="search" id="search" class="form-control"
@@ -34,10 +34,10 @@
                                     <a href="{{route('admin.equip_type', ['equipment' => $model])}}" class="btn btn-outline-info mr-2">
                                         {{__('admin.equipment.equip_types')}}
                                     </a>
-                                    <a href="{{route('admin.equipments.edit', ['equipment' => $model])}}" class="btn btn-warning"
-                                       title="{{__('global.btn_edit')}}">
+                                    <button type="button" onclick="edit('{{route('admin.equipments.update', ['equipment' => $model])}}', '{{$model->name}}')"
+                                            class="btn btn-warning" title="{{__('global.btn_edit')}}">
                                         <i class="fas fa-pencil-alt"></i>
-                                    </a>
+                                    </button>
                                     <button type="button" class="btn btn-danger" onclick="remove('form-{{$model->id}}')"
                                             title="{{__('global.btn_del')}}" role="button">
                                         <i class="fas fa-trash-alt"></i>
@@ -50,10 +50,36 @@
                 </table>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modal" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-gradient-primary">
+                        <h4 id="header" class="modal-title">{{__('admin.equipment.heading_create')}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('admin.equipments.store')}}" method="POST"
+                              id="form" onsubmit="submit.disabled = true">
+                            @csrf
+                            <input type="hidden" id="method" name="_method" value="POST">
+                            <div class="form-group">
+                                <label for="name">{{__('admin.equipment.name')}}</label>
+                                <input type="text" name="name" id="name" class="form-control" required>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" id="submit" class="btn btn-primary">{{__('global.btn_add')}}</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('global.btn_cancel')}}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 @stop
 @section('javascript')
+<script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
 <script>
     $('#search').keyup(function() {
         let value = this.value.toLowerCase();
@@ -79,9 +105,29 @@
                     title: '{{__('global.del_process')}}',
                     icon: 'success',
                     showConfirmButton: false,
-                })
+                });
             }
-        })
+        });
+    }
+
+    function addEquipment() {
+        $('#modal').modal();
+        $('#name').val(null);
+        $('#method').val('POST');
+        $('#header').text('{{__('admin.equipment.heading_create')}}');
+        $('#submit').text('{{__('global.btn_add')}}');
+
+        $('#form').attr('action', '{{route('admin.equipments.store')}}');
+    }
+
+    function edit(url, name) {
+        $('#modal').modal();
+        $('#name').val(name);
+        $('#method').val('PUT');
+        $('#header').text('{{__('admin.equipment.heading_edit')}}');
+        $('#submit').text('{{__('global.btn_upd')}}');
+
+        $('#form').attr('action', url);
     }
 </script>
 @endsection

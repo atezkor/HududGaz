@@ -12,14 +12,15 @@ class AddColumnToUser extends Migration {
      */
     public function up() {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('role');
+            $table->string('name');
             $table->string('lastname')->nullable();
             $table->string('patronymic')->nullable();
-            $table->integer('organ')->default(0);
             $table->string('position')->nullable();
             $table->string('locale')->default('uzk');
             $table->string('avatar')->nullable();
             $table->json('mac_address')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

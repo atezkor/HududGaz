@@ -67,7 +67,7 @@ class HelperSeeder extends Seeder {
                 'build_type' => rand(1, 2),
                 'type' => 2,
                 'status' => 1,
-                'file' => time() . '.pdf'
+                'file' => '100.pdf'
             ]);
 
             Legal::query()->create([
@@ -90,7 +90,7 @@ class HelperSeeder extends Seeder {
                 'build_type' => rand(1, 2),
                 'type' => 1,
                 'status' => 1,
-                'file' => time() . '.pdf'
+                'file' => '100.pdf'
             ]);
 
             Individual::query()->create([

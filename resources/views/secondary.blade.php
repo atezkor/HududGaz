@@ -28,9 +28,7 @@
 <div class="wrapper">
     @include('components.menu')
     <div class="content-wrapper">
-        <div class="mx-auto" style="width: 90%">
-            @yield('content')
-        </div>
+        @yield('content')
     </div>
 </div>
 <script src="{{'/js/jquery.min.js'}}"></script>

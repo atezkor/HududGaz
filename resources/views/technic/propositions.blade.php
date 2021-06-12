@@ -73,15 +73,14 @@
                                                 <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                             </td>
                                             <td>
-                                                <form action="{{route('propositions.delete', ['proposition' => $model])}}"
-                                                      method="post" id="form-{{$model->id}}">
+                                                <form action="{{route('propositions.delete', ['proposition' => $model])}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{route('propositions.edit', ['proposition' => $model])}}" class="btn btn-outline-info"
                                                        title="@lang('global.btn_edit')">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-outline-danger"
+                                                    <button type="button" onclick="remove(this.parentNode)" class="btn btn-outline-danger"
                                                             title="@lang('global.btn_del')" role="button">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
@@ -128,15 +127,14 @@
                                                 <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                             </td>
                                             <td>
-                                                <form action="{{route('propositions.delete', ['proposition' => $model])}}"
-                                                      method="post" id="legal-form-{{$model->id}}">
+                                                <form action="{{route('propositions.delete', ['proposition' => $model])}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{route('propositions.edit', ['proposition' => $model])}}" class="btn btn-outline-info"
                                                        title="@lang('global.btn_edit')">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button type="button" onclick="remove('legal-form-{{$model->id}}')" class="btn btn-outline-danger"
+                                                    <button type="button" onclick="remove(this.parentNode)" class="btn btn-outline-danger"
                                                             title="@lang('global.btn_del')" role="button">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
@@ -209,7 +207,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#${form}`).submit()
+                form.submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

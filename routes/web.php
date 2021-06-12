@@ -57,6 +57,10 @@ Route::prefix('district')->group(function() {
     require_once 'district.php';
 });
 
+Route::prefix('designer')->group(function() {
+    require_once 'designer.php';
+});
+
 # main route - in route distribution by to roles
 Route::get('/', function() {
     $user = auth()->user();

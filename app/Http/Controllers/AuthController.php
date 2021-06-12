@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AuthRequest;
-use App\Models\User;
-use Illuminate\Contracts\View\View;
+use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Http\Requests\AuthRequest;
 
 class AuthController extends Controller {
 
@@ -27,7 +27,7 @@ class AuthController extends Controller {
 
     public function entry(AuthRequest $request): RedirectResponse {
         $data = $request->validated();
-        $user = User::query()->where('email', '=', $data['email'])->get()->first();
+        $user = User::query()->where('username', '=', $data['username'])->get()->first();
 
         if ($user === null)
             return redirect()->route('login');

@@ -69,34 +69,34 @@
     </section>
 @endsection
 @section('javascript')
-    <script src="{{'/js/jquery.min.js'}}"></script>
-    <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
-    <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>
-    <script src="{{'/js/datatable/datatables.bootstrap4.min.js'}}"></script>
-    <script src="{{'/js/datatable/datatables.responsive.min.js'}}"></script>
-    <script>
-        $(function () {
-            let lang = {
-                emptyTable: "@lang('global.datatables.emptyTable')",
-                infoEmpty: "@lang('global.datatables.infoEmpty')",
-                sSearch: "@lang('global.datatables.search')",
-                oPaginate: {
-                    sPrevious: "@lang('global.datatables.previous')",
-                    sNext: "@lang('global.datatables.next')",
-                },
-                sInfo: "@lang('global.datatables.info')",
-                sZeroRecords: "@lang('global.datatables.zeroRecords')",
-                sInfoFiltered: "@lang('global.datatables.infoFiltered')"
-            }
+<script src="{{'/js/jquery.min.js'}}"></script>
+<script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+<script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>
+<script src="{{'/js/datatable/datatables.bootstrap4.min.js'}}"></script>
+<script src="{{'/js/datatable/datatables.responsive.min.js'}}"></script>
+<script>
+    $(function () {
+        let lang = {
+            emptyTable: "@lang('global.datatables.emptyTable')",
+            infoEmpty: "@lang('global.datatables.infoEmpty')",
+            sSearch: "@lang('global.datatables.search')",
+            oPaginate: {
+                sPrevious: "@lang('global.datatables.previous')",
+                sNext: "@lang('global.datatables.next')",
+            },
+            sInfo: "@lang('global.datatables.info')",
+            sZeroRecords: "@lang('global.datatables.zeroRecords')",
+            sInfoFiltered: "@lang('global.datatables.infoFiltered')"
+        }
 
-            $("#table").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "ordering": true,
-                searching: true,
-                language: lang
-            });
+        $("#table").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "ordering": true,
+            searching: true,
+            language: lang
         });
-    </script>
+    });
+</script>
 @endsection

@@ -159,7 +159,7 @@ return [
         'col_description' => "Tavsifi",
         'col_transition' => "O\u{2018}tishlar",
         'col_expired' => "Muddati",
-        'heading_edit' => "Ariza bosqichi holatini o\u{2018}zgartirish",
+        'heading_edit' => "Ariza holati ma\u{2019}lumotlarini o\u{2018}zgartirish",
         'description' => "Holat tavsifi",
         'transitions' => "O\u{2018}tishlar",
         'term' => "Bajarish muddati (soat)",
