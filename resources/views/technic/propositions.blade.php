@@ -80,8 +80,8 @@
                                                        title="@lang('global.btn_edit')">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button type="button" onclick="remove(this.parentNode)" class="btn btn-outline-danger"
-                                                            title="@lang('global.btn_del')" role="button">
+                                                    <button type="button" onclick="remove(this)" class="btn btn-outline-danger"
+                                                            title="@lang('global.btn_del')">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>
@@ -134,8 +134,8 @@
                                                        title="@lang('global.btn_edit')">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button type="button" onclick="remove(this.parentNode)" class="btn btn-outline-danger"
-                                                            title="@lang('global.btn_del')" role="button">
+                                                    <button type="button" onclick="remove(this)" class="btn btn-outline-danger"
+                                                            title="@lang('global.btn_del')">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>
@@ -207,7 +207,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                form.submit();
+                form.parentNode.submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

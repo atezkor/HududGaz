@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property HasOne individual
  * @property HasOne legal
  * @property int type
- * @property-read $applicant
+ * @property $applicant
  * @property int status
  * @property int id
  * @property int organ
@@ -47,5 +47,9 @@ class Proposition extends Model {
 
     function recommendation(): HasOne {
         return $this->hasOne(Recommendation::class);
+    }
+
+    function tech_condition(): HasOne {
+        return $this->hasOne(TechCondition::class);
     }
 }

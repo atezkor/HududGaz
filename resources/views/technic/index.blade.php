@@ -50,8 +50,8 @@
                                     <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <form action="{{route('technic.tech_condition.upload', ['condition' => $conditions[$key]])}}" method="post"
-                                          enctype="multipart/form-data">
+                                    <form action="{{route('technic.tech_condition.upload', ['condition' => $conditions[$key]])}}"
+                                          method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">
                                         <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">

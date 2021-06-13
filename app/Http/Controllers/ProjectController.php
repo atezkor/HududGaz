@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ProjectService;
+use App\Models\Project;
+use App\ViewModels\ProjectViewModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Services\ProjectService;
 
 class ProjectController extends Controller {
 
@@ -16,7 +18,7 @@ class ProjectController extends Controller {
     }
 
     public function index(): View {
-        return view('designer.projects');
+        return view('designer.projects', new ProjectViewModel());
     }
 
     public function progress(): View {
@@ -28,7 +30,12 @@ class ProjectController extends Controller {
     }
 
     public function add(Request $request): RedirectResponse {
-        $this->service->read($request);
+        $this->service->create($request);
         return redirect()->route('designer.projects');
+    }
+
+    public function upload(Request $request, Project $project): RedirectResponse {
+        $this->service->upload($request, $project);
+        return redirect()->back();
     }
 }

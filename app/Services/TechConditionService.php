@@ -27,7 +27,6 @@ class TechConditionService extends CrudService {
         $filename = time() . '.pdf';
         $attr = [
             'proposition_id' => $proposition->id,
-            'qrcode' => 'AB8674541',
             'file' => $filename
         ];
 

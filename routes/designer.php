@@ -11,4 +11,5 @@ Route::get('progress', [App\Http\Controllers\ProjectController::class, 'progress
 Route::get('cancelled', [App\Http\Controllers\ProjectController::class, 'cancelled'])->name('designer.projects.cancelled');
 
 Route::post('project/add', [App\Http\Controllers\ProjectController::class, 'add'])->name('designer.project.add');
+Route::post('projects/{project}/upload', [App\Http\Controllers\ProjectController::class, 'upload'])->name('designer.project.upload');
 

@@ -25,40 +25,39 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @php($limit = limit(10, 9)[10])
 {{--                        @php($l = 0)--}}
 {{--                        @php($p = 0)--}}
-{{--                        @foreach($propositions as $key => $model)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{$key + 1}}</td>--}}
-{{--                                <td>{{$model->number}}</td>--}}
-{{--                                <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>--}}
-{{--                                <td>--}}
-{{--                                    <a href="{{route('technic.tech_condition.show', ['condition' => $conditions[$key]])}}" target="_blank">--}}
-{{--                                        @lang('technic.tech_condition.show')--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
-{{--                                <td>{{$organs[$model->organ]}}</td>--}}
-{{--                                <td>{{$model->created_at}}</td>--}}
-{{--                                <td>--}}
-{{--                                    <div class="progress progress-xs">--}}
-{{--                                        <div class="{{progressColor($model->percent($limit))}}"--}}
-{{--                                             style="width: {{$model->percent($limit)}}%">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>--}}
-{{--                                </td>--}}
-{{--                                <td>--}}
-{{--                                    <form action="{{route('technic.tech_condition.upload', ['condition' => $conditions[$key]])}}" method="post"--}}
-{{--                                          enctype="multipart/form-data">--}}
-{{--                                        @csrf--}}
-{{--                                        <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">--}}
-{{--                                        <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">--}}
-{{--                                            <i class="fas fa-upload"></i>--}}
-{{--                                        </label>--}}
-{{--                                    </form>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
+                        @foreach($propositions as $key => $model)
+                            <tr>
+                                <td>{{$key + 1}}</td>
+                                <td>{{$projects[$key]->applicant}}</td>
+                                <td>
+                                    <a href="{{route('technic.tech_condition.show', ['condition' => $conditions[$key]])}}" target="_blank">
+                                        @lang('technic.tech_condition.show')
+                                    </a>
+                                </td>
+                                <td>{{$organs[$model->organ]}}</td>
+                                <td>
+                                    <div class="progress progress-xs">
+                                        <div class="{{progressColor($model->percent($limit))}}"
+                                             style="width: {{$model->percent($limit)}}%">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                </td>
+                                <td>
+                                    <form action="{{route('designer.project.upload', ['project' => $projects[$key]])}}" method="post"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">
+                                        <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
+                                            <i class="fas fa-upload"></i>
+                                        </label>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -75,9 +74,9 @@
                                   method="POST" id="form" onsubmit="submit.disabled = true">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="qrcode">@lang('designer.project.qrcode')</label>
-                                    <input type="text" name="qrcode" id="qrcode" class="form-control"
-                                           placeholder="@lang('designer.project.qr_read')">
+                                    <label for="number">@lang('designer.project.number')</label>
+                                    <input type="number" name="number" id="number" class="form-control"
+                                           placeholder="@lang('designer.project.num_read')" required>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="submit" id="submit" class="btn btn-primary">@lang('global.btn_add')</button>
@@ -123,7 +122,8 @@
         });
 
         $('#add').on('click', function() {
-            $('#modal').modal()
+            $('#modal').modal();
+            $('#number').val(null);
         });
     </script>
 @endsection

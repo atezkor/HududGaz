@@ -9,4 +9,8 @@ class Legal extends Model {
     use HasFactory;
     public $timestamps = false;
     protected $fillable = ['proposition_id', 'organ', 'legal_stir', 'legal_name', 'email', 'leader', 'leader_stir', 'phone', 'status'];
+
+    public function getNameAttribute(): string {
+        return $this->getAttribute('legal_name');
+    }
 }

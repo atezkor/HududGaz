@@ -14,8 +14,7 @@ class CreateTechConditionsTable extends Migration {
         Schema::create('tech_conditions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
-            $table->tinyInteger('status')->default(1);
-            $table->string('qrcode')->nullable();
+            $table->tinyInteger('status')->default(1); // $table->string('qrcode')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
         });
