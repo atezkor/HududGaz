@@ -6,7 +6,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\DesignerController;
 use App\Http\Controllers\MounterController;
-use App\Http\Controllers\FitterController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ActivityController;
@@ -31,14 +30,14 @@ Route::group(['prefix' => 'admin'], function() {
     resource('users', UserController::class, 'admin.users');
     Route::post('user/change-role/{role?}', [UserController::class, 'checkFirmOrOrgan'])->name('admin.change_role');
 
-    resource('equipments', EquipmentController::class, 'admin.equipments');
-    resource('designers', DesignerController::class, 'admin.designers');
-    resource('mounters', MounterController::class, 'admin.mounters');
     resource('organs', RegionController::class, 'admin.organs');
-    resource('fitters', FitterController::class, 'admin.fitters');
+    resource('mounters', MounterController::class, 'admin.mounters'); // resource('fitters', FitterController::class, 'admin.fitters');
+    resource('designers', DesignerController::class, 'admin.designers');
+
+    reducer('equipments', EquipmentController::class, 'admin.equipments');
+    reducer('activity-types', ActivityController::class, 'admin.activities');
 
     readonly('statuses', StatusController::class, 'admin.statuses');
-    reducer('activity-types', ActivityController::class, 'admin.activities');
     resource('timetable', TimetableController::class, 'admin.timetable');
 
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');

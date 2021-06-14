@@ -22,40 +22,44 @@
                         @include('components.errors')
 
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="org_name">{{__('admin.org_name')}}</label>
-                                <input type="text" name="org_name" id="org_name" value="{{$model->org_name}}" class="form-control">
+                            <div class="row">
+                                <div class="form-group col-6 pr-4">
+                                    <label for="org_name">{{__('admin.org_name')}}</label>
+                                    <input type="text" name="org_name" id="org_name" value="{{$model->org_name}}" class="form-control">
+                                </div>
+
+                                <div class="form-group col-6 pl-4">
+                                    <label for="leader">{{__('admin.org_leader')}}</label>
+                                    <input type="text" name="leader" id="leader" value="{{$model->leader}}" class="form-control">
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="leader">{{__('admin.org_leader')}}</label>
-                                <input type="text" name="leader" id="leader" value="{{$model->leader}}" class="form-control">
+                            <div class="row">
+                                <div class="form-group col-6 pr-4">
+                                    <label for="address">{{__('admin.designer.address')}}</label>
+                                    <input type="text" name="address" id="address" value="{{$model->address}}" class="form-control">
+                                </div>
+
+                                <div class="form-group col-6 pl-4">
+                                    <label for="address_krill">{{__('admin.designer.address_krill')}}</label>
+                                    <input type="text" name="address_krill" id="address_krill" value="{{$model->address_krill}}" class="form-control">
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="address">{{__('admin.designer.address')}}</label>
-                                <input type="text" name="address" id="address" value="{{$model->address}}" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="address_krill">{{__('admin.designer.address_krill')}}</label>
-                                <input type="text" name="address_krill" id="address_krill" value="{{$model->address_krill}}" class="form-control">
+                            <div class="row">
+                                <div class="form-group col-6 pr-4">
+                                    <label for="date_reg">{{__('admin.date_created')}}</label>
+                                    <input type="date" name="date_reg" id="date_reg" value="{{$model->date_reg}}" class="form-control">
+                                </div>
+                                <div class="form-group col-6 pl-4">
+                                    <label for="date_end">{{__('admin.date_expired')}}</label>
+                                    <input type="date" name="date_end" id="date_end" value="{{$model->date_end}}" class="form-control">
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">{{__('admin.designer.phone_number')}}</label>
-                                <textarea name="phone" id="phone" class="form-control">{{$model->phone}}</textarea>
-                            </div>
-
-                            <div class="form-group data-form">
-                                <div>
-                                    <label for="date_reg">{{__('admin.date_created')}}</label>
-                                    <input type="date" name="date_reg" id="date_reg" value="{{$model->date_reg}}" class="form-control">
-                                </div>
-                                <div>
-                                    <label for="date_end">{{__('admin.date_expired')}}</label>
-                                    <input type="date" name="date_end" id="date_end" value="{{$model->date_end}}" class="form-control">
-                                </div>
+                                <textarea name="phone" id="phone" class="form-control" style="resize: none">{{$model->phone}}</textarea>
                             </div>
 
                             <div class="form-group">

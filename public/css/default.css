@@ -2,15 +2,6 @@
     margin-top: -5px;
 }
 
-.data-form {
-    display: flex;
-    justify-content: space-between;
-}
-
-.data-form > div {
-    flex-basis: 45%;
-}
-
 .custom-file label::after {
     content: none;
 }

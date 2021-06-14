@@ -25,7 +25,7 @@ class MounterRequest extends FormRequest {
                 'date_created' => ['email'],
                 'short_name' => ['required'],
                 'leader' => ['required'],
-                'region' => ['required'],
+                'district' => ['required'],
                 'address' => ['required']
             ];
         }
@@ -36,7 +36,7 @@ class MounterRequest extends FormRequest {
             'full_name' => ['required'],
             'short_name' => ['required'],
             'leader' => ['required'],
-            'region' => ['required'],
+            'district' => ['required'],
             'address' => ['required'],
             'taxpayer_stir' => ['required'],
             'given_by' => [],
@@ -55,7 +55,7 @@ class MounterRequest extends FormRequest {
           'reg_num' => __('admin.mounter.reg_num'),
           'full_name' => __('admin.mounter.full_name'),
           'short_name' => __('admin.mounter.short_name'),
-          'region' => __('admin.mounter.district'),
+          'district' => __('admin.mounter.district'),
           'address' => __('admin.mounter.address'),
           'taxpayer_stir' => __('admin.mounter.taxpayer_stir')
         ];

@@ -117,7 +117,6 @@ return [
         'district' => "Tashkilot joylashgan tuman (shahar)",
         'address' => "Tashkilot manzili (qayerda joylashgan)",
         'taxpayer_stir' => "Soliq uchun STIR raqami",
-        'legal_form' => "Tashkiliy-huquqiy shakli",
         'given_by' => "Kim tomonidan berilgan",
         'permissions_to' => "Ruxsat etilgan",
         'implements_for' => "Amalga oshiriladi",

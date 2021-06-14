@@ -22,35 +22,42 @@
                         @include('components.errors')
 
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="leader">{{__('admin.mounter.leader')}}</label>
-                                <input type="text" name="leader" id="leader" value="{{$model->leader}}" class="form-control">
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
+                                    <label for="leader">{{__('admin.mounter.leader')}}</label>
+                                    <input type="text" name="leader" id="leader" value="{{$model->leader}}" class="form-control">
+                                </div>
+
+                                <div class="form-group col-6 pl-5">
+                                    <label for="taxpayer_stir">{{__('admin.mounter.taxpayer_stir')}}</label>
+                                    <input type="number" name="taxpayer_stir" id="taxpayer_stir" value="{{$model->taxpayer_stir}}" class="form-control">
+                                </div>
                             </div>
 
-                            <div class="data-form">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
                                     <label for="rec_num">{{__('admin.mounter.rec_num')}}</label>
                                     <input type="number" name="rec_num" id="rec_num" value="{{$model->rec_num}}" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-6 pl-5">
                                     <label for="reg_num">{{__('admin.mounter.reg_num')}}</label>
                                     <input type="number" name="reg_num" id="reg_num" value="{{$model->reg_num}}" class="form-control">
                                 </div>
                             </div>
 
-                            <div class="data-form">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
                                     <label for="full_name">{{__('admin.mounter.full_name')}}</label>
                                     <input type="text" name="full_name" id="full_name" value="{{$model->full_name}}" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-6 pl-5">
                                     <label for="short_name">{{__('admin.mounter.short_name')}}</label>
                                     <input type="text" name="short_name" id="short_name" value="{{$model->short_name}}" class="form-control">
                                 </div>
                             </div>
 
-                            <div class="data-form">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
                                     <label for="district">{{__('admin.mounter.district')}}</label>
                                     <select name="district" id="district" class="custom-select" required>
                                         <option value="">{{__('admin.select')}}</option>
@@ -63,47 +70,40 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-6 pl-5">
                                     <label for="address">{{__('admin.mounter.address')}}</label>
                                     <input type="text" name="address" id="address" value="{{$model->address}}" class="form-control">
                                 </div>
                             </div>
 
-                            <div class="data-form">
-                                <div class="form-group">
-                                    <label for="legal_form">{{__('admin.mounter.legal_form')}}</label>
-                                    <input type="text" name="legal_form" id="legal_form" value="{{$model->legal_form}}" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="given_by">{{__('admin.mounter.given_by')}}</label>
-                                    <input type="text" name="given_by" id="given_by" value="{{$model->given_by}}" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group data-form">
-                                <div>
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
                                     <label for="date_created">{{__('admin.date_created')}}</label>
                                     <input type="date" name="date_created" id="date_created" value="{{$model->date_created}}" class="form-control">
                                 </div>
-                                <div>
+                                <div class="form-group col-6 pl-5">
                                     <label for="date_expired">{{__('admin.date_expired')}}</label>
                                     <input type="date" name="date_expired" id="date_expired" value="{{$model->date_expired}}" class="form-control">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="taxpayer_stir">{{__('admin.mounter.taxpayer_stir')}}</label>
-                                <input type="number" name="taxpayer_stir" id="taxpayer_stir" value="{{$model->taxpayer_stir}}" class="form-control">
+                            <div class="row">
+                                <div class="form-group col-6 pr-5">
+                                    <label for="permission_to">{{__('admin.mounter.permissions_to')}}</label>
+                                    <textarea name="permission_to" id="permission_to" class="form-control"
+                                              style="resize: none" rows="4">{{$model->permission_to}}</textarea>
+                                </div>
+
+                                <div class="form-group col-6 pl-5">
+                                    <label for="implement_for">{{__('admin.mounter.implements_for')}}</label>
+                                    <textarea name="implement_for" id="implement_for" class="form-control"
+                                              style="resize: none" rows="4">{{$model->implement_for}}</textarea>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="permission_to">{{__('admin.mounter.permissions_to')}}</label>
-                                <textarea name="permission_to" id="permission_to" class="form-control">{{$model->permission_to}}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="implement_for">{{__('admin.mounter.implements_for')}}</label>
-                                <textarea name="implement_for" id="implement_for" class="form-control">{{$model->implement_for}}</textarea>
+                                <label for="given_by">{{__('admin.mounter.given_by')}}</label>
+                                <input type="text" name="given_by" id="given_by" value="{{$model->given_by}}" class="form-control">
                             </div>
 
                             <div class="form-group">

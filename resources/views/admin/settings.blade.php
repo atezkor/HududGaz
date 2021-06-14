@@ -74,47 +74,43 @@
 
                             <div class="form-group">
                                 <label for="phone">{{__('admin.organization.phone')}}</label>
-                                <textarea type="tel" name="phone" id="phone" class="form-control">{{$model->phone}}</textarea>
+                                <textarea type="tel" name="phone" id="phone"
+                                          class="form-control" style="resize: none">{{$model->phone}}</textarea>
                             </div>
                             <hr><br>
                             <div class="form-group row">
                                 <label for="reg_num" class="col-sm-2 col-form-label">{{__('admin.organization.org_num')}}</label>
                                 <div class="col-sm-10">
                                     <input type="number" name="reg_num" id="reg_num" class="form-control"
-                                           value="{{$model->reg_num}}"
-                                           placeholder="0000">
+                                           value="{{$model->reg_num}}" placeholder="0000">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="address_latin" class="col-sm-2 col-form-label">{{__('admin.organization.address_latin')}}</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="address_latin" id="address_latin" class="form-control"
-                                           value="{{$model->address_latin}}"
-                                           placeholder="{{__('admin.organization.address_latin')}}">
+                                           value="{{$model->address_latin}}" placeholder="{{__('admin.organization.address_latin')}}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="address" class="col-sm-2 col-form-label">{{__('admin.organization.address')}}</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="address" id="address" class="form-control"
-                                           value="{{$model->address}}"
-                                           placeholder="{{__('admin.organization.address')}}">
+                                           value="{{$model->address}}" placeholder="{{__('admin.organization.address')}}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="email" class="col-sm-2 col-form-label">{{__('admin.organization.email')}}</label>
                                 <div class="col-sm-10">
                                     <input type="email" name="email" id="email" class="form-control"
-                                           value="{{$model->email}}"
-                                           placeholder="{{__('admin.organization.email')}}">
+                                           value="{{$model->email}}" placeholder="{{__('admin.organization.email')}}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="fax" class="col-sm-2 col-form-label">{{__('admin.fax')}}</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="fax" id="fax" class="form-control"
-                                           value="{{$model->fax}}"
-                                           placeholder="{{__('admin.fax')}}">
+                                           value="{{$model->fax}}" placeholder="{{__('admin.fax')}}">
                                 </div>
                             </div>
                             <div class="form-group row">

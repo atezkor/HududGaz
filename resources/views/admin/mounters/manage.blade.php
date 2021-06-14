@@ -78,12 +78,12 @@
                                 </div>
                             </div>
 
-                            <div class="form-group data-form">
-                                <div>
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="date_contract">{{__('admin.mounter.date_contract')}}</label>
                                     <input type="date" name="date_contract" id="date_contract" value="{{$model->date_contract}}" class="form-control">
                                 </div>
-                                <div>
+                                <div class="col-6">
                                     <label for="date_contract_end">{{__('admin.mounter.date_contract_end')}}</label>
                                     <input type="date" name="date_contract_end" id="date_contract_end" value="{{$model->date_contract_end}}" class="form-control">
                                 </div>

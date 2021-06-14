@@ -41,7 +41,7 @@
                                               method="post" class="form">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{route('admin.fitters.index', ['firm' => $model->id])}}" class="btn btn-outline-info mr-2" style="pointer-events: none">
+                                            <a href="" class="btn btn-outline-info mr-2" style="pointer-events: none">
                                                 {{__('admin.mounter.workers')}}
                                             </a>
                                             <a href="{{route('admin.mounters.edit', ['mounter' => $model])}}" class="btn btn-warning"
@@ -68,7 +68,6 @@
 @section('javascript')
 <script src="{{'/js/default.js'}}"></script>
 <script>
-
     function remove(form) {
         Swal.fire({
             title: '{{__('admin.mounter.alert_title')}}',
