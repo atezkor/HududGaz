@@ -13,7 +13,8 @@
                         </a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
-                                <input type="search" id="search" class="form-control" placeholder="{{__('global.search')}}">
+                                <input type="search" id="search" oninput="search(this)" class="form-control"
+                                       placeholder="{{__('global.search')}}">
                             </div>
                         </div>
                     </div>
@@ -39,14 +40,14 @@
                                     <td>{{$model->email}}</td>
                                     <td>{{$roles[$model->role]}}</td>
                                     <td>
-                                        <form action="{{route('admin.users.delete', ['user' => $model])}}" method="post" id="form-{{$model->id}}">
+                                        <form action="{{route('admin.users.delete', ['user' => $model])}}" method="post">
                                             <a href="{{route('admin.users.edit', ['user' => $model])}}" class="btn btn-warning"
                                                title="{{__('global.btn_edit')}}">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
+                                            <button type="button" onclick="remove(this)" class="btn btn-danger"
                                                     title="{{__('global.btn_del')}}" role="button">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
@@ -63,16 +64,9 @@
     </div>
 </section>
 @endsection
-
 @section('javascript')
+<script src="{{'/js/default.js'}}"></script>
 <script>
-    $('#search').keyup(function() {
-        let value = $(this).val();
-        $('tbody tr').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-        });
-    });
-
     function remove(form) {
         Swal.fire({
             title: '{{__('admin.user.alert_title')}}',
@@ -85,7 +79,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#${form}`).submit()
+                form.parentNode.submit()
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',
@@ -94,5 +88,5 @@
             }
         });
     }
- </script>
+</script>
 @endsection

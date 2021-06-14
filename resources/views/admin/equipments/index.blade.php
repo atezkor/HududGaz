@@ -9,7 +9,7 @@
                 <button onclick="addEquipment()" class="btn btn-info">{{__('admin.equipment.heading_create')}}</button>
                 <div class="card-tools mt-2">
                     <div class="input-group w-75 ml-auto">
-                        <input type="search" id="search" class="form-control"
+                        <input type="search" id="search" oninput="search(this)" class="form-control"
                                placeholder="{{__('global.search')}}">
                     </div>
                 </div>
@@ -27,8 +27,7 @@
                         <tr>
                             <td>{{$model->name}}</td>
                             <td>
-                                <form action="{{route('admin.equipments.delete', ['equipment' => $model])}}" method="post"
-                                      id="form-{{$model->id}}">
+                                <form action="{{route('admin.equipments.delete', ['equipment' => $model])}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <a href="{{route('admin.equip_type', ['equipment' => $model])}}" class="btn btn-outline-info mr-2">
@@ -38,7 +37,7 @@
                                             class="btn btn-warning" title="{{__('global.btn_edit')}}">
                                         <i class="fas fa-pencil-alt"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger" onclick="remove('form-{{$model->id}}')"
+                                    <button type="button" class="btn btn-danger" onclick="remove(this)"
                                             title="{{__('global.btn_del')}}" role="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -80,14 +79,8 @@
 @stop
 @section('javascript')
 <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+<script src="{{'/js/default.js'}}"></script>
 <script>
-    $('#search').keyup(function() {
-        let value = this.value.toLowerCase();
-        $('tbody tr').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-        });
-    });
-
     function remove(form) {
         Swal.fire({
             title: '{{__('admin.equipment.alert_title')}}',
@@ -100,7 +93,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#${form}`).submit()
+                form.parentNode.submit()
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

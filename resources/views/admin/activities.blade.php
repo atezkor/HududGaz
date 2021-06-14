@@ -14,7 +14,8 @@
                         </button>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
-                                <input type="search" id="search" class="form-control" placeholder="{{__('global.search')}}">
+                                <input type="search" id="search" oninput="search(this)" class="form-control"
+                                       placeholder="{{__('global.search')}}">
                             </div>
                         </div>
                     </div>
@@ -34,15 +35,14 @@
                                     <td>{{$model->activity}}</td>
                                     <td>
                                         <form action="{{route('admin.activities.delete', ['activity_type' => $model])}}"
-                                              method="post" id="form-{{$model->id}}" class="form">
+                                              method="post" class="form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-warning" title="{{__('global.btn_edit')}}"
-                                                    onclick="show('{{$model->activity}}', '{{route('admin.activities.update', ['activity_type' => $model])}}')"
-                                                    role="button">
+                                                    onclick="show('{{$model->activity}}', '{{route('admin.activities.update', ['activity_type' => $model])}}')">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
-                                            <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
+                                            <button type="button" onclick="remove(this)" class="btn btn-danger"
                                                     title="{{__('global.btn_del')}}" role="button">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
@@ -53,30 +53,30 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="modal" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header bg-purple">
-                                    <h4 id="header" class="modal-title">{{__('admin.activity.add_activity')}}</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{route('admin.activities.store')}}" method="POST"
-                                          id="form" onsubmit="submit.disabled = true">
-                                        @csrf
-                                        <input type="hidden" name="_method" id="_method" value="POST">
-                                        <div class="form-group">
-                                            <label for="activity">{{__('admin.activity.activity')}}</label>
-                                            <input type="text" name="activity" id="activity" class="form-control">
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <button type="submit" id="submit" class="btn btn-success">{{__('global.btn_save')}}</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                {{__('global.btn_cancel')}}
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modal" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-purple">
+                                <h4 id="header" class="modal-title">{{__('admin.activity.add_activity')}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{route('admin.activities.store')}}" method="POST"
+                                      id="form" onsubmit="submit.disabled = true">
+                                    @csrf
+                                    <input type="hidden" name="_method" id="_method" value="POST">
+                                    <div class="form-group">
+                                        <label for="activity">{{__('admin.activity.activity')}}</label>
+                                        <input type="text" name="activity" id="activity" class="form-control">
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" id="submit" class="btn btn-success">{{__('global.btn_save')}}</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            {{__('global.btn_cancel')}}
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -88,14 +88,8 @@
 @endsection
 @section('javascript')
 <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+<script src="{{'/js/default.js'}}"></script>
 <script>
-    $('#search').keyup(function() {
-        let value = this.value.toLowerCase();
-        $('tbody tr').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-        });
-    });
-
     function show(activity = '', route) {
         $('#form').attr('action', route ? route : '{{route('admin.activities.store')}}');
         $('#header').text(activity ? "{{__('admin.activity.edit_activity')}}" : "{{__('admin.activity.add_activity')}}");
@@ -117,7 +111,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#${form}`).submit();
+                form.parentNode.submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

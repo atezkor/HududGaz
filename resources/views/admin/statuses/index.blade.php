@@ -10,7 +10,8 @@
                     <div class="card-header">
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
-                                <input type="search" id="search" class="form-control" placeholder="{{__('global.search')}}">
+                                <input type="search" id="search" oninput="search(this)" class="form-control"
+                                       placeholder="{{__('global.search')}}">
                             </div>
                         </div>
                     </div>
@@ -50,12 +51,5 @@
 </section>
 @endsection
 @section('javascript')
-<script>
-    $('#search').keyup(function() {
-        let value = this.value.toLowerCase();
-        $('tbody tr').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-        });
-    });
-</script>
+    <script src="{{'/js/default.js'}}"></script>
 @endsection

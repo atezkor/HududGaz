@@ -11,7 +11,8 @@
                         <a href="{{route('admin.organs.create')}}" class="btn btn-info">{{__('admin.organ.btn_new')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
-                                <input type="search" id="search" class="form-control" placeholder="{{__('global.search')}}">
+                                <input type="search" id="search" oninput="search(this)" class="form-control"
+                                       placeholder="{{__('global.search')}}">
                             </div>
                         </div>
                     </div>
@@ -65,14 +66,8 @@
 </section>
 @endsection
 @section('javascript')
+<script src="{{'/js/default.js'}}"></script>
 <script>
-    $('#search').keyup(function() {
-        let value = this.value.toLowerCase();
-        $('tbody tr').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-        });
-    });
-
     function remove(form) {
         Swal.fire({
             title: '{{__('admin.organ.alert_title')}}',

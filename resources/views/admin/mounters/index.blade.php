@@ -11,7 +11,7 @@
                         <a href="{{route('admin.mounters.create')}}" class="btn btn-info">{{__('admin.mounter.btn_new')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
-                                <input type="search" id="search" class="form-control"
+                                <input type="search" id="search" oninput="search(this)" class="form-control"
                                        placeholder="{{__('global.search')}}">
                             </div>
                         </div>
@@ -38,18 +38,18 @@
                                     <td>{{formatDate($model->date_created)}} - {{formatDate($model->date_expired)}}</td>
                                     <td>
                                         <form action="{{route('admin.mounters.delete', ['mounter' => $model])}}"
-                                              method="post" id="form-{{$model->id}}" class="form">
+                                              method="post" class="form">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{route('admin.fitters.index', ['firm' => $model->id])}}" class="btn btn-outline-info mr-2">
+                                            <a href="{{route('admin.fitters.index', ['firm' => $model->id])}}" class="btn btn-outline-info mr-2" style="pointer-events: none">
                                                 {{__('admin.mounter.workers')}}
                                             </a>
                                             <a href="{{route('admin.mounters.edit', ['mounter' => $model])}}" class="btn btn-warning"
                                                title="{{__('global.btn_edit')}}">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
-                                                    title="{{__('global.btn_del')}}" role="button">
+                                            <button type="button" onclick="remove(this)" class="btn btn-danger"
+                                                    title="{{__('global.btn_del')}}">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -66,14 +66,8 @@
 </section>
 @endsection
 @section('javascript')
-<script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+<script src="{{'/js/default.js'}}"></script>
 <script>
-    $('#search').keyup(function() {
-        let value = this.value.toLowerCase();
-        $('tbody tr').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-        });
-    });
 
     function remove(form) {
         Swal.fire({
@@ -87,7 +81,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#${form}`).submit();
+                form.parentNode.submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',
