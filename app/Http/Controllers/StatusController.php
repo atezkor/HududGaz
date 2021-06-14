@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StatusRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Status;
 use App\Services\Service;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use App\Http\Requests\StatusRequest;
+
 
 class StatusController extends Controller {
     private Service $service;

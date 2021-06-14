@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('admin.regions.create')}}" class="btn btn-info">{{__('admin.organ.btn_new')}}</a>
+                        <a href="{{route('admin.organs.create')}}" class="btn btn-info">{{__('admin.organ.btn_new')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" class="form-control" placeholder="{{__('global.search')}}">
@@ -26,7 +26,7 @@
                                     <th>{{__('admin.email')}}</th>
                                     <th>{{__('admin.organ.col_phone')}}</th>
                                     <th>{{__('admin.organ.col_address')}}</th>
-                                    <th></th>
+                                    <th style="width: 1px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,15 +40,14 @@
                                     <td>{{$model->phone}}</td>
                                     <td>{{$model->address}}</td>
                                     <td>
-                                        <form action="{{route('admin.regions.delete', ['region' => $model])}}"
-                                              method="post" id="form-{{$model->id}}">
+                                        <form action="{{route('admin.organs.delete', ['organ' => $model])}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{route('admin.regions.edit', ['region' => $model])}}" class="btn btn-warning"
+                                            <a href="{{route('admin.organs.edit', ['organ' => $model])}}" class="btn btn-warning"
                                                title="{{__('global.btn_edit')}}">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
+                                            <button type="button" onclick="remove(this)" class="btn btn-danger"
                                                     title="{{__('global.btn_del')}}" role="button">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
@@ -86,7 +85,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#${form}`).submit()
+                form.parentNode.submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

@@ -36,7 +36,7 @@ class HelperSeeder extends Seeder {
             $suffix = $district[0][strlen($district[0]) - 1] == 'a' ? "yev" : "ov";
             $name .= $suffix;
             Region::query()->create([
-                'org_number' => rand(100, 500) + rand(100, 500) + rand(100, 500),
+                'org_number' => rand(100, 500) + rand(100, 500) + rand(100, 500) + rand(1000, 1500),
                 'lead_engineer' =>  $name,
                 'section_leader' => $name,
                 'region' => $key,

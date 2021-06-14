@@ -101,7 +101,7 @@
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary mr-2">{{__('global.btn_save')}}</button>
-                            <a href="{{route('admin.regions.index')}}" class="btn btn-outline-secondary">{{__('global.btn_back')}}</a>
+                            <a href="{{route('admin.organs.index')}}" class="btn btn-outline-secondary">{{__('global.btn_back')}}</a>
                             <button type="reset" class="btn btn-default float-right">{{__('global.btn_reset')}}</button>
                         </div>
                     </form>

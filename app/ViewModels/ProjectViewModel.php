@@ -4,11 +4,11 @@ namespace App\ViewModels;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-use Spatie\ViewModels\ViewModel;
 use App\Models\Project;
 use App\Models\Proposition;
 use App\Models\TechCondition;
 use App\Models\Region;
+use Spatie\ViewModels\ViewModel;
 
 class ProjectViewModel extends ViewModel {
     private int $prop_status;
@@ -20,7 +20,7 @@ class ProjectViewModel extends ViewModel {
     }
 
     function propositions(): Collection {
-        return $this->models(Proposition::query(), $this->prop_status, ['organ', 'status', 'created_at']);
+        return $this->models(Proposition::query(), auth()->user()->organ ?? 0, $this->prop_status, ['organ', 'status', 'created_at']);
     }
 
     function conditions(): Collection {
@@ -28,7 +28,7 @@ class ProjectViewModel extends ViewModel {
     }
 
     function projects(): Collection {
-        return $this->models(Project::query(), $this->status, ['id', 'applicant'], 'proposition_id');
+        return $this->models(Project::query(), auth()->user()->organ ?? 0, $this->status, ['id', 'applicant'], 'proposition_id');
     }
 
     function organs(): Collection {
@@ -39,7 +39,9 @@ class ProjectViewModel extends ViewModel {
         return $query->where('status', $status)->orderBy('proposition_id')->pluck('id');
     }
 
-    private function models(Builder $builder, int $status, array $attributes, $order = 'id'): Collection {
-        return $builder->where('status', $status)->orderBy($order)->get($attributes);
+    private function models(Builder $builder, int $organ, int $status, array $attributes, $order = 'id'): Collection {
+        return $builder->where('organ', $organ)
+            ->where('status', $status)
+            ->orderBy($order)->get($attributes);
     }
 }

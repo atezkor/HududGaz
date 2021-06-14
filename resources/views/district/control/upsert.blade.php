@@ -255,9 +255,14 @@
     }
 
     $(function() {
+        $('input[type=text]').on('input', function() {
+            typographer(this);
+        });
+
         if ('{{$type}}' === 'accept') {
             submit.attr('disabled', true);
         }
+
         @if($type == 'accept')
         setTimeout(() => {
             changeEquips();

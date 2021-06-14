@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property Proposition proposition
+ * @property-read int organ
  */
 class Project extends Model {
     use HasFactory;

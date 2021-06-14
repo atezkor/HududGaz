@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CancelledProposition;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use App\ViewModels\PropositionListViewModel;
-use App\ViewModels\RecommendationViewModel;
-use App\Http\Requests\RecommendationRequest;
-use App\Services\RecommendationService;
-use App\Services\PropositionService;
 use App\Models\Recommendation;
+use App\Models\CancelledProposition;
 use App\Models\Proposition;
 use App\Models\Equipment;
+use App\Services\RecommendationService;
+use App\Services\PropositionService;
+use App\Http\Requests\RecommendationRequest;
+use App\ViewModels\RecommendationViewModel;
+use App\ViewModels\PropositionListViewModel;
 
 class RecommendationController extends Controller {
 

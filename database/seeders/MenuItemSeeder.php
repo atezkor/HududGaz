@@ -26,7 +26,7 @@ class MenuItemSeeder extends Seeder {
 
         $this->CreateMenuItem(1, 'admin.menu_settings', '#', 'nav-icon fas fa-chart-line');
         $this->CreateMenuItem(1, 'admin.menu_org', 'admin.settings', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.menu_districts', 'admin.regions.index', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(1, 'admin.menu_organs', 'admin.organs.index', 'nav-icon far fa-circle');
         $this->CreateMenuItem(1, 'admin.menu_status', 'admin.statuses.index', 'nav-icon far fa-circle');
         $this->CreateMenuItem(1, 'admin.menu_activity', 'admin.activities.index', 'nav-icon far fa-circle');
         $this->CreateMenuItem(1, 'admin.menu_timetable', 'admin.timetable.index', 'nav-icon far fa-circle');

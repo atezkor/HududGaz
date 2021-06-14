@@ -23,29 +23,29 @@ class RegionController extends Controller {
 
     public function create(): View|RedirectResponse {
         $model = new Region();
-        return view('admin.regions.form', ['action' => route('admin.regions.store'), 'method' => 'POST',
+        return view('admin.regions.form', ['action' => route('admin.organs.store'), 'method' => 'POST',
             'model' => $model, 'districts' => districts()]);
     }
 
     public function store(DistrictRequest $request): RedirectResponse {
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('admin.regions.index');
+        return redirect()->route('admin.organs.index');
     }
 
-    public function edit(Region $region): View|RedirectResponse {
-        return view('admin.regions.form', ['action' => route('admin.regions.update', ['region' => $region]),
-            'method' => 'PUT', 'model' => $region, 'districts' => districts()]);
+    public function edit(Region $organ): View|RedirectResponse {
+        return view('admin.regions.form', ['action' => route('admin.organs.update', ['organ' => $organ]),
+            'method' => 'PUT', 'model' => $organ, 'districts' => districts()]);
     }
 
-    public function update(DistrictRequest $request, Region $region): RedirectResponse {
+    public function update(DistrictRequest $request, Region $organ): RedirectResponse {
         $data = $request->validated();
-        $this->service->update($data, $region);
-        return redirect()->route('admin.regions.index');
+        $this->service->update($data, $organ);
+        return redirect()->route('admin.organs.index');
     }
 
-    public function destroy(Region $region): RedirectResponse {
-        $this->service->delete($region);
-        return redirect()->route('admin.regions.index');
+    public function destroy(Region $organ): RedirectResponse {
+        $this->service->delete($organ);
+        return redirect()->route('admin.organs.index');
     }
 }

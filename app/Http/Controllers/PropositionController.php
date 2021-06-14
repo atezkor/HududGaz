@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PropositionRequest;
-use App\Models\Activity;
-use App\Models\Individual;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Proposition;
+use App\Models\Individual;
+use App\Models\Activity;
 use App\Models\Region;
 use App\Services\PropositionService;
+use App\Http\Requests\PropositionRequest;
 use App\ViewModels\PropositionListViewModel;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class PropositionController extends Controller {
 

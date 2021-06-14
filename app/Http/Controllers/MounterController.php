@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\MounterRequest;
 use App\Models\Mounter;
 use App\Services\MounterService;
+use App\Http\Requests\MounterRequest;
 
 class MounterController extends Controller {
     private MounterService $service;

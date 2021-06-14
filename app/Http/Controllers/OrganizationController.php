@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Organization;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
+use App\Models\Organization;
 
 
 class OrganizationController extends Controller {
+
     public function index(): View {
         $model = Organization::Data();
         return view('admin.settings', ['model' => $model]);

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Timetable;
-use App\Services\Service;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Timetable;
+use App\Services\Service;
 
 class TimetableController extends Controller {
 

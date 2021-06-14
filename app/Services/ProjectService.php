@@ -16,21 +16,23 @@ class ProjectService extends CrudService {
 
     public function create($data) {
         $proposition = Proposition::query()
-            ->where('number', $data['number'])
             ->where('status', 8)
-            ->first();
-
+            ->find($data['number']);
         if (!$proposition)
             return;
+
+        $applicant = $proposition->getAttribute('applicant');
         $data = [
             'proposition_id' => $proposition->getAttribute('id'),
-            'applicant' => $proposition->getAttribute('applicant')->name,
+            'applicant' => $applicant->name,
             'organ' => auth()->user()->organ ?? 0
         ];
         $project = new Project($data);
         $project->save();
-        $proposition->update(['status' => 10]);
-        $proposition->getAttribute('applicant')->update(['status' => 10]);
+
+        $data = ['status' => 10, 'organ' => $project->organ];
+        $proposition->update($data);
+        $applicant->update($data);
     }
 
     public function upload($request, Project $project) {
@@ -40,9 +42,11 @@ class ProjectService extends CrudService {
         ];
 
         $project->fill($data);
-        $project->proposition->update(['status' => 11]);
-        $project->proposition->applicant->update(['status' => 11]);
         $this->update($data, $project);
+
+        $proposition = $project->proposition;
+        $proposition->update(['status' => 11]);
+        $proposition->applicant->update(['status' => 11]);
     }
 
     private function uploadFile($file): string {

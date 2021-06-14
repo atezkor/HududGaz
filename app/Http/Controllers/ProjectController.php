@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use App\ViewModels\ProjectViewModel;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use App\Models\Project;
 use App\Services\ProjectService;
+use App\ViewModels\ProjectViewModel;
 
 class ProjectController extends Controller {
-
     private ProjectService $service;
 
     public function __construct(ProjectService $service) {
@@ -29,7 +28,7 @@ class ProjectController extends Controller {
         return view('designer.projects');
     }
 
-    public function add(Request $request): RedirectResponse {
+    public function create(Request $request): RedirectResponse {
         $this->service->create($request);
         return redirect()->route('designer.projects');
     }

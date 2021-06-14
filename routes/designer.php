@@ -10,6 +10,6 @@ Route::get('projects', [App\Http\Controllers\ProjectController::class, 'index'])
 Route::get('progress', [App\Http\Controllers\ProjectController::class, 'progress'])->name('designer.projects.progress');
 Route::get('cancelled', [App\Http\Controllers\ProjectController::class, 'cancelled'])->name('designer.projects.cancelled');
 
-Route::post('project/add', [App\Http\Controllers\ProjectController::class, 'add'])->name('designer.project.add');
+Route::post('project/create', [App\Http\Controllers\ProjectController::class, 'create'])->name('designer.project.create');
 Route::post('projects/{project}/upload', [App\Http\Controllers\ProjectController::class, 'upload'])->name('designer.project.upload');
 

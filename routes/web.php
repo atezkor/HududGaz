@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin'], function() {
     resource('equipments', EquipmentController::class, 'admin.equipments');
     resource('designers', DesignerController::class, 'admin.designers');
     resource('mounters', MounterController::class, 'admin.mounters');
-    resource('regions', RegionController::class, 'admin.regions');
+    resource('organs', RegionController::class, 'admin.organs');
     resource('fitters', FitterController::class, 'admin.fitters');
 
     readonly('statuses', StatusController::class, 'admin.statuses');
@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');
     Route::post('equipments/{equipment}/equipment-types', [EquipmentController::class, 'add'])->name('admin.equip_type.add');
-    Route::post('equipments/{equipment}/equipment-types/{type}', [EquipmentController::class, 'renew'])->name('admin.equip_type.renew');
+    Route::post('equipments/equipment-types/{type}', [EquipmentController::class, 'renew'])->name('admin.equip_type.renew');
     Route::post('equipment-types/{type}', [EquipmentController::class, 'del'])->name('admin.equip_type.del');
     Route::get('settings', [OrganizationController::class, 'index'])->name('admin.settings');
     Route::post('settings', [OrganizationController::class, 'set'])->name('admin.settings.set');

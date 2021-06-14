@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 use App\Models\TechCondition;
-use App\Services\TechConditionService;
 use App\Models\Recommendation;
+use App\Services\TechConditionService;
 use App\Services\RecommendationService;
 use App\ViewModels\RecommendationViewModel;
 use App\ViewModels\TechConditionViewModel;
