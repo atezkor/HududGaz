@@ -12,4 +12,5 @@ Route::get('cancelled', [App\Http\Controllers\ProjectController::class, 'cancell
 
 Route::post('project/create', [App\Http\Controllers\ProjectController::class, 'create'])->name('designer.project.create');
 Route::post('projects/{project}/upload', [App\Http\Controllers\ProjectController::class, 'upload'])->name('designer.project.upload');
+Route::get('projects/{project}/show', [App\Http\Controllers\ProjectController::class, 'show'])->name('designer.project.show');
 

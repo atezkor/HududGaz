@@ -21,11 +21,11 @@ class ProjectController extends Controller {
     }
 
     public function progress(): View {
-        return view('designer.projects');
+        return view('designer.progress', new ProjectViewModel(2, 11));
     }
 
     public function cancelled(): View {
-        return view('designer.projects');
+        return view('designer.progress', new ProjectViewModel(2, 11));
     }
 
     public function create(Request $request): RedirectResponse {
@@ -36,5 +36,9 @@ class ProjectController extends Controller {
     public function upload(Request $request, Project $project): RedirectResponse {
         $this->service->upload($request, $project);
         return redirect()->back();
+    }
+
+    public function show(Project $project): RedirectResponse {
+        return redirect($this->service->show($project));
     }
 }

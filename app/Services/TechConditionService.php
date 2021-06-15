@@ -95,22 +95,12 @@ class TechConditionService extends CrudService {
         $this->pdf->save($this->path . $addition['filename']);
     }
 
-    private function uploadFile($file): string {
-        $filename = time() . '.pdf';
-        $file->storeAs('public/tech_conditions', $filename);
-        return $filename;
-    }
-
-    private function deleteFile($file) {
-        File::delete($this->path . $file);
-    }
-
     private function cancel(Proposition $proposition, Recommendation $recommendation, TechCondition $condition) {
         $cancelled = new CancelledProposition();
         $applicant = $proposition->applicant;
         $cancelled->fill([
             'prop_num' => $proposition->getAttribute('number'),
-            'applicant' => $applicant->full_name ?? $applicant->legal_name,
+            'applicant' => $applicant->name,
             'proposition' => 'p' . $proposition->file,
             'recommendation' => 'r' . $recommendation->file,
             'condition' => 'c' . $condition->file,
@@ -128,6 +118,16 @@ class TechConditionService extends CrudService {
         $this->move('propositions/', $proposition->file, 'p');
 
         $cancelled->save();
+    }
+
+    private function uploadFile($file): string {
+        $filename = time() . '.pdf';
+        $file->storeAs('public/tech_conditions', $filename);
+        return $filename;
+    }
+
+    private function deleteFile($file) {
+        File::delete($this->path . $file);
     }
 
     private function move(string $path, string $file, string $suffix) {

@@ -159,41 +159,21 @@
 <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>
 <script src="{{'/js/datatable/datatables.bootstrap4.min.js'}}"></script>
 <script src="{{'/js/datatable/datatables.responsive.min.js'}}"></script>
+<script src="{{'/js/default.js'}}"></script>
 <script>
-    $(function () {
-        let lang = {
-            emptyTable: "@lang('global.datatables.emptyTable')",
-            infoEmpty: "@lang('global.datatables.infoEmpty')",
-            sSearch: "@lang('global.datatables.search')",
-            oPaginate: {
-                sPrevious: "@lang('global.datatables.previous')",
-                sNext: "@lang('global.datatables.next')",
-            },
-            sInfo: "@lang('global.datatables.info')",
-            sZeroRecords: "@lang('global.datatables.zeroRecords')",
-            sInfoFiltered: "@lang('global.datatables.infoFiltered')"
-        }
-
-        $("#table1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "ordering": true,
-            searching: true,
-            language: lang
-        });
-
-        $('#table2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            searching: true,
-            language: lang
-        });
-    });
+    let lang = {
+        emptyTable: "@lang('global.datatables.emptyTable')",
+        infoEmpty: "@lang('global.datatables.infoEmpty')",
+        sSearch: "@lang('global.datatables.search')",
+        oPaginate: {
+            sPrevious: "@lang('global.datatables.previous')",
+            sNext: "@lang('global.datatables.next')",
+        },
+        sInfo: "@lang('global.datatables.info')",
+        sZeroRecords: "@lang('global.datatables.zeroRecords')",
+        sInfoFiltered: "@lang('global.datatables.infoFiltered')"
+    }
+    datatable(lang, 'table1', 'table2');
 
     function remove(form) {
         Swal.fire({

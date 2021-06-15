@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property Proposition proposition
  * @property-read int organ
+ * @property string file
  */
 class Project extends Model {
     use HasFactory;
 
-    protected $fillable = ['proposition_id', 'status', 'applicant', 'organ', 'file'];
+    protected $fillable = ['proposition_id', 'condition', 'status', 'applicant', 'organ', 'file'];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);

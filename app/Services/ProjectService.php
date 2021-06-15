@@ -4,10 +4,10 @@ namespace App\Services;
 
 use App\Models\Project;
 use App\Models\Proposition;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProjectService extends CrudService {
-
     private string $path = 'public/projects/';
 
     public function __construct(Project $model) {
@@ -22,8 +22,10 @@ class ProjectService extends CrudService {
             return;
 
         $applicant = $proposition->getAttribute('applicant');
+        $condition = $proposition->getAttribute('tech_condition');
         $data = [
             'proposition_id' => $proposition->getAttribute('id'),
+            'condition' => $condition->id,
             'applicant' => $applicant->name,
             'organ' => auth()->user()->organ ?? 0
         ];
@@ -33,6 +35,10 @@ class ProjectService extends CrudService {
         $data = ['status' => 10, 'organ' => $project->organ];
         $proposition->update($data);
         $applicant->update($data);
+    }
+
+    public function show(Project $project): string {
+        return Storage::url($this->path . $project->file);
     }
 
     public function upload($request, Project $project) {

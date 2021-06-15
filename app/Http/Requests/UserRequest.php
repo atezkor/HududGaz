@@ -42,8 +42,8 @@ class UserRequest extends FormRequest {
             'patronymic' => [],
             'role' => ['required'],
             'organ' => [],
-            'email' => ['required',
-                Rule::unique('users', 'email')->ignore($this->route('user'))
+            'username' => ['required',
+                Rule::unique('users', 'username')->ignore($this->route('user'))
             ],
             'password' => $pass[$this->input('_method')],
             'locale' => [],
@@ -54,7 +54,7 @@ class UserRequest extends FormRequest {
 
     public function messages(): array {
         return [
-            'email.unique' => __('admin.user.uniq_login')
+            'username.unique' => __('admin.user.uniq_login')
         ];
     }
 }
