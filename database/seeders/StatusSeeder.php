@@ -29,8 +29,7 @@ class StatusSeeder extends Seeder {
 
         $this->createStatus("Muhandis loyihani ochib ko\u{2018}rdi",72);
         $this->createStatus("Muhandis loyihani bekor qildi",60);
-        $this->createStatus("Muhandis loyihani tasdiqladi",60);
-        $this->createStatus("Muhandis tasdiqlangan loyihani yukladi",60);
+        $this->createStatus("Muhandis loyihani tasdiqladi va yukladi",60);
 
         $this->createStatus("Montajchi loyihani ochib ko\u{2018}rdi",72);
         $this->createStatus("Montajchi ishni bajardi",72);

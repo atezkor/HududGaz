@@ -102,7 +102,6 @@
             confirmButtonText: "@lang('technic.recommendation.btn_back')",
             cancelButtonText: "@lang('global.btn_cancel')",
             preConfirm: (value) => {
-                console.log(value)
                 return fetch(url, {
                         method: 'POST',
                         headers: {

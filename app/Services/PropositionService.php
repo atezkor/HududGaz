@@ -68,7 +68,7 @@ class PropositionService extends CrudService {
         $model->applicant->delete();
     }
 
-    private function createFile($file): string {
+    protected function createFile($file): string {
         $name = time() . '.' . $file->extension();
         $file->move($this->path, $name); # Store to public folder
         // $file->storeAs($this->path, $name); # Store to storage folder
@@ -76,7 +76,7 @@ class PropositionService extends CrudService {
         return $name;
     }
 
-    private function deleteFile($file) {
+    protected function deleteFile($file) {
         File::delete($this->path . '/' . $file);
     }
 

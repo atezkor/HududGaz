@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Interfaces\ICrudService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 
 abstract class CrudService implements ICrudService {
@@ -12,22 +13,27 @@ abstract class CrudService implements ICrudService {
      * This variable for detect Model
      */
     protected Model $model;
+    protected string $folder;
 
     /**
-     * @param $data
+     * @param array $data
      */
     public function create($data) {
         $this->model->fill($data);
         $this->model->save();
     }
 
-    public function update($data, $model) {
+    public function update(array $data, $model) {
         $model->fill($data);
         $model->save();
     }
 
     public function delete($model) {
         $model->delete();
+    }
+
+    protected function deleteFile(string $file) {
+        File::delete("storage/$this->folder/" . $file);
     }
 
 

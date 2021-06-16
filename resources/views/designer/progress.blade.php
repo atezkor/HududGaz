@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @php($limit = limit(11, 9)[11])
+                    @php($limit = limitOne(11))
                     @foreach($propositions as $key => $model)
                         <tr>
                             <td>{{$key + 1}}</td>

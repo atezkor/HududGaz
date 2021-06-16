@@ -105,7 +105,7 @@ class RecommendationService extends CrudService {
         return $filename;
     }
 
-    private function deleteFile($file) {
+    protected function deleteFile($file) {
         File::delete($this->path . $file);
     }
 

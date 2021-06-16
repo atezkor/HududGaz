@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @php($limit = limit(10, 9)[10])
+                    @php($limit = limitOne(10))
                     @foreach($propositions as $key => $model)
                         <tr>
                             <td>{{$key + 1}}</td>

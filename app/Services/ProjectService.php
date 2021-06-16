@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Project;
 use App\Models\Proposition;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -12,12 +13,13 @@ class ProjectService extends CrudService {
 
     public function __construct(Project $model) {
         $this->model = $model;
+        $this->folder = 'projects';
     }
 
     public function create($data) {
         $proposition = Proposition::query()
             ->where('status', 8)
-            ->find($data['number']);
+            ->find($data);
         if (!$proposition)
             return;
 
@@ -41,6 +43,25 @@ class ProjectService extends CrudService {
         return Storage::url($this->path . $project->file);
     }
 
+    public function confirm(Request $request, Project $project) {
+        $this->deleteFile($project->file);
+        $this->update([
+            'status' => 4, 'file' => $this->uploadFile($request->file('file'))
+        ], $project);
+
+        $proposition = $project->proposition;
+        $proposition->update(['status' => 14]);
+        $proposition->applicant->update(['status' => 14]);
+    }
+
+    public function cancel(string $comment, Project $project) {
+        $this->update(['status' => 3, 'comment' => $comment], $project);
+
+        $proposition = $project->proposition;
+        $proposition->update(['status' => 13]);
+        $proposition->applicant->update(['status' => 13]);
+    }
+
     public function upload($request, Project $project) {
         $data = [
             'file' => $this->uploadFile($request->file('file')),
@@ -48,6 +69,7 @@ class ProjectService extends CrudService {
         ];
 
         $project->fill($data);
+        $this->deleteFile($project->file);
         $this->update($data, $project);
 
         $proposition = $project->proposition;

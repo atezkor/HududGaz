@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Project extends Model {
     use HasFactory;
 
-    protected $fillable = ['proposition_id', 'condition', 'status', 'applicant', 'organ', 'file'];
+    protected $fillable = ['proposition_id', 'condition', 'status', 'applicant', 'organ', 'file', 'comment'];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);

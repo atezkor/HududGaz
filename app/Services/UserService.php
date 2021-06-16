@@ -41,7 +41,7 @@ class UserService extends CrudService {
         return $name;
     }
 
-    private function deleteFile($name) {
-        File::delete($this->path . $name);
+    protected function deleteFile($file) {
+        File::delete($this->path . $file);
     }
 }

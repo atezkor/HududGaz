@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\CancelledProposition;
-use App\Models\Proposition;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Proposition;
 use App\Models\Organization;
 use App\Models\Recommendation;
 use App\Models\TechCondition;
+use App\Models\CancelledProposition;
 use Barryvdh\DomPDF\PDF;
 
 
@@ -20,6 +20,7 @@ class TechConditionService extends CrudService {
     public function __construct(TechCondition $model, PDF $pdf) {
         $this->model = $model;
         $this->pdf = $pdf;
+        $this->folder = 'tech_conditions';
     }
 
     public function create($data, Recommendation $model = null) {
@@ -124,10 +125,6 @@ class TechConditionService extends CrudService {
         $filename = time() . '.pdf';
         $file->storeAs('public/tech_conditions', $filename);
         return $filename;
-    }
-
-    private function deleteFile($file) {
-        File::delete($this->path . $file);
     }
 
     private function move(string $path, string $file, string $suffix) {

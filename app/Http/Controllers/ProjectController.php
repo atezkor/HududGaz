@@ -17,19 +17,19 @@ class ProjectController extends Controller {
     }
 
     public function index(): View {
-        return view('designer.projects', new ProjectViewModel());
+        return view('designer.projects', new ProjectViewModel(organ: 1)); //auth()->user()->organ ?? 0
     }
 
     public function progress(): View {
-        return view('designer.progress', new ProjectViewModel(2, 11));
+        return view('designer.progress', new ProjectViewModel([2], [11], auth()->user()->organ ?? 0));
     }
 
     public function cancelled(): View {
-        return view('designer.progress', new ProjectViewModel(2, 11));
+        return view('designer.cancelled', new ProjectViewModel([3], [13], auth()->user()->organ ?? 0));
     }
 
     public function create(Request $request): RedirectResponse {
-        $this->service->create($request);
+        $this->service->create($request->get('number'));
         return redirect()->route('designer.projects');
     }
 

@@ -12,5 +12,6 @@
             'number' => "Ariza raqami",
             'num_read' => "Ariza raqamini kiriting",
             'add_project' => "Loyiha qo\u{2018}shish",
+            'comment' => "Bekor qilish sababi",
         ]
     ];
