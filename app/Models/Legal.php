@@ -13,4 +13,8 @@ class Legal extends Model {
     public function getNameAttribute(): string {
         return $this->getAttribute('legal_name');
     }
+
+    public function getPersonNameAttribute() {
+        return $this->getAttribute('leader');
+    }
 }

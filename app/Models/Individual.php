@@ -13,4 +13,8 @@ class Individual extends Model {
     public function getNameAttribute(): string {
         return $this->getAttribute('full_name');
     }
+
+    public function getPersonNameAttribute() {
+        return $this->getAttribute('full_name');
+    }
 }

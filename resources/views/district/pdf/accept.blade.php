@@ -108,8 +108,8 @@
         <div class="mt-20">
             <ol>
                 <li>
-                    <strong>@lang('district.pdf.object_name')</strong>: {{$model->address}}@lang('district.pdf.in_the')
-                    {{$consumer->full_name ?? $consumer->leader}}@lang('district.pdf.to') @lang('district.pdf.belong_to') {{buildType()[$proposition->build_type]}}
+                    <strong>@lang('district.pdf.object_name')</strong>: {{$model->address}}@lang('district.pdf.in_the') @lang('district.pdf.civil')
+                    {{$consumer->person_name}}@lang('district.pdf.to') @lang('district.pdf.belong_to') {{$build_type}}
                     @lang('district.pdf.gas_connect')
                 </li>
                 <li>

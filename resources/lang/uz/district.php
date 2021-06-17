@@ -79,6 +79,7 @@
             'object_name' => "Obyekt nomi",
             'near_address' => "Ulash imkoni bor manzil",
             'in_the' => "dagi",
+            'civil' => "fuqoro",
             'to' => "ga",
             'belong_to' => "qarashli",
             'gas_connect' => "binosini tabiiy gaz ta\u{2019}minotiga ulash",

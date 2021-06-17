@@ -39,6 +39,7 @@ return [
         'role' => "O\u{2018}rni",
         'organ' => "Tashkilot",
         'email' => "Elektron pochta manzili",
+        'username' => "Foydalanuvchi nomi",
         'password' => "Yashirin so\u{2018}z",
         'locale' => "Mahalliy til",
         'position' => "Lavozimi",

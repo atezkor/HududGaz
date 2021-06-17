@@ -22,6 +22,8 @@ class UserService extends CrudService {
     public function update($data, $model) {
         if (isset($data['password']))
             $data['password'] = $this->hashed($data['password']);
+        else
+            $data['password'] = $model->password;
 
         if (isset($data['avatar'])) {
             $this->deleteFile($model->avatar);

@@ -19,7 +19,7 @@ class UserRequest extends FormRequest {
         return [
             'name' => __('admin.user.name'),
             'role' => __('admin.user.role'),
-            'email' => __('admin.user.email'),
+            'username' => __('admin.user.username'),
             'password' => __('admin.user.password'),
             'lastname' => __('admin.user.lastname')
         ];

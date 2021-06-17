@@ -63,13 +63,13 @@ class ProjectService extends CrudService {
     }
 
     public function upload($request, Project $project) {
+        if ($project->file)
+            $this->deleteFile($project->file);
         $data = [
             'file' => $this->uploadFile($request->file('file')),
             'status' => 2
         ];
-
         $project->fill($data);
-        $this->deleteFile($project->file);
         $this->update($data, $project);
 
         $proposition = $project->proposition;
@@ -78,8 +78,6 @@ class ProjectService extends CrudService {
     }
 
     private function uploadFile($file): string {
-        $filename = time() . '.pdf';
-        $file->storeAs($this->path, $filename);
-        return $filename;
+        return $this->storeFile($file);
     }
 }

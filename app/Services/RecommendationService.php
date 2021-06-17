@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Organization;
 use App\Models\Recommendation;
@@ -21,6 +20,7 @@ class RecommendationService extends CrudService {
     public function __construct(Recommendation $model, PDF $pdf) {
         $this->model = $model;
         $this->pdf = $pdf;
+        $this->folder = 'recommendations';
     }
 
     public function show(Recommendation $recommendation): Response {
@@ -41,8 +41,10 @@ class RecommendationService extends CrudService {
     }
 
     public function upload($request, Recommendation $recommendation) {
+        if ($recommendation->file)
+            $this->deleteFile($recommendation->file);
         $recommendation->setAttribute('status', 2);
-        $recommendation->setAttribute('file', $this->createFile($request->file('file')));
+        $recommendation->setAttribute('file', $this->storeFile($request->file('file')));
         $recommendation->update();
     }
 
@@ -59,12 +61,22 @@ class RecommendationService extends CrudService {
     }
 
     public function update($data, $model) {
-        $this->deleteFile($model->file);
         $data['status'] = 1;
-        if (isset($data['file']))
-            $data['file'] = $this->createFile($data['file']);
-
         parent::update($data, $model);
+    }
+
+    function filter(int $status, string $operator, int $organ): Collection {
+        $add = request()->route()->getName() == "district.recommendations.cancelled";
+        $models = $this->model->query()->where('organ', $operator, $organ)
+            ->where('status', '=', $status)
+            ->orderBy('proposition_id');
+        return $add ? $models->get(['id', 'comment']) : $models->pluck('id');
+    }
+
+    function propositions(Builder $model, array $status, string $operator, int $organ): \Illuminate\Database\Eloquent\Collection {
+        return $model->where('organ', $operator, $organ)
+            ->whereIn('status', $status)
+            ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);
     }
 
     private function createPDF(Recommendation $recommendation): Response {
@@ -91,6 +103,7 @@ class RecommendationService extends CrudService {
             }
 
             $data['equipments'] = $equipments;
+            $data['build_type'] = $this->buildType($proposition->build_type);
         }
 
         view()->share($data);
@@ -99,27 +112,12 @@ class RecommendationService extends CrudService {
         return $this->pdf->stream(time() . '.pdf');
     }
 
-    private function createFile($file): string {
-        $filename = time() . '.pdf';
-        $file->storeAs($this->path, $filename);
-        return $filename;
-    }
+    private function buildType(int $type) {
+        $building_type = [
+            1 => __('district.build_type.residential'),
+            2 => __('district.build_type.non_residential')
+        ];
 
-    protected function deleteFile($file) {
-        File::delete($this->path . $file);
-    }
-
-    function filter(int $status, string $operator, int $organ): Collection {
-        $add = request()->route()->getName() == "district.recommendations.cancelled";
-        $models = $this->model->query()->where('organ', $operator, $organ)
-            ->where('status', '=', $status)
-            ->orderBy('proposition_id');
-       return $add ? $models->get(['id', 'comment']) : $models->pluck('id');
-    }
-
-    function propositions(Builder $model, array $status, string $operator, int $organ): \Illuminate\Database\Eloquent\Collection {
-        return $model->where('organ', $operator, $organ)
-            ->whereIn('status', $status)
-            ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);
+        return $building_type[$type];
     }
 }

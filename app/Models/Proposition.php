@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int organ
  * @property-read Recommendation recommendation
  * @property-read string file
+ * @property-read int build_type
  */
 class Proposition extends Model {
 
@@ -23,33 +24,33 @@ class Proposition extends Model {
 
     protected $fillable = ['number', 'organ', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
 
-    function individual(): HasOne {
+    public function individual(): HasOne {
         return $this->hasOne(Individual::class);
     }
 
-    function legal(): HasOne {
+    public function legal(): HasOne {
         return $this->hasOne(Legal::class);
     }
 
-    function applicant(): HasOne {
+    public function applicant(): HasOne {
         return $this->type == 1 ? $this->individual() : $this->legal();
     }
 
-    function percent($term = 72): string {
+    public function percent($term = 72): string {
         $now = time() - date_timestamp_get(date_create($this->getAttribute('created_at')));
         $percent = 100 - $now / (3600 * $term) * 100;
         return number_format($percent, 0, '.', '');
     }
 
-    function limit($limit, int $offset = 0) {
+    public function limit($limit, int $offset = 0) {
         return $limit[$this->status - $offset];
     }
 
-    function recommendation(): HasOne {
+    public function recommendation(): HasOne {
         return $this->hasOne(Recommendation::class);
     }
 
-    function tech_condition(): HasOne {
+    public function tech_condition(): HasOne {
         return $this->hasOne(TechCondition::class);
     }
 }

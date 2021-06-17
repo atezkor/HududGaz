@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Models\Designer;
-use Illuminate\Support\Facades\File;
 
 
 class DesignerService extends CrudService {
 
     public function __construct(Designer $designer) {
         $this->model = $designer;
+        $this->folder = 'designers';
     }
 
     public function create($data) {
@@ -21,7 +21,7 @@ class DesignerService extends CrudService {
     public function update($data, $model) {
         if (isset($data['document'])) {
             $data['document'] = $this->fileCreate($data['document']);
-            $this->fileDelete($model->document);
+            $this->deleteFile($model->document);
         }
 
         $model->fill($data);
@@ -29,7 +29,7 @@ class DesignerService extends CrudService {
     }
 
     public function delete($model) {
-        $this->fileDelete($model->document);
+        $this->deleteFile($model->document);
         $model->delete();
     }
 
@@ -37,9 +37,5 @@ class DesignerService extends CrudService {
         $name = time() . '.' . $file->extension();
         $file->move('storage/designers', $name);
         return $name;
-    }
-
-    private function fileDelete($path) {
-        File::delete('storage/designers/' . $path);
     }
 }

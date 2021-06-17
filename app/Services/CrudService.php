@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Interfaces\ICrudService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 
 
@@ -30,6 +31,12 @@ abstract class CrudService implements ICrudService {
 
     public function delete($model) {
         $model->delete();
+    }
+
+    protected function storeFile(UploadedFile $file): string {
+        $filename = time() . '.' . $file->extension();
+        $file->storeAs("public/$this->folder", $filename);
+        return $filename;
     }
 
     protected function deleteFile(string $file) {

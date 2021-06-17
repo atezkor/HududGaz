@@ -38,8 +38,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email">{{__('admin.user.email')}}</label>
-                                    <input type="email" name="email" id="email" value="{{$model->email}}" class="form-control">
+                                    <label for="username">{{__('admin.user.username')}}</label>
+                                    <input type="text" name="username" id="username" value="{{$model->username}}" class="form-control">
                                 </div>
 
                                 <div class="form-group">

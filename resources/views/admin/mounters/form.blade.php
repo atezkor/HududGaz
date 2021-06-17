@@ -79,11 +79,11 @@
                             <div class="row">
                                 <div class="form-group col-6 pr-5">
                                     <label for="date_created">{{__('admin.date_created')}}</label>
-                                    <input type="date" name="date_created" id="date_created" value="{{$model->date_created}}" class="form-control">
+                                    <input type="date" name="date_created" id="date_created" value="{{$model->date_created}}" class="form-control date">
                                 </div>
                                 <div class="form-group col-6 pl-5">
                                     <label for="date_expired">{{__('admin.date_expired')}}</label>
-                                    <input type="date" name="date_expired" id="date_expired" value="{{$model->date_expired}}" class="form-control">
+                                    <input type="date" name="date_expired" id="date_expired" value="{{$model->date_expired}}" class="form-control date">
                                 </div>
                             </div>
 
@@ -131,15 +131,8 @@
 </section>
 @endsection
 @section('javascript')
+<script src="{{'/js/default.js'}}"></script>
 <script>
-    $('#file').change(function(input) {
-        try {
-            $('#file_hint').text(input.target.files[0].name);
-        } catch (e) {}
-    })
-
-    $('#reset').on('click', function() {
-        $('#file_hint').text('{{__('admin.doc_upload')}}');
-    });
+    fileUpload('reset', 'file', 'file_hint', "{{__('admin.doc_upload')}}");
 </script>
 @endsection

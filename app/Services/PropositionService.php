@@ -4,7 +4,6 @@ namespace App\Services;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\File;
 use App\Models\Proposition;
 use App\Models\Individual;
 use App\Models\Legal;
@@ -15,13 +14,14 @@ class PropositionService extends CrudService {
 
     public function __construct(Proposition $model) {
         $this->model = $model;
+        $this->folder = 'propositions';
     }
 
     public function create($data) {
         $data['file'] = $this->createFile($data['file']);
         parent::create($data);
 
-        $data['proposition_id'] = $this->model->id; // getAttribute('id')
+        $data['proposition_id'] = $this->model->id;
         $this->createApplicant($data);
     }
 
@@ -38,9 +38,8 @@ class PropositionService extends CrudService {
     }
 
     public function delete($model) {
-        $this->deleteApplicant($model);
         $this->deleteFile($model->file);
-        parent::delete($model);
+        parent::delete($model); // $model->applicant->delete();
     }
 
     public function show(Proposition $proposition, int $status = 0): RedirectResponse {
@@ -55,29 +54,18 @@ class PropositionService extends CrudService {
     }
 
     private function createApplicant(array $data) {
-        if (intval($data['type']) === 1) {
+        if (intval($data['type']) === 1)
             $model = new Individual();
-        } else {
+        else
             $model = new Legal();
-        }
         $model->fill($data);
         $model->save();
-    }
-
-    private function deleteApplicant($model) {
-        $model->applicant->delete();
     }
 
     protected function createFile($file): string {
         $name = time() . '.' . $file->extension();
         $file->move($this->path, $name); # Store to public folder
-        // $file->storeAs($this->path, $name); # Store to storage folder
-
         return $name;
-    }
-
-    protected function deleteFile($file) {
-        File::delete($this->path . '/' . $file);
     }
 
     public function filter(int $type, array $statuses, string $operator, int $organ): Collection {

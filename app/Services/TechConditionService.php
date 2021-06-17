@@ -122,9 +122,7 @@ class TechConditionService extends CrudService {
     }
 
     private function uploadFile($file): string {
-        $filename = time() . '.pdf';
-        $file->storeAs('public/tech_conditions', $filename);
-        return $filename;
+        return parent::storeFile($file);
     }
 
     private function move(string $path, string $file, string $suffix) {

@@ -17,6 +17,7 @@ class MenuItemSeeder extends Seeder {
         $this->districtMenu();
         $this->designer();
         $this->engineer();
+        $this->mounterMenu();
     }
 
     private function adminMenu() {
@@ -46,20 +47,26 @@ class MenuItemSeeder extends Seeder {
     private function districtMenu() {
         $this->CreateMenuItem(3, 'district.propositions', 'district.propositions', 'badge bg-primary');
         $this->CreateMenuItem(3, 'district.recommendations', 'district.recommendations', 'badge bg-info');
-        $this->CreateMenuItem(3, 'district.progress', 'district.recommendations.progress', 'badge bg-danger');
+        $this->CreateMenuItem(3, 'district.progress', 'district.recommendations.progress', 'badge bg-success');
         $this->CreateMenuItem(3, 'district.cancelled', 'district.recommendations.cancelled', 'badge bg-danger');
         $this->CreateMenuItem(3, 'district.archive', 'district.recommendations.archive', 'badge bg-secondary');
     }
 
     private function designer() {
         $this->CreateMenuItem(4, 'designer.projects', 'designer.projects', 'badge bg-primary');
-        $this->CreateMenuItem(4, 'designer.progress', 'designer.projects.progress', 'badge bg-info');
-        $this->CreateMenuItem(4, 'designer.cancelled', 'designer.projects.cancelled', 'badge bg-success');
+        $this->CreateMenuItem(4, 'designer.progress', 'designer.projects.progress', 'badge bg-success');
+        $this->CreateMenuItem(4, 'designer.cancelled', 'designer.projects.cancelled', 'badge bg-danger');
     }
 
     private function engineer() {
         $this->CreateMenuItem(5, 'engineer.projects', 'engineer.projects', 'nav-icon far fa-circle');
         $this->CreateMenuItem(5, 'engineer.montages', 'engineer.montages', 'nav-icon far fa-circle');
+    }
+
+    private function mounterMenu() {
+        $this->CreateMenuItem(6, 'mounter.montages', 'mounter.montages', 'badge bg-primary');
+        $this->CreateMenuItem(6, 'mounter.progress', 'mounter.progress', 'badge bg-success');
+        $this->CreateMenuItem(6, 'mounter.cancelled', 'mounter.cancelled', 'badge bg-danger');
     }
 
     private function CreateMenuItem($role, $title, $href, $icon) {

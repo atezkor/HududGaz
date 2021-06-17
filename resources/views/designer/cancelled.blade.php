@@ -56,8 +56,8 @@
                                     <form action="{{route('designer.project.upload', ['project' => $projects[$key]])}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" class="d-none">
-                                        <label for="file-{{$key}}" class="btn btn-outline-info my-0">
-                                            <i class="fas fa-check"></i>
+                                        <label for="file-{{$key}}" class="btn btn-outline-info my-0" title="@lang('global.btn_upload')">
+                                            <i class="fas fa-upload"></i>
                                         </label>
                                     </form>
                                 </td>

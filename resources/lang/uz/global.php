@@ -15,6 +15,7 @@
         'btn_yes' => "Ha",
         'btn_no' => "Yo\u{2018}q",
         'btn_upload' => "Yuklash",
+        'btn_cfm' => "Tasdiqlash",
         'btn_send' => "Jo\u{2018}natish",
         'del_process' => "O\u{2018}chirilmoqda ...",
         'index' => "Tr",

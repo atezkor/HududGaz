@@ -11,6 +11,18 @@ function search(event) {
     });
 }
 
+function fileUpload(reset, file, file_hint, text) {
+    $(`#${file}`).change(function(input) {
+        try {
+            $(`#${file_hint}`).text(input.target.files[0].name);
+        } catch (e) {}
+    })
+
+    $(`#${reset}`).on('click', function() {
+        $(`#${file_hint}`).text(text);
+    });
+}
+
 function datatable(lang, ...tables) {
     $(function() {
         for (let table of tables) {

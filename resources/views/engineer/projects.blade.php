@@ -51,14 +51,15 @@
                                     <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <form action="{{route('engineer.project.confirm', ['project' => $projects[$key]])}}" method="post">
+                                    <form action="{{route('engineer.project.confirm', ['project' => $projects[$key]])}}"
+                                          method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" class="d-none">
-                                        <label for="file-{{$key}}" class="btn btn-outline-info my-0">
+                                        <label for="file-{{$key}}" class="btn btn-outline-info my-0" title="@lang('global.btn_cfm')">
                                             <i class="fas fa-check"></i>
                                         </label>
                                         <button type="button" onclick="cancel('{{route('engineer.project.cancel', ['project' => $projects[$key]])}}')"
-                                                class="btn btn-outline-danger">
+                                                class="btn btn-outline-danger" title="@lang('global.btn_cancel')">
                                             <i class="fas fa-ban"></i>
                                         </button>
                                     </form>

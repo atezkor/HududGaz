@@ -103,13 +103,6 @@ function districts(): array { # The reason for giving the key is to start from o
     ];
 }
 
-function buildType(): array {
-    return [
-        1 => __('district.build_type.residential'),
-        2 => __('district.build_type.non_residential')
-    ];
-}
-
 function dateFull($date, bool $reverse = false): string {
     $months = [
         __('district.january'),
