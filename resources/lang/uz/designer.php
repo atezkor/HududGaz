@@ -9,8 +9,8 @@
         'btn_add' => "Loyiha qo\u{2018}shish",
         'project' => [
             'name' => "Loyiha",
-            'number' => "Ariza raqami",
-            'num_read' => "Ariza raqamini kiriting",
+            'code' => "Maxsus kod",
+            'code_read' => "Maxsus kodni kiriting",
             'add_project' => "Loyiha qo\u{2018}shish",
             'comment' => "Bekor qilish sababi",
         ]

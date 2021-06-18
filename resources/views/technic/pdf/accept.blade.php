@@ -33,12 +33,20 @@
             text-align: center;
         }
 
+        .f-l {
+            float: left;
+        }
+
        .uppercase {
            text-transform: uppercase;
        }
 
        .lowercase {
            text-transform: lowercase;
+       }
+
+       .clear {
+           clear: both;
        }
 
         table {
@@ -62,11 +70,15 @@
     </style>
 </head>
 <body>
+    <div class="f-l">
+        <img src="data:image/svg+xml;base64, {{base64_encode($qrcode)}}" width="60px" alt="QR">
+    </div>
     <div class="text-right text-bold">
         <div>Davlat xizmatlari markazi</div>
         <div>Xorazm viloyati boshqarmasi</div>
         <div>Yangiariq tuman markazi</div>
     </div>
+    <div class="clear"></div>
     <div class="text-center">
         <div>Sizning <span class="lowercase">{{dateFull($proposition->created_at, true)}}</span>dagi <span class="text-bold">{{$proposition->id}}</span>-sonli talabnomangizga javoban:</div>
         <div>Tabiiy gaz bilan gazlashtirish loyihasini ishlab chiqish va gazlashtirishga</div>

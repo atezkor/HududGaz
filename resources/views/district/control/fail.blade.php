@@ -25,7 +25,7 @@
     <div class="col-12 mt-3">
         <label for="description">@lang('district.recommendation.description')</label>
         <input type="text" name="description" id="description" value="{{$model->description}}" class="form-control"
-               placeholder="@lang('district.recommendation.desc_hint')" required>
+               placeholder="@lang('district.recommendation.desc_hint')" autocomplete="off" required>
     </div>
 
     <div class="col-12 mt-4">

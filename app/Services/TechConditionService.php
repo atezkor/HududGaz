@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Exception;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Proposition;
@@ -10,17 +11,20 @@ use App\Models\Recommendation;
 use App\Models\TechCondition;
 use App\Models\CancelledProposition;
 use Barryvdh\DomPDF\PDF;
+use SimpleSoftwareIO\QrCode\Generator;
 
 
 class TechConditionService extends CrudService {
 
     private PDF $pdf;
     private string $path = 'storage/tech_conditions/';
+    private Generator $qrcode;
 
-    public function __construct(TechCondition $model, PDF $pdf) {
+    public function __construct(TechCondition $model, PDF $pdf, Generator $qrcode) {
+        $this->folder = 'tech_conditions';
         $this->model = $model;
         $this->pdf = $pdf;
-        $this->folder = 'tech_conditions';
+        $this->qrcode = $qrcode;
     }
 
     public function create($data, Recommendation $model = null) {
@@ -28,7 +32,8 @@ class TechConditionService extends CrudService {
         $filename = time() . '.pdf';
         $attr = [
             'proposition_id' => $proposition->id,
-            'file' => $filename
+            'file' => $filename,
+            'qrcode' => $this->qrcodeGenerate(4)
         ];
 
         $tech_condition = new TechCondition($attr);
@@ -40,7 +45,8 @@ class TechConditionService extends CrudService {
         $this->createPDF($model, [
             'proposition' => $proposition,
             'filename' => $filename,
-            'text' => $data['data']
+            'text' => $data['data'],
+            'qrcode' => $this->qrcode->generate($tech_condition->qrcode)
         ]);
     }
 
@@ -87,6 +93,7 @@ class TechConditionService extends CrudService {
 
             $data['equipments'] = $equipments;
             $data['data'] = $addition['text'];
+            $data['qrcode'] = $addition['qrcode'];
         } else {
             $data['reference'] = $addition['text'];
         }
@@ -108,15 +115,13 @@ class TechConditionService extends CrudService {
             'reason' => $recommendation->getAttribute('description')
         ]);
 
+        $this->move('tech_conditions/', $condition->file, 'c');
+        $this->move('recommendations/', $recommendation->file, 'r');
+        $this->move('propositions/', $proposition->file, 'p');
 
         $this->delete($condition);
-        $this->move('tech_conditions/', $condition->file, 'c');
-
         $this->delete($recommendation);
-        $this->move('recommendations/', $recommendation->file, 'r');
-
         $this->delete($proposition);
-        $this->move('propositions/', $proposition->file, 'p');
 
         $cancelled->save();
     }
@@ -126,6 +131,19 @@ class TechConditionService extends CrudService {
     }
 
     private function move(string $path, string $file, string $suffix) {
-        Storage::move("public/$path" . $file, "public/cancelled/$suffix" . $file);
+        try {
+            Storage::move("public/$path" . $file, "public/cancelled/$suffix" . $file);
+        } catch (Exception) {}
+    }
+
+    private function qrcodeGenerate($length = 10): string {
+        $characters = 'abc@defghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $char_length = strlen($characters);
+        $result = '';
+        for ($i = 0; $i < $length; $i ++) {
+            $result .= $characters[rand(0, $char_length - 1)];
+        }
+
+        return $result . time();
     }
 }

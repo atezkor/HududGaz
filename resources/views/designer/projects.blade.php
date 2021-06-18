@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <button id="create" class="btn btn-info">@lang('designer.btn_add')</button>
+                <button onclick="create()" class="btn btn-info">@lang('designer.btn_add')</button>
             </div>
             <div class="card-body">
                 <table id="table" class="table table-bordered table-striped table-center">
@@ -66,16 +66,23 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 id="header" class="modal-title">@lang('designer.project.add_project')</h4>
+                        <div class="row w-100">
+                            <div class="col-10">
+                                <h4 id="header" class="modal-title">@lang('designer.project.add_project')</h4>
+                            </div>
+                            <div class="col-2">
+                                <img src="data:image/svg+xml;base64, {{base64_encode($qrcode)}}" alt="QR" class="img-md">
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-body">
                         <form action="{{route('designer.project.create')}}" method="POST"
                               id="form" onsubmit="submit.disabled = true">
                             @csrf
                             <div class="form-group">
-                                <label for="number">@lang('designer.project.number')</label>
-                                <input type="number" name="number" id="number" class="form-control"
-                                       placeholder="@lang('designer.project.num_read')" required>
+                                <label for="code">@lang('designer.project.code')</label>
+                                <input type="text" name="code" id="code" class="form-control"
+                                       placeholder="@lang('designer.project.code_read')" autocomplete="off" required>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" id="submit" class="btn btn-primary">@lang('global.btn_add')</button>
@@ -110,9 +117,9 @@
             sInfoFiltered: "@lang('global.datatables.infoFiltered')"
         }, 'table');
 
-        $('#create').on('click', function() {
+        function create() {
             $('#modal').modal();
             $('#number').val(null);
-        });
+        }
     </script>
 @endsection

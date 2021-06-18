@@ -129,7 +129,7 @@
         function dynamicSelect(data) {
             let organ = $('#organ');
             organ.attr('required', true);
-            $(organ).children().each((index, e) => {
+            $(organ).children().each((index, e) => { // Remove all options
                 if (index !== 0) {
                     e.remove();
                 }

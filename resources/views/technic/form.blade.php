@@ -53,7 +53,8 @@
                                     <div class="form-group row">
                                         <label for="passport" class="col-2">@lang('technic.proposition.passport')</label>
                                         <div class="col-10">
-                                            <input type="text" name="passport" id="passport" value="{{$applicant->passport}}" class="form-control">
+                                            <input type="text" name="passport" id="passport" value="{{$applicant->passport}}"
+                                                   class="form-control" autocomplete="off">
                                         </div>
                                     </div>
 
@@ -75,14 +76,14 @@
                                     <div class="form-group row">
                                         <label for="legal_name" class="col-2">@lang('technic.proposition.legal_name')</label>
                                         <div class="col-10">
-                                            <input type="text" name="legal_name" id="legal_name" value="{{$applicant->legal_name}}" class="form-control">
+                                            <input type="text" name="legal_name" id="legal_name" value="{{$applicant->legal_name}}" class="form-control" autocomplete="off">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="leader" class="col-2">@lang('technic.proposition.leader')</label>
                                         <div class="col-10">
-                                            <input type="text" name="leader" id="leader" value="{{$applicant->leader}}" class="form-control">
+                                            <input type="text" name="leader" id="leader" value="{{$applicant->leader}}" class="form-control" autocomplete="off">
                                         </div>
                                     </div>
 
@@ -96,7 +97,7 @@
                                     <div class="form-group row">
                                         <label for="email" class="col-2">@lang('technic.proposition.email')</label>
                                         <div class="col-10">
-                                            <input type="email" name="email" id="email" value="{{$applicant->email}}" class="form-control">
+                                            <input type="email" name="email" id="email" value="{{$applicant->email}}" class="form-control" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +106,8 @@
                             <div class="form-group row">
                                 <label for="phone" class="col-2">@lang('technic.proposition.phone')</label>
                                 <div class="col-10">
-                                    <input type="tel" name="phone" id="phone" value="{{$applicant->phone}}" class="form-control">
+                                    <input type="tel" name="phone" id="phone" value="{{$applicant->phone}}"
+                                           class="form-control" autocomplete="off">
                                 </div>
                             </div>
 

@@ -3,13 +3,12 @@
 namespace App\Services;
 
 use App\Models\Project;
-use App\Models\Proposition;
+use App\Models\TechCondition;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 
 class ProjectService extends CrudService {
-    private string $path = 'public/projects/';
+    private string $path = '/storage/projects/';
 
     public function __construct(Project $model) {
         $this->model = $model;
@@ -17,17 +16,16 @@ class ProjectService extends CrudService {
     }
 
     public function create($data) {
-        $proposition = Proposition::query()
-            ->where('status', 8)
-            ->find($data);
-        if (!$proposition)
+        $condition = TechCondition::query()->where('status', 2)
+            ->where('qrcode', $data)->first();
+        if (!$condition)
             return;
 
-        $applicant = $proposition->getAttribute('applicant');
-        $condition = $proposition->getAttribute('tech_condition');
+        $proposition = $condition->getAttribute('proposition');
+        $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->getAttribute('id'),
-            'condition' => $condition->id,
+            'condition' => $condition->getAttribute('id'),
             'applicant' => $applicant->name,
             'organ' => auth()->user()->organ ?? 0
         ];
@@ -40,7 +38,7 @@ class ProjectService extends CrudService {
     }
 
     public function show(Project $project): string {
-        return Storage::url($this->path . $project->file);
+        return $this->path . $project->file;
     }
 
     public function confirm(Request $request, Project $project) {

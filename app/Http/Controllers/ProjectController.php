@@ -8,16 +8,21 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\Project;
 use App\Services\ProjectService;
 use App\ViewModels\ProjectViewModel;
+use SimpleSoftwareIO\QrCode\Generator;
 
 class ProjectController extends Controller {
     private ProjectService $service;
+    private Generator $qrcode;
 
-    public function __construct(ProjectService $service) {
+    public function __construct(ProjectService $service, Generator $qrcode) {
         $this->service = $service;
+        $this->qrcode = $qrcode;
     }
 
     public function index(): View {
-        return view('designer.projects', new ProjectViewModel(organ: 1)); //auth()->user()->organ ?? 0
+        return view('designer.projects', new ProjectViewModel(organ: auth()->user()->organ ?? 0), [
+            'qrcode' => $this->qrcode->size(100)->generate(csrf_token())
+        ]);
     }
 
     public function progress(): View {
@@ -29,7 +34,7 @@ class ProjectController extends Controller {
     }
 
     public function create(Request $request): RedirectResponse {
-        $this->service->create($request->get('number'));
+        $this->service->create($request->get('code'));
         return redirect()->route('designer.projects');
     }
 
@@ -39,6 +44,6 @@ class ProjectController extends Controller {
     }
 
     public function show(Project $project): RedirectResponse {
-        return redirect($this->service->show($project));
+        return response()->redirectTo($this->service->show($project));
     }
 }
