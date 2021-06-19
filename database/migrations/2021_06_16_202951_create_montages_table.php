@@ -14,9 +14,12 @@ class CreateMontagesTable extends Migration {
         Schema::create('montages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id');
+            $table->unsignedBigInteger('condition');
+            $table->unsignedBigInteger('project');
             $table->integer('organ');
             $table->integer('status')->default(1);
             $table->string('file')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

@@ -49,7 +49,7 @@
                                 <form action="{{route('designer.project.upload', ['project' => $projects[$key]])}}" method="post"
                                       enctype="multipart/form-data">
                                     @csrf
-                                    <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">
+                                    <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="upload(this)">
                                     <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
                                         <i class="fas fa-upload"></i>
                                     </label>
@@ -120,6 +120,30 @@
         function create() {
             $('#modal').modal();
             $('#number').val(null);
+        }
+
+        function upload(input) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: input.parentElement.action,
+                method: 'POST',
+                dataType: 'html',
+                data: {
+                    'download': true
+                },
+                success: function(data) {
+                    let win = open('', '');
+                    let doc = win.document;
+                    doc.write(data);
+
+                    input.parentElement.submit();
+                }
+            });
         }
     </script>
 @endsection

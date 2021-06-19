@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read Recommendation recommendation
  * @property-read string file
  * @property-read int build_type
+ * @property-read TechCondition tech_condition
  */
 class Proposition extends Model {
 

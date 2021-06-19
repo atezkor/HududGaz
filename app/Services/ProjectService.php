@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\TechCondition;
-use Illuminate\Http\Request;
 
 
 class ProjectService extends CrudService {
@@ -24,7 +24,7 @@ class ProjectService extends CrudService {
         $proposition = $condition->getAttribute('proposition');
         $applicant = $proposition->applicant;
         $data = [
-            'proposition_id' => $proposition->getAttribute('id'),
+            'proposition_id' => $proposition->id,
             'condition' => $condition->getAttribute('id'),
             'applicant' => $applicant->name,
             'organ' => auth()->user()->organ ?? 0
@@ -60,7 +60,7 @@ class ProjectService extends CrudService {
         $proposition->applicant->update(['status' => 13]);
     }
 
-    public function upload($request, Project $project) {
+    public function upload(Request $request, Project $project) {
         if ($project->file)
             $this->deleteFile($project->file);
         $data = [
