@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
 /**
@@ -16,5 +17,9 @@ class TechCondition extends Model {
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);
+    }
+
+    public function project(): HasOne {
+        return $this->hasOne(Project::class, 'condition');
     }
 }

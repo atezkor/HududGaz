@@ -21,7 +21,8 @@ class CreateRecommendationsTable extends Migration {
             $table->string('gas_network');
             $table->string('pipeline');
             $table->integer('length');
-            $table->integer('diameter');
+            $table->integer('pipe1')->nullable();
+            $table->integer('pipe2')->nullable();
             $table->integer('depth');
             $table->integer('capability');
             $table->integer('pressure_win');

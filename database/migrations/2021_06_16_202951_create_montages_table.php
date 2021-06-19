@@ -16,8 +16,10 @@ class CreateMontagesTable extends Migration {
             $table->unsignedBigInteger('proposition_id');
             $table->unsignedBigInteger('condition');
             $table->unsignedBigInteger('project');
-            $table->integer('organ');
+            $table->string('applicant');
+            $table->tinyInteger('firm');
             $table->integer('status')->default(1);
+            $table->tinyInteger('organ');
             $table->string('file')->nullable();
             $table->string('comment')->nullable();
             $table->timestamps();

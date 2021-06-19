@@ -46,7 +46,7 @@ class RecommendationRequest extends FormRequest {
             'gas_network' => ['required'],
             'pipeline' => [],
             'length' => [],
-            'diameter' => [],
+            'pipe1' => [],
             'depth' => [],
             'capability' => [],
             'pressure_win' => [],

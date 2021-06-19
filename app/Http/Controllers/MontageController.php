@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Montage;
 use App\Services\MontageService;
+use App\ViewModels\MontageViewModel;
 use SimpleSoftwareIO\QrCode\Generator;
 
 class MontageController extends Controller {
@@ -19,7 +21,7 @@ class MontageController extends Controller {
     }
 
     public function index(): View {
-        return view('installer.index', [], [
+        return view('installer.index', new MontageViewModel(user: auth()->user()), [
             'qrcode' => $this->qrcode->generate(json_encode([
                 'token' => csrf_token(),
                 'url' => route('mounter.project.open')
@@ -30,5 +32,22 @@ class MontageController extends Controller {
     public function open(Request $request): RedirectResponse {
         $this->service->create($request->get('code'));
         return redirect()->back();
+    }
+
+    public function upload(Request $request, Montage $montage): RedirectResponse {
+        $this->service->upload($request, $montage);
+        return redirect()->back();
+    }
+
+    public function progress(): View {
+        return view('installer.progress', new MontageViewModel([2, 3], auth()->user()));
+    }
+
+    public function show(Montage $montage): RedirectResponse {
+        return redirect($this->service->show($montage));
+    }
+
+    public function cancelled(): View {
+        return view('installer.cancelled', new MontageViewModel([4], auth()->user()));
     }
 }

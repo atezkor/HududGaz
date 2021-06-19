@@ -40,14 +40,15 @@
                                         <div class="form-group row">
                                             <label for="username" class="col-2">@lang('global.profile.username')</label>
                                             <div class="col-10">
-                                                <input type="text" name="username" id="username" value="{{$model->email}}" class="form-control">
+                                                <input type="text" name="username" id="username" value="{{$model->username}}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="name" class="col-2">@lang('global.profile.name')</label>
                                             <div class="col-10">
-                                                <input type="text" name="name" id="name" value="{{$model->name}}" class="form-control">
+                                                <input type="text" name="name" id="name" value="{{$model->name}}"
+                                                       class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 

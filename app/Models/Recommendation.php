@@ -14,8 +14,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Recommendation extends Model {
     public $timestamps = false;
 
-    protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'gas_network', 'pipeline', 'length', 'diameter', 'depth', 'capability',
-        'pressure_win', 'pressure_sum', 'grc', 'consumption', 'equipments', 'additional', 'description', 'type', 'file', 'comment'];
+    protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'gas_network', 'pipeline', 'length',
+        'pipe1', 'pipe2', 'depth', 'capability', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'equipments',
+        'additional', 'description', 'type', 'file', 'comment'];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);

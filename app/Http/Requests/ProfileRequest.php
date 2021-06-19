@@ -21,7 +21,7 @@ class ProfileRequest extends FormRequest {
      * @return array
      */
     public function rules(): array {
-        if (!$this->check($this->input('old_pass'), auth()->user()->getAuthPassword()))
+        if (!$this->check($this->input('old_pass'), auth()->user()->getAuthPassword()) && $this->input('old_pass'))
             return [
                 "old_pass" => ['email']
             ];

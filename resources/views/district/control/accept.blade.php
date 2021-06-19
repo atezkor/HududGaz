@@ -3,7 +3,7 @@
         <div class="form-group">
             <label for="address">@lang('district.recommendation.address')<span class="required">*</span></label>
             <input type="text" name="address" id="address" value="{{$model->address}}"
-                   class="form-control" placeholder="@lang('district.recommendation.address_hint')" required>
+                   class="form-control" placeholder="@lang('district.recommendation.address_hint')" autocomplete="off" required>
         </div>
 
         <div class="form-group">
@@ -34,8 +34,8 @@
                    class="form-control" placeholder="@lang('district.recommendation.len_hint')" required>
         </div>
         <div class="form-group">
-            <label for="diameter">@lang('district.recommendation.diameter')<span class="required">*</span></label>
-            <input type="number" name="diameter" id="diameter" step="0.01" value="{{$model->diameter}}"
+            <label for="pipe1">@lang('district.recommendation.diameter')<span class="required">*</span></label>
+            <input type="number" name="pipe1" id="pipe1" step="0.01" value="{{$model->pipe1}}"
                    class="form-control" placeholder="@lang('district.recommendation.diameter_hint')" required>
         </div>
     </div>
