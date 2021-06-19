@@ -27,37 +27,38 @@ class ProjectService extends CrudService {
             'proposition_id' => $proposition->id,
             'condition' => $condition->getAttribute('id'),
             'applicant' => $applicant->name,
-            'organ' => auth()->user()->organ ?? 0
+            'organ' => $proposition->organ,
+            'designer' => auth()->user()->organ ?? 0
         ];
         $project = new Project($data);
         $project->save();
 
-        $data = ['status' => 10, 'organ' => $project->organ];
-        $proposition->update($data);
-        $applicant->update($data);
+        $proposition->update(['status' => 10]);
+        $applicant->update(['status' => 10]);
     }
 
-    public function show(Project $project): string {
+    public function show(Project $project, $show = null): string {
+        if ($project->status == 2 && $show) {
+            $project->update(['status' => 3]);
+            $this->propStatus($project);
+        }
+
         return $this->path . $project->file;
     }
 
     public function confirm(Request $request, Project $project) {
         $this->deleteFile($project->file);
         $this->update([
-            'status' => 4, 'file' => $this->uploadFile($request->file('file'))
+            'status' => 5, 'file' => $this->uploadFile($request->file('file'))
         ], $project);
 
-        $proposition = $project->proposition;
-        $proposition->update(['status' => 14]);
-        $proposition->applicant->update(['status' => 14]);
+        $this->propStatus($project);
     }
 
     public function cancel(string $comment, Project $project) {
-        $this->update(['status' => 3, 'comment' => $comment], $project);
+        $this->update(['status' => 4, 'comment' => $comment], $project);
 
-        $proposition = $project->proposition;
-        $proposition->update(['status' => 13]);
-        $proposition->applicant->update(['status' => 13]);
+        $this->propStatus($project);
     }
 
     public function upload(Request $request, Project $project) {
@@ -70,12 +71,16 @@ class ProjectService extends CrudService {
         $project->fill($data);
         $this->update($data, $project);
 
-        $proposition = $project->proposition;
-        $proposition->update(['status' => 11]);
-        $proposition->applicant->update(['status' => 11]);
+        $this->propStatus($project);
     }
 
     private function uploadFile($file): string {
         return $this->storeFile($file);
+    }
+
+    private function propStatus(Project $project) {
+        $proposition = $project->proposition;
+        $proposition->update(['status' => $project->status + 9]);
+        $proposition->applicant->update(['status' => $project->status + 9]);
     }
 }

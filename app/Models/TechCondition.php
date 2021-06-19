@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
@@ -13,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read string qrcode
  */
 class TechCondition extends Model {
-    use HasFactory;
 
     protected $fillable = ['proposition_id', 'qrcode', 'status', 'qrcode', 'file'];
 

@@ -3,6 +3,7 @@
         'projects' => "Loyihalar",
         'montages' => "Montajlar",
         'tech_condition' => "Texnik shart",
+        'designer' => "Loyihachi tashkilot",
         'organ' => "Idora nomi",
         'show' => "Ko\u{2018}rish",
         'error' => "Xatolik yuz berdi",

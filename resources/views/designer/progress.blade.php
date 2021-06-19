@@ -23,19 +23,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @php($limit = limitOne(11))
-                    @foreach($propositions as $key => $model)
+                    @foreach($projects as $key => $model)
                         <tr>
                             <td>{{$key + 1}}</td>
-                            <td>{{$projects[$key]->applicant}}</td>
+                            <td>{{$model->applicant}}</td>
                             <td>
-                                <a href="{{route('technic.tech_condition.show', ['condition' => $projects[$key]->condition])}}"
+                                <a href="{{route('technic.tech_condition.show', ['condition' => $model->condition])}}"
                                    target="_blank">
                                     @lang('designer.show')
                                 </a>
                             </td>
                             <td>
-                                <a href="{{route('designer.project.show', ['project' => $projects[$key]])}}"
+                                <a href="{{route('designer.project.show', ['project' => $model])}}"
                                    target="_blank">
                                     @lang('designer.show')
                                 </a>
@@ -43,11 +42,11 @@
                             <td>{{$organs[$model->organ]}}</td>
                             <td>
                                 <div class="progress progress-xs">
-                                    <div class="{{progressColor($model->percent($limit))}}"
-                                         style="width: {{$model->percent($limit)}}%">
+                                    <div class="{{progressColor($model->percent($model->time($limit)))}}"
+                                         style="width: {{$model->percent($model->time($limit))}}%">
                                     </div>
                                 </div>
-                                <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                <div class="text-center">{{$model->time($limit)}} @lang('global.hour')</div>
                             </td>
                         </tr>
                     @endforeach

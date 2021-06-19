@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Activity extends Model {
+class Activity extends \Illuminate\Database\Eloquent\Model {
     use HasFactory;
+
     public $timestamps = false;
     protected $fillable = ['activity'];
 }

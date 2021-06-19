@@ -3,12 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class MenuItem extends Model {
-    use HasFactory;
-
+class MenuItem extends \Illuminate\Database\Eloquent\Model {
     public $timestamps = false;
 
     public static function items($user): Builder {

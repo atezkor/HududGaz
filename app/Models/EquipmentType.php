@@ -2,11 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class EquipmentType extends Model {
-    use HasFactory;
+class EquipmentType extends \Illuminate\Database\Eloquent\Model {
 
     protected $fillable = ['equipment_id', 'type', 'order'];
 }

@@ -25,25 +25,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = limitOne(13))
-                        @foreach($propositions as $key => $model)
+                        @foreach($projects as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td>{{$projects[$key]->applicant}}</td>
+                                <td>{{$model->applicant}}</td>
                                 <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $projects[$key]->condition])}}"
+                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->condition])}}"
                                        target="_blank">
                                         @lang('designer.show')
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{route('designer.project.show', ['project' => $projects[$key]])}}"
+                                    <a href="{{route('designer.project.show', ['project' => $model])}}"
                                        target="_blank">
                                         @lang('designer.show')
                                     </a>
                                 </td>
                                 <td>{{$organs[$model->organ]}}</td>
-                                <td>{{$projects[$key]->comment}}</td>
+                                <td>{{$model->comment}}</td>
                                 <td>
                                     <div class="progress progress-xs">
                                         <div class="{{progressColor($model->percent($limit))}}"
@@ -53,7 +52,7 @@
                                     <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <form action="{{route('designer.project.upload', ['project' => $projects[$key]])}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('designer.project.upload', ['project' => $model])}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" class="d-none">
                                         <label for="file-{{$key}}" class="btn btn-outline-info my-0" title="@lang('global.btn_upload')">

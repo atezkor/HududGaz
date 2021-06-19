@@ -21,17 +21,17 @@ class ProjectController extends Controller {
     }
 
     public function index(): View {
-        return view('designer.projects', new ProjectViewModel(organ: auth()->user()->organ ?? 0), [
-            'qrcode' => $this->qrcode->size(100)->generate(csrf_token())
+        return view('designer.projects', new ProjectViewModel(designer: auth()->user()->organ ?? 0), [
+            'qrcode' => $this->qrcode->generate(json_encode(['token' => csrf_token(), 'url' => route('designer.project.create')]))
         ]);
     }
 
     public function progress(): View {
-        return view('designer.progress', new ProjectViewModel([2], [11], auth()->user()->organ ?? 0));
+        return view('designer.progress', new ProjectViewModel([2, 3], auth()->user()->organ ?? 0));
     }
 
     public function cancelled(): View {
-        return view('designer.cancelled', new ProjectViewModel([3], [13], auth()->user()->organ ?? 0));
+        return view('designer.cancelled', new ProjectViewModel([4], auth()->user()->organ ?? 0));
     }
 
     public function create(Request $request): RedirectResponse {
@@ -55,7 +55,7 @@ class ProjectController extends Controller {
         ]);
     }
 
-    public function show(Project $project): RedirectResponse {
-        return response()->redirectTo($this->service->show($project));
+    public function show(Request $request, Project $project): RedirectResponse {
+        return response()->redirectTo($this->service->show($project, $request->get('show')));
     }
 }

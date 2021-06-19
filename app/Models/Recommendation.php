@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -14,8 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  */
 class Recommendation extends Model {
-    use HasFactory;
-
     public $timestamps = false;
 
     protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'gas_network', 'pipeline', 'length', 'diameter', 'depth', 'capability',

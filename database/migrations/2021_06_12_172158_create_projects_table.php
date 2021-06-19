@@ -15,8 +15,9 @@ class CreateProjectsTable extends Migration {
             $table->id();
             $table->unsignedBigInteger('proposition_id');
             $table->unsignedBigInteger('condition');
-            $table->tinyInteger('status')->default(1);
             $table->string('applicant');
+            $table->tinyInteger('designer');
+            $table->tinyInteger('status')->default(1);
             $table->tinyInteger('organ');
             $table->string('file')->nullable();
             $table->string('comment')->nullable();

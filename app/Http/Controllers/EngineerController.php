@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ProjectService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use App\Models\Project;
+use App\Models\Designer;
+use App\Services\ProjectService;
 use App\ViewModels\ProjectViewModel;
 
 class EngineerController extends Controller {
@@ -17,7 +19,9 @@ class EngineerController extends Controller {
     }
 
     public function projects(): View {
-        return view('engineer.projects', new ProjectViewModel([2], [11, 12]));
+        return view('engineer.projects', new ProjectViewModel([2, 3]), [
+            'designers' => $this->designers()
+        ]);
     }
 
     public function confirm(Request $request, Project $project): RedirectResponse {
@@ -29,5 +33,9 @@ class EngineerController extends Controller {
         $data = $request->validate(['comment' => ['required']])['comment'];
         $this->projectService->cancel($data, $project);
         return redirect()->back();
+    }
+
+    private function designers(): Collection {
+        return Designer::query()->pluck('org_name', 'id');
     }
 }

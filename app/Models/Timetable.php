@@ -2,11 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Timetable extends Model {
-    use HasFactory;
+class Timetable extends \Illuminate\Database\Eloquent\Model {
 
     protected $fillable = ['name', 'type', 'start', 'end'];
 }

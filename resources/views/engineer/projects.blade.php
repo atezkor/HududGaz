@@ -20,45 +20,46 @@
                                 <th>@lang('global.consumer')</th>
                                 <th>@lang('engineer.tech_condition')</th>
                                 <th>@lang('engineer.project.name')</th>
+                                <th>@lang('engineer.designer')</th>
                                 <th>@lang('engineer.organ')</th>
                                 <th>@lang('global.proposition.limit')</th>
                                 <th>@lang('global.proposition.action')</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = limitOne(11))
-                        @foreach($propositions as $key => $model)
+                        @foreach($projects as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td>{{$projects[$key]->applicant}}</td>
+                                <td>{{$model->applicant}}</td>
                                 <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $projects[$key]->condition])}}" target="_blank">
+                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->condition])}}" target="_blank">
                                         @lang('engineer.show')
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{route('designer.project.show', ['project' => $projects[$key]])}}" target="_blank">
+                                    <a href="{{route('designer.project.show', ['project' => $model, 'show' => true])}}" target="_blank">
                                         @lang('engineer.show')
                                     </a>
                                 </td>
+                                <td>{{$designers[$model->designer]}}</td>
                                 <td>{{$organs[$model->organ]}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($limit))}}"
-                                             style="width: {{$model->percent($limit)}}%">
+                                        <div class="{{progressColor($model->percent($model->time($limit)))}}"
+                                             style="width: {{$model->percent($model->time($limit))}}%">
                                         </div>
                                     </div>
-                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                    <div class="text-center">{{$model->time($limit)}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <form action="{{route('engineer.project.confirm', ['project' => $projects[$key]])}}"
+                                    <form action="{{route('engineer.project.confirm', ['project' => $model])}}"
                                           method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" class="d-none">
                                         <label for="file-{{$key}}" class="btn btn-outline-info my-0" title="@lang('global.btn_cfm')">
                                             <i class="fas fa-check"></i>
                                         </label>
-                                        <button type="button" onclick="cancel('{{route('engineer.project.cancel', ['project' => $projects[$key]])}}')"
+                                        <button type="button" onclick="cancel('{{route('engineer.project.cancel', ['project' => $model])}}')"
                                                 class="btn btn-outline-danger" title="@lang('global.btn_cancel')">
                                             <i class="fas fa-ban"></i>
                                         </button>

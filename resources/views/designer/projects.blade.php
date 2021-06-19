@@ -25,13 +25,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @php($limit = limitOne(10))
-                    @foreach($propositions as $key => $model)
+                    @foreach($projects as $key => $model)
                         <tr>
                             <td>{{$key + 1}}</td>
-                            <td>{{$projects[$key]->applicant}}</td>
+                            <td>{{$model->applicant}}</td>
                             <td>
-                                <a href="{{route('technic.tech_condition.show', ['condition' => $projects[$key]->condition])}}"
+                                <a href="{{route('technic.tech_condition.show', ['condition' => $model->condition])}}"
                                    target="_blank">
                                     @lang('designer.show')
                                 </a>
@@ -46,7 +45,7 @@
                                 <div class="text-center">{{$limit}} @lang('global.hour')</div>
                             </td>
                             <td>
-                                <form action="{{route('designer.project.upload', ['project' => $projects[$key]])}}" method="post"
+                                <form action="{{route('designer.project.upload', ['project' => $model])}}" method="post"
                                       enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="upload(this)">

@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Fitter extends Model {
-    use HasFactory;
+class Fitter extends \Illuminate\Database\Eloquent\Model {
     public $timestamps = false;
 
     protected $fillable = ['firm_id', 'statement_number', 'first_name', 'second_name', 'last_name', 'date_contract',
