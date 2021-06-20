@@ -9,6 +9,8 @@ use App\Models\Project;
 use App\Models\Designer;
 use App\Models\Montage;
 use App\Models\Mounter;
+use App\Models\Permit;
+use App\Models\Organization;
 use App\Services\ProjectService;
 use App\Services\MontageService;
 use App\ViewModels\ProjectViewModel;
@@ -55,5 +57,13 @@ class EngineerController extends Controller {
 
         $this->montageService->confirm($request, $montage);
         return redirect()->back();
+    }
+
+    public function permits(Permit $permit): View {
+        return view('engineer.permit', [
+            'organization' => Organization::Data(),
+            'district' => $permit->district,
+            'designer' => $permit->project->designer
+        ]);
     }
 }

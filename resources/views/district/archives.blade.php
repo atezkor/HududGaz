@@ -26,7 +26,7 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div id="completed" class="tab-pane active">
-                        <table id="table" class="table table-bordered table-striped table-center">
+                        <table id="table1" class="table table-bordered table-striped table-center">
                             <thead>
                                 <tr>
                                     <th>@lang('global.index')</th>
@@ -56,7 +56,7 @@
                         </table>
                     </div>
                     <div id="uncompleted" class="tab-pane fade">
-                        <table id="table" class="table table-bordered table-striped table-center">
+                        <table id="table2" class="table table-bordered table-striped table-center">
                             <thead>
                                 <tr>
                                     <th>@lang('global.index')</th>
@@ -110,6 +110,6 @@
         sInfo: "@lang('global.datatables.info')",
         sZeroRecords: "@lang('global.datatables.zeroRecords')",
         sInfoFiltered: "@lang('global.datatables.infoFiltered')"
-    }, 'table');
+    }, 'table1', 'table2');
 </script>
 @endsection

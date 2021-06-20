@@ -1,9 +1,3 @@
-$(function() {
-    $('#search').on('search', function() {
-        $('tbody tr').show();
-    });
-});
-
 function search(event) {
     let value = $(event).val().toLowerCase();
     $('tbody tr').filter(function() {
@@ -37,3 +31,5 @@ function datatable(lang, ...tables) {
         }
     });
 }
+
+// function searchStart() {$(function() {$('#search').on('search', function() {$('tbody tr').show();});});}

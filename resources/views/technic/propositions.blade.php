@@ -94,16 +94,16 @@
                             <div id="legal_entity" class="tap-pane">
                                 <table id="table2" class="table table-bordered table-striped table-center">
                                     <thead>
-                                    <tr>
-                                        <th>@lang('global.index')</th>
-                                        <th>@lang('global.proposition.number')</th>
-                                        <th>@lang('global.proposition.legal_stir')</th>
-                                        <th>@lang('technic.organ')</th>
-                                        <th>@lang('global.proposition.name')</th>
-                                        <th>@lang('global.proposition.date')</th>
-                                        <th>@lang('global.proposition.limit')</th>
-                                        <th>@lang('global.proposition.action')</th>
-                                    </tr>
+                                        <tr>
+                                            <th>@lang('global.index')</th>
+                                            <th>@lang('global.proposition.number')</th>
+                                            <th>@lang('global.proposition.legal_stir')</th>
+                                            <th>@lang('technic.organ')</th>
+                                            <th>@lang('global.proposition.name')</th>
+                                            <th>@lang('global.proposition.date')</th>
+                                            <th>@lang('global.proposition.limit')</th>
+                                            <th>@lang('global.proposition.action')</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($legalEntities as $model)
@@ -175,7 +175,7 @@
     }
     datatable(lang, 'table1', 'table2');
 
-    function remove(form) {
+    function remove(btn) {
         Swal.fire({
             title: '{{__('technic.proposition.alert_message')}}',
             text: "{{__('technic.proposition.alert_text')}}",
@@ -187,7 +187,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                form.parentNode.submit();
+                btn.parentNode.submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

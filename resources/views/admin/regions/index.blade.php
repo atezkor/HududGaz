@@ -20,7 +20,7 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>№</th>
+                                    <th>{{__('global.index')}}</th>
                                     <th>{{__('admin.organ.col_num')}}</th>
                                     <th>{{__('admin.organ.col_name')}}</th>
                                     <th>{{__('admin.organ.col_engineer')}}</th>
@@ -68,7 +68,7 @@
 @section('javascript')
 <script src="{{'/js/default.js'}}"></script>
 <script>
-    function remove(form) {
+    function remove(btn) {
         Swal.fire({
             title: '{{__('admin.organ.alert_title')}}',
             text: "{{__('admin.alert_text')}}",
@@ -80,7 +80,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                form.parentNode.submit();
+                btn.parentNode.submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

@@ -2,6 +2,7 @@
     return [
         'projects' => "Loyihalar",
         'montages' => "Montajlar",
+        'permits' => "Ruxsatnomalar",
         'tech_condition' => "Texnik shart",
         'designer' => "Loyihachi tashkilot",
         'mounter' => "Montajchi tashkilot",

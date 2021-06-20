@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\MenuItem;
-use App\Models\Status;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
@@ -51,8 +48,8 @@ function formatDate($date, $format = 'd.m.Y'): string {
     return date_format($res, $format);
 }
 
-function MenuItems(): Collection {
-    return MenuItem::items(auth()->user())->get();
+function MenuItems(): Illuminate\Database\Eloquent\Collection {
+    return App\Models\MenuItem::items(auth()->user())->get();
 }
 
 function progressColor($percent): string {
@@ -66,12 +63,12 @@ function progressColor($percent): string {
 }
 
 /* This is function for application term */
-function limit(int $status, int $offset = 0): \Illuminate\Support\Collection {
-    return Status::query()->offset($offset)->limit($status - $offset)->pluck('term', 'id');
+function limit(int $status, int $offset = 0): Illuminate\Support\Collection {
+    return App\Models\Status::query()->offset($offset)->limit($status - $offset)->pluck('term', 'id');
 }
 
 function limitOne(int $status): int {
-    return Status::query()->find($status)->getAttribute('term');
+    return App\Models\Status::query()->find($status)->getAttribute('term');
 }
 
 function roles(): array {

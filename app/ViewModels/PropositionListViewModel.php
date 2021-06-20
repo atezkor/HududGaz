@@ -13,13 +13,13 @@ use App\Models\Legal;
 class PropositionListViewModel extends ViewModel {
 
     private PropositionService $service;
-    private array $statuses;
+    private array $status;
     private string $operator = '>';
     private int $organ;
 
-    public function __construct(PropositionService $service, $statuses = [1, 2, 3], int $organ = 0) {
+    public function __construct(PropositionService $service, $status = [1, 2, 3], int $organ = 0) {
         $this->service = $service;
-        $this->statuses = $statuses;
+        $this->status = $status;
         $this->organ = $organ;
         if ($organ) {
             $this->operator = '=';
@@ -27,11 +27,11 @@ class PropositionListViewModel extends ViewModel {
     }
 
     function individuals(): \Illuminate\Database\Eloquent\Collection {
-        return $this->service->filter(1, $this->statuses, $this->operator ,$this->organ);
+        return $this->service->filter(1, $this->status, $this->operator ,$this->organ);
     }
 
     function legalEntities(): \Illuminate\Database\Eloquent\Collection {
-        return $this->service->filter(2, $this->statuses, $this->operator, $this->organ);
+        return $this->service->filter(2, $this->status, $this->operator, $this->organ);
     }
 
     function physicals(): Collection {
@@ -48,7 +48,7 @@ class PropositionListViewModel extends ViewModel {
 
     private function filter(Builder $builder, string $attribute): Collection {
         return $builder->where('organ', $this->operator, $this->organ)
-            ->whereIn('status', $this->statuses)
+            ->whereIn('status', $this->status)
             ->pluck($attribute);
     }
 }

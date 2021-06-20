@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * @property HasOne individual
  * @property HasOne legal
- * @property int type
  * @property $applicant
+ * @property-read Recommendation recommendation
+ * @property-read TechCondition tech_condition
+ * @property int type
  * @property int status
  * @property int id
  * @property int organ
- * @property-read Recommendation recommendation
  * @property-read string file
  * @property-read int build_type
- * @property-read TechCondition tech_condition
  */
 class Proposition extends Model {
 

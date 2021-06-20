@@ -83,14 +83,14 @@
                                                 <td>{{$model->start}}</td>
                                                 <td>{{$model->end}}</td>
                                                 <td>
-                                                    <form action="{{route('admin.timetable.delete', ['timetable' => $model])}}" method="post" id="form-{{$model->id}}">
+                                                    <form action="{{route('admin.timetable.delete', ['timetable' => $model])}}" method="post">
                                                         {{$csrf}}
                                                         @method('DELETE')
                                                         <a href="{{route('admin.timetable.edit', ['timetable' => $model])}}" class="btn btn-info"
                                                            title="@lang('global.btn_edit')">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <button type="button" onclick="remove('form-{{$model->id}}')" class="btn btn-danger"
+                                                        <button type="button" onclick="remove(this)" class="btn btn-danger"
                                                                 title="@lang('global.btn_del')">
                                                             <i class="fas fa-calendar-times"></i>
                                                         </button>
@@ -112,7 +112,7 @@
 @section('javascript')
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script>
-        function remove(form) {
+        function remove(btn) {
             Swal.fire({
                 title: '{{__('admin.timetable.alert_title')}}',
                 text: "{{__('admin.alert_text')}}",
@@ -124,7 +124,7 @@
                 cancelButtonText: '{{__('global.btn_no')}}'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $(`#${form}`).submit();
+                    btn.parentNode.submit();
                     Swal.fire({
                         title: '{{__('global.del_process')}}',
                         icon: 'success',

@@ -65,7 +65,7 @@
 @section('javascript')
 <script src="{{'/js/default.js'}}"></script>
 <script>
-    function remove(form) {
+    function remove(btn) {
         Swal.fire({
             title: '{{__('admin.designer.alert_title')}}',
             text: "{{__('admin.alert_text')}}",
@@ -77,7 +77,7 @@
             cancelButtonText: '{{__('global.btn_no')}}'
         }).then((result) => {
             if (result.isConfirmed) {
-                form.parentNode.submit();
+                btn.parentNode.submit();
                 Swal.fire({
                     title: '{{__('global.del_process')}}',
                     icon: 'success',

@@ -22,7 +22,7 @@
                                 <li class="nav-item">
                                     <a href="{{route($items[$i]->href)}}" class="nav-link">
                                         <i class="{{$items[$i]->icon}}"></i>
-                                        <p>@lang($items[$i]->title)</p>
+                                        <span>@lang($items[$i]->title)</span>
                                     </a>
                                 </li>
                             @endfor
@@ -33,7 +33,7 @@
                     <li class="nav-item">
                         <a href="{{route($menu->href)}}" class="nav-link">
                             <i class="{{$menu->icon}}"></i>
-                            <p>@lang($menu->title)</p>
+                            <span>@lang($menu->title)</span>
                         </a>
                     </li>
                 @endforeach

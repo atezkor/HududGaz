@@ -9,22 +9,18 @@
                 <div class="card">
                     <div class="card-header">
                     @if ($method == "POST")
-                        <div class="row">
-                            <div class="col">
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item">
-                                        <a href="#individual" class="nav-link active" onclick="changeType(1)" data-toggle="tab">
-                                            @lang('global.proposition.individual')
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#legal_entity" class="nav-link" onclick="changeType(2)" data-toggle="tab">
-                                            @lang('global.proposition.legal_entity')
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a href="#individual" class="nav-link active" onclick="changeType(1)" data-toggle="tab">
+                                    @lang('global.proposition.individual')
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#legal_entity" class="nav-link" onclick="changeType(2)" data-toggle="tab">
+                                    @lang('global.proposition.legal_entity')
+                                </a>
+                            </li>
+                        </ul>
                     @else
                         <h3>@lang('technic.proposition.heading_edit')</h3>
                     @endif
@@ -65,6 +61,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div id="legal_entity" class="tap-pane">
                                     <div class="form-group row">
                                         <label for="legal_stir" class="col-2">@lang('technic.proposition.legal_stir')</label>
@@ -130,7 +127,7 @@
                                 <div class="col-10">
                                     <select name="build_type" id="build_type" class="form-control">
                                         <option value="1">@lang('technic.proposition.residential')</option>
-                                        <option value="2">@lang('technic.proposition.non_residential')</option>
+                                        <option value="2" @if($model->build_type == 2){{'selected'}}@endif>@lang('technic.proposition.non_residential')</option>
                                     </select>
                                 </div>
                             </div>
@@ -141,22 +138,22 @@
                                     <select name="organ" id="organ" class="form-control">
                                         <option value="">@lang('technic.proposition.organ_select')</option>
                                         @foreach($organs as $key => $organ)
-                                        <option value="{{$key}}" @if($model->organ == $key) selected @endif>
-                                            {{$organ}}
-                                        </option>
+                                            <option value="{{$key}}" @if($model->organ == $key) selected @endif>
+                                                {{$organ}}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="document" class="col-2">@lang('technic.proposition.file')</label>
+                                <label for="file" class="col-2">@lang('technic.proposition.file')</label>
                                 <div class="col-10">
                                     <div class="custom-file">
-                                        <input type="file" name="file" id="document" class="custom-file-input"
+                                        <input type="file" name="file" id="file" class="custom-file-input"
                                                @if($method == "POST") required @endif>
-                                        <label class="custom-file-label" for="document">
-                                            <span id="document_label">@lang('technic.proposition.file_hint')</span>
+                                        <label class="custom-file-label" for="file">
+                                            <span id="file_hint">@lang('technic.proposition.file_hint')</span>
                                             <span class="btn btn-info"><i class="far fa-file-pdf"></i></span>
                                         </label>
                                     </div>
@@ -178,16 +175,9 @@
 @endsection
 @section('javascript')
 <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+<script src="{{'/js/default.js'}}"></script>
 <script>
-    $('#document').change(function(input) {
-        try {
-            $('#document_label').text(input.target.files[0].name)
-        } catch (e) {}
-    });
-
-    $('#reset').on('click', function () {
-        $('#document_label').text('@lang('technic.proposition.file_hint')');
-    });
+    fileUpload('reset', 'file', 'file_hint', "@lang('technic.proposition.file_hint')")
 
     function changeType(type) {
         $('#type').val(type);
