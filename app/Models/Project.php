@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read Proposition proposition
- * @property-read Designer designer
+ * @property-read Designer firm
+ * @property-read int id
  * @property-read int organ
- * @property int status
- * @property string file
+ * @property-read int status
+ * @property-read string file
  */
 class Project extends Model {
     protected $fillable = ['proposition_id', 'applicant', 'condition', 'designer', 'organ', 'status', 'file', 'comment'];
@@ -18,7 +19,7 @@ class Project extends Model {
         return $this->belongsTo(Proposition::class);
     }
 
-    public function designer(): BelongsTo {
+    public function firm(): BelongsTo {
         return $this->belongsTo(Designer::class, 'designer');
     }
 

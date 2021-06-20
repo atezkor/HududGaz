@@ -26,8 +26,8 @@ class ProjectController extends Controller {
         ]);
     }
 
-    public function progress(): View {
-        return view('designer.progress', new ProjectViewModel([2, 3], auth()->user()->organ ?? 0));
+    public function process(): View {
+        return view('designer.process', new ProjectViewModel([2, 3], auth()->user()->organ ?? 0));
     }
 
     public function cancelled(): View {
@@ -36,7 +36,7 @@ class ProjectController extends Controller {
 
     public function create(Request $request): RedirectResponse {
         $this->service->create($request->get('code'));
-        return redirect()->route('designer.projects');
+        return redirect()->back();
     }
 
     public function upload(Request $request, Project $project): RedirectResponse|View {

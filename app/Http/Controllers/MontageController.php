@@ -39,8 +39,8 @@ class MontageController extends Controller {
         return redirect()->back();
     }
 
-    public function progress(): View {
-        return view('installer.progress', new MontageViewModel([2, 3], auth()->user()));
+    public function process(): View {
+        return view('installer.process', new MontageViewModel([2, 3], auth()->user()));
     }
 
     public function show(Request $request, Montage $montage): RedirectResponse {

@@ -1,7 +1,7 @@
 <?php
     return [
         'montages' => "Ishlar",
-        'progress' => "Jarayonda",
+        'process' => "Jarayonda",
         'cancelled' => "Bekor qilingan",
         'btn_read' => "O\u{2018}qish",
         'tech_condition' => "Texnik shart",

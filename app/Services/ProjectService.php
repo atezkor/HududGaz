@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\TechCondition;
@@ -16,13 +17,14 @@ class ProjectService extends CrudService {
     }
 
     public function create($data) {
-        $condition = TechCondition::query()->where('qrcode', $data)->first();
+        $condition = TechCondition::query()->where('qrcode', $data)
+            ->whereHas('proposition', function(Builder $query) {
+                return $query->where('status', 8);
+            })->first();
         if (!$condition)
             return;
-        $proposition = $condition->getAttribute('proposition');
-        if ($proposition->status !== 8)
-            return;
 
+        $proposition = $condition->getAttribute('proposition');
         $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,

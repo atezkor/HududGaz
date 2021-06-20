@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+/**
+ * @property string short_name
+ */
 class Mounter extends \Illuminate\Database\Eloquent\Model {
 
     public $timestamps = false;

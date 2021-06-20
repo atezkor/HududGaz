@@ -5,7 +5,7 @@
         'tech_conditions' => "Texnik shartlar",
         'reports' => "Hisobotlar",
         'region_sec' => "Viloyat kesimida",
-        'district_sec' => "Tuman kesimida",
+        'organ_sec' => "Idoralar kesimida",
         'more_sec' => "Batafsil",
         'btn_new' => "Ariza qo\u{2018}shish",
         'organ' => "Idora",

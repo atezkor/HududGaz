@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -10,9 +11,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property $applicant
  * @property-read Recommendation recommendation
  * @property-read TechCondition tech_condition
+ * @property-read Region org
+ * @property int id
  * @property int type
  * @property int status
- * @property int id
  * @property int organ
  * @property-read string file
  * @property-read int build_type
@@ -39,6 +41,10 @@ class Proposition extends Model {
 
     public function tech_condition(): HasOne {
         return $this->hasOne(TechCondition::class);
+    }
+
+    public function org(): BelongsTo {
+        return $this->belongsTo(Region::class, 'organ');
     }
 
     public function limit($limit, int $offset = 0) {

@@ -7,7 +7,7 @@ Route::get('/', function() {
 });
 
 Route::get('projects', [App\Http\Controllers\ProjectController::class, 'index'])->name('designer.projects');
-Route::get('progress', [App\Http\Controllers\ProjectController::class, 'progress'])->name('designer.projects.progress');
+Route::get('process', [App\Http\Controllers\ProjectController::class, 'process'])->name('designer.projects.process');
 Route::get('cancelled', [App\Http\Controllers\ProjectController::class, 'cancelled'])->name('designer.projects.cancelled');
 
 Route::post('project/create', [App\Http\Controllers\ProjectController::class, 'create'])->name('designer.project.create');

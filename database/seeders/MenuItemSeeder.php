@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\MenuItem;
 use Illuminate\Database\Seeder;
+use App\Models\MenuItem;
 
 class MenuItemSeeder extends Seeder {
     /**
@@ -40,7 +40,7 @@ class MenuItemSeeder extends Seeder {
         $this->CreateMenuItem(2, 'technic.tech_conditions', 'technic.index', 'nav-icon fas fa-paste');
         $this->CreateMenuItem(2, 'technic.reports', '#', 'nav-icon fas fa-chart-line');
         $this->CreateMenuItem(2, 'technic.region_sec', 'propositions.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(2, 'technic.district_sec', 'propositions.index', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(2, 'technic.organ_sec', 'propositions.index', 'nav-icon far fa-circle');
         $this->CreateMenuItem(2, 'technic.more_sec', 'propositions.index', 'nav-icon far fa-circle');
     }
 
@@ -54,7 +54,7 @@ class MenuItemSeeder extends Seeder {
 
     private function designer() {
         $this->CreateMenuItem(4, 'designer.projects', 'designer.projects', 'badge bg-primary');
-        $this->CreateMenuItem(4, 'designer.progress', 'designer.projects.progress', 'badge bg-success');
+        $this->CreateMenuItem(4, 'designer.process', 'designer.projects.process', 'badge bg-success');
         $this->CreateMenuItem(4, 'designer.cancelled', 'designer.projects.cancelled', 'badge bg-danger');
     }
 
@@ -66,7 +66,7 @@ class MenuItemSeeder extends Seeder {
 
     private function mounterMenu() {
         $this->CreateMenuItem(6, 'mounter.montages', 'mounter.montages', 'badge bg-primary');
-        $this->CreateMenuItem(6, 'mounter.progress', 'mounter.progress', 'badge bg-success');
+        $this->CreateMenuItem(6, 'mounter.process', 'mounter.process', 'badge bg-success');
         $this->CreateMenuItem(6, 'mounter.cancelled', 'mounter.cancelled', 'badge bg-danger');
     }
 

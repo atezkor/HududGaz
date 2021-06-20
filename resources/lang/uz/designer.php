@@ -1,7 +1,7 @@
 <?php
     return [
         'projects' => "Loyihalar",
-        'progress' => "Jarayonda",
+        'process' => "Jarayonda",
         'cancelled' => "Bekor qilingan",
         'tech_condition' => "Texnik shart",
         'organ' => "Idora nomi",

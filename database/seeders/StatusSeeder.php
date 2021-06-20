@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Status;
 use Illuminate\Database\Seeder;
+use App\Models\Status;
 
 class StatusSeeder extends Seeder {
     /**
@@ -36,8 +36,7 @@ class StatusSeeder extends Seeder {
 
         $this->createStatus("Muhandis ishni ochib ko\u{2018}rdi",72);
         $this->createStatus("Muhandis montajchining ishni bekor qildi",72);
-        $this->createStatus("Muhandis montajchi ishini tasdiqladi va tasdiqlangan faylni yukladi",72);
-        $this->createStatus("Muhandis ruxsatnomani yuklab oldi",72);
+        $this->createStatus("Muhandis tasdiqlangan ishni yukladi va ruxsatnoma yaratildi",72);
         $this->createStatus("Muhandis imzolangan ruxsatnomani yukladi",72);
 
         $this->createStatus("Tavsiyanoma o\u{2018}chirildi",50);

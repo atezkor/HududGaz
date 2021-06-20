@@ -2,32 +2,39 @@
 
 namespace App\Services;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Montage;
+use App\Models\Permit;
+use App\Models\Organization;
 use App\Models\TechCondition;
+use Barryvdh\DomPDF\PDF;
 
 
 class MontageService extends CrudService {
 
-    public function __construct(Montage $model) {
+    private PDF $pdf;
+    public function __construct(Montage $model, PDF $pdf) {
         $this->model = $model;
         $this->folder = 'montages';
+        $this->pdf = $pdf;
     }
 
     public function create($data): string {
-        $condition = TechCondition::query()->where('qrcode', $data)->first();
+        $condition = TechCondition::query()->where('qrcode', $data)
+            ->whereHas('proposition', function(Builder $query) {
+                $query->where('status', 14);
+            })->first();
         if (!$condition)
             return "Yoq";
-        $proposition = $condition->getAttribute('proposition');
-        if ($proposition->status !== 14)
-            return "Yoq";
 
+        $proposition = $condition->getAttribute('proposition');
         $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,
             'condition' => $condition->getAttribute('id'),
-            'project' => $condition->project->id,
+            'project' => $condition->getAttribute('project')->id,
             'applicant' => $applicant->name,
             'firm' => auth()->user()->organ ?? 0,
             'organ' => $proposition->organ
@@ -67,7 +74,7 @@ class MontageService extends CrudService {
         $this->update([
             'status' => 5, 'file' => $this->storeFile($request->file('file'))
         ], $montage);
-        $this->propStatus($montage);
+        $this->createLicense($montage);
     }
 
     public function cancel(string $comment, Montage $montage) {
@@ -79,5 +86,37 @@ class MontageService extends CrudService {
         $proposition = $montage->proposition;
         $proposition->update(['status' => $montage->status + 14]);
         $proposition->applicant->update(['status' => $montage->status + 14]);
+    }
+
+    private function createLicense(Montage $montage) {
+        $proposition = $montage->proposition;
+        $permit = new Permit([
+            'proposition_id' => $proposition->id,
+            'project' => $montage->project_relation->id,
+            'montage' => $montage->id,
+            'district' => $proposition->org->region,
+        ]);
+        $permit->save();
+
+        /* Create permit */
+        $this->propStatus($montage);
+        $this->createPDF($permit);
+    }
+
+    private function createPDF(Permit $permit) {
+        $filename = time() . '.pdf';
+        $proposition = $permit->proposition;
+        $data = [
+            'permit' => $permit,
+            'proposition' => $proposition,
+            'recommendation' => $proposition->recommendation,
+            'organization' => Organization::Data(),
+            'designer' => $permit->project_relation->firm->org_name,
+            'installer' => $permit->montage_relation->mounter->short_name,
+            'district' => districts()[$permit->district],
+        ];
+
+        view()->share($data);
+        $this->pdf->loadView('engineer.permit')->save('storage/permits/' . $filename);
     }
 }
