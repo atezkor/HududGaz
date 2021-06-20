@@ -43,8 +43,8 @@ class MontageController extends Controller {
         return view('installer.progress', new MontageViewModel([2, 3], auth()->user()));
     }
 
-    public function show(Montage $montage): RedirectResponse {
-        return redirect($this->service->show($montage));
+    public function show(Request $request, Montage $montage): RedirectResponse {
+        return redirect($this->service->show($montage, $request->get('show')));
     }
 
     public function cancelled(): View {

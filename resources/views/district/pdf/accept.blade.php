@@ -125,7 +125,7 @@
                 </li>
                 <li>
                     <strong>@lang('district.pdf.diameter_and_depth'):</strong>
-                    {{$model->diameter}} @lang('district.pdf.millimeter'), {{$model->depth}} @lang('district.pdf.meter')
+                    {{$model->pipe1}} @lang('district.pdf.millimeter'), {{$model->depth}} @lang('district.pdf.meter')
                 </li>
                 <li>
                     <strong>@lang('district.pdf.gas_pressure'):</strong>
@@ -162,7 +162,7 @@
                 </li>
                 <li>
                     <strong>@lang('district.pdf.gas_network') </strong>
-                    <span>{{$model->gas_network}} </span>
+                    <span>{{$model->gas_network}}</span>
                     <span>@lang('district.pdf.noname')</span>
                 </li>
                 <li>

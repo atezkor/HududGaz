@@ -100,7 +100,7 @@
                 title: "@lang('engineer.project.alert_title')",
                 text: "@lang('engineer.project.alert_text')",
                 input: 'text',
-                inputPlaceholder: "@lang('engineer.project.note')",
+                inputPlaceholder: "@lang('engineer.note')",
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#17a2b8',

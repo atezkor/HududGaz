@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @php($limit = limit(3, 2)[3])
+                    @php($limit = limitOne(3))
                     @php($l = 0)
                     @php($p = 0)
                     @foreach($propositions as $key => $model)
@@ -54,7 +54,7 @@
                             <td>
                                 <input type="file" id="file-{{$key}}" class="d-none"
                                        onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $recommendations[$key]])}}')">
-                                <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
+                                <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
                                     <i class="fas fa-upload"></i>
                                 </label>
                             </td>

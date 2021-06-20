@@ -53,10 +53,11 @@
                                     <form action="{{route('mounter.montage.upload', ['montage' => $model])}}" method="post"
                                           enctype="multipart/form-data">
                                         @csrf
-                                        <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="upload(this)">
-                                        <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
+                                        <input type="file" name="file" id="file{{$key}}" class="d-none">
+                                        <button type="button" onclick="upload(file{{$key}})" class="btn btn-outline-info text-bold my-0"
+                                               title="@lang('global.btn_upload')">
                                             <i class="fas fa-upload"></i>
-                                        </label>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -127,6 +128,7 @@
         }
 
         function upload(input) {
+
             Swal.fire({
                 title: "@lang('mounter.alert_title')",
                 text: "@lang('mounter.alert_text')",
@@ -161,7 +163,10 @@
                 allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {
                 if (result.isConfirmed) {
-                    input.parentElement.submit();
+                    input.click();
+                    input.onchange = function() {
+                        input.parentElement.submit();
+                    }
                 }
             });
         }

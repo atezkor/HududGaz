@@ -16,12 +16,11 @@ class MontageService extends CrudService {
     }
 
     public function create($data): string {
-        $condition = TechCondition::query()->where('status', 2)
-            ->where('qrcode', $data)->first();
+        $condition = TechCondition::query()->where('qrcode', $data)->first();
         if (!$condition)
             return "Yoq";
         $proposition = $condition->getAttribute('proposition');
-        if ($proposition->status >= 14)
+        if ($proposition->status !== 14)
             return "Yoq";
 
         $applicant = $proposition->applicant;
@@ -51,13 +50,13 @@ class MontageService extends CrudService {
         if ($this->model->file)
             $this->deleteFile($this->model->file);
         $montage->update(['status' => 2, 'file' => $this->storeFile($request->file('file'))]);
-        $this->propStatus($montage, 19);
+        $this->propStatus($montage);
     }
 
     public function show(Montage $montage, $show = false): string {
         if ($montage->status == 2 && $show) {
             $montage->update(['status' => 3]);
-            $this->propStatus($montage, 18);
+            $this->propStatus($montage);
         }
 
         return Storage::url("$this->folder/" . $montage->file);
@@ -66,19 +65,19 @@ class MontageService extends CrudService {
     public function confirm(Request $request, Montage $montage) {
         $this->deleteFile($montage->file);
         $this->update([
-            'status' => 4, 'file' => $this->storeFile($request->file('file'))
+            'status' => 5, 'file' => $this->storeFile($request->file('file'))
         ], $montage);
-        $this->propStatus($montage, 17);
+        $this->propStatus($montage);
     }
 
     public function cancel(string $comment, Montage $montage) {
-        $this->update(['status' => 3, 'comment' => $comment], $montage);
-        $this->propStatus($montage, 18);
+        $this->update(['status' => 4, 'comment' => $comment], $montage);
+        $this->propStatus($montage);
     }
 
-    private function propStatus(Montage $montage, int $status) {
+    private function propStatus(Montage $montage) {
         $proposition = $montage->proposition;
-        $proposition->update(['status' => $status]);
-        $proposition->applicant->update(['status' => $status]);
+        $proposition->update(['status' => $montage->status + 14]);
+        $proposition->applicant->update(['status' => $montage->status + 14]);
     }
 }

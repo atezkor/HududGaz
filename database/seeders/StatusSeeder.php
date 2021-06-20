@@ -29,20 +29,21 @@ class StatusSeeder extends Seeder {
 
         $this->createStatus("Muhandis loyihani ochib ko\u{2018}rdi",72);
         $this->createStatus("Muhandis loyihani bekor qildi",60);
-        $this->createStatus("Muhandis loyihani tasdiqladi va yukladi",60);
+        $this->createStatus("Muhandis loyihani tasdiqladi va tasdiqlangan faylni yukladi",60);
 
         $this->createStatus("Montajchi loyihani ochib ko\u{2018}rdi",72);
         $this->createStatus("Montajchi ishni bajardi",72);
 
-        $this->createStatus("Muhandis montajchi ishini tasdiqladi",72);
+        $this->createStatus("Muhandis ishni ochib ko\u{2018}rdi",72);
         $this->createStatus("Muhandis montajchining ishni bekor qildi",72);
-        $this->createStatus("Muhandis ruxsatnoma berdi",72);
+        $this->createStatus("Muhandis montajchi ishini tasdiqladi va tasdiqlangan faylni yukladi",72);
+        $this->createStatus("Muhandis ruxsatnomani yuklab oldi",72);
         $this->createStatus("Muhandis imzolangan ruxsatnomani yukladi",72);
 
-        $this->createStatus("Tavsiyanoma o\u{2018}chirildi",72);
-        $this->createStatus("Texnik shart o\u{2018}chirildi",72);
-        $this->createStatus("Loyiha o\u{2018}chirildi",72);
-        $this->createStatus("Montaj o\u{2018}chirildi",72);
+        $this->createStatus("Tavsiyanoma o\u{2018}chirildi",50);
+        $this->createStatus("Texnik shart o\u{2018}chirildi",50);
+        $this->createStatus("Loyiha o\u{2018}chirildi",50);
+        $this->createStatus("Montaj o\u{2018}chirildi",50);
     }
 
     private function createStatus($description, $term) {

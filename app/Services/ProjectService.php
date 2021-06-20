@@ -16,12 +16,13 @@ class ProjectService extends CrudService {
     }
 
     public function create($data) {
-        $condition = TechCondition::query()->where('status', 2)
-            ->where('qrcode', $data)->first();
+        $condition = TechCondition::query()->where('qrcode', $data)->first();
         if (!$condition)
             return;
-
         $proposition = $condition->getAttribute('proposition');
+        if ($proposition->status !== 8)
+            return;
+
         $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,
@@ -35,6 +36,19 @@ class ProjectService extends CrudService {
 
         $proposition->update(['status' => 10]);
         $applicant->update(['status' => 10]);
+    }
+
+    public function upload(Request $request, Project $project) {
+        if ($project->file)
+            $this->deleteFile($project->file);
+        $data = [
+            'file' => $this->uploadFile($request->file('file')),
+            'status' => 2
+        ];
+        $project->fill($data);
+        $this->update($data, $project);
+
+        $this->propStatus($project);
     }
 
     public function show(Project $project, $show = null): string {
@@ -57,20 +71,6 @@ class ProjectService extends CrudService {
 
     public function cancel(string $comment, Project $project) {
         $this->update(['status' => 4, 'comment' => $comment], $project);
-
-        $this->propStatus($project);
-    }
-
-    public function upload(Request $request, Project $project) {
-        if ($project->file)
-            $this->deleteFile($project->file);
-        $data = [
-            'file' => $this->uploadFile($request->file('file')),
-            'status' => 2
-        ];
-        $project->fill($data);
-        $this->update($data, $project);
-
         $this->propStatus($project);
     }
 

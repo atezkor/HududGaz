@@ -10,22 +10,18 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a href="#individual" class="nav-link active" data-toggle="tab">
-                                    @lang('global.proposition.individual')
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#legal_entity" class="nav-link" data-toggle="tab">
-                                    @lang('global.proposition.legal_entity')
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a href="#individual" class="nav-link active" data-toggle="tab">
+                            @lang('global.proposition.individual')
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#legal_entity" class="nav-link" data-toggle="tab">
+                            @lang('global.proposition.legal_entity')
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="card-body">
                 <div class="tab-content">

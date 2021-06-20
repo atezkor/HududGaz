@@ -7,7 +7,7 @@
     </li>
     <li>
         Gaz quvuriga ulanish joyi, harakatdagi yer osti/usti, <u>past</u> bosimli gaz tarmog&#8216;iga,
-        ulanish nuqtasiga bo&#8216;lgan masofa: {{$recommendation->length}} p/m, D-{{$recommendation->diameter}} mm,
+        ulanish nuqtasiga bo&#8216;lgan masofa: {{$recommendation->length}} p/m, D-{{$recommendation->pipe1}} mm,
         o&#8216;rt. qishgi - {{$recommendation->pressure_win}} kgc/cm<sup>2</sup>, o&#8216;rt. yozgi - {{$recommendation->pressure_sum}} kgc/cm<sup>2</sup>, <b><u>Tuman</u></b> - GTS
     </li>
     <li>Soatlik, yillik gaz iste&#8217;moli sarfi: {{$recommendation->consumption}} nm<sup>3</sup>/soat. (5441) nm<sup>3</sup>/yil </li>

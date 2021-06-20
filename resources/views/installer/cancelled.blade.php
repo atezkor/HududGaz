@@ -59,7 +59,7 @@
                                 <form action="{{route('mounter.montage.upload', ['montage' => $model])}}" method="post"
                                       enctype="multipart/form-data">
                                     @csrf
-                                    <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="upload(this)">
+                                    <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentElement.submit()">
                                     <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
                                         <i class="fas fa-upload"></i>
                                     </label>

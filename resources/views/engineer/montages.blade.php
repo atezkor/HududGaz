@@ -43,7 +43,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{route('mounter.montage.show', ['montage' => $model])}}" target="_blank">
+                                    <a href="{{route('mounter.montage.show', ['montage' => $model, 'show' => true])}}" target="_blank">
                                         @lang('global.btn_show')
                                     </a>
                                 </td>
@@ -51,20 +51,24 @@
                                 <td>{{$organs[$model->organ]}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($limit))}}"
-                                             style="width: {{$model->percent($limit)}}%">
+                                        <div class="{{progressColor($model->percent($model->time($limit)))}}"
+                                             style="width: {{$model->percent($model->time($limit))}}%">
                                         </div>
                                     </div>
-                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                    <div class="text-center">{{$model->time($limit)}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <form action="{{route('engineer.montage.upload', ['montage' => $model])}}" method="post"
+                                    <form action="{{route('engineer.montage.confirm', ['montage' => $model])}}" method="post"
                                           enctype="multipart/form-data">
                                         @csrf
-                                        <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="upload(this)">
+                                        <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">
                                         <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
                                             <i class="fas fa-upload"></i>
                                         </label>
+                                        <button type="button" onclick="cancel('{{route('engineer.montage.cancel', ['montage' => $model])}}')"
+                                                class="btn btn-outline-danger">
+                                            <i class="fas fa-ban"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -96,5 +100,46 @@
             sZeroRecords: "@lang('global.datatables.zeroRecords')",
             sInfoFiltered: "@lang('global.datatables.infoFiltered')"
         }, 'table');
+
+        function cancel(url) {
+            Swal.fire({
+                title: "@lang('engineer.montage.alert_title')",
+                text: "@lang('engineer.montage.alert_text')",
+                input: 'text',
+                inputPlaceholder: "@lang('engineer.note')",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#17a2b8',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: "@lang('global.btn_send')",
+                cancelButtonText: "@lang('global.btn_cancel')",
+                preConfirm: (value) => {
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'X-CSRF-TOKEN': '{{csrf_token()}}'
+                        },
+                        credentials: "same-origin",
+                        body: JSON.stringify({
+                            comment: value
+                        })
+                    }).then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return response;
+                    })
+                        .catch(() => {
+                            Swal.showValidationMessage("@lang('engineer.error')");
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+            });
+        }
     </script>
 @endsection

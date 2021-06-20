@@ -30,20 +30,30 @@ class EngineerController extends Controller {
     }
 
     public function montages(): View {
-        return view('engineer.montages', new MontageViewModel(), [
+        return view('engineer.montages', new MontageViewModel([2, 3]), [
             'mounters' => Mounter::query()->pluck('short_name', 'id')
         ]);
     }
 
-    public function confirm(Request $request, Project $project): RedirectResponse {
+    public function project(Request $request, Project $project): RedirectResponse {
+        if ($request->has('comment')) {
+            $data = $request->validate(['comment' => ['required']])['comment'];
+            $this->projectService->cancel($data, $project);
+            return redirect()->back();
+        }
+
         $this->projectService->confirm($request, $project);
-        $this->montageService->confirm($request, new Montage());
         return redirect()->back();
     }
 
-    public function cancel(Request $request, Project $project): RedirectResponse {
-        $data = $request->validate(['comment' => ['required']])['comment'];
-        $this->projectService->cancel($data, $project);
+    public function montage(Request $request, Montage $montage): RedirectResponse {
+        if ($request->has('comment')) {
+            $data = $request->validate(['comment' => ['required']])['comment'];
+            $this->montageService->cancel($data, $montage);
+            return redirect()->back();
+        }
+
+        $this->montageService->confirm($request, $montage);
         return redirect()->back();
     }
 }

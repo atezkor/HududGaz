@@ -12,7 +12,8 @@
         'file' => "Imzolangan hujjat",
         'file_hint' => "Imzolangan hujjatni yuklang",
         'tech_condition' => "Texnik shart",
-        'btn_open' => "Ochish",
+        'completed' => "Bajarilgan",
+        'uncompleted' => "Bajarilmagan",
 
         // Months
         'january' => "Yanvar",

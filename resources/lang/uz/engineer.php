@@ -10,13 +10,15 @@
         'error' => "Xatolik yuz berdi",
         'process' => "Jo\u{2018}natilmoqda ...",
         'wait' => "Kuting ...",
+        'note' => "Izohni kiriting",
         'project' => [
             'name' => "Loyiha",
             'alert_title' => "Loyihani bekor qilmoqchimisiz?",
-            'alert_text' => "Loyihachiga qisqacha izoh yozing?",
-            'note' => "Izohni kiriting",
+            'alert_text' => "Loyihachiga qisqacha izoh yozing?"
         ],
         'montage' => [
-            'name' => "Montaj"
-        ],
+            'name' => "Montaj",
+            'alert_title' => "Ishni bekor qilmoqchimisiz?",
+            'alert_text' => "Montajchi uchun qisqacha qoldiring?"
+        ]
     ];
