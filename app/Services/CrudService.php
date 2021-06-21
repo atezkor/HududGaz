@@ -48,7 +48,6 @@ abstract class CrudService implements ICrudService {
 //        if (property_exists($this, 'Model')) {
 //            return $this->Model;
 //        }
-//
 //        throw new Exception(get_class($this) . 'Model property not implemented');
 //    }
 }

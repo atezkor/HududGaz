@@ -30,20 +30,18 @@ class MontageService extends CrudService {
             return "Yoq";
 
         $proposition = $condition->getAttribute('proposition');
-        $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,
             'condition' => $condition->getAttribute('id'),
             'project' => $condition->getAttribute('project')->id,
-            'applicant' => $applicant->name,
+            'applicant' => $proposition->applicant->name,
             'firm' => auth()->user()->organ ?? 0,
             'organ' => $proposition->organ
         ];
         $montage = new Montage($data);
         $montage->save();
 
-        $proposition->update(['status' => 15]);
-        $applicant->update(['status' => 15]);
+        $proposition->update(['status' => 15]); // $applicant->update(['status' => 15]);
 
         return "Bor";
     }
@@ -84,8 +82,7 @@ class MontageService extends CrudService {
 
     private function propStatus(Montage $montage) {
         $proposition = $montage->proposition;
-        $proposition->update(['status' => $montage->status + 14]);
-        $proposition->applicant->update(['status' => $montage->status + 14]);
+        $proposition->update(['status' => $montage->status + 14]); // $proposition->applicant->update(['status' => $montage->status + 14]);
     }
 
     private function createLicense(Montage $montage) {

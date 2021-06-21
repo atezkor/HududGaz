@@ -96,11 +96,7 @@ class RecommendationService extends CrudService {
         ];
 
         if ($recommendation->type == 'accept') {
-            $equipments = json_decode($recommendation->getAttribute('equipments'), true);
-            foreach ($equipments as $key => $equipment) {
-                $equipments[$key]['equipment'] = $recommendation->equipment($equipment['equipment']);
-                $equipments[$key]['type'] = $recommendation->equipType($equipment['type']);
-            }
+            $equipments = $recommendation->getEquipments();
 
             $data['equipments'] = $equipments;
             $data['build_type'] = $this->buildType($proposition->build_type);

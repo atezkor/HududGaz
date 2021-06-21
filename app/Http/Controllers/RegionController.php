@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\DistrictRequest;
-use App\Services\OrganService;
 use App\Models\Region;
+use App\Services\Service;
+use App\Http\Requests\DistrictRequest;
 
 class RegionController extends Controller {
 
-    private OrganService $service;
+    private Service $service;
 
-    public function __construct(OrganService $service) {
-        $this->service = $service;
+    public function __construct() {
+        $this->service = new Service(new Region());
     }
 
     public function index(): View|RedirectResponse {

@@ -25,19 +25,17 @@ class ProjectService extends CrudService {
             return;
 
         $proposition = $condition->getAttribute('proposition');
-        $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,
             'condition' => $condition->getAttribute('id'),
-            'applicant' => $applicant->name,
+            'applicant' => $proposition->applicant->name,
             'organ' => $proposition->organ,
             'designer' => auth()->user()->organ ?? 0
         ];
         $project = new Project($data);
         $project->save();
 
-        $proposition->update(['status' => 10]);
-        $applicant->update(['status' => 10]);
+        $proposition->update(['status' => 10]); // $applicant->update(['status' => 10]);
     }
 
     public function upload(Request $request, Project $project) {
@@ -82,7 +80,6 @@ class ProjectService extends CrudService {
 
     private function propStatus(Project $project) {
         $proposition = $project->proposition;
-        $proposition->update(['status' => $project->status + 9]);
-        $proposition->applicant->update(['status' => $project->status + 9]);
+        $proposition->update(['status' => $project->status + 9]); // $proposition->applicant->update(['status' => $project->status + 9]);
     }
 }

@@ -62,6 +62,9 @@ class MenuItemSeeder extends Seeder {
         $this->CreateMenuItem(5, 'engineer.projects', 'engineer.projects', 'nav-icon fas fa-drafting-compass');
         $this->CreateMenuItem(5, 'engineer.montages', 'engineer.montages', 'nav-icon fas fa-network-wired');
         $this->CreateMenuItem(5, 'engineer.permits', 'engineer.permits', 'nav-icon fas fa-copy');
+        $this->CreateMenuItem(5, 'engineer.archive', '#', 'nav-icon fas fa-box-open');
+        $this->CreateMenuItem(5, 'engineer.projects', 'engineer.projects', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(5, 'engineer.montages', 'engineer.montages', 'nav-icon far fa-circle');
     }
 
     private function mounterMenu() {

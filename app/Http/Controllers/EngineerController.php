@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 use App\Models\Project;
 use App\Models\Designer;
@@ -59,6 +61,27 @@ class EngineerController extends Controller {
     }
 
     public function permits(): View {
-        return view('engineer.permits', ['models' => Permit::all()]);
+        return view('engineer.permits', [
+            'models' => Permit::all(),
+            'districts' => districts()
+        ]);
+    }
+
+    public function show(Permit $permit): RedirectResponse {
+        return redirect('storage/permits/' . $permit->file);
+    }
+
+    public function upload(Request $request, Permit $permit): RedirectResponse {
+        $this->storeFile($request->file('file'), $permit);
+        return redirect()->back();
+    }
+
+    private function storeFile(UploadedFile $file, Permit $permit) {
+        File::delete('storage/permits/' . $permit->file);
+        $filename = time() . $file->extension();
+        $file->storeAs('public/permits', $filename);
+
+        $permit->update(['file' => $filename, 'status' => 2]);
+        $permit->proposition->update(['status' => 20]);
     }
 }

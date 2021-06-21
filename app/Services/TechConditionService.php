@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Exception;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Proposition;
 use App\Models\Organization;
@@ -69,27 +68,21 @@ class TechConditionService extends CrudService {
         }
 
         $condition->update();
-        $proposition->update(['status' => 8]);
-        $proposition->applicant->update(['status' => 8]);
+        $proposition->update(['status' => 8]); // $proposition->applicant->update(['status' => 8]);
     }
 
-    private function createPDF(Recommendation $model, array $addition) {
-        File::makeDirectory($this->path, 0777, true, true);
-        $organ = $model->org;
+    private function createPDF(Recommendation $recommendation, array $addition) {
+        $organ = $recommendation->org;
         $data = [
-            'recommendation' => $model,
+            'recommendation' => $recommendation,
             'proposition' => $addition['proposition'],
             'organ' => $organ,
             'organization' => Organization::Data(),
             'district' => districts()[$organ->getAttribute('region')],
         ];
 
-        if ($model->type == 'accept') {
-            $equipments = json_decode($model->getAttribute('equipments'));
-            foreach ($equipments as $equipment) {
-                $equipment->equipment = $model->equipment($equipment->equipment);
-                $equipment->type = $model->equipType($equipment->type);
-            }
+        if ($recommendation->type == 'accept') {
+            $equipments = $recommendation->getEquipments();
 
             $data['equipments'] = $equipments;
             $data['data'] = $addition['text'];
@@ -99,7 +92,7 @@ class TechConditionService extends CrudService {
         }
 
         view()->share($data);
-        $this->pdf->loadView("technic.pdf.$model->type");
+        $this->pdf->loadView("technic.pdf.$recommendation->type");
         $this->pdf->save($this->path . $addition['filename']);
     }
 

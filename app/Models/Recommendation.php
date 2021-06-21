@@ -26,11 +26,24 @@ class Recommendation extends Model {
         return $this->belongsTo(Region::class, 'organ');
     }
 
-    public function equipment(int $id): string {
+    public function getEquipments() {
+        $equipments = json_decode($this->getAttribute('equipments'));
+        if (!$equipments)
+            return [];
+
+        foreach ($equipments as $equipment) {
+            $equipment->equipment = $this->equipment($equipment->equipment);
+            $equipment->type = $this->equipType($equipment->type);
+        }
+
+        return $equipments;
+    }
+
+    private function equipment(int $id): string {
         return Equipment::query()->find($id)->getAttribute('name');
     }
 
-    public function equipType(int $id): string {
+    private function equipType(int $id): string {
         return EquipmentType::query()->find($id)->getAttribute('type');
     }
 }

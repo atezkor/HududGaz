@@ -8,7 +8,7 @@
         'organ_sec' => "Idoralar kesimida",
         'more_sec' => "Batafsil",
         'btn_new' => "Ariza qo\u{2018}shish",
-        'organ' => "Idora",
+        'organ' => "Idora nomi",
         'proposition' => [
             'heading_edit' => "Ariza ma\u{2019}lumotlarini yangilash",
             'prop_num' => "Ariza raqami",

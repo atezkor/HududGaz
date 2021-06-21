@@ -20,6 +20,20 @@
             line-height: 1.3;
         }
 
+        table {
+            width: 100%;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #000000;
+        }
+
+        li {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
         .section {
             margin-top: 50px;
         }
@@ -67,20 +81,6 @@
 
         .clear {
             clear: both;
-        }
-
-        table {
-            width: 100%;
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid #000000;
-        }
-
-        li {
-            margin-top: 8px;
-            margin-bottom: 8px;
         }
     </style>
 </head>
@@ -175,10 +175,10 @@
                 <li>
                     <span><b>@lang('district.pdf.installed_equipments')</b>:</span>
                     @foreach ($equipments as $equipment)
-                    <span>{{$equipment['number']}} ta</span>
-                    <span>{{$equipment['type']}}</span>
-                    <span class="lowercase">{{$equipment['equipment']}}</span>
-                    <span>{{$equipment['note']}}</span>@if($loop->last){{'.'}}@else{{','}}@endif
+                    <span>{{$equipment->number}} ta</span>
+                    <span>{{$equipment->type}}</span>
+                    <span class="lowercase">{{$equipment->equipment}}</span>
+                    <span>{{$equipment->note}}</span>@if($loop->last){{'.'}}@else{{','}}@endif
                     @endforeach
                     <div class="text-center">
                         @lang('district.pdf.type')

@@ -36,16 +36,14 @@ class TechnicController extends Controller {
     }
 
     public function create(Recommendation $recommendation): View {
-        $equipments = json_decode($recommendation->getAttribute('equipments'));
-        foreach ($equipments ?? [] as $equipment) {
-            $equipment->equipment = $recommendation->equipment($equipment->equipment);
-            $equipment->type = $recommendation->equipType($equipment->type);
-        }
-
-        return view("technic.control.$recommendation->type", ['recommendation' => $recommendation,
-            'proposition' => $recommendation->proposition, 'method' => 'POST',
-            'action' => route('technic.tech_condition.store', ['recommendation' => $recommendation]),
-            'equipments' => $equipments]);
+        $equipments = $recommendation->getEquipments();
+        return view("technic.control.$recommendation->type", [
+            'recommendation' => $recommendation,
+            'proposition' => $recommendation->proposition,
+            'equipments' => $equipments,
+            'method' => 'POST',
+            'action' => route('technic.tech_condition.store', ['recommendation' => $recommendation])
+        ]);
     }
 
     /**

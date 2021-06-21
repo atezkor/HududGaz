@@ -16,6 +16,7 @@ class CreatePermitsTable extends Migration {
             $table->unsignedBigInteger('proposition_id');
             $table->unsignedBigInteger('project');
             $table->unsignedBigInteger('montage');
+            $table->tinyInteger('status')->default(1);
             $table->tinyInteger('district');
             $table->string('file')->nullable();
             $table->timestamps();
