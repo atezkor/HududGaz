@@ -25,6 +25,7 @@
         'uploaded' => "Yuklangan",
         'unloaded' => "Yuklanmangan",
         'propositions' => "Arizalar",
+        'documents' => "Hujjatlar",
         'consumer' => "Iste\u{2019}molchi",
         'year' => "yil",
         'del_process' => "O\u{2018}chirilmoqda ...",
@@ -50,6 +51,7 @@
             'designer' => "Loyihachi",
             'engineer' => "Muhandis",
             'mounter' => "Montajchi",
+            'director' => "Direktor"
         ],
         'proposition' => [
             'name' => "Ariza",
@@ -61,7 +63,7 @@
             'limit' => "Vaqt qoldig\u{2018}i",
             'show' => "Arizani ko\u{2018}rish",
             'individual' => "Jismoniy shaxs",
-            'legal_entity' => "Yuridik shaxs",
+            'legal_entity' => "Yuridik shaxs"
         ],
         'datatables' => [
             'search' => "Qidiruv",

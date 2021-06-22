@@ -25,7 +25,7 @@
                                     <th>{{__('global.index')}}</th>
                                     <th>{{__('admin.user.col_name')}}</th>
                                     <th>{{__('admin.user.col_position')}}</th>
-                                    <th>{{__('admin.email')}}</th>
+                                    <th>{{__('admin.user.username')}}</th>
                                     <th>{{__('admin.user.col_role')}}</th>
                                     <th style="width: 1px;"></th>
                                 </tr>
@@ -37,7 +37,7 @@
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->name}}</td>
                                     <td>{{$model->position}}</td>
-                                    <td>{{$model->email}}</td>
+                                    <td>{{$model->username}}</td>
                                     <td>{{$roles[$model->role]}}</td>
                                     <td>
                                         <form action="{{route('admin.users.delete', ['user' => $model])}}" method="post">

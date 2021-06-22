@@ -22,17 +22,17 @@ class MenuItemSeeder extends Seeder {
     }
 
     private function adminMenu() {
-        $this->CreateMenuItem(1, 'admin.menu_users', 'admin.users.index', 'nav-icon fas fa-users');
-        $this->CreateMenuItem(1, 'admin.menu_equips', 'admin.equipments.index', 'nav-icon fas fa-drafting-compass');
-        $this->CreateMenuItem(1, 'admin.menu_designers', 'admin.designers.index', 'nav-icon fas fa-pencil-ruler');
-        $this->CreateMenuItem(1, 'admin.menu_mounters', 'admin.mounters.index', 'nav-icon fas fa-network-wired');
+        $this->CreateMenuItem(1, 'admin.users', 'admin.users.index', 'nav-icon fas fa-users');
+        $this->CreateMenuItem(1, 'admin.equips', 'admin.equipments.index', 'nav-icon fas fa-drafting-compass');
+        $this->CreateMenuItem(1, 'admin.designers', 'admin.designers.index', 'nav-icon fas fa-pencil-ruler');
+        $this->CreateMenuItem(1, 'admin.mounters', 'admin.mounters.index', 'nav-icon fas fa-network-wired');
 
-        $this->CreateMenuItem(1, 'admin.menu_settings', '#', 'nav-icon fas fa-chart-line');
-        $this->CreateMenuItem(1, 'admin.menu_org', 'admin.settings', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.menu_organs', 'admin.organs.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.menu_status', 'admin.statuses.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.menu_activity', 'admin.activities.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.menu_timetable', 'admin.timetable.index', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(1, 'admin.settings', '#', 'nav-icon fas fa-chart-line');
+        $this->CreateMenuItem(1, 'admin.org_about', 'admin.settings', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(1, 'admin.organs', 'admin.organs.index', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(1, 'admin.statuses', 'admin.statuses.index', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(1, 'admin.activities', 'admin.activities.index', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(1, 'admin.timetables', 'admin.timetable.index', 'nav-icon far fa-circle');
     }
 
     private function technicMenu() {
@@ -77,16 +77,16 @@ class MenuItemSeeder extends Seeder {
     }
 
     private function directorMenu() {
-        $this->CreateMenuItem(7, 'director.organs', 'director.organs', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.designers', 'director.designers', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.mounters', 'director.mounters', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.documents', '#', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.propositions', 'director.propositions', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.recommendations', 'director.recommendations', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.tech_conditions', 'director.tech_conditions', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.projects', 'director.projects', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.montages', 'director.montages', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'director.permits', 'director.permits', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'admin.organs', 'director.organs', 'nav-icon fas fa-copy');
+        $this->CreateMenuItem(7, 'admin.designers', 'director.designers', 'nav-icon fas fa-copy');
+        $this->CreateMenuItem(7, 'admin.mounters', 'director.installers', 'nav-icon fas fa-copy');
+        $this->CreateMenuItem(7, 'global.documents', '#', 'nav-icon fas fa-folder-open');
+        $this->CreateMenuItem(7, 'global.propositions', 'director.propositions', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'district.recommendations', 'director.recommendations', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'technic.tech_conditions', 'director.tech_conditions', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'designer.projects', 'director.projects', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'mounter.montages', 'director.montages', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'engineer.permits', 'director.permits', 'nav-icon fas fa-paste');
     }
 
     private function CreateMenuItem($role, $title, $href, $icon) {

@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Organization;
 use App\Models\Recommendation;
@@ -63,20 +61,6 @@ class RecommendationService extends CrudService {
     public function update($data, $model) {
         $data['status'] = 1;
         parent::update($data, $model);
-    }
-
-    function filter(int $status, string $operator, int $organ): Collection {
-        $add = request()->route()->getName() == "district.recommendations.cancelled";
-        $models = $this->model->query()->where('organ', $operator, $organ)
-            ->where('status', '=', $status)
-            ->orderBy('proposition_id');
-        return $add ? $models->get(['id', 'comment']) : $models->pluck('id');
-    }
-
-    function propositions(Builder $model, array $status, string $operator, int $organ): \Illuminate\Database\Eloquent\Collection {
-        return $model->where('organ', $operator, $organ)
-            ->whereIn('status', $status)
-            ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);
     }
 
     private function createPDF(Recommendation $recommendation): Response {

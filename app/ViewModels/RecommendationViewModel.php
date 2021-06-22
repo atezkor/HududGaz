@@ -2,25 +2,23 @@
 
 namespace App\ViewModels;
 
-use App\Models\Individual;
-use App\Models\Legal;
-use App\Models\Proposition;
-use App\Models\Region;
-use App\Services\RecommendationService;
-use Spatie\ViewModels\ViewModel;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Recommendation;
+use App\Models\Proposition;
+use App\Models\Individual;
+use App\Models\Legal;
+use App\Models\Region;
+use Spatie\ViewModels\ViewModel;
 
 
 class RecommendationViewModel extends ViewModel {
-    private RecommendationService $service;
     private array $status;
     private int $status_rec;
     private string $operator = '>';
     private int $organ;
 
-    public function __construct(RecommendationService $service, int $organ = 0, array $status = [3], int $status_rec = 1) {
-        $this->service = $service;
+    public function __construct(int $organ = 0, array $status = [3], int $status_rec = 1) {
         $this->status = $status;
         $this->status_rec = $status_rec;
 
@@ -31,19 +29,19 @@ class RecommendationViewModel extends ViewModel {
     }
 
     public function recommendations(): Collection {
-        return $this->service->filter($this->status_rec, $this->operator, $this->organ);
+        return $this->models($this->status_rec, $this->operator, $this->organ);
     }
 
     public function propositions(): \Illuminate\Database\Eloquent\Collection {
-        return $this->service->propositions(Proposition::query(), $this->status, $this->operator, $this->organ);
+        return $this->props(Proposition::query(), $this->status, $this->operator, $this->organ);
     }
 
     function physicals(): Collection {
-        return $this->filter(Individual::query(), 'full_name');
+        return $this->collections(Individual::query(), 'full_name');
     }
 
     function legals(): Collection {
-        return $this->filter(Legal::query(), 'legal_name');
+        return $this->collections(Legal::query(), 'legal_name');
     }
 
     public function applicant($physicals, $legals, &$p, &$l, $type): string {
@@ -58,8 +56,22 @@ class RecommendationViewModel extends ViewModel {
         return Region::query()->pluck('org_name', 'id');
     }
 
-    private function filter(Builder $builder, string $attr): Collection {
+    private function collections(Builder $builder, string $attr): Collection {
         return $builder->where('organ', $this->operator, $this->organ)
             ->whereIn('status', $this->status)->pluck($attr);
+    }
+
+    private function models(int $status, string $operator, int $organ): Collection {
+        $add = request()->route()->getName() == "district.recommendations.cancelled";
+        $models = Recommendation::query()->where('organ', $operator, $organ)
+            ->where('status', '=', $status)
+            ->orderBy('proposition_id');
+        return $add ? $models->get(['id', 'comment']) : $models->pluck('id');
+    }
+
+    private function props(Builder $query, array $status, string $operator, int $organ): \Illuminate\Database\Eloquent\Collection {
+        return $query->where('organ', $operator, $organ)
+            ->whereIn('status', $status)
+            ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Proposition;
 use App\Models\Individual;
@@ -66,12 +65,5 @@ class PropositionService extends CrudService {
         $name = time() . '.' . $file->extension();
         $file->move($this->path, $name); # Store to public folder
         return $name;
-    }
-
-    public function filter(int $type, array $statuses, string $operator, int $organ): Collection {
-        return $this->model->query()->where('organ', $operator, $organ)
-            ->where('type', '=', $type)
-            ->whereIn('status', $statuses)
-            ->get();
     }
 }

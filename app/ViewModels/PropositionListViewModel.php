@@ -2,23 +2,21 @@
 
 namespace App\ViewModels;
 
-use App\Models\Region;
-use App\Services\PropositionService;
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\ViewModels\ViewModel;
 use Illuminate\Support\Collection;
+use App\Models\Proposition;
 use App\Models\Individual;
 use App\Models\Legal;
+use App\Models\Region;
+use Spatie\ViewModels\ViewModel;
 
 class PropositionListViewModel extends ViewModel {
 
-    private PropositionService $service;
     private array $status;
     private string $operator = '>';
     private int $organ;
 
-    public function __construct(PropositionService $service, $status = [1, 2, 3], int $organ = 0) {
-        $this->service = $service;
+    public function __construct($status = [1, 2, 3], int $organ = 0) {
         $this->status = $status;
         $this->organ = $organ;
         if ($organ) {
@@ -27,28 +25,35 @@ class PropositionListViewModel extends ViewModel {
     }
 
     function individuals(): \Illuminate\Database\Eloquent\Collection {
-        return $this->service->filter(1, $this->status, $this->operator ,$this->organ);
+        return $this->models(1, $this->status, $this->operator ,$this->organ);
     }
 
     function legalEntities(): \Illuminate\Database\Eloquent\Collection {
-        return $this->service->filter(2, $this->status, $this->operator, $this->organ);
+        return $this->models(2, $this->status, $this->operator, $this->organ);
     }
 
     function physicals(): Collection {
-        return $this->filter(Individual::query(), 'stir');
+        return $this->collections(Individual::query(), 'stir');
     }
 
     function legals(): Collection {
-        return $this->filter(Legal::query(), 'legal_stir');
+        return $this->collections(Legal::query(), 'legal_stir');
     }
 
     function organs(): Collection {
         return Region::query()->pluck('org_name', 'id');
     }
 
-    private function filter(Builder $builder, string $attribute): Collection {
+    private function collections(Builder $builder, string $attribute): Collection {
         return $builder->where('organ', $this->operator, $this->organ)
             ->whereIn('status', $this->status)
             ->pluck($attribute);
+    }
+
+    private function models(int $type, array $statuses, string $operator, int $organ): \Illuminate\Database\Eloquent\Collection {
+        return Proposition::query()->where('organ', $operator, $organ)
+            ->where('type', '=', $type)
+            ->whereIn('status', $statuses)
+            ->get();
     }
 }

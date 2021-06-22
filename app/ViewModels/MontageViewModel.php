@@ -2,10 +2,10 @@
 
 namespace App\ViewModels;
 
-use App\Models\Region;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use App\Models\Montage;
+use App\Models\Region;
 use Spatie\ViewModels\ViewModel;
 
 class MontageViewModel extends ViewModel {

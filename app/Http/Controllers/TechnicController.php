@@ -32,7 +32,7 @@ class TechnicController extends Controller {
     }
 
     public function recommendations(): View {
-        return view('technic.recommends', new RecommendationViewModel($this->rec_service, 0, [4, 5], 2));
+        return view('technic.recommends', new RecommendationViewModel(0, [4, 5], 2));
     }
 
     public function show(Recommendation $recommendation): RedirectResponse {
@@ -95,7 +95,7 @@ class TechnicController extends Controller {
     }
 
     public function more(): View {
-        return view('technic.reports.region', [
+        return view('technic.reports.more', [
             'models' => Status::query()->pluck('description', 'id'),
             'activities' => Activity::query()->pluck('activity', 'id'),
             'propositions' => Proposition::query()->get(['status', 'activity_type'])->groupBy('status')

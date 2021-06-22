@@ -79,6 +79,7 @@ function roles(): array {
       4 => __('global.roles.designer'),
       5 => __('global.roles.engineer'),
       6 => __('global.roles.mounter'),
+      7 => __('global.roles.director'),
     ];
 }
 

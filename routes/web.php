@@ -68,6 +68,10 @@ Route::prefix('mounter')->group(function() {
     require_once 'mounter.php';
 });
 
+Route::prefix('director')->group(function() {
+    require_once 'director.php';
+});
+
 # main route - in route distribution by to roles
 Route::get('/', function() {
     $user = auth()->user();
