@@ -16,7 +16,7 @@
                     <a href="{{route($menu->href)}}" class="nav-link">
                         <p>
                             <span>@lang($menu->title)</span>
-                            <span class="{{$menu->icon}}">1</span>
+                            <span class="badge {{$menu->icon}}">1</span>
                         </p>
                     </a>
                 </li>

@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activity;
-use App\Models\Proposition;
-use App\Models\Region;
-use App\Models\Status;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +11,10 @@ use App\Models\Recommendation;
 use App\Services\TechConditionService;
 use App\Services\RecommendationService;
 use App\ViewModels\RecommendationViewModel;
+use App\Models\Activity;
+use App\Models\Proposition;
+use App\Models\Region;
+use App\Models\Status;
 use App\ViewModels\TechConditionViewModel;
 
 class TechnicController extends Controller {
@@ -80,9 +80,9 @@ class TechnicController extends Controller {
 
     public function region(): View {
         return view('technic.reports.region', [
-            'models' => Status::query()->pluck('description', 'id'),
+            'models' => Region::query()->get(['id', 'org_name', 'region']),
             'activities' => Activity::query()->pluck('activity', 'id'),
-            'propositions' => Proposition::query()->get(['status', 'activity_type'])->groupBy('status')
+            'propositions' => Proposition::query()->get(['organ', 'activity_type'])->groupBy('activity_type')
         ]);
     }
 
@@ -95,6 +95,10 @@ class TechnicController extends Controller {
     }
 
     public function more(): View {
-        return view('technic.reports.more');
+        return view('technic.reports.region', [
+            'models' => Status::query()->pluck('description', 'id'),
+            'activities' => Activity::query()->pluck('activity', 'id'),
+            'propositions' => Proposition::query()->get(['status', 'activity_type'])->groupBy('status')
+        ]);
     }
 }

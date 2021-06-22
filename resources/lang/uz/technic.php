@@ -9,6 +9,7 @@
         'more_sec' => "Batafsil",
         'btn_new' => "Ariza qo\u{2018}shish",
         'organ' => "Idora nomi",
+        'district' => "Tuman nomi",
         'total' => "Jami",
         'btn_create' => "Texnik shart yaratish",
         'proposition' => [

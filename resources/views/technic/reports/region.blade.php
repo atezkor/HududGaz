@@ -15,7 +15,7 @@
                                 <thead>
                                     <tr>
                                         <th>@lang('global.index')</th>
-                                        <th>@lang('technic.organ')</th>
+                                        <th>@lang('technic.district')</th>
                                         <th>@lang('technic.total')</th>
                                         @foreach($activities as $activity)
                                         <th>{{$activity}}</th>
@@ -25,13 +25,14 @@
                                 <tbody>
                                 @foreach($models as $key => $model)
                                     <tr>
-                                        <td>{{$key}}</td>
-                                        <td>{{$model}}</td>
-                                    @if(isset($propositions[$key]))
-                                        <td>{{$propositions[$key]->count()}}</td>
+                                        <td>{{$key + 1}}</td>
+                                        <td>{{$model->district}}</td>
+                                    @if(isset($propositions[$key + 1]))
+                                        <td>{{$propositions[$key + 1]->count()}}</td>
                                     @php
-                                        if (isset($propositions))
-                                            $proposition = $propositions[$key ?? 0]->groupBy('activity_type')
+                                    if (isset($propositions))
+                                        if (isset($key))
+                                            $proposition = $propositions[$key + 1]->groupBy('activity_type')
                                     @endphp
                                 @foreach($activities as $id => $activity)
                                     @if(isset($proposition[$id]))

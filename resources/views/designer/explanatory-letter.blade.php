@@ -24,14 +24,6 @@
             text-align: center;
         }
 
-        .mt-20 {
-            margin-top: 20px;
-        }
-
-        .mb-10 {
-            margin-bottom: 10px;
-        }
-
         table {
             width: 90%;
             margin-left: 5%;
@@ -44,6 +36,14 @@
 
         ul {
             list-style: none;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-10 {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -89,7 +89,7 @@
         <span>Gazlashtirish uchun: 1 dona isitish qazoni KSOB-16,5 va 1 dona kamparakli gaz plita PG-4 o&#8216;rnatilishi mo&#8216;ljallandi.</span>
     </p>
     <div>
-        Gaz asboblarining maksimal 1 yillik gaz sarfi quyidagicha:
+        <span>Gaz asboblarining maksimal 1 yillik gaz sarfi quyidagicha:</span>
         <table>
             <tr>
                 <td>KSOB-16.5</td>
@@ -100,7 +100,7 @@
                 <td>1,2 nm<sup>3</sup>/soat</td>
             </tr>
         </table>
-        Shundan kelib chiqib umumiy mo&#8216;tadil bir soatlik gaz sarfi:
+        <span>Shundan kelib chiqib umumiy mo&#8216;tadil bir soatlik gaz sarfi:</span>
         <table>
             <tr>
                 <td>Q soat</td>
@@ -117,22 +117,25 @@
     </p>
     <p>Gaz quvurlarini qurulishi uchun quvurlar SHNK 2.04.08-13 ga asosan qa&#8217;bul qilindi.</p>
     <p>
-        Qurilishda qa&#8217;bul qilingan gaz quvurlarining qism detallari 5.905 - 15 namuna loyihasida me&#8217;yor bo&#8216;yicha tayyorlanishi kerak.
-        Yer osti gaz quvurlari tuproqdan himoya qilish uchun loyihada quvur ustiga "eng kuchaytirilgan"
-        maromdagi himoya qoplamasi yo&#8216;li bilan himoya vositasini bajarish nazarda tutilgan.
-        Yer ustki gaz quvurlarini tashqi muhitni (atmosfera) ta&#8217;siridan zanglashdan, xomaki va 2 marta moyli bo&#8216;yoq bilan bo&#8216;yash orqali himoya qilindi.
+        <span>Qurilishda qa&#8217;bul qilingan gaz quvurlarining qism detallari 5.905 - 15 namuna loyihasida me&#8217;yor bo&#8216;yicha tayyorlanishi kerak.</span>
+        <span>Yer osti gaz quvurlari tuproqdan himoya qilish uchun loyihada quvur ustiga "eng kuchaytirilgan" maromdagi himoya qoplamasi yo&#8216;li bilan himoya vositasini bajarish nazarda tutilgan.</span>
+        <span>Yer ustki gaz quvurlarini tashqi muhitni (atmosfera) ta&#8217;siridan zanglashdan, xomaki va 2 marta moyli bo&#8216;yoq bilan bo&#8216;yash orqali himoya qilindi.</span>
     </p>
     <p>Tashqi muhitni himoya qilishga yerni, suvni, atmosfera havosini, o&#8216;simliklar va boshqalarni muhofaza qilish kiradi.</p>
-    <p>Gaz quvurini ishlatishda yer ustki qoplami atmosfera ifloslanishi, gaz quvurlarining nosoz ishlashi va buzilishdan, quvurni gaz bilan damlashdan,
+    <p>
+        Gaz quvurini ishlatishda yer ustki qoplami atmosfera ifloslanishi, gaz quvurlarining nosoz ishlashi va buzilishdan, quvurni gaz bilan damlashdan,
         gaz quvurlarini ba&#8217;zi armaturalari bilan ulashini joyidagi zichligini ta&#8217;minlamaslikdan quvurlarni me&#8217;yoriy kapital ta&#8217;mirlashdan keyin,
-        uzoq muddatga ishlatilishi natijasida chiqadigan chiqindilar sorid bo&#8216;ladi.</p>
+        uzoq muddatga ishlatilishi natijasida chiqadigan chiqindilar sodir bo&#8216;ladi.
+    </p>
     <p>Gaz asboblari bilan ishlovchi xodim, ma&#8217;sul kamandada tayinlanishi va unda maxsus o&#8216;qishda qatnashib imtihondan o&#8216;tganligi haqida guvohnoma bo&#8216;lishi kerak.</p>
     <p>
         <strong>Gazlashtirayotgan xonalarni shamollatish va mahsulotlarini chiqarib tashlash xavfsizlik talablari asosida me&#8217;yoriga muofiq bajarilsin.</strong>
     </p>
     <p>Gaz asboblari o&#8216;rnatilgan xonalarda ulardan foydalanish haqida yo&#8216;riqnomalar osib qo&#8216;yilishi kerak.</p>
-    <p>Gaz quvurlarini qurish va gaz asboblarini o&#8216;rnatish gazga ulash hamda gaz berish ishi mutaxislashtirilgan qurilish tashkilotlari va
-        xo&#8216;jaligi idoralari orqali bajarilishi kerak.</p>
+    <p>
+        Gaz quvurlarini qurish va gaz asboblarini o&#8216;rnatish gazga ulash hamda gaz berish ishi mutaxislashtirilgan qurilish tashkilotlari va
+        xo&#8216;jaligi idoralari orqali bajarilishi kerak.
+    </p>
     <div class="mt-20">
         <table>
             <tr>

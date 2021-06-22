@@ -51,7 +51,7 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertActivity() {
-        foreach (['Yakka', 'Oilaviy', 'Davalat sheriklik', 'Notijorat'] as $activity) {
+        foreach (['Aholi xonadonlari, Yakka', 'Oilaviy', 'Davalat sheriklik', 'Notijorat'] as $activity) {
             Activity::query()->create([
                 'activity' => $activity
             ]);

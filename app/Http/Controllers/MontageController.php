@@ -51,6 +51,10 @@ class MontageController extends Controller {
         return view('installer.cancelled', new MontageViewModel([4], auth()->user()));
     }
 
+    public function archive(): View {
+        return view('installer.archive', new MontageViewModel([5]));
+    }
+
     public function delete(Montage $montage) {
         $this->service->delete($montage);
     }

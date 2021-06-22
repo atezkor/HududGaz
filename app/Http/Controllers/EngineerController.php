@@ -18,6 +18,7 @@ use App\ViewModels\ProjectViewModel;
 use App\ViewModels\MontageViewModel;
 
 class EngineerController extends Controller {
+
     private ProjectService $projectService;
     private MontageService $montageService;
 
@@ -74,6 +75,14 @@ class EngineerController extends Controller {
     public function upload(Request $request, Permit $permit): RedirectResponse {
         $this->storeFile($request->file('file'), $permit);
         return redirect()->back();
+    }
+
+    public function completedProjects(): View {
+        return view('designer.archive', new ProjectViewModel([5]));
+    }
+
+    public function archiveMontages(): View {
+        return view('installer.archive', new MontageViewModel([5]));
     }
 
     private function storeFile(UploadedFile $file, Permit $permit) {

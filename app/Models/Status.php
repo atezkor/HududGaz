@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Status extends \Illuminate\Database\Eloquent\Model {
+use Illuminate\Database\Eloquent\Model as BaseModel;
+
+class Status extends BaseModel {
 
     public $timestamps = false;
     protected $fillable = ['description', 'transitions', 'term'];

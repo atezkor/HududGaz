@@ -19,6 +19,7 @@ class UsersSeeder extends Seeder {
         $this->creator(4, 'Loyihachi', 'designer', 'admin', 'uz', 1);
         $this->creator(5, 'Muhandis', 'engineer', 'admin');
         $this->creator(6, 'Montajchi', 'mounter', 'admin', 'uzk', 1);
+        $this->creator(7, 'Direktor', 'director', 'admin', 'uzk');
     }
 
     private function creator($role_id, $name, $username, $password = "123456", $locale = 'uz', $organ = 0) {

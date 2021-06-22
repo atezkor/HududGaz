@@ -18,6 +18,7 @@ class MenuItemSeeder extends Seeder {
         $this->designer();
         $this->engineer();
         $this->mounterMenu();
+        $this->directorMenu();
     }
 
     private function adminMenu() {
@@ -45,18 +46,18 @@ class MenuItemSeeder extends Seeder {
     }
 
     private function districtMenu() {
-        $this->CreateMenuItem(3, 'district.propositions', 'district.propositions', 'badge bg-primary');
-        $this->CreateMenuItem(3, 'district.recommendations', 'district.recommendations', 'badge bg-info');
-        $this->CreateMenuItem(3, 'district.progress', 'district.recommendations.progress', 'badge bg-success');
-        $this->CreateMenuItem(3, 'district.cancelled', 'district.recommendations.cancelled', 'badge bg-danger');
-        $this->CreateMenuItem(3, 'district.archive', 'district.recommendations.archive', 'badge bg-secondary');
+        $this->CreateMenuItem(3, 'district.propositions', 'district.propositions', 'bg-primary');
+        $this->CreateMenuItem(3, 'district.recommendations', 'district.recommendations', 'bg-info');
+        $this->CreateMenuItem(3, 'district.progress', 'district.recommendations.progress', 'bg-success');
+        $this->CreateMenuItem(3, 'district.cancelled', 'district.recommendations.cancelled', 'bg-danger');
+        $this->CreateMenuItem(3, 'district.archive', 'district.recommendations.archive', 'bg-secondary');
     }
 
     private function designer() {
-        $this->CreateMenuItem(4, 'designer.projects', 'designer.projects', 'badge bg-primary');
-        $this->CreateMenuItem(4, 'designer.process', 'designer.projects.process', 'badge bg-info');
-        $this->CreateMenuItem(4, 'designer.cancelled', 'designer.projects.cancelled', 'badge bg-danger');
-        $this->CreateMenuItem(4, 'designer.accomplished', 'designer.projects.accomplished', 'badge bg-success');
+        $this->CreateMenuItem(4, 'designer.projects', 'designer.projects', 'bg-primary');
+        $this->CreateMenuItem(4, 'designer.process', 'designer.projects.process', 'bg-info');
+        $this->CreateMenuItem(4, 'designer.cancelled', 'designer.projects.cancelled', 'bg-danger');
+        $this->CreateMenuItem(4, 'designer.accomplished', 'designer.projects.accomplished', 'bg-success');
     }
 
     private function engineer() {
@@ -64,15 +65,28 @@ class MenuItemSeeder extends Seeder {
         $this->CreateMenuItem(5, 'engineer.montages', 'engineer.montages', 'nav-icon fas fa-network-wired');
         $this->CreateMenuItem(5, 'engineer.permits', 'engineer.permits', 'nav-icon fas fa-copy');
         $this->CreateMenuItem(5, 'engineer.archive', '#', 'nav-icon fas fa-box-open');
-        $this->CreateMenuItem(5, 'engineer.projects', 'engineer.projects', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(5, 'engineer.montages', 'engineer.montages', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(5, 'engineer.projects', 'engineer.projects.archive', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(5, 'engineer.montages', 'engineer.montages.archive', 'nav-icon far fa-circle');
     }
 
     private function mounterMenu() {
-        $this->CreateMenuItem(6, 'mounter.montages', 'mounter.montages', 'badge bg-primary');
-        $this->CreateMenuItem(6, 'mounter.process', 'mounter.process', 'badge bg-info');
-        $this->CreateMenuItem(6, 'mounter.cancelled', 'mounter.cancelled', 'badge bg-danger');
-        $this->CreateMenuItem(6, 'mounter.accomplished', 'mounter.accomplished', 'badge bg-success');
+        $this->CreateMenuItem(6, 'mounter.montages', 'mounter.montages', 'bg-primary');
+        $this->CreateMenuItem(6, 'mounter.process', 'mounter.process', 'bg-info');
+        $this->CreateMenuItem(6, 'mounter.cancelled', 'mounter.cancelled', 'bg-danger');
+        $this->CreateMenuItem(6, 'mounter.accomplished', 'mounter.archive', 'bg-success');
+    }
+
+    private function directorMenu() {
+        $this->CreateMenuItem(7, 'director.organs', 'director.organs', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.designers', 'director.designers', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.mounters', 'director.mounters', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.documents', '#', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.propositions', 'director.propositions', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.recommendations', 'director.recommendations', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.tech_conditions', 'director.tech_conditions', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.projects', 'director.projects', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.montages', 'director.montages', 'nav-icon fas fa-paste');
+        $this->CreateMenuItem(7, 'director.permits', 'director.permits', 'nav-icon fas fa-paste');
     }
 
     private function CreateMenuItem($role, $title, $href, $icon) {

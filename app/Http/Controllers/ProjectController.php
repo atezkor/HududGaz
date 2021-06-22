@@ -62,4 +62,8 @@ class ProjectController extends Controller {
     public function delete(Project $project) {
         $this->service->delete($project);
     }
+
+    public function archive(): View {
+        return view('designer.archive', new ProjectViewModel([5], auth()->user()->organ ?? 0));
+    }
 }

@@ -1,8 +1,14 @@
-@extends('secondary')
+@php
+    if (in_array(auth()->user()->role ?? 0, [1, 2, 5, 7]))
+        $layout = 'layout';
+    else
+        $layout = 'secondary';
+@endphp
+@extends($layout)
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -16,16 +22,14 @@
                             <tr>
                                 <th>@lang('global.index')</th>
                                 <th>@lang('global.consumer')</th>
-                                <th>@lang('designer.tech_condition')</th>
-                                <th>@lang('designer.project.name')</th>
-                                <th>@lang('designer.organ')</th>
-                                <th>@lang('designer.project.comment')</th>
-                                <th>@lang('global.proposition.limit')</th>
-                                <th>@lang('global.proposition.action')</th>
+                                <th>@lang('mounter.tech_condition')</th>
+                                <th>@lang('mounter.project.name')</th>
+                                <th>@lang('mounter.montage')</th>
+                                <th>@lang('mounter.organ')</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($projects as $key => $model)
+                        @foreach($models as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
                                 <td>{{$model->applicant}}</td>
@@ -36,30 +40,18 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{route('designer.project.show', ['project' => $model])}}"
+                                    <a href="{{route('designer.project.show', ['project' => $model->project])}}"
+                                       target="_blank">
+                                        @lang('designer.show')
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{route('mounter.montage.show', ['montage' => $model])}}"
                                        target="_blank">
                                         @lang('designer.show')
                                     </a>
                                 </td>
                                 <td>{{$organs[$model->organ]}}</td>
-                                <td>{{$model->comment}}</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($limit))}}"
-                                             style="width: {{$model->percent($limit)}}%">
-                                        </div>
-                                    </div>
-                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
-                                </td>
-                                <td>
-                                    <form action="{{route('designer.project.upload', ['project' => $model])}}" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" class="d-none">
-                                        <label for="file-{{$key}}" class="btn btn-outline-info my-0" title="@lang('global.btn_upload')">
-                                            <i class="fas fa-upload"></i>
-                                        </label>
-                                    </form>
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
