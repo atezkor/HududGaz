@@ -93,15 +93,15 @@
             showCancelButton: true,
             confirmButtonColor: '#dd3333',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: '{{__('global.btn_yes')}}',
-            cancelButtonText: '{{__('global.btn_no')}}'
+            confirmButtonText: "{{__('global.btn_yes')}}",
+            cancelButtonText: "{{__('global.btn_no')}}"
         }).then((result) => {
             if (result.isConfirmed) {
                 btn.parentNode.submit();
                 Swal.fire({
-                    title: '{{__('global.del_process')}}',
+                    title: "{{__('global.del_process')}}",
                     icon: 'success',
-                    showConfirmButton: false,
+                    showConfirmButton: false
                 });
             }
         });

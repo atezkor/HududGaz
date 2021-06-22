@@ -52,6 +52,9 @@
                                     <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
                                         <i class="fas fa-upload"></i>
                                     </label>
+                                    <button type="button" onclick="remove({{$model->id}})" class="btn btn-outline-danger" title="@lang('global.btn_del')">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -122,25 +125,34 @@
         }
 
         function upload(input) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+            ajax(input.parentElement.action, {'download': true}, function(data) {
+                let win = open('', '');
+                let doc = win.document;
+                doc.write(data);
+
+                input.parentElement.submit();
             });
+        }
 
-            $.ajax({
-                url: input.parentElement.action,
-                method: 'POST',
-                dataType: 'html',
-                data: {
-                    'download': true
-                },
-                success: function(data) {
-                    let win = open('', '');
-                    let doc = win.document;
-                    doc.write(data);
-
-                    input.parentElement.submit();
+        function remove(id) {
+            Swal.fire({
+                title: "@lang('designer.alert_title')",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dd3333',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: "@lang('global.btn_yes')",
+                cancelButtonText: "@lang('global.btn_no')"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    ajax("{{route('designer.project.delete')}}/" + id, {}, function() {
+                        Swal.fire({
+                            title: "@lang('global.del_process')",
+                            icon: 'success',
+                            showConfirmButton: false
+                        });
+                        location.reload();
+                    });
                 }
             });
         }

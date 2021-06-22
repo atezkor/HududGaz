@@ -32,4 +32,22 @@ function datatable(lang, ...tables) {
     });
 }
 
+function ajax(url, data = {}, callback, datatype = 'html') {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        dataType: datatype,
+        data: data,
+        success: function(data, status) {
+            callback(data, status);
+        }
+    });
+}
+
 // function searchStart() {$(function() {$('#search').on('search', function() {$('tbody tr').show();});});}

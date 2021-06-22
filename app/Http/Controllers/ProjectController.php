@@ -58,4 +58,8 @@ class ProjectController extends Controller {
     public function show(Request $request, Project $project): RedirectResponse {
         return response()->redirectTo($this->service->show($project, $request->get('show')));
     }
+
+    public function delete(Project $project) {
+        $this->service->delete($project);
+    }
 }

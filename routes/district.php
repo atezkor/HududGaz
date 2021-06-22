@@ -20,5 +20,5 @@ Route::post('recommendations/{recommendation}/update', [RecommendationController
 Route::get('recommendations/{recommendation}', [RecommendationController::class, 'show'])->name('district.recommendation.show');
 Route::get('propositions/{proposition}', [RecommendationController::class, 'proposition'])->name('district.proposition.show');
 
-Route::get('/add-equipment', [RecommendationController::class, 'add'])->name('district.equipment.add');
-Route::get('/add-type/{equipment?}', [RecommendationController::class, 'types'])->name('district.equipment.type');
+Route::get('add-equipment', [RecommendationController::class, 'add'])->name('district.equipment.add');
+Route::get('add-type/{equipment?}', [RecommendationController::class, 'types'])->name('district.equipment.type');

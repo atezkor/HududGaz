@@ -3,6 +3,7 @@
         'projects' => "Loyihalar",
         'montages' => "Montajlar",
         'permits' => "Ruxsatnomalar",
+        'archive' => "Arxivlar",
         'permit' => "Ruxsatnoma",
         'tech_condition' => "Texnik shart",
         'designer' => "Loyihachi tashkilot",

@@ -58,6 +58,9 @@
                                                title="@lang('global.btn_upload')">
                                             <i class="fas fa-upload"></i>
                                         </button>
+                                        <button type="button" onclick="remove({{$model->id}})" class="btn btn-outline-danger" title="@lang('global.btn_del')">
+                                            <i class="fas fa-ban"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -128,7 +131,6 @@
         }
 
         function upload(input) {
-
             Swal.fire({
                 title: "@lang('mounter.alert_title')",
                 text: "@lang('mounter.alert_text')",
@@ -167,6 +169,29 @@
                     input.onchange = function() {
                         input.parentElement.submit();
                     }
+                }
+            });
+        }
+
+        function remove(id) {
+            Swal.fire({
+                title: "@lang('mounter.delete_title')",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dd3333',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: "@lang('global.btn_yes')",
+                cancelButtonText: "@lang('global.btn_no')"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    ajax("{{route('mounter.montage.delete')}}/" + id, {}, function() {
+                        Swal.fire({
+                            title: "@lang('global.del_process')",
+                            icon: 'success',
+                            showConfirmButton: false
+                        });
+                        location.reload();
+                    });
                 }
             });
         }

@@ -21,6 +21,25 @@
             font-size: 12px;
         }
 
+        table {
+            width: 100%;
+            vertical-align: text-top;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        td:first-child {
+            width: 50%;
+            text-align: justify;
+        }
+
+        td:last-child {
+            text-align: right;
+            width: 30%;
+        }
+
         .text-right {
             text-align: right;
         }
@@ -49,24 +68,9 @@
            clear: both;
        }
 
-        table {
-            width: 100%;
-            vertical-align: text-top;
-        }
-
-        table td {
-            vertical-align: top;
-        }
-
-        td:first-child {
-            width: 50%;
-            text-align: justify;
-        }
-
-        td:last-child {
-            text-align: right;
-            width: 30%;
-        }
+       .mt-10 {
+           margin-top: 10px;
+       }
     </style>
 </head>
 <body>
@@ -79,7 +83,7 @@
         <div>Yangiariq tuman markazi</div>
     </div>
     <div class="clear"></div>
-    <div class="text-center">
+    <div class="text-center mt-10">
         <div>Sizning <span class="lowercase">{{dateFull($proposition->created_at, true)}}</span>dagi <span class="text-bold">{{$proposition->id}}</span>-sonli talabnomangizga javoban:</div>
         <div>Tabiiy gaz bilan gazlashtirish loyihasini ishlab chiqish va gazlashtirishga</div>
         <div style="margin: 5px 0">

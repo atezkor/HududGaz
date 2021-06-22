@@ -52,9 +52,10 @@ class MontageService extends CrudService {
             return;
         }
 
+        $data = $request->validate(['file' => ['required']]);
         if ($this->model->file)
             $this->deleteFile($this->model->file);
-        $montage->update(['status' => 2, 'file' => $this->storeFile($request->file('file'))]);
+        $montage->update(['status' => 2, 'file' => $this->storeFile($data['file'])]);
         $this->propStatus($montage);
     }
 
@@ -78,6 +79,11 @@ class MontageService extends CrudService {
     public function cancel(string $comment, Montage $montage) {
         $this->update(['status' => 4, 'comment' => $comment], $montage);
         $this->propStatus($montage);
+    }
+
+    public function delete($model) {
+        $model->proposition->update(['status' => 14]);
+        parent::delete($model);
     }
 
     private function propStatus(Montage $montage) {

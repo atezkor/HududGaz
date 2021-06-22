@@ -39,10 +39,11 @@ class ProjectService extends CrudService {
     }
 
     public function upload(Request $request, Project $project) {
+        $file = $request->validate(['file' => ['required']]);
         if ($project->file)
             $this->deleteFile($project->file);
         $data = [
-            'file' => $this->uploadFile($request->file('file')),
+            'file' => $this->uploadFile($file['file']),
             'status' => 2
         ];
         $project->fill($data);
@@ -72,6 +73,11 @@ class ProjectService extends CrudService {
     public function cancel(string $comment, Project $project) {
         $this->update(['status' => 4, 'comment' => $comment], $project);
         $this->propStatus($project);
+    }
+
+    public function delete($model) {
+        $model->proposition->update(['status' => 8]);
+        parent::delete($model);
     }
 
     private function uploadFile($file): string {

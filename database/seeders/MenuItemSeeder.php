@@ -54,8 +54,9 @@ class MenuItemSeeder extends Seeder {
 
     private function designer() {
         $this->CreateMenuItem(4, 'designer.projects', 'designer.projects', 'badge bg-primary');
-        $this->CreateMenuItem(4, 'designer.process', 'designer.projects.process', 'badge bg-success');
+        $this->CreateMenuItem(4, 'designer.process', 'designer.projects.process', 'badge bg-info');
         $this->CreateMenuItem(4, 'designer.cancelled', 'designer.projects.cancelled', 'badge bg-danger');
+        $this->CreateMenuItem(4, 'designer.accomplished', 'designer.projects.accomplished', 'badge bg-success');
     }
 
     private function engineer() {
@@ -69,8 +70,9 @@ class MenuItemSeeder extends Seeder {
 
     private function mounterMenu() {
         $this->CreateMenuItem(6, 'mounter.montages', 'mounter.montages', 'badge bg-primary');
-        $this->CreateMenuItem(6, 'mounter.process', 'mounter.process', 'badge bg-success');
+        $this->CreateMenuItem(6, 'mounter.process', 'mounter.process', 'badge bg-info');
         $this->CreateMenuItem(6, 'mounter.cancelled', 'mounter.cancelled', 'badge bg-danger');
+        $this->CreateMenuItem(6, 'mounter.accomplished', 'mounter.accomplished', 'badge bg-success');
     }
 
     private function CreateMenuItem($role, $title, $href, $icon) {
