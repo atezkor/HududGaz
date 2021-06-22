@@ -39,9 +39,9 @@ class MenuItemSeeder extends Seeder {
         $this->CreateMenuItem(2, 'technic.recommends', 'technic.recommendations', 'nav-icon fas fa-paste');
         $this->CreateMenuItem(2, 'technic.tech_conditions', 'technic.index', 'nav-icon fas fa-paste');
         $this->CreateMenuItem(2, 'technic.reports', '#', 'nav-icon fas fa-chart-line');
-        $this->CreateMenuItem(2, 'technic.region_sec', 'propositions.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(2, 'technic.organ_sec', 'propositions.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(2, 'technic.more_sec', 'propositions.index', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(2, 'technic.region_sec', 'technic.reg_section', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(2, 'technic.organ_sec', 'technic.org_section', 'nav-icon far fa-circle');
+        $this->CreateMenuItem(2, 'technic.more_sec', 'technic.more', 'nav-icon far fa-circle');
     }
 
     private function districtMenu() {

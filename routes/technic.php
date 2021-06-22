@@ -18,3 +18,7 @@ Route::post('recommendations/{recommendation}/update', [App\Http\Controllers\Tec
 
 Route::get('tech-conditions/{condition}/show', [App\Http\Controllers\TechnicController::class, 'show_condition'])->name('technic.tech_condition.show');
 Route::post('tech-conditions/{condition}/upload', [App\Http\Controllers\TechnicController::class, 'upload'])->name('technic.tech_condition.upload');
+
+Route::get('region-section', [App\Http\Controllers\TechnicController::class, 'region'])->name('technic.reg_section');
+Route::get('organ-section', [App\Http\Controllers\TechnicController::class, 'organ'])->name('technic.org_section');
+Route::get('more', [App\Http\Controllers\TechnicController::class, 'more'])->name('technic.more');

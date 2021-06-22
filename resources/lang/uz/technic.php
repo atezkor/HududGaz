@@ -9,6 +9,7 @@
         'more_sec' => "Batafsil",
         'btn_new' => "Ariza qo\u{2018}shish",
         'organ' => "Idora nomi",
+        'total' => "Jami",
         'proposition' => [
             'heading_edit' => "Ariza ma\u{2019}lumotlarini yangilash",
             'prop_num' => "Ariza raqami",

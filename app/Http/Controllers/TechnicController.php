@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
+use App\Models\Proposition;
+use App\Models\Region;
+use App\Models\Status;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -72,5 +76,25 @@ class TechnicController extends Controller {
     public function upload(Request $request, TechCondition $condition): RedirectResponse {
         $this->service->upload($request, $condition);
         return redirect()->route('technic.index');
+    }
+
+    public function region(): View {
+        return view('technic.reports.region', [
+            'models' => Status::query()->pluck('description', 'id'),
+            'activities' => Activity::query()->pluck('activity', 'id'),
+            'propositions' => Proposition::query()->get(['status', 'activity_type'])->groupBy('status')
+        ]);
+    }
+
+    public function organ(): View {
+        return view('technic.reports.organ', [
+            'models' => Region::query()->pluck('org_name', 'id'),
+            'activities' => Activity::query()->pluck('activity', 'id'),
+            'propositions' => Proposition::query()->get(['organ', 'activity_type'])->groupBy('organ')
+        ]);
+    }
+
+    public function more(): View {
+        return view('technic.reports.more');
     }
 }
