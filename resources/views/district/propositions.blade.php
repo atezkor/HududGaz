@@ -46,7 +46,7 @@
                                     <td>{{$model->number}}</td>
                                     <td>{{$physicals[$loop->index]}}</td>
                                     <td>
-                                        <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
+                                        <a href="{{route('district.proposition.show', ['proposition' => $model])}}" target="_blank">
                                             @lang('global.proposition.show')
                                         </a>
                                     </td>
@@ -95,7 +95,7 @@
                                     <td>{{$model->number}}</td>
                                     <td>{{$legals[$loop->index]}}</td>
                                     <td>
-                                        <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
+                                        <a href="{{route('district.proposition.show', ['proposition' => $model])}}" target="_blank">
                                             @lang('global.proposition.show')
                                         </a>
                                     </td>

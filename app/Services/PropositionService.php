@@ -38,7 +38,7 @@ class PropositionService extends CrudService {
 
     public function delete($model) {
         $this->deleteFile($model->file);
-        parent::delete($model); // $model->applicant->delete();
+        parent::delete($model);
     }
 
     public function show(Proposition $proposition, int $status = 0): RedirectResponse {

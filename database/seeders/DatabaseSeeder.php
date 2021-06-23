@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
         $this->call(StatusSeeder::class);
         $this->call(MenuItemSeeder::class);
         $this->call(HelperSeeder::class);
+        $this->call(PermissionSeeder::class);
 
         $this->makeFolder();
     }

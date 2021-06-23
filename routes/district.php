@@ -18,6 +18,6 @@ Route::post('recommendations/{recommendation}/upload', [RecommendationController
 Route::get('recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('district.recommendation.edit');
 Route::post('recommendations/{recommendation}/update', [RecommendationController::class, 'update'])->name('district.recommendation.update');
 Route::get('recommendations/{recommendation}', [RecommendationController::class, 'show'])->name('district.recommendation.show');
-
+Route::get('propositions/{proposition}', [RecommendationController::class, 'proposition'])->name('district.proposition.show');
 Route::get('add-equipment', [RecommendationController::class, 'add'])->name('district.equipment.add');
 Route::get('add-type/{equipment?}', [RecommendationController::class, 'types'])->name('district.equipment.type');
