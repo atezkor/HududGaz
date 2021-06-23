@@ -27,9 +27,8 @@ class AuthServiceProvider extends ServiceProvider {
 
         $gates = Permission::query()->get(['name', 'role']);
         foreach ($gates as $gate) {
-            # if (authorize('{key}')) has equivalent to $gate->name, run is Gate else not run.
-            Gate::define($gate->name, function(User $user) use ($gate) {
-                return $user->role === $gate->role;
+            Gate::define($gate->name, function(User $user) use ($gates, $gate) {
+                return count($gates->where('name', $gate->name)->where('role', $user->role)); // 0 | 1
             });
         }
     }

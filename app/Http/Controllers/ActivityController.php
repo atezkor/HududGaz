@@ -20,7 +20,7 @@ class ActivityController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $models = Activity::all();
@@ -31,7 +31,7 @@ class ActivityController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -43,7 +43,7 @@ class ActivityController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -55,7 +55,7 @@ class ActivityController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $this->service->delete($activity_type);

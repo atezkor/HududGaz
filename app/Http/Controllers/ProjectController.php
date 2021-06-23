@@ -22,6 +22,12 @@ class ProjectController extends Controller {
     }
 
     public function index(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_project');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('designer.projects', new ProjectViewModel(designer: auth()->user()->organ ?? 0), [
             'qrcode' => $this->qrcode->generate(json_encode(['token' => csrf_token(), 'url' => route('designer.project.create')]))
         ]);
@@ -29,9 +35,9 @@ class ProjectController extends Controller {
 
     public function process(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('designer.process', new ProjectViewModel([2, 3], auth()->user()->organ ?? 0));
@@ -39,9 +45,9 @@ class ProjectController extends Controller {
 
     public function cancelled(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('designer.cancelled', new ProjectViewModel([4], auth()->user()->organ ?? 0));
@@ -49,9 +55,9 @@ class ProjectController extends Controller {
 
     public function create(Request $request): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $this->service->create($request->get('code'));
@@ -60,9 +66,9 @@ class ProjectController extends Controller {
 
     public function upload(Request $request, Project $project): RedirectResponse|View {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         if (!$request->has('download')) { // If not have download key
@@ -86,9 +92,9 @@ class ProjectController extends Controller {
 
     public function delete(Project $project): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $this->service->delete($project);
@@ -97,9 +103,9 @@ class ProjectController extends Controller {
 
     public function archive(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('designer.archive', new ProjectViewModel([5], auth()->user()->organ ?? 0));

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Proposition;
@@ -26,6 +27,12 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_prop');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.propositions', new PropositionListViewModel());
     }
 
@@ -36,11 +43,19 @@ class PropositionController extends Controller {
      * If Query -> All => pluck return Models
      */
     public function create(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_prop');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $model = new Proposition();
         $organs = Region::query()->pluck('org_name', 'id');
         return view('technic.form', ['action' => route('propositions.store'), 'method' => 'POST',
             'model' => $model, 'organs' => $organs,
-            'activities' => Activity::query()->pluck('activity', 'id'), 'applicant' => new Individual()]);
+            'applicant' => new Individual(),
+            'activities' => Activity::query()->pluck('activity', 'id')
+        ]);
     }
 
     /**
@@ -50,6 +65,12 @@ class PropositionController extends Controller {
      * @return RedirectResponse
      */
     public function store(PropositionRequest $request): RedirectResponse {
+        try {
+            $this->authorize('crud_prop');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $data = $request->validated();
         $this->service->create($data);
         return redirect()->route('propositions.index');
@@ -72,12 +93,20 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Proposition $proposition): View|RedirectResponse {
-        $applicant = $proposition->applicant;
+        try {
+            $this->authorize('crud_prop');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
 
+        $applicant = $proposition->applicant;
         $organs = Region::query()->pluck('org_name', 'id');
         return view('technic.form', ['action' => route('propositions.update', ['proposition' => $proposition]),
-            'method' => 'PUT', 'model' => $proposition, 'organs' => $organs,
-            'activities' => Activity::query()->pluck('activity', 'id'), 'applicant' => $applicant]);
+            'method' => 'PUT', 'model' => $proposition,
+            'applicant' => $applicant,
+            'organs' => $organs,
+            'activities' => Activity::query()->pluck('activity', 'id')
+        ]);
     }
 
     /**
@@ -88,6 +117,12 @@ class PropositionController extends Controller {
      * @return RedirectResponse
      */
     public function update(PropositionRequest $request, Proposition $proposition): RedirectResponse {
+        try {
+            $this->authorize('crud_prop');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $data = $request->validated();
         $this->service->update($data, $proposition);
         return redirect()->route('propositions.index');
@@ -100,6 +135,12 @@ class PropositionController extends Controller {
      * @return RedirectResponse
      */
     public function destroy(Proposition $proposition): RedirectResponse {
+        try {
+            $this->authorize('crud_prop');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $this->service->delete($proposition);
         return redirect()->route('propositions.index');
     }

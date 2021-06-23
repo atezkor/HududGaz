@@ -22,13 +22,16 @@ class PermissionSeeder extends Seeder {
     }
 
     private function admin() {
+        $this->generate(1, 'edit_profile');
         $this->generate(1, 'crud_user');
         $this->generate(1, 'be_admin');
-        $this->generate(1, 'edit_profile');
     }
 
     private function technic() {
         $this->generate(2, 'edit_profile');
+        $this->generate(2, 'crud_prop');
+        $this->generate(2, 'crud_tech');
+        $this->generate(2, 'show_report');
     }
 
     private function organ() {
@@ -38,21 +41,23 @@ class PermissionSeeder extends Seeder {
 
     private function designer() {
         $this->generate(4, 'edit_profile');
+        $this->generate(4, 'crud_project');
     }
 
     private function engineer() {
         $this->generate(5, 'edit_profile');
+        $this->generate(5, 'crud_permit');
     }
 
     private function installer() {
         $this->generate(6, 'edit_profile');
+        $this->generate(6, 'crud_montage');
     }
 
     private function director() {
-        $this->generate(7, 'show_user');
-        $this->generate(7, 'show_organ');
-        $this->generate(7, 'show_designer');
-        $this->generate(7, 'show_installer');
+        $this->generate(7, 'edit_profile');
+        $this->generate(7, 'res_admin'); // resource admin
+        $this->generate(7, 'show_document');
     }
 
     private function generate(int $role, string $name) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -27,11 +28,23 @@ class TechnicController extends Controller {
         $this->rec_service = $rec_service;
     }
 
-    public function index(): View {
+    public function index(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.index', new TechConditionViewModel());
     }
 
-    public function recommendations(): View {
+    public function recommendations(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.recommends', new RecommendationViewModel([4, 5], 2));
     }
 
@@ -39,7 +52,13 @@ class TechnicController extends Controller {
         return $this->rec_service->techShow($recommendation);
     }
 
-    public function create(Recommendation $recommendation): View {
+    public function create(Recommendation $recommendation): View|RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $equipments = $recommendation->getEquipments();
         return view("technic.control.$recommendation->type", [
             'recommendation' => $recommendation,
@@ -54,6 +73,12 @@ class TechnicController extends Controller {
      * @throws ValidationException
      */
     public function store(Request $request, Recommendation $recommendation): RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $data = $this->validate($request, [
             'description' => [],
             'data' => ['required']
@@ -69,16 +94,35 @@ class TechnicController extends Controller {
         return redirect($this->service->show($condition));
     }
 
-    public function back(Request $request, Recommendation $recommendation) {
+    public function back(Request $request, Recommendation $recommendation): RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $this->rec_service->back($recommendation, $request['comment']);
+        return redirect()->back();
     }
 
     public function upload(Request $request, TechCondition $condition): RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $this->service->upload($request, $condition);
         return redirect()->route('technic.index');
     }
 
-    public function region(): View {
+    public function region(): View|RedirectResponse {
+        try {
+            $this->authorize('show_report');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.reports.region', [
             'models' => Region::query()->get(['id', 'org_name', 'region']),
             'activities' => Activity::query()->pluck('activity', 'id'),
@@ -86,7 +130,13 @@ class TechnicController extends Controller {
         ]);
     }
 
-    public function organ(): View {
+    public function organ(): View|RedirectResponse {
+        try {
+            $this->authorize('show_report');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.reports.organ', [
             'models' => Region::query()->pluck('org_name', 'id'),
             'activities' => Activity::query()->pluck('activity', 'id'),
@@ -94,7 +144,13 @@ class TechnicController extends Controller {
         ]);
     }
 
-    public function more(): View {
+    public function more(): View|RedirectResponse {
+        try {
+            $this->authorize('show_report');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.reports.more', [
             'models' => Status::query()->pluck('description', 'id'),
             'activities' => Activity::query()->pluck('activity', 'id'),

@@ -33,6 +33,12 @@ class RecommendationController extends Controller {
      * @return View|RedirectResponse
      */
     public function propositions(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('district.propositions', new PropositionListViewModel([1, 2], request()->user()->organ));
     }
 
@@ -45,21 +51,39 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('district.index', new RecommendationViewModel(organ: request()->user()->organ));
     }
 
-    public function progress(): View {
+    public function progress(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('district.progress', new RecommendationViewModel([4, 5], 2, request()->user()->organ));
     }
 
-    public function cancelled(): View {
+    public function cancelled(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('district.cancelled', new RecommendationViewModel([6], 3, request()->user()->organ));
     }
 
-    public function archives(): View {
+    public function archives(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $models = CancelledProposition::all();
         $provider = function($file): string {
             return '/storage/cancelled/' . $file;
@@ -74,9 +98,15 @@ class RecommendationController extends Controller {
      *
      * @param Proposition $proposition
      * @param string $type
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function create(Proposition $proposition, string $type): View {
+    public function create(Proposition $proposition, string $type): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $recommendation = new Recommendation();
         return view("district.control.upsert", ['model' => $recommendation, 'proposition' => $proposition,
             'type' => $type, 'action' => route('district.recommendation.store', ['type' => $type]),
@@ -91,6 +121,12 @@ class RecommendationController extends Controller {
      */
 
     public function store(RecommendationRequest $request): RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $data = $request->validated();
         $this->service->create($data);
 
@@ -102,10 +138,18 @@ class RecommendationController extends Controller {
      * void
      * @param Request $request
      * @param Recommendation $recommendation
+     * @return RedirectResponse
      */
-    public function upload(Request $request, Recommendation $recommendation) {
+    public function upload(Request $request, Recommendation $recommendation): RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $this->service->upload($request, $recommendation);
         $this->service_prop->show($recommendation->proposition, 4);
+        return redirect()->back();
     }
 
     /**
@@ -122,21 +166,19 @@ class RecommendationController extends Controller {
         return $this->service_prop->show($proposition, 2);
     }
 
-    public function add(): Collection {
-        return Equipment::query()->pluck('name', 'id');
-    }
-
-    public function types(Equipment $equipment): Collection {
-        return $equipment->types()->pluck('type', 'id');
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param Recommendation $recommendation
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function edit(Recommendation $recommendation): View {
+    public function edit(Recommendation $recommendation): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $type = $recommendation->type;
         return view('district.control.upsert', ['model' => $recommendation, 'proposition' => $recommendation->proposition,
             'type' => $type, 'action' => route('district.recommendation.update', ['recommendation' => $recommendation]),
@@ -151,11 +193,25 @@ class RecommendationController extends Controller {
      * @return RedirectResponse
      */
     public function update(RecommendationRequest $request, Recommendation $recommendation): RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $data = $request->validated();
 
         $this->service->update($data, $recommendation);
         $this->service_prop->update(['status' => 3], $recommendation->proposition);
         return redirect()->route('district.recommendations.cancelled');
+    }
+
+    public function add(): Collection {
+        return Equipment::query()->pluck('name', 'id');
+    }
+
+    public function types(Equipment $equipment): Collection {
+        return $equipment->types()->pluck('type', 'id');
     }
 
     private function getProposition(int $id): Proposition|Model {

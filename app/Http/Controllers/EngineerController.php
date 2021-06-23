@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -27,19 +28,37 @@ class EngineerController extends Controller {
         $this->montageService = $montageService;
     }
 
-    public function projects(): View {
+    public function projects(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('engineer.projects', new ProjectViewModel([2, 3]), [
             'designers' => Designer::query()->pluck('org_name', 'id')
         ]);
     }
 
-    public function montages(): View {
+    public function montages(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('engineer.montages', new MontageViewModel([2, 3]), [
             'mounters' => Mounter::query()->pluck('short_name', 'id')
         ]);
     }
 
     public function project(Request $request, Project $project): RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         if ($request->has('comment')) {
             $data = $request->validate(['comment' => ['required']])['comment'];
             $this->projectService->cancel($data, $project);
@@ -51,6 +70,12 @@ class EngineerController extends Controller {
     }
 
     public function montage(Request $request, Montage $montage): RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         if ($request->has('comment')) {
             $data = $request->validate(['comment' => ['required']])['comment'];
             $this->montageService->cancel($data, $montage);
@@ -61,7 +86,13 @@ class EngineerController extends Controller {
         return redirect()->back();
     }
 
-    public function permits(): View {
+    public function permits(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('engineer.permits', [
             'models' => Permit::all(),
             'districts' => districts()
@@ -73,15 +104,33 @@ class EngineerController extends Controller {
     }
 
     public function upload(Request $request, Permit $permit): RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         $this->storeFile($request->file('file'), $permit);
         return redirect()->back();
     }
 
-    public function completedProjects(): View {
+    public function completedProjects(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('designer.archive', new ProjectViewModel([5]));
     }
 
-    public function archiveMontages(): View {
+    public function archiveMontages(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('installer.archive', new MontageViewModel([5]));
     }
 

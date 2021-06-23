@@ -25,7 +25,7 @@ class MounterController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $models = Mounter::all();
@@ -41,7 +41,7 @@ class MounterController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $model = new Mounter();
@@ -59,7 +59,7 @@ class MounterController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -77,7 +77,7 @@ class MounterController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('admin.mounters.form', ['action' => route('admin.mounters.update', ['mounter' => $mounter]),
@@ -95,7 +95,7 @@ class MounterController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -113,7 +113,7 @@ class MounterController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $this->service->delete($mounter);

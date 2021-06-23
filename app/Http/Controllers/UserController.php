@@ -26,7 +26,7 @@ class UserController extends Controller {
         try {
             $this->authorize('crud_user');
         } catch (AuthorizationException) {
-             return redirect()->route('logout');
+             return redirect()->route('login');
         }
 
         $models = User::query()->where('role', '<>', 1)->get();
@@ -37,7 +37,7 @@ class UserController extends Controller {
         try {
             $this->authorize('crud_user');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('admin.users.form', ['model' => new User(),
@@ -45,7 +45,7 @@ class UserController extends Controller {
     }
 
 
-    public function checkFirmOrOrgan(int $role): Collection {
+    public function checkRole(int $role): Collection {
         switch ($role) {
             case 3:
                 return Region::query()->pluck('org_name', 'id');
@@ -62,7 +62,7 @@ class UserController extends Controller {
         try {
             $this->authorize('crud_user');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -74,7 +74,7 @@ class UserController extends Controller {
         try {
             $this->authorize('crud_user');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('admin.users.form', ['model' => $user,
@@ -85,7 +85,7 @@ class UserController extends Controller {
         try {
             $this->authorize('crud_user');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -97,7 +97,7 @@ class UserController extends Controller {
         try {
             $this->authorize('crud_user');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $this->service->delete($user);

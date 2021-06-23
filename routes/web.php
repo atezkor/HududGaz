@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin'], function() {
     });
 
     resource('users', UserController::class, 'admin.users');
-    Route::post('user/change-role/{role?}', [UserController::class, 'checkFirmOrOrgan'])->name('admin.change_role');
+    Route::post('user/change-role/{role?}', [UserController::class, 'checkRole'])->name('admin.change_role');
 
     resource('organs', RegionController::class, 'admin.organs');
     resource('mounters', MounterController::class, 'admin.mounters'); // resource('fitters', FitterController::class, 'admin.fitters');

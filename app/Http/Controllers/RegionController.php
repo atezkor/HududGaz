@@ -21,7 +21,7 @@ class RegionController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $models = Region::all();
@@ -32,7 +32,7 @@ class RegionController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $model = new Region();
@@ -44,7 +44,7 @@ class RegionController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -56,7 +56,7 @@ class RegionController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('admin.regions.form', ['action' => route('admin.organs.update', ['organ' => $organ]),
@@ -67,7 +67,7 @@ class RegionController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -79,7 +79,7 @@ class RegionController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $this->service->delete($organ);

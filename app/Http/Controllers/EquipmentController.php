@@ -10,6 +10,7 @@ use App\Models\EquipmentType;
 use App\Services\Service;
 use App\Http\Requests\EquipmentRequest;
 
+
 class EquipmentController extends Controller {
     private Service $service;
 
@@ -24,7 +25,7 @@ class EquipmentController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $models = Equipment::all();
@@ -41,7 +42,7 @@ class EquipmentController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -61,7 +62,7 @@ class EquipmentController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -80,7 +81,7 @@ class EquipmentController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $this->service->delete($equipment);
@@ -97,7 +98,7 @@ class EquipmentController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $models = $equipment->types()->get();
@@ -113,7 +114,7 @@ class EquipmentController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -132,7 +133,7 @@ class EquipmentController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->validated();
@@ -149,7 +150,7 @@ class EquipmentController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $type->delete();

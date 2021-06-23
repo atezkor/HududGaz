@@ -21,7 +21,7 @@ class TimetableController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $models = Timetable::all();
@@ -34,7 +34,7 @@ class TimetableController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('admin.table.form', ['model' => new Timetable(),
@@ -45,7 +45,7 @@ class TimetableController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->all();
@@ -59,7 +59,7 @@ class TimetableController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         return view('admin.table.form', ['model' => $timetable, 'method' => 'PUT',
@@ -70,7 +70,7 @@ class TimetableController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $data = $request->all();
@@ -82,7 +82,7 @@ class TimetableController extends Controller {
         try {
             $this->authorize('be_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
 
         $this->service->delete($timetable);

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Designer;
 use App\Models\Mounter;
 use App\Models\Permit;
@@ -15,45 +17,99 @@ use App\ViewModels\TechConditionViewModel;
 
 class DirectorController extends Controller {
 
-    public function organs(): View {
+    public function organs(): View|RedirectResponse {
+        try {
+            $this->authorize('res_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('admin.regions.index', [
             'models' => Region::all()
         ]);
     }
 
-    public function designers(): View {
+    public function designers(): View|RedirectResponse {
+        try {
+            $this->authorize('res_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('admin.designers.index', [
             'models' => Designer::all()
         ]);
     }
 
-    public function installers(): View {
+    public function installers(): View|RedirectResponse {
+        try {
+            $this->authorize('res_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('admin.mounters.index', [
             'models' => Mounter::all()
         ]);
     }
 
-    public function propositions(): View {
+    public function propositions(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.propositions', new PropositionListViewModel());
     }
 
-    public function recommendations(): View {
+    public function recommendations(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.recommends', new RecommendationViewModel());
     }
 
-    public function tech_conditions(): View {
+    public function tech_conditions(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('technic.index', new TechConditionViewModel());
     }
 
-    public function projects(): View {
+    public function projects(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('engineer.projects', new ProjectViewModel([5]));
     }
 
-    public function montages(): View {
+    public function montages(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('engineer.montages', new MontageViewModel([5]));
     }
 
-    public function permits(): View {
+    public function permits(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect()->route('login');
+        }
+
         return view('engineer.permits', [
             'models' => Permit::all()
         ]);
