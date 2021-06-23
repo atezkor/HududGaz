@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Permission;
+use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider {
     /**
@@ -24,8 +25,12 @@ class AuthServiceProvider extends ServiceProvider {
     public function boot() {
         $this->registerPolicies();
 
-        Gate::define('show', function(User $user) {
-            return $user->getAttribute('role');
-        });
+        $gates = Permission::query()->get(['name', 'role']);
+        foreach ($gates as $gate) {
+            # if (authorize('{key}')) has equivalent to $gate->name, run is Gate else not run.
+            Gate::define($gate->name, function(User $user) use ($gate) {
+                return $user->role === $gate->role;
+            });
+        }
     }
 }

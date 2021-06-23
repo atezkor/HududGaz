@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Status;
 use App\Services\Service;
 use App\Http\Requests\StatusRequest;
-
 
 class StatusController extends Controller {
     private Service $service;
@@ -22,6 +22,12 @@ class StatusController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $models = Status::all();
         return view('admin.statuses.index', ['models' => $models]);
     }
@@ -33,6 +39,12 @@ class StatusController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Status $status): View|RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         return view('admin.statuses.form', ['action' => route('admin.statuses.update', ['status' => $status]),
             'model' => $status]);
     }
@@ -45,6 +57,12 @@ class StatusController extends Controller {
      * @return RedirectResponse
      */
     public function update(StatusRequest $request, Status $status): RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $data = $request->validated();
         $this->service->update($data, $status);
         return redirect()->route('admin.statuses.index');

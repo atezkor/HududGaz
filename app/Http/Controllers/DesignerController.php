@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Designer;
@@ -22,6 +23,12 @@ class DesignerController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $models = Designer::all();
         return view('admin.designers.index', ['models' => $models]);
     }
@@ -32,6 +39,12 @@ class DesignerController extends Controller {
      * @return View|RedirectResponse
      */
     public function create(): View|RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $model = new Designer();
         return view('admin.designers.form', ['action' => route('admin.designers.store'),
             'method' => 'POST', 'model' => $model]);
@@ -44,6 +57,12 @@ class DesignerController extends Controller {
      * @return RedirectResponse
      */
     public function store(DesignerRequest $request): RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $data = $request->validated();
         $this->service->create($data);
         return redirect()->route('admin.designers.index');
@@ -56,6 +75,12 @@ class DesignerController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Designer $designer): View|RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         return view('admin.designers.form', ['action' => route('admin.designers.update', ['designer' => $designer]),
             'method' => 'PUT', 'model' => $designer]);
     }
@@ -68,6 +93,12 @@ class DesignerController extends Controller {
      * @return RedirectResponse
      */
     public function update(DesignerRequest $request, Designer $designer): RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $data = $request->validated();
         $this->service->update($data, $designer);
         return redirect()->route('admin.designers.index');
@@ -80,6 +111,12 @@ class DesignerController extends Controller {
      * @return RedirectResponse
      */
     public function destroy(Designer $designer): RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $this->service->delete($designer);
         return redirect()->route('admin.designers.index');
     }

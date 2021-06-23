@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Mounter;
@@ -21,6 +22,12 @@ class MounterController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(): View|RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $models = Mounter::all();
         return view('admin.mounters.index', ['models' => $models]);
     }
@@ -31,6 +38,12 @@ class MounterController extends Controller {
      * @return View|RedirectResponse
      */
     public function create(): View|RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $model = new Mounter();
         return view('admin.mounters.form', ['action' => route('admin.mounters.store'),
             'method' => 'POST', 'model' => $model, 'districts' => districts()]);
@@ -43,6 +56,12 @@ class MounterController extends Controller {
      * @return RedirectResponse
      */
     public function store(MounterRequest $request): RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $data = $request->validated();
         $this->service->create($data);
         return redirect()->route('admin.mounters.index');
@@ -55,6 +74,12 @@ class MounterController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Mounter $mounter): View|RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         return view('admin.mounters.form', ['action' => route('admin.mounters.update', ['mounter' => $mounter]),
             'method' => 'PUT', 'model' => $mounter, 'districts' => districts()]);
     }
@@ -67,6 +92,12 @@ class MounterController extends Controller {
      * @return RedirectResponse
      */
     public function update(MounterRequest $request, Mounter $mounter): RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $data = $request->validated();
         $this->service->update($data, $mounter);
         return redirect()->route('admin.mounters.index');
@@ -79,6 +110,12 @@ class MounterController extends Controller {
      * @return RedirectResponse
      */
     public function destroy(Mounter $mounter): RedirectResponse {
+        try {
+            $this->authorize('be_admin');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $this->service->delete($mounter);
         return redirect()->route('admin.mounters.index');
     }

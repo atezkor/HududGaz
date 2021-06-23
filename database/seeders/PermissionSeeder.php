@@ -23,34 +23,29 @@ class PermissionSeeder extends Seeder {
 
     private function admin() {
         $this->generate(1, 'crud_user');
-        $this->generate(1, 'crud_organ');
-        $this->generate(1, 'crud_equipment');
-        $this->generate(1, 'crud_designer');
-        $this->generate(1, 'crud_installer');
-        $this->generate(1, 'crud_setting'); // setting
-        $this->generate(1, 'crud_status');
-        $this->generate(1, 'crud_activity');
-        $this->generate(1, 'crud_time');
+        $this->generate(1, 'be_admin');
+        $this->generate(1, 'edit_profile');
     }
 
     private function technic() {
-        $this->generate(2, 'show');
+        $this->generate(2, 'edit_profile');
     }
 
     private function organ() {
-
+        $this->generate(3, 'edit_profile');
+        $this->generate(3, 'crud_rec');
     }
 
     private function designer() {
-
+        $this->generate(4, 'edit_profile');
     }
 
     private function engineer() {
-
+        $this->generate(5, 'edit_profile');
     }
 
     private function installer() {
-
+        $this->generate(6, 'edit_profile');
     }
 
     private function director() {

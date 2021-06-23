@@ -39,7 +39,7 @@
 
                                 <div class="form-group">
                                     <label for="username">{{__('admin.user.username')}}</label>
-                                    <input type="text" name="username" id="username" value="{{$model->username}}" class="form-control">
+                                    <input type="text" name="username" id="username" value="{{$model->username}}" class="form-control" autocomplete="off">
                                 </div>
 
                                 <div class="form-group">

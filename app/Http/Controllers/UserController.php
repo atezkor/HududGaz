@@ -24,9 +24,9 @@ class UserController extends Controller {
 
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('show', UserController::class);
+            $this->authorize('crud_user');
         } catch (AuthorizationException) {
-            // return redirect('/logout');
+             return redirect()->route('logout');
         }
 
         $models = User::query()->where('role', '<>', 1)->get();
@@ -34,12 +34,18 @@ class UserController extends Controller {
     }
 
     public function create(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_user');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         return view('admin.users.form', ['model' => new User(),
             'action' => route('admin.users.store'), 'method' => 'POST']);
     }
 
 
-    public function checkFirmOrOrgan(int $role): Collection|null {
+    public function checkFirmOrOrgan(int $role): Collection {
         switch ($role) {
             case 3:
                 return Region::query()->pluck('org_name', 'id');
@@ -49,27 +55,51 @@ class UserController extends Controller {
                 return Mounter::query()->pluck('short_name', 'id');
         }
 
-        return null;
+        return new Collection();
     }
 
     public function store(UserRequest $request): RedirectResponse {
+        try {
+            $this->authorize('crud_user');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $data = $request->validated();
         $this->service->create($data);
         return redirect()->route('admin.users.index');
     }
 
     public function edit(User $user): View|RedirectResponse {
+        try {
+            $this->authorize('crud_user');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         return view('admin.users.form', ['model' => $user,
             'action' => route('admin.users.update', ['user' => $user]), 'method' => 'PUT']);
     }
 
     public function update(UserRequest $request, User $user): RedirectResponse {
+        try {
+            $this->authorize('crud_user');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $data = $request->validated();
         $this->service->update($data, $user);
         return redirect()->route('admin.users.index');
     }
 
     public function destroy(User $user): RedirectResponse {
+        try {
+            $this->authorize('crud_user');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
         $this->service->delete($user);
         return redirect()->route('admin.users.index');
     }

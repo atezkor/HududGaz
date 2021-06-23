@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,27 +30,33 @@ class RecommendationController extends Controller {
     }
 
     /**
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function propositions(): View {
-        return view('district.propositions', new PropositionListViewModel([1, 2], auth()->user()->organ ?? 0));
+    public function propositions(): View|RedirectResponse {
+        return view('district.propositions', new PropositionListViewModel([1, 2], request()->user()->organ));
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function index(): View {
-        return view('district.index', new RecommendationViewModel(organ: auth()->user()->organ ?? 0));
+    public function index(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect()->route('logout');
+        }
+
+        return view('district.index', new RecommendationViewModel(organ: request()->user()->organ));
     }
 
     public function progress(): View {
-        return view('district.progress', new RecommendationViewModel([4, 5], 2, auth()->user()->organ ?? 0));
+        return view('district.progress', new RecommendationViewModel([4, 5], 2, request()->user()->organ));
     }
 
     public function cancelled(): View {
-        return view('district.cancelled', new RecommendationViewModel([6], 3, auth()->user()->organ ?? 0));
+        return view('district.cancelled', new RecommendationViewModel([6], 3, request()->user()->organ));
     }
 
     public function archives(): View {
@@ -58,7 +65,7 @@ class RecommendationController extends Controller {
             return '/storage/cancelled/' . $file;
         };
 
-        return view('district.archives', new RecommendationViewModel([8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4),
+        return view('district.archives', new RecommendationViewModel([8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4, request()->user()->organ),
             ['models' => $models, 'provider' => $provider]);
     }
 
