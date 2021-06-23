@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 
@@ -42,8 +41,8 @@ class Organization {
 
         $logo = Cache::get('organization')->logo ?? '';
         if (isset($data['logo'])) {
-            $this->logo = $this->fileCreate($data['logo']);
-            $this->fileDelete($logo);
+            $this->logo = $this->createFile($data['logo']);
+            $this->deleteFile($logo);
         } else {
             $this->logo = $logo;
         }
@@ -53,13 +52,13 @@ class Organization {
         return Cache::get('organization') ?: new Organization();
     }
 
-    private function fileCreate($file): string {
+    private function createFile($file): string {
         $name = time() . '.' . $file->extension();
         $file->move('storage/images', $name);
         return $name;
     }
 
-    private function fileDelete($path) {
+    private function deleteFile($path) {
         File::delete('storage/images/' . $path);
     }
 }

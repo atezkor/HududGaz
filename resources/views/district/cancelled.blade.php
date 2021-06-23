@@ -21,7 +21,6 @@
                                 <th>@lang('global.consumer')</th>
                                 <th>@lang('district.recommendation.name')</th>
                                 <th>@lang('district.recommendation.reason')</th>
-                                <th>@lang('global.proposition.date')</th>
                                 <th>@lang('global.proposition.limit')</th>
                                 <th>@lang('global.proposition.action')</th>
                             </tr>
@@ -41,7 +40,6 @@
                                     </a>
                                 </td>
                                 <td>{{$recommendations[$key]->comment}}</td>
-                                <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">
                                         <div class="{{progressColor($model->percent($limit))}}"

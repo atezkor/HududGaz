@@ -4,6 +4,7 @@ namespace App\ViewModels;
 
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection as Models;
 use App\Models\Recommendation;
 use App\Models\Proposition;
 use App\Models\Individual;
@@ -13,14 +14,14 @@ use Spatie\ViewModels\ViewModel;
 
 
 class RecommendationViewModel extends ViewModel {
-    private array $status;
-    private int $status_rec;
-    private string $operator = '>';
+    private array $prop_status;
+    private int $status;
     private int $organ;
+    private string $operator = '>';
 
-    public function __construct(int $organ = 0, array $status = [3], int $status_rec = 1) {
+    public function __construct(array $prop_status = [3], int $status = 1, int $organ = 0) {
+        $this->prop_status = $prop_status;
         $this->status = $status;
-        $this->status_rec = $status_rec;
 
         $this->organ = $organ;
         if ($organ) {
@@ -29,11 +30,11 @@ class RecommendationViewModel extends ViewModel {
     }
 
     public function recommendations(): Collection {
-        return $this->models($this->status_rec, $this->operator, $this->organ);
+        return $this->models($this->status, $this->operator, $this->organ);
     }
 
-    public function propositions(): \Illuminate\Database\Eloquent\Collection {
-        return $this->props(Proposition::query(), $this->status, $this->operator, $this->organ);
+    public function propositions(): Models {
+        return $this->props(Proposition::query(), $this->prop_status, $this->operator, $this->organ);
     }
 
     function physicals(): Collection {
@@ -58,7 +59,7 @@ class RecommendationViewModel extends ViewModel {
 
     private function collections(Builder $builder, string $attr): Collection {
         return $builder->where('organ', $this->operator, $this->organ)
-            ->whereIn('status', $this->status)->pluck($attr);
+            ->whereIn('status', $this->prop_status)->pluck($attr);
     }
 
     private function models(int $status, string $operator, int $organ): Collection {
@@ -69,7 +70,7 @@ class RecommendationViewModel extends ViewModel {
         return $add ? $models->get(['id', 'comment']) : $models->pluck('id');
     }
 
-    private function props(Builder $query, array $status, string $operator, int $organ): \Illuminate\Database\Eloquent\Collection {
+    private function props(Builder $query, array $status, string $operator, int $organ): Models {
         return $query->where('organ', $operator, $organ)
             ->whereIn('status', $status)
             ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);

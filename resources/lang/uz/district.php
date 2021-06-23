@@ -60,7 +60,7 @@
             'consume_hint' => "Talab qilinadigan gaz hajmini kiriting",
             'add_equipment' => "Jihoz qo\u{2018}shish",
             'description' => "Bekor qilish sababi",
-            'reason' => "Sabab",
+            'reason' => "Bekor qilish sababi",
             'additional' => "Qo\u{2018}shimcha ma\u{2019}lumot",
             'notification' => "Bildirishnomani yozing",
             'desc_hint' => "Bekor qilish sababini kiriting",

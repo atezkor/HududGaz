@@ -12,6 +12,7 @@
 - `php artisan key:generate`
 
 ## Ishlatish
+- php artisan storage:link
 - php artisan migrate --seed
 - php artisan serve
 

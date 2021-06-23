@@ -41,15 +41,15 @@ class RecommendationController extends Controller {
      * @return View
      */
     public function index(): View {
-        return view('district.index', new RecommendationViewModel(auth()->user()->organ ?? 0));
+        return view('district.index', new RecommendationViewModel(organ: auth()->user()->organ ?? 0));
     }
 
     public function progress(): View {
-        return view('district.progress', new RecommendationViewModel(auth()->user()->organ ?? 0, [4, 5], 2));
+        return view('district.progress', new RecommendationViewModel([4, 5], 2, auth()->user()->organ ?? 0));
     }
 
     public function cancelled(): View {
-        return view('district.cancelled', new RecommendationViewModel(auth()->user()->organ ?? 0, [6], 3));
+        return view('district.cancelled', new RecommendationViewModel([6], 3, auth()->user()->organ ?? 0));
     }
 
     public function archives(): View {
@@ -57,7 +57,9 @@ class RecommendationController extends Controller {
         $provider = function($file): string {
             return '/storage/cancelled/' . $file;
         };
-        return view('district.archives', ['models' => $models, 'provider' => $provider]);
+
+        return view('district.archives', new RecommendationViewModel([8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4),
+            ['models' => $models, 'provider' => $provider]);
     }
 
     /**

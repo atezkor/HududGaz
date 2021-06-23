@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model as BaseModel;
+
 /**
  * @property string short_name
  */
-class Mounter extends \Illuminate\Database\Eloquent\Model {
+class Mounter extends BaseModel {
 
     public $timestamps = false;
     protected $fillable = ['rec_num', 'reg_num', 'full_name', 'short_name', 'leader',

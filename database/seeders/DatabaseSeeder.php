@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder {
     }
 
     private function makeFolder() {
-        $folder = 'storage/tech_conditions';
+        $folder = 'public/storage/tech_conditions';
         if (!file_exists($folder))
             File::makeDirectory($folder, 0777, true, true);
 
-        File::makeDirectory('storage/permits', 0777, true, true);
+        File::makeDirectory('public/storage/permits', 0777, true, true);
     }
 }

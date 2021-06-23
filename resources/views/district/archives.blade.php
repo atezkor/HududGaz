@@ -34,22 +34,20 @@
                                     <th>@lang('global.consumer')</th>
                                     <th>@lang('global.proposition.name')</th>
                                     <th>@lang('district.recommendation.name')</th>
-                                    <th>@lang('district.tech_condition')</th>
-                                    <th>@lang('district.recommendation.reason')</th>
-                                    <th>@lang('global.proposition.date')</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($models as $model)
+                            @foreach($propositions as $model)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$model->prop_num}}</td>
-                                    <td>{{$model->applicant}}</td>
-                                    <td><a href="{{$provider($model->proposition)}}" target="_blank">@lang('global.btn_open')</a></td>
-                                    <td><a href="{{$provider($model->recommendation)}}" target="_blank">@lang('global.btn_open')</a></td>
-                                    <td><a href="{{$provider($model->condition)}}" target="_blank">@lang('global.btn_open')</a></td>
-                                    <td>{{$model->reason}}</td>
-                                    <td>{{$model->created_at}}</td>
+                                    <td>{{$model->number}}</td>
+                                    <td>{{$model->applicant->name}}</td>
+                                    <td>
+                                        <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">@lang('global.btn_show')</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('district.recommendation.show', ['recommendation' => 1])}}" target="_blank">@lang('global.btn_show')</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -75,9 +73,15 @@
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->prop_num}}</td>
                                     <td>{{$model->applicant}}</td>
-                                    <td><a href="{{$provider($model->proposition)}}" target="_blank">@lang('global.btn_open')</a></td>
-                                    <td><a href="{{$provider($model->recommendation)}}" target="_blank">@lang('global.btn_open')</a></td>
-                                    <td><a href="{{$provider($model->condition)}}" target="_blank">@lang('global.btn_open')</a></td>
+                                    <td>
+                                        <a href="{{$provider($model->proposition)}}" target="_blank">@lang('global.btn_open')</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{$provider($model->recommendation)}}" target="_blank">@lang('global.btn_open')</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{$provider($model->condition)}}" target="_blank">@lang('global.btn_open')</a>
+                                    </td>
                                     <td>{{$model->reason}}</td>
                                     <td>{{$model->created_at}}</td>
                                 </tr>

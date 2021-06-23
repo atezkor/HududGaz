@@ -32,7 +32,7 @@ class TechnicController extends Controller {
     }
 
     public function recommendations(): View {
-        return view('technic.recommends', new RecommendationViewModel(0, [4, 5], 2));
+        return view('technic.recommends', new RecommendationViewModel([4, 5], 2));
     }
 
     public function show(Recommendation $recommendation): RedirectResponse {

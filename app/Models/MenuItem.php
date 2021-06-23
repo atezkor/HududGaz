@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model as BaseModel;
 
-class MenuItem extends \Illuminate\Database\Eloquent\Model {
+class MenuItem extends BaseModel {
     public $timestamps = false;
 
     public static function items($user): Builder {

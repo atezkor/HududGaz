@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 function resource($url, $controller, $name) {
@@ -33,7 +32,7 @@ function readonly($url, $controller, $name) {
 }
 
 function getName(): string {
-    return Cache::get('organization')->branch_name ?? "";
+    return App\Models\Organization::Data()->branch_name;
 }
 
 function setImage($user): string {

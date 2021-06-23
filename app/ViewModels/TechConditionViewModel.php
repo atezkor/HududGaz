@@ -45,11 +45,11 @@ class TechConditionViewModel extends ViewModel {
         return Status::query()->find(7)->getAttribute('term');
     }
 
-    private function models(Builder $query): Collection { // int $status = 7
+    private function models(Builder $query): Collection {
         return $query->where('status', '=', 7)->get(['id', 'number', 'organ', 'type', 'created_at']);
     }
 
-    private function collections(Builder $query, string $attr, int $status = 7): Collection {
-        return $query->where('status', '=', $status)->pluck($attr);
+    private function collections(Builder $query, string $attr): Collection { // $status = 7
+        return $query->where('status', '=', 7)->pluck($attr);
     }
 }

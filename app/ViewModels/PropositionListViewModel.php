@@ -4,6 +4,7 @@ namespace App\ViewModels;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection as Models;
 use App\Models\Proposition;
 use App\Models\Individual;
 use App\Models\Legal;
@@ -24,11 +25,11 @@ class PropositionListViewModel extends ViewModel {
         }
     }
 
-    function individuals(): \Illuminate\Database\Eloquent\Collection {
+    function individuals(): Models {
         return $this->models(1, $this->status, $this->operator ,$this->organ);
     }
 
-    function legalEntities(): \Illuminate\Database\Eloquent\Collection {
+    function legalEntities(): Models {
         return $this->models(2, $this->status, $this->operator, $this->organ);
     }
 
@@ -50,7 +51,7 @@ class PropositionListViewModel extends ViewModel {
             ->pluck($attribute);
     }
 
-    private function models(int $type, array $statuses, string $operator, int $organ): \Illuminate\Database\Eloquent\Collection {
+    private function models(int $type, array $statuses, string $operator, int $organ): Models {
         return Proposition::query()->where('organ', $operator, $organ)
             ->where('type', '=', $type)
             ->whereIn('status', $statuses)
