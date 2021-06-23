@@ -68,7 +68,7 @@ class TechConditionService extends CrudService {
         }
 
         $condition->update();
-        $proposition->update(['status' => 8]); // $proposition->applicant->update(['status' => 8]);
+        $proposition->update(['status' => 8]); $proposition->applicant->update(['status' => 8]);
     }
 
     private function createPDF(Recommendation $recommendation, array $addition) {

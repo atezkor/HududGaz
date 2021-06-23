@@ -281,7 +281,7 @@
     });
 
     function CustomValidity() {
-        $('input').each(function(){
+        $('input').each(function() {
             this.oninvalid = () => {
                 this.setCustomValidity("@lang('district.recommendation.required')");
             }

@@ -25,17 +25,18 @@ class ProjectService extends CrudService {
             return;
 
         $proposition = $condition->getAttribute('proposition');
+        $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,
             'condition' => $condition->getAttribute('id'),
-            'applicant' => $proposition->applicant->name,
+            'applicant' => $applicant->name,
             'organ' => $proposition->organ,
             'designer' => auth()->user()->organ ?? 0
         ];
         $project = new Project($data);
         $project->save();
 
-        $proposition->update(['status' => 10]); // $applicant->update(['status' => 10]);
+        $proposition->update(['status' => 10]); $applicant->update(['status' => 10]);
     }
 
     public function upload(Request $request, Project $project) {
@@ -76,7 +77,7 @@ class ProjectService extends CrudService {
     }
 
     public function delete($model) {
-        $model->proposition->update(['status' => 8]);
+        $this->propStatus($model, -$model->status);
         parent::delete($model);
     }
 
@@ -84,8 +85,9 @@ class ProjectService extends CrudService {
         return $this->storeFile($file);
     }
 
-    private function propStatus(Project $project) {
+    private function propStatus(Project $project, $status = 9) {
         $proposition = $project->proposition;
-        $proposition->update(['status' => $project->status + 9]); // $proposition->applicant->update(['status' => $project->status + 9]);
+        $proposition->update(['status' => $project->status + $status]);
+        $proposition->applicant->update(['status' => $project->status + $status]);
     }
 }

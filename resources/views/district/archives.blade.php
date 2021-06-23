@@ -37,16 +37,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($propositions as $model)
+                            @php($l = 0)
+                            @php($p = 0)
+                            @foreach($propositions as $key => $model)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->number}}</td>
-                                    <td>{{$model->applicant->name}}</td>
+                                    <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
                                     <td>
                                         <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">@lang('global.btn_show')</a>
                                     </td>
                                     <td>
-                                        <a href="{{route('district.recommendation.show', ['recommendation' => 1])}}" target="_blank">@lang('global.btn_show')</a>
+                                        <a href="{{route('district.recommendation.show', ['recommendation' => $recommendations[$key]])}}" target="_blank">@lang('global.btn_show')</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -74,13 +76,13 @@
                                     <td>{{$model->prop_num}}</td>
                                     <td>{{$model->applicant}}</td>
                                     <td>
-                                        <a href="{{$provider($model->proposition)}}" target="_blank">@lang('global.btn_open')</a>
+                                        <a href="{{$provider($model->proposition)}}" target="_blank">@lang('global.btn_show')</a>
                                     </td>
                                     <td>
-                                        <a href="{{$provider($model->recommendation)}}" target="_blank">@lang('global.btn_open')</a>
+                                        <a href="{{$provider($model->recommendation)}}" target="_blank">@lang('global.btn_show')</a>
                                     </td>
                                     <td>
-                                        <a href="{{$provider($model->condition)}}" target="_blank">@lang('global.btn_open')</a>
+                                        <a href="{{$provider($model->condition)}}" target="_blank">@lang('global.btn_show')</a>
                                     </td>
                                     <td>{{$model->reason}}</td>
                                     <td>{{$model->created_at}}</td>

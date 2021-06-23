@@ -20,10 +20,6 @@
             margin: 20mm 15mm 20mm 30mm;
         }
 
-        .text-center {
-            text-align: center;
-        }
-
         table {
             width: 90%;
             margin-left: 5%;
@@ -36,6 +32,10 @@
 
         ul {
             list-style: none;
+        }
+
+        .text-center {
+            text-align: center;
         }
 
         .mt-20 {
@@ -84,7 +84,7 @@
         Ushbu loyihada: {{$recommendation->address}}da joylashgan, {{$applicant->person_name}}ga qarashli {{$build_type}} binosini gazlashtirish nazarda tutilgan.
     </p>
     <p>
-        <span>&emsp;Gazlashtirish manbai qilib D-{{$recommendation->diameter}} mm bo&#8216;lgan past bosimli gaz quvuri qa&#8217;bul qilingan</span><br>
+        <span>&emsp;Gazlashtirish manbai qilib D-{{$recommendation->pipe1}} mm bo&#8216;lgan past bosimli gaz quvuri qa&#8217;bul qilingan</span><br>
         <span>Gaz sarfini o&#8216;lchash uchun: 1 dona D12 elektron gaz hisoblash asbobi o&#8216;rnatildi.</span>
         <span>Gazlashtirish uchun: 1 dona isitish qazoni KSOB-16,5 va 1 dona kamparakli gaz plita PG-4 o&#8216;rnatilishi mo&#8216;ljallandi.</span>
     </p>

@@ -47,10 +47,13 @@
             </div>
         </li>
         <li class="nav-item">
-            <a href="{{route('logout')}}" class="nav-link logout btn" data-toggle="tooltip" title="@lang('global.logout')">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>@lang('global.logout')</span>
-            </a>
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button type="submit" class="nav-link logout btn" title="@lang('global.logout')">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>@lang('global.logout')</span>
+                </button>
+            </form>
         </li>
     </ul>
 </nav>

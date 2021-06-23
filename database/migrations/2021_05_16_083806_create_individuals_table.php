@@ -14,12 +14,12 @@ class CreateIndividualsTable extends Migration {
         Schema::create('individuals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
-            $table->integer('organ');
             $table->string('full_name');
+            $table->integer('organ');
+            $table->tinyInteger('status')->default(1);
             $table->string('phone');
             $table->string('passport');
             $table->integer('stir');
-            $table->tinyInteger('status')->default(1);
 
             $table->foreign('proposition_id')
                 ->references('id')

@@ -25,7 +25,7 @@
                         @foreach($models as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td>{{$model->proposition->applicant->name}}</td>
+                                <td>{{$model->applicant}}</td>
                                 <td>
                                     <a href="{{route('engineer.permit.show', ['permit' => $model])}}" target="_blank">
                                         @lang('global.btn_show')
@@ -43,17 +43,21 @@
                                 </td>
                                 <td>{{$districts[$model->district]}}</td>
                                 <td>
-                                    @if($model->status == 1)
-                                        <form action="{{route('engineer.permit.upload', ['permit' => $model])}}" method="post" enctype="multipart/form-data">
-                                            @csrf
-                                            <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">
-                                            <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
-                                                <i class="fas fa-upload"></i>
-                                            </label>
-                                        </form>
+                                @if($model->status == 1)
+                                    @can('crud_permit')
+                                    <form action="{{route('engineer.permit.upload', ['permit' => $model])}}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">
+                                        <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
+                                            <i class="fas fa-upload"></i>
+                                        </label>
+                                    </form>
                                     @else
-                                        <span>@lang('global.uploaded')</span>
-                                    @endif
+                                    <span>@lang('global.unloaded')</span>
+                                    @endcan
+                                @else
+                                    <span>@lang('global.uploaded')</span>
+                                @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -30,18 +30,19 @@ class MontageService extends CrudService {
             return "Yoq";
 
         $proposition = $condition->getAttribute('proposition');
+        $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,
             'condition' => $condition->getAttribute('id'),
             'project' => $condition->getAttribute('project')->id,
-            'applicant' => $proposition->applicant->name,
+            'applicant' => $applicant->name,
             'firm' => auth()->user()->organ ?? 0,
             'organ' => $proposition->organ
         ];
         $montage = new Montage($data);
         $montage->save();
 
-        $proposition->update(['status' => 15]); // $applicant->update(['status' => 15]);
+        $proposition->update(['status' => 15]); $applicant->update(['status' => 15]);
 
         return "Bor";
     }
@@ -82,19 +83,21 @@ class MontageService extends CrudService {
     }
 
     public function delete($model) {
-        $model->proposition->update(['status' => 14]);
+        $this->propStatus($model, -$model->status);
         parent::delete($model);
     }
 
-    private function propStatus(Montage $montage) {
+    private function propStatus(Montage $montage, $status = 14) {
         $proposition = $montage->proposition;
-        $proposition->update(['status' => $montage->status + 14]); // $proposition->applicant->update(['status' => $montage->status + 14]);
+        $proposition->update(['status' => $montage->status + $status]);
+        $proposition->applicant->update(['status' => $montage->status + $status]);
     }
 
     private function createLicense(Montage $montage) {
         $proposition = $montage->proposition;
         $permit = new Permit([
             'proposition_id' => $proposition->id,
+            'applicant' => $proposition->applicant->name,
             'project' => $montage->project_relation->id,
             'montage' => $montage->id,
             'district' => $proposition->org->region,
@@ -121,5 +124,6 @@ class MontageService extends CrudService {
 
         view()->share($data);
         $this->pdf->loadView('engineer.permit')->save('storage/permits/' . $filename);
+        $permit->update(['file' => $filename]);
     }
 }

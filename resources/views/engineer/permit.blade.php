@@ -26,6 +26,10 @@
             margin-bottom: 30px;
         }
 
+        li {
+            margin-bottom: 5px;
+        }
+
         table {
             width: 100%;
             text-align: justify;
@@ -91,7 +95,7 @@
     <ol class="mb-30">
         <li class="mb-30">
             <span>Iste&#8217;molchi nomi:</span>
-            <strong>{{$recommendation->address}} hududida joylashgan, {{$proposition->person_name}} qarashli bino va inshoatlarni gazlashtirish</strong>.<br>
+            <strong>{{$recommendation->address}} hududida joylashgan, {{$proposition->applicant->person_name}} qarashli bino va inshoatlarni gazlashtirish</strong>.<br>
             <div class="text-center">\ishoat manzili\</div>
         </li>
         <li class="mb-20">
@@ -106,7 +110,7 @@
         </li>
         <li>
             <span>Tabiiy gazdan foydalanish uchun berilgan ruxsatnoma:</span>
-            <span>&#8220;{{$organization->branch_name}}&#8221; GFTning <b class="lowercase">{{dateFull(now(), true)}} {{$recommendation->id}}/{{$proposition->id}}-sonli</b> xatiga asosan, 4256 m<sup>3</sup> yiliga.</span>
+            <span>&#8220;{{$organization->branch_name}}&#8221; GFTning <b class="lowercase">{{dateFull(now(), true)}}dagi {{$recommendation->id}}/{{$proposition->id}}-sonli</b> xatiga asosan, 4256 m<sup>3</sup> yiliga.</span>
             <div class="text-center">/qaysi tashkilot va qancha hajmda/</div>
         </li>
         <li>

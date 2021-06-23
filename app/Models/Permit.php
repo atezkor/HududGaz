@@ -15,7 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Permit extends BaseModel {
     use HasFactory;
-    protected $fillable = ['proposition_id', 'project', 'montage', 'district', 'status', 'file'];
+    public $timestamps = false;
+    protected $fillable = ['proposition_id', 'applicant', 'project', 'montage', 'district', 'status', 'file'];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);

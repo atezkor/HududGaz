@@ -89,7 +89,8 @@ class RecommendationController extends Controller {
             return '/storage/cancelled/' . $file;
         };
 
-        return view('district.archives', new RecommendationViewModel([8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4, request()->user()->organ),
+        return view('district.archives',
+            new RecommendationViewModel([8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4, request()->user()->organ),
             ['models' => $models, 'provider' => $provider]);
     }
 

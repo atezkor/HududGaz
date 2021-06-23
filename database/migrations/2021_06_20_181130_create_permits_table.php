@@ -14,12 +14,12 @@ class CreatePermitsTable extends Migration {
         Schema::create('permits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id');
+            $table->string('applicant');
             $table->unsignedBigInteger('project');
             $table->unsignedBigInteger('montage');
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('district');
             $table->string('file')->nullable();
-            $table->timestamps();
         });
     }
 
