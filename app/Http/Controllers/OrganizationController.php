@@ -13,9 +13,9 @@ class OrganizationController extends Controller {
 
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect('/');
         }
 
         $model = Organization::Data();
@@ -24,9 +24,9 @@ class OrganizationController extends Controller {
 
     public function set(Request $request): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect('/');
         }
 
         $organ = new Organization();

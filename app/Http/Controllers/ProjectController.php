@@ -25,7 +25,7 @@ class ProjectController extends Controller {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('designer.projects', new ProjectViewModel(designer: auth()->user()->organ ?? 0), [
@@ -37,7 +37,7 @@ class ProjectController extends Controller {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('designer.process', new ProjectViewModel([2, 3], auth()->user()->organ ?? 0));
@@ -47,7 +47,7 @@ class ProjectController extends Controller {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('designer.cancelled', new ProjectViewModel([4], auth()->user()->organ ?? 0));
@@ -57,7 +57,7 @@ class ProjectController extends Controller {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->create($request->get('code'));
@@ -68,7 +68,7 @@ class ProjectController extends Controller {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         if (!$request->has('download')) { // If not have download key
@@ -94,7 +94,7 @@ class ProjectController extends Controller {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->delete($project);
@@ -105,7 +105,7 @@ class ProjectController extends Controller {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('designer.archive', new ProjectViewModel([5], auth()->user()->organ ?? 0));

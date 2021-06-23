@@ -20,7 +20,7 @@ class ProfileController extends Controller {
         try {
             $this->authorize('edit_profile');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect('/');
         }
 
         return view('profile', ['model' => $user, 'action' => route('profile.update', ['user' => $user])]);
@@ -30,7 +30,7 @@ class ProfileController extends Controller {
         try {
             $this->authorize('edit_profile');
         } catch (AuthorizationException) {
-            return redirect()->route('logout');
+            return redirect('/');
         }
 
         $data = $request->validated();

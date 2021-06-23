@@ -8,7 +8,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+                        @can('crud_admin')
                         <a href="{{route('admin.mounters.create')}}" class="btn btn-info">{{__('admin.mounter.btn_new')}}</a>
+                        @endcan
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" oninput="search(this)" class="form-control"
@@ -37,6 +39,7 @@
                                     <td>{{$model->address}}</td>
                                     <td>{{formatDate($model->date_created)}} - {{formatDate($model->date_expired)}}</td>
                                     <td>
+                                        @can('crud_admin')
                                         <form action="{{route('admin.mounters.delete', ['mounter' => $model])}}"
                                               method="post" class="form">
                                             @csrf
@@ -53,6 +56,7 @@
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

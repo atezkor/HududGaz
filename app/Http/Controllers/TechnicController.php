@@ -32,7 +32,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('crud_tech');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('technic.index', new TechConditionViewModel());
@@ -42,7 +42,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('crud_tech');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('technic.recommends', new RecommendationViewModel([4, 5], 2));
@@ -56,7 +56,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('crud_tech');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $equipments = $recommendation->getEquipments();
@@ -76,7 +76,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('crud_tech');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $this->validate($request, [
@@ -98,7 +98,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('crud_tech');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->rec_service->back($recommendation, $request['comment']);
@@ -109,7 +109,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('crud_tech');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->upload($request, $condition);
@@ -120,7 +120,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('show_report');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('technic.reports.region', [
@@ -134,7 +134,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('show_report');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('technic.reports.organ', [
@@ -148,7 +148,7 @@ class TechnicController extends Controller {
         try {
             $this->authorize('show_report');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('technic.reports.more', [

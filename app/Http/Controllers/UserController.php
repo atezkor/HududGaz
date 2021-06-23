@@ -24,9 +24,9 @@ class UserController extends Controller {
 
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('crud_user');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-             return redirect()->route('login');
+             return redirect('/');
         }
 
         $models = User::query()->where('role', '<>', 1)->get();
@@ -35,9 +35,9 @@ class UserController extends Controller {
 
     public function create(): View|RedirectResponse {
         try {
-            $this->authorize('crud_user');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.users.form', ['model' => new User(),
@@ -60,9 +60,9 @@ class UserController extends Controller {
 
     public function store(UserRequest $request): RedirectResponse {
         try {
-            $this->authorize('crud_user');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -72,9 +72,9 @@ class UserController extends Controller {
 
     public function edit(User $user): View|RedirectResponse {
         try {
-            $this->authorize('crud_user');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.users.form', ['model' => $user,
@@ -83,9 +83,9 @@ class UserController extends Controller {
 
     public function update(UserRequest $request, User $user): RedirectResponse {
         try {
-            $this->authorize('crud_user');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -95,9 +95,9 @@ class UserController extends Controller {
 
     public function destroy(User $user): RedirectResponse {
         try {
-            $this->authorize('crud_user');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->delete($user);

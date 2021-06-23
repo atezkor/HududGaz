@@ -36,7 +36,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('district.propositions', new PropositionListViewModel([1, 2], request()->user()->organ));
@@ -51,7 +51,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('district.index', new RecommendationViewModel(organ: request()->user()->organ));
@@ -61,7 +61,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('district.progress', new RecommendationViewModel([4, 5], 2, request()->user()->organ));
@@ -71,7 +71,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('district.cancelled', new RecommendationViewModel([6], 3, request()->user()->organ));
@@ -81,7 +81,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $models = CancelledProposition::all();
@@ -104,7 +104,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $recommendation = new Recommendation();
@@ -124,7 +124,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -144,7 +144,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->upload($request, $recommendation);
@@ -176,7 +176,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $type = $recommendation->type;
@@ -196,7 +196,7 @@ class RecommendationController extends Controller {
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();

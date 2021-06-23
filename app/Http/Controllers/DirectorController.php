@@ -21,7 +21,7 @@ class DirectorController extends Controller {
         try {
             $this->authorize('res_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.regions.index', [
@@ -33,7 +33,7 @@ class DirectorController extends Controller {
         try {
             $this->authorize('res_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.designers.index', [
@@ -45,7 +45,7 @@ class DirectorController extends Controller {
         try {
             $this->authorize('res_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.mounters.index', [
@@ -57,7 +57,7 @@ class DirectorController extends Controller {
         try {
             $this->authorize('show_document');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('technic.propositions', new PropositionListViewModel());
@@ -67,17 +67,17 @@ class DirectorController extends Controller {
         try {
             $this->authorize('show_document');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
-        return view('technic.recommends', new RecommendationViewModel());
+        return view('technic.recommends', new RecommendationViewModel([4, 5], 2));
     }
 
     public function tech_conditions(): View|RedirectResponse {
         try {
             $this->authorize('show_document');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('technic.index', new TechConditionViewModel());
@@ -87,31 +87,34 @@ class DirectorController extends Controller {
         try {
             $this->authorize('show_document');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
-        return view('engineer.projects', new ProjectViewModel([5]));
+        return view('designer.archive', new ProjectViewModel([5]), [
+            'designers' => Designer::query()->pluck('org_name', 'id')
+        ]);
     }
 
     public function montages(): View|RedirectResponse {
         try {
             $this->authorize('show_document');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
-        return view('engineer.montages', new MontageViewModel([5]));
+        return view('installer.archive', new MontageViewModel([5]));
     }
 
     public function permits(): View|RedirectResponse {
         try {
             $this->authorize('show_document');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('engineer.permits', [
-            'models' => Permit::all()
+            'models' => Permit::all(),
+            'districts' => districts()
         ]);
     }
 }

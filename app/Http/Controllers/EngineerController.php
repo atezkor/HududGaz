@@ -32,7 +32,7 @@ class EngineerController extends Controller {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('engineer.projects', new ProjectViewModel([2, 3]), [
@@ -44,7 +44,7 @@ class EngineerController extends Controller {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('engineer.montages', new MontageViewModel([2, 3]), [
@@ -56,7 +56,7 @@ class EngineerController extends Controller {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         if ($request->has('comment')) {
@@ -73,7 +73,7 @@ class EngineerController extends Controller {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         if ($request->has('comment')) {
@@ -90,7 +90,7 @@ class EngineerController extends Controller {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('engineer.permits', [
@@ -107,7 +107,7 @@ class EngineerController extends Controller {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->storeFile($request->file('file'), $permit);
@@ -118,7 +118,7 @@ class EngineerController extends Controller {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('designer.archive', new ProjectViewModel([5]));
@@ -128,7 +128,7 @@ class EngineerController extends Controller {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('installer.archive', new MontageViewModel([5]));

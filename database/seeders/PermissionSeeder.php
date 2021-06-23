@@ -23,8 +23,7 @@ class PermissionSeeder extends Seeder {
 
     private function admin() {
         $this->generate(1, 'edit_profile');
-        $this->generate(1, 'crud_user');
-        $this->generate(1, 'be_admin');
+        $this->generate(1, 'crud_admin');
     }
 
     private function technic() {

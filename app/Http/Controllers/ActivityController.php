@@ -18,9 +18,9 @@ class ActivityController extends Controller {
 
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $models = Activity::all();
@@ -29,9 +29,9 @@ class ActivityController extends Controller {
 
     public function store(ActivityRequest $request): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -41,9 +41,9 @@ class ActivityController extends Controller {
 
     public function update(ActivityRequest $request, Activity $activity_type): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -53,9 +53,9 @@ class ActivityController extends Controller {
 
     public function destroy(Activity $activity_type): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/')->route('login');
         }
 
         $this->service->delete($activity_type);

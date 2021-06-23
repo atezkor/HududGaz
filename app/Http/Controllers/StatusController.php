@@ -23,9 +23,9 @@ class StatusController extends Controller {
      */
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $models = Status::all();
@@ -40,9 +40,9 @@ class StatusController extends Controller {
      */
     public function edit(Status $status): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.statuses.form', ['action' => route('admin.statuses.update', ['status' => $status]),
@@ -58,9 +58,9 @@ class StatusController extends Controller {
      */
     public function update(StatusRequest $request, Status $status): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();

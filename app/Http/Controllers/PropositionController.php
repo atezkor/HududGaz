@@ -30,7 +30,7 @@ class PropositionController extends Controller {
         try {
             $this->authorize('crud_prop');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('technic.propositions', new PropositionListViewModel());
@@ -46,7 +46,7 @@ class PropositionController extends Controller {
         try {
             $this->authorize('crud_prop');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $model = new Proposition();
@@ -68,7 +68,7 @@ class PropositionController extends Controller {
         try {
             $this->authorize('crud_prop');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -96,7 +96,7 @@ class PropositionController extends Controller {
         try {
             $this->authorize('crud_prop');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $applicant = $proposition->applicant;
@@ -120,7 +120,7 @@ class PropositionController extends Controller {
         try {
             $this->authorize('crud_prop');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -138,7 +138,7 @@ class PropositionController extends Controller {
         try {
             $this->authorize('crud_prop');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->delete($proposition);

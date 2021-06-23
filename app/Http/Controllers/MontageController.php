@@ -25,7 +25,7 @@ class MontageController extends Controller {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('installer.index', new MontageViewModel(user: auth()->user()), [
@@ -40,7 +40,7 @@ class MontageController extends Controller {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->create($request->get('code'));
@@ -51,7 +51,7 @@ class MontageController extends Controller {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->upload($request, $montage);
@@ -62,7 +62,7 @@ class MontageController extends Controller {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('installer.process', new MontageViewModel([2, 3], auth()->user()));
@@ -76,7 +76,7 @@ class MontageController extends Controller {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('installer.cancelled', new MontageViewModel([4], auth()->user()));
@@ -86,7 +86,7 @@ class MontageController extends Controller {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('installer.archive', new MontageViewModel([5]));
@@ -96,7 +96,7 @@ class MontageController extends Controller {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->delete($montage);

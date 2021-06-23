@@ -23,9 +23,9 @@ class MounterController extends Controller {
      */
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $models = Mounter::all();
@@ -39,9 +39,9 @@ class MounterController extends Controller {
      */
     public function create(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $model = new Mounter();
@@ -57,9 +57,9 @@ class MounterController extends Controller {
      */
     public function store(MounterRequest $request): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -75,9 +75,9 @@ class MounterController extends Controller {
      */
     public function edit(Mounter $mounter): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.mounters.form', ['action' => route('admin.mounters.update', ['mounter' => $mounter]),
@@ -93,9 +93,9 @@ class MounterController extends Controller {
      */
     public function update(MounterRequest $request, Mounter $mounter): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -111,9 +111,9 @@ class MounterController extends Controller {
      */
     public function destroy(Mounter $mounter): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->delete($mounter);

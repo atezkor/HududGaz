@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        @can('be_admin')
+                        @can('crud_admin')
                         <a href="{{route('admin.organs.create')}}" class="btn btn-info">{{__('admin.organ.btn_new')}}</a>
                         @endcan
                         <div class="card-tools mt-2">
@@ -43,6 +43,7 @@
                                     <td>{{$model->phone}}</td>
                                     <td>{{$model->address}}</td>
                                     <td>
+                                        @can('crud_admin')
                                         <form action="{{route('admin.organs.delete', ['organ' => $model])}}" method="post">
                                             @csrf
                                             @method('DELETE')
@@ -55,6 +56,7 @@
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

@@ -8,7 +8,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+                        @can('crud_admin')
                         <a href="{{route('admin.designers.create')}}" class="btn btn-info">{{__('admin.designer.btn_new')}}</a>
+                        @endcan
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" oninput="search(this)" class="form-control"
@@ -37,6 +39,7 @@
                                     <td>{{$model->address}}</td>
                                     <td>{{formatDate($model->date_reg)}} - {{formatDate($model->date_end)}}</td>
                                     <td>
+                                        @can('crud_admin')
                                         <form action="{{route('admin.designers.delete', ['designer' => $model])}}"
                                               method="post" class="form">
                                             @csrf
@@ -50,6 +53,7 @@
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

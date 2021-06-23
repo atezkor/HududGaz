@@ -19,9 +19,9 @@ class TimetableController extends Controller {
 
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $models = Timetable::all();
@@ -32,9 +32,9 @@ class TimetableController extends Controller {
 
     public function create(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.table.form', ['model' => new Timetable(),
@@ -43,9 +43,9 @@ class TimetableController extends Controller {
 
     public function store(Request $request): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->all();
@@ -57,9 +57,9 @@ class TimetableController extends Controller {
 
     public function edit(Timetable $timetable): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.table.form', ['model' => $timetable, 'method' => 'PUT',
@@ -68,9 +68,9 @@ class TimetableController extends Controller {
 
     public function update(Request $request, Timetable $timetable): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->all();
@@ -80,9 +80,9 @@ class TimetableController extends Controller {
 
     public function destroy(Timetable $timetable): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->delete($timetable);

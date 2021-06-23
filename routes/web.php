@@ -74,11 +74,11 @@ Route::prefix('director')->group(function() {
 
 # main route - in route distribution by to roles
 Route::get('/', function() {
-    $user = auth()->user();
+    $user = request()->user();
     if ($user == null)
         return redirect()->route('login');
 
-    $role = $user->role ?? 0;
+    $role = $user->role;
     switch ($role) {
         case 1: return redirect('/admin');
         case 2: return redirect('/technic');
@@ -89,5 +89,6 @@ Route::get('/', function() {
         case 7: return redirect('/director');
     }
 
+    auth()->logout();
     return redirect()->route('login');
 })->name('dashboard');

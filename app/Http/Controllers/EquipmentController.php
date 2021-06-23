@@ -23,9 +23,9 @@ class EquipmentController extends Controller {
      */
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $models = Equipment::all();
@@ -40,9 +40,9 @@ class EquipmentController extends Controller {
      */
     public function store(EquipmentRequest $request): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -60,9 +60,9 @@ class EquipmentController extends Controller {
      */
     public function update(EquipmentRequest $request, Equipment $equipment): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -79,9 +79,9 @@ class EquipmentController extends Controller {
      */
     public function destroy(Equipment $equipment): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->delete($equipment);
@@ -96,9 +96,9 @@ class EquipmentController extends Controller {
      */
     public function show(Equipment $equipment): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $models = $equipment->types()->get();
@@ -112,9 +112,9 @@ class EquipmentController extends Controller {
      */
     public function add(EquipmentRequest $request, Equipment $equipment): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -131,9 +131,9 @@ class EquipmentController extends Controller {
      */
     public function renew(EquipmentRequest $request, EquipmentType $type): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -148,9 +148,9 @@ class EquipmentController extends Controller {
      */
     public function del(EquipmentType $type): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $type->delete();

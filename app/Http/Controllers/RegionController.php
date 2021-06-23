@@ -19,9 +19,9 @@ class RegionController extends Controller {
 
     public function index(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $models = Region::all();
@@ -30,9 +30,9 @@ class RegionController extends Controller {
 
     public function create(): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $model = new Region();
@@ -42,9 +42,9 @@ class RegionController extends Controller {
 
     public function store(DistrictRequest $request): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -54,9 +54,9 @@ class RegionController extends Controller {
 
     public function edit(Region $organ): View|RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         return view('admin.regions.form', ['action' => route('admin.organs.update', ['organ' => $organ]),
@@ -65,9 +65,9 @@ class RegionController extends Controller {
 
     public function update(DistrictRequest $request, Region $organ): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $data = $request->validated();
@@ -77,9 +77,9 @@ class RegionController extends Controller {
 
     public function destroy(Region $organ): RedirectResponse {
         try {
-            $this->authorize('be_admin');
+            $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-            return redirect()->route('login');
+            return redirect('/');
         }
 
         $this->service->delete($organ);
