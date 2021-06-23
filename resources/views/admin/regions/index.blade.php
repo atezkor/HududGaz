@@ -8,7 +8,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+                        @can('be_admin')
                         <a href="{{route('admin.organs.create')}}" class="btn btn-info">{{__('admin.organ.btn_new')}}</a>
+                        @endcan
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" oninput="search(this)" class="form-control"
