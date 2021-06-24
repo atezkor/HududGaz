@@ -53,7 +53,7 @@
                                     <form action="{{route('technic.tech_condition.upload', ['condition' => $conditions[$key]])}}"
                                           method="post" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="file" name="file" id="file-{{$key}}" class="d-none" onchange="this.parentNode.submit()">
+                                        <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" hidden>
                                         <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
                                             <i class="fas fa-upload"></i>
                                         </label>

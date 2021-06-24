@@ -55,7 +55,7 @@
                                     <form action="{{route('engineer.project.confirm', ['project' => $model])}}"
                                           method="post" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" class="d-none">
+                                        <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" hidden>
                                         <label for="file-{{$key}}" class="btn btn-outline-info my-0" title="@lang('global.btn_cfm')">
                                             <i class="fas fa-check"></i>
                                         </label>

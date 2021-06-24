@@ -100,7 +100,7 @@ function districts(): array { # The reason for giving the key is to start from o
     ];
 }
 
-function dateFull($date, bool $reverse = false): string {
+function extendedDate($date, bool $reverse = false): string {
     $months = [
         __('district.january'),
         __('district.february'),

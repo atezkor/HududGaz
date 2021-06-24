@@ -31,8 +31,12 @@ class Recommendation extends Model {
         if (!$equipments)
             return [];
 
-        foreach ($equipments as $equipment) {
+        foreach ($equipments as $key => $equipment) {
             $equipment->equipment = $this->equipment($equipment->equipment);
+            if (!$equipment->equipment) {
+                unset($equipments[$key]);
+                continue;
+            }
             $equipment->type = $this->equipType($equipment->type);
         }
 
@@ -40,10 +44,10 @@ class Recommendation extends Model {
     }
 
     private function equipment(int $id): string {
-        return Equipment::query()->find($id)->getAttribute('name');
+        return Equipment::query()->where('static', false)->find($id)->name ?? '';
     }
 
     private function equipType(int $id): string {
-        return EquipmentType::query()->find($id)->getAttribute('type');
+        return EquipmentType::query()->find($id)->type ?? '';
     }
 }

@@ -51,7 +51,7 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertActivity() {
-        foreach (['Aholi xonadonlari, Yakka', 'Oilaviy', 'Davalat sheriklik', 'Notijorat'] as $activity) {
+        foreach (['Aholi xonadonlari', 'Yakka', 'Oilaviy', 'Davalat sheriklik', 'Notijorat'] as $activity) {
             Activity::query()->create([
                 'activity' => $activity
             ]);
@@ -105,13 +105,26 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertEquipment() {
-        Equipment::query()->create([
-            'name' => "Gaz-hisoblagich",
-        ]);
+        foreach (["Gaz-hisoblagich"] as $name) {
+            Equipment::query()->create([
+                'name' => $name,
+                'static' => true
+            ]);
+        }
 
-        foreach (['Gaz quvuri', "Jo\u{2018}mrak", 'Gaz qozoni'] as $equip) {
+        foreach (["Gaz qozoni", 'Gaz quvuri', "Jo\u{2018}mrak"] as $equip) {
             Equipment::query()->create([
                 'name' => $equip,
+            ]);
+        }
+    }
+
+    private function insertEquipmentTypes() {
+        foreach (['PRINTS-G10'] as $key => $type) {
+            EquipmentType::query()->create([
+                'type' => $type,
+                'equipment_id' => $key + 1,
+                'order' => 1
             ]);
         }
     }
@@ -149,16 +162,6 @@ class HelperSeeder extends Seeder {
                 'permission_to' => "barcha gaz inshootlarini o\'rnatish va ta'mirlash, gaz quvurlarini ishlatish tekshirish",
                 'implement_for' => "yuqori, o'rta va past bosimli gaz inshootlarining yer osti va usti gaz quvurlarini ishga tushirish zamin quvurlarini o'rnatish, ta'mirlash ishlari",
                 'document' => 'qwerty.pdf'
-            ]);
-        }
-    }
-
-    private function insertEquipmentTypes() {
-        foreach (['PRINTS-G10'] as $key => $type) {
-            EquipmentType::query()->create([
-                'type' => $type,
-                'equipment_id' => $key + 1,
-                'order' => 1
             ]);
         }
     }

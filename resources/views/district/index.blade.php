@@ -52,8 +52,8 @@
                                 <div class="text-center">{{$limit}} @lang('global.hour')</div>
                             </td>
                             <td>
-                                <input type="file" id="file-{{$key}}" class="d-none"
-                                       onchange="upload(this, '{{route('district.recommendation.upload', ['recommendation' => $recommendations[$key]])}}')">
+                                <input type="file" id="file-{{$key}}" onchange="upload(this,
+                                    '{{route('district.recommendation.upload', ['recommendation' => $recommendations[$key]])}}')" hidden>
                                 <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
                                     <i class="fas fa-upload"></i>
                                 </label>

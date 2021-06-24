@@ -100,7 +100,7 @@
 
     <div class="body mt-20">
         <div>
-            <span class="f-l lowercase">{{dateFull($model->created_at)}}</span>
+            <span class="f-l lowercase">{{extendedDate($model->created_at)}}</span>
             <strong class="f-r">{{$district}}</strong>
             <div class="clear"></div>
         </div>

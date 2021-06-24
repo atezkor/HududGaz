@@ -14,6 +14,7 @@ class CreateEquipmentTable extends Migration {
         Schema::create('equipments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('static')->default(false);
             $table->timestamps();
         });
     }

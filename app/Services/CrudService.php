@@ -42,12 +42,4 @@ abstract class CrudService implements ICrudService {
     protected function deleteFile(string $file) {
         File::delete("storage/$this->folder/" . $file);
     }
-
-
-//    protected function getModelClass(): Model {
-//        if (property_exists($this, 'Model')) {
-//            return $this->Model;
-//        }
-//        throw new Exception(get_class($this) . 'Model property not implemented');
-//    }
 }

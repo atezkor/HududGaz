@@ -68,7 +68,7 @@ class EquipmentController extends Controller {
         $data = $request->validated();
 
         $this->service->update($data, $equipment);
-        return redirect()->route('admin.equipments.index');
+        return redirect()->back()->with('message', __('admin.upd_success'));
     }
 
     /**
@@ -84,8 +84,12 @@ class EquipmentController extends Controller {
             return redirect('/');
         }
 
+        if ($equipment->checkStatic()) {
+            return redirect()->back()->with('message', __('admin.equipment.del_info'))->with('mess_type', 'info');
+        }
+
         $this->service->delete($equipment);
-        return redirect()->route('admin.equipments.index');
+        return redirect()->back()->with('message', __('admin.del_success'));
     }
 
     /**
@@ -139,7 +143,7 @@ class EquipmentController extends Controller {
         $data = $request->validated();
         $this->service->update($data, $type);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', __('admin.upd_success'));
     }
 
     /**
@@ -154,6 +158,6 @@ class EquipmentController extends Controller {
         }
 
         $type->delete();
-        return redirect()->route('admin.equip_type', ['equipment' => $type->getAttribute('equipment_id')]);
+        return redirect()->back()->with('message', __('admin.del_success'));
     }
 }

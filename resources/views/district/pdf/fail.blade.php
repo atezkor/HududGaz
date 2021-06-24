@@ -104,7 +104,7 @@
         <div>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&#8220;{{$organization->shareholder_name}}&#8221; AJ &#8220;{{$organization->branch_name}}&#8221;
                 GTF &#8220;{{$organ->org_name}}&#8221; gaz ta&#8217;minot bo&#8216;limi,
-                sizning <span class="lowercase">{{dateFull($proposition->created_at, true)}}dagi</span> {{$proposition->number}}-sonli xatingizga javoban quyidagilarni ma&#8217;lum qiladi.</span>
+                sizning <span class="lowercase">{{extendedDate($proposition->created_at, true)}}dagi</span> {{$proposition->number}}-sonli xatingizga javoban quyidagilarni ma&#8217;lum qiladi.</span>
         </div>
     </div>
 

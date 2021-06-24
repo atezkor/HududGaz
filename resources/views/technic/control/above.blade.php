@@ -1,7 +1,7 @@
 <ol class="px-2">
     <li>
         Texnik tavsiya bergan gaz ta&#8217;minoti nomi, sanasi raqami va iste&#8217;molchi nomi, manzili va faoliyat turi: &#8220;{{$recommendation->org->org_name}}&#8221; filialining
-        <span style="text-transform: lowercase">{{dateFull($recommendation->created_at, true)}}dagi</span> {{$recommendation->id}}-sonli texnik tavsiyanomasiga asosan, {{$recommendation->address}}da joylashgan,
+        <span style="text-transform: lowercase">{{extendedDate($recommendation->created_at, true)}}dagi</span> {{$recommendation->id}}-sonli texnik tavsiyanomasiga asosan, {{$recommendation->address}}da joylashgan,
         {{$proposition->applicant->full_name ?? $proposition->applicant->legal_name}}ga qarashli noturar binosini gazlashtirish.
         <br>
     </li>

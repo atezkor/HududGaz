@@ -88,7 +88,7 @@
         <span>No {{$permit->id}}</span>
     </div>
     <div class="mb-30">
-        <div class="f-l">{{formatDate($permit->created_at)}}</div>
+        <div class="f-l">{{extendedDate($permit->created_at)}}</div>
         <div class="f-r">{{$district}}</div>
         <div class="clear"></div>
     </div>
@@ -110,7 +110,7 @@
         </li>
         <li>
             <span>Tabiiy gazdan foydalanish uchun berilgan ruxsatnoma:</span>
-            <span>&#8220;{{$organization->branch_name}}&#8221; GFTning <b class="lowercase">{{dateFull(now(), true)}}dagi {{$recommendation->id}}/{{$proposition->id}}-sonli</b> xatiga asosan, 4256 m<sup>3</sup> yiliga.</span>
+            <span>&#8220;{{$organization->branch_name}}&#8221; GFTning <b class="lowercase">{{extendedDate(now(), true)}}dagi {{$recommendation->id}}/{{$proposition->id}}-sonli</b> xatiga asosan, 4256 m<sup>3</sup> yiliga.</span>
             <div class="text-center">/qaysi tashkilot va qancha hajmda/</div>
         </li>
         <li>

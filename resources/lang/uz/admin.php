@@ -25,6 +25,8 @@ return [
     'uzk' => "Ўзбекча",
     'email' => "E-pochta",
     'fax' => "Fax",
+    'del_success' => "Muaffaqiyatli o\u{2018}chirildi",
+    'upd_success' => "Muaffaqiyatli yangilandi",
     'user' => [
         'col_name' => "Ismi",
         'col_position' => "Lavozimi",
@@ -94,7 +96,8 @@ return [
         'alert_title' => "Jihozni o\u{2018}chirib tashlamoqchimisiz?",
         'add_type' => "Tur qo\u{2018}shish",
         'edit_type' => "Turni o\u{2018}zgartirish",
-        'alert_type_msg' => "Turni o\u{2018}chirib tashlamoqchimisiz?"
+        'alert_type_msg' => "Turni o\u{2018}chirib tashlamoqchimisiz?",
+        'del_info' => "Bu jihozni o\u{2018}chirib bo\u{2018}lmaydi"
     ],
     'designer' => [
         'btn_new' => "Tashkilot qo\u{2018}shish",

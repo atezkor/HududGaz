@@ -50,4 +50,24 @@ function ajax(url, data = {}, callback, datatype = 'html') {
     });
 }
 
-// function searchStart() {$(function() {$('#search').on('search', function() {$('tbody tr').show();});});}
+function toast(message, type) {
+    if (!message)
+        return;
+
+    if (!type)
+        type = 'success';
+
+    $(function() {
+        let Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        Toast.fire({
+            icon: type,
+            title: message
+        });
+    });
+}

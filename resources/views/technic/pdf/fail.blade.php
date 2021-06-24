@@ -86,11 +86,10 @@
     </div>
 
     <div class="mt-20">
-        <div>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;&#8220;{{$organization->branch_name}}&#8221; gaz ta&#8217;minoti filiali,
-                sizning <span class="lowercase">{{dateFull($proposition->created_at, true)}}dagi</span>
-                <b>{{$proposition->number}}</b>-sonli arizangizga javoban quyidagilarni ma&#8217;lum qiladi.</span>
-        </div>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&#8220;{{$organization->branch_name}}&#8221; gaz ta&#8217;minoti filiali,
+            sizning <span class="lowercase">{{extendedDate($proposition->created_at, true)}}dagi</span>
+            <b>{{$proposition->number}}</b>-sonli arizangizga javoban quyidagilarni ma&#8217;lum qiladi.
+        </span>
     </div>
 
     <div class="mt-20">

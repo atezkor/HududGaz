@@ -122,5 +122,7 @@
 
         $('#form').attr('action', url);
     }
+
+    toast('{{session()->get('message')}}', '{{session()->get('mess_type')}}');
 </script>
 @endsection
