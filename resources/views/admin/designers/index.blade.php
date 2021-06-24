@@ -10,6 +10,7 @@
                     <div class="card-header">
                         @can('crud_admin')
                         <a href="{{route('admin.designers.create')}}" class="btn btn-info">{{__('admin.designer.btn_new')}}</a>
+                            @php($show = true) @else @php($show = false)
                         @endcan
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
@@ -39,7 +40,7 @@
                                     <td>{{$model->address}}</td>
                                     <td>{{formatDate($model->date_reg)}} - {{formatDate($model->date_end)}}</td>
                                     <td>
-                                        @can('crud_admin')
+                                    @if($show)
                                         <form action="{{route('admin.designers.delete', ['designer' => $model])}}"
                                               method="post" class="form">
                                             @csrf
@@ -53,7 +54,7 @@
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
-                                        @endcan
+                                    @endif
                                     </td>
                                 </tr>
                             @endforeach

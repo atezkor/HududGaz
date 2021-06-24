@@ -10,7 +10,11 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-
+                @can('crud_tech')
+                    @php($show = true)
+                @else
+                    @php($show = false)
+                @endcan
             </div>
             <div class="card-body">
                 <table id="table" class="table table-bordered table-striped table-center">
@@ -51,6 +55,7 @@
                                 <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                             </td>
                             <td>
+                            @if($show)
                                 <a href="{{route('technic.tech_condition.create', ['recommendation' => $recommendations[$key]])}}"
                                    class="btn btn-outline-info" title="@lang('technic.btn_create')">
                                     <i class="fas fa-plus"></i>
@@ -59,6 +64,7 @@
                                         class="btn btn-outline-secondary" title="@lang('global.btn_cancel')">
                                     <i class="fas fa-undo"></i>
                                 </button>
+                            @endif
                             </td>
                         </tr>
                     @endforeach

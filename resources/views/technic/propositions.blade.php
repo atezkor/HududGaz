@@ -27,11 +27,14 @@
                                     </li>
                                 </ul>
                             </div>
+                            @can('crud_prop')
                             <div class="col">
                                 <a href="{{route('propositions.create')}}" class="btn btn-info float-md-right">
                                     @lang('technic.btn_new')
                                 </a>
                             </div>
+                                @php($show = true) @else @php($show = false)
+                            @endcan
                         </div>
                     </div>
                     <div class="card-body">
@@ -73,6 +76,7 @@
                                                 <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                             </td>
                                             <td>
+                                            @if($show)
                                                 <form action="{{route('propositions.delete', ['proposition' => $model])}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
@@ -85,6 +89,7 @@
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>
+                                            @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -127,6 +132,7 @@
                                                 <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                             </td>
                                             <td>
+                                            @if($show)
                                                 <form action="{{route('propositions.delete', ['proposition' => $model])}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
@@ -139,6 +145,7 @@
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>
+                                            @endif
                                             </td>
                                         </tr>
                                     @endforeach

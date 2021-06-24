@@ -66,7 +66,7 @@
                                             <i class="fas fa-upload"></i>
                                         </label>
                                         <button type="button" onclick="cancel('{{route('engineer.montage.cancel', ['montage' => $model])}}')"
-                                                class="btn btn-outline-danger">
+                                                class="btn btn-outline-danger" title="@lang('global.btn_cancel')">
                                             <i class="fas fa-ban"></i>
                                         </button>
                                     </form>

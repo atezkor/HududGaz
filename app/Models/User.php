@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @property int role
+ * @property-read int id
  */
 class User extends Authenticatable {
     use HasFactory, Notifiable;

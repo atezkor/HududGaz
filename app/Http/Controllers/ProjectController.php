@@ -7,7 +7,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Project;
-use App\Models\Organization;
 use App\Services\ProjectService;
 use App\ViewModels\ProjectViewModel;
 use SimpleSoftwareIO\QrCode\Generator;
@@ -28,8 +27,10 @@ class ProjectController extends Controller {
             return redirect('/');
         }
 
-        return view('designer.projects', new ProjectViewModel(designer: auth()->user()->organ ?? 0), [
-            'qrcode' => $this->qrcode->generate(json_encode(['token' => csrf_token(), 'url' => route('designer.project.create')]))
+        return view('designer.projects', new ProjectViewModel(designer: request()->user()->organ), [
+            'qrcode' => $this->qrcode->generate(json_encode([
+                'token' => csrf_token(), 'url' => route('designer.project.create')
+            ]))
         ]);
     }
 
@@ -40,7 +41,7 @@ class ProjectController extends Controller {
             return redirect('/');
         }
 
-        return view('designer.process', new ProjectViewModel([2, 3], auth()->user()->organ ?? 0));
+        return view('designer.process', new ProjectViewModel([2, 3], request()->user()->organ));
     }
 
     public function cancelled(): View|RedirectResponse {
@@ -50,7 +51,7 @@ class ProjectController extends Controller {
             return redirect('/');
         }
 
-        return view('designer.cancelled', new ProjectViewModel([4], auth()->user()->organ ?? 0));
+        return view('designer.cancelled', new ProjectViewModel([4], request()->user()->organ));
     }
 
     public function create(Request $request): RedirectResponse {
@@ -71,19 +72,12 @@ class ProjectController extends Controller {
             return redirect('/');
         }
 
-        if (!$request->has('download')) { // If not have download key
-            $this->service->upload($request, $project);
-            return redirect()->back();
+        if ($request->has('download')) {
+            return $this->service->generateLetter($project);
         }
 
-        $proposition = $project->proposition;
-        return view('designer.explanatory-letter', [
-            'proposition' => $proposition, 'applicant' => $proposition->applicant,
-            'recommendation' => $proposition->recommendation,
-            'build_type' => [__('designer.residential'), __('designer.nonresidential')][$proposition->build_type - 1],
-            'condition' => $proposition->tech_condition,
-            'organization' => Organization::Data()->shareholder_name,
-        ]);
+        $this->service->upload($request, $project);
+        return redirect()->back();
     }
 
     public function show(Request $request, Project $project): RedirectResponse {
@@ -108,6 +102,6 @@ class ProjectController extends Controller {
             return redirect('/');
         }
 
-        return view('designer.archive', new ProjectViewModel([5], auth()->user()->organ ?? 0));
+        return view('designer.archive', new ProjectViewModel([5], request()->user()->organ));
     }
 }

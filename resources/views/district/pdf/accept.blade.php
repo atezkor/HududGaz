@@ -109,7 +109,12 @@
             <ol>
                 <li>
                     <strong>@lang('district.pdf.object_name')</strong>: {{$model->address}}@lang('district.pdf.in_the') @lang('district.pdf.civil')
-                    {{$consumer->person_name}}@lang('district.pdf.to') @lang('district.pdf.belong_to') {{$build_type}}
+                    {{$consumer->person_name}}@lang('district.pdf.to') @lang('district.pdf.belong_to')
+                @if($activity->id === 1)
+                    <span>@lang('district.pdf.home')</span>
+                @else
+                    <span>&#8220;{{$activity->activity}}&#8221; {{$build_type}} @lang('district.pdf.build')</span>
+                @endif
                     @lang('district.pdf.gas_connect')
                 </li>
                 <li>
@@ -177,8 +182,7 @@
                     @foreach ($equipments as $equipment)
                     <span>{{$equipment->number}} ta</span>
                     <span>{{$equipment->type}}</span>
-                    <span class="lowercase">{{$equipment->equipment}}</span>
-                    <span>{{$equipment->note}}</span>@if($loop->last){{'.'}}@else{{','}}@endif
+                    <span class="lowercase">{{$equipment->equipment}}</span><span>@if($equipment->note){{' ' . $equipment->note}}@endif</span>@if($loop->last){{'.'}}@else{{','}}@endif
                     @endforeach
                     <div class="text-center">
                         @lang('district.pdf.type')

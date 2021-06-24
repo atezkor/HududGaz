@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read Recommendation recommendation
  * @property-read TechCondition tech_condition
  * @property-read Region org
+ * @property-read Activity activity
  * @property int id
  * @property int type
  * @property int status
@@ -45,6 +46,10 @@ class Proposition extends Model {
 
     public function org(): BelongsTo {
         return $this->belongsTo(Region::class, 'organ');
+    }
+
+    public function activity(): BelongsTo {
+        return $this->belongsTo(Activity::class, 'activity_type');
     }
 
     public function limit($limit, int $offset = 0) {

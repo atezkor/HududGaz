@@ -10,7 +10,11 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-
+                    @can('crud_tech')
+                        @php($show = true)
+                    @else
+                        @php($show = false)
+                    @endcan
                 </div>
                 <div class="card-body">
                     <table id="table" class="table table-bordered table-striped table-center">
@@ -50,6 +54,7 @@
                                     <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
+                                @if($show)
                                     <form action="{{route('technic.tech_condition.upload', ['condition' => $conditions[$key]])}}"
                                           method="post" enctype="multipart/form-data">
                                         @csrf
@@ -58,6 +63,7 @@
                                             <i class="fas fa-upload"></i>
                                         </label>
                                     </form>
+                                @endif
                                 </td>
                             </tr>
                         @endforeach

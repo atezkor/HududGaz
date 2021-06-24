@@ -10,6 +10,7 @@
                     <div class="card-header">
                         @can('crud_admin')
                         <a href="{{route('admin.organs.create')}}" class="btn btn-info">{{__('admin.organ.btn_new')}}</a>
+                            @php($show = true) @else @php($show = false)
                         @endcan
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
@@ -43,7 +44,7 @@
                                     <td>{{$model->phone}}</td>
                                     <td>{{$model->address}}</td>
                                     <td>
-                                        @can('crud_admin')
+                                    @if($show)
                                         <form action="{{route('admin.organs.delete', ['organ' => $model])}}" method="post">
                                             @csrf
                                             @method('DELETE')
@@ -56,7 +57,7 @@
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
-                                        @endcan
+                                    @endif
                                     </td>
                                 </tr>
                             @endforeach

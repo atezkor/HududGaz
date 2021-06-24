@@ -120,6 +120,8 @@ class MontageService extends CrudService {
             'designer' => $permit->project_relation->firm->org_name,
             'installer' => $permit->montage_relation->mounter->short_name,
             'district' => districts()[$permit->district],
+            'meters' => $proposition->recommendation->GasMeters(),
+            'equipments' => $proposition->recommendation->getEquipments()
         ];
 
         view()->share($data);

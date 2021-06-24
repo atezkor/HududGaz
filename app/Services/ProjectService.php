@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Organization;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Models\Project;
@@ -51,6 +53,20 @@ class ProjectService extends CrudService {
         $this->update($data, $project);
 
         $this->propStatus($project);
+    }
+
+    public function generateLetter(Project $project): View {
+        $proposition = $project->proposition;
+        $recommendation = $proposition->recommendation;
+        return view('designer.explanatory-letter', [
+            'proposition' => $proposition, 'applicant' => $proposition->applicant,
+            'recommendation' => $proposition->recommendation,
+            'build_type' => [__('designer.residential'), __('designer.nonresidential')][$proposition->build_type - 1],
+            'condition' => $proposition->tech_condition,
+            'organization' => Organization::Data()->shareholder_name,
+            'gas_meters' => $recommendation->GasMeters(),
+            'equipments' => $recommendation->getEquipments()
+        ]);
     }
 
     public function show(Project $project, $show = null): string {

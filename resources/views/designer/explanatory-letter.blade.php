@@ -85,8 +85,16 @@
     </p>
     <p>
         <span>&emsp;Gazlashtirish manbai qilib D-{{$recommendation->pipe1}} mm bo&#8216;lgan past bosimli gaz quvuri qa&#8217;bul qilingan</span><br>
-        <span>Gaz sarfini o&#8216;lchash uchun: 1 dona D12 elektron gaz hisoblash asbobi o&#8216;rnatildi.</span>
-        <span>Gazlashtirish uchun: 1 dona isitish qazoni KSOB-16,5 va 1 dona kamparakli gaz plita PG-4 o&#8216;rnatilishi mo&#8216;ljallandi.</span>
+        <span>Gaz sarfini o&#8216;lchash uchun:</span>
+    @foreach($gas_meters as $meter)
+        <span>{{$meter->number}} dona {{$meter->type}}@if(!$loop->last), @endif</span>
+    @endforeach
+        <span>elektron gaz hisoblash asbobi o&#8216;rnatildi.</span><br>
+        <span>Gazlashtirish uchun:</span>
+    @foreach($equipments as $equipment)
+        <span>{{$equipment->number}} dona {{$equipment->equipment}} {{$equipment->type}}</span>@if(!$loop->last), @endif
+    @endforeach
+        <span>o&#8216;rnatilishi mo&#8216;ljallandi.</span>
     </p>
     <div>
         <span>Gaz asboblarining maksimal 1 yillik gaz sarfi quyidagicha:</span>
@@ -144,5 +152,9 @@
             </tr>
         </table>
     </div>
+    <script>
+        print()
+        console.log(156)
+    </script>
 </body>
 </html>

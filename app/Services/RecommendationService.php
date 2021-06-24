@@ -66,17 +66,14 @@ class RecommendationService extends CrudService {
     private function createPDF(Recommendation $recommendation): Response {
         $proposition = $recommendation->proposition;
         $organ = $recommendation->org;
-        $applicant = $proposition->applicant;
-        $district = districts()[$organ->getAttribute('region')];
-        $organization = Organization::Data();
 
         $data = [
             'model' => $recommendation,
             'proposition' => $proposition,
             'organ' => $organ,
-            'consumer' => $applicant,
-            'district' => $district,
-            'organization' => $organization
+            'consumer' => $proposition->applicant,
+            'district' => districts()[$organ->getAttribute('region')],
+            'organization' => Organization::Data()
         ];
 
         if ($recommendation->type == 'accept') {
@@ -84,6 +81,7 @@ class RecommendationService extends CrudService {
 
             $data['equipments'] = $equipments;
             $data['build_type'] = $this->buildType($proposition->build_type);
+            $data['activity'] = $proposition->activity;
         }
 
         view()->share($data);

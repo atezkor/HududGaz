@@ -26,10 +26,6 @@
             margin-bottom: 30px;
         }
 
-        li {
-            margin-bottom: 5px;
-        }
-
         table {
             width: 100%;
             text-align: justify;
@@ -50,6 +46,10 @@
 
         .text-center {
             text-align: center;
+        }
+
+        .text-bold {
+            font-weight: bold;
         }
 
         .uppercase {
@@ -88,7 +88,7 @@
         <span>No {{$permit->id}}</span>
     </div>
     <div class="mb-30">
-        <div class="f-l">{{extendedDate($permit->created_at)}}</div>
+        <div class="f-l lowercase">{{extendedDate($permit->created_at)}}</div>
         <div class="f-r">{{$district}}</div>
         <div class="clear"></div>
     </div>
@@ -100,12 +100,17 @@
         </li>
         <li class="mb-20">
             <span>Gaz tarmog&#8216;iga ulanuvchi asboblar turlari:</span>
-            <span>ASD (i/q) - 1 dona</span><br>
+        @foreach($equipments as $equip)
+            <strong>{{$equip->type}} (i/q)</strong>
+            <span>&#8211; {{$equip->number . ' dona'}}@if(!$loop->last), @else.@endif</span>
+        @endforeach
             <div class="text-center">/turi, soni/</div>
         </li>
         <li>
             <span>Gaz o&#8216;lchagich asbobi:</span>
-            <span>PRINT-G10 - 1 dona</span><br>
+        @foreach($meters as $meter)
+            <span>{{$meter->type}} - {{$meter->number}} {{'dona'}}@if(!$loop->last), @else.@endif</span>
+        @endforeach
             <div class="text-center">/turi, soni/</div>
         </li>
         <li>
@@ -144,7 +149,7 @@
             <span>Ruxsatnomada ko&#8216;rsatilgan gaz asboblarining sertifikati mavjudligi va texnik shartdan tashqari qo&#8216;shimcha o&#8216;rnatilgan gaz asboblari nazorati shahar/tuman filiali zimmasiga yuklatiladi.</span>
         </li>
     </ol>
-    <table class="mb-30">
+    <table class="mb-30 text-bold">
         <tr>
             <td>
                 <span>&#8220;{{$organization->branch_name}}&#8221; gaz ta&#8217;minoti filiali bosh muhandisi</span>
@@ -163,7 +168,7 @@
             </td>
         </tr>
     </table>
-    <table>
+    <table class="text-bold">
         <tr>
             <td>
                 <span>&#8220;{{$organization->branch_name}}&#8221; gaz ta&#8217;minoti filiali yuridik shaxslarga tabiiy gaz yetkazib berishni nozara qilish bo&#8216;limi boshlig&#8216;i</span>

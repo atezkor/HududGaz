@@ -23,6 +23,9 @@ class ProfileController extends Controller {
             return redirect('/');
         }
 
+        if (request()->user()->id !== $user->id)
+            return redirect()->back();
+
         return view('profile', ['model' => $user, 'action' => route('profile.update', ['user' => $user])]);
     }
 
