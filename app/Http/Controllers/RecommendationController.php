@@ -90,7 +90,7 @@ class RecommendationController extends Controller {
         };
 
         return view('district.archives',
-            new RecommendationViewModel([8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4, request()->user()->organ),
+            new RecommendationViewModel([7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4, request()->user()->organ),
             ['models' => $models, 'provider' => $provider]);
     }
 

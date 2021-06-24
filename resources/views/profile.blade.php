@@ -1,5 +1,5 @@
 @php
-    if (in_array(auth()->user()->role ?? 0, [1, 2, 5, 7]))
+    if (in_array(request()->user()->role, [1, 2, 5, 7]))
         $layout = 'layout';
     else
         $layout = 'secondary';

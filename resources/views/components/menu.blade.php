@@ -7,17 +7,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        @php($user = auth()->user())
+        @php($user = request()->user())
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav">
             @php($items = MenuItems())
-            @foreach($items as $menu)
+            @foreach($items as $key => $menu)
                 <li class="nav-item">
                     <a href="{{route($menu->href)}}" class="nav-link">
-                        <p>
-                            <span>@lang($menu->title)</span>
-                            <span class="badge {{$menu->icon}}">1</span>
-                        </p>
+                        <span>@lang($menu->title)</span>
+                        <span class="badge {{$menu->icon}}">{{$numbers[$key]}}</span>
                     </a>
                 </li>
             @endforeach
@@ -32,7 +30,7 @@
                     </div>
                     <div class="info">
                         <a href="{{route('profile.edit', ['user' => $user->getAuthIdentifier()])}}" class="d-block" style="color: rgba(0, 0, 0, 0.5)">
-                            {{$user->name ?? ''}}
+                            {{$user->name}}
                         </a>
                     </div>
                 </div>
