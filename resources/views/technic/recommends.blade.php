@@ -147,5 +147,7 @@
             }
         });
     }
+
+    showNavbar();
 </script>
 @endsection

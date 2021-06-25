@@ -12,7 +12,7 @@ class StatusSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $this->createStatus("Ariza qabul qilindi",72);
+        $this->createStatus("Ariza yaratildi",72);
 
         $this->createStatus("Tuman ochib ko\u{2018}rdi",72);
         $this->createStatus("Tuman tavsiyanoma yaratidi",72);
@@ -39,10 +39,10 @@ class StatusSeeder extends Seeder {
         $this->createStatus("Muhandis tasdiqlangan ishni yukladi va ruxsatnoma yaratildi",72);
         $this->createStatus("Muhandis imzolangan ruxsatnomani yukladi",72);
 
-        $this->createStatus("Tavsiyanoma o\u{2018}chirildi",50);
-        $this->createStatus("Texnik shart o\u{2018}chirildi",50);
-        $this->createStatus("Loyiha o\u{2018}chirildi",50);
-        $this->createStatus("Montaj o\u{2018}chirildi",50);
+        $this->createStatus("Tavsiyanoma o\u{2018}chirildi",0);
+        $this->createStatus("Texnik shart o\u{2018}chirildi",0);
+        $this->createStatus("Loyiha o\u{2018}chirildi",0);
+        $this->createStatus("Montaj o\u{2018}chirildi",0);
     }
 
     private function createStatus($description, $term) {

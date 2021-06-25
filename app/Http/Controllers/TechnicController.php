@@ -6,6 +6,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use App\Models\TechCondition;
 use App\Models\Recommendation;
@@ -196,5 +197,15 @@ class TechnicController extends Controller {
             'activities' => Activity::query()->pluck('activity', 'id'),
             'propositions' => Proposition::query()->get(['status', 'activity_type'])->groupBy('status')
         ]);
+    }
+
+    public function numbers(): array {
+        return [
+            Proposition::query()->whereDate('created_at', now())->count(),
+            Proposition::query()->whereIn('status', [1, 2])->count(),
+            Proposition::query()->where('created_at', '<',
+                date(DATE_ATOM, time() - Status::query()->sum('term') * 3600))->count(),
+            Proposition::query()->whereDate('created_at', '>', Carbon::now()->firstOfYear())->count()
+        ];
     }
 }

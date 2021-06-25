@@ -71,3 +71,16 @@ function toast(message, type) {
         });
     });
 }
+
+function showNavbar() {
+    $(function() {
+        let nav = $('#navbar');
+        $.get('numbers', function(data) {
+            nav.show();
+
+            $('#navbar span').each((i, e) => {
+                e.innerText = data[i];
+            })
+        });
+    });
+}

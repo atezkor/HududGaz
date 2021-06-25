@@ -98,5 +98,7 @@
         sInfoFiltered: "@lang('global.datatables.infoFiltered')"
     }
     datatable(lang, 'table');
+
+    showNavbar();
 </script>
 @endsection

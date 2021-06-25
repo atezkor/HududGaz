@@ -203,5 +203,7 @@
             }
         });
     }
+
+    showNavbar();
 </script>
 @endsection

@@ -51,9 +51,12 @@
 @section('javascript')
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script src="{{'/js/extra/summernote.min.js'}}"></script>
+    <script src="{{'/js/default.js'}}"></script>
     <script>
         $(document).ready(function() {
            $('#data').summernote();
         });
+
+        showNavbar();
     </script>
 @endsection

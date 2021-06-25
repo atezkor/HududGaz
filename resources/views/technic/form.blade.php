@@ -190,5 +190,7 @@
             $('#type').val(2);
         }
     });
+
+    showNavbar();
 </script>
 @endsection

@@ -29,6 +29,12 @@
         'consumer' => "Iste\u{2019}molchi",
         'year' => "yil",
         'del_process' => "O\u{2018}chirilmoqda ...",
+        'navbar' => [
+            'today' => "Bugungi arizlar",
+            'process' => "Ko\u{2018}rilayotgan arizalar",
+            'late' => "Kechikgan arizalar",
+            'year' => "Yillik arizalar",
+        ],
         'districts' => [
             '1' => "Urganch shahri",
             '2' => "Urganch tumani",
