@@ -25,8 +25,6 @@ return [
     'uzk' => "Ўзбекча",
     'email' => "E-pochta",
     'fax' => "Fax",
-    'del_success' => "Muaffaqiyatli o\u{2018}chirildi",
-    'upd_success' => "Muaffaqiyatli yangilandi",
     'user' => [
         'col_name' => "Ismi",
         'col_position' => "Lavozimi",

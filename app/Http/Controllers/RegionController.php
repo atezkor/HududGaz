@@ -49,7 +49,7 @@ class RegionController extends Controller {
 
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('admin.organs.index');
+        return redirect()->route('admin.organs.index')->with('msg', __('global.messages.crt'));
     }
 
     public function edit(Region $organ): View|RedirectResponse {
@@ -72,7 +72,7 @@ class RegionController extends Controller {
 
         $data = $request->validated();
         $this->service->update($data, $organ);
-        return redirect()->route('admin.organs.index');
+        return redirect()->route('admin.organs.index')->with('msg', __('global.messages.upd'));
     }
 
     public function destroy(Region $organ): RedirectResponse {
@@ -83,6 +83,6 @@ class RegionController extends Controller {
         }
 
         $this->service->delete($organ);
-        return redirect()->route('admin.organs.index');
+        return redirect()->route('admin.organs.index')->with('msg', __('global.messages.del'));
     }
 }

@@ -65,9 +65,10 @@ class UserController extends Controller {
             return redirect('/');
         }
 
+
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('msg', __('global.messages.crt'));
     }
 
     public function edit(User $user): View|RedirectResponse {
@@ -90,7 +91,7 @@ class UserController extends Controller {
 
         $data = $request->validated();
         $this->service->update($data, $user);
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('msg', __('global.messages.upd'));
     }
 
     public function destroy(User $user): RedirectResponse {
@@ -101,6 +102,6 @@ class UserController extends Controller {
         }
 
         $this->service->delete($user);
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('msg', __('global.messages.del'));
     }
 }

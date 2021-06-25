@@ -36,7 +36,7 @@ class ActivityController extends Controller {
 
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('admin.activities.index');
+        return redirect()->route('admin.activities.index')->with('msg', __('global.messages.crt'));
     }
 
     public function update(ActivityRequest $request, Activity $activity_type): RedirectResponse {
@@ -48,7 +48,7 @@ class ActivityController extends Controller {
 
         $data = $request->validated();
         $this->service->update($data, $activity_type);
-        return redirect()->route('admin.activities.index');
+        return redirect()->route('admin.activities.index')->with('msg', __('global.messages.upd'));
     }
 
     public function destroy(Activity $activity_type): RedirectResponse {
@@ -59,6 +59,6 @@ class ActivityController extends Controller {
         }
 
         $this->service->delete($activity_type);
-        return redirect()->route('admin.activities.index');
+        return redirect()->route('admin.activities.index')->with('msg', __('global.messages.del'));
     }
 }

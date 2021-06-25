@@ -58,8 +58,11 @@
                                     <form action="{{route('technic.tech_condition.upload', ['condition' => $conditions[$key]])}}"
                                           method="post" enctype="multipart/form-data">
                                         @csrf
+                                        <a href="{{route('technic.tech_condition.edit', ['condition' => $conditions[$key]])}}" class="btn btn-info">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                         <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" hidden>
-                                        <label for="file-{{$key}}" class="btn btn-outline-info text-bold" title="@lang('global.btn_upload')">
+                                        <label for="file-{{$key}}" class="btn btn-primary text-bold my-0" title="@lang('global.btn_upload')">
                                             <i class="fas fa-upload"></i>
                                         </label>
                                     </form>

@@ -65,7 +65,7 @@ class DesignerController extends Controller {
 
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('admin.designers.index');
+        return redirect()->route('admin.designers.index')->with('msg', __('global.messages.crt'));
     }
 
     /**
@@ -101,7 +101,7 @@ class DesignerController extends Controller {
 
         $data = $request->validated();
         $this->service->update($data, $designer);
-        return redirect()->route('admin.designers.index');
+        return redirect()->route('admin.designers.index')->with('msg', __('global.messages.upd'));
     }
 
     /**
@@ -118,6 +118,6 @@ class DesignerController extends Controller {
         }
 
         $this->service->delete($designer);
-        return redirect()->route('admin.designers.index');
+        return redirect()->route('admin.designers.index')->with('msg', __('global.messages.del'));
     }
 }

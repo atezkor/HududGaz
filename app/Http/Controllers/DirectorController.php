@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Models\User;
 use App\Models\Designer;
 use App\Models\Mounter;
 use App\Models\Permit;
@@ -16,6 +17,18 @@ use App\ViewModels\RecommendationViewModel;
 use App\ViewModels\TechConditionViewModel;
 
 class DirectorController extends Controller {
+
+    public function users(): View|RedirectResponse {
+        try {
+            $this->authorize('res_admin');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('admin.users.index', [
+            'models' => User::all()
+        ]);
+    }
 
     public function organs(): View|RedirectResponse {
         try {

@@ -65,6 +65,6 @@ class StatusController extends Controller {
 
         $data = $request->validated();
         $this->service->update($data, $status);
-        return redirect()->route('admin.statuses.index');
+        return redirect()->route('admin.statuses.index')->with('msg', __('global.messages.upd'));
     }
 }

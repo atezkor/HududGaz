@@ -53,6 +53,20 @@ class TechConditionService extends CrudService {
         return Storage::url('tech_conditions/' . $condition->file);
     }
 
+    public function update(array $data, $model) {
+        $filename = time() . '.pdf';
+        $this->deleteFile($model->file);
+
+        $proposition = $model->proposition;
+        $this->createPDF($proposition->recommendation, [
+            'proposition' => $proposition,
+            'filename' => $filename,
+            'text' => $data['data'],
+            'qrcode' => $this->qrcode->generate($model->qrcode)
+        ]);
+        parent::update(['file' => $filename], $model);
+    }
+
     public function upload($request, TechCondition $condition) {
         $proposition = $condition->proposition;
         $recommendation = $proposition->recommendation;

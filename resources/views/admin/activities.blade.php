@@ -120,5 +120,7 @@
             }
         });
     }
+
+    toast("{{session()->get('msg')}}", "{{session()->get('msg_type')}}");
 </script>
 @endsection

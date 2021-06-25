@@ -16,6 +16,9 @@ class UserService extends CrudService {
 
     public function create($data) {
         $data['password'] = $this->hashed($data['password']);
+        if ($data['organ'] === null)
+            unset($data['organ']);
+
         parent::create($data);
     }
 

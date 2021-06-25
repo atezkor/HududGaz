@@ -64,7 +64,6 @@ class TechnicController extends Controller {
             'recommendation' => $recommendation,
             'proposition' => $recommendation->proposition,
             'equipments' => $equipments,
-            'method' => 'POST',
             'action' => route('technic.tech_condition.store', ['recommendation' => $recommendation])
         ]);
     }
@@ -105,6 +104,46 @@ class TechnicController extends Controller {
         return redirect()->back();
     }
 
+    public function edit(TechCondition $condition): View|RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $recommendation = $condition->proposition->recommendation;
+        $equipments = $recommendation->getEquipments();
+        return view("technic.control.$recommendation->type", [
+            'recommendation' => $recommendation,
+            'proposition' => $recommendation->proposition,
+            'equipments' => $equipments,
+            'action' => route('technic.tech_condition.update', ['condition' => $condition])
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param TechCondition $condition
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
+    public function update(Request $request, TechCondition $condition): RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $data = $this->validate($request, [
+            'description' => [],
+            'data' => ['required']
+        ], [], [
+            'data' => __('technic.tech_condition.ref')
+        ]);
+        $this->service->update($data, $condition);
+        return redirect()->route('technic.index');
+    }
+
     public function upload(Request $request, TechCondition $condition): RedirectResponse {
         try {
             $this->authorize('crud_tech');
@@ -116,6 +155,7 @@ class TechnicController extends Controller {
         return redirect()->route('technic.index');
     }
 
+    /* Reports */
     public function region(): View|RedirectResponse {
         try {
             $this->authorize('show_report');

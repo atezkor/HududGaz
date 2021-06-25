@@ -11,11 +11,14 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
+                        @if(request()->route()->parameter('condition'))
+                            <h3 class="card-title">@lang('technic.tech_condition.heading_edit')</h3>
+                        @else
                             <h3 class="card-title">@lang('technic.tech_condition.heading_create')</h3>
+                        @endif
                         </div>
                         <form action="{{$action}}" method="post">
                             @csrf
-                            @method($method)
                             @include('components.errors')
                             <div class="card-body">
                                 <div class="form-group">

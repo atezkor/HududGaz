@@ -64,7 +64,7 @@ class MounterController extends Controller {
 
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('admin.mounters.index');
+        return redirect()->route('admin.mounters.index')->with('msg', __('global.messages.crt'));
     }
 
     /**
@@ -100,7 +100,7 @@ class MounterController extends Controller {
 
         $data = $request->validated();
         $this->service->update($data, $mounter);
-        return redirect()->route('admin.mounters.index');
+        return redirect()->route('admin.mounters.index')->with('msg', __('global.messages.upd'));
     }
 
     /**
@@ -117,6 +117,6 @@ class MounterController extends Controller {
         }
 
         $this->service->delete($mounter);
-        return redirect()->route('admin.mounters.index');
+        return redirect()->route('admin.mounters.index')->with('msg', __('global.messages.del'));
     }
 }

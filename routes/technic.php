@@ -13,8 +13,8 @@ Route::post('recommendations/{recommendation}/back', [App\Http\Controllers\Techn
 Route::get('tech-conditions', [App\Http\Controllers\TechnicController::class, 'index'])->name('technic.index');
 Route::get('recommendations/{recommendation}/create', [App\Http\Controllers\TechnicController::class, 'create'])->name('technic.tech_condition.create');
 Route::post('recommendation/{recommendation}/store', [App\Http\Controllers\TechnicController::class, 'store'])->name('technic.tech_condition.store');
-Route::get('recommendations/{recommendation}/edit', [App\Http\Controllers\TechnicController::class, 'edit'])->name('technic.tech_condition.edit');
-Route::post('recommendations/{recommendation}/update', [App\Http\Controllers\TechnicController::class, 'update'])->name('technic.tech_condition.update');
+Route::get('tech-conditions/{condition}/edit', [App\Http\Controllers\TechnicController::class, 'edit'])->name('technic.tech_condition.edit');
+Route::post('tech-conditions/{condition}/update', [App\Http\Controllers\TechnicController::class, 'update'])->name('technic.tech_condition.update');
 
 Route::get('tech-conditions/{condition}/show', [App\Http\Controllers\TechnicController::class, 'show_condition'])->name('technic.tech_condition.show');
 Route::post('tech-conditions/{condition}/upload', [App\Http\Controllers\TechnicController::class, 'upload'])->name('technic.tech_condition.upload');

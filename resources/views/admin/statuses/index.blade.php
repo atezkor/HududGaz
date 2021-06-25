@@ -52,4 +52,7 @@
 @endsection
 @section('javascript')
     <script src="{{'/js/default.js'}}"></script>
+    <script>
+        toast("{{session()->get('msg')}}", "{{session()->get('msg_type')}}");
+    </script>
 @endsection

@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
-    return redirect()->route('director.organs');
+    return redirect()->route('director.users');
 });
 
+Route::get('users', [App\Http\Controllers\DirectorController::class, 'users'])->name('director.users');
 Route::get('organs', [App\Http\Controllers\DirectorController::class, 'organs'])->name('director.organs');
 Route::get('designers', [App\Http\Controllers\DirectorController::class, 'designers'])->name('director.designers');
 Route::get('installers', [App\Http\Controllers\DirectorController::class, 'installers'])->name('director.installers');

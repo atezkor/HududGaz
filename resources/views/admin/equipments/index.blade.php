@@ -123,6 +123,6 @@
         $('#form').attr('action', url);
     }
 
-    toast('{{session()->get('message')}}', '{{session()->get('mess_type')}}');
+    toast("{{session()->get('msg')}}", "{{session()->get('msg_type')}}");
 </script>
 @endsection

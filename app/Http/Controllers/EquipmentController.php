@@ -48,7 +48,7 @@ class EquipmentController extends Controller {
         $data = $request->validated();
         $this->service->create($data);
 
-        return redirect()->route('admin.equipments.index');
+        return redirect()->route('admin.equipments.index')->with('msg', __('global.messages.crt'));
     }
 
     /**
@@ -68,7 +68,7 @@ class EquipmentController extends Controller {
         $data = $request->validated();
 
         $this->service->update($data, $equipment);
-        return redirect()->back()->with('message', __('admin.upd_success'));
+        return redirect()->back()->with('msg', __('global.messages.upd'));
     }
 
     /**
@@ -85,11 +85,11 @@ class EquipmentController extends Controller {
         }
 
         if ($equipment->checkStatic()) {
-            return redirect()->back()->with('message', __('admin.equipment.del_info'))->with('mess_type', 'info');
+            return redirect()->back()->with('msg', __('admin.equipment.del_info'))->with('msg_type', 'info');
         }
 
         $this->service->delete($equipment);
-        return redirect()->back()->with('message', __('admin.del_success'));
+        return redirect()->back()->with('msg', __('global.messages.del'));
     }
 
     /**
@@ -125,7 +125,7 @@ class EquipmentController extends Controller {
         $data['equipment_id'] = $equipment->id;
         $this->service->update($data, new EquipmentType());
 
-        return redirect()->route('admin.equip_type', ['equipment' => $equipment]);
+        return redirect()->back()->with('msg', __('global.messages.crt'));
     }
 
     /**
@@ -143,7 +143,7 @@ class EquipmentController extends Controller {
         $data = $request->validated();
         $this->service->update($data, $type);
 
-        return redirect()->back()->with('message', __('admin.upd_success'));
+        return redirect()->back()->with('msg', __('global.messages.upd'));
     }
 
     /**
@@ -158,6 +158,6 @@ class EquipmentController extends Controller {
         }
 
         $type->delete();
-        return redirect()->back()->with('message', __('admin.del_success'));
+        return redirect()->back()->with('msg', __('global.messages.del'));
     }
 }
