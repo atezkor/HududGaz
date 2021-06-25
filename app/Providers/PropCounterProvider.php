@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Montage;
@@ -33,13 +35,21 @@ class PropCounterProvider extends ServiceProvider {
     public function boot() {
         View::composer('components.menu', function() {
             $user = request()->user();
-            $numbers = match($user->role) {
+            $numbers = match ($user->role) {
                 3 => $this->organs($user->organ),
                 4 => $this->projects($user->organ),
                 6 => $this->montages($user->organ),
                 default => [0, 0, 0, 0, 0]
             };
 
+            View::share(['numbers' => $numbers]);
+        });
+
+        View::composer('components.navbar', function() {
+            $numbers = match (request()->user()->role) {
+                2 => $this->technic(),
+                default => [0, 0, 0, 0]
+            };
             View::share(['numbers' => $numbers]);
         });
     }
@@ -95,5 +105,15 @@ class PropCounterProvider extends ServiceProvider {
         }
 
         return $numbers;
+    }
+
+    private function technic(): array {
+        return [
+            Proposition::query()->whereDate('created_at', now())->count(),
+            Proposition::query()->whereIn('status', [1, 2])->count(),
+            Proposition::query()->where('created_at', '<',
+                date(DATE_ATOM, time() - Status::query()->sum('term') * 3600))->count(),
+            Proposition::query()->whereDate('created_at', '>', Carbon::now()->firstOfYear())->count()
+        ];
     }
 }

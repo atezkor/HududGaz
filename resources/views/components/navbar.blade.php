@@ -8,22 +8,22 @@
     <ul id="navbar" class="navbar-nav" style="display: none">
         <li class="nav-item ml-5">
             <div>
-                <h3 class="card-title">@lang('global.navbar.today'): <span></span></h3>
+                <h3 class="card-title">@lang('global.navbar.today'): <span>{{$numbers[0]}}</span></h3>
             </div>
         </li>
         <li class="nav-item ml-5">
             <div>
-                <h3 class="card-title">@lang('global.navbar.process'): <span></span></h3>
+                <h3 class="card-title">@lang('global.navbar.process'): <span>{{$numbers[1]}}</span></h3>
             </div>
         </li>
         <li class="nav-item ml-5">
             <div>
-                <h3 class="card-title">@lang('global.navbar.late'): <span></span></h3>
+                <h3 class="card-title">@lang('global.navbar.late'): <span>{{$numbers[2]}}</span></h3>
             </div>
         </li>
         <li class="nav-item ml-5">
             <div>
-                <h3 class="card-title">@lang('global.navbar.year'): <span></span></h3>
+                <h3 class="card-title">@lang('global.navbar.year'): <span>{{$numbers[3]}}</span></h3>
             </div>
         </li>
     </ul>

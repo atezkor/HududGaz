@@ -22,4 +22,3 @@ Route::post('tech-conditions/{condition}/upload', [App\Http\Controllers\TechnicC
 Route::get('region-section', [App\Http\Controllers\TechnicController::class, 'region'])->name('technic.reg_section');
 Route::get('organ-section', [App\Http\Controllers\TechnicController::class, 'organ'])->name('technic.org_section');
 Route::get('more', [App\Http\Controllers\TechnicController::class, 'more'])->name('technic.more');
-Route::get('numbers', [App\Http\Controllers\TechnicController::class, 'numbers']);
