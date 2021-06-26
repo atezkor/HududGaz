@@ -106,6 +106,7 @@ return [
         'address_krill' => "Tashkilot manzili (krillcha)",
         'phone_number' => "Telefon raqami (har birini alohida qatorga yozing)",
         'alert_title' => "Tashkilotni o\u{2018}chirib tashlamoqchimisiz?",
+        'del_title' => "Tashkilotni o\u{2018}chirib bo\u{2018}lmaydi, chunki jarayondagi loyihalar mavjud!",
     ],
     'mounter' => [
         'btn_new' => "Tashkilot qo\u{2018}shish",
@@ -123,6 +124,7 @@ return [
         'permissions_to' => "Ruxsat etilgan",
         'implements_for' => "Amalga oshiriladi",
         'alert_title' => "Tashkilotni o\u{2018}chirib tashlamoqchimisiz?",
+        'del_title' => "Tashkilotni o\u{2018}chirib bo\u{2018}lmaydi, chunki jarayondagi ishlar mavjud!",
 
         // Worker side
         'firm' => "Tashkilot tanlanmagan. Dasturdan foydalanishda o\u{2018}z tartibi bo\u{2018}yicha ishlang.",
@@ -168,6 +170,8 @@ return [
     'timetable' => [
         'holiday_days' => "Bayram kunlari",
         'extra_work_days' => "Qo\u{2018}shimcha ish kunlari",
+        'heading_create' => "Ish jadvaliga yangi sana qo\u{2018}shish",
+        'heading_edit' => "Ish jadvaliga o\u{2018}zgartirish kiritish",
         'create' => "Yaratish",
         'name' => "Nomi",
         'start' => "Boshi",

@@ -26,7 +26,7 @@
                             <div class="form-group row">
                                 <label for="transitions" class="col-2">{{__('admin.status.transitions')}}</label>
                                 <div class="col-10">
-                                    <input type="text" name="transitions" id="transitions" value="{{$model->transitions}}" class="form-control">
+                                    <input type="text" name="transitions" id="transitions" class="form-control" disabled>
                                 </div>
                             </div>
 

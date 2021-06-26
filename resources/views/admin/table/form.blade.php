@@ -10,9 +10,9 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 @if($method == 'POST')
-                                    {{__('admin.organ.heading_create')}}
+                                    {{__('admin.timetable.heading_create')}}
                                 @else
-                                    {{__('admin.organ.heading_edit')}}
+                                    {{__('admin.timetable.heading_edit')}}
                                 @endif
                             </h3>
                         </div>
@@ -30,8 +30,11 @@
 
                                 <div class="form-group row">
                                     <label for="interval" class="col-3">@lang('admin.timetable.interval')</label>
-                                    <div class="col-9">
-                                        <input type="date" name="interval" id="interval" value="{{$model->name}}" class="form-control">
+                                    <div class="col-4">
+                                        <input type="date" name="start" id="start" value="{{$model->start}}" class="form-control date">
+                                    </div>
+                                    <div class="col-4 ml-auto">
+                                        <input type="date" name="end" id="end" value="{{$model->end}}" class="form-control date">
                                     </div>
                                 </div>
 

@@ -117,6 +117,9 @@ class DesignerController extends Controller {
             return redirect('/');
         }
 
+        if ($designer->projects)
+            return redirect()->route('admin.designers.index')->with('msg', __('admin.designer.del_title'))->with('msg_type', 'info');
+
         $this->service->delete($designer);
         return redirect()->route('admin.designers.index')->with('msg', __('global.messages.del'));
     }

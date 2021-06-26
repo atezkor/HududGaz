@@ -100,7 +100,6 @@ class MontageController extends Controller {
         }
 
         $this->service->delete($montage);
-
         return redirect()->back();
     }
 }

@@ -49,8 +49,6 @@ class TimetableController extends Controller {
         }
 
         $data = $request->all();
-        $data['start'] = $data['interval'];
-        $data['end'] = $data['interval'];
         $this->service->create($data);
         return redirect()->route('admin.timetable.index');
     }

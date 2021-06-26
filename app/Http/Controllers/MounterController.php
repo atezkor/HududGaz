@@ -116,6 +116,9 @@ class MounterController extends Controller {
             return redirect('/');
         }
 
+        if ($mounter->montages)
+            return redirect()->route('admin.designers.index')->with('msg', __('admin.mounter.del_title'))->with('msg_type', 'info');
+
         $this->service->delete($mounter);
         return redirect()->route('admin.mounters.index')->with('msg', __('global.messages.del'));
     }

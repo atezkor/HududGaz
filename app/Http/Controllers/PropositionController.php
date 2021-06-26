@@ -146,7 +146,13 @@ class PropositionController extends Controller {
         return redirect()->route('propositions.index');
     }
 
-    public function propositions(int $type, int $stir): View {
+    public function propositions(int $type, int $stir): View|RedirectResponse {
+        try {
+            $this->authorize('crud_prop');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
         return view('technic.filter', [
             'models' => Proposition::query()->whereHas($type == 1 ? 'individual' : 'legal', function(Builder $query) use ($type, $stir) {
                 if ($type == 1)

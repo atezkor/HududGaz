@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proposition;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
@@ -11,12 +11,12 @@ use App\Models\Designer;
 use App\Models\Mounter;
 use App\Models\Permit;
 use App\Models\Region;
+use App\Models\Proposition;
 use App\ViewModels\MontageViewModel;
 use App\ViewModels\ProjectViewModel;
 use App\ViewModels\PropositionListViewModel;
 use App\ViewModels\RecommendationViewModel;
 use App\ViewModels\TechConditionViewModel;
-use Illuminate\Support\Facades\DB;
 
 class DirectorController extends Controller {
 

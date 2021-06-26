@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Models\Status;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Status;
 use App\Models\Montage;
 use App\Models\Project;
 use App\Models\Proposition;
