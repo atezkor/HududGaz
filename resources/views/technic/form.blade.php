@@ -42,7 +42,8 @@
                                     <div class="form-group row">
                                         <label for="stir" class="col-2">@lang('technic.proposition.stir')</label>
                                         <div class="col-10">
-                                            <input type="number" name="stir" id="stir" value="{{$applicant->stir}}" class="form-control">
+                                            <input type="number" name="stir" id="stir" onblur="checkTin(1, this.value)"
+                                                   value="{{$applicant->stir}}" class="form-control">
                                         </div>
                                     </div>
 
@@ -57,7 +58,8 @@
                                     <div class="form-group row">
                                         <label for="full_name" class="col-2">@lang('technic.proposition.full_name')</label>
                                         <div class="col-10">
-                                            <input type="text" name="full_name" id="full_name" value="{{$applicant->full_name}}" class="form-control">
+                                            <input type="text" name="full_name" id="full_name" value="{{$applicant->full_name}}"
+                                                   class="form-control" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +68,8 @@
                                     <div class="form-group row">
                                         <label for="legal_stir" class="col-2">@lang('technic.proposition.legal_stir')</label>
                                         <div class="col-10">
-                                            <input type="number" name="legal_stir" id="legal_stir" value="{{$applicant->legal_stir}}" class="form-control">
+                                            <input type="number" name="legal_stir" id="legal_stir" onblur="checkTin(2, this.value)"
+                                                   value="{{$applicant->legal_stir}}" class="form-control">
                                         </div>
                                     </div>
 
@@ -87,7 +90,8 @@
                                     <div class="form-group row">
                                         <label for="leader_stir" class="col-2">@lang('technic.proposition.leader_stir')</label>
                                         <div class="col-10">
-                                            <input type="number" name="leader_stir" id="leader_stir" value="{{$applicant->leader_stir}}" class="form-control">
+                                            <input type="number" name="leader_stir" id="leader_stir" onblur="checkTin(3, this.value)"
+                                                   value="{{$applicant->leader_stir}}" class="form-control">
                                         </div>
                                     </div>
 
@@ -190,6 +194,16 @@
             $('#type').val(2);
         }
     });
+
+    function checkTin(type, stir) {
+        $.get(`{{route('technic.check_stir')}}/${type}/${stir}`, function(data) {
+            if (data.length === 0)
+                return;
+
+            toast(`<a href="{{route('technic.propositions')}}/${type}/${stir}" target="_blank" class="text-danger">Bunday stirli ariza mavjud (${Object.keys(data).length})</a>`,
+                'warning', 5000)
+        });
+    }
 
     showNavbar();
 </script>

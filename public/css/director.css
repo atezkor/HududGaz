@@ -1,0 +1,133 @@
+.clear {
+    clear: both;
+}
+
+img {
+    max-width: 100%;
+}
+
+.sphere-list {
+    position: relative;
+}
+
+.sphere-list li {
+    list-style: none;
+    position: relative;
+    float: left;
+    width: calc((100% - 80px) / 4);
+    margin: 0 15px 15px 0;
+}
+
+.sphere-list li:nth-child(4n + 1) {
+    clear: both;
+}
+
+.sphere-list li > div {
+    position: relative;
+    display: block;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    color: #4B4B4B;
+    border-radius: 7px;
+    overflow: hidden;
+    padding: 0 10px 0 0;
+    border: 1px solid #ffffff;
+    transition: none;
+}
+
+.sphere-list li .left-part {
+    width: 80px;
+    float: left;
+    position: relative;
+    text-align: center;
+    padding: 20px 0 20px 0;
+    z-index: 1;
+}
+
+.sphere-list li .service-count {
+    display: block;
+    font-size: 30px;
+    color: #5FB8D9;
+}
+
+.sphere-list li .right-part {
+    width: calc(100% - 80px);
+    float: right;
+    padding: 15px 5px 15px 0;
+}
+
+.sphere-list li .sphere-title {
+    color: #2478DD !important;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    height: 36px;
+    overflow: hidden;
+    position: relative;
+    line-height: 18px;
+    margin: 0 0 8px 0;
+}
+
+.sphere-list li .service-name {
+    font-size: 15px;
+    line-height: 1.2;
+    display: block;
+    height: 57px;
+    overflow: hidden;
+}
+
+.sphere-list li > div:hover {
+    background: #2478dd;
+    color: #ffffff !important;
+    border: 1px solid #7c99ba;
+}
+
+.sphere-list li > div:hover .left-part span.service-count {
+    color: #fff !important;
+}
+
+.sphere-list li > div:hover .left-part img {
+    filter: brightness(0%) invert(100%);
+}
+
+.sphere-list li > div:hover .sphere-title {
+    color: #ffffff !important;
+}
+
+@media (max-width: 1420px) {
+    .sphere-list li {
+        width: calc((100% - 50px) / 2);
+    }
+
+    .sphere-list li:nth-child(2n + 1) {
+        clear: both;
+    }
+}
+
+/* Pie chart */
+.pie-block {
+    width: 95%;
+    margin-left: 2%;
+    padding: 5px 1%;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+}
+
+.pie-title {
+    font-size: 18px;
+    margin: 15px 50px 15px 0;
+    padding: 5px 0 10px 0;
+    border-bottom: 1px solid #d1d4d8;
+}
+
+@media (max-width: 770px) {
+    .sphere-list li {
+        width: 90%;
+    }
+
+    .pie-block {
+        width: 87%;
+        margin-left: 3%;
+    }
+}

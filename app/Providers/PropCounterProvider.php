@@ -47,7 +47,7 @@ class PropCounterProvider extends ServiceProvider {
 
         View::composer('components.navbar', function() {
             $numbers = match (request()->user()->role) {
-                2 => $this->technic(),
+                2, 7 => $this->technic(),
                 default => [0, 0, 0, 0]
             };
             View::share(['numbers' => $numbers]);

@@ -30,7 +30,7 @@ class UserController extends Controller {
         }
 
         $models = User::query()->where('role', '<>', 1)->get();
-        return view('admin.users.index', ['models' => $models]);
+        return view('admin.users.index', ['models' => $models, 'show' => true]);
     }
 
     public function create(): View|RedirectResponse {

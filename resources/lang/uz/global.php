@@ -29,6 +29,7 @@
         'consumer' => "Iste\u{2019}molchi",
         'year' => "yil",
         'del_process' => "O\u{2018}chirilmoqda ...",
+        'statistics' => "Ko\u{2018}rsatkichlar",
         'navbar' => [
             'today' => "Bugungi arizlar",
             'process' => "Ko\u{2018}rilayotgan arizalar",

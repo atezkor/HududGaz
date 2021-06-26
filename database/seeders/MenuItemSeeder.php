@@ -77,6 +77,7 @@ class MenuItemSeeder extends Seeder {
     }
 
     private function directorMenu() {
+        $this->CreateMenuItem(7, 'global.statistics', 'director.index', 'nav-icon fas fa-chart-bar');
         $this->CreateMenuItem(7, 'admin.users', 'director.users', 'nav-icon fas fa-users');
         $this->CreateMenuItem(7, 'admin.organs', 'director.organs', 'nav-icon fas fa-landmark');
         $this->CreateMenuItem(7, 'admin.designers', 'director.designers', 'nav-icon fas fa-drafting-compass');

@@ -18,6 +18,7 @@ class Localization {
             app()->setLocale(session()->get('locale'));
         } else {
             app()->setLocale(auth()->user()->locale ?? 'uz');
+            session()->put('locale', app()->getLocale());
         }
 
         return $next($request);

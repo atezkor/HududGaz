@@ -5,6 +5,8 @@ namespace App\Services;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Proposition;
+use App\Models\Individual;
+use App\Models\Legal;
 use App\Models\Organization;
 use App\Models\Recommendation;
 use App\Models\TechCondition;
@@ -49,6 +51,25 @@ class TechConditionService extends CrudService {
         ]);
     }
 
+    /**
+     * Check that such stir has existed before.
+    */
+    public function checkTin(int $type, int $stir): array {
+        if ($type == 1)
+            return Individual::query()->where('stir', $stir)
+                ->pluck('stir', 'proposition_id')->toArray();
+
+        if ($type == 2)
+            return Legal::query()->where('legal_stir', $stir)
+                ->pluck('legal_stir', 'proposition_id')->toArray();
+
+        return Legal::query()->where('leader_stir', $stir)
+            ->pluck('leader_stir', 'proposition_id')->toArray();
+    }
+
+    /**
+     * This function to showing the tech-condition
+     */
     public function show(TechCondition $condition): string {
         return Storage::url('tech_conditions/' . $condition->file);
     }

@@ -50,7 +50,7 @@ function ajax(url, data = {}, callback, datatype = 'html') {
     });
 }
 
-function toast(message, type) {
+function toast(message, type, time = 3000) {
     if (!message)
         return;
 
@@ -62,7 +62,7 @@ function toast(message, type) {
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
-            timer: 3000
+            timer: time
         });
 
         Toast.fire({

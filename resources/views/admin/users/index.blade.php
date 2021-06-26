@@ -8,9 +8,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+                        @if($show)
                         <a href="{{route('admin.users.create')}}" class="btn btn-info">
                             {{__('admin.user.btn_add')}}
                         </a>
+                        @endif
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" oninput="search(this)" class="form-control"
@@ -40,6 +42,7 @@
                                     <td>{{$model->username}}</td>
                                     <td>{{$roles[$model->role]}}</td>
                                     <td>
+                                    @if($show)
                                         <form action="{{route('admin.users.delete', ['user' => $model])}}" method="post">
                                             <a href="{{route('admin.users.edit', ['user' => $model])}}" class="btn btn-warning"
                                                title="{{__('global.btn_edit')}}">
@@ -52,6 +55,7 @@
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
+                                    @endif
                                     </td>
                                 </tr>
                             @endforeach

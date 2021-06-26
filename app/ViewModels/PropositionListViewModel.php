@@ -26,7 +26,7 @@ class PropositionListViewModel extends ViewModel {
     }
 
     function individuals(): Models {
-        return $this->models(1, $this->status, $this->operator ,$this->organ);
+        return $this->models(1, $this->status, $this->operator, $this->organ);
     }
 
     function legalEntities(): Models {

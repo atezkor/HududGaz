@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Proposition;
 use App\Models\Individual;
@@ -143,5 +144,21 @@ class PropositionController extends Controller {
 
         $this->service->delete($proposition);
         return redirect()->route('propositions.index');
+    }
+
+    public function propositions(int $type, int $stir): View {
+        return view('technic.filter', [
+            'models' => Proposition::query()->whereHas($type == 1 ? 'individual' : 'legal', function(Builder $query) use ($type, $stir) {
+                if ($type == 1)
+                    $query->where('stir', $stir);
+                elseif($type == 2)
+                    $query->where('legal_stir', $stir);
+                else
+                    $query->where('leader_stir', $stir);
+            })->get(['id', 'number', 'type', 'organ', 'created_at']),
+            'organs' => Region::query()->pluck('org_name', 'id'),
+            'type' => $type,
+            'stir' => $stir
+        ]);
     }
 }
