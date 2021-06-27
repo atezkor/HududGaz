@@ -28,7 +28,7 @@
                     <div class="input-group mb-3">
                         {{-- old funksiyasi tasdiqlanmagan maydonni qayta to'ldrish uchun kerak --}}
                         <input type="text" name="username" value="{{old('username')}}" class="form-control" placeholder="Foydalanuvchi nomi"
-                               autocomplete="off">
+                               autocomplete="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i class="fas fa-user"></i>
@@ -47,9 +47,7 @@
                         <div class="col-8">
                             <div class="icheck-primary">
                                 <input type="checkbox" id="remember" name="remember" value="1">
-                                <label for="remember">
-                                    Eslab qol
-                                </label>
+                                <label for="remember">Eslab qol</label>
                             </div>
                         </div>
                         <div class="col-4">

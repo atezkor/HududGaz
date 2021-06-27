@@ -27,7 +27,7 @@ class AuthController extends Controller {
 
     public function entry(AuthRequest $request): RedirectResponse {
         $data = $request->validated();
-        $user = User::query()->where('username', '=', $data['username'])->get()->first();
+        $user = User::query()->where('username', '=', $data['username'])->first();
 
         if ($user === null)
             return redirect()->route('login');
@@ -35,7 +35,7 @@ class AuthController extends Controller {
         if (!$this->checkPass($data['password'], $user->password))
             return redirect()->route('login');
 
-        auth()->login($user);
+        auth()->login($user); // auth()->attempt($data, true)
         return redirect()->route('dashboard');
     }
 

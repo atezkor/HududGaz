@@ -2,7 +2,7 @@
 - `git clone https://github.com/Anvar-Avenger/HududGaz.git`
 - `cd HududGaz`
 - `composer install`
-- .env faylini yaratilsin (.env.example ni nusxash orqali)<br>
+- .env faylini yaratilsin (.env.example ni nusxalash orqali)<br>
   ```
   DB_DATABASE=hududgaz
   DB_USERNAME=root
@@ -17,7 +17,8 @@
 - php artisan serve
 
 ## Qo&#8216;shimcha
-Laravel extensions
+Dastur kerakli kutubxonalar - (extensions php)
 - extension=fileinfo
 - extension=pdo_mysql
+- extension=gd
 

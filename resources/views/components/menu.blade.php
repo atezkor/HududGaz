@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container-fluid" style="width: 90%">
-        <a href="{{route('dashboard')}}" class="navbar-brand col-md-3">
-            <img src="{{'/img/logo.png'}}" alt="{{getName()}}" class="col-md-12">
+        <a href="{{route('dashboard')}}" class="navbar-brand col-3" style="min-width: 250px">
+            <img src="{{'/img/logo.png'}}" alt="{{getName()}}" class="col-12">
         </a>
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,11 +9,11 @@
 
         @php($user = request()->user())
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav custom-navbar">
             @php($items = MenuItems())
             @foreach($items as $key => $menu)
                 <li class="nav-item">
-                    <a href="{{route($menu->href)}}" class="nav-link">
+                    <a href="{{route($menu->href)}}" class="nav-link text-nowrap">
                         <span>@lang($menu->title)</span>
                         <span class="badge {{$menu->icon}}">{{$numbers[$key]}}</span>
                     </a>
