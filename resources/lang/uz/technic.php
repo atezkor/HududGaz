@@ -18,7 +18,7 @@
             'stir' => "STIR",
             'passport' => "Pasport seriya va raqami",
             'full_name' => "To\u{2018}liq ism",
-            'legal_stir' => "Yuriridik shaxs STIRi",
+            'legal_stir' => "Yuridik shaxs STIRi",
             'legal_name' => "Yuridik shaxs nomi",
             'leader' => "Rahbarning to\u{2018}liq ismi",
             'leader_stir' => "Rahbarning STIRi",

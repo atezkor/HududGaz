@@ -15,7 +15,7 @@ class CreatePropositionsTable extends Migration {
             $table->id();
             $table->integer('number');
             $table->integer('organ');
-            $table->integer('activity_type');
+            $table->integer('activity_type')->default(1);
             $table->tinyInteger('build_type');
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('type');

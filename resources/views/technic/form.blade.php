@@ -101,6 +101,20 @@
                                             <input type="email" name="email" id="email" value="{{$applicant->email}}" class="form-control" autocomplete="off">
                                         </div>
                                     </div>
+
+                                    <div class="form-group row">
+                                        <label for="activity_type" class="col-2">@lang('technic.proposition.activity_type')</label>
+                                        <div class="col-10">
+                                            <select name="activity_type" id="activity_type" class="form-control">
+                                                <option value="">@lang('technic.proposition.activity_type')</option>
+                                                @foreach($activities as $key => $activity)
+                                                    <option value="{{$key}}" @if($model->activity_type == $key) selected @endif>
+                                                        {{$activity}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -109,20 +123,6 @@
                                 <div class="col-10">
                                     <input type="tel" name="phone" id="phone" value="{{$applicant->phone}}"
                                            class="form-control" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="activity_type" class="col-2">@lang('technic.proposition.activity_type')</label>
-                                <div class="col-10">
-                                    <select name="activity_type" id="activity_type" class="form-control">
-                                        <option value="">@lang('technic.proposition.activity_type')</option>
-                                        @foreach($activities as $key => $activity)
-                                            <option value="{{$key}}" @if($model->activity_type == $key) selected @endif>
-                                                {{$activity}}
-                                            </option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
 

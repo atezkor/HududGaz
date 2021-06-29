@@ -110,12 +110,10 @@
                 <li>
                     <strong>@lang('district.pdf.object_name')</strong>: {{$model->address}}@lang('district.pdf.in_the') @lang('district.pdf.civil')
                     {{$consumer->person_name}}@lang('district.pdf.to') @lang('district.pdf.belong_to')
-                @if($activity->id === 1)
-                    <span>@lang('district.pdf.home')</span>
-                @else
-                    <span>&#8220;{{$activity->activity}}&#8221; {{$build_type}} @lang('district.pdf.build')</span>
+                @if($proposition->type === 2)
+                    <span>&#8220;{{$activity->activity}}&#8221;</span>
                 @endif
-                    @lang('district.pdf.gas_connect')
+                    <span class="lowercase">{{$build_type}} @lang('district.pdf.build') @lang('district.pdf.gas_connect')</span>
                 </li>
                 <li>
                     <strong>@lang('district.pdf.near_address')</strong>: {{$model->access_point}}

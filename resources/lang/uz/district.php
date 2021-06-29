@@ -82,7 +82,6 @@
             'in_the' => "dagi",
             'civil' => "fuqoro",
             'to' => "ga",
-            'home' => "yashash xonadonini",
             'belong_to' => "qarashli",
             'build' => "binosini",
             'gas_connect' => "tabiiy gaz ta\u{2019}minotiga ulash",

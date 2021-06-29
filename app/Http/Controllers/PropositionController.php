@@ -55,7 +55,7 @@ class PropositionController extends Controller {
         return view('technic.form', ['action' => route('propositions.store'), 'method' => 'POST',
             'model' => $model, 'organs' => $organs,
             'applicant' => new Individual(),
-            'activities' => Activity::query()->pluck('activity', 'id')
+            'activities' => Activity::query()->skip(1)->take(5)->pluck('activity', 'id')
         ]);
     }
 
@@ -106,7 +106,7 @@ class PropositionController extends Controller {
             'method' => 'PUT', 'model' => $proposition,
             'applicant' => $applicant,
             'organs' => $organs,
-            'activities' => Activity::query()->pluck('activity', 'id')
+            'activities' => Activity::query()->skip(1)->take(5)->pluck('activity', 'id')
         ]);
     }
 

@@ -20,6 +20,24 @@
             line-height: 1.3;
         }
 
+        table {
+            width: 100%;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #000000;
+        }
+
+        li {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
         .mt-20 {
             margin-top: 20px;
         }
@@ -63,24 +81,6 @@
 
         .clear {
             clear: both;
-        }
-
-        table {
-            width: 100%;
-        }
-
-        td {
-            vertical-align: top;
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid #000000;
-        }
-
-        li {
-            margin-top: 10px;
-            margin-bottom: 10px;
         }
     </style>
 </head>

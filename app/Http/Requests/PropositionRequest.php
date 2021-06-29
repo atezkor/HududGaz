@@ -49,7 +49,6 @@ class PropositionRequest extends FormRequest {
         return [
             'number' => ['required'],
             'organ' => ['required'],
-            'activity_type' => ['required'],
             'build_type' => [],
             'type' => ['required'],
             'status' => [],
