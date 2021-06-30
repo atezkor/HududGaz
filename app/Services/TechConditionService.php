@@ -30,6 +30,10 @@ class TechConditionService extends CrudService {
 
     public function create($data, Recommendation $model = null) {
         $proposition = $model->proposition;
+        if (TechCondition::query()->where('proposition_id', $proposition->id)->first()) {
+            return;
+        }
+
         $filename = time() . '.pdf';
         $attr = [
             'proposition_id' => $proposition->id,
@@ -112,8 +116,7 @@ class TechConditionService extends CrudService {
             'recommendation' => $recommendation,
             'proposition' => $addition['proposition'],
             'organ' => $organ,
-            'organization' => Organization::Data(),
-            'district' => districts()[$organ->getAttribute('region')],
+            'organization' => Organization::Data()
         ];
 
         if ($recommendation->type == 'accept') {

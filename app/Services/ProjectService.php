@@ -61,7 +61,7 @@ class ProjectService extends CrudService {
         return view('designer.explanatory-letter', [
             'proposition' => $proposition, 'applicant' => $proposition->applicant,
             'recommendation' => $proposition->recommendation,
-            'build_type' => [__('designer.residential'), __('designer.nonresidential')][$proposition->build_type - 1],
+            'build_type' => $proposition->buildType(),
             'condition' => $proposition->tech_condition,
             'organization' => Organization::Data()->shareholder_name,
             'gas_meters' => $recommendation->GasMeters(),

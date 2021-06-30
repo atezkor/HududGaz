@@ -1,14 +1,14 @@
 <ol class="px-2">
     <li>
-        Texnik tavsiya bergan gaz ta&#8217;minoti nomi, sanasi raqami va iste&#8217;molchi nomi, manzili va faoliyat turi: &#8220;{{$recommendation->org->org_name}}&#8221; filialining
-        <span style="text-transform: lowercase">{{extendedDate($recommendation->created_at, true)}}dagi</span> {{$recommendation->id}}-sonli texnik tavsiyanomasiga asosan, {{$recommendation->address}}da joylashgan,
-        {{$proposition->applicant->full_name ?? $proposition->applicant->legal_name}}ga qarashli noturar binosini gazlashtirish.
+        <span>Texnik tavsiya bergan gaz ta&#8217;minoti nomi, sanasi raqami va iste&#8217;molchi nomi, manzili va faoliyat turi: &#8220;{{$recommendation->org->org_name}}&#8221; filialining</span>
+        <span style="text-transform: lowercase">{{extendedDate($recommendation->created_at, true)}}dagi</span> {{$recommendation->id}}-sonli texnik tavsiyanomasiga asosan,
+        <span>{{$recommendation->address}}da joylashgan, {{$proposition->applicant->name}}ga qarashli <span class="text-lowercase">{{$proposition->buildType()}}</span> binosini gazlashtirish.</span>
         <br>
     </li>
     <li>
         Gaz quvuriga ulanish joyi, harakatdagi yer osti/usti, <u>past</u> bosimli gaz tarmog&#8216;iga,
         ulanish nuqtasiga bo&#8216;lgan masofa: {{$recommendation->length}} p/m, D-{{$recommendation->pipe1}} mm,
-        o&#8216;rt. qishgi - {{$recommendation->pressure_win}} kgc/cm<sup>2</sup>, o&#8216;rt. yozgi - {{$recommendation->pressure_sum}} kgc/cm<sup>2</sup>, <b><u>Tuman</u></b> - GTS
+        o&#8216;rt. qishgi - {{$recommendation->pressure_win}} kgc/cm<sup>2</sup>, o&#8216;rt. yozgi - {{$recommendation->pressure_sum}} kgc/cm<sup>2</sup>, <b><u>{{explode(' ', $proposition->org->district)[0]}}</u></b> - GTS
     </li>
     <li>Soatlik, yillik gaz iste&#8217;moli sarfi: {{$recommendation->consumption}} nm<sup>3</sup>/soat. (5441) nm<sup>3</sup>/yil </li>
     <li>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
  * @property int region
+ * @property string district
  */
 class Region extends BaseModel {
 

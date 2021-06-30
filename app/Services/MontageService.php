@@ -112,16 +112,17 @@ class MontageService extends CrudService {
     private function createPDF(Permit $permit) {
         $filename = time() . '.pdf';
         $proposition = $permit->proposition;
+        $recommendation = $proposition->recommendation;
         $data = [
             'permit' => $permit,
             'proposition' => $proposition,
-            'recommendation' => $proposition->recommendation,
+            'recommendation' => $recommendation,
             'organization' => Organization::Data(),
             'designer' => $permit->project_relation->firm->org_name,
             'installer' => $permit->montage_relation->mounter->short_name,
             'district' => districts()[$permit->district],
-            'meters' => $proposition->recommendation->GasMeters(),
-            'equipments' => $proposition->recommendation->getEquipments()
+            'meters' => $recommendation->GasMeters(),
+            'equipments' => $recommendation->getEquipments()
         ];
 
         view()->share($data);

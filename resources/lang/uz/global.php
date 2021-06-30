@@ -70,7 +70,9 @@
             'limit' => "Vaqt qoldig\u{2018}i",
             'show' => "Arizani ko\u{2018}rish",
             'individual' => "Jismoniy shaxs",
-            'legal_entity' => "Yuridik shaxs"
+            'legal_entity' => "Yuridik shaxs",
+            'residential' => "Turar",
+            'non_residential' => "Noturar"
         ],
         'datatables' => [
             'search' => "Qidiruv",

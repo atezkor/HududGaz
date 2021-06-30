@@ -109,10 +109,6 @@
             'type' => "(rusumi, soni)",
             'noname' => 'past bosimli yer osti _______'
         ],
-        'build_type' => [
-            'residential' => "turar",
-            'non_residential' => "noturar"
-        ],
         'equipment' => [
             'name' => "Jihoz nomi",
             'name_hint' => "Jihozni tanlang",

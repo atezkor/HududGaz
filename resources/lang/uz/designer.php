@@ -15,7 +15,5 @@
             'code_read' => "Maxsus kodni kiriting",
             'add_project' => "Loyiha qo\u{2018}shish",
             'comment' => "Bekor qilish sababi",
-        ],
-        'residential' => "turar",
-        'nonresidential' => "noturar"
+        ]
     ];

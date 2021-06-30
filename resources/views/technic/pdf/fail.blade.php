@@ -19,6 +19,14 @@
             padding: 20mm 15mm 20mm 30mm;
         }
 
+        table {
+            width: 100%;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
         .text-center {
             text-align: center;
         }
@@ -54,14 +62,6 @@
         .mt-20 {
             margin-top: 20px;
         }
-
-        table {
-            width: 100%;
-        }
-
-        td {
-            vertical-align: top;
-        }
     </style>
 </head>
 <body>
@@ -77,7 +77,7 @@
         <h4>
             <span>Davlat xizmlatlari agentligi</span><br>
             <span>Xorazm viloyati boshqarmasi</span><br>
-            <span>{{$district}} markaziga</span>
+            <span>{{$organ->district}} markaziga</span>
         </h4>
     </div>
 

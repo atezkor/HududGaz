@@ -80,7 +80,7 @@ class RecommendationService extends CrudService {
             $equipments = $recommendation->getEquipments();
 
             $data['equipments'] = $equipments;
-            $data['build_type'] = $this->buildType($proposition->build_type);
+            $data['build_type'] = $proposition->buildType();
             $data['activity'] = $proposition->activity;
         }
 
@@ -88,14 +88,5 @@ class RecommendationService extends CrudService {
 
         $this->pdf->loadView('district.pdf.' . $recommendation->type);
         return $this->pdf->stream(time() . '.pdf');
-    }
-
-    private function buildType(int $type) {
-        $building_type = [
-            1 => __('district.build_type.residential'),
-            2 => __('district.build_type.non_residential')
-        ];
-
-        return $building_type[$type];
     }
 }

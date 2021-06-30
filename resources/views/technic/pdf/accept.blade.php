@@ -15,7 +15,7 @@
         }
 
         body {
-            padding: 20mm 15mm 20mm 30mm;
+            padding: 15mm 15mm 10mm 30mm;
             text-align: justify;
             line-height: 1.3;
             font-size: 12px;
@@ -23,7 +23,6 @@
 
         table {
             width: 100%;
-            vertical-align: text-top;
         }
 
         td {
@@ -38,6 +37,10 @@
         td:last-child {
             text-align: right;
             width: 30%;
+        }
+
+        .text-left {
+            text-align: left;
         }
 
         .text-right {
@@ -116,9 +119,20 @@
             <td>{{$organization->exploitation_section}}</td>
         </tr>
     </table>
-    <table>
+    <table class="text-bold">
         <tr>
-            <td></td>
+            <td>
+                <span>{{$organ->org_number}}, {{$organ->address}}.</span><br>
+                <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
+                <span>E-pochta: {{$organ->email}}</span>
+            </td>
+            <td class="text-left">
+                <div class="f-r">
+                    <span>{{$organ->org_number}}, {{$organ->address}}.</span><br>
+                    <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
+                    <span>E-pochta: {{$organ->email}}</span>
+                </div>
+            </td>
         </tr>
     </table>
 </body>

@@ -28,8 +28,6 @@
             'build_type' => "Bino turi",
             'organ' => "Tashkilot nomi",
             'organ_select' => "Kerakli idorani tanlang",
-            'residential' => "Turar",
-            'non_residential' => "Noturar",
             'file' => "Ariza nusxasi",
             'file_hint' => "Arizani yuklash",
             'alert_message' => "Arizani o\u{2018}chirib tashlamoqchimisiz?",

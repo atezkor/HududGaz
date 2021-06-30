@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property HasOne individual
- * @property HasOne legal
  * @property $applicant
  * @property-read Recommendation recommendation
  * @property-read TechCondition tech_condition
@@ -54,5 +52,12 @@ class Proposition extends Model {
 
     public function limit($limit, int $offset = 0) {
         return $limit[$this->status - $offset];
+    }
+
+    public function buildType(): string {
+        return [
+            1 => __('global.proposition.residential'),
+            2 => __('global.proposition.non_residential')
+        ][$this->build_type];
     }
 }
