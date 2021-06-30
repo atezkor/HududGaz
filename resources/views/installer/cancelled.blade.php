@@ -49,7 +49,7 @@
                             <td>{{$organs[$model->organ]}}</td>
                             <td>
                                 <div class="progress progress-xs">
-                                    <div class="{{progressColor($model->percent($limit))}}"
+                                    <div class="{{$model->progressColor($model->percent($limit))}}"
                                          style="width: {{$model->percent($limit)}}%">
                                     </div>
                                 </div>

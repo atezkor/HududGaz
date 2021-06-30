@@ -44,11 +44,11 @@
                                     </a>
                                 </td>
                                 <td>{{$organs[$model->organ]}}</td>
-                                <td>{{$model->created_at}}</td>
+                                <td>{{$conditions[$key]->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($limit))}}"
-                                             style="width: {{$model->percent($limit)}}%">
+                                        <div class="{{$conditions[$key]->progressColor($model->percent($limit))}}"
+                                             style="width: {{$conditions[$key]->percent($limit)}}%">
                                         </div>
                                     </div>
                                     <div class="text-center">{{$limit}} @lang('global.hour')</div>

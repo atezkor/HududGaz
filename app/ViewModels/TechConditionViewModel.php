@@ -15,11 +15,11 @@ use Spatie\ViewModels\ViewModel;
 class TechConditionViewModel extends ViewModel {
 
     function conditions(): Collection {
-        return TechCondition::query()->where('status', 1)->orderBy('proposition_id')->pluck('id');
+        return $this->models(TechCondition::query(), 1, ['id', 'created_at'],'proposition_id');
     }
 
     function propositions(): Collection {
-        return $this->models(Proposition::query());
+        return $this->models(Proposition::query(), 7, ['id', 'number', 'organ', 'type']);
     }
 
     function physicals(): Collection {
@@ -45,11 +45,11 @@ class TechConditionViewModel extends ViewModel {
         return Status::query()->find(7)->getAttribute('term');
     }
 
-    private function models(Builder $query): Collection {
-        return $query->where('status', '=', 7)->get(['id', 'number', 'organ', 'type', 'created_at']);
+    private function models(Builder $query, $status, $attr = [], $order = 'id'): Collection {
+        return $query->where('status', '=', $status)->orderBy($order)->get($attr);
     }
 
-    private function collections(Builder $query, string $attr): Collection { // $status = 7
+    private function collections(Builder $query, string $attr): Collection {
         return $query->where('status', '=', 7)->pluck($attr);
     }
 }

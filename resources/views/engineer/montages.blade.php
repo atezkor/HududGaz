@@ -51,11 +51,11 @@
                                 <td>{{$organs[$model->organ]}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($model->time($limit)))}}"
-                                             style="width: {{$model->percent($model->time($limit))}}%">
+                                        <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
+                                             style="width: {{$model->percent($model->limit($limit))}}%">
                                         </div>
                                     </div>
-                                    <div class="text-center">{{$model->time($limit)}} @lang('global.hour')</div>
+                                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                 </td>
                                 <td>
                                     <form action="{{route('engineer.montage.confirm', ['montage' => $model])}}" method="post"

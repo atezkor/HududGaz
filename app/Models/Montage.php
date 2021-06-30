@@ -28,7 +28,7 @@ class Montage extends Model {
         return $this->belongsTo(Mounter::class, 'firm');
     }
 
-    public function time($limit) {
-        return $limit[$this->status + 14];
+    public function limit($limit, $distance = 14) {
+        return parent::limit($limit, $distance);
     }
 }

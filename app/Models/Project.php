@@ -23,7 +23,7 @@ class Project extends Model {
         return $this->belongsTo(Designer::class, 'designer');
     }
 
-    public function time($limit) {
-        return $limit[$this->status + 9];
+    public function limit($limit, int $distance = 9) {
+        return parent::limit($limit, $distance);
     }
 }
