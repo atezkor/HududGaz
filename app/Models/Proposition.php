@@ -50,10 +50,6 @@ class Proposition extends Model {
         return $this->belongsTo(Activity::class, 'activity_type');
     }
 
-    public function limit($limit, int $offset = 0) {
-        return $limit[$this->status - $offset];
-    }
-
     public function buildType(): string {
         return [
             1 => __('global.proposition.residential'),

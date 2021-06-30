@@ -29,27 +29,27 @@
                         @php($limit = limitOne(6))
                         @php($l = 0)
                         @php($p = 0)
-                        @foreach($propositions as $key => $model)
+                        @foreach($recommendations as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td>{{$model->number}}</td>
-                                <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
+                                <td>{{$propositions[$key]->number}}</td>
+                                <td>{{$applicant($physicals, $legals, $p, $l, $propositions[$key]->type)}}</td>
                                 <td>
-                                    <a href="{{route('district.recommendation.show', ['recommendation' => $recommendations[$key]])}}" target="_blank">
+                                    <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
                                         @lang('district.show')
                                     </a>
                                 </td>
-                                <td>{{$recommendations[$key]->comment}}</td>
+                                <td>{{$model->comment}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($limit))}}"
+                                        <div class="{{$model->progressColor($model->percent($limit))}}"
                                              style="width: {{$model->percent($limit)}}%">
                                         </div>
                                     </div>
                                     <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                 </td>
                                 <td>
-                                    <a href="{{route('district.recommendation.edit', ['recommendation' => $recommendations[$key]])}}"
+                                    <a href="{{route('district.recommendation.edit', ['recommendation' => $model])}}"
                                        class="btn btn-outline-info">
                                         <i class="fas fa-tools"></i>
                                         <span>@lang('district.btn_correction')</span>

@@ -34,13 +34,13 @@
                     @php($limit = limit(5, 3))
                     @php($l = 0)
                     @php($p = 0)
-                    @foreach($propositions as $key => $model)
+                    @foreach($recommendations as $key => $model)
                         <tr>
                             <td>{{$key + 1}}</td>
-                            <td>{{$model->number}}</td>
-                            <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
+                            <td>{{$propositions[$key]->number}}</td>
+                            <td>{{$applicant($physicals, $legals, $p, $l, $propositions[$key]->type)}}</td>
                             <td>
-                                <a href="{{route('technic.recommendation.show', ['recommendation' => $recommendations[$key]])}}" target="_blank">
+                                <a href="{{route('technic.recommendation.show', ['recommendation' => $model])}}" target="_blank">
                                     @lang('technic.recommendation.show')
                                 </a>
                             </td>
@@ -48,7 +48,7 @@
                             <td>{{$model->created_at}}</td>
                             <td>
                                 <div class="progress progress-xs">
-                                    <div class="{{progressColor($model->percent($model->limit($limit)))}}"
+                                    <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
                                          style="width: {{$model->percent($model->limit($limit))}}%">
                                     </div>
                                 </div>
@@ -56,11 +56,11 @@
                             </td>
                             <td>
                             @if($show)
-                                <a href="{{route('technic.tech_condition.create', ['recommendation' => $recommendations[$key]])}}"
+                                <a href="{{route('technic.tech_condition.create', ['recommendation' => $model])}}"
                                    class="btn btn-outline-info" title="@lang('technic.btn_create')">
                                     <i class="fas fa-plus"></i>
                                 </a>
-                                <button type="button" onclick="back('{{route('technic.recommendation.back', ['recommendation' => $recommendations[$key]])}}')"
+                                <button type="button" onclick="back('{{route('technic.recommendation.back', ['recommendation' => $model])}}')"
                                         class="btn btn-outline-secondary" title="@lang('global.btn_cancel')">
                                     <i class="fas fa-undo"></i>
                                 </button>

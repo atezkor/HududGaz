@@ -63,16 +63,14 @@ class RecommendationViewModel extends ViewModel {
     }
 
     private function models(int $status, string $operator, int $organ): Collection {
-        $add = request()->route()->getName() == "district.recommendations.cancelled";
-        $models = Recommendation::query()->where('organ', $operator, $organ)
+        return Recommendation::query()->where('organ', $operator, $organ)
             ->where('status', '=', $status)
-            ->orderBy('proposition_id');
-        return $add ? $models->get(['id', 'comment']) : $models->pluck('id');
+            ->orderBy('proposition_id')->get(['id', 'status', 'organ', 'comment', 'created_at']);
     }
 
     private function props(Builder $query, array $status, string $operator, int $organ): Models {
         return $query->where('organ', $operator, $organ)
             ->whereIn('status', $status)
-            ->get(['id', 'number', 'type', 'status', 'organ', 'created_at']);
+            ->get(['id', 'number', 'type']);
     }
 }

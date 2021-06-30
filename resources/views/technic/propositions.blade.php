@@ -69,7 +69,7 @@
                                             <td>{{$model->created_at}}</td>
                                             <td>
                                                 <div class="progress progress-xs">
-                                                    <div class="{{progressColor($model->percent($model->limit($limit)))}}"
+                                                    <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
                                                          style="width: {{$model->percent($model->limit($limit))}}%">
                                                     </div>
                                                 </div>
@@ -125,7 +125,7 @@
                                             <td>{{$model->created_at}}</td>
                                             <td>
                                                 <div class="progress progress-xs">
-                                                    <div class="{{progressColor($model->percent($model->limit($limit)))}}"
+                                                    <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
                                                          style="width: {{$model->percent($model->limit($limit))}}%">
                                                     </div>
                                                 </div>

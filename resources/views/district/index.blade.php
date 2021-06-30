@@ -42,11 +42,11 @@
                                     @lang('district.show')
                                 </a>
                             </td>
-                            <td>{{$model->created_at}}</td>
+                            <td>{{$recommendations[$key]->created_at}}</td>
                             <td>
                                 <div class="progress progress-xs">
-                                    <div class="{{progressColor($model->percent($limit))}}"
-                                         style="width: {{$model->percent($limit)}}%">
+                                    <div class="{{$recommendations[$key]->progressColor($recommendations[$key]->percent($limit))}}"
+                                         style="width: {{$recommendations[$key]->percent($limit)}}%">
                                     </div>
                                 </div>
                                 <div class="text-center">{{$limit}} @lang('global.hour')</div>

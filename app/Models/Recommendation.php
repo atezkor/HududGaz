@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  */
 class Recommendation extends Model {
-    public $timestamps = false;
 
     protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'gas_network', 'pipeline', 'length',
         'pipe1', 'pipe2', 'depth', 'capability', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'equipments',
@@ -41,6 +40,10 @@ class Recommendation extends Model {
         }
 
         return $equipments;
+    }
+
+    public function limit($limit, $distance = 2) {
+        return parent::limit($limit, $distance); // 2, 3 -> x(3) - now only 2
     }
 
     public function GasMeters() {

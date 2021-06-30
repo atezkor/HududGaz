@@ -28,20 +28,20 @@
                         @php($limit = limit(5, 3))
                         @php($l = 0)
                         @php($p = 0)
-                        @foreach($propositions as $key => $model)
+                        @foreach($recommendations as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td>{{$model->number}}</td>
-                                <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
+                                <td>{{$propositions[$key]->number}}</td>
+                                <td>{{$applicant($physicals, $legals, $p, $l, $propositions[$key]->type)}}</td>
                                 <td>
-                                    <a href="{{route('district.recommendation.show', ['recommendation' => $recommendations[$key]])}}" target="_blank">
+                                    <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
                                         @lang('district.show')
                                     </a>
                                 </td>
                                 <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="{{progressColor($model->percent($model->limit($limit)))}}"
+                                        <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
                                              style="width: {{$model->percent($model->limit($limit))}}%">
                                         </div>
                                     </div>

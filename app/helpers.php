@@ -51,16 +51,6 @@ function MenuItems(): Illuminate\Database\Eloquent\Collection {
     return App\Models\MenuItem::items(auth()->user())->get();
 }
 
-function progressColor($percent): string {
-    if ($percent > 75)
-        return 'progress-bar bg-success';
-    if ($percent > 25)
-        return 'progress-bar bg-warning';
-    if ($percent > 0)
-        return 'progress-bar bg-danger';
-    return 'progress-bar bg-transparent';
-}
-
 /* This is function for application term */
 function limit(int $status, int $offset = 0): Illuminate\Support\Collection {
     return App\Models\Status::query()->offset($offset)->limit($status - $offset)->pluck('term', 'id');
