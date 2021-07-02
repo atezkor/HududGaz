@@ -16,17 +16,18 @@ class ProfileController extends Controller {
         $this->service = $service;
     }
 
-    public function edit(User $user): View|RedirectResponse {
+    public function edit($user): View|RedirectResponse {
         try {
             $this->authorize('edit_profile');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        if (request()->user()->id !== $user->id)
+        $model = request()->user();
+        if ($model->id != $user)
             return redirect()->back();
 
-        return view('profile', ['model' => $user, 'action' => route('profile.update', ['user' => $user])]);
+        return view('profile', ['model' => $model, 'action' => route('profile.update', ['user' => $user])]);
     }
 
     public function update(ProfileRequest $request, User $user): RedirectResponse {

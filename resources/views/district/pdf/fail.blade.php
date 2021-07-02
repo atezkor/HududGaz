@@ -38,34 +38,21 @@
             margin-bottom: 10px;
         }
 
+        .clear {
+            clear: both;
+        }
+
         .mt-20 {
             margin-top: 20px;
         }
-
-        /*.my-15 {*/
-        /*    margin-top: 15px;*/
-        /*    margin-bottom: 15px;*/
-        /*}*/
-
-        /*.text-left {*/
-        /*    text-align: left;*/
-        /*}*/
 
         .text-right {
             text-align: right;
         }
 
-        /*.text-center {
-            text-align: center;
-        }*/
-
         .text-bold {
             font-weight: bold;
         }
-
-        /*.uppercase {
-            text-transform: uppercase;
-        }*/
 
         .lowercase {
             text-transform: lowercase;
@@ -77,10 +64,6 @@
 
         .f-r {
             float: right;
-        }
-
-        .clear {
-            clear: both;
         }
     </style>
 </head>
@@ -107,12 +90,13 @@
                 sizning <span class="lowercase">{{extendedDate($proposition->created_at, true)}}dagi</span> {{$proposition->number}}-sonli xatingizga javoban quyidagilarni ma&#8217;lum qiladi.</span>
         </div>
     </div>
-
-    <div class="mt-20">
+    <p><br></p>
+    <div>
+        <span class="f-l">&nbsp;&nbsp;&nbsp;&nbsp;</span>
         {!! $model->additional !!}
     </div>
 
-    <table class="mt-20">
+    <table class="text-bold mt-20">
         <tr>
             <td>
                 <span>&#8220;{{$organ->org_name}}&#8221; gaz ta&#8217;minoti</span><br>
