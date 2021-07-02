@@ -49,7 +49,10 @@
             'input' => "ni kiriting",
             'address_hint' => "Manzilni kiriting",
             'point_hint' => "Ulanish nuqtasini kiriting",
-            'pipeline' => "Quvurning yo\u{2018}li",
+            'pipeline' => "Quvur yo\u{2018}li",
+            'pipe_type' => "Quvur turi",
+            'low_pressure' => "Past bosimli",
+            'high_pressure' => "Yuqori bosimli",
             'len_hint' => "Quvur uzunligini kiriting",
             'diameter_hint' => "Quvur diametrini kiriting",
             'depth_hint' => "Chuqurlikni kiriting",
@@ -107,7 +110,7 @@
             'installed_equipments' => "O\u{2018}rnatilgan gaz asboblari",
             'note' => "Texnik tavsiyanoma loyihalash uchun asos bo\u{2018}la olmaydi",
             'type' => "(rusumi, soni)",
-            'noname' => 'past bosimli yer osti _______'
+            'noname' => 'yer osti _____________'
         ],
         'equipment' => [
             'name' => "Jihoz nomi",

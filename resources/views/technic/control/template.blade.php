@@ -1,7 +1,5 @@
 <ol class="px-4" start="5">
-    <li>
-        Gaz taqsimlash punkti (GTP) qurish zarurligi
-    </li>
+    <li>Gaz taqsimlash punkti (GTP) qurish zarurligi</li>
     <li>
         <b>
             Tabiiy gazni yonilg&#8216;i sifatida foydalanuvchi iste&#8217;molchilar kuz-qish mavsumida 3 oy davomida extiyojni qoplaydigan muqobil yoqilg&#8216;i

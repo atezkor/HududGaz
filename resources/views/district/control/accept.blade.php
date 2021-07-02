@@ -29,6 +29,16 @@
         </div>
 
         <div class="form-group">
+            <label for="pipe_type">@lang('district.recommendation.pipe_type')<span class="required">*</span></label>
+            <select name="pipe_type" id="pipe_type" class="custom-select">
+                <option value="low_pressure">@lang('district.recommendation.low_pressure')</option>
+                <option value="high_pressure" @if($model->pipe_type == 'high_pressure') selected @endif>
+                    @lang('district.recommendation.high_pressure')
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="length">@lang('district.recommendation.length')<span class="required">*</span></label>
             <input type="number" name="length" id="length" value="{{$model->length}}"
                    class="form-control" placeholder="@lang('district.recommendation.len_hint')" required>

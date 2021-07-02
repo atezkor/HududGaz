@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property-read Proposition proposition
+ * @property-read int id
  * @property-read Project project
  * @property-read string file
  * @property-read string qrcode

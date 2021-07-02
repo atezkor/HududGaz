@@ -90,7 +90,7 @@
         <div>Sizning <span class="lowercase">{{extendedDate($proposition->created_at, true)}}</span>dagi <span class="text-bold">{{$proposition->id}}</span>-sonli talabnomangizga javoban:</div>
         <div>Tabiiy gaz bilan gazlashtirish loyihasini ishlab chiqish va gazlashtirishga</div>
         <div style="margin: 5px 0">
-            <strong class="uppercase">Texnik shart</strong> No 1 {{formatDate(now())}}
+            <strong class="uppercase">Texnik shart</strong> No {{$id}} {{formatDate(now())}}
         </div>
     </div>
     <div class="conditions">

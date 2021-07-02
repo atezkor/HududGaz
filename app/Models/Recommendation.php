@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Recommendation extends Model {
 
-    protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'gas_network', 'pipeline', 'length',
-        'pipe1', 'pipe2', 'depth', 'capability', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'equipments',
+    protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'gas_network', 'pipeline', 'pipe_type',
+        'length', 'pipe1', 'pipe2', 'depth', 'capability', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'equipments',
         'additional', 'description', 'type', 'file', 'comment'];
 
     public function proposition(): BelongsTo {

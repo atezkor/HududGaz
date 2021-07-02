@@ -2,13 +2,13 @@
     <li>
         <span>Texnik tavsiya bergan gaz ta&#8217;minoti nomi, sanasi raqami va iste&#8217;molchi nomi, manzili va faoliyat turi: &#8220;{{$recommendation->org->org_name}}&#8221; filialining</span>
         <span style="text-transform: lowercase">{{extendedDate($recommendation->created_at, true)}}dagi</span> {{$recommendation->id}}-sonli texnik tavsiyanomasiga asosan,
-        <span>{{$recommendation->address}}da joylashgan, {{$proposition->applicant->name}}ga qarashli <span class="text-lowercase">{{$proposition->buildType()}}</span> binosini gazlashtirish.</span>
+        <span>{{$recommendation->address}}da joylashgan, {{$proposition->applicant->name}}ga qarashli <span style="text-transform: lowercase">{{$proposition->buildType()}}</span> binosini gazlashtirish.</span>
         <br>
     </li>
     <li>
-        Gaz quvuriga ulanish joyi, harakatdagi yer osti/usti, <u>past</u> bosimli gaz tarmog&#8216;iga,
-        ulanish nuqtasiga bo&#8216;lgan masofa: {{$recommendation->length}} p/m, D-{{$recommendation->pipe1}} mm,
-        o&#8216;rt. qishgi - {{$recommendation->pressure_win}} kgc/cm<sup>2</sup>, o&#8216;rt. yozgi - {{$recommendation->pressure_sum}} kgc/cm<sup>2</sup>, <b><u>{{explode(' ', $proposition->org->district)[0]}}</u></b> - GTS
+        <span>Gaz quvuriga ulanish joyi, harakatdagi yer osti/usti, <u class="text-lowercase">@lang("district.recommendation.$recommendation->pipe_type")</u> gaz tarmog&#8216;iga,</span>
+        <span>ulanish nuqtasiga bo&#8216;lgan masofa: {{$recommendation->length}} p/m, D-{{$recommendation->pipe1}} mm,</span>
+        <span>o&#8216;rt. qishgi - {{$recommendation->pressure_win}} kgc/cm<sup>2</sup>, o&#8216;rt. yozgi - {{$recommendation->pressure_sum}} kgc/cm<sup>2</sup>, <b><u>{{$recommendation->grc}}</u></b>-GFT</span>
     </li>
     <li>Soatlik, yillik gaz iste&#8217;moli sarfi: {{$recommendation->consumption}} nm<sup>3</sup>/soat. (5441) nm<sup>3</sup>/yil </li>
     <li>

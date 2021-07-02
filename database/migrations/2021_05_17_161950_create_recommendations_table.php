@@ -20,6 +20,7 @@ class CreateRecommendationsTable extends Migration {
             $table->string('access_point');
             $table->string('gas_network');
             $table->string('pipeline');
+            $table->string('pipe_type')->nullable();
             $table->integer('length');
             $table->integer('pipe1')->nullable();
             $table->integer('pipe2')->nullable();

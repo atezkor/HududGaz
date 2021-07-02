@@ -109,7 +109,7 @@
             <ol>
                 <li>
                     <strong>@lang('district.pdf.object_name')</strong>: {{$model->address}}@lang('district.pdf.in_the') @lang('district.pdf.civil')
-                    {{$consumer->person_name}}@lang('district.pdf.to') @lang('district.pdf.belong_to')
+                    <span>{{$consumer->person_name}}@lang('district.pdf.to') @lang('district.pdf.belong_to')</span>
                 @if($proposition->type === 2)
                     <span>&#8220;{{$activity->activity}}&#8221;</span>
                 @endif
@@ -154,18 +154,19 @@
                     </table>
                 </li>
                 <li class="text-left">
-                    <strong>@lang('district.pdf.grc'):</strong> <span class="f-r">{{$model->grc}}</span>
+                    <strong>@lang('district.pdf.grc'):</strong> <span class="f-r">{{$model->grc}}-GRS</span>
                     <div class="clear"></div>
                     <table class="text-right">
                         <tr>
                             <td class="text-center"><strong>@lang('district.pdf.pipe_real_capacity'):</strong></td>
-                            <td>{{$model->grc}}</td>
+                            <td>{{$model->grc}}-GRS</td>
                         </tr>
                     </table>
                 </li>
                 <li>
                     <strong>@lang('district.pdf.gas_network') </strong>
                     <span>{{$model->gas_network}}</span>
+                    <span class="lowercase">@lang("district.recommendation.$model->pipe_type")</span>
                     <span>@lang('district.pdf.noname')</span>
                 </li>
                 <li>

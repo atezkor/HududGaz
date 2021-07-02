@@ -48,6 +48,7 @@ class TechConditionService extends CrudService {
         $model->update(['status' => 4, 'description' => $data['description']]);
 
         $this->createPDF($model, [
+            'condition' => $tech_condition->id,
             'proposition' => $proposition,
             'filename' => $filename,
             'text' => $data['data'],
@@ -84,6 +85,7 @@ class TechConditionService extends CrudService {
 
         $proposition = $model->proposition;
         $this->createPDF($proposition->recommendation, [
+            'condition' => $proposition->tech_condition->id,
             'proposition' => $proposition,
             'filename' => $filename,
             'text' => $data['data'],
@@ -113,6 +115,7 @@ class TechConditionService extends CrudService {
     private function createPDF(Recommendation $recommendation, array $addition) {
         $organ = $recommendation->org;
         $data = [
+            'id' => $addition['condition'],
             'recommendation' => $recommendation,
             'proposition' => $addition['proposition'],
             'organ' => $organ,
