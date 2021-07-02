@@ -22,7 +22,7 @@ class ProjectViewModel extends ViewModel {
     }
 
     function projects(): Collection {
-        return $this->models(Project::query(), $this->designer, $this->status, ['id', 'applicant', 'condition',
+        return $this->models(Project::query(), ['id', 'applicant', 'condition',
             'organ', 'comment', 'designer', 'status', 'created_at']);
     }
 
@@ -36,9 +36,9 @@ class ProjectViewModel extends ViewModel {
         return limitOne($this->status[0] + 9);
     }
 
-    private function models(Builder $builder, int $designer, array $status, array $attributes = []): Collection {
-        return $builder->where('designer', $this->statement, $designer)
-            ->whereIn('status', $status)
+    private function models(Builder $builder, array $attributes = []): Collection {
+        return $builder->where('designer', $this->statement, $this->designer)
+            ->whereIn('status', $this->status)
             ->orderBy('proposition_id')->get($attributes);
     }
 }

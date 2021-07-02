@@ -11,26 +11,26 @@ use App\Models\Legal;
 use App\Models\Region;
 use Spatie\ViewModels\ViewModel;
 
+
 class PropositionListViewModel extends ViewModel {
 
-    private array $status;
+    private array $statuses;
     private string $operator = '>';
     private int $organ;
 
-    public function __construct($status = [1, 2, 3], int $organ = 0) {
-        $this->status = $status;
+    public function __construct($statuses = [1, 2, 3], int $organ = 0) {
+        $this->statuses = $statuses;
         $this->organ = $organ;
-        if ($organ) {
+        if ($organ)
             $this->operator = '=';
-        }
     }
 
     function individuals(): Models {
-        return $this->models(1, $this->status, $this->operator, $this->organ);
+        return $this->models(1);
     }
 
     function legalEntities(): Models {
-        return $this->models(2, $this->status, $this->operator, $this->organ);
+        return $this->models(2);
     }
 
     function physicals(): Collection {
@@ -47,14 +47,14 @@ class PropositionListViewModel extends ViewModel {
 
     private function collections(Builder $builder, string $attribute): Collection {
         return $builder->where('organ', $this->operator, $this->organ)
-            ->whereIn('status', $this->status)
+            ->whereIn('status', $this->statuses)
             ->pluck($attribute);
     }
 
-    private function models(int $type, array $statuses, string $operator, int $organ): Models {
-        return Proposition::query()->where('organ', $operator, $organ)
+    private function models(int $type): Models {
+        return Proposition::query()->where('organ', $this->operator, $this->organ)
             ->where('type', '=', $type)
-            ->whereIn('status', $statuses)
+            ->whereIn('status', $this->statuses)
             ->get();
     }
 }

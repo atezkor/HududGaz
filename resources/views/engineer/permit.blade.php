@@ -134,8 +134,8 @@
             <span>2 nusxada ishlab chiqarish bo&#8216;limiga</span>
         </li>
         <li>
-            <span>a/keltiruvchi gaz quvuri:</span> <strong>D-{{$recommendation->pipe1}} mm past bosimli</strong><br>
-            <span>b/xovli gaz quvuri:</span> <strong>D-{{$recommendation->pipe2}} mm past bosimli</strong>.
+            <span>a/keltiruvchi gaz quvuri:</span> <strong>D-{{$recommendation->pipe1}} mm @lang("district.recommendation.$recommendation->pipe_type")</strong><br>
+            <span>b/xovli gaz quvuri:</span> <strong>D-{{$recommendation->pipe2}} mm @lang("district.recommendation.$recommendation->pipe_type")</strong>.
         </li>
         <li>
             <span>Iste&#8217;molchi tabiiy gazdan foydalanish bo&#8216;yicha harakatdagi qonun va qoidalarga rioya qilishni o&#8216;z zimmasiga oladi: <b><i>Rahbar</i></b></span>.

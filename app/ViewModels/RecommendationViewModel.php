@@ -24,17 +24,18 @@ class RecommendationViewModel extends ViewModel {
         $this->status = $status;
 
         $this->organ = $organ;
-        if ($organ) {
+        if ($organ)
             $this->operator = '=';
-        }
     }
 
     public function recommendations(): Collection {
-        return $this->models($this->status, $this->operator, $this->organ);
+        return Recommendation::query()->where('organ', $this->operator, $this->organ)
+            ->where('status', '=', $this->status)
+            ->orderBy('proposition_id')->get(['id', 'status', 'organ', 'comment', 'created_at']);
     }
 
     public function propositions(): Models {
-        return $this->props(Proposition::query(), $this->prop_status, $this->operator, $this->organ);
+        return $this->props(Proposition::query());
     }
 
     function physicals(): Collection {
@@ -46,9 +47,8 @@ class RecommendationViewModel extends ViewModel {
     }
 
     public function applicant($physicals, $legals, &$p, &$l, $type): string {
-        if ($type == 1) {
+        if ($type == 1)
             return $physicals[$p ++];
-        }
 
         return $legals[$l ++];
     }
@@ -62,15 +62,9 @@ class RecommendationViewModel extends ViewModel {
             ->whereIn('status', $this->prop_status)->pluck($attr);
     }
 
-    private function models(int $status, string $operator, int $organ): Collection {
-        return Recommendation::query()->where('organ', $operator, $organ)
-            ->where('status', '=', $status)
-            ->orderBy('proposition_id')->get(['id', 'status', 'organ', 'comment', 'created_at']);
-    }
-
-    private function props(Builder $query, array $status, string $operator, int $organ): Models {
-        return $query->where('organ', $operator, $organ)
-            ->whereIn('status', $status)
+    private function props(Builder $query): Models {
+        return $query->where('organ', $this->operator, $this->organ)
+            ->whereIn('status', $this->prop_status)
             ->get(['id', 'number', 'type']);
     }
 }
