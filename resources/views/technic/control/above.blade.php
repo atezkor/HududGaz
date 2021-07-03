@@ -10,7 +10,7 @@
         <span>ulanish nuqtasiga bo&#8216;lgan masofa: {{$recommendation->length}} p/m, D-{{$recommendation->pipe1}} mm,</span>
         <span>o&#8216;rt. qishgi - {{$recommendation->pressure_win}} kgc/cm<sup>2</sup>, o&#8216;rt. yozgi - {{$recommendation->pressure_sum}} kgc/cm<sup>2</sup>, <b><u>{{$recommendation->grc}}</u></b>-GFT</span>
     </li>
-    <li>Soatlik, yillik gaz iste&#8217;moli sarfi: {{$recommendation->consumption}} nm<sup>3</sup>/soat. (5441) nm<sup>3</sup>/yil </li>
+    <li>Soatlik, yillik gaz iste&#8217;moli sarfi: 0 m<sup>3</sup>/soat. {{$recommendation->consumption}} m<sup>3</sup>/yil </li>
     <li>
         <span>Gaz jihozlari:</span>
         <span class="text-bold">
