@@ -20,7 +20,8 @@
                                 <div class="form-group">
                                     <label for="description">@lang('technic.tech_condition.reason')</label>
                                     <input type="text" name="description" id="description" class="form-control"
-                                           placeholder="@lang('technic.tech_condition.reason_hind')" required>
+                                           value="{{$recommendation->description}}" placeholder="@lang('technic.tech_condition.reason_hind')"
+                                           autocomplete="off" required>
                                 </div>
 
                                 <div class="form-group mt-5">

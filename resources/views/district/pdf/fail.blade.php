@@ -69,7 +69,7 @@
 </head>
 <body>
     <div>
-        <span class="f-l"># {{$proposition->id}}</span>
+        <span class="f-l"># {{$model->id}}</span>
         <span class="f-r">{{formatDate($proposition->created_at)}}</span>
     </div>
     <div class="clear">
@@ -90,11 +90,10 @@
                 sizning <span class="lowercase">{{extendedDate($proposition->created_at, true)}}dagi</span> {{$proposition->number}}-sonli xatingizga javoban quyidagilarni ma&#8217;lum qiladi.</span>
         </div>
     </div>
-    <p><br></p>
-    <div>
-        <span class="f-l">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+    <p style="margin-top: 5px;">
         {!! $model->additional !!}
-    </div>
+    </p>
 
     <table class="text-bold mt-20">
         <tr>
