@@ -123,15 +123,15 @@
     <table class="text-bold">
         <tr>
             <td>
-                <span>{{$organ->org_number}}, {{$organ->address}}.</span><br>
-                <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
-                <span>E-pochta: {{$organ->email}}</span>
+                <span>{{$organization->reg_num}}, {{$organization->address}}.</span><br>
+                <span>Telefonlar: {{$organization->phone}}, Faks: {{$organization->fax}}</span><br>
+                <span>E-pochta: {{$organization->email}}</span>
             </td>
             <td class="text-left">
                 <div class="f-r">
-                    <span>{{$organ->org_number}}, {{$organ->address}}.</span><br>
-                    <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
-                    <span>E-pochta: {{$organ->email}}</span>
+                    <span>{{$organization->reg_num}}, {{$organization->address}}.</span><br>
+                    <span>Telefonlar: {{$organization->phone}}, Faks: {{$organization->fax}}</span><br>
+                    <span>E-pochta: {{$organization->email}}</span>
                 </div>
             </td>
         </tr>

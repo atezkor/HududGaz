@@ -86,17 +86,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="address_latin" class="col-sm-2 col-form-label">{{__('admin.organization.address_latin')}}</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="address_latin" id="address_latin" class="form-control"
-                                           value="{{$model->address_latin}}" placeholder="{{__('admin.organization.address_latin')}}">
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="address" class="col-sm-2 col-form-label">{{__('admin.organization.address')}}</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="address" id="address" class="form-control"
                                            value="{{$model->address}}" placeholder="{{__('admin.organization.address')}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="address_krill" class="col-sm-2 col-form-label">{{__('admin.organization.address_krill')}}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="address_krill" id="address_krill" class="form-control"
+                                           value="{{$model->address_krill}}" placeholder="{{__('admin.organization.address_krill')}}">
                                 </div>
                             </div>
                             <div class="form-group row">

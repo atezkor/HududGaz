@@ -111,15 +111,15 @@
     <table class="mt-20 text-bold" style="font-size: 12px">
         <tr>
             <td>
-                <span>{{$organ->org_number}}, {{$organ->address}}.</span><br>
-                <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
-                <span>Elektron pochta: {{$organ->email}}</span>
+                <span>{{$organization->reg_num}}, {{$organization->address}}.</span><br>
+                <span>Telefonlar: {{$organization->phone}}, Faks: {{$organization->fax}}</span><br>
+                <span>E-pochta: {{$organization->email}}</span>
             </td>
-            <td>
+            <td class="text-left">
                 <div class="f-r">
-                    <span>{{$organ->org_number}}, {{$organ->address_krill}}.</span><br>
-                    <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
-                    <span>Elektron pochta: {{$organ->email}}</span>
+                    <span>{{$organization->reg_num}}, {{$organization->address}}.</span><br>
+                    <span>Telefonlar: {{$organization->phone}}, Faks: {{$organization->fax}}</span><br>
+                    <span>E-pochta: {{$organization->email}}</span>
                 </div>
             </td>
         </tr>

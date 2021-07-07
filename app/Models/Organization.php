@@ -18,7 +18,7 @@ class Organization {
     public string $phone = '';
     public ?int $reg_num = null;
     public string $address = '';
-    public string $address_latin = '';
+    public string $address_krill = '';
     public string $email = '';
     public string $fax = '';
     public string $logo = '';
@@ -35,7 +35,7 @@ class Organization {
         $this->reg_num = $data['reg_num'];
         $this->phone = $data['phone'] ?: '';
         $this->address = $data['address'] ?: '';
-        $this->address_latin = $data['address_latin'] ?: '';
+        $this->address_krill = $data['address_krill'] ?: '';
         $this->email = $data['email'] ?: '';
         $this->fax = $data['fax'] ?: '';
 

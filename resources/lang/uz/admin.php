@@ -62,8 +62,8 @@ return [
         'phone' => "Telefon raqami (har birini alohida qatorga yozing)",
         'org_num' => "Tashkilot №",
         'email' => "Elektron pochta manzili",
-        'address_latin' => "Manzili",
-        'address' => "Manzili (krillcha)"
+        'address' => "Manzili",
+        'address_krill' => "Manzili (krillcha)"
     ],
     'organ' => [
         'btn_new' => "Tashkilot qo\u{2018}shish",
