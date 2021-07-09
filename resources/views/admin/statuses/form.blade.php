@@ -38,9 +38,11 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary mr-2">{{__('global.btn_renew')}}</button>
-                            <a href="{{route('admin.statuses.index')}}" class="btn btn-outline-secondary">{{__('global.btn_back')}}</a>
-                            <button type="reset" class="btn btn-default float-right">{{__('global.btn_reset')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('global.btn_renew')}}</button>
+                            <div class="float-right">
+                                <a href="{{route('admin.statuses.index')}}" class="btn btn-outline-secondary">{{__('global.btn_back')}}</a>
+                                <button type="reset" class="btn btn-default">{{__('global.btn_reset')}}</button>
+                            </div>
                         </div>
                     </form>
                 </div>

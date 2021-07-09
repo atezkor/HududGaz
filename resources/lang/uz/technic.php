@@ -49,8 +49,8 @@
             'heading_create' => "Texnik shartni yaratish",
             'heading_edit' => "Texnik shartni yangilash",
             'cond_content' => "Texnik shart tarkibi",
-            'ref' => "Ma\u{2018}lumotnomani",
-            'reference' => "Ma\u{2018}lumotnomani yozing",
+            'ref' => "Ma\u{2019}lumotnoma",
+            'reference' => "Ma\u{2019}lumotnomani yozing",
             'reason' => "Bekor qilish sababi",
             'reason_hind' => "Bekor qilish sababini kiriting (qisqacha)",
         ]

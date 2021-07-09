@@ -30,9 +30,11 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" id="submit" class="btn btn-primary mr-2">@lang('global.btn_save')</button>
-                                <a href="{{route('technic.recommendations')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
-                                <button type="reset" id="reset" class="btn btn-default float-right">@lang('global.btn_reset')</button>
+                                <button type="submit" id="submit" class="btn btn-primary">@lang('global.btn_save')</button>
+                                <div class="float-right">
+                                    <a href="{{route('technic.recommendations')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
+                                    <button type="reset" id="reset" class="btn btn-default">@lang('global.btn_reset')</button>
+                                </div>
                             </div>
                         </form>
                     </div>
