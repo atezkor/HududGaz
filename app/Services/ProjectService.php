@@ -18,13 +18,17 @@ class ProjectService extends CrudService {
         $this->folder = 'projects';
     }
 
-    public function create($data) {
+    public function create($data, $user = null): string {
+        $id = auth()->user()->organ ?? $user;
+        if ($id == null)
+            return __('global.msg.no_allow');
+
         $condition = TechCondition::query()->where('qrcode', $data)
             ->whereHas('proposition', function(Builder $query) {
                 return $query->where('status', 8);
             })->first();
         if (!$condition)
-            return;
+            return __('global.msg.not_found');
 
         $proposition = $condition->getAttribute('proposition');
         $applicant = $proposition->applicant;
@@ -33,12 +37,13 @@ class ProjectService extends CrudService {
             'condition' => $condition->getAttribute('id'),
             'applicant' => $applicant->name,
             'organ' => $proposition->organ,
-            'designer' => auth()->user()->organ ?? 0
+            'designer' => $id
         ];
         $project = new Project($data);
         $project->save();
 
         $proposition->update(['status' => 10]); $applicant->update(['status' => 10]);
+        return __('global.messages.crt');
     }
 
     public function upload(Request $request, Project $project) {
@@ -93,7 +98,7 @@ class ProjectService extends CrudService {
     }
 
     public function delete($model) {
-        $this->propStatus($model, -$model->status);
+        $this->propStatus($model, 7);
         parent::delete($model);
     }
 

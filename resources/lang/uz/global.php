@@ -106,5 +106,10 @@
             'crt' => "Muaffaqiyatli yaratildi",
             'del' => "Muaffaqiyatli o\u{2018}chirildi",
             'upd' => "Muaffaqiyatli yangilandi"
+        ],
+        'msg' => [
+            'no_allow' => "Ruxsat yo\u{2018}q",
+            'not_match' => "Mosliq yo\u{2018}q",
+            'not_found' => "Hujjat topilmadi",
         ]
     ];

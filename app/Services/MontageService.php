@@ -21,13 +21,17 @@ class MontageService extends CrudService {
         $this->pdf = $pdf;
     }
 
-    public function create($data): string {
+    public function create($data, $user = null): string {
+        $id = auth()->user()->organ ?? $user;
+        if ($id == null)
+            return __('global.msg.no_allow');
+
         $condition = TechCondition::query()->where('qrcode', $data)
             ->whereHas('proposition', function(Builder $query) {
                 $query->where('status', 14);
             })->first();
         if (!$condition)
-            return "Yoq";
+            return __('global.msg.not_found');
 
         $proposition = $condition->getAttribute('proposition');
         $applicant = $proposition->applicant;
@@ -44,7 +48,7 @@ class MontageService extends CrudService {
 
         $proposition->update(['status' => 15]); $applicant->update(['status' => 15]);
 
-        return "Bor";
+        return __('global.messages.crt');
     }
 
     public function upload(Request $request, Montage $montage) {
