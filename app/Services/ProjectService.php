@@ -18,11 +18,7 @@ class ProjectService extends CrudService {
         $this->folder = 'projects';
     }
 
-    public function create($data, $user = null): string {
-        $id = auth()->user()->organ ?? $user;
-        if ($id == null)
-            return __('global.msg.no_allow');
-
+    public function create($data): string {
         $condition = TechCondition::query()->where('qrcode', $data)
             ->whereHas('proposition', function(Builder $query) {
                 return $query->where('status', 8);
@@ -37,7 +33,7 @@ class ProjectService extends CrudService {
             'condition' => $condition->getAttribute('id'),
             'applicant' => $applicant->name,
             'organ' => $proposition->organ,
-            'designer' => $id
+            'designer' => auth()->user()->organ ?? 0
         ];
         $project = new Project($data);
         $project->save();

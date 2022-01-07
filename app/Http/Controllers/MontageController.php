@@ -47,10 +47,6 @@ class MontageController extends Controller {
         return redirect()->back();
     }
 
-    function androidCreate(Request $request, int $user): string {
-        return $this->service->create($request->get('qrcode'), $user);
-    }
-
     public function upload(Request $request, Montage $montage): RedirectResponse {
         try {
             $this->authorize('crud_montage');

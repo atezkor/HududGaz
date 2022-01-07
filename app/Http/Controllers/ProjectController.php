@@ -29,7 +29,8 @@ class ProjectController extends Controller {
 
         return view('designer.projects', new ProjectViewModel(designer: request()->user()->organ), [
             'qrcode' => $this->qrcode->generate(json_encode([
-                'token' => csrf_token(), 'url' => route('designer.project.create_android', ['user' => request()->user()])
+                'token' => csrf_token(),
+                'url' => route('designer.project.create_android', ['user' => request()->user()])
             ]))
         ]);
     }
@@ -63,10 +64,6 @@ class ProjectController extends Controller {
 
         $this->service->create($request->get('code'));
         return redirect()->back();
-    }
-
-    public function androidCreate(Request $request, int $user): string {
-        return $this->service->create($request->get('qrcode'), $user);
     }
 
     public function upload(Request $request, Project $project): RedirectResponse|View {

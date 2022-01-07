@@ -21,11 +21,7 @@ class MontageService extends CrudService {
         $this->pdf = $pdf;
     }
 
-    public function create($data, $user = null): string {
-        $id = auth()->user()->organ ?? $user;
-        if ($id == null)
-            return __('global.msg.no_allow');
-
+    public function create($data): string {
         $condition = TechCondition::query()->where('qrcode', $data)
             ->whereHas('proposition', function(Builder $query) {
                 $query->where('status', 14);
