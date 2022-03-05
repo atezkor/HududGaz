@@ -22,3 +22,7 @@ Dastur kerakli kutubxonalar - (extensions php)
 - extension=pdo_mysql
 - extension=gd
 
+
+## Kamchilik
+- AuthServiceProviderda Permission::query ishlatilganligi uchun o'rnatish jarayonida bazaga murojaat bo'lgan va xatolik yuz bergan
+- try, catch ga olindi

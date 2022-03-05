@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Permission;
@@ -25,7 +26,12 @@ class AuthServiceProvider extends ServiceProvider {
     public function boot() {
         $this->registerPolicies();
 
-        $gates = Permission::query()->get(['name', 'role']);
+        try {
+            $gates = Permission::query()->get(['name', 'role']);
+        } catch (QueryException $e) {
+            $gates = [];
+        }
+
         foreach ($gates as $gate) {
             Gate::define($gate->name, function(User $user) use ($gates, $gate) {
                 return count($gates->where('name', $gate->name)->where('role', $user->role)); // 0 | 1
