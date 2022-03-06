@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
  */
 class Region extends BaseModel {
 
-    protected $fillable = ['org_number', 'lead_engineer', 'section_leader', 'region', 'org_name', 'address', 'address_krill',
+    protected $fillable = ['org_number', 'lead_engineer', 'section_leader', 'district', 'org_name', 'address', 'address_krill',
         'email', 'phone', 'fax'];
 
-    public function getDistrictAttribute() {
-        return districts()[$this->getAttribute('region')];
+    public function getDistrictNameAttribute() {
+        return districts()[$this->getAttribute('district')];
     }
 }

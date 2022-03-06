@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Schema;
 class CreateTechConditionsTable extends Migration {
     /**
      * Run the migrations.
-     * Status -> [1 => "Create", 2 => "Upload"]
      * @return void
      */
     public function up() {
         Schema::create('tech_conditions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proposition_id')->index();
+            $table->foreignId('proposition_id')
+                ->constrained('propositions')
+                ->cascadeOnDelete();
             $table->tinyInteger('status')->default(1);
             $table->string('qrcode')->nullable();
             $table->string('file')->nullable();

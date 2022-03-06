@@ -8,6 +8,7 @@ use App\Models\Montage;
 use App\Models\Region;
 use Spatie\ViewModels\ViewModel;
 
+
 class MontageViewModel extends ViewModel {
 
     private array $status;
@@ -37,7 +38,7 @@ class MontageViewModel extends ViewModel {
     }
 
     private function collections(Builder $query): Collection {
-        return $query->where('firm', $this->statement, $this->firm)
+        return $query->where('mounter_id', $this->statement, $this->firm)
             ->whereIn('status', $this->status)->get();
     }
 }

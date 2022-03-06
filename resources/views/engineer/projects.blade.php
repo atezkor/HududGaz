@@ -30,9 +30,9 @@
                         @foreach($projects as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td>{{$model->applicant}}</td>
+                                <td>{{$model->applicant->name}}</td>
                                 <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->condition])}}" target="_blank">
+                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}" target="_blank">
                                         @lang('engineer.show')
                                     </a>
                                 </td>
@@ -41,7 +41,7 @@
                                         @lang('engineer.show')
                                     </a>
                                 </td>
-                                <td>{{$designers[$model->designer]}}</td>
+                                <td>{{$designers[$model->designer_id]}}</td>
                                 <td>{{$organs[$model->organ]}}</td>
                                 <td>
                                     <div class="progress progress-xs">

@@ -28,12 +28,12 @@
                                 </div>
 
                                 <div class="form-group col-6 pl-4">
-                                    <label for="region">{{__('admin.organ.select_hint')}}</label>
-                                    <select name="region" id="region" class="custom-select">
+                                    <label for="district">{{__('admin.organ.select_hint')}}</label>
+                                    <select name="district" id="district" class="custom-select">
                                         <option value="">{{__('admin.select')}}</option>
                                         @foreach($districts as $key => $district)
                                             <option value="{{$key}}"
-                                                    @if ($key == $model->region) selected @endif>
+                                                    @if ($key == $model->district) selected @endif>
                                                 {{$district}}
                                             </option>
                                         @endforeach

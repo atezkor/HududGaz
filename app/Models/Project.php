@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read Proposition proposition
- * @property-read Designer firm
+ * @property-read Designer designer
  * @property-read int id
  * @property-read int organ
  * @property-read int status
  * @property-read string file
  */
 class Project extends Model {
-    protected $fillable = ['proposition_id', 'tech_condition_id', 'designer', 'organ', 'status', 'file', 'comment'];
+    protected $fillable = ['proposition_id', 'tech_condition_id', 'designer_id', 'organ', 'status', 'file', 'comment'];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class, 'proposition_id');
@@ -23,8 +23,8 @@ class Project extends Model {
         return $this->belongsTo(Proposition::class, 'proposition_id');
     }
 
-    public function firm(): BelongsTo {
-        return $this->belongsTo(Designer::class, 'designer');
+    public function designer(): BelongsTo {
+        return $this->belongsTo(Designer::class);
     }
 
     public function limit($limit, int $distance = 9) {

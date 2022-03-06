@@ -50,7 +50,8 @@ class RegionController extends Controller {
 
         $data = $request->validated();
         $this->service->create($data);
-        return redirect()->route('admin.organs.index')->with('msg', __('global.messages.crt'));
+        return redirect()->route('admin.organs.index')
+            ->with('msg', __('global.messages.crt'));
     }
 
     public function edit(Region $organ): View|RedirectResponse {

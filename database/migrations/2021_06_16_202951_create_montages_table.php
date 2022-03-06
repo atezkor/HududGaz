@@ -13,11 +13,13 @@ class CreateMontagesTable extends Migration {
     public function up() {
         Schema::create('montages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proposition_id');
-            $table->unsignedBigInteger('condition');
-            $table->unsignedBigInteger('project');
+            $table->foreignId('proposition_id')
+                ->constrained('propositions')
+                ->cascadeOnDelete();
+            $table->unsignedBigInteger('tech_condition_id');
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('mounter_id');
             $table->string('applicant');
-            $table->tinyInteger('firm');
             $table->integer('status')->default(1);
             $table->tinyInteger('organ');
             $table->string('file')->nullable();

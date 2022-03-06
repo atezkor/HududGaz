@@ -55,11 +55,11 @@ class PropCounterProvider extends ServiceProvider {
     }
 
     private function projects($organ): array {
-        return $this->secondary(Project::query(), 'designer', $organ);
+        return $this->secondary(Project::query(), 'designer_id', $organ);
     }
 
     private function montages($organ): array {
-        return $this->secondary(Montage::query(), 'firm', $organ);
+        return $this->secondary(Montage::query(), 'mounter_id', $organ);
     }
 
     private function secondary(Builder $query, $column, $organ): array {

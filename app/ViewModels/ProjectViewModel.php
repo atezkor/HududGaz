@@ -23,7 +23,7 @@ class ProjectViewModel extends ViewModel {
 
     function projects(): Collection {
         return Project::with('applicant')
-            ->where('designer', $this->statement, $this->designer)
+            ->where('designer_id', $this->statement, $this->designer)
             ->whereIn('status', $this->status)
             ->orderBy('proposition_id')->get();
     }

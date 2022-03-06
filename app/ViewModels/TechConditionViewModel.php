@@ -12,6 +12,7 @@ use App\Models\Region;
 use App\Models\Status;
 use Spatie\ViewModels\ViewModel;
 
+
 class TechConditionViewModel extends ViewModel {
 
     function conditions(): Collection {

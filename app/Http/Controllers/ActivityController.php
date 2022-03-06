@@ -9,6 +9,7 @@ use App\Models\Activity;
 use App\Http\Requests\ActivityRequest;
 use App\Services\Service;
 
+
 class ActivityController extends Controller {
     private Service $service;
 

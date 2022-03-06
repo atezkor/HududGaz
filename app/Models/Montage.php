@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read Proposition proposition
- * @property-read Project project_relation
+ * @property-read Project project
  * @property-read Mounter mounter
  * @property-read int status
  * @property-read string file
@@ -14,18 +14,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int id
  */
 class Montage extends Model {
-    protected $fillable = ['proposition_id', 'condition', 'project', 'applicant', 'firm', 'status', 'organ', 'file', 'comment'];
+    protected $fillable = ['proposition_id', 'tech_condition_id', 'project_id', 'mounter_id', 'applicant', 'status', 'organ', 'file', 'comment'];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);
     }
 
-    public function project_relation(): BelongsTo {
-        return $this->belongsTo(Project::class, 'project');
+    public function project(): BelongsTo {
+        return $this->belongsTo(Project::class, 'project_id');
     }
 
     public function mounter(): BelongsTo {
-        return $this->belongsTo(Mounter::class, 'firm');
+        return $this->belongsTo(Mounter::class);
     }
 
     public function limit($limit, $distance = 14) {

@@ -15,13 +15,17 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class TechCondition extends Model {
 
-    protected $fillable = ['proposition_id', 'qrcode', 'status', 'qrcode', 'file'];
+    protected $fillable = ['proposition_id', 'qrcode', 'status', 'file'];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);
     }
 
     public function project(): HasOne {
-        return $this->hasOne(Project::class, 'condition');
+        return $this->hasOne(Project::class);
+    }
+
+    public function montage(): HasOne {
+        return $this->hasOne(Montage::class);
     }
 }

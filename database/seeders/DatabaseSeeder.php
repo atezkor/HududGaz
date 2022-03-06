@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder {
         $this->call(HelperSeeder::class);
         $this->call(PermissionSeeder::class);
 
-        $this->makeFolder();
+//        $this->makeFolder();
     }
 
     private function makeFolder() {

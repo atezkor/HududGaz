@@ -6,19 +6,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Montage;
-use App\Models\Permit;
-use App\Models\Organization;
 use App\Models\TechCondition;
-use Barryvdh\DomPDF\PDF;
 
 
 class MontageService extends CrudService {
 
-    private PDF $pdf;
-    public function __construct(Montage $model, PDF $pdf) {
+    public function __construct(Montage $model) {
         $this->model = $model;
         $this->folder = 'montages';
-        $this->pdf = $pdf;
     }
 
     public function create($data): string {
@@ -26,6 +21,7 @@ class MontageService extends CrudService {
             ->whereHas('proposition', function(Builder $query) {
                 $query->where('status', 14);
             })->first();
+
         if (!$condition)
             return __('global.msg.not_found');
 
@@ -33,10 +29,10 @@ class MontageService extends CrudService {
         $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,
-            'condition' => $condition->getAttribute('id'),
-            'project' => $condition->getAttribute('project')->id,
+            'tech_condition_id' => $condition->getAttribute('id'),
+            'project_id' => $condition->project->id,
             'applicant' => $applicant->name,
-            'firm' => auth()->user()->organ ?? 0,
+            'mounter_id' => auth()->user()->organ ?? 0,
             'organ' => $proposition->organ
         ];
         $montage = new Montage($data);
@@ -69,12 +65,13 @@ class MontageService extends CrudService {
         return Storage::url("$this->folder/" . $montage->file);
     }
 
-    public function confirm(Request $request, Montage $montage) {
+    public function action(Request $request, Montage $montage) {
         $this->deleteFile($montage->file);
-        $this->update([
-            'status' => 5, 'file' => $this->storeFile($request->file('file'))
-        ], $montage);
-        $this->createLicense($montage);
+        $this->update(
+            ['status' => 5, 'file' => $this->storeFile($request->file('file'))],
+            $montage
+        );
+        $this->propStatus($montage);
     }
 
     public function cancel(string $comment, Montage $montage) {
@@ -91,42 +88,5 @@ class MontageService extends CrudService {
         $proposition = $montage->proposition;
         $proposition->update(['status' => $montage->status + $status]);
         $proposition->applicant->update(['status' => $montage->status + $status]);
-    }
-
-    private function createLicense(Montage $montage) {
-        $proposition = $montage->proposition;
-        $permit = new Permit([
-            'proposition_id' => $proposition->id,
-            'applicant' => $proposition->applicant->name,
-            'project' => $montage->project_relation->id,
-            'montage' => $montage->id,
-            'district' => $proposition->org->region,
-        ]);
-        $permit->save();
-
-        /* Create permit */
-        $this->propStatus($montage);
-        $this->createPDF($permit);
-    }
-
-    private function createPDF(Permit $permit) {
-        $filename = time() . '.pdf';
-        $proposition = $permit->proposition;
-        $recommendation = $proposition->recommendation;
-        $data = [
-            'permit' => $permit,
-            'proposition' => $proposition,
-            'recommendation' => $recommendation,
-            'organization' => Organization::Data(),
-            'designer' => $permit->project_relation->firm->org_name,
-            'installer' => $permit->montage_relation->mounter->short_name,
-            'district' => districts()[$permit->district],
-            'meters' => $recommendation->GasMeters(),
-            'equipments' => $recommendation->getEquipments()
-        ];
-
-        view()->share($data);
-        $this->pdf->loadView('engineer.permit')->save('storage/permits/' . $filename);
-        $permit->update(['file' => $filename]);
     }
 }

@@ -32,7 +32,7 @@
                             <td>{{$key + 1}}</td>
                             <td>{{$model->applicant}}</td>
                             <td>
-                                <a href="{{route('technic.tech_condition.show', ['condition' => $model->condition])}}" target="_blank">
+                                <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}" target="_blank">
                                     @lang('global.btn_show')
                                 </a>
                             </td>

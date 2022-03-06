@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Organization;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use App\Models\Organization;
 use App\Models\Project;
 use App\Models\TechCondition;
 
@@ -33,7 +33,7 @@ class ProjectService extends CrudService {
             'proposition_id' => $proposition->id,
             'tech_condition_id' => $condition->id,
             'organ' => $proposition->organ,
-            'designer' => auth()->user()->organ ?? 0
+            'designer_id' => auth()->user()->organ ?? 0
         ];
 
         $project = new Project($data);
@@ -63,7 +63,8 @@ class ProjectService extends CrudService {
         $proposition = $project->proposition;
         $recommendation = $proposition->recommendation;
         return view('designer.explanatory-letter', [
-            'proposition' => $proposition, 'applicant' => $proposition->applicant,
+            'proposition' => $proposition,
+            'applicant' => $proposition->applicant,
             'recommendation' => $proposition->recommendation,
             'build_type' => $proposition->buildType(),
             'condition' => $proposition->tech_condition,

@@ -13,9 +13,11 @@ class CreateProjectsTable extends Migration {
     public function up() {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proposition_id');
+            $table->foreignId('proposition_id')
+                ->constrained('propositions')
+                ->cascadeOnDelete();
             $table->unsignedBigInteger('tech_condition_id');
-            $table->tinyInteger('designer');
+            $table->unsignedBigInteger('designer_id');
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('organ');
             $table->string('file')->nullable();

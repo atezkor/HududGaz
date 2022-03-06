@@ -12,20 +12,24 @@ use App\Models\Project;
 use App\Models\Designer;
 use App\Models\Montage;
 use App\Models\Mounter;
-use App\Models\Permit;
+use App\Models\License;
 use App\Services\ProjectService;
 use App\Services\MontageService;
+use App\Services\LicenseService;
 use App\ViewModels\ProjectViewModel;
 use App\ViewModels\MontageViewModel;
+
 
 class EngineerController extends Controller {
 
     private ProjectService $projectService;
     private MontageService $montageService;
+    private LicenseService $licenseService;
 
-    public function __construct(ProjectService $projectService, MontageService $montageService) {
+    public function __construct(ProjectService $projectService, MontageService $montageService, LicenseService $licenseService) {
         $this->projectService = $projectService;
         $this->montageService = $montageService;
+        $this->licenseService = $licenseService;
     }
 
     public function projects(): View|RedirectResponse {
@@ -77,12 +81,12 @@ class EngineerController extends Controller {
         }
 
         if ($request->has('comment')) {
-            $data = $request->validate(['comment' => ['required']])['comment'];
-            $this->montageService->cancel($data, $montage);
+            $this->montageService->cancel($request->comment, $montage);
             return redirect()->back();
         }
 
-        $this->montageService->confirm($request, $montage);
+        $this->montageService->action($request, $montage);
+        $this->licenseService->createLicense($montage);
         return redirect()->back();
     }
 
@@ -93,17 +97,20 @@ class EngineerController extends Controller {
             return redirect('/');
         }
 
+        $models = License::with('project', 'montage')
+            ->where('status', 1)
+            ->get();
         return view('engineer.permits', [
-            'models' => Permit::all(),
+            'models' => $models,
             'districts' => districts()
         ]);
     }
 
-    public function show(Permit $permit): RedirectResponse {
+    public function show(License $permit): RedirectResponse {
         return redirect('storage/permits/' . $permit->file);
     }
 
-    public function upload(Request $request, Permit $permit): RedirectResponse {
+    public function upload(Request $request, License $permit): RedirectResponse {
         try {
             $this->authorize('crud_permit');
         } catch (AuthorizationException) {
@@ -134,7 +141,7 @@ class EngineerController extends Controller {
         return view('installer.archive', new MontageViewModel([5]));
     }
 
-    private function storeFile(UploadedFile $file, Permit $permit) {
+    private function storeFile(UploadedFile $file, License $permit) {
         File::delete('storage/permits/' . $permit->file);
         $filename = time() . $file->extension();
         $file->storeAs('public/permits', $filename);

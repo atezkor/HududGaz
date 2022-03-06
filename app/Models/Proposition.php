@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read Proposition applicant
  * @property-read Recommendation recommendation
  * @property-read TechCondition tech_condition
- * @property-read Region org
+ * @property-read Region organization
  * @property-read Activity activity
  * @property int id
  * @property int type
@@ -17,7 +17,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int organ
  * @property-read string file
  * @property-read int build_type
+ * @property string $name
  */
+
 class Proposition extends Model {
 
     protected $fillable = ['number', 'organ', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
@@ -42,7 +44,7 @@ class Proposition extends Model {
         return $this->hasOne(TechCondition::class);
     }
 
-    public function org(): BelongsTo {
+    public function organization(): BelongsTo {
         return $this->belongsTo(Region::class, 'organ');
     }
 

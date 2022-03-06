@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use App\Models\Designer;
 use App\Models\Mounter;
-use App\Models\Permit;
+use App\Models\License;
 use App\Models\Region;
 use App\Models\Proposition;
 use App\ViewModels\MontageViewModel;
@@ -165,7 +165,7 @@ class DirectorController extends Controller {
         }
 
         return view('engineer.permits', [
-            'models' => Permit::all(),
+            'models' => License::all(),
             'districts' => districts()
         ]);
     }

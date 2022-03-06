@@ -24,7 +24,7 @@ class DistrictRequest extends FormRequest {
             'org_number' => ['required'],
             'lead_engineer' => ['required'],
             'section_leader' => ['required'],
-            'region' => ['required'],
+            'district' => ['required'],
             'org_name' => ['required'],
             'address' => ['required'],
             'address_krill' => ['required'],
