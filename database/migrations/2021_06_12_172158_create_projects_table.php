@@ -14,8 +14,7 @@ class CreateProjectsTable extends Migration {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id');
-            $table->unsignedBigInteger('condition');
-            $table->string('applicant');
+            $table->unsignedBigInteger('tech_condition_id');
             $table->tinyInteger('designer');
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('organ');

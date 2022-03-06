@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,6 +13,15 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable {
     use HasFactory, Notifiable;
+
+    /* Role */
+    public const ADMIN = 1;
+    public const TECHNIC = 2;
+    public const REGION = 3;
+    public const DESIGNER = 4;
+    public const ENGINEER = 5;
+    public const MOUNTER = 6;
+    public const DIRECTOR = 7;
 
     /**
      * The attributes that are mass assignable.

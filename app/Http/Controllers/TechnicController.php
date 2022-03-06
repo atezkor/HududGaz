@@ -18,6 +18,7 @@ use App\Models\Region;
 use App\Models\Status;
 use App\ViewModels\TechConditionViewModel;
 
+
 class TechnicController extends Controller {
 
     private TechConditionService $service;

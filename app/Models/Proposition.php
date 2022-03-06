@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property $applicant
+ * @property-read Proposition applicant
  * @property-read Recommendation recommendation
  * @property-read TechCondition tech_condition
  * @property-read Region org

@@ -9,6 +9,7 @@ use App\Models\Designer;
 use App\Http\Requests\DesignerRequest;
 use App\Services\DesignerService;
 
+
 class DesignerController extends Controller {
 
     private DesignerService $service;
@@ -118,7 +119,9 @@ class DesignerController extends Controller {
         }
 
         if ($designer->projects)
-            return redirect()->route('admin.designers.index')->with('msg', __('admin.designer.del_title'))->with('msg_type', 'info');
+            return redirect()->route('admin.designers.index')
+                ->with('msg', __('admin.designer.del_title'))
+                ->with('msg_type', 'info');
 
         $this->service->delete($designer);
         return redirect()->route('admin.designers.index')->with('msg', __('global.messages.del'));

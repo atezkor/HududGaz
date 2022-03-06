@@ -30,9 +30,8 @@ class TechConditionService extends CrudService {
 
     public function create($data, Recommendation $model = null) {
         $proposition = $model->proposition;
-        if (TechCondition::query()->where('proposition_id', $proposition->id)->first()) {
+        if (TechCondition::query()->where('proposition_id', $proposition->id)->first())
             return;
-        }
 
         $filename = time() . '.pdf';
         $attr = [

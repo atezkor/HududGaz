@@ -16,7 +16,7 @@
 - php artisan migrate --seed
 - php artisan serve
 
-## Qo&#8216;shimcha
+## Kutubxonalar (majburiy)
 Dastur kerakli kutubxonalar - (extensions php)
 - extension=fileinfo
 - extension=pdo_mysql
@@ -26,3 +26,6 @@ Dastur kerakli kutubxonalar - (extensions php)
 ## Kamchilik
 - AuthServiceProviderda Permission::query ishlatilganligi uchun o'rnatish jarayonida bazaga murojaat bo'lgan va xatolik yuz bergan
 - try, catch ga olindi
+
+## Qo&#8216;shimcha
+- composer require barryvdh/laravel-debugbar --dev

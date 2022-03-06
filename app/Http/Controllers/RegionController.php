@@ -9,6 +9,7 @@ use App\Models\Region;
 use App\Services\Service;
 use App\Http\Requests\DistrictRequest;
 
+
 class RegionController extends Controller {
 
     private Service $service;

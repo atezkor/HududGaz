@@ -130,8 +130,8 @@
                                 <label for="build_type" class="col-2">@lang('technic.proposition.build_type')</label>
                                 <div class="col-10">
                                     <select name="build_type" id="build_type" class="form-control">
-                                        <option value="1">@lang('technic.proposition.residential')</option>
-                                        <option value="2" @if($model->build_type == 2){{'selected'}}@endif>@lang('technic.proposition.non_residential')</option>
+                                        <option value="1">@lang('global.proposition.residential')</option>
+                                        <option value="2" @if($model->build_type == 2){{'selected'}}@endif>@lang('global.proposition.non_residential')</option>
                                     </select>
                                 </div>
                             </div>

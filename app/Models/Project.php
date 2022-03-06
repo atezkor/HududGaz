@@ -13,10 +13,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read string file
  */
 class Project extends Model {
-    protected $fillable = ['proposition_id', 'applicant', 'condition', 'designer', 'organ', 'status', 'file', 'comment'];
+    protected $fillable = ['proposition_id', 'tech_condition_id', 'designer', 'organ', 'status', 'file', 'comment'];
 
     public function proposition(): BelongsTo {
-        return $this->belongsTo(Proposition::class);
+        return $this->belongsTo(Proposition::class, 'proposition_id');
+    }
+
+    public function applicant(): BelongsTo {
+        return $this->belongsTo(Proposition::class, 'proposition_id');
     }
 
     public function firm(): BelongsTo {

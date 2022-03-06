@@ -30,7 +30,7 @@ class ProjectController extends Controller {
         return view('designer.projects', new ProjectViewModel(designer: request()->user()->organ), [
             'qrcode' => $this->qrcode->generate(json_encode([
                 'token' => csrf_token(),
-                'url' => route('designer.project.create_android', ['user' => request()->user()])
+                'url' => route('designer.project.create_api', ['user' => request()->user()])
             ]))
         ]);
     }
@@ -103,6 +103,7 @@ class ProjectController extends Controller {
             return redirect('/');
         }
 
-        return view('designer.archive', new ProjectViewModel([5], request()->user()->organ));
+        $organ = request()->user()->organ;
+        return view('designer.archive', new ProjectViewModel([5], $organ));
     }
 }

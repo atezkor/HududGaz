@@ -23,22 +23,24 @@ class ProjectService extends CrudService {
             ->whereHas('proposition', function(Builder $query) {
                 return $query->where('status', 8);
             })->first();
+
         if (!$condition)
             return __('global.msg.not_found');
 
-        $proposition = $condition->getAttribute('proposition');
+        $proposition = $condition->proposition;
         $applicant = $proposition->applicant;
         $data = [
             'proposition_id' => $proposition->id,
-            'condition' => $condition->getAttribute('id'),
-            'applicant' => $applicant->name,
+            'tech_condition_id' => $condition->id,
             'organ' => $proposition->organ,
             'designer' => auth()->user()->organ ?? 0
         ];
+
         $project = new Project($data);
         $project->save();
 
-        $proposition->update(['status' => 10]); $applicant->update(['status' => 10]);
+        $proposition->update(['status' => 10]);
+        $applicant->update(['status' => 10]);
         return __('global.messages.crt');
     }
 
@@ -46,13 +48,14 @@ class ProjectService extends CrudService {
         $file = $request->validate(['file' => ['required']]);
         if ($project->file)
             $this->deleteFile($project->file);
+
         $data = [
             'file' => $this->uploadFile($file['file']),
             'status' => 2
         ];
+
         $project->fill($data);
         $this->update($data, $project);
-
         $this->propStatus($project);
     }
 

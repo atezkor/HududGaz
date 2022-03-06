@@ -47,11 +47,11 @@ class UserController extends Controller {
 
     public function checkRole(int $role): Collection {
         switch ($role) {
-            case 3:
+            case User::REGION:
                 return Region::query()->pluck('org_name', 'id');
-            case 4:
+            case User::DESIGNER:
                 return Designer::query()->pluck('org_name', 'id');
-            case 6:
+            case User::MOUNTER:
                 return Mounter::query()->pluck('short_name', 'id');
         }
 
@@ -64,7 +64,6 @@ class UserController extends Controller {
         } catch (AuthorizationException) {
             return redirect('/');
         }
-
 
         $data = $request->validated();
         $this->service->create($data);
