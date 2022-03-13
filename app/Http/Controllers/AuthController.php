@@ -36,6 +36,7 @@ class AuthController extends Controller {
             return redirect()->route('login');
 
         auth()->login($user); // auth()->attempt($data, true)
+        $user->createToken('auth_token');
         return redirect()->route('dashboard');
     }
 

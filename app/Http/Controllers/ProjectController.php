@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Services\ProjectService;
 use App\ViewModels\ProjectViewModel;
 use SimpleSoftwareIO\QrCode\Generator;
+use function GuzzleHttp\Promise\all;
 
 class ProjectController extends Controller {
     private ProjectService $service;
@@ -29,7 +30,7 @@ class ProjectController extends Controller {
 
         return view('designer.projects', new ProjectViewModel(designer: request()->user()->organ), [
             'qrcode' => $this->qrcode->generate(json_encode([
-                'token' => csrf_token(),
+                'token' => request()->user()->getLastToken(),
                 'url' => route('designer.project.create_api', ['user' => request()->user()])
             ]))
         ]);
