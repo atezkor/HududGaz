@@ -47,7 +47,7 @@ class UserController extends Controller {
 
     public function checkRole(int $role): Collection {
         switch ($role) {
-            case User::REGION:
+            case User::DISTRICT:
                 return Region::query()->pluck('org_name', 'id');
             case User::DESIGNER:
                 return Designer::query()->pluck('org_name', 'id');

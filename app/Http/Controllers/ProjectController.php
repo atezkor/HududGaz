@@ -10,7 +10,7 @@ use App\Models\Project;
 use App\Services\ProjectService;
 use App\ViewModels\ProjectViewModel;
 use SimpleSoftwareIO\QrCode\Generator;
-use function GuzzleHttp\Promise\all;
+
 
 class ProjectController extends Controller {
     private ProjectService $service;

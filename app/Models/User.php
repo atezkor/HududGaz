@@ -15,14 +15,15 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable {
     use HasFactory, Notifiable, HasApiTokens;
 
-    /* Role */
+    /* Roles */
     public const ADMIN = 1;
     public const TECHNIC = 2;
-    public const REGION = 3;
+    public const DISTRICT = 3;
     public const DESIGNER = 4;
     public const ENGINEER = 5;
     public const MOUNTER = 6;
     public const DIRECTOR = 7;
+    /* ~ Roles */
 
     /**
      * The attributes that are mass assignable.
@@ -31,10 +32,6 @@ class User extends Authenticatable {
      */
     protected $fillable = ['name', 'role', 'organ', 'username', 'lastname', 'patronymic', 'password', 'locale',
         'position', 'avatar', 'mac_address'];
-
-    public function getLastToken() {
-        return $this->tokens()->orderByDesc('id')->first('token')->getAttribute('token');
-    }
 
     /**
      * The attributes that should be hidden for arrays.

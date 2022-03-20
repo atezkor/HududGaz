@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use Laravel\Sanctum\NewAccessToken;
 use App\Http\Requests\AuthRequest;
+use App\Models\User;
+
 
 class AuthController extends Controller {
 
@@ -36,42 +38,16 @@ class AuthController extends Controller {
             return redirect()->route('login');
 
         auth()->login($user); // auth()->attempt($data, true)
-        $user->createToken('auth_token');
+        file_put_contents('t.txt', $user->createToken('auth_token')->plainTextToken);
         return redirect()->route('dashboard');
     }
 
     private function checkPass($pass, $pass_database): bool {
         return HASH::check($pass, $pass_database);
     }
+
+    private function getLastToken($user) {
+        $token = $user->tokens()->orderByDesc('id')->first('token');
+        return new NewAccessToken($token, $token->getKey().'|'.$token->plainTextToken);
+    }
 }
-
-/* For create super user
- * Route::get('/reg', [AuthController::class, 'create'])->name('create');
- * Route::post('/reg', [AuthController::class, 'store'])->name('store');
- */
-/*
-    public function store(AuthRequest $request): RedirectResponse {
-        if (auth()->user())
-            return redirect('/');
-
-        $data = $request->validated();
-
-        $user = new User();
-        $data['password'] = $this->hashPass($data['password']);
-        $user->fill($data);
-        $user->save();
-
-        return redirect()->route('login');
-    }
-
-    public function create(): View|RedirectResponse {
-        if (auth()->user())
-            return redirect()->route('dashboard');
-
-        return view('register');
-    }
-
-    private function hashPass($pass): string {
-        return Hash::make($pass);
-    }
-*/
