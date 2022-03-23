@@ -30,7 +30,7 @@ class ProjectController extends Controller {
 
         return view('designer.projects', new ProjectViewModel(designer: request()->user()->organ), [
             'qrcode' => $this->qrcode->generate(json_encode([
-                'token' => request()->user()->getLastToken(),
+                'token' => csrf_token(),
                 'url' => route('designer.project.create_api', ['user' => request()->user()])
             ]))
         ]);
