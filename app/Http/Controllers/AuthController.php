@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Sanctum\NewAccessToken;
 use App\Http\Requests\AuthRequest;
 use App\Models\User;
 
@@ -38,7 +37,6 @@ class AuthController extends Controller {
             return redirect()->route('login');
 
         auth()->login($user); // auth()->attempt($data, true)
-        file_put_contents('t.txt', $user->createToken('auth_token')->plainTextToken);
         return redirect()->route('dashboard');
     }
 
@@ -46,8 +44,23 @@ class AuthController extends Controller {
         return HASH::check($pass, $pass_database);
     }
 
-    private function getLastToken($user) {
-        $token = $user->tokens()->orderByDesc('id')->first('token');
-        return new NewAccessToken($token, $token->getKey().'|'.$token->plainTextToken);
+    public function redirect(): RedirectResponse {
+        $user = request()->user();
+        if ($user == null)
+            return redirect()->route('login');
+
+        $role = $user->role;
+        switch ($role) {
+            case 1: return redirect('/admin');
+            case 2: return redirect('/technic');
+            case 3: return redirect('/district');
+            case 4: return redirect('/designer');
+            case 5: return redirect('/engineer');
+            case 6: return redirect('/mounter');
+            case 7: return redirect('/director');
+        }
+
+        auth()->logout();
+        return redirect()->route('login');
     }
 }

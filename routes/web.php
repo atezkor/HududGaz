@@ -73,22 +73,4 @@ Route::prefix('director')->group(function() {
 });
 
 # main route - in route distribution by to roles
-Route::get('/', function() {
-    $user = request()->user();
-    if ($user == null)
-        return redirect()->route('login');
-
-    $role = $user->role;
-    switch ($role) {
-        case 1: return redirect('/admin');
-        case 2: return redirect('/technic');
-        case 3: return redirect('/district');
-        case 4: return redirect('/designer');
-        case 5: return redirect('/engineer');
-        case 6: return redirect('/mounter');
-        case 7: return redirect('/director');
-    }
-
-    auth()->logout();
-    return redirect()->route('login');
-})->name('dashboard');
+Route::get('/', [AuthController::class, 'redirect'])->name('dashboard');
