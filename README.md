@@ -12,7 +12,7 @@
 - `php artisan key:generate`
 
 ## Ishlatish
-- php artisan storage:link
+- php artisan storage:link - public papkasiga havola yaratish uchun. Papka config orqali sozlanishi mumkin.
 - php artisan migrate --seed
 - php artisan serve
 
