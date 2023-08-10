@@ -3,13 +3,10 @@
 namespace App\Services;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\File;
 use App\Services\Interfaces\ICrudService;
 
 
 abstract class CrudService implements ICrudService {
-
     /**
      * @var Model
      * This variable for detect Model
@@ -32,15 +29,5 @@ abstract class CrudService implements ICrudService {
 
     public function delete($model) {
         $model->delete();
-    }
-
-    protected function storeFile(UploadedFile $file): string {
-        $filename = time() . '.' . $file->extension();
-        $file->storeAs("public/$this->folder", $filename);
-        return $filename;
-    }
-
-    protected function deleteFile(string $file) {
-        File::delete("storage/$this->folder/" . $file);
     }
 }

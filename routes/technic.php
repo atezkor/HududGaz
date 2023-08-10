@@ -24,4 +24,4 @@ Route::get('organ-section', [App\Http\Controllers\TechnicController::class, 'org
 Route::get('more', [App\Http\Controllers\TechnicController::class, 'more'])->name('technic.more');
 
 Route::get('propositions/check-stir/{type?}/{stir?}', [App\Http\Controllers\TechnicController::class, 'check'])->name('technic.check_stir');
-Route::get('propositions/{type?}/{stir?}', [App\Http\Controllers\PropositionController::class, 'propositions'])->name('technic.propositions');
+Route::get('propositions/{type?}/{stir?}', [App\Http\Controllers\PropositionController::class, 'available'])->name('technic.propositions');

@@ -2,15 +2,20 @@
 
 namespace App\Services;
 
-use App\Models\Montage;
-use App\Models\License;
-use App\Models\Organization;
 use Barryvdh\DomPDF\PDF;
+use App\Models\License;
+use App\Models\Montage;
+use App\Models\Organization;
+use App\Utilities\FileUploadManager;
+use App\Utilities\StorageManager;
 
 
 class LicenseService extends CrudService {
 
+    use FileUploadManager, StorageManager;
+
     private PDF $pdf;
+
     public function __construct(PDF $pdf) {
         $this->folder = 'montages';
         $this->pdf = $pdf;
@@ -52,5 +57,13 @@ class LicenseService extends CrudService {
         view()->share($data);
         $this->pdf->loadView('engineer.permit')->save('storage/permits/' . $filename);
         $license->update(['file' => $filename]);
+    }
+
+    public function upload($file, License $permit) {
+        $this->deleteFile('storage/permits/', $permit->file);
+        $filename = $this->storeFile($file, 'permits');
+
+        $permit->update(['file' => $filename, 'status' => 2]);
+        $permit->proposition->update(['status' => 20]);
     }
 }

@@ -13,6 +13,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read string file
  */
 class Project extends Model {
+
+    public const CREATED = 1;
+    public const CANCELLED = 4;
+    public const COMPLETED = 5;
+
     protected $fillable = ['proposition_id', 'tech_condition_id', 'designer_id', 'organ', 'status', 'file', 'comment'];
 
     public function proposition(): BelongsTo {

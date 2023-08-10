@@ -9,7 +9,9 @@ use App\Models\Status;
 use App\Services\Service;
 use App\Http\Requests\StatusRequest;
 
+
 class StatusController extends Controller {
+
     private Service $service;
 
     public function __construct() {
@@ -45,8 +47,10 @@ class StatusController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.statuses.form', ['action' => route('admin.statuses.update', ['status' => $status]),
-            'model' => $status]);
+        return view('admin.statuses.form', [
+            'action' => route('admin.statuses.update', ['status' => $status]),
+            'model' => $status
+        ]);
     }
 
     /**

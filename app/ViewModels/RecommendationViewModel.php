@@ -2,15 +2,11 @@
 
 namespace App\ViewModels;
 
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as Models;
-use App\Models\Recommendation;
-use App\Models\Proposition;
-use App\Models\Individual;
-use App\Models\Legal;
-use App\Models\Region;
+use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
+use App\Models\{Individual, LegalProposition, Proposition, Recommendation, Region};
 
 
 class RecommendationViewModel extends ViewModel {
@@ -43,14 +39,14 @@ class RecommendationViewModel extends ViewModel {
     }
 
     function legals(): Collection {
-        return $this->collections(Legal::query(), 'legal_name');
+        return $this->collections(LegalProposition::query(), 'legal_name');
     }
 
     public function applicant($physicals, $legals, &$p, &$l, $type): string {
         if ($type == 1)
-            return $physicals[$p ++];
+            return $physicals[$p++];
 
-        return $legals[$l ++];
+        return $legals[$l++];
     }
 
     public function organs(): Collection {

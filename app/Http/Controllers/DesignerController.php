@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Designer;
 use App\Http\Requests\DesignerRequest;
 use App\Services\DesignerService;
+use App\Models\Designer;
 
 
 class DesignerController extends Controller {
@@ -47,8 +47,10 @@ class DesignerController extends Controller {
         }
 
         $model = new Designer();
-        return view('admin.designers.form', ['action' => route('admin.designers.store'),
-            'method' => 'POST', 'model' => $model]);
+        return view('admin.designers.form', [
+            'action' => route('admin.designers.store'),
+            'method' => 'POST', 'model' => $model
+        ]);
     }
 
     /**
@@ -82,8 +84,10 @@ class DesignerController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.designers.form', ['action' => route('admin.designers.update', ['designer' => $designer]),
-            'method' => 'PUT', 'model' => $designer]);
+        return view('admin.designers.form', [
+            'action' => route('admin.designers.update', ['designer' => $designer]),
+            'method' => 'PUT', 'model' => $designer
+        ]);
     }
 
     /**

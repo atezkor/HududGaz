@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
@@ -20,6 +21,7 @@ use App\ViewModels\TechConditionViewModel;
 
 
 class TechnicController extends Controller {
+    use ValidatesRequests;
 
     private TechConditionService $service;
     private RecommendationService $rec_service;
@@ -50,7 +52,8 @@ class TechnicController extends Controller {
     }
 
     public function show(Recommendation $recommendation): RedirectResponse {
-        return $this->rec_service->techShow($recommendation);
+        $url = $this->rec_service->techShow($recommendation);
+        return redirect("$url");
     }
 
     public function create(Recommendation $recommendation): View|RedirectResponse {

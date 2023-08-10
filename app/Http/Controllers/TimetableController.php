@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use App\Models\Timetable;
 use App\Services\Service;
 
+
 class TimetableController extends Controller {
 
     private Service $service;
@@ -37,8 +38,11 @@ class TimetableController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.table.form', ['model' => new Timetable(),
-            'action' => route('admin.timetable.store'), 'method' => 'POST']);
+        return view('admin.table.form', [
+            'model' => new Timetable(),
+            'action' => route('admin.timetable.store'),
+            'method' => 'POST'
+        ]);
     }
 
     public function store(Request $request): RedirectResponse {
@@ -60,8 +64,11 @@ class TimetableController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.table.form', ['model' => $timetable, 'method' => 'PUT',
-            'action' => route('admin.timetable.update', ['timetable'=> $timetable])]);
+        return view('admin.table.form', [
+            'model' => $timetable,
+            'method' => 'PUT',
+            'action' => route('admin.timetable.update', ['timetable'=> $timetable])
+        ]);
     }
 
     public function update(Request $request, Timetable $timetable): RedirectResponse {

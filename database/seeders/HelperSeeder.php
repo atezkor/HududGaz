@@ -7,7 +7,7 @@ use App\Models\Region;
 use App\Models\Activity;
 use App\Models\Proposition;
 use App\Models\Individual;
-use App\Models\Legal;
+use App\Models\LegalProposition;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
 use App\Models\Designer;
@@ -70,7 +70,7 @@ class HelperSeeder extends Seeder {
                 'file' => '100.pdf'
             ]);
 
-            Legal::query()->create([
+            LegalProposition::query()->create([
                 'proposition_id' => $key + 1,
                 'organ' => 1,
                 'legal_stir' => rand(1000, 5000) + rand(100, 500),

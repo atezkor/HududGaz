@@ -6,10 +6,11 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use SimpleSoftwareIO\QrCode\Generator;
 use App\Models\Montage;
 use App\Services\MontageService;
 use App\ViewModels\MontageViewModel;
-use SimpleSoftwareIO\QrCode\Generator;
+
 
 class MontageController extends Controller {
 
@@ -54,7 +55,13 @@ class MontageController extends Controller {
             return redirect('/');
         }
 
-        $this->service->upload($request, $montage);
+        if ($request->has('diameter')) {
+            $this->service->updatePart($request->get('diameter'), $montage);
+            redirect()->back();
+        }
+
+        $data = $request->validate(['file' => ['required']]);
+        $this->service->upload($data, $montage);
         return redirect()->back();
     }
 
@@ -89,7 +96,7 @@ class MontageController extends Controller {
             return redirect('/');
         }
 
-        return view('installer.archive', new MontageViewModel([5]));
+        return view('installer.archive', new MontageViewModel([Montage::COMPLETED]));
     }
 
     public function delete(Montage $montage): RedirectResponse {

@@ -2,15 +2,16 @@
 
 namespace App\Services;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Organization;
 use App\Models\Recommendation;
+use App\Utilities\FileUploadManager;
+use App\Utilities\StorageManager;
 use Barryvdh\DomPDF\PDF;
 
 
 class RecommendationService extends CrudService {
+    use FileUploadManager, StorageManager;
 
     private string $path = 'public/recommendations/';
     private PDF $pdf;
@@ -22,48 +23,6 @@ class RecommendationService extends CrudService {
     }
 
     public function show(Recommendation $recommendation): Response {
-        return $this->createPDF($recommendation);
-    }
-
-    /**
-     * This function allows the person to see the file
-     */
-    public function techShow(Recommendation $recommendation): RedirectResponse {
-        $proposition = $recommendation->proposition;
-        if ($proposition->status == 4) {
-            $proposition->update(['status' => 5]);
-            $proposition->applicant->update(['status' => 5]);
-        }
-
-        return redirect(Storage::url($this->path . $recommendation->getAttribute('file')));
-    }
-
-    public function upload($request, Recommendation $recommendation) {
-        if ($recommendation->file)
-            $this->deleteFile($recommendation->file);
-        $recommendation->setAttribute('status', 2);
-        $recommendation->setAttribute('file', $this->storeFile($request->file('file')));
-        $recommendation->update();
-    }
-
-    /**
-     * This function for back recommendation to District
-     */
-    public function back(Recommendation $recommendation, string $comment) {
-        $recommendation->setAttribute('comment', $comment);
-        $recommendation->setAttribute('status', 3);
-        $recommendation->update();
-
-        $recommendation->proposition->update(['status' => 6]);
-        $recommendation->proposition->applicant->update(['status' => 6]);
-    }
-
-    public function update($data, $model) {
-        $data['status'] = 1;
-        parent::update($data, $model);
-    }
-
-    private function createPDF(Recommendation $recommendation): Response {
         $proposition = $recommendation->proposition;
         $organ = $recommendation->org;
 
@@ -84,9 +43,47 @@ class RecommendationService extends CrudService {
             $data['activity'] = $proposition->activity;
         }
 
-        view()->share($data);
+        view()->share($data); // TODO
 
         $this->pdf->loadView('district.pdf.' . $recommendation->type);
         return $this->pdf->stream(time() . '.pdf');
+    }
+
+    /**
+     * This function allows the person to see the file
+     */
+    public function techShow(Recommendation $recommendation): string {
+        $proposition = $recommendation->proposition;
+        if ($proposition->status == 4) {
+            $proposition->update(['status' => 5]);
+            $proposition->applicant->update(['status' => 5]);
+        }
+
+        return $this->fileUrl($this->path, $recommendation->getAttribute('file'));
+    }
+
+    public function upload($request, Recommendation $recommendation) {
+        if ($recommendation->file)
+            $this->deleteFile($this->folder, $recommendation->file);
+        $recommendation->setAttribute('status', 2);
+        $recommendation->setAttribute('file', $this->storeFile($request->file('file'), $this->folder));
+        $recommendation->update();
+    }
+
+    /**
+     * This function for back recommendation to District
+     */
+    public function back(Recommendation $recommendation, string $comment) {
+        $recommendation->setAttribute('comment', $comment);
+        $recommendation->setAttribute('status', 3);
+        $recommendation->update();
+
+        $recommendation->proposition->update(['status' => 6]);
+        $recommendation->proposition->applicant->update(['status' => 6]);
+    }
+
+    public function update($data, $model) {
+        $data['status'] = 1;
+        parent::update($data, $model);
     }
 }

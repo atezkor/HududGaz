@@ -2,15 +2,17 @@
 
 namespace App\Services;
 
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Models\Organization;
 use App\Models\Project;
 use App\Models\TechCondition;
+use App\Utilities\FileUploadManager;
+use App\Utilities\StorageManager;
 
 
 class ProjectService extends CrudService {
+    use FileUploadManager, StorageManager;
+
     private string $path = '/storage/projects/';
 
     public function __construct(Project $model) {
@@ -44,13 +46,12 @@ class ProjectService extends CrudService {
         return __('global.messages.crt');
     }
 
-    public function upload(Request $request, Project $project) {
-        $file = $request->validate(['file' => ['required']]);
+    public function upload($file, Project $project) {
         if ($project->file)
-            $this->deleteFile($project->file);
+            $this->deleteFile($this->folder, $project->file);
 
         $data = [
-            'file' => $this->uploadFile($file['file']),
+            'file' => $this->storeFile($file['file'], $this->folder),
             'status' => 2
         ];
 
@@ -59,10 +60,10 @@ class ProjectService extends CrudService {
         $this->propStatus($project);
     }
 
-    public function generateLetter(Project $project): View {
+    public function generateLetter(Project $project): array {
         $proposition = $project->proposition;
         $recommendation = $proposition->recommendation;
-        return view('designer.explanatory-letter', [
+        return [
             'proposition' => $proposition,
             'applicant' => $proposition->applicant,
             'recommendation' => $proposition->recommendation,
@@ -71,7 +72,7 @@ class ProjectService extends CrudService {
             'organization' => Organization::Data()->shareholder_name,
             'gas_meters' => $recommendation->GasMeters(),
             'equipments' => $recommendation->getEquipments()
-        ]);
+        ];
     }
 
     public function show(Project $project, $show = null): string {
@@ -83,10 +84,11 @@ class ProjectService extends CrudService {
         return $this->path . $project->file;
     }
 
-    public function confirm(Request $request, Project $project) {
-        $this->deleteFile($project->file);
+    public function confirm($file, Project $project) {
+        $this->deleteFile($this->folder, $project->file);
         $this->update([
-            'status' => 5, 'file' => $this->uploadFile($request->file('file'))
+            'status' => 5,
+            'file' => $this->storeFile($file, $this->folder)
         ], $project);
 
         $this->propStatus($project);
@@ -100,10 +102,6 @@ class ProjectService extends CrudService {
     public function delete($model) {
         $this->propStatus($model, 7);
         parent::delete($model);
-    }
-
-    private function uploadFile($file): string {
-        return $this->storeFile($file);
     }
 
     private function propStatus(Project $project, $status = 9) {

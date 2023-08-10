@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Activity;
 use App\Http\Requests\ActivityRequest;
 use App\Services\Service;
+use App\Models\Activity;
 
 
 class ActivityController extends Controller {
+
     private Service $service;
 
     public function __construct() {

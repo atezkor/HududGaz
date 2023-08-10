@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MounterRequest;
+use App\Models\Mounter;
+use App\Services\MounterService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Mounter;
-use App\Services\MounterService;
-use App\Http\Requests\MounterRequest;
+
 
 class MounterController extends Controller {
+
     private MounterService $service;
 
     public function __construct(MounterService $service) {
@@ -45,8 +47,12 @@ class MounterController extends Controller {
         }
 
         $model = new Mounter();
-        return view('admin.mounters.form', ['action' => route('admin.mounters.store'),
-            'method' => 'POST', 'model' => $model, 'districts' => districts()]);
+        return view('admin.mounters.form', [
+            'action' => route('admin.mounters.store'),
+            'method' => 'POST',
+            'model' => $model,
+            'districts' => districts()
+        ]);
     }
 
     /**
@@ -80,8 +86,12 @@ class MounterController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.mounters.form', ['action' => route('admin.mounters.update', ['mounter' => $mounter]),
-            'method' => 'PUT', 'model' => $mounter, 'districts' => districts()]);
+        return view('admin.mounters.form', [
+            'action' => route('admin.mounters.update', ['mounter' => $mounter]),
+            'method' => 'PUT',
+            'model' => $mounter,
+            'districts' => districts()
+        ]);
     }
 
     /**

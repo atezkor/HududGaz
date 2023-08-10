@@ -4,10 +4,10 @@ namespace App\ViewModels;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-use App\Models\Montage;
-use App\Models\Region;
 use Spatie\ViewModels\ViewModel;
-
+use App\Models\{
+    Montage, Region
+};
 
 class MontageViewModel extends ViewModel {
 
@@ -15,7 +15,7 @@ class MontageViewModel extends ViewModel {
     private int $firm;
     private string $statement = '>';
 
-    public function __construct(array $status = [1], $user = null) {
+    public function __construct(array $status = [Montage::CREATED], $user = null) {
         $this->status = $status;
         $this->firm = $user->organ ?? 0;
 
@@ -24,7 +24,7 @@ class MontageViewModel extends ViewModel {
     }
 
     function models(): Collection {
-        return $this->collections(Montage::query());
+        return $this->collections(Montage::query(), $this->status);
     }
 
     function organs(): Collection {
@@ -37,8 +37,8 @@ class MontageViewModel extends ViewModel {
         return limitOne(15);
     }
 
-    private function collections(Builder $query): Collection {
+    private function collections(Builder $query, $status): Collection {
         return $query->where('mounter_id', $this->statement, $this->firm)
-            ->whereIn('status', $this->status)->get();
+            ->whereIn('status', $status)->get();
     }
 }

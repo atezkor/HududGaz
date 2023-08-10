@@ -3,13 +3,15 @@
 namespace App\Services;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Montage;
 use App\Models\TechCondition;
+use App\Utilities\FileUploadManager;
+use App\Utilities\StorageManager;
 
 
 class MontageService extends CrudService {
+    use FileUploadManager, StorageManager;
 
     public function __construct(Montage $model) {
         $this->model = $model;
@@ -17,7 +19,8 @@ class MontageService extends CrudService {
     }
 
     public function create($data): string {
-        $condition = TechCondition::query()->where('qrcode', $data)
+        $condition = TechCondition::query()
+            ->where('qrcode', $data)
             ->whereHas('proposition', function(Builder $query) {
                 $query->where('status', 14);
             })->first();
@@ -38,21 +41,25 @@ class MontageService extends CrudService {
         $montage = new Montage($data);
         $montage->save();
 
-        $proposition->update(['status' => 15]); $applicant->update(['status' => 15]);
+        $proposition->update(['status' => 15]);
+        $applicant->update(['status' => 15]);
 
         return __('global.messages.crt');
     }
 
-    public function upload(Request $request, Montage $montage) {
-        if ($request->has('diameter')) {
-            $montage->proposition->recommendation->update(['pipe2' => $request->get('diameter')]);
-            return;
-        }
+    public function updatePart($data, $model) {
+        $model->proposition->recommendation->update(['pipe2' => $data]);
+    }
 
-        $data = $request->validate(['file' => ['required']]);
+    public function upload($data, Montage $montage) {
         if ($this->model->file)
-            $this->deleteFile($this->model->file);
-        $montage->update(['status' => 2, 'file' => $this->storeFile($data['file'])]);
+            $this->deleteFile($this->folder, $this->model->file);
+
+        $montage->update([
+            'status' => 2,
+            'file' => $this->storeFile($data['file'], $this->folder)
+        ]);
+
         $this->propStatus($montage);
     }
 
@@ -65,10 +72,10 @@ class MontageService extends CrudService {
         return Storage::url("$this->folder/" . $montage->file);
     }
 
-    public function action(Request $request, Montage $montage) {
-        $this->deleteFile($montage->file);
+    public function action($file, Montage $montage) {
+        $this->deleteFile($this->folder, $montage->file);
         $this->update(
-            ['status' => 5, 'file' => $this->storeFile($request->file('file'))],
+            ['status' => 5, 'file' => $this->storeFile($file, $this->folder)],
             $montage
         );
         $this->propStatus($montage);

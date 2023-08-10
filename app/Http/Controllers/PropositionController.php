@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Proposition;
-use App\Models\Individual;
+use App\Http\Requests\PropositionRequest;
 use App\Models\Activity;
+use App\Models\Individual;
+use App\Models\Proposition;
 use App\Models\Region;
 use App\Services\PropositionService;
-use App\Http\Requests\PropositionRequest;
 use App\ViewModels\PropositionListViewModel;
+
 
 class PropositionController extends Controller {
 
@@ -52,10 +52,13 @@ class PropositionController extends Controller {
 
         $model = new Proposition();
         $organs = Region::query()->pluck('org_name', 'id');
-        return view('technic.form', ['action' => route('propositions.store'), 'method' => 'POST',
+        $activities = Activity::query()->skip(1)->take(5)->pluck('activity', 'id');
+        return view('technic.form', [
+            'action' => route('propositions.store'),
+            'method' => 'POST',
             'model' => $model, 'organs' => $organs,
             'applicant' => new Individual(),
-            'activities' => Activity::query()->skip(1)->take(5)->pluck('activity', 'id')
+            'activities' => $activities
         ]);
     }
 
@@ -84,7 +87,8 @@ class PropositionController extends Controller {
      * @return RedirectResponse
      */
     public function show(Proposition $proposition): RedirectResponse {
-        return $this->service->show($proposition);
+        $url = $this->service->show($proposition);
+        return redirect($url);
     }
 
     /**
@@ -102,7 +106,8 @@ class PropositionController extends Controller {
 
         $applicant = $proposition->applicant;
         $organs = Region::query()->pluck('org_name', 'id');
-        return view('technic.form', ['action' => route('propositions.update', ['proposition' => $proposition]),
+        return view('technic.form', [
+            'action' => route('propositions.update', ['proposition' => $proposition]),
             'method' => 'PUT', 'model' => $proposition,
             'applicant' => $applicant,
             'organs' => $organs,
@@ -146,22 +151,16 @@ class PropositionController extends Controller {
         return redirect()->route('propositions.index');
     }
 
-    public function propositions(int $type, int $stir): View|RedirectResponse {
+    public function available(int $type, int $stir): View|RedirectResponse {
         try {
             $this->authorize('crud_prop');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
+
         return view('technic.filter', [
-            'models' => Proposition::query()->whereHas($type == 1 ? 'individual' : 'legal', function(Builder $query) use ($type, $stir) {
-                if ($type == 1)
-                    $query->where('stir', $stir);
-                elseif($type == 2)
-                    $query->where('legal_stir', $stir);
-                else
-                    $query->where('leader_stir', $stir);
-            })->get(['id', 'number', 'type', 'organ', 'created_at']),
+            'models' => $this->service->available($type, $stir),
             'organs' => Region::query()->pluck('org_name', 'id'),
             'type' => $type,
             'stir' => $stir

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FitterRequest;
-use App\Models\Fitter;
-use App\Services\MounterService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\FitterRequest;
+use App\Services\MounterService;
+use App\Models\Fitter;
+
 
 class FitterController extends Controller {
+
     private MounterService $service;
 
     public function __construct(MounterService $service) {
@@ -25,7 +27,10 @@ class FitterController extends Controller {
     public function index(Request $request): View|RedirectResponse {
         $firm = $request->get('firm');
         $models = Fitter::query()->where('firm_id', '=', $firm)->get();
-        return view('admin.mounters.workers', ['models' => $models, 'firm_id' => $firm]);
+        return view('admin.mounters.workers', [
+            'models' => $models,
+            'firm_id' => $firm
+        ]);
     }
 
     /**
@@ -37,8 +42,13 @@ class FitterController extends Controller {
     public function create(Request $request): View|RedirectResponse {
         $model = new Fitter();
         $firm = $request->get('firm');
-        return view('admin.mounters.manage', ['action' => route('admin.fitters.store'),
-            'method' => 'POST', 'model' => $model, 'firm_id' => $firm]);
+
+        return view('admin.mounters.manage', [
+            'action' => route('admin.fitters.store'),
+            'method' => 'POST',
+            'model' => $model,
+            'firm_id' => $firm
+        ]);
     }
 
     /**
@@ -62,8 +72,11 @@ class FitterController extends Controller {
      * @return View|RedirectResponse
      */
     public function edit(Fitter $fitter): View|RedirectResponse {
-        return view('admin.mounters.manage', ['action' => route('admin.fitters.update', ['fitter' => $fitter]),
-            'method' => 'PUT', 'model' => $fitter]);
+        return view('admin.mounters.manage', [
+            'action' => route('admin.fitters.update', ['fitter' => $fitter]),
+            'method' => 'PUT',
+            'model' => $fitter
+        ]);
     }
 
     /**
@@ -89,6 +102,8 @@ class FitterController extends Controller {
      */
     public function destroy(Fitter $fitter): RedirectResponse {
         $this->service->deleteWorker($fitter);
-        return redirect()->route('admin.fitters.index', ['firm' => $fitter->getAttribute('firm_id')]);
+        return redirect()->route('admin.fitters.index', [
+            'firm' => $fitter->getAttribute('firm_id')
+        ]);
     }
 }

@@ -3,9 +3,9 @@
 namespace App\ViewModels;
 
 use Illuminate\Support\Collection;
+use Spatie\ViewModels\ViewModel;
 use App\Models\Project;
 use App\Models\Region;
-use Spatie\ViewModels\ViewModel;
 
 
 class ProjectViewModel extends ViewModel {

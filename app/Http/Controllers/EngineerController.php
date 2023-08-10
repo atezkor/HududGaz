@@ -5,19 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
-use App\Models\Project;
 use App\Models\Designer;
+use App\Models\License;
 use App\Models\Montage;
 use App\Models\Mounter;
-use App\Models\License;
-use App\Services\ProjectService;
-use App\Services\MontageService;
+use App\Models\Project;
 use App\Services\LicenseService;
-use App\ViewModels\ProjectViewModel;
+use App\Services\MontageService;
+use App\Services\ProjectService;
 use App\ViewModels\MontageViewModel;
+use App\ViewModels\ProjectViewModel;
 
 
 class EngineerController extends Controller {
@@ -69,7 +67,7 @@ class EngineerController extends Controller {
             return redirect()->back();
         }
 
-        $this->projectService->confirm($request, $project);
+        $this->projectService->confirm($request->file('file'), $project);
         return redirect()->back();
     }
 
@@ -85,7 +83,7 @@ class EngineerController extends Controller {
             return redirect()->back();
         }
 
-        $this->montageService->action($request, $montage);
+        $this->montageService->action($request->file('file'), $montage);
         $this->licenseService->createLicense($montage);
         return redirect()->back();
     }
@@ -98,7 +96,7 @@ class EngineerController extends Controller {
         }
 
         $models = License::with('project', 'montage')
-            ->where('status', 1)
+            ->where('status', License::CREATED)
             ->get();
         return view('engineer.permits', [
             'models' => $models,
@@ -117,7 +115,7 @@ class EngineerController extends Controller {
             return redirect('/');
         }
 
-        $this->storeFile($request->file('file'), $permit);
+        $this->licenseService->upload($request->file('file'), $permit);
         return redirect()->back();
     }
 
@@ -139,14 +137,5 @@ class EngineerController extends Controller {
         }
 
         return view('installer.archive', new MontageViewModel([5]));
-    }
-
-    private function storeFile(UploadedFile $file, License $permit) {
-        File::delete('storage/permits/' . $permit->file);
-        $filename = time() . $file->extension();
-        $file->storeAs('public/permits', $filename);
-
-        $permit->update(['file' => $filename, 'status' => 2]);
-        $permit->proposition->update(['status' => 20]);
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Requests\EquipmentRequest;
 
 
 class EquipmentController extends Controller {
+
     private Service $service;
 
     public function __construct() {
@@ -150,7 +151,7 @@ class EquipmentController extends Controller {
      * @param EquipmentType $type
      * @return RedirectResponse
      */
-    public function del(EquipmentType $type): RedirectResponse {
+    public function remove(EquipmentType $type): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {

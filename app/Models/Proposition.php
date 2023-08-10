@@ -22,6 +22,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Proposition extends Model {
 
+    public const CREATED = 1;
+    public const IN_PROCESS = 4;
+    public const COMPLETED = 5;
+
     protected $fillable = ['number', 'organ', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
 
     public function individual(): HasOne {
@@ -29,7 +33,7 @@ class Proposition extends Model {
     }
 
     public function legal(): HasOne {
-        return $this->hasOne(Legal::class);
+        return $this->hasOne(LegalProposition::class);
     }
 
     public function applicant(): HasOne {

@@ -2,26 +2,28 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\File;
 use App\Models\Mounter;
+use App\Utilities\StorageManager;
 
 
 class MounterService extends CrudService {
+
+    use StorageManager;
 
     public function __construct() {
         $this->model = new Mounter();
     }
 
     public function create($data) {
-        $data['document'] = $this->fileCreate($data['document']);
+        $data['document'] = $this->createFile('storage/mounters', $data['document']);
         $this->model->fill($data);
         $this->model->save();
     }
 
     public function update($data, $model) {
         if (isset($data['document'])) {
-            $data['document'] = $this->fileCreate($data['document']);
-            $this->fileDelete($model->document);
+            $data['document'] = $this->createFile('storage/mounters', $data['document']);
+            $this->deleteFile("storage/mounters", $model->document);
         }
 
         $model->fill($data);
@@ -29,15 +31,15 @@ class MounterService extends CrudService {
     }
 
     public function delete($model) {
-        $this->fileDelete($model->document);
+        $this->deleteFile("storage/mounters", $model->document);
         $model->delete();
     }
 
     /* Fitters */
     public function worker($data, $model) {
         if (isset($data['document'])) {
-            $data['document'] = $this->fileCreate($data['document'], '/workers');
-            $this->fileDelete($model->document, 'workers/');
+            $data['document'] = $this->createFile('storage/mounters/workers', $data['document']);
+            $this->deleteFile("storage/mounters/workers", $model->document);
         }
 
         $model->fill($data);
@@ -45,17 +47,7 @@ class MounterService extends CrudService {
     }
 
     public function deleteWorker($model) {
-        $this->fileDelete($model->document, 'workers/');
+        $this->deleteFile("storage/mounters/workers", $model->document);
         $model->delete();
-    }
-
-    private function fileCreate($file, $worker = ''): string {
-        $name = time() . '.' . $file->extension();
-        $file->move('storage/mounters' . $worker, $name);
-        return $name;
-    }
-
-    private function fileDelete($path, $worker = '') {
-        File::delete("storage/mounters/$worker" . $path);
     }
 }

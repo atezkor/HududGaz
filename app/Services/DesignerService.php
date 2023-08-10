@@ -3,9 +3,12 @@
 namespace App\Services;
 
 use App\Models\Designer;
+use App\Utilities\FileUploadManager;
+use App\Utilities\StorageManager;
 
 
 class DesignerService extends CrudService {
+    use StorageManager, FileUploadManager;
 
     public function __construct(Designer $designer) {
         $this->model = $designer;
@@ -13,15 +16,15 @@ class DesignerService extends CrudService {
     }
 
     public function create($data) {
-        $data['document'] = $this->fileCreate($data['document']);
+        $data['document'] = $this->uploadFile('storage/designers', $data['document']);
         $this->model->fill($data);
         $this->model->save();
     }
 
     public function update($data, $model) {
         if (isset($data['document'])) {
-            $data['document'] = $this->fileCreate($data['document']);
-            $this->deleteFile($model->document);
+            $data['document'] = $this->uploadFile('storage/designers', $data['document']);
+            $this->deleteFile($this->folder, $model->document);
         }
 
         $model->fill($data);
@@ -29,13 +32,7 @@ class DesignerService extends CrudService {
     }
 
     public function delete($model) {
-        $this->deleteFile($model->document);
+        $this->deleteFile($this->folder, $model->document);
         $model->delete();
-    }
-
-    private function fileCreate($file): string {
-        $name = time() . '.' . $file->extension();
-        $file->move('storage/designers', $name);
-        return $name;
     }
 }

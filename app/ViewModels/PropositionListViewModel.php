@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as Models;
 use App\Models\Proposition;
 use App\Models\Individual;
-use App\Models\Legal;
+use App\Models\LegalProposition;
 use App\Models\Region;
 use Spatie\ViewModels\ViewModel;
 
@@ -38,7 +38,7 @@ class PropositionListViewModel extends ViewModel {
     }
 
     function legals(): Collection {
-        return $this->collections(Legal::query(), 'legal_stir');
+        return $this->collections(LegalProposition::query(), 'legal_stir');
     }
 
     function organs(): Collection {

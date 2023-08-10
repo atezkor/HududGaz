@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\UserService;
 use App\Http\Requests\ProfileRequest;
 
+
 class ProfileController extends Controller {
 
     private UserService $service;
@@ -27,7 +28,10 @@ class ProfileController extends Controller {
         if ($model->id != $user)
             return redirect()->back();
 
-        return view('profile', ['model' => $model, 'action' => route('profile.update', ['user' => $user])]);
+        return view('profile', [
+            'model' => $model,
+            'action' => route('profile.update', ['user' => $user])
+        ]);
     }
 
     public function update(ProfileRequest $request, User $user): RedirectResponse {

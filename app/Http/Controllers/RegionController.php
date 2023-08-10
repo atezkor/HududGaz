@@ -37,8 +37,11 @@ class RegionController extends Controller {
         }
 
         $model = new Region();
-        return view('admin.regions.form', ['action' => route('admin.organs.store'), 'method' => 'POST',
-            'model' => $model, 'districts' => districts()]);
+        return view('admin.regions.form', [
+            'action' => route('admin.organs.store'),
+            'method' => 'POST',
+            'model' => $model, 'districts' => districts()
+        ]);
     }
 
     public function store(DistrictRequest $request): RedirectResponse {
@@ -61,8 +64,11 @@ class RegionController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.regions.form', ['action' => route('admin.organs.update', ['organ' => $organ]),
-            'method' => 'PUT', 'model' => $organ, 'districts' => districts()]);
+        return view('admin.regions.form', [
+            'action' => route('admin.organs.update', ['organ' => $organ]),
+            'method' => 'PUT',
+            'model' => $organ, 'districts' => districts()
+        ]);
     }
 
     public function update(DistrictRequest $request, Region $organ): RedirectResponse {

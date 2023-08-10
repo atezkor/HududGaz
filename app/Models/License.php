@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class License extends BaseModel {
     use HasFactory;
+
+    public const CREATED = 1;
+
     public $timestamps = false;
     protected $fillable = ['proposition_id', 'applicant', 'project_id', 'montage_id', 'district', 'status', 'file'];
 

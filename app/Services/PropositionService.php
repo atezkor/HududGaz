@@ -2,13 +2,16 @@
 
 namespace App\Services;
 
-use Illuminate\Http\RedirectResponse;
-use App\Models\Proposition;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Individual;
-use App\Models\Legal;
+use App\Models\LegalProposition;
+use App\Models\Proposition;
+use App\Utilities\StorageManager;
 
 
 class PropositionService extends CrudService {
+    use StorageManager;
+
     private string $path = 'storage/propositions';
 
     public function __construct(Proposition $model) {
@@ -17,7 +20,7 @@ class PropositionService extends CrudService {
     }
 
     public function create($data) {
-        $data['file'] = $this->createFile($data['file']);
+        $data['file'] = $this->createFile($this->path, $data['file']);
         parent::create($data);
 
         $data['proposition_id'] = $this->model->id;
@@ -26,8 +29,8 @@ class PropositionService extends CrudService {
 
     public function update($data, $model) {
         if (isset($data['file'])) {
-            $data['file'] = $this->createFile($data['file']);
-            $this->deleteFile($model->file);
+            $data['file'] = $this->createFile($this->path, $data['file']);
+            $this->deleteFile($this->folder, $model->file);
         }
         parent::update($data, $model);
 
@@ -37,11 +40,11 @@ class PropositionService extends CrudService {
     }
 
     public function delete($model) {
-        $this->deleteFile($model->file);
+        $this->deleteFile("storage/$this->folder/", $model->file);
         parent::delete($model);
     }
 
-    public function show(Proposition $proposition, int $status = 0): RedirectResponse {
+    public function show(Proposition $proposition, int $status = 0): string {
         if ($status) {
             $this->update(['status' => $status], $proposition);
 
@@ -49,21 +52,27 @@ class PropositionService extends CrudService {
             $applicant->status = $status;
             $applicant->update();
         }
-        return redirect($this->path . '/' . $proposition->getAttribute('file'));
+
+        return $this->path . '/' . $proposition->getAttribute('file');
     }
 
     private function createApplicant(array $data) {
         if (intval($data['type']) === 1)
             $model = new Individual();
         else
-            $model = new Legal();
+            $model = new LegalProposition();
         $model->fill($data);
         $model->save();
     }
 
-    protected function createFile($file): string {
-        $name = time() . '.' . $file->extension();
-        $file->move($this->path, $name); # Store to public folder
-        return $name;
+    public function available($type, $stir): array {
+        return Proposition::query()->whereHas($type == 1 ? 'individual' : 'legal', function(Builder $query) use ($type, $stir) {
+            if ($type == 1)
+                $query->where('stir', $stir);
+            elseif ($type == 2)
+                $query->where('legal_stir', $stir);
+            else
+                $query->where('leader_stir', $stir);
+        })->get(['id', 'number', 'type', 'organ', 'created_at']);
     }
 }

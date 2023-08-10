@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Organization;
 
+
 class OrganizationController extends Controller {
 
     public function index(): View|RedirectResponse {

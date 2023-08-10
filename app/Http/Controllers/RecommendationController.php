@@ -19,6 +19,7 @@ use App\Http\Requests\RecommendationRequest;
 use App\ViewModels\RecommendationViewModel;
 use App\ViewModels\PropositionListViewModel;
 
+
 class RecommendationController extends Controller {
 
     private RecommendationService $service;
@@ -90,8 +91,13 @@ class RecommendationController extends Controller {
         };
 
         return view('district.archives',
-            new RecommendationViewModel([7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4, request()->user()->organ),
-            ['models' => $models, 'provider' => $provider]);
+            new RecommendationViewModel(
+                [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                4,
+                request()->user()->organ
+            ),
+            ['models' => $models, 'provider' => $provider]
+        );
     }
 
     /**
@@ -109,9 +115,13 @@ class RecommendationController extends Controller {
         }
 
         $recommendation = new Recommendation();
-        return view("district.control.upsert", ['model' => $recommendation, 'proposition' => $proposition,
-            'type' => $type, 'action' => route('district.recommendation.store', ['type' => $type]),
-            'back' => route('district.propositions')]);
+        return view("district.control.upsert", [
+            'model' => $recommendation,
+            'proposition' => $proposition,
+            'type' => $type,
+            'action' => route('district.recommendation.store', ['type' => $type]),
+            'back' => route('district.propositions')
+        ]);
     }
 
     /**
@@ -164,7 +174,8 @@ class RecommendationController extends Controller {
     }
 
     public function proposition(Proposition $proposition): RedirectResponse {
-        return $this->service_prop->show($proposition, 2);
+        $url = $this->service_prop->show($proposition, 2);
+        return redirect($url);
     }
 
     /**
@@ -181,9 +192,13 @@ class RecommendationController extends Controller {
         }
 
         $type = $recommendation->type;
-        return view('district.control.upsert', ['model' => $recommendation, 'proposition' => $recommendation->proposition,
-            'type' => $type, 'action' => route('district.recommendation.update', ['recommendation' => $recommendation]),
-            'back' => route('district.recommendations.cancelled')]);
+        return view('district.control.upsert', [
+            'model' => $recommendation,
+            'proposition' => $recommendation->proposition,
+            'type' => $type,
+            'action' => route('district.recommendation.update', ['recommendation' => $recommendation]),
+            'back' => route('district.recommendations.cancelled')
+        ]);
     }
 
     /**

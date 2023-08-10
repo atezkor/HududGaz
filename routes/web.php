@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');
     Route::post('equipments/{equipment}/equipment-types', [EquipmentController::class, 'add'])->name('admin.equip_type.add');
     Route::post('equipments/equipment-types/{type}', [EquipmentController::class, 'renew'])->name('admin.equip_type.renew');
-    Route::post('equipment-types/{type}', [EquipmentController::class, 'del'])->name('admin.equip_type.del');
+    Route::post('equipment-types/{type}', [EquipmentController::class, 'remove'])->name('admin.equip_type.del');
     Route::get('settings', [OrganizationController::class, 'index'])->name('admin.settings');
     Route::post('settings', [OrganizationController::class, 'set'])->name('admin.settings.set');
 });

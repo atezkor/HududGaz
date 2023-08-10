@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use App\Models\Proposition;
 use App\Models\Individual;
-use App\Models\Legal;
+use App\Models\LegalProposition;
 use App\Models\TechCondition;
 use App\Models\Region;
 use App\Models\Status;
@@ -28,7 +28,7 @@ class TechConditionViewModel extends ViewModel {
     }
 
     function legals(): Collection {
-        return $this->collections(Legal::query(), 'legal_name');
+        return $this->collections(LegalProposition::query(), 'legal_name');
     }
 
     function applicant($physicals, $legals, &$p, &$l, $type) {

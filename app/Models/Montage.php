@@ -14,6 +14,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int id
  */
 class Montage extends Model {
+
+    public const CREATED = 1;
+    public const COMPLETED = 5;
+
     protected $fillable = ['proposition_id', 'tech_condition_id', 'project_id', 'mounter_id', 'applicant', 'status', 'organ', 'file', 'comment'];
 
     public function proposition(): BelongsTo {

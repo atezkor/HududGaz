@@ -3,7 +3,7 @@
 namespace App\Models;
 
 
-class Legal extends Model {
+class LegalProposition extends Model {
     public $timestamps = false;
     protected $fillable = ['proposition_id', 'organ', 'legal_stir', 'legal_name', 'email', 'leader', 'leader_stir', 'phone', 'status'];
 

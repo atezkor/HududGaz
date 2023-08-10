@@ -2,20 +2,23 @@
 
 namespace App\Services;
 
+use Barryvdh\DomPDF\PDF;
 use Exception;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Proposition;
+use SimpleSoftwareIO\QrCode\Generator;
+use App\Models\CancelledProposition;
 use App\Models\Individual;
-use App\Models\Legal;
+use App\Models\LegalProposition;
 use App\Models\Organization;
+use App\Models\Proposition;
 use App\Models\Recommendation;
 use App\Models\TechCondition;
-use App\Models\CancelledProposition;
-use Barryvdh\DomPDF\PDF;
-use SimpleSoftwareIO\QrCode\Generator;
+use App\Utilities\FileUploadManager;
+use App\Utilities\StorageManager;
 
 
 class TechConditionService extends CrudService {
+    use FileUploadManager, StorageManager;
 
     private PDF $pdf;
     private string $path = 'storage/tech_conditions/';
@@ -57,17 +60,17 @@ class TechConditionService extends CrudService {
 
     /**
      * Check that such stir has existed before.
-    */
+     */
     public function checkTin(int $type, int $stir): array {
         if ($type == 1)
             return Individual::query()->where('stir', $stir)
                 ->pluck('stir', 'proposition_id')->toArray();
 
         if ($type == 2)
-            return Legal::query()->where('legal_stir', $stir)
+            return LegalProposition::query()->where('legal_stir', $stir)
                 ->pluck('legal_stir', 'proposition_id')->toArray();
 
-        return Legal::query()->where('leader_stir', $stir)
+        return LegalProposition::query()->where('leader_stir', $stir)
             ->pluck('leader_stir', 'proposition_id')->toArray();
     }
 
@@ -80,7 +83,7 @@ class TechConditionService extends CrudService {
 
     public function update(array $data, $model) {
         $filename = time() . '.pdf';
-        $this->deleteFile($model->file);
+        $this->deleteFile($this->path, $model->file);
 
         $proposition = $model->proposition;
         $this->createPDF($proposition->recommendation, [
@@ -96,7 +99,7 @@ class TechConditionService extends CrudService {
     public function upload($request, TechCondition $condition) {
         $proposition = $condition->proposition;
         $recommendation = $proposition->recommendation;
-        $this->deleteFile($condition->file);
+        $this->deleteFile($this->path, $condition->file);
         $condition->fill([
             'file' => $this->uploadFile($request->file('file')),
             'status' => 2
@@ -108,7 +111,8 @@ class TechConditionService extends CrudService {
         }
 
         $condition->update();
-        $proposition->update(['status' => 8]); $proposition->applicant->update(['status' => 8]);
+        $proposition->update(['status' => 8]);
+        $proposition->applicant->update(['status' => 8]);
     }
 
     private function createPDF(Recommendation $recommendation, array $addition) {
@@ -160,20 +164,21 @@ class TechConditionService extends CrudService {
     }
 
     private function uploadFile($file): string {
-        return parent::storeFile($file);
+        return $this->storeFile($file, $this->folder);
     }
 
     private function move(string $path, string $file, string $suffix) {
         try {
             Storage::move("public/$path" . $file, "public/cancelled/$suffix" . $file);
-        } catch (Exception) {}
+        } catch (Exception) {
+        }
     }
 
     private function qrcodeGenerate($length = 10): string {
         $characters = 'abc@defghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $char_length = strlen($characters);
         $result = '';
-        for ($i = 0; $i < $length; $i ++) {
+        for ($i = 0; $i < $length; $i++) {
             $result .= $characters[rand(0, $char_length - 1)];
         }
 

@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Generator;
 use App\Models\Project;
 use App\Services\ProjectService;
 use App\ViewModels\ProjectViewModel;
-use SimpleSoftwareIO\QrCode\Generator;
 
 
 class ProjectController extends Controller {
+
     private ProjectService $service;
     private Generator $qrcode;
 
@@ -53,7 +54,7 @@ class ProjectController extends Controller {
             return redirect('/');
         }
 
-        return view('designer.cancelled', new ProjectViewModel([4], request()->user()->organ));
+        return view('designer.cancelled', new ProjectViewModel([Project::CANCELLED], request()->user()->organ));
     }
 
     public function create(Request $request): RedirectResponse {
@@ -75,10 +76,12 @@ class ProjectController extends Controller {
         }
 
         if ($request->has('download')) {
-            return $this->service->generateLetter($project);
+            $data = $this->service->generateLetter($project);
+            return view('designer.explanatory-letter', $data);
         }
 
-        $this->service->upload($request, $project);
+        $file = $request->validate(['file' => ['required']]);
+        $this->service->upload($file, $project);
         return redirect()->back();
     }
 
@@ -105,6 +108,6 @@ class ProjectController extends Controller {
         }
 
         $organ = request()->user()->organ;
-        return view('designer.archive', new ProjectViewModel([5], $organ));
+        return view('designer.archive', new ProjectViewModel([Project::COMPLETED], $organ));
     }
 }

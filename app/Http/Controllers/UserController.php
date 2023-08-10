@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
-use App\Models\User;
-use App\Models\Region;
-use App\Models\Designer;
-use App\Models\Mounter;
 use App\Http\Requests\UserRequest;
 use App\Services\UserService;
+use App\Models\Designer;
+use App\Models\Mounter;
+use App\Models\Region;
+use App\Models\User;
 
 
 class UserController extends Controller {
@@ -26,11 +26,11 @@ class UserController extends Controller {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
-             return redirect('/');
+            return redirect('/');
         }
 
         $models = User::query()->where('role', '<>', 1)->get();
-        return view('admin.users.index', ['models' => $models, 'show' => true]);
+        return view('admin.users.index', ['models' => $models, 'branch' => getName()]);
     }
 
     public function create(): View|RedirectResponse {
@@ -40,22 +40,11 @@ class UserController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.users.form', ['model' => new User(),
-            'action' => route('admin.users.store'), 'method' => 'POST']);
-    }
-
-
-    public function checkRole(int $role): Collection {
-        switch ($role) {
-            case User::DISTRICT:
-                return Region::query()->pluck('org_name', 'id');
-            case User::DESIGNER:
-                return Designer::query()->pluck('org_name', 'id');
-            case User::MOUNTER:
-                return Mounter::query()->pluck('short_name', 'id');
-        }
-
-        return new Collection();
+        return view('admin.users.form', [
+            'model' => new User(),
+            'action' => route('admin.users.store'),
+            'method' => 'POST'
+        ]);
     }
 
     public function store(UserRequest $request): RedirectResponse {
@@ -77,8 +66,11 @@ class UserController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.users.form', ['model' => $user,
-            'action' => route('admin.users.update', ['user' => $user]), 'method' => 'PUT']);
+        return view('admin.users.form', [
+            'model' => $user,
+            'action' => route('admin.users.update', ['user' => $user]),
+            'method' => 'PUT'
+        ]);
     }
 
     public function update(UserRequest $request, User $user): RedirectResponse {
@@ -102,5 +94,18 @@ class UserController extends Controller {
 
         $this->service->delete($user);
         return redirect()->route('admin.users.index')->with('msg', __('global.messages.del'));
+    }
+
+    public function checkRole(int $role): Collection {
+        switch ($role) {
+            case User::DISTRICT:
+                return Region::query()->pluck('org_name', 'id');
+            case User::DESIGNER:
+                return Designer::query()->pluck('org_name', 'id');
+            case User::MOUNTER:
+                return Mounter::query()->pluck('short_name', 'id');
+        }
+
+        return new Collection();
     }
 }

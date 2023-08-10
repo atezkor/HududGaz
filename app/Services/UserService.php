@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Utilities\CryptoHash;
+use App\Utilities\StorageManager;
+
 
 class UserService extends CrudService {
+    use StorageManager, CryptoHash;
 
     private string $path = "storage/users/";
 
@@ -29,24 +31,18 @@ class UserService extends CrudService {
             $data['password'] = $model->password;
 
         if (isset($data['avatar'])) {
-            $this->deleteFile($model->avatar);
-            $data['avatar'] = $this->createFile($data['avatar']);
+            $this->deleteFile($this->path, $model->avatar);
+            $data['avatar'] = $this->createFile($this->path, $data['avatar']);
         }
 
         parent::update($data, $model);
     }
 
-    private function hashed(string $password): string {
-        return Hash::make($password);
-    }
+    public function delete($model) {
+        if (isset($data['avatar'])) {
+            $this->deleteFile($this->path, $model->avatar);
+        }
 
-    private function createFile($file): string {
-        $name = time() . '.' . $file->extension();
-        $file->move($this->path, $name);
-        return $name;
-    }
-
-    protected function deleteFile($file) {
-        File::delete($this->path . $file);
+        parent::delete($model);
     }
 }
