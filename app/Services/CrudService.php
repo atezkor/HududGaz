@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Services;
 
-use App\Interfaces\ICrudService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use App\Services\Interfaces\ICrudService;
 
 
 abstract class CrudService implements ICrudService {
