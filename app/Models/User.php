@@ -11,16 +11,16 @@ use Laravel\Sanctum\NewAccessToken;
 
 
 /**
- * @property int role
- * @property-read int id
+ * @property int id
+ * @property-read int $role_id
  */
 class User extends Authenticatable {
     use HasFactory, Notifiable, HasApiTokens;
 
     /* Roles */
-    public const ADMIN = 1;
+    public const ROLE_ADMIN = 1;
     public const TECHNIC = 2;
-    public const DISTRICT = 3;
+    public const ORGAN = 3;
     public const DESIGNER = 4;
     public const ENGINEER = 5;
     public const MOUNTER = 6;
@@ -32,8 +32,12 @@ class User extends Authenticatable {
      *
      * @var array
      */
-    protected $fillable = ['name', 'role', 'organ', 'username', 'lastname', 'patronymic', 'password', 'locale',
-        'position', 'avatar', 'mac_address'];
+    protected $fillable = [
+        'name', 'surname', 'patronymic', // surname -> lastname, patronymic -> second_name
+        'role_id', 'username', 'password',
+        'organ_id', 'position',
+        'avatar', 'locale', 'mac_address'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -54,9 +58,9 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-    public function getLastToken() {
+    public function getLastToken(): string {
         $token = $this->tokens()->orderByDesc('id')->firstOr();
         $token->plainTextToken = Str::random(40);
-        return (new NewAccessToken($token, $token->getKey(). '|'. $token->plainTextToken))->plainTextToken;
+        return (new NewAccessToken($token, $token->getKey() . '|' . $token->plainTextToken))->plainTextToken;
     }
 }

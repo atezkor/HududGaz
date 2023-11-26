@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Equipment;
 use App\Models\EquipmentType;
+use App\Models\Equipment;
 use App\Services\Service;
 use App\Http\Requests\EquipmentRequest;
 
@@ -16,7 +16,7 @@ class EquipmentController extends Controller {
     private Service $service;
 
     public function __construct() {
-        $this->service = new Service(new Equipment());
+        $this->service = new Service(new EquipmentType());
     }
 
     /**
@@ -29,7 +29,7 @@ class EquipmentController extends Controller {
             return redirect('/');
         }
 
-        $models = Equipment::all();
+        $models = EquipmentType::all();
         return view('admin.equipments.index', ['models' => $models]);
     }
 
@@ -56,10 +56,10 @@ class EquipmentController extends Controller {
      * Update the specified resource in storage.
      *
      * @param EquipmentRequest $request
-     * @param Equipment $equipment
+     * @param EquipmentType $equipment
      * @return RedirectResponse
      */
-    public function update(EquipmentRequest $request, Equipment $equipment): RedirectResponse {
+    public function update(EquipmentRequest $request, EquipmentType $equipment): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
@@ -75,10 +75,10 @@ class EquipmentController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param Equipment $equipment
+     * @param EquipmentType $equipment
      * @return RedirectResponse
      */
-    public function destroy(Equipment $equipment): RedirectResponse {
+    public function destroy(EquipmentType $equipment): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
@@ -96,10 +96,10 @@ class EquipmentController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param Equipment $equipment
+     * @param EquipmentType $equipment
      * @return View|RedirectResponse
      */
-    public function show(Equipment $equipment): View|RedirectResponse {
+    public function show(EquipmentType $equipment): View|RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
@@ -112,10 +112,10 @@ class EquipmentController extends Controller {
 
     /**
      * @param EquipmentRequest $request
-     * @param Equipment $equipment
+     * @param EquipmentType $equipment
      * @return RedirectResponse
      */
-    public function add(EquipmentRequest $request, Equipment $equipment): RedirectResponse {
+    public function add(EquipmentRequest $request, EquipmentType $equipment): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
@@ -124,17 +124,17 @@ class EquipmentController extends Controller {
 
         $data = $request->validated();
         $data['equipment_id'] = $equipment->id;
-        $this->service->update($data, new EquipmentType());
+        $this->service->update($data, new Equipment());
 
         return redirect()->back()->with('msg', __('global.messages.crt'));
     }
 
     /**
      * @param EquipmentRequest $request
-     * @param EquipmentType $type
+     * @param Equipment $type
      * @return RedirectResponse
      */
-    public function renew(EquipmentRequest $request, EquipmentType $type): RedirectResponse {
+    public function renew(EquipmentRequest $request, Equipment $type): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
@@ -148,10 +148,10 @@ class EquipmentController extends Controller {
     }
 
     /**
-     * @param EquipmentType $type
+     * @param Equipment $type
      * @return RedirectResponse
      */
-    public function remove(EquipmentType $type): RedirectResponse {
+    public function remove(Equipment $type): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {

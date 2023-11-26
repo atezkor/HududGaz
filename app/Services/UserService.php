@@ -18,9 +18,6 @@ class UserService extends CrudService {
 
     public function create($data) {
         $data['password'] = $this->hashed($data['password']);
-        if ($data['organ'] === null)
-            unset($data['organ']);
-
         parent::create($data);
     }
 
@@ -44,5 +41,17 @@ class UserService extends CrudService {
         }
 
         parent::delete($model);
+    }
+
+    function roles(): array {
+        return [
+            User::ROLE_ADMIN => __('global.roles.admin'),
+            User::TECHNIC => __('global.roles.technic'),
+            User::ORGAN => __('global.roles.organ'),
+            User::DESIGNER => __('global.roles.designer'),
+            User::ENGINEER => __('global.roles.engineer'),
+            User::MOUNTER => __('global.roles.mounter'),
+            User::DIRECTOR => __('global.roles.director'),
+        ];
     }
 }

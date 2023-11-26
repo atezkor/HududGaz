@@ -3,8 +3,12 @@
 namespace App\Models;
 
 
-class Individual extends Model {
+class IndividualApplication extends Application {
+
     public $timestamps = false;
+
+    protected $table = "physical_applications";
+
     protected $fillable = ['proposition_id', 'organ', 'full_name', 'phone', 'passport', 'stir', 'status'];
 
     public function getNameAttribute(): string {

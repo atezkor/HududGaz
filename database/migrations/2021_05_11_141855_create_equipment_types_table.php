@@ -4,14 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEquipmentTable extends Migration {
+
+class CreateEquipmentTypesTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('equipments', function (Blueprint $table) {
+        Schema::create('equipment_types', function(Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->boolean('static')->default(false);
@@ -25,6 +26,6 @@ class CreateEquipmentTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('equipments');
+        Schema::dropIfExists('equipment_types');
     }
 }

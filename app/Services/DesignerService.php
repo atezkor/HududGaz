@@ -10,6 +10,9 @@ use App\Utilities\StorageManager;
 class DesignerService extends CrudService {
     use StorageManager, FileUploadManager;
 
+    private string $path = 'storage/designers';
+    private string $folder;
+
     public function __construct(Designer $designer) {
         $this->model = $designer;
         $this->folder = 'designers';
@@ -23,7 +26,7 @@ class DesignerService extends CrudService {
 
     public function update($data, $model) {
         if (isset($data['document'])) {
-            $data['document'] = $this->uploadFile('storage/designers', $data['document']);
+            $data['document'] = $this->uploadFile($this->path, $data['document']);
             $this->deleteFile($this->folder, $model->document);
         }
 

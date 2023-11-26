@@ -4,14 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegionsTable extends Migration {
+
+class CreateOrgansTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('regions', function (Blueprint $table) {
+        Schema::create('organs', function(Blueprint $table) {
             $table->id();
             $table->integer('org_number')->unique();
             $table->string('lead_engineer');
@@ -33,6 +34,6 @@ class CreateRegionsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists('organs');
     }
 }

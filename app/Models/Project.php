@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read int status
  * @property-read string file
  */
-class Project extends Model {
+class Project extends Application {
 
     public const CREATED = 1;
     public const CANCELLED = 4;

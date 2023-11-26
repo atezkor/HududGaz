@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Region;
+use App\Models\Organ;
 use App\Services\Service;
 use App\Http\Requests\DistrictRequest;
 
@@ -15,7 +15,7 @@ class RegionController extends Controller {
     private Service $service;
 
     public function __construct() {
-        $this->service = new Service(new Region());
+        $this->service = new Service(new Organ());
     }
 
     public function index(): View|RedirectResponse {
@@ -25,7 +25,7 @@ class RegionController extends Controller {
             return redirect('/');
         }
 
-        $models = Region::all();
+        $models = Organ::all();
         return view('admin.regions.index', ['models' => $models]);
     }
 
@@ -36,7 +36,7 @@ class RegionController extends Controller {
             return redirect('/');
         }
 
-        $model = new Region();
+        $model = new Organ();
         return view('admin.regions.form', [
             'action' => route('admin.organs.store'),
             'method' => 'POST',
@@ -57,7 +57,7 @@ class RegionController extends Controller {
             ->with('msg', __('global.messages.crt'));
     }
 
-    public function edit(Region $organ): View|RedirectResponse {
+    public function edit(Organ $organ): View|RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
@@ -71,7 +71,7 @@ class RegionController extends Controller {
         ]);
     }
 
-    public function update(DistrictRequest $request, Region $organ): RedirectResponse {
+    public function update(DistrictRequest $request, Organ $organ): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
@@ -83,7 +83,7 @@ class RegionController extends Controller {
         return redirect()->route('admin.organs.index')->with('msg', __('global.messages.upd'));
     }
 
-    public function destroy(Region $organ): RedirectResponse {
+    public function destroy(Organ $organ): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {

@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+
 
 function resource($url, $controller, $name) {
     Route::resource($url, $controller)->names([
@@ -47,7 +49,7 @@ function formatDate($date, $format = 'd.m.Y'): string {
     return date_format($res, $format);
 }
 
-function MenuItems(): Illuminate\Database\Eloquent\Collection {
+function menuItems(): Illuminate\Database\Eloquent\Collection {
     return App\Models\MenuItem::items(auth()->user())->get();
 }
 
@@ -58,18 +60,6 @@ function limit(int $status, int $offset = 0): Illuminate\Support\Collection {
 
 function limitOne(int $status): int {
     return App\Models\Status::query()->find($status)->getAttribute('term');
-}
-
-function roles(): array {
-    return [
-      1 => __('global.roles.admin'),
-      2 => __('global.roles.technic'),
-      3 => __('global.roles.district'),
-      4 => __('global.roles.designer'),
-      5 => __('global.roles.engineer'),
-      6 => __('global.roles.mounter'),
-      7 => __('global.roles.director'),
-    ];
 }
 
 function districts(): array { # The reason for giving the key is to start from order 1
@@ -114,4 +104,8 @@ function extendedDate($date, bool $reverse = false): string {
     if ($reverse)
         return $year . '-' . __('global.year') . ' ' . $day . '-' . $months[$month - 1];
     return $day . '-' . $months[$month - 1] . ', ' . $year . '-' . __('global.year');
+}
+
+function isPrimaryTheme(): bool {
+    return in_array(request()->user()->role, [User::ROLE_ADMIN, User::TECHNIC, User::ENGINEER, User::DIRECTOR]);
 }

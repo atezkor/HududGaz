@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
 use App\Models\{
-    Montage, Region
+    Montage, Organ
 };
 
 class MontageViewModel extends ViewModel {
@@ -28,7 +28,7 @@ class MontageViewModel extends ViewModel {
     }
 
     function organs(): Collection {
-        return Region::query()->pluck('org_name', 'id');
+        return Organ::query()->pluck('org_name', 'id');
     }
 
     function limit(): Collection|int {

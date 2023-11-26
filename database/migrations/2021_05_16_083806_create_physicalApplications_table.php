@@ -4,14 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIndividualsTable extends Migration {
+class CreatePhysicalApplicationsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('individuals', function (Blueprint $table) {
+        Schema::create('physical_applications', function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
             $table->string('full_name');
@@ -34,6 +34,6 @@ class CreateIndividualsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('individuals');
+        Schema::dropIfExists('physical_applications');
     }
 }

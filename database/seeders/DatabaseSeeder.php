@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
+
 class DatabaseSeeder extends Seeder {
     /**
      * Seed the application's database.
@@ -12,13 +13,13 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $this->call(UsersSeeder::class);
+        $this->call(UserSeeder::class);
         $this->call(StatusSeeder::class);
         $this->call(MenuItemSeeder::class);
         $this->call(HelperSeeder::class);
         $this->call(PermissionSeeder::class);
 
-//        $this->makeFolder();
+        // $this->makeFolder();
     }
 
     private function makeFolder() {

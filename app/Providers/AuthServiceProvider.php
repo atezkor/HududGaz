@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider {
 
         foreach ($gates as $gate) {
             Gate::define($gate->name, function(User $user) use ($gates, $gate) {
-                return count($gates->where('name', $gate->name)->where('role', $user->role)); // 0 | 1
+                return count($gates->where('name', $gate->name)->where('role', $user->role_id)); // 0 | 1
             });
         }
     }

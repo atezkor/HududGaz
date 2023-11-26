@@ -28,7 +28,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @php($roles = roles())
                             @foreach($models as $model)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>

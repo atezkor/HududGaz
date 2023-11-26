@@ -12,7 +12,7 @@ use Illuminate\View\View;
 use App\Models\Recommendation;
 use App\Models\CancelledProposition;
 use App\Models\Proposition;
-use App\Models\Equipment;
+use App\Models\EquipmentType;
 use App\Services\RecommendationService;
 use App\Services\PropositionService;
 use App\Http\Requests\RecommendationRequest;
@@ -223,10 +223,10 @@ class RecommendationController extends Controller {
     }
 
     public function add(): Collection {
-        return Equipment::query()->pluck('name', 'id');
+        return EquipmentType::query()->pluck('name', 'id');
     }
 
-    public function types(Equipment $equipment): Collection {
+    public function types(EquipmentType $equipment): Collection {
         return $equipment->types()->pluck('type', 'id');
     }
 

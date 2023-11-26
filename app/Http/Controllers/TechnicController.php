@@ -15,7 +15,7 @@ use App\Services\RecommendationService;
 use App\ViewModels\RecommendationViewModel;
 use App\Models\Activity;
 use App\Models\Proposition;
-use App\Models\Region;
+use App\Models\Organ;
 use App\Models\Status;
 use App\ViewModels\TechConditionViewModel;
 
@@ -98,7 +98,7 @@ class TechnicController extends Controller {
     }
 
     public function show_condition(TechCondition $condition): RedirectResponse {
-        return redirect($this->service->show($condition));
+        return redirect($this->service->get($condition));
     }
 
     public function back(Request $request, Recommendation $recommendation): RedirectResponse {
@@ -172,7 +172,7 @@ class TechnicController extends Controller {
         }
 
         return view('technic.reports.region', [
-            'models' => Region::query()->get(['id', 'org_name', 'region']),
+            'models' => Organ::query()->get(['id', 'org_name', 'region']),
             'activities' => Activity::query()->pluck('activity', 'id'),
             'propositions' => Proposition::query()->get(['organ', 'activity_type'])->groupBy('activity_type')
         ]);
@@ -186,7 +186,7 @@ class TechnicController extends Controller {
         }
 
         return view('technic.reports.organ', [
-            'models' => Region::query()->pluck('org_name', 'id'),
+            'models' => Organ::query()->pluck('org_name', 'id'),
             'activities' => Activity::query()->pluck('activity', 'id'),
             'propositions' => Proposition::query()->get(['organ', 'activity_type'])->groupBy('organ')
         ]);

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+
 class UserRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,10 +19,10 @@ class UserRequest extends FormRequest {
     public function attributes(): array {
         return [
             'name' => __('admin.user.name'),
-            'role' => __('admin.user.role'),
+            'surname' => __('admin.user.lastname'),
+            'role_id' => __('admin.user.role'),
             'username' => __('admin.user.username'),
-            'password' => __('admin.user.password'),
-            'lastname' => __('admin.user.lastname')
+            'password' => __('admin.user.password')
         ];
     }
 
@@ -32,18 +33,18 @@ class UserRequest extends FormRequest {
      */
     public function rules(): array {
         $pass = [
-            'POST' => ['required', 'min:6'],
+            null => ['required', 'min:6'],
             'PUT' => []
         ];
 
         return [
             'name' => ['required'],
-            'lastname' => ['required'],
+            'surname' => ['required'],
             'patronymic' => [],
-            'role' => ['required'],
-            'organ' => [],
-            'username' => ['required',
-                Rule::unique('users', 'username')->ignore($this->route('user'))
+            'role_id' => ['required'],
+            'organ_id' => [],
+            'username' => ['required', 'string', Rule::unique('users', 'username')
+                ->ignore($this->route('user'))
             ],
             'password' => $pass[$this->input('_method')],
             'locale' => [],

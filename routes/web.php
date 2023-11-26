@@ -1,16 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\EquipmentController;
-use App\Http\Controllers\DesignerController;
-use App\Http\Controllers\MounterController;
-use App\Http\Controllers\RegionController;
-use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DesignerController;
+use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\MounterController;
+use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TimetableController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 // Authentication routes
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -18,8 +18,8 @@ Route::post('/login', [AuthController::class, 'entry'])->name('auth');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Profile
-Route::get('profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
-Route::post('profile/{user}/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+Route::get('users/{user}/profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('users/{user}/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 // Admin routes
 Route::group(['prefix' => 'admin'], function() {
@@ -73,4 +73,4 @@ Route::prefix('director')->group(function() {
 });
 
 # main route - in route distribution by to roles
-Route::get('/', [AuthController::class, 'redirect'])->name('dashboard');
+Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');

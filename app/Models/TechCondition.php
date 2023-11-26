@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read string file
  * @property-read string qrcode
  */
-class TechCondition extends Model {
+class TechCondition extends Application {
 
     protected $fillable = ['proposition_id', 'qrcode', 'status', 'file'];
 

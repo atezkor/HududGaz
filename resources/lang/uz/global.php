@@ -54,7 +54,7 @@
         'roles' => [
             'admin' => "Ma\u{2019}mur",
             'technic' => "Texnik",
-            'district' => "Tuman idorasi",
+            'organ' => "Tuman idorasi",
             'designer' => "Loyihachi",
             'engineer' => "Muhandis",
             'mounter' => "Montajchi",

@@ -10,7 +10,7 @@
         @php($user = request()->user())
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav custom-navbar">
-            @php($items = MenuItems())
+            @php($items = menuItems())
             @foreach($items as $key => $menu)
                 <li class="nav-item">
                     <a href="{{route($menu->href)}}" class="nav-link text-nowrap">

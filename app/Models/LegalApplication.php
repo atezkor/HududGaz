@@ -3,8 +3,10 @@
 namespace App\Models;
 
 
-class LegalProposition extends Model {
+class LegalApplication extends Application {
+
     public $timestamps = false;
+
     protected $fillable = ['proposition_id', 'organ', 'legal_stir', 'legal_name', 'email', 'leader', 'leader_stir', 'phone', 'status'];
 
     public function getNameAttribute(): string {

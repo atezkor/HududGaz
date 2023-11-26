@@ -5,7 +5,7 @@ namespace App\ViewModels;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
 use App\Models\Project;
-use App\Models\Region;
+use App\Models\Organ;
 
 
 class ProjectViewModel extends ViewModel {
@@ -29,7 +29,7 @@ class ProjectViewModel extends ViewModel {
     }
 
     function organs(): Collection {
-        return Region::query()->pluck('org_name', 'id');
+        return Organ::query()->pluck('org_name', 'id');
     }
 
     function limit(): Collection|int {

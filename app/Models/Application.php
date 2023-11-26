@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Model extends BaseModel {
+
+class Application extends Model {
     use HasFactory;
 
     public function percent($term = 72): string {

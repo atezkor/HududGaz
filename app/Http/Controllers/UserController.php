@@ -2,24 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\Designer;
+use App\Models\Mounter;
+use App\Models\Organ;
+use App\Models\User;
+use App\Repositories\UserRepository;
+use App\Services\UserService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Collection;
-use App\Http\Requests\UserRequest;
-use App\Services\UserService;
-use App\Models\Designer;
-use App\Models\Mounter;
-use App\Models\Region;
-use App\Models\User;
 
 
 class UserController extends Controller {
 
     private UserService $service;
 
-    public function __construct(UserService $service) {
+    private UserRepository $repository;
+
+    public function __construct(UserService $service, UserRepository $repository) {
         $this->service = $service;
+        $this->repository = $repository;
     }
 
     public function index(): View|RedirectResponse {
@@ -29,8 +33,12 @@ class UserController extends Controller {
             return redirect('/');
         }
 
-        $models = User::query()->where('role', '<>', 1)->get();
-        return view('admin.users.index', ['models' => $models, 'branch' => getName()]);
+        $models = $this->repository->users();
+        return view('admin.users.index', [
+            'models' => $models,
+            'roles' => $this->service->roles(),
+            'branch' => getName()
+        ]);
     }
 
     public function create(): View|RedirectResponse {
@@ -40,10 +48,9 @@ class UserController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.users.form', [
+        return view('admin.users.create', [
             'model' => new User(),
-            'action' => route('admin.users.store'),
-            'method' => 'POST'
+            'roles' => $this->service->roles()
         ]);
     }
 
@@ -56,6 +63,7 @@ class UserController extends Controller {
 
         $data = $request->validated();
         $this->service->create($data);
+
         return redirect()->route('admin.users.index')->with('msg', __('global.messages.crt'));
     }
 
@@ -66,10 +74,9 @@ class UserController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.users.form', [
+        return view('admin.users.edit', [
             'model' => $user,
-            'action' => route('admin.users.update', ['user' => $user]),
-            'method' => 'PUT'
+            'roles' => $this->service->roles()
         ]);
     }
 
@@ -98,8 +105,8 @@ class UserController extends Controller {
 
     public function checkRole(int $role): Collection {
         switch ($role) {
-            case User::DISTRICT:
-                return Region::query()->pluck('org_name', 'id');
+            case User::ORGAN:
+                return Organ::query()->pluck('org_name', 'id');
             case User::DESIGNER:
                 return Designer::query()->pluck('org_name', 'id');
             case User::MOUNTER:

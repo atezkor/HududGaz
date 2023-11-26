@@ -5,7 +5,7 @@
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @php($items = MenuItems())
+                @php($items = menuItems())
                 @foreach($items as $menu)
                     @if ($menu->href == '#')
                     <li class="nav-item">

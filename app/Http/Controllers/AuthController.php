@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthRequest;
+use App\Models\User;
+use App\Utilities\CryptoHash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Http\Requests\AuthRequest;
-use App\Utilities\CryptoHash;
-use App\Models\User;
 
 
 class AuthController extends Controller {
@@ -28,39 +28,42 @@ class AuthController extends Controller {
     }
 
     public function entry(AuthRequest $request): RedirectResponse {
-        $data = $request->validated();
-        $user = User::query()->where('username', '=', $data['username'])->first();
+        /* @var User $user */
+        $credentials = $request->validated();
+        $user = User::query()
+            ->where('username', '=', $credentials['username'])
+            ->first();
 
         if ($user === null)
             return redirect()->route('login');
 
-        if (!$this->compare($data['password'], $user->password))
+        if (!$this->compare($credentials['password'], $user->password))
             return redirect()->route('login');
 
         auth()->login($user); // auth()->attempt($data, true)
         return redirect()->route('dashboard');
     }
 
-    public function redirect(): RedirectResponse {
+    public function dashboard(): RedirectResponse {
+        /* @var User $user */
         $user = request()->user();
         if ($user == null)
             return redirect()->route('login');
 
-        $role = $user->role;
-        switch ($role) {
-            case 1:
+        switch ($user->role_id) {
+            case User::ROLE_ADMIN:
                 return redirect('/admin');
-            case 2:
+            case User::TECHNIC:
                 return redirect('/technic');
-            case 3:
+            case User::ORGAN:
                 return redirect('/district');
-            case 4:
+            case User::DESIGNER:
                 return redirect('/designer');
-            case 5:
+            case User::ENGINEER:
                 return redirect('/engineer');
-            case 6:
+            case User::MOUNTER:
                 return redirect('/mounter');
-            case 7:
+            case User::DIRECTOR:
                 return redirect('/director');
         }
 

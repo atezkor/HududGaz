@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read Proposition applicant
  * @property-read Recommendation recommendation
  * @property-read TechCondition tech_condition
- * @property-read Region organization
+ * @property-read Organ organization
  * @property-read Activity activity
  * @property int id
  * @property int type
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  */
 
-class Proposition extends Model {
+class Proposition extends Application {
 
     public const CREATED = 1;
     public const IN_PROCESS = 4;
@@ -29,11 +29,11 @@ class Proposition extends Model {
     protected $fillable = ['number', 'organ', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
 
     public function individual(): HasOne {
-        return $this->hasOne(Individual::class);
+        return $this->hasOne(IndividualApplication::class);
     }
 
     public function legal(): HasOne {
-        return $this->hasOne(LegalProposition::class);
+        return $this->hasOne(LegalApplication::class);
     }
 
     public function applicant(): HasOne {
@@ -49,7 +49,7 @@ class Proposition extends Model {
     }
 
     public function organization(): BelongsTo {
-        return $this->belongsTo(Region::class, 'organ');
+        return $this->belongsTo(Organ::class, 'organ');
     }
 
     public function activity(): BelongsTo {

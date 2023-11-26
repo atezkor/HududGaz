@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\MenuItem;
+use App\Models\User;
+use Illuminate\Database\Seeder;
+
 
 class MenuItemSeeder extends Seeder {
     /**
@@ -14,7 +16,7 @@ class MenuItemSeeder extends Seeder {
     public function run() {
         $this->adminMenu();
         $this->technicMenu();
-        $this->districtMenu();
+        $this->organMenuItems();
         $this->designer();
         $this->engineer();
         $this->mounterMenu();
@@ -22,76 +24,76 @@ class MenuItemSeeder extends Seeder {
     }
 
     private function adminMenu() {
-        $this->CreateMenuItem(1, 'admin.users', 'admin.users.index', 'nav-icon fas fa-users');
-        $this->CreateMenuItem(1, 'admin.equips', 'admin.equipments.index', 'nav-icon fas fa-drafting-compass');
-        $this->CreateMenuItem(1, 'admin.designers', 'admin.designers.index', 'nav-icon fas fa-pencil-ruler');
-        $this->CreateMenuItem(1, 'admin.mounters', 'admin.mounters.index', 'nav-icon fas fa-network-wired');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.users', 'admin.users.index', 'nav-icon fas fa-users');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.organs', 'admin.organs.index', 'nav-icon far fa-building');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.designers', 'admin.designers.index', 'nav-icon fas fa-pencil-ruler');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.mounters', 'admin.mounters.index', 'nav-icon fas fa-network-wired');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.equips', 'admin.equipments.index', 'nav-icon fas fa-drafting-compass');
 
-        $this->CreateMenuItem(1, 'admin.settings', '#', 'nav-icon fas fa-chart-line');
-        $this->CreateMenuItem(1, 'admin.org_about', 'admin.settings', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.organs', 'admin.organs.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.statuses', 'admin.statuses.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.activities', 'admin.activities.index', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(1, 'admin.timetables', 'admin.timetable.index', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.settings', '#', 'nav-icon fas fa-chart-line');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.org_about', 'admin.settings', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.statuses', 'admin.statuses.index', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.activities', 'admin.activities.index', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.timetables', 'admin.timetable.index', 'nav-icon far fa-circle');
     }
 
     private function technicMenu() {
-        $this->CreateMenuItem(2, 'technic.props', 'propositions.index', 'nav-icon fas fa-file-alt');
-        $this->CreateMenuItem(2, 'technic.recommends', 'technic.recommendations', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(2, 'technic.tech_conditions', 'technic.index', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(2, 'technic.reports', '#', 'nav-icon fas fa-chart-line');
-        $this->CreateMenuItem(2, 'technic.region_sec', 'technic.reg_section', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(2, 'technic.organ_sec', 'technic.org_section', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(2, 'technic.more_sec', 'technic.more', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::TECHNIC, 'technic.props', 'propositions.index', 'nav-icon fas fa-file-alt');
+        $this->createMenuItem(User::TECHNIC, 'technic.recommends', 'technic.recommendations', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::TECHNIC, 'technic.tech_conditions', 'technic.index', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::TECHNIC, 'technic.reports', '#', 'nav-icon fas fa-chart-line');
+        $this->createMenuItem(User::TECHNIC, 'technic.region_sec', 'technic.reg_section', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::TECHNIC, 'technic.organ_sec', 'technic.org_section', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::TECHNIC, 'technic.more_sec', 'technic.more', 'nav-icon far fa-circle');
     }
 
-    private function districtMenu() {
-        $this->CreateMenuItem(3, 'district.propositions', 'district.propositions', 'bg-primary');
-        $this->CreateMenuItem(3, 'district.recommendations', 'district.recommendations', 'bg-info');
-        $this->CreateMenuItem(3, 'district.progress', 'district.recommendations.progress', 'bg-success');
-        $this->CreateMenuItem(3, 'district.cancelled', 'district.recommendations.cancelled', 'bg-danger');
-        $this->CreateMenuItem(3, 'district.archive', 'district.recommendations.archive', 'bg-secondary');
+    private function organMenuItems() {
+        $this->createMenuItem(User::ORGAN, 'district.propositions', 'district.propositions', 'bg-primary');
+        $this->createMenuItem(User::ORGAN, 'district.recommendations', 'district.recommendations', 'bg-info');
+        $this->createMenuItem(User::ORGAN, 'district.progress', 'district.recommendations.progress', 'bg-success');
+        $this->createMenuItem(User::ORGAN, 'district.cancelled', 'district.recommendations.cancelled', 'bg-danger');
+        $this->createMenuItem(User::ORGAN, 'district.archive', 'district.recommendations.archive', 'bg-secondary');
     }
 
     private function designer() {
-        $this->CreateMenuItem(4, 'designer.projects', 'designer.projects', 'bg-primary');
-        $this->CreateMenuItem(4, 'designer.process', 'designer.projects.process', 'bg-info');
-        $this->CreateMenuItem(4, 'designer.cancelled', 'designer.projects.cancelled', 'bg-danger');
-        $this->CreateMenuItem(4, 'designer.accomplished', 'designer.projects.accomplished', 'bg-success');
+        $this->createMenuItem(User::DESIGNER, 'designer.projects', 'designer.projects', 'bg-primary');
+        $this->createMenuItem(User::DESIGNER, 'designer.process', 'designer.projects.process', 'bg-info');
+        $this->createMenuItem(User::DESIGNER, 'designer.cancelled', 'designer.projects.cancelled', 'bg-danger');
+        $this->createMenuItem(User::DESIGNER, 'designer.accomplished', 'designer.projects.accomplished', 'bg-success');
     }
 
     private function engineer() {
-        $this->CreateMenuItem(5, 'engineer.projects', 'engineer.projects', 'nav-icon fas fa-drafting-compass');
-        $this->CreateMenuItem(5, 'engineer.montages', 'engineer.montages', 'nav-icon fas fa-network-wired');
-        $this->CreateMenuItem(5, 'engineer.permits', 'engineer.permits', 'nav-icon fas fa-copy');
-        $this->CreateMenuItem(5, 'engineer.archive', '#', 'nav-icon fas fa-box-open');
-        $this->CreateMenuItem(5, 'engineer.projects', 'engineer.projects.archive', 'nav-icon far fa-circle');
-        $this->CreateMenuItem(5, 'engineer.montages', 'engineer.montages.archive', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::ENGINEER, 'engineer.projects', 'engineer.projects', 'nav-icon fas fa-drafting-compass');
+        $this->createMenuItem(User::ENGINEER, 'engineer.montages', 'engineer.montages', 'nav-icon fas fa-network-wired');
+        $this->createMenuItem(User::ENGINEER, 'engineer.permits', 'engineer.permits', 'nav-icon fas fa-copy');
+        $this->createMenuItem(User::ENGINEER, 'engineer.archive', '#', 'nav-icon fas fa-box-open');
+        $this->createMenuItem(User::ENGINEER, 'engineer.projects', 'engineer.projects.archive', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::ENGINEER, 'engineer.montages', 'engineer.montages.archive', 'nav-icon far fa-circle');
     }
 
     private function mounterMenu() {
-        $this->CreateMenuItem(6, 'mounter.montages', 'mounter.montages', 'bg-primary');
-        $this->CreateMenuItem(6, 'mounter.process', 'mounter.process', 'bg-info');
-        $this->CreateMenuItem(6, 'mounter.cancelled', 'mounter.cancelled', 'bg-danger');
-        $this->CreateMenuItem(6, 'mounter.accomplished', 'mounter.archive', 'bg-success');
+        $this->createMenuItem(User::MOUNTER, 'mounter.montages', 'mounter.montages', 'bg-primary');
+        $this->createMenuItem(User::MOUNTER, 'mounter.process', 'mounter.process', 'bg-info');
+        $this->createMenuItem(User::MOUNTER, 'mounter.cancelled', 'mounter.cancelled', 'bg-danger');
+        $this->createMenuItem(User::MOUNTER, 'mounter.accomplished', 'mounter.archive', 'bg-success');
     }
 
     private function directorMenu() {
-        $this->CreateMenuItem(7, 'global.statistics', 'director.index', 'nav-icon fas fa-chart-bar');
-        $this->CreateMenuItem(7, 'admin.users', 'director.users', 'nav-icon fas fa-users');
-        $this->CreateMenuItem(7, 'admin.organs', 'director.organs', 'nav-icon fas fa-landmark');
-        $this->CreateMenuItem(7, 'admin.designers', 'director.designers', 'nav-icon fas fa-drafting-compass');
-        $this->CreateMenuItem(7, 'admin.mounters', 'director.installers', 'nav-icon fas fa-network-wired');
-        $this->CreateMenuItem(7, 'global.documents', '#', 'nav-icon fas fa-folder-open');
-        $this->CreateMenuItem(7, 'global.propositions', 'director.propositions', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'district.recommendations', 'director.recommendations', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'technic.tech_conditions', 'director.tech_conditions', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'designer.projects', 'director.projects', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'mounter.montages', 'director.montages', 'nav-icon fas fa-paste');
-        $this->CreateMenuItem(7, 'engineer.permits', 'director.permits', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::DIRECTOR, 'global.statistics', 'director.index', 'nav-icon fas fa-chart-bar');
+        $this->createMenuItem(User::DIRECTOR, 'admin.users', 'director.users', 'nav-icon fas fa-users');
+        $this->createMenuItem(User::DIRECTOR, 'admin.organs', 'director.organs', 'nav-icon fas fa-landmark');
+        $this->createMenuItem(User::DIRECTOR, 'admin.designers', 'director.designers', 'nav-icon fas fa-drafting-compass');
+        $this->createMenuItem(User::DIRECTOR, 'admin.mounters', 'director.installers', 'nav-icon fas fa-network-wired');
+        $this->createMenuItem(User::DIRECTOR, 'global.documents', '#', 'nav-icon fas fa-folder-open');
+        $this->createMenuItem(User::DIRECTOR, 'global.propositions', 'director.propositions', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::DIRECTOR, 'district.recommendations', 'director.recommendations', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::DIRECTOR, 'technic.tech_conditions', 'director.tech_conditions', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::DIRECTOR, 'designer.projects', 'director.projects', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::DIRECTOR, 'mounter.montages', 'director.montages', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::DIRECTOR, 'engineer.permits', 'director.permits', 'nav-icon fas fa-paste');
     }
 
-    private function CreateMenuItem($role, $title, $href, $icon) {
+    private function createMenuItem($role, $title, $href, $icon) {
         MenuItem::query()->firstOrCreate([
             'role' => $role,
             'title' => $title,

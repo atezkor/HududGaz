@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
+use App\Utilities\CodeGenerator;
 use Barryvdh\DomPDF\PDF;
-use Exception;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Generator;
 use App\Models\CancelledProposition;
-use App\Models\Individual;
-use App\Models\LegalProposition;
+use App\Models\IndividualApplication;
+use App\Models\LegalApplication;
 use App\Models\Organization;
 use App\Models\Proposition;
 use App\Models\Recommendation;
@@ -18,11 +18,12 @@ use App\Utilities\StorageManager;
 
 
 class TechConditionService extends CrudService {
-    use FileUploadManager, StorageManager;
+    use FileUploadManager, StorageManager, CodeGenerator;
 
     private PDF $pdf;
-    private string $path = 'storage/tech_conditions/';
     private Generator $qrcode;
+    private string $path = 'storage/tech_conditions/';
+    private string $folder;
 
     public function __construct(TechCondition $model, PDF $pdf, Generator $qrcode) {
         $this->folder = 'tech_conditions';
@@ -59,25 +60,9 @@ class TechConditionService extends CrudService {
     }
 
     /**
-     * Check that such stir has existed before.
-     */
-    public function checkTin(int $type, int $stir): array {
-        if ($type == 1)
-            return Individual::query()->where('stir', $stir)
-                ->pluck('stir', 'proposition_id')->toArray();
-
-        if ($type == 2)
-            return LegalProposition::query()->where('legal_stir', $stir)
-                ->pluck('legal_stir', 'proposition_id')->toArray();
-
-        return LegalProposition::query()->where('leader_stir', $stir)
-            ->pluck('leader_stir', 'proposition_id')->toArray();
-    }
-
-    /**
      * This function to showing the tech-condition
      */
-    public function show(TechCondition $condition): string {
+    public function get(TechCondition $condition): string {
         return Storage::url('tech_conditions/' . $condition->file);
     }
 
@@ -94,6 +79,22 @@ class TechConditionService extends CrudService {
             'qrcode' => $this->qrcode->generate($model->qrcode)
         ]);
         parent::update(['file' => $filename], $model);
+    }
+
+    /**
+     * Check that such stir has existed before.
+     */
+    public function checkTin(int $type, int $stir): array {
+        if ($type == 1)
+            return IndividualApplication::query()->where('stir', $stir)
+                ->pluck('stir', 'proposition_id')->toArray();
+
+        if ($type == 2)
+            return LegalApplication::query()->where('legal_stir', $stir)
+                ->pluck('legal_stir', 'proposition_id')->toArray();
+
+        return LegalApplication::query()->where('leader_stir', $stir)
+            ->pluck('leader_stir', 'proposition_id')->toArray();
     }
 
     public function upload($request, TechCondition $condition) {
@@ -165,23 +166,5 @@ class TechConditionService extends CrudService {
 
     private function uploadFile($file): string {
         return $this->storeFile($file, $this->folder);
-    }
-
-    private function move(string $path, string $file, string $suffix) {
-        try {
-            Storage::move("public/$path" . $file, "public/cancelled/$suffix" . $file);
-        } catch (Exception) {
-        }
-    }
-
-    private function qrcodeGenerate($length = 10): string {
-        $characters = 'abc@defghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $char_length = strlen($characters);
-        $result = '';
-        for ($i = 0; $i < $length; $i++) {
-            $result .= $characters[rand(0, $char_length - 1)];
-        }
-
-        return $result . time();
     }
 }

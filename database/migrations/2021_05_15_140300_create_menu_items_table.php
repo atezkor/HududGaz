@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateMenuItemsTable extends Migration {
     /**
      * Run the migrations.
@@ -11,7 +12,7 @@ class CreateMenuItemsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('menu_items', function (Blueprint $table) {
+        Schema::create('menu_items', function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('role')->index();
             $table->string('title');

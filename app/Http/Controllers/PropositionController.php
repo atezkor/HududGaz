@@ -7,9 +7,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\PropositionRequest;
 use App\Models\Activity;
-use App\Models\Individual;
+use App\Models\IndividualApplication;
 use App\Models\Proposition;
-use App\Models\Region;
+use App\Models\Organ;
 use App\Services\PropositionService;
 use App\ViewModels\PropositionListViewModel;
 
@@ -51,13 +51,13 @@ class PropositionController extends Controller {
         }
 
         $model = new Proposition();
-        $organs = Region::query()->pluck('org_name', 'id');
+        $organs = Organ::query()->pluck('org_name', 'id');
         $activities = Activity::query()->skip(1)->take(5)->pluck('activity', 'id');
         return view('technic.form', [
             'action' => route('propositions.store'),
             'method' => 'POST',
             'model' => $model, 'organs' => $organs,
-            'applicant' => new Individual(),
+            'applicant' => new IndividualApplication(),
             'activities' => $activities
         ]);
     }
@@ -105,7 +105,7 @@ class PropositionController extends Controller {
         }
 
         $applicant = $proposition->applicant;
-        $organs = Region::query()->pluck('org_name', 'id');
+        $organs = Organ::query()->pluck('org_name', 'id');
         return view('technic.form', [
             'action' => route('propositions.update', ['proposition' => $proposition]),
             'method' => 'PUT', 'model' => $proposition,
@@ -161,7 +161,7 @@ class PropositionController extends Controller {
 
         return view('technic.filter', [
             'models' => $this->service->available($type, $stir),
-            'organs' => Region::query()->pluck('org_name', 'id'),
+            'organs' => Organ::query()->pluck('org_name', 'id'),
             'type' => $type,
             'stir' => $stir
         ]);

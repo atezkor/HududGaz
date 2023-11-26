@@ -15,6 +15,7 @@ class LicenseService extends CrudService {
     use FileUploadManager, StorageManager;
 
     private PDF $pdf;
+    private string $path = "storage/permits/";
 
     public function __construct(PDF $pdf) {
         $this->folder = 'montages';
@@ -55,7 +56,7 @@ class LicenseService extends CrudService {
         ];
 
         view()->share($data);
-        $this->pdf->loadView('engineer.permit')->save('storage/permits/' . $filename);
+        $this->pdf->loadView('engineer.permit')->save($this->path . $filename);
         $license->update(['file' => $filename]);
     }
 

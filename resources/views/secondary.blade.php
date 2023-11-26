@@ -34,6 +34,6 @@
 <script src="{{'/js/jquery.min.js'}}"></script>
 <script src="{{'/js/adminlte.min.js'}}"></script>
 <script src="{{'/js/sweetalert2.js'}}"></script>
-@yield('javascript')
+@yield('js')
 </body>
 </html>

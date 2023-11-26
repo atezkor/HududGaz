@@ -11,7 +11,7 @@ use App\Models\Montage;
 use App\Models\Mounter;
 use App\Models\Project;
 use App\Models\Proposition;
-use App\Models\Region;
+use App\Models\Organ;
 use App\Models\User;
 use App\Services\DirectorService;
 use App\ViewModels\MontageViewModel;
@@ -62,7 +62,7 @@ class DirectorController extends Controller {
         }
 
         return view('admin.regions.index', [
-            'models' => Region::all()
+            'models' => Organ::all()
         ]);
     }
 

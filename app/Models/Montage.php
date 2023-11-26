@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int organ
  * @property int id
  */
-class Montage extends Model {
+class Montage extends Application {
 
     public const CREATED = 1;
     public const COMPLETED = 5;

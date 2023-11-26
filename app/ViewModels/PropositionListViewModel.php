@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as Models;
 use App\Models\Proposition;
-use App\Models\Individual;
-use App\Models\LegalProposition;
-use App\Models\Region;
+use App\Models\IndividualApplication;
+use App\Models\LegalApplication;
+use App\Models\Organ;
 use Spatie\ViewModels\ViewModel;
 
 
@@ -34,15 +34,15 @@ class PropositionListViewModel extends ViewModel {
     }
 
     function physicals(): Collection {
-        return $this->collections(Individual::query(), 'stir');
+        return $this->collections(IndividualApplication::query(), 'stir');
     }
 
     function legals(): Collection {
-        return $this->collections(LegalProposition::query(), 'legal_stir');
+        return $this->collections(LegalApplication::query(), 'legal_stir');
     }
 
     function organs(): Collection {
-        return Region::query()->pluck('org_name', 'id');
+        return Organ::query()->pluck('org_name', 'id');
     }
 
     private function collections(Builder $builder, string $attribute): Collection {

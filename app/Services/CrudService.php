@@ -12,7 +12,6 @@ abstract class CrudService implements ICrudService {
      * This variable for detect Model
      */
     protected Model $model;
-    protected string $folder;
 
     /**
      * @param array $data

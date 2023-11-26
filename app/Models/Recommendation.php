@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property Proposition proposition
  * @property string type
- * @property Region org
+ * @property Organ org
  * @property string file
  *
  */
-class Recommendation extends Model {
+class Recommendation extends Application {
 
     public const CREATED = 1;
     public const COMPLETED = 5;
@@ -25,7 +25,7 @@ class Recommendation extends Model {
     }
 
     public function org(): BelongsTo {
-        return $this->belongsTo(Region::class, 'organ');
+        return $this->belongsTo(Organ::class, 'organ');
     }
 
     public function getEquipments() {
@@ -72,10 +72,10 @@ class Recommendation extends Model {
     }
 
     private function equipment(int $id, $meter = false): string {
-        return Equipment::query()->where('static', $meter)->find($id)->name ?? '';
+        return EquipmentType::query()->where('static', $meter)->find($id)->name ?? '';
     }
 
     private function equipType(int $id): string {
-        return EquipmentType::query()->find($id)->type ?? '';
+        return Equipment::query()->find($id)->type ?? '';
     }
 }

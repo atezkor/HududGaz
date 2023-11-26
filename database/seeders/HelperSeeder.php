@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Region;
 use App\Models\Activity;
-use App\Models\Proposition;
-use App\Models\Individual;
-use App\Models\LegalProposition;
+use App\Models\Designer;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
-use App\Models\Designer;
+use App\Models\IndividualApplication;
+use App\Models\LegalApplication;
 use App\Models\Mounter;
+use App\Models\Proposition;
+use App\Models\Organ;
+use Illuminate\Database\Seeder;
+
 
 class HelperSeeder extends Seeder {
     /**
@@ -23,10 +24,11 @@ class HelperSeeder extends Seeder {
         $this->insertOrgan();
         $this->insertActivity();
         $this->insertProposition();
-        $this->insertEquipment();
         $this->insertDesigner();
         $this->insertMontageFirm();
+
         $this->insertEquipmentTypes();
+//        $this->insertEquipment();
     }
 
     private function insertOrgan() {
@@ -35,9 +37,10 @@ class HelperSeeder extends Seeder {
             $name = $district[0][0] . '.' . strtoupper($district[1][0]) . '.' . $district[0];
             $suffix = $district[0][strlen($district[0]) - 1] == 'a' ? "yev" : "ov";
             $name .= $suffix;
-            Region::query()->create([
+
+            Organ::query()->create([
                 'org_number' => rand(100, 500) + rand(100, 500) + rand(100, 500) + rand(1000, 1500),
-                'lead_engineer' =>  $name,
+                'lead_engineer' => $name,
                 'section_leader' => $name,
                 'district' => $key,
                 'org_name' => $district[0] . $district[1] . "gazta\u{2019}minot",
@@ -67,10 +70,10 @@ class HelperSeeder extends Seeder {
                 'build_type' => rand(1, 2),
                 'type' => 2,
                 'status' => 1,
-                'file' => '100.pdf'
+                'file' => 'test.pdf'
             ]);
 
-            LegalProposition::query()->create([
+            LegalApplication::query()->create([
                 'proposition_id' => $key + 1,
                 'organ' => 1,
                 'legal_stir' => rand(1000, 5000) + rand(100, 500),
@@ -90,10 +93,10 @@ class HelperSeeder extends Seeder {
                 'build_type' => rand(1, 2),
                 'type' => 1,
                 'status' => 1,
-                'file' => '100.pdf'
+                'file' => 'test.pdf'
             ]);
 
-            Individual::query()->create([
+            IndividualApplication::query()->create([
                 'proposition_id' => $key + 5,
                 'organ' => 1,
                 'full_name' => $applicant,
@@ -104,24 +107,24 @@ class HelperSeeder extends Seeder {
         }
     }
 
-    private function insertEquipment() {
+    private function insertEquipmentTypes() {
         foreach (["Gaz-hisoblagich"] as $name) {
-            Equipment::query()->create([
+            EquipmentType::query()->create([
                 'name' => $name,
                 'static' => true
             ]);
         }
 
         foreach (["Gaz qozoni", 'Gaz quvuri', "Jo\u{2018}mrak"] as $equip) {
-            Equipment::query()->create([
+            EquipmentType::query()->create([
                 'name' => $equip,
             ]);
         }
     }
 
-    private function insertEquipmentTypes() {
+    private function insertEquipment() {
         foreach (['PRINTS-G10'] as $key => $type) {
-            EquipmentType::query()->create([
+            Equipment::query()->create([
                 'type' => $type,
                 'equipment_id' => $key + 1,
                 'order' => 1
@@ -159,8 +162,8 @@ class HelperSeeder extends Seeder {
                 'date_created' => now(),
                 'date_expired' => date('Y-m-d', time() + 3600 * 24 * 356),
                 'given_by' => 'Davlat xizmatlari markazi',
-                'permission_to' => "barcha gaz inshootlarini o\'rnatish va ta'mirlash, gaz quvurlarini ishlatish tekshirish",
-                'implement_for' => "yuqori, o'rta va past bosimli gaz inshootlarining yer osti va usti gaz quvurlarini ishga tushirish zamin quvurlarini o'rnatish, ta'mirlash ishlari",
+                'permission_to' => "barcha gaz inshootlarini o\u{2018}rnatish va ta\u{2019}mirlash, gaz quvurlarini ishlatish tekshirish",
+                'implement_for' => "yuqori, o\u{2018}rta va past bosimli gaz inshootlarining yer osti va usti gaz quvurlarini ishga tushirish zamin quvurlarini o\u{2018}rnatish, ta\u{2019}mirlash ishlari",
                 'document' => 'qwerty.pdf'
             ]);
         }

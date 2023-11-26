@@ -12,7 +12,7 @@
                             @lang('admin.user.btn_add')
                         </a>
                         <div class="card-tools mt-2">
-                            <div class="input-group w-75 ml-auto">
+                            <div class="input-group ml-auto">
                                 <input type="search" id="search" oninput="search(this)" class="form-control"
                                        placeholder="{{__('global.search')}}">
                             </div>
@@ -31,17 +31,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @php($roles = roles())
                             @foreach($models as $model)
                                 <tr>
-                                    <td>{{$loop->index + 1}}</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{$model->name}}</td>
                                     <td>{{$model->position}}</td>
                                     <td>{{$model->username}}</td>
-                                    <td>{{$roles[$model->role]}}</td>
+                                    <td>{{$roles[$model->role_id]}}</td>
                                     <td>
-                                        <form action="{{route('admin.users.delete', ['user' => $model])}}" method="post">
-                                            <a href="{{route('admin.users.edit', ['user' => $model])}}" class="btn btn-warning"
+                                        <form action="{{route('admin.users.delete', $model->id)}}" method="post">
+                                            <a href="{{route('admin.users.edit', $model->id)}}"
+                                               class="btn btn-warning"
                                                title="{{__('global.btn_edit')}}">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
@@ -64,24 +64,24 @@
     </div>
 </section>
 @endsection
-@section('javascript')
+@section('js')
 <script src="{{'/js/default.js'}}"></script>
 <script>
     function remove(btn) {
         Swal.fire({
-            title: "{{__('admin.user.alert_title')}}",
-            text: "{{__('admin.alert_text')}}",
+            title: "@lang('admin.user.alert_title')",
+            text: "@lang('admin.alert_text')",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dd3333',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: "{{__('global.btn_yes')}}",
-            cancelButtonText: "{{__('global.btn_no')}}"
+            confirmButtonText: "@lang('global.btn_yes')",
+            cancelButtonText: "@lang('global.btn_no')"
         }).then((result) => {
             if (result.isConfirmed) {
                 btn.parentNode.submit()
                 Swal.fire({
-                    title: "{{__('global.del_process')}}",
+                    title: "@lang('global.del_process')",
                     icon: 'success',
                     showConfirmButton: false
                 });

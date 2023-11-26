@@ -7,7 +7,7 @@ namespace App\Models;
  * @property string recommendation
  * @property string condition
  */
-class CancelledProposition extends Model {
+class CancelledProposition extends Application {
 
     protected $fillable = ['prop_num', 'applicant', 'proposition', 'recommendation', 'condition', 'reason'];
 }
