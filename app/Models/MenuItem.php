@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\Model;
 
 
-class MenuItem extends BaseModel {
+class MenuItem extends Model {
 
     public $timestamps = false;
 

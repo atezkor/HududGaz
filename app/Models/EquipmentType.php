@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int id
  */
-class EquipmentType extends BaseModel {
+class EquipmentType extends Model {
 
     protected $fillable = ['name', 'static'];
 

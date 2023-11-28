@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
+/**** Route ****/
 function resource($url, $controller, $name) {
     Route::resource($url, $controller)->names([
         'index' => $name . '.index',
@@ -32,6 +33,8 @@ function readonly($url, $controller, $name) {
         'update' => $name . '.update'
     ]);
 }
+/**** ~ Route ~ ****/
+
 
 function getName(): string {
     return App\Models\Organization::Data()->branch_name;

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string short_name
  * @property Montage montages
  */
-class Mounter extends BaseModel {
+class Mounter extends Model {
 
     public $timestamps = false;
     protected $fillable = ['rec_num', 'reg_num', 'full_name', 'short_name', 'leader',

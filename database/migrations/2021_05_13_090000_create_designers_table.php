@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateDesignersTable extends Migration {
     /**
      * Run the migrations.
@@ -11,16 +12,16 @@ class CreateDesignersTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('designers', function (Blueprint $table) {
+        Schema::create('designers', function(Blueprint $table) {
             $table->id();
-            $table->string('org_name');
-            $table->string('leader');
+            $table->string('name');
+            $table->string('director');
             $table->string('address');
             $table->string('address_krill')->nullable();
             $table->string('phone');
             $table->date('date_reg');
             $table->date('date_end');
-            $table->string('document')->nullable();
+            $table->string('license')->nullable();
             $table->timestamps();
         });
     }
