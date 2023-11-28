@@ -14,15 +14,15 @@ class CreateOrgansTable extends Migration {
     public function up() {
         Schema::create('organs', function(Blueprint $table) {
             $table->id();
-            $table->integer('org_number')->unique();
+            $table->string('name');
+            $table->integer('tin')->unique();
+            $table->tinyInteger('district_id');
             $table->string('lead_engineer');
-            $table->string('section_leader');
-            $table->tinyInteger('district');
-            $table->string('org_name');
+            $table->string('department_head');
             $table->string('address');
             $table->string('address_krill');
             $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->string('fax')->nullable();
             $table->timestamps();
         });

@@ -10,7 +10,6 @@ use App\Models\IndividualApplication;
 use App\Models\LegalApplication;
 use App\Models\Mounter;
 use App\Models\Proposition;
-use App\Models\Organ;
 use Illuminate\Database\Seeder;
 
 
@@ -21,7 +20,6 @@ class HelperSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $this->insertOrgan();
         $this->insertActivity();
         $this->insertProposition();
         $this->insertDesigner();
@@ -29,28 +27,6 @@ class HelperSeeder extends Seeder {
 
         $this->insertEquipmentTypes();
 //        $this->insertEquipment();
-    }
-
-    private function insertOrgan() {
-        foreach (districts() as $key => $organ) {
-            $district = explode(' ', $organ);
-            $name = $district[0][0] . '.' . strtoupper($district[1][0]) . '.' . $district[0];
-            $suffix = $district[0][strlen($district[0]) - 1] == 'a' ? "yev" : "ov";
-            $name .= $suffix;
-
-            Organ::query()->create([
-                'org_number' => rand(100, 500) + rand(100, 500) + rand(100, 500) + rand(1000, 1500),
-                'lead_engineer' => $name,
-                'section_leader' => $name,
-                'district' => $key,
-                'org_name' => $district[0] . $district[1] . "gazta\u{2019}minot",
-                'address' => $district[0] . " mahallasi",
-                'address_krill' => $organ . ' bozori',
-                'email' => strtolower($district[0] . $district[1]) . "@mail.uz",
-                'phone' => "+(125) 15-55",
-                'fax' => "+(125) 15-55"
-            ]);
-        }
     }
 
     private function insertActivity() {

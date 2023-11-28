@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class DistrictRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,11 +22,11 @@ class DistrictRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'org_number' => ['required'],
+            'name' => ['required'],
+            'tin' => ['required'],
             'lead_engineer' => ['required'],
-            'section_leader' => ['required'],
-            'district' => ['required'],
-            'org_name' => ['required'],
+            'department_head' => ['required'],
+            'district_id' => ['required'],
             'address' => ['required'],
             'address_krill' => ['required'],
             'email' => ['required'],
@@ -36,11 +37,11 @@ class DistrictRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'org_number' => __('admin.organ.org_num'),
+            'name' => __('admin.org_name'),
+            'tin' => __('admin.organ.org_num'),
             'lead_engineer' => __('admin.organ.engineer'),
-            'section_leader' => __('admin.organ.section_leader'),
-            'region' => __('admin.organ.select_hint'),
-            'org_name' => __('admin.org_name'),
+            'department_head' => __('admin.organ.department_head'),
+            'district_id' => __('admin.organ.select_hint'),
             'address' => __('admin.organ.address'),
             'address_krill' => __('admin.organ.address_krill'),
             'email' => __('admin.organ.email'),

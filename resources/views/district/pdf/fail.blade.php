@@ -110,7 +110,7 @@
     <table class="mt-20 text-bold" style="font-size: 12px">
         <tr>
             <td>
-                <span>{{$organ->org_number}}, {{$organ->address}}.</span><br>
+                <span>{{$organ->tin}}, {{$organ->address}}.</span><br>
                 <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
                 <span>Elektron pochta: {{$organ->email}}</span>
             </td>

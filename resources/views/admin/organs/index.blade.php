@@ -24,8 +24,8 @@
                             <thead>
                                 <tr>
                                     <th>{{__('global.index')}}</th>
-                                    <th>{{__('admin.organ.col_num')}}</th>
                                     <th>{{__('admin.organ.col_name')}}</th>
+                                    <th>{{__('admin.organ.col_num')}}</th>
                                     <th>{{__('admin.organ.col_engineer')}}</th>
                                     <th>{{__('admin.email')}}</th>
                                     <th>{{__('admin.organ.col_phone')}}</th>
@@ -37,8 +37,8 @@
                             @foreach($models as $model)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$model->org_number}}</td>
-                                    <td>{{$model->org_name}}</td>
+                                    <td>{{$model->name}}</td>
+                                    <td>{{$model->tin}}</td>
                                     <td>{{$model->lead_engineer}}</td>
                                     <td>{{$model->email}}</td>
                                     <td>{{$model->phone}}</td>
@@ -70,7 +70,7 @@
     </div>
 </section>
 @endsection
-@section('javascript')
+@section('js')
 <script src="{{'/js/default.js'}}"></script>
 <script>
     function remove(btn) {

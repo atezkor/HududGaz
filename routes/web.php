@@ -5,8 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DesignerController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\MounterController;
+use App\Http\Controllers\OrganController;
 use App\Http\Controllers\OrganizationController;
-use App\Http\Controllers\RegionController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\UserController;
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin'], function() {
     resource('users', UserController::class, 'admin.users');
     Route::post('user/change-role/{role?}', [UserController::class, 'checkRole'])->name('admin.change_role');
 
-    resource('organs', RegionController::class, 'admin.organs');
+    resource('organs', OrganController::class, 'admin.organs');
     resource('mounters', MounterController::class, 'admin.mounters'); // resource('fitters', FitterController::class, 'admin.fitters');
     resource('designers', DesignerController::class, 'admin.designers');
 

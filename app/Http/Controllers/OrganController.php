@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\DistrictRequest;
 use App\Models\Organ;
 use App\Services\Service;
-use App\Http\Requests\DistrictRequest;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\RedirectResponse;
 
 
-class RegionController extends Controller {
+class OrganController extends Controller {
 
     private Service $service;
 
@@ -26,7 +27,7 @@ class RegionController extends Controller {
         }
 
         $models = Organ::all();
-        return view('admin.regions.index', ['models' => $models]);
+        return view('admin.organs.index', ['models' => $models]);
     }
 
     public function create(): View|RedirectResponse {
@@ -36,11 +37,8 @@ class RegionController extends Controller {
             return redirect('/');
         }
 
-        $model = new Organ();
-        return view('admin.regions.form', [
-            'action' => route('admin.organs.store'),
-            'method' => 'POST',
-            'model' => $model, 'districts' => districts()
+        return view('admin.organs.create', [
+            'model' => new Organ(), 'districts' => districts()
         ]);
     }
 
@@ -52,9 +50,12 @@ class RegionController extends Controller {
         }
 
         $data = $request->validated();
-        $this->service->create($data);
-        return redirect()->route('admin.organs.index')
-            ->with('msg', __('global.messages.crt'));
+        try {
+            $this->service->create($data);
+            return redirect()->route('admin.organs.index')->with('msg', __('global.messages.crt'));
+        } catch (QueryException $ex) {
+            return redirect()->back()->with('error', $ex->getMessage());
+        }
     }
 
     public function edit(Organ $organ): View|RedirectResponse {
@@ -64,9 +65,7 @@ class RegionController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.regions.form', [
-            'action' => route('admin.organs.update', ['organ' => $organ]),
-            'method' => 'PUT',
+        return view('admin.organs.edit', [
             'model' => $organ, 'districts' => districts()
         ]);
     }
@@ -79,8 +78,12 @@ class RegionController extends Controller {
         }
 
         $data = $request->validated();
-        $this->service->update($data, $organ);
-        return redirect()->route('admin.organs.index')->with('msg', __('global.messages.upd'));
+        try {
+            $this->service->update($data, $organ);
+            return redirect()->route('admin.organs.index')->with('msg', __('global.messages.upd'));
+        } catch (QueryException $ex) {
+            return redirect()->back()->with('error', $ex->getMessage());
+        }
     }
 
     public function destroy(Organ $organ): RedirectResponse {

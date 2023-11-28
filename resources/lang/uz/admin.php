@@ -77,7 +77,7 @@ return [
         'org_num' => "Tashkilot raqami",
         'select_hint' => "Tuman (shahar)",
         'engineer' => "Bosh muhandis",
-        'section_leader' => "Bo\u{2018}lim boshlig\u{2018}i",
+        'department_head' => "Bo\u{2018}lim boshlig\u{2018}i",
         'email' => "Elektron pochta manzili",
         'address' => "Manzil",
         'address_krill' => "Manzil (krillcha)",
