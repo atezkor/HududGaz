@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DesignerRequest;
+use App\Models\Designer;
+use App\Services\DesignerService;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\DesignerRequest;
-use App\Services\DesignerService;
-use App\Models\Designer;
 
 
 class DesignerController extends Controller {
@@ -46,11 +47,7 @@ class DesignerController extends Controller {
             return redirect('/');
         }
 
-        $model = new Designer();
-        return view('admin.designers.form', [
-            'action' => route('admin.designers.store'),
-            'method' => 'POST', 'model' => $model
-        ]);
+        return view('admin.designers.create', ['model' => new Designer()]);
     }
 
     /**
@@ -66,8 +63,7 @@ class DesignerController extends Controller {
             return redirect('/');
         }
 
-        $data = $request->validated();
-        $this->service->create($data);
+        $this->service->create($request->validated());
         return redirect()->route('admin.designers.index')->with('msg', __('global.messages.crt'));
     }
 
@@ -84,10 +80,7 @@ class DesignerController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.designers.form', [
-            'action' => route('admin.designers.update', ['designer' => $designer]),
-            'method' => 'PUT', 'model' => $designer
-        ]);
+        return view('admin.designers.edit', ['model' => $designer]);
     }
 
     /**
@@ -122,12 +115,13 @@ class DesignerController extends Controller {
             return redirect('/');
         }
 
-        if ($designer->projects)
+        try {
+            $this->service->delete($designer);
+            return redirect()->route('admin.designers.index')->with('msg', __('global.messages.del'));
+        } catch (Exception $ex) {
             return redirect()->route('admin.designers.index')
                 ->with('msg', __('admin.designer.del_title'))
                 ->with('msg_type', 'info');
-
-        $this->service->delete($designer);
-        return redirect()->route('admin.designers.index')->with('msg', __('global.messages.del'));
+        }
     }
 }

@@ -72,6 +72,8 @@ Front-End
 - [SweetAlert](https://sweetalert2.github.io) A beautiful, responsive, customizable, accessible (WAI-ARIA) replacement
   for JavaScript's popup boxes. Zero dependencies.
 
-
+Voila (uala)
 # Havolalar
 - https://benjamincrozat.com/install-php-mac-laravel-valet
+- https://www.w3docs.com/
+- https://remark.js.org/

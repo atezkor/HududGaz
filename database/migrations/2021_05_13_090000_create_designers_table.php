@@ -19,8 +19,8 @@ class CreateDesignersTable extends Migration {
             $table->string('address');
             $table->string('address_krill')->nullable();
             $table->string('phone');
-            $table->date('date_reg');
-            $table->date('date_end');
+            $table->date('registry_date');
+            $table->date('expiry_date');
             $table->string('license')->nullable();
             $table->timestamps();
         });

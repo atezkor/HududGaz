@@ -1,96 +1,67 @@
-@extends('layout')
-@section('title', getName())
+<div class="card-body">
+    <div class="row">
+        <div class="form-group col-6 pr-4">
+            <label for="name">{{__('admin.org_name')}}</label>
+            <input type="text" name="name" id="name" class="form-control"
+                   value="{{old('name', $model->name)}}" autocomplete="off">
+        </div>
 
-@section('content')
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            @if($method == 'POST')
-                                {{__('admin.designer.heading_create')}}
-                            @else
-                                {{__('admin.designer.heading_edit')}}
-                            @endif
-                        </h3>
-                    </div>
-                    <form action="{{$action}}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        @method($method)
-                        @include('components.errors')
-
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-6 pr-4">
-                                    <label for="org_name">{{__('admin.org_name')}}</label>
-                                    <input type="text" name="org_name" id="org_name" value="{{$model->org_name}}" class="form-control">
-                                </div>
-
-                                <div class="form-group col-6 pl-4">
-                                    <label for="leader">{{__('admin.org_leader')}}</label>
-                                    <input type="text" name="leader" id="leader" value="{{$model->leader}}" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col-6 pr-4">
-                                    <label for="address">{{__('admin.designer.address')}}</label>
-                                    <input type="text" name="address" id="address" value="{{$model->address}}" class="form-control">
-                                </div>
-
-                                <div class="form-group col-6 pl-4">
-                                    <label for="address_krill">{{__('admin.designer.address_krill')}}</label>
-                                    <input type="text" name="address_krill" id="address_krill" value="{{$model->address_krill}}" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col-6 pr-4">
-                                    <label for="date_reg">{{__('admin.date_created')}}</label>
-                                    <input type="date" name="date_reg" id="date_reg" value="{{$model->date_reg}}" class="form-control date">
-                                </div>
-                                <div class="form-group col-6 pl-4">
-                                    <label for="date_end">{{__('admin.date_expired')}}</label>
-                                    <input type="date" name="date_end" id="date_end" value="{{$model->date_end}}" class="form-control date">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="phone">{{__('admin.designer.phone_number')}}</label>
-                                <textarea name="phone" id="phone" class="form-control" style="resize: none">{{$model->phone}}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="file">{{__('admin.document')}}</label>
-                                <div class="custom-file">
-                                    <input type="file" name="document" id="file" class="custom-file-input"
-                                           @if($method == "POST") required @endif>
-                                    <label class="custom-file-label" for="file">
-                                        <span id="file_hint">{{__('admin.doc_upload')}}</span>
-                                        <span class="btn btn-info"><i class="far fa-file-pdf"></i></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary mr-2">{{__('global.btn_save')}}</button>
-                            <div class="float-right">
-                                <a href="{{route('admin.designers.index')}}" class="btn btn-outline-secondary">{{__('global.btn_back')}}</a>
-                                <button type="reset" id="reset" class="btn btn-default">{{__('global.btn_reset')}}</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="form-group col-6 pl-4">
+            <label for="director">{{__('admin.org_director')}}</label>
+            <input type="text" name="director" id="director" class="form-control"
+                   value="{{old('director', $model->director)}}" autocomplete="off">
         </div>
     </div>
-</section>
-@endsection
-@section('javascript')
-<script src="{{'/js/default.js'}}"></script>
-<script>
-    fileUpload('reset', 'file', 'file_hint', "{{__('admin.doc_upload')}}");
-</script>
+
+    <div class="row">
+        <div class="form-group col-6 pr-4">
+            <label for="address">@lang('admin.designer.address')</label>
+            <input type="text" name="address" id="address" class="form-control"
+                   value="{{old('address', $model->address)}}"
+                   autocomplete="off">
+        </div>
+
+        <div class="form-group col-6 pl-4">
+            <label for="address_krill">@lang('admin.designer.address_krill')</label>
+            <input type="text" name="address_krill" id="address_krill" class="form-control"
+                   value="{{old('address_krill', $model->address_krill)}}" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-6 pr-4">
+            <label for="registry_date">{{__('admin.date_created')}}</label>
+            <input type="date" name="registry_date" id="registry_date" class="form-control date"
+                   value="{{$model->registry_date}}">
+        </div>
+        <div class="form-group col-6 pl-4">
+            <label for="expiry_date">{{__('admin.expiry_date')}}</label>
+            <input type="date" name="expiry_date" id="expiry_date" value="{{$model->expiry_date}}"
+                   class="form-control date">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">{{__('admin.designer.phone_number')}}</label>
+        <textarea name="phone" id="phone" class="form-control"
+                  style="resize: none">{{$model->phone}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="license">@lang('admin.license')</label>
+        <div class="custom-file">
+            <input type="file" name="license" id="license" class="custom-file-input"
+                   @if($model->id) required @endif>
+            <label class="custom-file-label" for="file">
+                <span id="file_hint">@lang('admin.doc_upload')</span>
+                <span class="btn btn-info"><i class="far fa-file-pdf"></i></span>
+            </label>
+        </div>
+    </div>
+</div>
+@section('js')
+    <script src="{{'/js/default.js'}}"></script>
+    <script>
+        fileUpload('reset', 'license', 'file_hint', "{{__('admin.doc_upload')}}");
+    </script>
 @endsection

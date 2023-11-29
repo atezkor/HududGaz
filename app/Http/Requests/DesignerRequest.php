@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class DesignerRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,40 +21,40 @@ class DesignerRequest extends FormRequest {
      * @return array
      */
     public function rules(): array {
-        if ($this->request->get('date_reg') >= $this->request->get('date_end')) {
+        if ($this->request->get('registry_date') >= $this->request->get('expiry_date')) {
             return [
-                'date_reg' => ['email'],
-                'org_name' => ['required'],
-                'leader' => ['required'],
+                'name' => ['required'],
+                'director' => ['required'],
                 'phone' => ['required'],
-                'address' => ['required']
+                'address' => ['required'],
+                'registry_date' => ['email']
             ];
         }
 
         return [
-            'org_name' => ['required'],
-            'leader' => ['required'],
+            'name' => ['required'],
+            'director' => ['required'],
             'phone' => ['required'],
             'address' => ['required'],
             'address_krill' => [],
-            'date_reg' => [],
-            'date_end' => [],
-            'document' => []
+            'registry_date' => [],
+            'expiry_date' => [],
+            'license' => []
         ];
     }
 
     public function attributes(): array {
         return [
-          'phone' => __('admin.phone'),
-          'org_name' => __('admin.org_name'),
-          'leader' => __('admin.org_leader'),
-          'address' => __('admin.address')
+            'name' => __('admin.org_name'),
+            'director' => __('admin.org_director'),
+            'phone' => __('admin.phone'),
+            'address' => __('admin.address')
         ];
     }
 
     public function messages(): array {
         return [
-            'date_reg.email' => __('validation.date_invalid')
+            'registry_date.email' => __('validation.date_invalid')
         ];
     }
 }

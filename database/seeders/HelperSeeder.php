@@ -111,14 +111,14 @@ class HelperSeeder extends Seeder {
     private function insertDesigner() {
         foreach (['IDEAL TARMOQ LOYIHA'] as $designer) {
             Designer::query()->create([
-                'org_name' => $designer,
-                'leader' => 'L.L.Loyihachi',
+                'name' => $designer,
+                'director' => 'L.L.Loyihachi',
                 'phone' => '+998 99 555 15 55',
                 'address' => 'Mahalla',
                 'address_krill' => 'Mahalla',
-                'date_reg' => now(),
-                'date_end' => date('Y-m-d', time() + 3600 * 24 * 356),
-                'document' => 'qwerty.pdf'
+                'registry_date' => now(),
+                'expiry_date' => date('Y-m-d', time() + 3600 * 24 * 356),
+                'license' => 'qwerty.pdf'
             ]);
         }
     }

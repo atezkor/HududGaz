@@ -25,7 +25,7 @@
                                 <tr>
                                     <th>№</th>
                                     <th>{{__('admin.org_name')}}</th>
-                                    <th>{{__('admin.org_leader')}}</th>
+                                    <th>{{__('admin.org_director')}}</th>
                                     <th>{{__('admin.address')}}</th>
                                     <th>{{__('admin.period_activity')}}</th>
                                     <th style="width: 1px;"></th>
@@ -70,7 +70,7 @@
     </div>
 </section>
 @endsection
-@section('javascript')
+@section('js')
 <script src="{{'/js/default.js'}}"></script>
 <script>
     function remove(btn) {

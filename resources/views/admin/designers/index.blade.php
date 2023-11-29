@@ -8,10 +8,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        @can('crud_admin')
-                        <a href="{{route('admin.designers.create')}}" class="btn btn-info">{{__('admin.designer.btn_new')}}</a>
-                            @php($show = true) @else @php($show = false)
-                        @endcan
+                        <a href="{{route('admin.designers.create')}}"
+                           class="btn btn-info">{{__('admin.designer.btn_new')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" oninput="search(this)" class="form-control"
@@ -25,7 +23,7 @@
                                 <tr>
                                     <th>{{__('global.index')}}</th>
                                     <th>{{__('admin.org_name')}}</th>
-                                    <th>{{__('admin.org_leader')}}</th>
+                                    <th>{{__('admin.org_director')}}</th>
                                     <th>{{__('admin.address')}}</th>
                                     <th>{{__('admin.period_activity')}}</th>
                                     <th style="width: 1px;"></th>
@@ -35,17 +33,20 @@
                             @foreach($models as $model)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$model->org_name}}</td>
-                                    <td>{{$model->leader}}</td>
+                                    <td>{{$model->name}}</td>
+                                    <td>{{$model->director}}</td>
                                     <td>{{$model->address}}</td>
-                                    <td>{{formatDate($model->date_reg)}} - {{formatDate($model->date_end)}}</td>
                                     <td>
-                                    @if($show)
-                                        <form action="{{route('admin.designers.delete', ['designer' => $model])}}"
-                                              method="post" class="form">
+                                        {{formatDate($model->registry_date)}} - {{formatDate($model->expiry_date)}}
+                                    </td>
+                                    <td>
+                                        <form
+                                            action="{{route('admin.designers.delete', ['designer' => $model])}}"
+                                            method="post" class="form">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{route('admin.designers.edit', ['designer' => $model])}}" class="btn btn-warning"
+                                            <a href="{{route('admin.designers.edit', ['designer' => $model])}}"
+                                               class="btn btn-warning"
                                                title="{{__('global.btn_edit')}}">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
@@ -54,7 +55,6 @@
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
-                                    @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -67,7 +67,7 @@
     </div>
 </section>
 @endsection
-@section('javascript')
+@section('js')
 <script src="{{'/js/default.js'}}"></script>
 <script>
     function remove(btn) {
