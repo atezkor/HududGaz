@@ -32,7 +32,7 @@ class MounterRequest extends FormRequest {
             'address' => ['required'],
             'given_by' => [],
             'date_registry' => ['required'],
-            'date_expiry' => ['required'],
+            'date_expiry' => ['required'], // TODO greater_than
             'permissions' => [],
             'implementations' => [],
             'license' => []

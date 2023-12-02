@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model {
     use HasFactory;
 
+    public const PHYSICAL = 1;
+    public const LEGAL = 2;
+
     public function percent($term = 72): string {
         $now = time() - date_timestamp_get(date_create($this->getAttribute('created_at')));
         $percent = 100 - $now / (3600 * $term) * 100;

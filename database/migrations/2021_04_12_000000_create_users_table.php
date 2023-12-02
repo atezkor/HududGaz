@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration {
             $table->string('password');
             $table->tinyInteger('role_id');
 
-            $table->integer('organ_id')->nullable();
+            $table->integer('organization_id')->nullable();
 
             $table->string('position')->nullable();
             $table->string('locale')->default('uzk');

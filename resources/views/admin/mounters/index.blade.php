@@ -20,14 +20,14 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
                             <thead>
-                                <tr>
-                                    <th>№</th>
-                                    <th>{{__('admin.org_name')}}</th>
-                                    <th>{{__('admin.org_director')}}</th>
-                                    <th>{{__('admin.address')}}</th>
-                                    <th>{{__('admin.period_activity')}}</th>
-                                    <th style="width: 1px;"></th>
-                                </tr>
+                            <tr>
+                                <th>№</th>
+                                <th>{{__('admin.org_name')}}</th>
+                                <th>{{__('admin.org_director')}}</th>
+                                <th>{{__('admin.address')}}</th>
+                                <th>{{__('admin.period_activity')}}</th>
+                                <th style="width: 1px;"></th>
+                            </tr>
                             </thead>
                             <tbody>
                             @foreach($models as $model)
@@ -44,7 +44,8 @@
                                               method="post" class="form">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="" class="btn btn-outline-info mr-2"
+                                            <a href="{{route('admin.mounter.employees.index', ['firm_id' => $model->id])}}"
+                                               class="btn btn-outline-info mr-2"
                                                style="pointer-events: none">
                                                 {{__('admin.mounter.workers')}}
                                             </a>
@@ -71,30 +72,30 @@
 </section>
 @endsection
 @section('js')
-    <script src="{{'/js/default.js'}}"></script>
-    <script>
-        function remove(btn) {
-            Swal.fire({
-                title: "{{__('admin.mounter.alert_title')}}",
-                text: "{{__('admin.alert_text')}}",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#dd3333',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: "{{__('global.btn_yes')}}",
-                cancelButtonText: "{{__('global.btn_no')}}"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    btn.parentNode.submit();
-                    Swal.fire({
-                        title: "{{__('global.del_process')}}",
-                        icon: 'success',
-                        showConfirmButton: false
-                    });
-                }
-            });
-        }
+<script src="{{'/js/default.js'}}"></script>
+<script>
+    function remove(btn) {
+        Swal.fire({
+            title: "{{__('admin.mounter.alert_title')}}",
+            text: "{{__('admin.alert_text')}}",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dd3333',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: "{{__('global.btn_yes')}}",
+            cancelButtonText: "{{__('global.btn_no')}}"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                btn.parentNode.submit();
+                Swal.fire({
+                    title: "{{__('global.del_process')}}",
+                    icon: 'success',
+                    showConfirmButton: false
+                });
+            }
+        });
+    }
 
-        toast("{{session()->get('msg')}}", "{{session()->get('msg_type')}}");
-    </script>
+    toast("{{session()->get('msg')}}", "{{session()->get('msg_type')}}");
+</script>
 @endsection

@@ -6,8 +6,8 @@ use App\Http\Controllers\RecommendationController;
 Route::get('', function() {
     return redirect()->route('district.propositions');
 });
-Route::get('recommendations', [RecommendationController::class, 'index'])->name('district.recommendations');
 Route::get('propositions', [RecommendationController::class, 'propositions'])->name('district.propositions');
+Route::get('recommendations', [RecommendationController::class, 'index'])->name('district.recommendations');
 Route::get('recommendations/progress', [RecommendationController::class, 'progress'])->name('district.recommendations.progress');
 Route::get('recommendations/cancelled', [RecommendationController::class, 'cancelled'])->name('district.recommendations.cancelled');
 Route::get('recommendations/archive', [RecommendationController::class, 'archives'])->name('district.recommendations.archive');

@@ -11,7 +11,6 @@ use App\Utilities\StorageManager;
 
 
 class LicenseService extends CrudService {
-
     use FileUploadManager, StorageManager;
 
     private PDF $pdf;

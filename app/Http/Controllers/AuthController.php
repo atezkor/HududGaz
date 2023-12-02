@@ -34,6 +34,7 @@ class AuthController extends Controller {
             ->where('username', '=', $credentials['username'])
             ->first();
 
+
         if ($user === null)
             return redirect()->route('login');
 

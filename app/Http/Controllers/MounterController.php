@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MounterRequest;
 use App\Models\Mounter;
-use App\Services\MounterService;
+use App\Services\Mounter\MounterService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DesignerController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\MounterController;
+use App\Http\Controllers\MounterEmployeeController;
 use App\Http\Controllers\OrganController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\StatusController;
@@ -31,7 +32,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('user/change-role/{role?}', [UserController::class, 'checkRole'])->name('admin.change_role');
 
     resource('organs', OrganController::class, 'admin.organs');
-    resource('mounters', MounterController::class, 'admin.mounters'); // resource('fitters', FitterController::class, 'admin.fitters');
+    resource('mounters/employees', MounterEmployeeController::class, 'admin.mounter.employees');
+    resource('mounters', MounterController::class, 'admin.mounters');
     resource('designers', DesignerController::class, 'admin.designers');
 
     reducer('equipments', EquipmentController::class, 'admin.equipments');
@@ -53,7 +55,7 @@ Route::prefix('technic')->group(function() {
 });
 
 Route::prefix('district')->group(function() {
-    require_once 'district.php';
+    require_once 'organ.php';
 });
 
 Route::prefix('designer')->group(function() {

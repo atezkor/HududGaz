@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FitterRequest;
+use App\Models\Fitter;
+use App\Services\Mounter\MounterEmployeeService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\FitterRequest;
-use App\Services\MounterService;
-use App\Models\Fitter;
 
 
-class FitterController extends Controller {
+class MounterEmployeeController extends Controller {
 
-    private MounterService $service;
+    private MounterEmployeeService $service;
 
-    public function __construct(MounterService $service) {
+    public function __construct(MounterEmployeeService $service) {
         $this->service = $service;
     }
 
@@ -25,11 +25,14 @@ class FitterController extends Controller {
      * @return View|RedirectResponse
      */
     public function index(Request $request): View|RedirectResponse {
-        $firm = $request->get('firm');
-        $models = Fitter::query()->where('firm_id', '=', $firm)->get();
-        return view('admin.mounters.workers', [
-            'models' => $models,
-            'firm_id' => $firm
+        $firmId = $request->get('firm_id');
+        if (!$firmId) {
+            return redirect()->route('admin.mounters.index');
+        }
+
+        return view('admin.mounters.employees.index', [
+            'models' => $this->service->all($firmId),
+            'firm_id' => $firmId
         ]);
     }
 
@@ -43,8 +46,8 @@ class FitterController extends Controller {
         $model = new Fitter();
         $firm = $request->get('firm');
 
-        return view('admin.mounters.manage', [
-            'action' => route('admin.fitters.store'),
+        return view('admin.mounters.employees.create', [
+            'action' => route('admin.mounter.employees.store'),
             'method' => 'POST',
             'model' => $model,
             'firm_id' => $firm
@@ -59,7 +62,7 @@ class FitterController extends Controller {
      */
     public function store(FitterRequest $request): RedirectResponse {
         $data = $request->validated();
-        $this->service->worker($data, new Fitter());
+        $this->service->create($data);
 
         $firm = $request->get('firm_id');
         return redirect()->route('admin.fitters.index', ['firm' => $firm]);
@@ -88,7 +91,7 @@ class FitterController extends Controller {
      */
     public function update(FitterRequest $request, Fitter $fitter): RedirectResponse {
         $data = $request->validated();
-        $this->service->worker($data, $fitter);
+        $this->service->update($fitter, $data);
 
         $firm = $request->get('firm_id');
         return redirect()->route('admin.fitters.index', ['firm' => $firm]);
@@ -101,7 +104,7 @@ class FitterController extends Controller {
      * @return RedirectResponse
      */
     public function destroy(Fitter $fitter): RedirectResponse {
-        $this->service->deleteWorker($fitter);
+        $this->service->delete($fitter);
         return redirect()->route('admin.fitters.index', [
             'firm' => $fitter->getAttribute('firm_id')
         ]);

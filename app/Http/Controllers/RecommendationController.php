@@ -2,6 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecommendationRequest;
+use App\Models\CancelledProposition;
+use App\Models\EquipmentType;
+use App\Models\Proposition;
+use App\Models\Recommendation;
+use App\Models\User;
+use App\Services\PropositionService;
+use App\Services\RecommendationService;
+use App\ViewModels\PropositionListViewModel;
+use App\ViewModels\RecommendationViewModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
@@ -9,15 +19,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use App\Models\Recommendation;
-use App\Models\CancelledProposition;
-use App\Models\Proposition;
-use App\Models\EquipmentType;
-use App\Services\RecommendationService;
-use App\Services\PropositionService;
-use App\Http\Requests\RecommendationRequest;
-use App\ViewModels\RecommendationViewModel;
-use App\ViewModels\PropositionListViewModel;
 
 
 class RecommendationController extends Controller {
@@ -40,7 +41,9 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
-        return view('district.propositions', new PropositionListViewModel([1, 2], request()->user()->organ));
+        /* @var User $user */
+        $user = request()->user();
+        return view('organ.propositions', new PropositionListViewModel([1, 2], $user->organization_id));
     }
 
     /**

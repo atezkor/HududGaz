@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
+/**
+ * @property string $license
+ */
 class Fitter extends Model {
     public $timestamps = false;
 
