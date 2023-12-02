@@ -23,7 +23,7 @@ class HelperSeeder extends Seeder {
         $this->insertActivity();
         $this->insertProposition();
         $this->insertDesigner();
-        $this->insertMontageFirm();
+        $this->insertMontunter();
 
         $this->insertEquipmentTypes();
 //        $this->insertEquipment();
@@ -123,24 +123,25 @@ class HelperSeeder extends Seeder {
         }
     }
 
-    private function insertMontageFirm() {
-        foreach (['MONTAJ SERVICE SIFAT'] as $montage_firm) {
+    private function insertMontunter() {
+        foreach (['MONTAJ SERVICE SIFAT'] as $firm) {
             Mounter::query()->create([
+//                'license' => []
+                'full_name' => $firm,
+                'short_name' => $firm,
+                'director' => 'M.M.Montajchi',
+                'tin' => rand(1000, 5000) + rand(100, 500),
                 'rec_num' => rand(1000, 5000) + rand(100, 500),
                 'reg_num' => rand(1000, 5000) + rand(100, 500),
-                'full_name' => $montage_firm,
-                'short_name' => $montage_firm,
-                'leader' => 'M.M.Montajchi',
-                'district' => rand(1, 13),
+                'district_id' => rand(1, 13),
                 'phone' => '+998 99 555 15 55',
                 'address' => 'Mahalla',
-                'taxpayer_stir' => rand(1000, 5000) + rand(100, 500),
-                'date_created' => now(),
-                'date_expired' => date('Y-m-d', time() + 3600 * 24 * 356),
+                'date_registry' => now(),
+                'date_expiry' => date('Y-m-d', time() + 3600 * 24 * 356),
                 'given_by' => 'Davlat xizmatlari markazi',
-                'permission_to' => "barcha gaz inshootlarini o\u{2018}rnatish va ta\u{2019}mirlash, gaz quvurlarini ishlatish tekshirish",
-                'implement_for' => "yuqori, o\u{2018}rta va past bosimli gaz inshootlarining yer osti va usti gaz quvurlarini ishga tushirish zamin quvurlarini o\u{2018}rnatish, ta\u{2019}mirlash ishlari",
-                'document' => 'qwerty.pdf'
+                'permissions' => "barcha gaz inshootlarini o\u{2018}rnatish va ta\u{2019}mirlash, gaz quvurlarini ishlatish tekshirish",
+                'implementations' => "yuqori, o\u{2018}rta va past bosimli gaz inshootlarining yer osti va usti gaz quvurlarini ishga tushirish zamin quvurlarini o\u{2018}rnatish, ta\u{2019}mirlash ishlari",
+                'license' => 'license.pdf'
             ]);
         }
     }

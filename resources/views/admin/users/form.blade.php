@@ -1,16 +1,22 @@
 @include('components.errors')
 
 <div class="card-body">
-    <div class="form-group">
-        <label for="name">{{__('admin.user.name')}}</label>
-        <input type="text" name="name" id="name" value="{{$model->name}}"
-               class="form-control" autocomplete="off">
-    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="name">{{__('admin.user.name')}}</label>
+                <input type="text" name="name" id="name" value="{{$model->name}}"
+                       class="form-control" autocomplete="off">
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label for="surname">{{__('admin.user.lastname')}}</label>
-        <input type="text" name="surname" id="surname" value="{{$model->surname}}"
-               class="form-control" autocomplete="off">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="surname">{{__('admin.user.lastname')}}</label>
+                <input type="text" name="surname" id="surname" value="{{$model->surname}}"
+                       class="form-control" autocomplete="off">
+            </div>
+        </div>
     </div>
 
     <div class="form-group">
@@ -19,16 +25,22 @@
                class="form-control" autocomplete="off">
     </div>
 
-    <div class="form-group">
-        <label for="username">{{__('admin.user.username')}}</label>
-        <input type="text" name="username" id="username" value="{{$model->username}}"
-               class="form-control" autocomplete="off">
-    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="username">{{__('admin.user.username')}}</label>
+                <input type="text" name="username" id="username" value="{{$model->username}}"
+                       class="form-control" autocomplete="off">
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label for="password">{{__('admin.user.password')}}</label>
-        <input type="password" name="password" id="password" class="form-control"
-               @if($model->password) placeholder="******" @endif>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="password">{{__('admin.user.password')}}</label>
+                <input type="password" name="password" id="password" class="form-control"
+                       @if($model->password) placeholder="******" @endif>
+            </div>
+        </div>
     </div>
 
     <div class="form-group">
@@ -50,19 +62,25 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="locale">{{__('admin.user.locale')}}</label>
-        <select name="locale" id="locale" class="form-control">
-            <option value="uz">{{__('admin.uz')}}</option>
-            <option value="uzk"
-                    @if($model->locale == 'uzk') selected @endif>{{__('admin.uzk')}}</option>
-        </select>
-    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="locale">{{__('admin.user.locale')}}</label>
+                <select name="locale" id="locale" class="form-control">
+                    <option value="uz">{{__('admin.uz')}}</option>
+                    <option value="uzk"
+                            @if($model->locale == 'uzk') selected @endif>{{__('admin.uzk')}}</option>
+                </select>
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label for="position">{{__('admin.user.position')}}</label>
-        <input type="text" name="position" id="position" value="{{$model->position}}"
-               class="form-control" autocomplete="off">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="position">{{__('admin.user.position')}}</label>
+                <input type="text" name="position" id="position" value="{{$model->position}}"
+                       class="form-control" autocomplete="off">
+            </div>
+        </div>
     </div>
 </div>
 @section('js')

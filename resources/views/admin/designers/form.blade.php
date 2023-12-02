@@ -30,21 +30,21 @@
 
     <div class="row">
         <div class="form-group col-6 pr-4">
-            <label for="registry_date">{{__('admin.date_created')}}</label>
+            <label for="registry_date">{{__('admin.date_registry')}}</label>
             <input type="date" name="registry_date" id="registry_date" class="form-control date"
-                   value="{{$model->registry_date}}">
+                   value="{{old('registry_date', $model->registry_date)}}">
         </div>
         <div class="form-group col-6 pl-4">
-            <label for="expiry_date">{{__('admin.expiry_date')}}</label>
-            <input type="date" name="expiry_date" id="expiry_date" value="{{$model->expiry_date}}"
-                   class="form-control date">
+            <label for="expiry_date">{{__('admin.date_expiry')}}</label>
+            <input type="date" name="expiry_date" id="expiry_date" class="form-control date"
+                   value="{{old('expiry_date', $model->expiry_date)}}">
         </div>
     </div>
 
     <div class="form-group">
         <label for="phone">{{__('admin.designer.phone_number')}}</label>
-        <textarea name="phone" id="phone" class="form-control"
-                  style="resize: none">{{$model->phone}}</textarea>
+        <input name="phone" id="phone" class="form-control"
+               value="{{old('phone', $model->phone)}}" autocomplete="off">
     </div>
 
     <div class="form-group">

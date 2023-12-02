@@ -30,8 +30,7 @@ class MounterController extends Controller {
             return redirect('/');
         }
 
-        $models = Mounter::all();
-        return view('admin.mounters.index', ['models' => $models]);
+        return view('admin.mounters.index', ['models' => Mounter::all()]);
     }
 
     /**
@@ -47,12 +46,7 @@ class MounterController extends Controller {
         }
 
         $model = new Mounter();
-        return view('admin.mounters.form', [
-            'action' => route('admin.mounters.store'),
-            'method' => 'POST',
-            'model' => $model,
-            'districts' => districts()
-        ]);
+        return view('admin.mounters.create', ['model' => $model, 'districts' => districts()]);
     }
 
     /**
@@ -68,8 +62,7 @@ class MounterController extends Controller {
             return redirect('/');
         }
 
-        $data = $request->validated();
-        $this->service->create($data);
+        $this->service->create($request->validated());
         return redirect()->route('admin.mounters.index')->with('msg', __('global.messages.crt'));
     }
 
@@ -86,9 +79,7 @@ class MounterController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.mounters.form', [
-            'action' => route('admin.mounters.update', ['mounter' => $mounter]),
-            'method' => 'PUT',
+        return view('admin.mounters.edit', [
             'model' => $mounter,
             'districts' => districts()
         ]);

@@ -2,12 +2,14 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HududGaz | Kirish</title>
     <link rel="shortcut icon" href="{{'/img/favicon.png'}}" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- CSS links -->
     <link rel="stylesheet" href="{{'/css/adminlte.min.css'}}">
     <!-- This is link for checkbox -->
@@ -22,12 +24,13 @@
                 <p>GAZ TA&#8217;MINOTI FILIALI</p>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Kirish uchun shaxsiy login va parolingizdan foydalaning</p>
+                <p class="login-box-msg">Kirish uchun o&#8216;z maxfiy ma&#8217;lumotlaringizdan foydalaning</p>
                 <form action="" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         {{-- old funksiyasi tasdiqlanmagan maydonni qayta to'ldrish uchun kerak --}}
-                        <input type="text" name="username" value="{{old('username')}}" class="form-control" placeholder="Foydalanuvchi nomi"
+                        <input type="text" name="username" value="{{old('username')}}" class="form-control"
+                               placeholder="Foydalanuvchi nomi"
                                autocomplete="username">
                         <div class="input-group-append">
                             <div class="input-group-text">

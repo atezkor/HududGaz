@@ -8,10 +8,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        @can('crud_admin')
-                        <a href="{{route('admin.mounters.create')}}" class="btn btn-info">{{__('admin.mounter.btn_new')}}</a>
-                            @php($show = true) @else @php($show = false)
-                        @endcan
+                        <a href="{{route('admin.mounters.create')}}"
+                           class="btn btn-info">{{__('admin.mounter.btn_new')}}</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" oninput="search(this)" class="form-control"
@@ -36,19 +34,22 @@
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$model->short_name}}</td>
-                                    <td>{{$model->leader}}</td>
+                                    <td>{{$model->director}}</td>
                                     <td>{{$model->address}}</td>
-                                    <td>{{formatDate($model->date_created)}} - {{formatDate($model->date_expired)}}</td>
                                     <td>
-                                    @if($show)
+                                        <span>{{formatDate($model->date_registry)}} - {{formatDate($model->date_expiry)}}</span>
+                                    </td>
+                                    <td>
                                         <form action="{{route('admin.mounters.delete', ['mounter' => $model])}}"
                                               method="post" class="form">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="" class="btn btn-outline-info mr-2" style="pointer-events: none">
+                                            <a href="" class="btn btn-outline-info mr-2"
+                                               style="pointer-events: none">
                                                 {{__('admin.mounter.workers')}}
                                             </a>
-                                            <a href="{{route('admin.mounters.edit', ['mounter' => $model])}}" class="btn btn-warning"
+                                            <a href="{{route('admin.mounters.edit', $model->id)}}"
+                                               class="btn btn-warning"
                                                title="{{__('global.btn_edit')}}">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
@@ -57,7 +58,6 @@
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
-                                    @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -71,30 +71,30 @@
 </section>
 @endsection
 @section('js')
-<script src="{{'/js/default.js'}}"></script>
-<script>
-    function remove(btn) {
-        Swal.fire({
-            title: "{{__('admin.mounter.alert_title')}}",
-            text: "{{__('admin.alert_text')}}",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dd3333',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: "{{__('global.btn_yes')}}",
-            cancelButtonText: "{{__('global.btn_no')}}"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                btn.parentNode.submit();
-                Swal.fire({
-                    title: "{{__('global.del_process')}}",
-                    icon: 'success',
-                    showConfirmButton: false
-                });
-            }
-        });
-    }
+    <script src="{{'/js/default.js'}}"></script>
+    <script>
+        function remove(btn) {
+            Swal.fire({
+                title: "{{__('admin.mounter.alert_title')}}",
+                text: "{{__('admin.alert_text')}}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dd3333',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: "{{__('global.btn_yes')}}",
+                cancelButtonText: "{{__('global.btn_no')}}"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    btn.parentNode.submit();
+                    Swal.fire({
+                        title: "{{__('global.del_process')}}",
+                        icon: 'success',
+                        showConfirmButton: false
+                    });
+                }
+            });
+        }
 
-    toast("{{session()->get('msg')}}", "{{session()->get('msg_type')}}");
-</script>
+        toast("{{session()->get('msg')}}", "{{session()->get('msg_type')}}");
+    </script>
 @endsection

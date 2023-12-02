@@ -15,15 +15,15 @@ class MounterService extends CrudService {
     }
 
     public function create($data) {
-        $data['document'] = $this->createFile('storage/mounters', $data['document']);
+        $data['license'] = $this->createFile('storage/mounters', $data['license']);
         $this->model->fill($data);
         $this->model->save();
     }
 
     public function update($data, $model) {
-        if (isset($data['document'])) {
-            $data['document'] = $this->createFile('storage/mounters', $data['document']);
-            $this->deleteFile("storage/mounters", $model->document);
+        if (isset($data['license'])) {
+            $data['license'] = $this->createFile('storage/mounters', $data['license']);
+            $this->deleteFile("storage/mounters", $model->license);
         }
 
         $model->fill($data);
@@ -31,15 +31,15 @@ class MounterService extends CrudService {
     }
 
     public function delete($model) {
-        $this->deleteFile("storage/mounters", $model->document);
+        $this->deleteFile("storage/mounters", $model->license);
         $model->delete();
     }
 
     /* Fitters */
     public function worker($data, $model) {
-        if (isset($data['document'])) {
-            $data['document'] = $this->createFile('storage/mounters/workers', $data['document']);
-            $this->deleteFile("storage/mounters/workers", $model->document);
+        if (isset($data['license'])) {
+            $data['license'] = $this->createFile('storage/mounters/workers', $data['license']);
+            $this->deleteFile("storage/mounters/workers", $model->license);
         }
 
         $model->fill($data);
@@ -47,7 +47,7 @@ class MounterService extends CrudService {
     }
 
     public function deleteWorker($model) {
-        $this->deleteFile("storage/mounters/workers", $model->document);
+        $this->deleteFile("storage/mounters/workers", $model->license);
         $model->delete();
     }
 }

@@ -21,25 +21,15 @@ class DesignerRequest extends FormRequest {
      * @return array
      */
     public function rules(): array {
-        if ($this->request->get('registry_date') >= $this->request->get('expiry_date')) {
-            return [
-                'name' => ['required'],
-                'director' => ['required'],
-                'phone' => ['required'],
-                'address' => ['required'],
-                'registry_date' => ['email']
-            ];
-        }
-
         return [
             'name' => ['required'],
             'director' => ['required'],
             'phone' => ['required'],
             'address' => ['required'],
             'address_krill' => [],
-            'registry_date' => [],
+            'registry_date' => [], // TODO greater than
             'expiry_date' => [],
-            'license' => []
+            'license' => [$this->get('id') ? "" : 'required']
         ];
     }
 
@@ -48,13 +38,8 @@ class DesignerRequest extends FormRequest {
             'name' => __('admin.org_name'),
             'director' => __('admin.org_director'),
             'phone' => __('admin.phone'),
-            'address' => __('admin.address')
-        ];
-    }
-
-    public function messages(): array {
-        return [
-            'registry_date.email' => __('validation.date_invalid')
+            'address' => __('admin.address'),
+            'license' => __("admin.document")
         ];
     }
 }
