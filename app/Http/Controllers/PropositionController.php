@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PropositionRequest;
+use App\Models\Activity;
+use App\Models\IndividualApplicant;
+use App\Models\Organ;
+use App\Models\Proposition;
+use App\Models\User;
+use App\Services\PropositionService;
+use App\ViewModels\PropositionListViewModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\PropositionRequest;
-use App\Models\Activity;
-use App\Models\IndividualApplication;
-use App\Models\Proposition;
-use App\Models\Organ;
-use App\Services\PropositionService;
-use App\ViewModels\PropositionListViewModel;
 
 
 class PropositionController extends Controller {
@@ -34,7 +35,7 @@ class PropositionController extends Controller {
             return redirect('/');
         }
 
-        return view('technic.propositions', new PropositionListViewModel());
+        return view('technic.applications.index', new PropositionListViewModel());
     }
 
     /**
@@ -51,13 +52,15 @@ class PropositionController extends Controller {
         }
 
         $model = new Proposition();
-        $organs = Organ::query()->pluck('org_name', 'id');
-        $activities = Activity::query()->skip(1)->take(5)->pluck('activity', 'id');
-        return view('technic.form', [
-            'action' => route('propositions.store'),
-            'method' => 'POST',
+        $organs = Organ::query()->pluck('name', 'id');
+        $activities = Activity::query()
+            ->skip(1)
+            ->take(5)
+            ->pluck('activity', 'id');
+
+        return view('technic.propositions.create', [
             'model' => $model, 'organs' => $organs,
-            'applicant' => new IndividualApplication(),
+            'applicant' => new IndividualApplicant(),
             'activities' => $activities
         ]);
     }
@@ -158,12 +161,26 @@ class PropositionController extends Controller {
             return redirect('/');
         }
 
-
         return view('technic.filter', [
             'models' => $this->service->available($type, $stir),
             'organs' => Organ::query()->pluck('org_name', 'id'),
             'type' => $type,
             'stir' => $stir
         ]);
+    }
+
+    /**
+     * @return \Illuminate\View\View|RedirectResponse
+     */
+    public function organ(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        /* @var User $user */
+        $user = request()->user();
+        return view('organ.propositions.index', new PropositionListViewModel([Proposition::CREATED, Proposition::CREATED_T], $user->organization_id));
     }
 }

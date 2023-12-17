@@ -32,21 +32,6 @@ class RecommendationController extends Controller {
     }
 
     /**
-     * @return View|RedirectResponse
-     */
-    public function propositions(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_rec');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        /* @var User $user */
-        $user = request()->user();
-        return view('organ.propositions', new PropositionListViewModel([1, 2], $user->organization_id));
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return View|RedirectResponse

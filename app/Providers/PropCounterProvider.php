@@ -2,21 +2,21 @@
 
 namespace App\Providers;
 
+use App\Models\Montage;
+use App\Models\Project;
+use App\Models\Proposition;
+use App\Models\Recommendation;
+use App\Models\Status;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Status;
-use App\Models\Montage;
-use App\Models\Project;
-use App\Models\Proposition;
-use App\Models\Recommendation;
 
 /**
  * Add this Class to config/app.php -> providers
  */
-
 class PropCounterProvider extends ServiceProvider {
     /**
      * Register services.
@@ -35,10 +35,10 @@ class PropCounterProvider extends ServiceProvider {
     public function boot() {
         View::composer('components.menu', function() {
             $user = request()->user();
-            $numbers = match ($user->role) {
-                3 => $this->organs($user->organ),
-                4 => $this->projects($user->organ),
-                6 => $this->montages($user->organ),
+            $numbers = match ($user->role_id) {
+                User::ORGAN => $this->applications($user->organization_id),
+                User::DESIGNER => $this->projects($user->organization_id),
+                User::MOUNTER => $this->montages($user->organization_id),
                 default => [0, 0, 0, 0, 0]
             };
 
@@ -77,14 +77,19 @@ class PropCounterProvider extends ServiceProvider {
      * @return array
      * This function for District role (Role(3)). Return count of Propositions and Recommendations
      */
-    private function organs(int $organ): array {
-        $recs = Recommendation::query()->where('organ', $organ)
-            ->get('status')->groupBy('status');
+    private function applications(int $organ): array {
+        $propositions = Proposition::query()->where('organ', $organ)
+            ->whereIn('status', [Proposition::CREATED, Proposition::CREATED_T])
+            ->count();
+
+        $recs = Recommendation::query()
+            ->where('organ', $organ)
+            ->get('status')
+            ->groupBy('status');
         $temp = $this->countByGroup($recs, [1, 2, 3, 4]);
 
         return [
-            Proposition::query()->where('organ', $organ)
-                ->whereIn('status', [1, 2])->count(),
+            $propositions,
             $temp[0], $temp[1], $temp[2], $temp[3]
         ];
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\District;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,7 @@ function readonly($url, $controller, $name) {
         'update' => $name . '.update'
     ]);
 }
+
 /**** ~ Route ~ ****/
 
 

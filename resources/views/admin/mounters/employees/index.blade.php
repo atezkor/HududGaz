@@ -8,7 +8,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('admin.mounter.employees.create', ['firm_id' => $firm_id]) }}" class="btn btn-info">
+                            <a href="{{ route('admin.mounter.employees.create', ['firm_id' => $firm_id]) }}"
+                               class="btn btn-info">
                                 {{__('admin.mounter.btn_add')}}
                             </a>
                             <div class="card-tools mt-2">

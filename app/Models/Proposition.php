@@ -6,30 +6,35 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
+ * @property int id
+ * @property int organ
+ * @property int type
+ * @property int status
+ * @property string $name
+ * @property-read string $pdf
+ * @property-read int $build_type
  * @property-read Proposition applicant
  * @property-read Recommendation recommendation
  * @property-read TechCondition tech_condition
  * @property-read Organ organization
  * @property-read Activity activity
- * @property int id
- * @property int type
- * @property int status
- * @property int organ
- * @property-read string file
- * @property-read int build_type
- * @property string $name
  */
-
 class Proposition extends Application {
 
     public const CREATED = 1;
+    public const CREATED_T = 2;
+    public const CREATED_B = 3;
+
     public const IN_PROCESS = 4;
     public const COMPLETED = 5;
 
-    protected $fillable = ['number', 'organ', 'activity_type', 'applicant', 'build_type', 'status', 'type', 'file', 'delete_at'];
+    protected $fillable = [
+        'number', 'organization_id', 'type',
+        'activity_type', 'build_type', 'status', 'pdf'
+    ];
 
     public function individual(): HasOne {
-        return $this->hasOne(IndividualApplication::class);
+        return $this->hasOne(IndividualApplicant::class);
     }
 
     public function legal(): HasOne {

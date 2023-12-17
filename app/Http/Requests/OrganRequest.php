@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class DistrictRequest extends FormRequest {
+class OrganRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +28,7 @@ class DistrictRequest extends FormRequest {
             'department_head' => ['required'],
             'district_id' => ['required'],
             'address' => ['required'],
-            'address_krill' => ['required'],
+            'address_cyrill' => ['required'],
             'email' => ['required'],
             'phone' => ['required'],
             'fax' => []
@@ -43,7 +43,7 @@ class DistrictRequest extends FormRequest {
             'department_head' => __('admin.organ.department_head'),
             'district_id' => __('admin.organ.select_hint'),
             'address' => __('admin.organ.address'),
-            'address_krill' => __('admin.organ.address_krill'),
+            'address_cyrill' => __('admin.organ.address_cyrillic'),
             'email' => __('admin.organ.email'),
             'phone' => __('admin.phone')
         ];

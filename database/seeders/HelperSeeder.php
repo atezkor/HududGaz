@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Activity;
+use App\Models\Application;
 use App\Models\Designer;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
-use App\Models\IndividualApplication;
+use App\Models\IndividualApplicant;
 use App\Models\LegalApplication;
 use App\Models\Mounter;
 use App\Models\Proposition;
@@ -38,47 +39,48 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertProposition() {
-        foreach (['Anvar', 'Abror', 'Olloshukur', 'Bekdiyor'] as $key => $applicant) {
-            Proposition::query()->create([
+        $appLegalList = ['Anvar', 'Abror', 'Bekdiyor'];
+        $appPhysicalList = ['Behzod', 'Mirzabek', 'Dilshod'];
+
+        foreach ($appLegalList as $key => $applicant) {
+            $model = Proposition::query()->create([
                 'number' => rand(1000, 5000) + rand(100, 500),
-                'organ' => 1, # $key + 1
-                'activity_type' => $key + 1,
+                'organization_id' => 1,
+                'type' => Application::LEGAL,
                 'build_type' => rand(1, 2),
-                'type' => 2,
-                'status' => 1,
-                'file' => 'test.pdf'
+                'activity_type' => $key + 1,
+                'pdf' => 'test.pdf'
             ]);
 
             LegalApplication::query()->create([
-                'proposition_id' => $key + 1,
-                'organ' => 1,
-                'legal_stir' => rand(1000, 5000) + rand(100, 500),
-                'legal_name' => $applicant . ' Industries',
+                'proposition_id' => $model->id,
+                'tin' => rand(1000, 5000) + rand(100, 500),
+                'name' => $applicant . ' Industries',
                 'email' => strtolower($applicant) . '@mail.uz',
-                'leader' => $applicant,
-                'leader_stir' => rand(1000, 5000) + rand(1000, 5000),
+                'director' => $applicant,
+                'director_tin' => rand(1000, 5000) + rand(1000, 5000),
                 'phone' => "+998 99 555 15 55"
             ]);
         }
 
-        foreach (['Bekzod', 'Mirzabek', 'Dilshod', 'Temur'] as $key => $applicant) {
-            Proposition::query()->create([
+        foreach ($appPhysicalList as $key => $applicant) {
+            $model = Proposition::query()->create([
                 'number' => rand(1000, 5000) + rand(100, 500),
-                'organ' => 1, # $key + 5
-                'activity_type' => $key + 1,
+                'organization_id' => 1,
+                'type' => Application::PHYSICAL,
                 'build_type' => rand(1, 2),
-                'type' => 1,
-                'status' => 1,
-                'file' => 'test.pdf'
+                'activity_type' => $key + 1,
+                'pdf' => 'test.pdf'
             ]);
 
-            IndividualApplication::query()->create([
-                'proposition_id' => $key + 5,
-                'organ' => 1,
-                'full_name' => $applicant,
+            IndividualApplicant::query()->create([
+                'proposition_id' => $model->id,
+                'name' => $applicant,
+                'surname' => "",
                 'phone' => "+998 99 555 15 55",
                 'passport' => "AB8674" . rand(101, 999),
-                'stir' => rand(1000, 5000) + rand(1000, 5000),
+                'tin' => rand(1000, 5000) + rand(1000, 5000),
+                'pin_fl' => rand(100, 1000000000) . rand(100, 100000)
             ]);
         }
     }
@@ -115,7 +117,7 @@ class HelperSeeder extends Seeder {
                 'director' => 'L.L.Loyihachi',
                 'phone' => '+998 99 555 15 55',
                 'address' => 'Mahalla',
-                'address_krill' => 'Mahalla',
+                'address_cyrill' => 'Mahalla',
                 'registry_date' => now(),
                 'expiry_date' => date('Y-m-d', time() + 3600 * 24 * 356),
                 'license' => 'qwerty.pdf'

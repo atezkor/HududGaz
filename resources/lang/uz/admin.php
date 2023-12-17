@@ -64,7 +64,7 @@ return [
         'org_num' => "Tashkilot №",
         'email' => "Elektron pochta manzili",
         'address' => "Manzili",
-        'address_krill' => "Manzili (krillcha)"
+        'address_cyrillic' => "Manzili (krillcha)"
     ],
     'organ' => [
         'btn_new' => "Tashkilot qo\u{2018}shish",
@@ -81,7 +81,7 @@ return [
         'department_head' => "Bo\u{2018}lim boshlig\u{2018}i",
         'email' => "Elektron pochta manzili",
         'address' => "Manzil",
-        'address_krill' => "Manzil (krillcha)",
+        'address_cyrillic' => "Manzil (krillcha)",
         'fax' => "Tashkilot faksi",
         'alert_title' => "Tashkilotni o\u{2018}chirib tashlamoqchimisiz?",
     ],
@@ -104,7 +104,7 @@ return [
         'heading_edit' => "Tashkilot ma\u{2019}lumotlarini yangilash",
         'district' => "Tashkilot joylashgan tuman (shahar)",
         'address' => "Tashkilot manzili (qayerda joylashgan)",
-        'address_krill' => "Tashkilot manzili (krillcha)",
+        'address_cyrillic' => "Tashkilot manzili (krillcha)",
         'phone_number' => "Telefon raqami (har birini alohida qatorga yozing)",
         'alert_title' => "Tashkilotni o\u{2018}chirib tashlamoqchimisiz?",
         'del_title' => "Tashkilotni o\u{2018}chirib bo\u{2018}lmaydi, chunki jarayondagi loyihalar mavjud!",

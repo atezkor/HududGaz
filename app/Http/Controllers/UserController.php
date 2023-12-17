@@ -50,7 +50,8 @@ class UserController extends Controller {
 
         return view('admin.users.create', [
             'model' => new User(),
-            'roles' => $this->service->roles()
+            'roles' => $this->service->roles(),
+            'childlessRoles' => [User::ROLE_ADMIN, User::TECHNIC, User::ENGINEER]
         ]);
     }
 
@@ -76,7 +77,8 @@ class UserController extends Controller {
 
         return view('admin.users.edit', [
             'model' => $user,
-            'roles' => $this->service->roles()
+            'roles' => $this->service->roles(),
+            'childlessRoles' => [User::ROLE_ADMIN, User::TECHNIC, User::ENGINEER]
         ]);
     }
 
@@ -103,12 +105,12 @@ class UserController extends Controller {
         return redirect()->route('admin.users.index')->with('msg', __('global.messages.del'));
     }
 
-    public function checkRole(int $role): Collection {
+    public function organization(int $role): Collection {
         switch ($role) {
             case User::ORGAN:
-                return Organ::query()->pluck('org_name', 'id');
+                return Organ::query()->pluck('name', 'id');
             case User::DESIGNER:
-                return Designer::query()->pluck('org_name', 'id');
+                return Designer::query()->pluck('name', 'id');
             case User::MOUNTER:
                 return Mounter::query()->pluck('short_name', 'id');
         }

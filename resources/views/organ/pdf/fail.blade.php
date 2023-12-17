@@ -116,7 +116,7 @@
             </td>
             <td>
                 <div class="f-r">
-                    <span>{{$organ->org_number}}, {{$organ->address_krill}}.</span><br>
+                    <span>{{$organ->org_number}}, {{$organ->address_cyrill}}.</span><br>
                     <span>Telefonlar: {{$organ->phone}}, Faks: {{$organ->fax}}</span><br>
                     <span>Elektron pochta: {{$organ->email}}</span>
                 </div>

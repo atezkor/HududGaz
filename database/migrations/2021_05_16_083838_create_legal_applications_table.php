@@ -13,15 +13,13 @@ class CreateLegalApplicationsTable extends Migration {
     public function up() {
         Schema::create('legal_applications', function(Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('tin');
             $table->unsignedBigInteger('proposition_id')->index();
-            $table->integer('organ');
-            $table->integer('legal_stir');
-            $table->string('legal_name');
-            $table->string('leader');
-            $table->string('leader_stir');
+            $table->string('director');
+            $table->string('director_tin');
             $table->string('email');
             $table->string('phone');
-            $table->tinyInteger('status')->default(1);
 
             $table->foreign('proposition_id')
                 ->references('id')

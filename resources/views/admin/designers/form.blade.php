@@ -22,9 +22,9 @@
         </div>
 
         <div class="form-group col-6 pl-4">
-            <label for="address_krill">@lang('admin.designer.address_krill')</label>
-            <input type="text" name="address_krill" id="address_krill" class="form-control"
-                   value="{{old('address_krill', $model->address_krill)}}" autocomplete="off">
+            <label for="address_cyrill">@lang('admin.designer.address_cyrillic')</label>
+            <input type="text" name="address_cyrill" id="address_cyrill" class="form-control"
+                   value="{{old('address_cyrill', $model->address_cyrill)}}" autocomplete="off">
         </div>
     </div>
 

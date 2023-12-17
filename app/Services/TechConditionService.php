@@ -7,7 +7,7 @@ use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Generator;
 use App\Models\CancelledProposition;
-use App\Models\IndividualApplication;
+use App\Models\IndividualApplicant;
 use App\Models\LegalApplication;
 use App\Models\Organization;
 use App\Models\Proposition;
@@ -86,7 +86,7 @@ class TechConditionService extends CrudService {
      */
     public function checkTin(int $type, int $stir): array {
         if ($type == 1)
-            return IndividualApplication::query()->where('stir', $stir)
+            return IndividualApplicant::query()->where('stir', $stir)
                 ->pluck('stir', 'proposition_id')->toArray();
 
         if ($type == 2)

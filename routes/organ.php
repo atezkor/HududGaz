@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PropositionController;
 use App\Http\Controllers\RecommendationController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('', function() {
     return redirect()->route('district.propositions');
 });
-Route::get('propositions', [RecommendationController::class, 'propositions'])->name('district.propositions');
+Route::get('propositions', [PropositionController::class, 'organ'])->name('district.propositions');
 Route::get('recommendations', [RecommendationController::class, 'index'])->name('district.recommendations');
 Route::get('recommendations/progress', [RecommendationController::class, 'progress'])->name('district.recommendations.progress');
 Route::get('recommendations/cancelled', [RecommendationController::class, 'cancelled'])->name('district.recommendations.cancelled');

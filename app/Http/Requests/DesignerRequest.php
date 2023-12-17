@@ -26,7 +26,7 @@ class DesignerRequest extends FormRequest {
             'director' => ['required'],
             'phone' => ['required'],
             'address' => ['required'],
-            'address_krill' => [],
+            'address_cyrill' => [],
             'registry_date' => [], // TODO greater than
             'expiry_date' => [],
             'license' => [$this->get('id') ? "" : 'required']

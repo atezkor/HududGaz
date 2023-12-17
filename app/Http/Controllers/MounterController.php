@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MounterRequest;
 use App\Models\Mounter;
+use App\Repositories\DistrictRepository;
 use App\Services\Mounter\MounterService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
@@ -14,8 +15,11 @@ class MounterController extends Controller {
 
     private MounterService $service;
 
-    public function __construct(MounterService $service) {
+    private DistrictRepository $districtRepository;
+
+    public function __construct(MounterService $service, DistrictRepository $districtRepository) {
         $this->service = $service;
+        $this->districtRepository = $districtRepository;
     }
 
     /**
@@ -46,7 +50,7 @@ class MounterController extends Controller {
         }
 
         $model = new Mounter();
-        return view('admin.mounters.create', ['model' => $model, 'districts' => districts()]);
+        return view('admin.mounters.create', ['model' => $model, 'districts' => $this->districtRepository->all()]);
     }
 
     /**
@@ -81,7 +85,7 @@ class MounterController extends Controller {
 
         return view('admin.mounters.edit', [
             'model' => $mounter,
-            'districts' => districts()
+            'districts' => $this->districtRepository->all()
         ]);
     }
 

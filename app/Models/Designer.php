@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Designer extends Model {
 
-    protected $fillable = ['name', 'director', 'address', 'address_krill', 'phone', 'registry_date', 'expiry_date', 'license'];
+    protected $fillable = ['name', 'director', 'address', 'address_cyrill', 'phone', 'registry_date', 'expiry_date', 'license'];
 
     public function projects(): HasMany {
         return $this->hasMany(Project::class);

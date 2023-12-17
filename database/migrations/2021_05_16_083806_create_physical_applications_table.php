@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreatePhysicalApplicationsTable extends Migration {
     /**
      * Run the migrations.
@@ -14,12 +15,12 @@ class CreatePhysicalApplicationsTable extends Migration {
         Schema::create('physical_applications', function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
-            $table->string('full_name');
-            $table->integer('organ');
-            $table->tinyInteger('status')->default(1);
+            $table->string('name');
+            $table->string('surname');
             $table->string('phone');
             $table->string('passport');
-            $table->integer('stir');
+            $table->integer('tin');
+            $table->bigInteger('pin_fl');
 
             $table->foreign('proposition_id')
                 ->references('id')

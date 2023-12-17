@@ -5,7 +5,7 @@ namespace App\ViewModels;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
-use App\Models\IndividualApplication;
+use App\Models\IndividualApplicant;
 use App\Models\LegalApplication;
 use App\Models\Proposition;
 use App\Models\Organ;
@@ -24,7 +24,7 @@ class TechConditionViewModel extends ViewModel {
     }
 
     function physicals(): Collection {
-        return $this->collections(IndividualApplication::query(), 'full_name');
+        return $this->collections(IndividualApplicant::query(), 'full_name');
     }
 
     function legals(): Collection {

@@ -96,7 +96,7 @@
         let organ = $('#organ_id');
 
         function changeRole(role) {
-            if (!role || [1, 2, 5].includes(parseInt(role))) { // TODO work with constants
+            if (!role || {{json_encode($childlessRoles)}}.includes(parseInt(role))) {
                 organs.hide(250);
                 organ.attr('required', false);
                 organ.val(null); // organ.prop('disabled', true)
@@ -106,7 +106,7 @@
 
             organs.show(250);
             $.ajax({
-                url: '{{route('admin.change_role')}}' + `/${role}`,
+                url: '{{route('admin.organizations-by-role')}}' + `/${role}`,
                 method: 'POST',
                 dataType: 'json',
                 success: function(data) {

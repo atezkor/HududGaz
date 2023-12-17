@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\IndividualApplication;
+use App\Models\IndividualApplicant;
 use App\Models\LegalApplication;
 use App\Models\Proposition;
 use App\Utilities\StorageManager;
@@ -58,7 +58,7 @@ class PropositionService extends CrudService {
 
     private function createApplicant(array $data) {
         if (intval($data['type']) === 1)
-            $model = new IndividualApplication();
+            $model = new IndividualApplicant();
         else
             $model = new LegalApplication();
         $model->fill($data);

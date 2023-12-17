@@ -36,21 +36,6 @@
             'late' => "Kechikgan arizalar",
             'year' => "Yillik arizalar",
         ],
-        'districts' => [
-            '1' => "Urganch shahri",
-            '2' => "Urganch tumani",
-            '3' => "Xiva shahri",
-            '4' => "Xiva tumani",
-            '5' => "Xonqa tumani",
-            '6' => "Bog\u{2018}ot tumani",
-            '7' => "Yangiariq tumani",
-            '8' => "Yangibozor tumani",
-            '9' => "Xozarasp tumani",
-            '10' => "Shovot tumani",
-            '11' => "Gurlan tumani",
-            '12' => "Qo\u{2018}shko\u{2018}pir tumani",
-            '13' => "Tuproq-qa\u{2019}la tumani"
-        ],
         'roles' => [
             'admin' => "Ma\u{2019}mur",
             'technic' => "Texnik",

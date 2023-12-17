@@ -51,10 +51,10 @@
                 <label for="district_id">{{__('admin.mounter.district')}}</label>
                 <select name="district_id" id="district_id" class="custom-select" required>
                     <option value="">{{__('admin.select')}}</option>
-                    @foreach($districts as $key => $district)
-                        <option value="{{$key}}"
-                                @if ($key == $model->district_id || old('district_id') == $key) selected @endif>
-                            <span>{{$district}}</span>
+                    @foreach($districts as $district)
+                        <option value="{{$district->id}}"
+                                @if ($model->district_id == $district->id  || old('district_id') == $district->id) selected @endif>
+                            <span>{{$district->name}}</span>
                         </option>
                     @endforeach
                 </select>

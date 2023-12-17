@@ -93,10 +93,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="address_krill" class="col-sm-2 col-form-label">{{__('admin.organization.address_krill')}}</label>
+                                <label for="address_cyrill" class="col-sm-2 col-form-label">{{__('admin.organization.address_cyrill')}}</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="address_krill" id="address_krill" class="form-control"
-                                           value="{{$model->address_krill}}" placeholder="{{__('admin.organization.address_krill')}}">
+                                    <input type="text" name="address_cyrill" id="address_cyrill" class="form-control"
+                                           value="{{$model->address_cyrill}}" placeholder="{{__('admin.organization.address_cyrill')}}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -142,7 +142,7 @@
     </div>
 </section>
 @endsection
-@section('javascript')
+@section('js')
 <script src="{{'/js/typographer.js'}}"></script>
 <script>
     $('#logo').change(function(input) {

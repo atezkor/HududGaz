@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DistrictRequest;
+use App\Http\Requests\OrganRequest;
 use App\Models\Organ;
+use App\Repositories\DistrictRepository;
 use App\Services\Service;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
@@ -15,8 +16,12 @@ class OrganController extends Controller {
 
     private Service $service;
 
-    public function __construct() {
+    private DistrictRepository $districtRepository;
+
+
+    public function __construct(DistrictRepository $districtRepository) {
         $this->service = new Service(new Organ());
+        $this->districtRepository = $districtRepository;
     }
 
     public function index(): View|RedirectResponse {
@@ -38,11 +43,11 @@ class OrganController extends Controller {
         }
 
         return view('admin.organs.create', [
-            'model' => new Organ(), 'districts' => districts()
+            'model' => new Organ(), 'districts' => $this->districtRepository->all()
         ]);
     }
 
-    public function store(DistrictRequest $request): RedirectResponse {
+    public function store(OrganRequest $request): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
@@ -66,11 +71,11 @@ class OrganController extends Controller {
         }
 
         return view('admin.organs.edit', [
-            'model' => $organ, 'districts' => districts()
+            'model' => $organ, 'districts' => $this->districtRepository->all()
         ]);
     }
 
-    public function update(DistrictRequest $request, Organ $organ): RedirectResponse {
+    public function update(OrganRequest $request, Organ $organ): RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {

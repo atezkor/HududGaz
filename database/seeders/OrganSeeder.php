@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\District;
 use App\Models\Organ;
 use Illuminate\Database\Seeder;
 
@@ -13,8 +14,8 @@ class OrganSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        foreach (districts() as $key => $organ) {
-            $district = explode(' ', $organ);
+        foreach (District::all() as $key => $model) {
+            $district = explode(' ', $model->name);
             $name = $district[0][0] . '.' . strtoupper($district[1][0]) . '.' . $district[0];
             $suffix = $district[0][strlen($district[0]) - 1] == 'a' ? "yev" : "ov";
             $name .= $suffix;
@@ -26,7 +27,7 @@ class OrganSeeder extends Seeder {
                 'lead_engineer' => $name,
                 'department_head' => $name,
                 'address' => $district[0] . " mahallasi",
-                'address_krill' => $organ . ' bozori',
+                'address_cyrill' => $model->name_cyrillic,
                 'email' => strtolower($district[0] . $district[1]) . "@mail.uz",
                 'phone' => "+998 (99) 215-55-0$key",
                 'fax' => "+(125) 15-55"

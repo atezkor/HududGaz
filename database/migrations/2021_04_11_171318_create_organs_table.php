@@ -20,7 +20,7 @@ class CreateOrgansTable extends Migration {
             $table->string('lead_engineer');
             $table->string('department_head');
             $table->string('address');
-            $table->string('address_krill');
+            $table->string('address_cyrill');
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('fax')->nullable();

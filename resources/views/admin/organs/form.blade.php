@@ -14,10 +14,10 @@
                 <label for="district_id">@lang('admin.organ.select_hint')</label>
                 <select name="district_id" id="district_id" class="custom-select" required>
                     <option value="">{{__('admin.select')}}</option>
-                    @foreach($districts as $key => $district)
-                        <option value="{{$key}}"
-                                @if ($key == $model->district_id) selected @endif>
-                            {{$district}}
+                    @foreach($districts as $district)
+                        <option value="{{$district->id}}"
+                                @if ($district->id == $model->district_id || $district->id == old('district_id')) selected @endif>
+                            {{$district->name}}
                         </option>
                     @endforeach
                 </select>
@@ -58,9 +58,9 @@
             </div>
 
             <div class="form-group col-6 pl-4">
-                <label for="address_krill">{{__('admin.organ.address_krill')}}</label>
-                <input type="text" name="address_krill" id="address_krill" class="form-control"
-                       value="{{ $model->address_krill }}" autocomplete="off">
+                <label for="address_cyrill">{{__('admin.organ.address_cyrillic')}}</label>
+                <input type="text" name="address_cyrill" id="address_cyrill" class="form-control"
+                       value="{{ $model->address_cyrill }}" autocomplete="off">
             </div>
         </div>
 
