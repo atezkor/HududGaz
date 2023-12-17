@@ -2,19 +2,17 @@
 
 namespace App\Services;
 
-use App\Utilities\CodeGenerator;
-use Barryvdh\DomPDF\PDF;
-use Illuminate\Support\Facades\Storage;
-use SimpleSoftwareIO\QrCode\Generator;
 use App\Models\CancelledProposition;
-use App\Models\IndividualApplicant;
-use App\Models\LegalApplication;
 use App\Models\Organization;
 use App\Models\Proposition;
 use App\Models\Recommendation;
 use App\Models\TechCondition;
+use App\Utilities\CodeGenerator;
 use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Generator;
 
 
 class TechConditionService extends CrudService {
@@ -79,22 +77,6 @@ class TechConditionService extends CrudService {
             'qrcode' => $this->qrcode->generate($model->qrcode)
         ]);
         parent::update(['file' => $filename], $model);
-    }
-
-    /**
-     * Check that such stir has existed before.
-     */
-    public function checkTin(int $type, int $stir): array {
-        if ($type == 1)
-            return IndividualApplicant::query()->where('stir', $stir)
-                ->pluck('stir', 'proposition_id')->toArray();
-
-        if ($type == 2)
-            return LegalApplication::query()->where('legal_stir', $stir)
-                ->pluck('legal_stir', 'proposition_id')->toArray();
-
-        return LegalApplication::query()->where('leader_stir', $stir)
-            ->pluck('leader_stir', 'proposition_id')->toArray();
     }
 
     public function upload($request, TechCondition $condition) {

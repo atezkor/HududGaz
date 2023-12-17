@@ -71,7 +71,7 @@
             sZeroRecords: "@lang('global.datatables.zeroRecords')",
             sInfoFiltered: "@lang('global.datatables.infoFiltered')"
         }
-        datatable(lang, 'table1', 'table2');
+        datatable(lang, 'individual-table', 'legal-table');
 
         function remove(btn) {
             Swal.fire({

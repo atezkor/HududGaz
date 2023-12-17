@@ -57,7 +57,7 @@ class AuthController extends Controller {
             case User::TECHNIC:
                 return redirect('/technic');
             case User::ORGAN:
-                return redirect('/district');
+                return redirect('/organ');
             case User::DESIGNER:
                 return redirect('/designer');
             case User::ENGINEER:

@@ -25,7 +25,7 @@ class PropositionListViewModel extends ViewModel {
         return Proposition::query()
             ->with('individual')
             ->when($this->organizationId, function(Builder $query) {
-                return $query->where('organ', $this->organizationId);
+                return $query->where('organization_id', $this->organizationId);
             })
             ->where('type', Application::PHYSICAL)
             ->whereIn('status', $this->statuses)
@@ -36,7 +36,7 @@ class PropositionListViewModel extends ViewModel {
         return Proposition::query()
             ->with('legal')
             ->when($this->organizationId, function(Builder $query) {
-                return $query->where('organ', $this->organizationId);
+                return $query->where('organization_id', $this->organizationId);
             })
             ->where('type', Application::LEGAL)
             ->whereIn('status', $this->statuses)

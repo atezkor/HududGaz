@@ -72,10 +72,6 @@ class TechnicController extends Controller {
         ]);
     }
 
-    public function check(int $type, int $stir): array {
-        return $this->service->checkTin($type, $stir);
-    }
-
     /**
      * @throws ValidationException
      */

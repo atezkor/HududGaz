@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as Models;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
-use App\Models\{IndividualApplicant, LegalApplication, Proposition, Recommendation, Organ};
+use App\Models\{PhysicalApplicant, LegalApplicant, Proposition, Recommendation, Organ};
 
 
 class RecommendationViewModel extends ViewModel {
@@ -35,11 +35,11 @@ class RecommendationViewModel extends ViewModel {
     }
 
     function physicals(): Collection {
-        return $this->collections(IndividualApplicant::query(), 'full_name');
+        return $this->collections(PhysicalApplicant::query(), 'full_name');
     }
 
     function legals(): Collection {
-        return $this->collections(LegalApplication::query(), 'legal_name');
+        return $this->collections(LegalApplicant::query(), 'legal_name');
     }
 
     public function applicant($physicals, $legals, &$p, &$l, $type): string {

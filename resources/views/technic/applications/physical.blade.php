@@ -3,7 +3,7 @@
         <tr>
             <th>@lang('global.index')</th>
             <th>@lang('global.proposition.number')</th>
-            <th>@lang('global.proposition.stir')</th>
+            <th>@lang('global.proposition.tin')</th>
             <th>@lang('technic.organ')</th>
             <th>@lang('global.proposition.name')</th>
             <th>@lang('global.proposition.date')</th>
@@ -17,8 +17,8 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$model->number}}</td>
-                <td>{{$model->individual->stir}}</td>
-                <td>{{$model->organ}}</td>
+                <td>{{$model->individual->tin}}</td>
+                <td>{{$model->organization_id}}</td>
                 <td>
                     <a href="{{route('propositions.show', $model->id)}}" target="_blank">
                         <span>@lang('global.proposition.show')</span>

@@ -36,9 +36,9 @@ class PropCounterProvider extends ServiceProvider {
         View::composer('components.menu', function() {
             $user = request()->user();
             $numbers = match ($user->role_id) {
-                User::ORGAN => $this->applications($user->organization_id),
-                User::DESIGNER => $this->projects($user->organization_id),
-                User::MOUNTER => $this->montages($user->organization_id),
+//                User::ORGAN => $this->applications($user->organization_id),
+//                User::DESIGNER => $this->projects($user->organization_id),
+//                User::MOUNTER => $this->montages($user->organization_id),
                 default => [0, 0, 0, 0, 0]
             };
 

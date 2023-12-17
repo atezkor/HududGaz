@@ -3,7 +3,7 @@
         <tr>
             <th>@lang('global.index')</th>
             <th>@lang('global.proposition.number')</th>
-            <th>@lang('global.proposition.legal_stir')</th>
+            <th>@lang('global.proposition.legal_tin')</th>
             <th>@lang('global.proposition.name')</th>
             <th>@lang('global.proposition.date')</th>
             <th>@lang('global.proposition.limit')</th>
@@ -15,7 +15,7 @@
             <tr>
                 <td>{{$loop->index + 1}}</td>
                 <td>{{$model->number}}</td>
-                <td>{{$model->legal->legal_stir}}</td>
+                <td>{{$model->legal->tin}}</td>
                 <td>
                     <a href="{{route('district.proposition.show', ['proposition' => $model])}}" target="_blank">
                         @lang('global.proposition.show')

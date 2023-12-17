@@ -1,3 +1,8 @@
+@php
+    use App\Models\Proposition
+    /* @var Proposition $model */;
+@endphp
+
 <form action="{{$action}}" method="post" enctype="multipart/form-data">
     @csrf
     @include('components.errors')
@@ -13,11 +18,11 @@
         <div class="tab-content">
             <div id="individual" class="tap-pane active">
                 <div class="form-group row">
-                    <label for="stir" class="col-2">@lang('technic.proposition.stir')</label>
+                    <label for="tin" class="col-2">@lang('technic.proposition.tin')</label>
                     <div class="col-10">
-                        <input type="number" name="stir" id="stir"
-                               onblur="checkTin(1, this.value)"
-                               value="{{$applicant->stir}}" class="form-control">
+                        <input type="number" name="tin" id="tin"
+                               onblur="checkTin({{ $model::PHYSICAL }}, this.value)"
+                               value="{{$applicant->tin}}" class="form-control">
                     </div>
                 </div>
 
@@ -42,14 +47,14 @@
                 </div>
             </div>
 
-            <div id="legal_entity" class="tap-pane">
+            <div id="legal" class="tap-pane">
                 <div class="form-group row">
-                    <label for="legal_stir"
-                           class="col-2">@lang('technic.proposition.legal_stir')</label>
+                    <label for="tin"
+                           class="col-2">@lang('technic.proposition.legal_tin')</label>
                     <div class="col-10">
-                        <input type="number" name="legal_stir" id="legal_stir"
-                               onblur="checkTin(2, this.value)"
-                               value="{{$applicant->legal_stir}}" class="form-control">
+                        <input type="number" name="tin" id="tin"
+                               onblur="checkTin({{ $model::LEGAL}}, this.value)"
+                               value="{{$applicant->tin}}" class="form-control">
                     </div>
                 </div>
 
@@ -64,22 +69,22 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="leader"
-                           class="col-2">@lang('technic.proposition.leader')</label>
+                    <label for="director"
+                           class="col-2">@lang('technic.proposition.director')</label>
                     <div class="col-10">
-                        <input type="text" name="leader" id="leader"
-                               value="{{$applicant->leader}}" class="form-control"
+                        <input type="text" name="director" id="director"
+                               value="{{$applicant->director}}" class="form-control"
                                autocomplete="off">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="leader_stir"
-                           class="col-2">@lang('technic.proposition.leader_stir')</label>
+                    <label for="director_pin_fl"
+                           class="col-2">@lang('technic.proposition.director_pin_fl')</label>
                     <div class="col-10">
-                        <input type="number" name="leader_stir" id="leader_stir"
-                               onblur="checkTin(3, this.value)"
-                               value="{{$applicant->leader_stir}}" class="form-control">
+                        <input type="number" name="director_pin_fl" id="director_pin_fl"
+                               onblur="checkTin(0, this.value)"
+                               value="{{$applicant->director_pin_fl}}" class="form-control">
                     </div>
                 </div>
 
@@ -123,17 +128,20 @@
                    class="col-2">@lang('technic.proposition.build_type')</label>
             <div class="col-10">
                 <select name="build_type" id="build_type" class="form-control">
-                    <option value="1">@lang('global.proposition.residential')</option>
-                    <option
-                        value="2" @if($model->build_type == 2){{'selected'}}@endif>@lang('global.proposition.non_residential')</option>
+                    <option value="1">
+                        @lang('global.proposition.residential')
+                    </option>
+                    <option value="2"@if($model->build_type == 2){{'selected'}}@endif>
+                        @lang('global.proposition.non_residential')
+                    </option>
                 </select>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="organ" class="col-2">@lang('technic.proposition.organ')</label>
+            <label for="organization_id" class="col-2">@lang('technic.proposition.organ')</label>
             <div class="col-10">
-                <select name="organ" id="organ" class="form-control">
+                <select name="organization_id" id="organization_id" class="form-control">
                     <option value="">@lang('technic.proposition.organ_select')</option>
                     @foreach($organs as $key => $organ)
                         <option value="{{$key}}" @if($model->organ == $key) selected @endif>

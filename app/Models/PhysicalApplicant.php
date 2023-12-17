@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 
-class IndividualApplicant extends Application {
+
+class PhysicalApplicant extends Model {
 
     public $timestamps = false;
-
-    protected $table = "physical_applications";
 
     protected $fillable = ['proposition_id', 'name', 'surname', 'phone', 'passport', 'tin', 'pin_fl'];
 

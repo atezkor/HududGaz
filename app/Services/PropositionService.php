@@ -2,17 +2,20 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Builder;
-use App\Models\IndividualApplicant;
-use App\Models\LegalApplication;
+use App\Models\Application;
+use App\Models\LegalApplicant;
+use App\Models\PhysicalApplicant;
 use App\Models\Proposition;
 use App\Utilities\StorageManager;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class PropositionService extends CrudService {
     use StorageManager;
 
     private string $path = 'storage/propositions';
+    private string $folder;
 
     public function __construct(Proposition $model) {
         $this->model = $model;
@@ -56,23 +59,41 @@ class PropositionService extends CrudService {
         return $this->path . '/' . $proposition->getAttribute('file');
     }
 
+    /**
+     * Check that such tin has existed before.
+     */
+    public function checkTin(int $type, int $tin): array {
+        if ($type == Application::PHYSICAL)
+            return PhysicalApplicant::query()
+                ->where('tin', $tin)
+                ->pluck('tin', 'proposition_id')
+                ->toArray();
+
+        return LegalApplicant::query()
+            ->where('tin', $tin)
+            ->pluck('tin', 'proposition_id')
+            ->toArray();
+    }
+
     private function createApplicant(array $data) {
-        if (intval($data['type']) === 1)
-            $model = new IndividualApplicant();
+        if (intval($data['type']) === Application::PHYSICAL)
+            $model = new PhysicalApplicant();
         else
-            $model = new LegalApplication();
+            $model = new LegalApplicant();
         $model->fill($data);
         $model->save();
     }
 
-    public function available($type, $stir): array {
-        return Proposition::query()->whereHas($type == 1 ? 'individual' : 'legal', function(Builder $query) use ($type, $stir) {
-            if ($type == 1)
-                $query->where('stir', $stir);
-            elseif ($type == 2)
-                $query->where('legal_stir', $stir);
-            else
-                $query->where('leader_stir', $stir);
-        })->get(['id', 'number', 'type', 'organ', 'created_at']);
+    public function exist($type, $tin): Collection {
+        return Proposition::query()
+            ->whereHas($type == Application::PHYSICAL ? 'individual' : 'legal', function(Builder $query) use ($type, $tin) {
+                if ($type == Application::PHYSICAL)
+                    $query->where('tin', $tin);
+                elseif ($type == Application::LEGAL)
+                    $query->where('tin', $tin);
+                else
+                    $query->where('director_pin_fl', $tin);
+            })
+            ->get(['id', 'number', 'type', 'organization_id', 'created_at']);
     }
 }

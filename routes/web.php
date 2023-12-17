@@ -54,7 +54,7 @@ Route::prefix('technic')->group(function() {
     require_once 'technic.php';
 });
 
-Route::prefix('district')->group(function() {
+Route::prefix('organ')->group(function() {
     require_once 'organ.php';
 });
 

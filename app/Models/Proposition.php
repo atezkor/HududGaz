@@ -34,11 +34,11 @@ class Proposition extends Application {
     ];
 
     public function individual(): HasOne {
-        return $this->hasOne(IndividualApplicant::class);
+        return $this->hasOne(PhysicalApplicant::class);
     }
 
     public function legal(): HasOne {
-        return $this->hasOne(LegalApplication::class);
+        return $this->hasOne(LegalApplicant::class);
     }
 
     public function applicant(): HasOne {

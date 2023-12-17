@@ -4,23 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
-class CreatePhysicalApplicationsTable extends Migration {
+class CreateLegalApplicantsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('physical_applications', function(Blueprint $table) {
+        Schema::create('legal_applicants', function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
             $table->string('name');
-            $table->string('surname');
-            $table->string('phone');
-            $table->string('passport');
             $table->integer('tin');
-            $table->bigInteger('pin_fl');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('director');
+            $table->string('director_pin_fl');
 
             $table->foreign('proposition_id')
                 ->references('id')
@@ -35,6 +34,6 @@ class CreatePhysicalApplicationsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('physical_applications');
+        Schema::dropIfExists('legal_applicants');
     }
 }

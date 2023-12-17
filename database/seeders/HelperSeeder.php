@@ -7,8 +7,8 @@ use App\Models\Application;
 use App\Models\Designer;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
-use App\Models\IndividualApplicant;
-use App\Models\LegalApplication;
+use App\Models\PhysicalApplicant;
+use App\Models\LegalApplicant;
 use App\Models\Mounter;
 use App\Models\Proposition;
 use Illuminate\Database\Seeder;
@@ -52,14 +52,14 @@ class HelperSeeder extends Seeder {
                 'pdf' => 'test.pdf'
             ]);
 
-            LegalApplication::query()->create([
+            LegalApplicant::query()->create([
                 'proposition_id' => $model->id,
-                'tin' => rand(1000, 5000) + rand(100, 500),
+                'tin' => rand(100000000, 1000000000),
                 'name' => $applicant . ' Industries',
+                'phone' => "+998 99 555 15 55",
                 'email' => strtolower($applicant) . '@mail.uz',
                 'director' => $applicant,
-                'director_tin' => rand(1000, 5000) + rand(1000, 5000),
-                'phone' => "+998 99 555 15 55"
+                'director_pin_fl' => rand(100, 1000000000) . rand(100, 100000)
             ]);
         }
 
@@ -73,14 +73,14 @@ class HelperSeeder extends Seeder {
                 'pdf' => 'test.pdf'
             ]);
 
-            IndividualApplicant::query()->create([
+            PhysicalApplicant::query()->create([
                 'proposition_id' => $model->id,
                 'name' => $applicant,
                 'surname' => "",
                 'phone' => "+998 99 555 15 55",
                 'passport' => "AB8674" . rand(101, 999),
-                'tin' => rand(1000, 5000) + rand(1000, 5000),
-                'pin_fl' => rand(100, 1000000000) . rand(100, 100000)
+                'tin' => rand(100000000, 1000000000),
+                'pin_fl' => rand(100000000, 1000000000) . rand(10000, 100000)
             ]);
         }
     }

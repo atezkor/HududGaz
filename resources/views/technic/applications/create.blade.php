@@ -1,5 +1,9 @@
 @extends('layout')
 @section('title', getName())
+@php
+    use App\Models\Application
+    /* @var Application $model */;
+@endphp
 
 @section('content')
     <section class="content">
@@ -10,20 +14,21 @@
                         <div class="card-header">
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
-                                    <a href="#individual" class="nav-link active" onclick="changeType(1)"
+                                    <a href="#individual" class="nav-link active"
+                                       onclick="changeType({{ $model::PHYSICAL }})"
                                        data-toggle="tab">
                                         @lang('global.proposition.individual')
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#legal_entity" class="nav-link" onclick="changeType(2)"
+                                    <a href="#legal" class="nav-link" onclick="changeType({{ $model::LEGAL }})"
                                        data-toggle="tab">
                                         @lang('global.proposition.legal_entity')
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        @include('technic.propositions.form', ['action' => route('propositions.store')])
+                        @include('technic.applications.form', ['action' => route('propositions.store')])
                     </div>
                 </div>
             </div>
@@ -41,20 +46,20 @@
         }
 
         $(document).ready(function() {
-            if ({{$model->type ?? 1}} === 2) {
-                $('#legal_entity').tab('show');
+            if ({{$model->type ?? $model::PHYSICAL}} === {{$model::LEGAL}}) {
+                $('#legal').tab('show');
                 $('#individual').removeClass('active');
-                $('#type').val(2);
+                $('#type').val({{$model::LEGAL}});
             }
         });
 
-        function checkTin(type, stir) {
-            $.get(`{{route('technic.check_stir')}}/${type}/${stir}`, function(data) {
+        function checkTin(type, tin) {
+            $.get(`{{route('propositions.check-for-tin')}}/${type}/${tin}`, function(data) {
                 if (data.length === 0)
                     return;
-
-                toast(`<a href="{{route('technic.propositions')}}/${type}/${stir}" target="_blank" class="text-danger">Bunday stirli ariza mavjud (${Object.keys(data).length})</a>`,
-                    'warning', 5000)
+                let text = `@lang('technic.proposition.applications_exist')(${Object.keys(data).length})`;
+                let dText = `<a href="{{route('technic.propositions')}}/${type}/${tin}" target="_blank" class="text-danger">${text}</a>`
+                toast(dText, 'warning', 2000)
             });
         }
 

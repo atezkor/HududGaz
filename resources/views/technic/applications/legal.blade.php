@@ -1,9 +1,9 @@
-<table id="table2" class="table table-bordered table-striped table-center">
+<table id="legal-table" class="table table-bordered table-striped table-center">
     <thead>
         <tr>
             <th>@lang('global.index')</th>
             <th>@lang('global.proposition.number')</th>
-            <th>@lang('global.proposition.legal_stir')</th>
+            <th>@lang('global.proposition.legal_tin')</th>
             <th>@lang('technic.organ')</th>
             <th>@lang('global.proposition.name')</th>
             <th>@lang('global.proposition.date')</th>
@@ -16,8 +16,8 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$model->number}}</td>
-                <td>{{$model->legal->legal_stir}}</td>
-                <td>{{$model->organ}}</td>
+                <td>{{$model->legal->tin}}</td>
+                <td>{{$model->organization_id}}</td>
                 <td>
                     <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
                         @lang('global.proposition.show')

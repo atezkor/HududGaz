@@ -48,8 +48,8 @@
         'proposition' => [
             'name' => "Ariza",
             'number' => "Ariza raqami",
-            'stir' => "Arizachi STIRi",
-            'legal_stir' => "Yuridik shaxs STIRi",
+            'tin' => "Arizachi STIRi",
+            'legal_tin' => "Yuridik shaxs STIRi",
             'date' => "Yaratilgan",
             'action' => "Amal",
             'limit' => "Vaqt qoldig\u{2018}i",

@@ -23,13 +23,13 @@ class OrganSeeder extends Seeder {
             Organ::query()->create([
                 'name' => $district[0] . $district[1] . "gazta\u{2019}minot",
                 'tin' => rand(100, 500) + rand(100, 500) + rand(100, 500) + rand(1000, 1500),
-                'district_id' => $key,
+                'district_id' => $model->id,
                 'lead_engineer' => $name,
                 'department_head' => $name,
                 'address' => $district[0] . " mahallasi",
                 'address_cyrill' => $model->name_cyrillic,
                 'email' => strtolower($district[0] . $district[1]) . "@mail.uz",
-                'phone' => "+998 (99) 215-55-0$key",
+                'phone' => "+998 (99) 215-55-0$model->id",
                 'fax' => "+(125) 15-55"
             ]);
 

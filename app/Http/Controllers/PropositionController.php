@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PropositionRequest;
 use App\Models\Activity;
-use App\Models\IndividualApplicant;
 use App\Models\Organ;
+use App\Models\PhysicalApplicant;
 use App\Models\Proposition;
 use App\Models\User;
 use App\Services\PropositionService;
@@ -40,7 +40,6 @@ class PropositionController extends Controller {
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return View|RedirectResponse
      * If Query -> All => pluck return Models
      */
@@ -51,16 +50,16 @@ class PropositionController extends Controller {
             return redirect('/');
         }
 
-        $model = new Proposition();
         $organs = Organ::query()->pluck('name', 'id');
         $activities = Activity::query()
             ->skip(1)
             ->take(5)
             ->pluck('activity', 'id');
 
-        return view('technic.propositions.create', [
-            'model' => $model, 'organs' => $organs,
-            'applicant' => new IndividualApplicant(),
+        return view('technic.applications.create', [
+            'model' => new Proposition(),
+            'applicant' => new PhysicalApplicant(),
+            'organs' => $organs,
             'activities' => $activities
         ]);
     }
@@ -108,7 +107,7 @@ class PropositionController extends Controller {
         }
 
         $applicant = $proposition->applicant;
-        $organs = Organ::query()->pluck('org_name', 'id');
+        $organs = Organ::query()->pluck('name', 'id');
         return view('technic.form', [
             'action' => route('propositions.update', ['proposition' => $proposition]),
             'method' => 'PUT', 'model' => $proposition,
@@ -154,23 +153,41 @@ class PropositionController extends Controller {
         return redirect()->route('propositions.index');
     }
 
-    public function available(int $type, int $stir): View|RedirectResponse {
+
+    /**
+     * Check for application with this tin for existing
+     * @param int $type
+     * @param int $tin
+     * @return array
+     */
+    public function check(int $type, int $tin): array {
+        return $this->service->checkTin($type, $tin);
+    }
+
+    /**
+     *
+     * @param int $type
+     * @param int $tin
+     * @return View|RedirectResponse
+     */
+    public function exist(int $type, int $tin): View|RedirectResponse {
         try {
             $this->authorize('crud_prop');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        return view('technic.filter', [
-            'models' => $this->service->available($type, $stir),
-            'organs' => Organ::query()->pluck('org_name', 'id'),
+        return view('technic.applications.exist', [
+            'models' => $this->service->exist($type, $tin),
+            'organs' => Organ::query()->pluck('name', 'id'),
             'type' => $type,
-            'stir' => $stir
+            'tin' => $tin
         ]);
     }
 
     /**
-     * @return \Illuminate\View\View|RedirectResponse
+     * Organ applications list
+     * @return View|RedirectResponse
      */
     public function organ(): View|RedirectResponse {
         try {
