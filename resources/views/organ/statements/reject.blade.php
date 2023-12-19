@@ -23,13 +23,13 @@
     </div>
 
     <div class="col-12 mt-3">
-        <label for="description">@lang('district.recommendation.description')</label>
+        <label for="description">@lang('organ.recommendation.description')</label>
         <input type="text" name="description" id="description" value="{{$model->description}}" class="form-control"
-               placeholder="@lang('district.recommendation.desc_hint')" autocomplete="off" required>
+               placeholder="@lang('organ.recommendation.desc_hint')" autocomplete="off" required>
     </div>
 
     <div class="col-12 mt-4">
-        <label for="additional">@lang('district.recommendation.notification') <span class="required">*</span></label>
+        <label for="additional">@lang('organ.recommendation.notification') <span class="required">*</span></label>
         <textarea id="additional" name="additional">&nbsp;&nbsp;&nbsp;&nbsp;{{$model->additional}}</textarea>
     </div>
 </div>

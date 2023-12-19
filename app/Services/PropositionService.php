@@ -47,16 +47,12 @@ class PropositionService extends CrudService {
         parent::delete($model);
     }
 
-    public function show(Proposition $proposition, int $status = 0): string {
-        if ($status) {
+    public function view(Proposition $proposition, int $status = 0): string {
+        if ($status && $proposition->status == Proposition::CREATED) {
             $this->update(['status' => $status], $proposition);
-
-            $applicant = $proposition->applicant;
-            $applicant->status = $status;
-            $applicant->update();
         }
 
-        return $this->path . '/' . $proposition->getAttribute('file');
+        return $this->path . '/' . $proposition->getAttribute('pdf');
     }
 
     /**

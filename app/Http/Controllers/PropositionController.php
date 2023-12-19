@@ -7,6 +7,7 @@ use App\Models\Activity;
 use App\Models\Organ;
 use App\Models\PhysicalApplicant;
 use App\Models\Proposition;
+use App\Models\Recommendation;
 use App\Models\User;
 use App\Services\PropositionService;
 use App\ViewModels\PropositionListViewModel;
@@ -89,7 +90,7 @@ class PropositionController extends Controller {
      * @return RedirectResponse
      */
     public function show(Proposition $proposition): RedirectResponse {
-        $url = $this->service->show($proposition);
+        $url = $this->service->view($proposition);
         return redirect($url);
     }
 
@@ -153,6 +154,14 @@ class PropositionController extends Controller {
         return redirect()->route('propositions.index');
     }
 
+    /**
+     * @param Proposition $proposition
+     * @return RedirectResponse
+     */
+    public function view(Proposition $proposition): RedirectResponse {
+        $url = $this->service->view($proposition, Proposition::CREATED_T);
+        return redirect($url);
+    }
 
     /**
      * Check for application with this tin for existing
@@ -199,5 +208,29 @@ class PropositionController extends Controller {
         /* @var User $user */
         $user = request()->user();
         return view('organ.propositions.index', new PropositionListViewModel([Proposition::CREATED, Proposition::CREATED_T], $user->organization_id));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param Proposition $proposition
+     * @param string $type
+     * @return View|RedirectResponse
+     */
+    public function statement(Proposition $proposition, string $type): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $recommendation = new Recommendation();
+        return view("organ.statements.upsert", [
+            'model' => $recommendation,
+            'proposition' => $proposition,
+            'type' => $type,
+            'action' => route('organ.recommendation.store'),
+            'back' => route('organ.propositions')
+        ]);
     }
 }

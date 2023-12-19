@@ -12,21 +12,24 @@
                 <div class="card">
                     <div class="card-header">
                     @if ($model->status == 3)
-                        <h3>@lang('district.recommendation.heading_edit')</h3>
+                        <h3>@lang('organ.recommendation.heading_edit')</h3>
                     @else
-                        <h3>@lang('district.recommendation.heading_create')</h3>
+                        <h3>@lang('organ.recommendation.heading_create')</h3>
                     @endif
                     </div>
                     <form id="form" action="{{$action}}" method="post">
                         @csrf
                         @include('components.errors')
+
+                        <input type="hidden" name="type" value="{{$type}}">
+
                         <div class="card-body">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">@lang('district.recommendation.heading')</h3>
+                                    <h3 class="card-title">@lang('organ.recommendation.heading')</h3>
                                 </div>
                                 <div class="card-body">
-                                    @include("district.control.$type")
+                                    @include("organ.statements.$type")
                                     <input type="hidden" name="proposition_id" value="{{$proposition->id}}">
                                     <input type="hidden" name="type" value="{{$type}}">
                                     <input type="hidden" name="organ" value="{{$proposition->organ}}">
@@ -82,7 +85,7 @@
 
     function addEquipment(update_data = new Equipment()) { // update_data - for select necessary options and input fields
         submit.attr('disabled', false);
-        ajax("{{route('district.equipment.add')}}", function(data) {
+        ajax("{{route('organ.equipment.add')}}", function(data) {
             create(data, update_data);
         });
     }
@@ -100,14 +103,14 @@
         let number = document.createElement('input');
         let note = document.createElement('input');
         let btn = document.createElement('button');
-        append(row2, equipment, 'equipment', null, "@lang('district.equipment.name')");
-        append(row2, type, 'type', null,"@lang('district.equipment.type')");
-        append(row2, number, 'number', 'number', "@lang('district.equipment.number')", "@lang('district.equipment.number_hint')");
-        append(row2, note, 'note', 'text', "@lang('district.equipment.note')", "@lang('district.equipment.note_hint')");
+        append(row2, equipment, 'equipment', null, "@lang('organ.equipment.name')");
+        append(row2, type, 'type', null,"@lang('organ.equipment.type')");
+        append(row2, number, 'number', 'number', "@lang('organ.equipment.number')", "@lang('organ.equipment.number_hint')");
+        append(row2, note, 'note', 'text', "@lang('organ.equipment.note')", "@lang('organ.equipment.note_hint')");
         append(col2, btn, '', null, '', '', 'btn btn-danger');
 
-        fillSelect(equipment, data, "@lang('district.equipment.name_hint')", update_data.equipment);
-        fillSelect(type, [], "@lang('district.equipment.type_hint')", update_data.type);
+        fillSelect(equipment, data, "@lang('organ.equipment.name_hint')", update_data.equipment);
+        fillSelect(type, [], "@lang('organ.equipment.type_hint')", update_data.type);
 
         equipment.onchange = change;
         function change(use = false) {
@@ -118,8 +121,8 @@
                 update_data.type = ''; // This after changed equipment, forget equipment-type data come from update data.
             }
 
-            ajax("{{route('district.equipment.type')}}" + `/${equipment.value}`, function(data) {
-                fillSelect(type, data, "@lang('district.equipment.type_hint')", update_data.type);
+            ajax("{{route('organ.equipment.type')}}" + `/${equipment.value}`, function(data) {
+                fillSelect(type, data, "@lang('organ.equipment.type_hint')", update_data.type);
             });
         }
 

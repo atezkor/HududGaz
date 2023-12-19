@@ -22,7 +22,7 @@ class RecommendationRequest extends FormRequest {
     public function rules(): array {
         $rules = [
             'accept' => $this->accept(),
-            'fail' => $this->fail(),
+            'reject' => $this->reject(),
         ];
 
         return $rules[$this->input('type')];
@@ -61,7 +61,7 @@ class RecommendationRequest extends FormRequest {
         ];
     }
 
-    private function fail(): array {
+    private function reject(): array {
         return [
             'proposition_id' => ['required'],
             'organ' => ['required'],

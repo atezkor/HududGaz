@@ -24,11 +24,11 @@ use Illuminate\View\View;
 class RecommendationController extends Controller {
 
     private RecommendationService $service;
-    private PropositionService $service_prop;
+    private PropositionService $propService;
 
-    public function __construct(RecommendationService $service, PropositionService $service_prop) {
+    public function __construct(RecommendationService $service, PropositionService $propService) {
         $this->service = $service;
-        $this->service_prop = $service_prop;
+        $this->propService = $propService;
     }
 
     /**
@@ -44,72 +44,6 @@ class RecommendationController extends Controller {
         }
 
         return view('district.index', new RecommendationViewModel(organ: request()->user()->organ));
-    }
-
-    public function progress(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_rec');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        return view('district.progress', new RecommendationViewModel([4, 5], 2, request()->user()->organ));
-    }
-
-    public function cancelled(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_rec');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        return view('district.cancelled', new RecommendationViewModel([6], 3, request()->user()->organ));
-    }
-
-    public function archives(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_rec');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        $models = CancelledProposition::all();
-        $provider = function($file): string {
-            return '/storage/cancelled/' . $file;
-        };
-
-        return view('district.archives',
-            new RecommendationViewModel(
-                [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-                4,
-                request()->user()->organ
-            ),
-            ['models' => $models, 'provider' => $provider]
-        );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param Proposition $proposition
-     * @param string $type
-     * @return View|RedirectResponse
-     */
-    public function create(Proposition $proposition, string $type): View|RedirectResponse {
-        try {
-            $this->authorize('crud_rec');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        $recommendation = new Recommendation();
-        return view("district.control.upsert", [
-            'model' => $recommendation,
-            'proposition' => $proposition,
-            'type' => $type,
-            'action' => route('district.recommendation.store', ['type' => $type]),
-            'back' => route('district.propositions')
-        ]);
     }
 
     /**
@@ -129,26 +63,8 @@ class RecommendationController extends Controller {
         $data = $request->validated();
         $this->service->create($data);
 
-        $this->service_prop->show($this->getProposition($data['proposition_id']), 3);
+        $this->propService->view($this->getProposition($data['proposition_id']), 3);
         return redirect()->route('district.recommendations');
-    }
-
-    /**
-     * void
-     * @param Request $request
-     * @param Recommendation $recommendation
-     * @return RedirectResponse
-     */
-    public function upload(Request $request, Recommendation $recommendation): RedirectResponse {
-        try {
-            $this->authorize('crud_rec');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        $this->service->upload($request, $recommendation);
-        $this->service_prop->show($recommendation->proposition, 4);
-        return redirect()->back();
     }
 
     /**
@@ -159,11 +75,6 @@ class RecommendationController extends Controller {
      */
     public function show(Recommendation $recommendation): Response {
         return $this->service->show($recommendation);
-    }
-
-    public function proposition(Proposition $proposition): RedirectResponse {
-        $url = $this->service_prop->show($proposition, 2);
-        return redirect($url);
     }
 
     /**
@@ -206,8 +117,68 @@ class RecommendationController extends Controller {
         $data = $request->validated();
 
         $this->service->update($data, $recommendation);
-        $this->service_prop->update(['status' => 3], $recommendation->proposition);
+        $this->propService->update(['status' => 3], $recommendation->proposition);
         return redirect()->route('district.recommendations.cancelled');
+    }
+
+    /**
+     * void
+     * @param Request $request
+     * @param Recommendation $recommendation
+     * @return RedirectResponse
+     */
+    public function upload(Request $request, Recommendation $recommendation): RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $this->service->upload($request, $recommendation);
+        $this->propService->view($recommendation->proposition, 4);
+        return redirect()->back();
+    }
+
+    public function progress(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('district.progress', new RecommendationViewModel([4, 5], 2, request()->user()->organ));
+    }
+
+    public function cancelled(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('district.cancelled', new RecommendationViewModel([6], 3, request()->user()->organ));
+    }
+
+    public function archives(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $models = CancelledProposition::all();
+        $provider = function($file): string {
+            return '/storage/cancelled/' . $file;
+        };
+
+        return view('district.archives',
+            new RecommendationViewModel(
+                [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                4,
+                request()->user()->organ
+            ),
+            ['models' => $models, 'provider' => $provider]
+        );
     }
 
     public function add(): Collection {

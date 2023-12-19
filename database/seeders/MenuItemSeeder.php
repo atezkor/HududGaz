@@ -48,11 +48,11 @@ class MenuItemSeeder extends Seeder {
     }
 
     private function organMenuItems() {
-        $this->createMenuItem(User::ORGAN, 'district.propositions', 'district.propositions', 'bg-primary');
-        $this->createMenuItem(User::ORGAN, 'district.recommendations', 'district.recommendations', 'bg-info');
-        $this->createMenuItem(User::ORGAN, 'district.progress', 'district.recommendations.progress', 'bg-success');
-        $this->createMenuItem(User::ORGAN, 'district.cancelled', 'district.recommendations.cancelled', 'bg-danger');
-        $this->createMenuItem(User::ORGAN, 'district.archive', 'district.recommendations.archive', 'bg-secondary');
+        $this->createMenuItem(User::ORGAN, 'organ.propositions', 'organ.propositions', 'bg-primary');
+        $this->createMenuItem(User::ORGAN, 'organ.recommendations', 'organ.recommendations', 'bg-info');
+        $this->createMenuItem(User::ORGAN, 'organ.progress', 'organ.recommendations.progress', 'bg-success');
+        $this->createMenuItem(User::ORGAN, 'organ.cancelled', 'organ.recommendations.cancelled', 'bg-danger');
+        $this->createMenuItem(User::ORGAN, 'organ.archive', 'organ.recommendations.archive', 'bg-secondary');
     }
 
     private function designer() {

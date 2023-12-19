@@ -17,7 +17,7 @@
                 <td>{{$model->number}}</td>
                 <td>{{$model->legal->tin}}</td>
                 <td>
-                    <a href="{{route('district.proposition.show', ['proposition' => $model])}}" target="_blank">
+                    <a href="{{route('organ.proposition.show', ['proposition' => $model])}}" target="_blank">
                         @lang('global.proposition.show')
                     </a>
                 </td>
@@ -30,12 +30,12 @@
                     <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                 </td>
                 <td>
-                    <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'accept'])}}"
-                       class="btn btn-outline-info" title="@lang('district.accept')">
+                    <a href="{{route('organ.statement.create', ['proposition' => $model, 'type' => $model::ACCEPT])}}"
+                       class="btn btn-outline-info" title="@lang('organ.accept')">
                         <i class="fas fa-check"></i>
                     </a>
-                    <a href="{{route('district.recommendation.create', ['proposition' => $model, 'type' => 'fail'])}}"
-                       class="btn btn-outline-danger" title="@lang('district.cancel')">
+                    <a href="{{route('organ.statement.create', ['proposition' => $model, 'type' => $model::REJECT])}}"
+                       class="btn btn-outline-danger" title="@lang('organ.reject')">
                         <i class="fas fa-minus"></i>
                     </a>
                 </td>

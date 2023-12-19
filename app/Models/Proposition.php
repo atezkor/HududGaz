@@ -28,6 +28,9 @@ class Proposition extends Application {
     public const IN_PROCESS = 4;
     public const COMPLETED = 5;
 
+    public const ACCEPT = "accept";
+    public const REJECT = "reject";
+
     protected $fillable = [
         'number', 'organization_id', 'type',
         'activity_type', 'build_type', 'status', 'pdf'
