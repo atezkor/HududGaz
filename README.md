@@ -71,6 +71,7 @@ Front-End
 - [AdminLTE](https://adminlte.io) AdminLTE Bootstrap Admin Dashboard Template
 - [SweetAlert](https://sweetalert2.github.io) A beautiful, responsive, customizable, accessible (WAI-ARIA) replacement
   for JavaScript's popup boxes. Zero dependencies.
+- [Source Sans Pro](https://fonts.adobe.com/fonts/source-sans)
 
 Voila (uala)
 # Havolalar

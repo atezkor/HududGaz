@@ -8,8 +8,7 @@
     <title>HududGaz | Kirish</title>
     <link rel="shortcut icon" href="{{'/img/favicon.png'}}" type="image/x-icon">
 
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="{{'/css/sans-pro.css'}}">
     <!-- CSS links -->
     <link rel="stylesheet" href="{{'/css/adminlte.min.css'}}">
     <!-- This is link for checkbox -->
@@ -64,6 +63,6 @@
 
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{"/js/bootstrap.bundle.min.js"}}"></script>
-    <script src="{{asset('js/adminlte.min.js')}}"></script>
+    <script src="{{'/js/adminlte.min.js'}}"></script>
 </body>
 </html>
