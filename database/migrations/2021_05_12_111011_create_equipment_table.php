@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateEquipmentTable extends Migration {
     /**
      * Run the migrations.
@@ -13,14 +14,13 @@ class CreateEquipmentTable extends Migration {
     public function up() {
         Schema::create('equipments', function(Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('equipment_id');
-            $table->string('type');
-            $table->integer('order')->default(1);
+            $table->unsignedBigInteger('equipment_type_id');
+            $table->string('name');
             $table->timestamps();
 
-            $table->foreign('equipment_id')
+            $table->foreign('equipment_type_id')
                 ->references('id')
-                ->on('equipments')
+                ->on('equipment_types')
                 ->onDelete('cascade');
         });
     }

@@ -10,13 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class EquipmentType extends Model {
 
-    protected $fillable = ['name', 'static'];
+    protected $fillable = ['name'];
 
     public function equipments(): HasMany {
         return $this->hasMany(Equipment::class);
-    }
-
-    public function checkStatic(): bool {
-        return $this->getAttribute('static');
     }
 }

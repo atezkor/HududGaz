@@ -37,7 +37,7 @@
                     </a>
                     <a href="{{route('organ.statement.create', ['proposition' => $model->id, 'type' => $model::REJECT])}}"
                        class="btn btn-outline-danger" title="@lang('organ.reject')">
-                        <i class="fas fa-minus"></i>
+                        <i class="fas fa-reply"></i>
                     </a>
                 </td>
             </tr>

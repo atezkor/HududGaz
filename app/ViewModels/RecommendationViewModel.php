@@ -2,45 +2,48 @@
 
 namespace App\ViewModels;
 
+use App\Models\{LegalApplicant, Organ, PhysicalApplicant, Proposition, Recommendation};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as Models;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
-use App\Models\{PhysicalApplicant, LegalApplicant, Proposition, Recommendation, Organ};
 
 
 class RecommendationViewModel extends ViewModel {
-    private array $prop_status;
-    private int $status;
-    private int $organ;
-    private string $operator = '>';
 
-    public function __construct(array $prop_status = [3], int $status = 1, int $organ = 0) {
-        $this->prop_status = $prop_status;
+    private array $propStatuses;
+    private int $status;
+    private int $organizationId;
+
+    public function __construct(array $propStatuses = [Proposition::CREATED_B], int $status = Recommendation::CREATED, int $organizationId = 0) {
+        $this->propStatuses = $propStatuses;
         $this->status = $status;
 
-        $this->organ = $organ;
-        if ($organ)
-            $this->operator = '=';
+        $this->organizationId = $organizationId;
     }
 
     public function recommendations(): Collection {
-        return Recommendation::query()->where('organ', $this->operator, $this->organ)
+        return Recommendation::query()
             ->where('status', '=', $this->status)
-            ->orderBy('proposition_id')->get(['id', 'status', 'organ', 'comment', 'created_at']);
+            ->when($this->organizationId, fn(Builder $query) => $query->where('organization_id', $this->organizationId))
+            ->orderBy('proposition_id')
+            ->get(['id', 'status', 'organization_id', 'comment', 'created_at']);
     }
 
     public function propositions(): Models {
-        return $this->props(Proposition::query());
+        return Proposition::query()
+            ->whereIn('status', $this->propStatuses)
+            ->when($this->organizationId, fn(Builder $query) => $query->where('organization_id', $this->organizationId))
+            ->get(['id', 'number', 'type']);
     }
 
-    function physicals(): Collection {
-        return $this->collections(PhysicalApplicant::query(), 'full_name');
-    }
-
-    function legals(): Collection {
-        return $this->collections(LegalApplicant::query(), 'legal_name');
-    }
+//    function physicals(): Collection {
+//        return PhysicalApplicant::query()->pluck('name');
+//    }
+//
+//    function legals(): Collection {
+//        return LegalApplicant::query()->pluck('name');
+//    }
 
     public function applicant($physicals, $legals, &$p, &$l, $type): string {
         if ($type == 1)
@@ -50,17 +53,6 @@ class RecommendationViewModel extends ViewModel {
     }
 
     public function organs(): Collection {
-        return Organ::query()->pluck('org_name', 'id');
-    }
-
-    private function collections(Builder $builder, string $attr): Collection {
-        return $builder->where('organ', $this->operator, $this->organ)
-            ->whereIn('status', $this->prop_status)->pluck($attr);
-    }
-
-    private function props(Builder $query): Models {
-        return $query->where('organ', $this->operator, $this->organ)
-            ->whereIn('status', $this->prop_status)
-            ->get(['id', 'number', 'type']);
+        return Organ::query()->pluck('name', 'id');
     }
 }

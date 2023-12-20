@@ -7,9 +7,9 @@ use App\Models\Application;
 use App\Models\Designer;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
-use App\Models\PhysicalApplicant;
 use App\Models\LegalApplicant;
 use App\Models\Mounter;
+use App\Models\PhysicalApplicant;
 use App\Models\Proposition;
 use Illuminate\Database\Seeder;
 
@@ -27,7 +27,7 @@ class HelperSeeder extends Seeder {
         $this->insertMontunter();
 
         $this->insertEquipmentTypes();
-//        $this->insertEquipment();
+        $this->insertEquipment();
     }
 
     private function insertActivity() {
@@ -86,28 +86,18 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertEquipmentTypes() {
-        foreach (["Gaz-hisoblagich"] as $name) {
+        foreach (["Gaz-hisoblagich", "Gaz qozoni", 'Gaz quvuri', "Jo\u{2018}mrak"] as $equip) {
             EquipmentType::query()->create([
-                'name' => $name,
-                'static' => true
-            ]);
-        }
-
-        foreach (["Gaz qozoni", 'Gaz quvuri', "Jo\u{2018}mrak"] as $equip) {
-            EquipmentType::query()->create([
-                'name' => $equip,
+                'name' => $equip
             ]);
         }
     }
 
     private function insertEquipment() {
-        foreach (['PRINTS-G10'] as $key => $type) {
-            Equipment::query()->create([
-                'type' => $type,
-                'equipment_id' => $key + 1,
-                'order' => 1
-            ]);
-        }
+        Equipment::query()->create([
+            'name' => 'PRINTS-G10',
+            'equipment_type_id' => 1
+        ]);
     }
 
     private function insertDesigner() {

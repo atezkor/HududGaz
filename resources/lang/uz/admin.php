@@ -1,12 +1,12 @@
 <?php
 return [
     'users' => "Foydalanuvchilar",
-    'equips' => "Jihozlar",
+    'organs' => "Idoralar",
     'designers' => "Loyihachilar",
     'mounters' => "Montajchilar",
+    'equipment_types' => "Jihozlar turlari",
     'settings' => "Sozlamalar",
-    'org_about' => "Tashkilot haqida",
-    'organs' => "Idoralar",
+    'about_org' => "Tashkilot haqida",
     'statuses' => "Holatlar",
     'activities' => "Faoliyat turlari",
     'timetables' => "Ish jadvali",

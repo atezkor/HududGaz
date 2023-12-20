@@ -5,27 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property Proposition proposition
- * @property string type
- * @property Organ org
- * @property string file
- *
+ * @property string $type
+ * @property string $pdf
+ * @property Proposition $proposition
+ * @property Organ $organ
  */
 class Recommendation extends Application {
 
     public const CREATED = 1;
     public const COMPLETED = 5;
 
-    protected $fillable = ['proposition_id', 'organ', 'status', 'address', 'access_point', 'gas_network', 'pipeline', 'pipe_type',
-        'length', 'pipe1', 'pipe2', 'depth', 'capability', 'pressure_win', 'pressure_sum', 'grc', 'consumption', 'equipments',
-        'additional', 'description', 'type', 'file', 'comment'];
+    protected $fillable = [
+        'proposition_id', 'organization_id', 'type', 'status', 'pdf',
+        'address', 'access_point', 'gas_network', 'pipeline', 'pipe_type',
+        'length', 'pipe1', 'pipe2', 'depth', 'capability', 'pressure_win', 'pressure_sum',
+        'grc', 'consumption', 'equipments',
+        'additional', 'description', 'comment'
+    ];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);
     }
 
-    public function org(): BelongsTo {
-        return $this->belongsTo(Organ::class, 'organ');
+    public function organ(): BelongsTo { // Previous name: org
+        return $this->belongsTo(Organ::class, 'organization_id');
     }
 
     public function getEquipments() {

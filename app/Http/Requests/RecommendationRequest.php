@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class RecommendationRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,17 +31,17 @@ class RecommendationRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'address' => __('district.recommendation.address'),
-            'access_point' => __('district.recommendation.access_point'),
-            'description' => __('district.recommendation.description'),
-            'additional' => __('district.recommendation.additional')
+            'address' => __('organ.recommendation.address'),
+            'access_point' => __('organ.recommendation.access_point'),
+            'description' => __('organ.recommendation.description'),
+            'additional' => __('organ.recommendation.additional')
         ];
     }
 
     private function accept(): array {
         return [
             'proposition_id' => ['required'],
-            'organ' => ['required'],
+            'type' => ['required'], // Action type
             'address' => ['required'],
             'access_point' => ['required'],
             'gas_network' => ['required'],
@@ -55,20 +56,18 @@ class RecommendationRequest extends FormRequest {
             'grc' => [],
             'consumption' => [],
             'additional' => [],
-            'type' => ['required'],
-            'file' => [],
-            'equipments' => []
+            'equipments' => [],
+            'pdf' => []
         ];
     }
 
     private function reject(): array {
         return [
             'proposition_id' => ['required'],
-            'organ' => ['required'],
+            'type' => ['required'], // Action type
             'description' => ['required'],
             'additional' => ['required'],
-            'type' => ['required'],
-            'file' => []
+            'pdf' => []
         ];
     }
 }

@@ -18,7 +18,7 @@ function resource($url, $controller, $name) {
     ]);
 }
 
-function reducer($url, $controller, $name) {
+function reduced($url, $controller, $name) {
     Route::resource($url, $controller)->names([
         'index' => $name . '.index',
         'store' => $name . '.store',

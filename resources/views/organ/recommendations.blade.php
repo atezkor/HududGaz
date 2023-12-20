@@ -22,7 +22,7 @@
                             <th>@lang('global.index')</th>
                             <th>@lang('global.proposition.number')</th>
                             <th>@lang('global.consumer')</th>
-                            <th>@lang('district.recommendation.name')</th>
+                            <th>@lang('organ.recommendation.name')</th>
                             <th>@lang('global.proposition.date')</th>
                             <th>@lang('global.proposition.limit')</th>
                             <th>@lang('global.proposition.action')</th>
@@ -36,10 +36,10 @@
                         <tr>
                             <td>{{$key + 1}}</td>
                             <td>{{$model->number}}</td>
-                            <td>{{$applicant($physicals, $legals, $p, $l, $model->type)}}</td>
+                            <td>$applicant($physicals, $legals, $p, $l, $model->type)</td>
                             <td>
-                                <a href="{{route('district.recommendation.show', ['recommendation' => $recommendations[$key]])}}" target="_blank">
-                                    @lang('district.show')
+                                <a href="{{route('organ.recommendation.show', ['recommendation' => $recommendations[$key]])}}" target="_blank">
+                                    @lang('organ.show')
                                 </a>
                             </td>
                             <td>{{$recommendations[$key]->created_at}}</td>
@@ -53,7 +53,7 @@
                             </td>
                             <td>
                                 <input type="file" id="file-{{$key}}" onchange="upload(this,
-                                    '{{route('district.recommendation.upload', ['recommendation' => $recommendations[$key]])}}')" hidden>
+                                    '{{route('organ.recommendation.upload', $recommendations[$key])}}')" hidden>
                                 <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
                                     <i class="fas fa-upload"></i>
                                 </label>

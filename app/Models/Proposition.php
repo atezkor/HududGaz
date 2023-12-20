@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int id
- * @property int organ
  * @property int type
  * @property int status
+ * @property int $organization_id
  * @property string $name
  * @property-read string $pdf
  * @property-read int $build_type

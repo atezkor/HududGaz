@@ -7,13 +7,10 @@ use App\Models\CancelledProposition;
 use App\Models\EquipmentType;
 use App\Models\Proposition;
 use App\Models\Recommendation;
-use App\Models\User;
 use App\Services\PropositionService;
 use App\Services\RecommendationService;
-use App\ViewModels\PropositionListViewModel;
 use App\ViewModels\RecommendationViewModel;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -43,7 +40,8 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
-        return view('district.index', new RecommendationViewModel(organ: request()->user()->organ));
+        $user = request()->user();
+        return view('organ.recommendations', new RecommendationViewModel(organizationId: $user->organization_id));
     }
 
     /**
@@ -63,8 +61,9 @@ class RecommendationController extends Controller {
         $data = $request->validated();
         $this->service->create($data);
 
-        $this->propService->view($this->getProposition($data['proposition_id']), 3);
-        return redirect()->route('district.recommendations');
+        $proposition = $this->propService->find($data['proposition_id']);
+        $this->propService->view($proposition, Proposition::CREATED_B); // TODO function
+        return redirect()->route('organ.recommendations');
     }
 
     /**
@@ -187,9 +186,5 @@ class RecommendationController extends Controller {
 
     public function types(EquipmentType $equipment): Collection {
         return $equipment->types()->pluck('type', 'id');
-    }
-
-    private function getProposition(int $id): Proposition|Model {
-        return Proposition::query()->find($id);
     }
 }

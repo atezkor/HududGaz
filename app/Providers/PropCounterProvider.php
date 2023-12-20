@@ -36,7 +36,7 @@ class PropCounterProvider extends ServiceProvider {
         View::composer('components.menu', function() {
             $user = request()->user();
             $numbers = match ($user->role_id) {
-//                User::ORGAN => $this->applications($user->organization_id),
+                User::ORGAN => $this->applications($user->organization_id),
 //                User::DESIGNER => $this->projects($user->organization_id),
 //                User::MOUNTER => $this->montages($user->organization_id),
                 default => [0, 0, 0, 0, 0]
@@ -73,20 +73,21 @@ class PropCounterProvider extends ServiceProvider {
 
 
     /**
-     * @param int $organ
+     * @param int $organId
      * @return array
      * This function for District role (Role(3)). Return count of Propositions and Recommendations
      */
-    private function applications(int $organ): array {
-        $propositions = Proposition::query()->where('organ', $organ)
+    private function applications(int $organId): array {
+        $propositions = Proposition::query()
+            ->where('organization_id', $organId)
             ->whereIn('status', [Proposition::CREATED, Proposition::CREATED_T])
             ->count();
 
         $recs = Recommendation::query()
-            ->where('organ', $organ)
+            ->where('organization_id', $organId)
             ->get('status')
             ->groupBy('status');
-        $temp = $this->countByGroup($recs, [1, 2, 3, 4]);
+        $temp = $this->countByGroup($recs, [Recommendation::CREATED, 2, 3, 4]); // TODO status
 
         return [
             $propositions,

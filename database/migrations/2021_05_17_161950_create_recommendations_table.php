@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateRecommendationsTable extends Migration {
     /**
      * Run the migrations.
@@ -11,10 +12,11 @@ class CreateRecommendationsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('recommendations', function (Blueprint $table) {
+        Schema::create('recommendations', function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id')->index();
-            $table->integer('organ');
+            $table->integer('organization_id');
+            $table->string('type', 10)->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('address');
             $table->string('access_point');
@@ -31,11 +33,10 @@ class CreateRecommendationsTable extends Migration {
             $table->string('grc');
             $table->integer('consumption');
             $table->json('equipments')->nullable();
+            $table->string('pdf')->nullable();
+            $table->string('comment')->nullable();
             $table->text('additional')->nullable();
             $table->string('description')->nullable();
-            $table->char('type', 10)->nullable();
-            $table->string('file')->nullable();
-            $table->string('comment')->nullable();
             $table->timestamps();
 
             $table->foreign('proposition_id')

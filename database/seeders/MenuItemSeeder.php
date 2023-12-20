@@ -28,10 +28,10 @@ class MenuItemSeeder extends Seeder {
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.organs', 'admin.organs.index', 'nav-icon far fa-building');
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.designers', 'admin.designers.index', 'nav-icon fas fa-pencil-ruler');
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.mounters', 'admin.mounters.index', 'nav-icon fas fa-network-wired');
-        $this->createMenuItem(User::ROLE_ADMIN, 'admin.equips', 'admin.equipments.index', 'nav-icon fas fa-drafting-compass');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.equipment_types', 'admin.equipment-types.index', 'nav-icon fas fa-drafting-compass');
 
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.settings', '#', 'nav-icon fas fa-chart-line');
-        $this->createMenuItem(User::ROLE_ADMIN, 'admin.org_about', 'admin.settings', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.about_org', 'admin.settings', 'nav-icon far fa-circle');
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.statuses', 'admin.statuses.index', 'nav-icon far fa-circle');
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.activities', 'admin.activities.index', 'nav-icon far fa-circle');
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.timetables', 'admin.timetable.index', 'nav-icon far fa-circle');

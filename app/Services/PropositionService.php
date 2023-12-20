@@ -9,6 +9,7 @@ use App\Models\Proposition;
 use App\Utilities\StorageManager;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 
 class PropositionService extends CrudService {
@@ -28,6 +29,10 @@ class PropositionService extends CrudService {
 
         $data['proposition_id'] = $this->model->id;
         $this->createApplicant($data);
+    }
+
+    public function find(int $id): Model|Proposition {
+        return Proposition::query()->find($id);
     }
 
     public function update($data, $model) {

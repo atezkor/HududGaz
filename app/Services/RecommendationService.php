@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Response;
 use App\Models\Organization;
+use App\Models\Proposition;
 use App\Models\Recommendation;
 use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
 use Barryvdh\DomPDF\PDF;
+use Illuminate\Http\Response;
 
 
 class RecommendationService extends CrudService {
@@ -20,6 +21,16 @@ class RecommendationService extends CrudService {
         $this->model = $model;
         $this->pdf = $pdf;
         $this->folder = 'recommendations';
+    }
+
+    /**
+     * @param array $data
+     */
+    public function create($data) {
+        /* @var Proposition $proposition */
+        $proposition = Proposition::query()->find($data['proposition_id']);
+        $data['organization_id'] = $proposition->organization_id;
+        parent::create($data);
     }
 
     public function show(Recommendation $recommendation): Response {

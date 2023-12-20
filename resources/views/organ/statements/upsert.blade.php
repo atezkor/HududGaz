@@ -1,7 +1,7 @@
 @extends('secondary')
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/extra/summernote.min.css'}}">
+<link rel="stylesheet" href="{{'/css/summernote/summernote.min.css'}}">
 @endsection
 
 @section('content')
@@ -17,11 +17,9 @@
                         <h3>@lang('organ.recommendation.heading_create')</h3>
                     @endif
                     </div>
-                    <form id="form" action="{{$action}}" method="post">
+                    <form id="form" action="{{route('organ.recommendation.store')}}" method="post">
                         @csrf
                         @include('components.errors')
-
-                        <input type="hidden" name="type" value="{{$type}}">
 
                         <div class="card-body">
                             <div class="card card-primary">
@@ -42,7 +40,7 @@
                         @else
                             <button type="submit" id="submit" class="btn btn-primary mr-2">@lang('global.btn_save')</button>
                         @endif
-                            <a href="{{$back}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
+                            <a href="{{route('organ.propositions')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
                             <button type="reset" id="reset" class="btn btn-default float-right">@lang('global.btn_reset')</button>
                         </div>
                     </form>
@@ -56,9 +54,17 @@
 <!-- For text editor -->
 <script src="{{'/js/jquery.min.js'}}"></script>
 <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
-<script src="{{'/js/extra/summernote.min.js'}}"></script>
+<script src="{{'/js/summernote/summernote.min.js'}}"></script>
 <script src="{{'/js/typographer.js'}}"></script>
 <script>
+    $(document).ready(function() {
+        $('#additional').summernote({
+            minHeight: 150
+        });
+
+        CustomValidity();
+    });
+
     // You must rewrite this code!
     let count = 0;
     let equips = $('#equipments');
@@ -210,7 +216,7 @@
                 } else {
                     Swal.fire({
                         icon: 'warning',
-                        title: "@lang('district.equipment.warning')",
+                        title: "@lang('organ.equipment.warning')",
                         confirmButtonText: "<i class='fas fa-check'></i>"
                     });
                 }
@@ -273,20 +279,10 @@
         @endif
     });
 
-    $(document).ready(function() {
-        $('#additional').summernote({
-        @if($type == 'fail')
-            minHeight: 150
-        @endif
-        });
-
-        CustomValidity();
-    });
-
     function CustomValidity() {
         $('input').each(function() {
             this.oninvalid = () => {
-                this.setCustomValidity("@lang('district.recommendation.required')");
+                this.setCustomValidity("@lang('organ.recommendation.required')");
             }
             this.oninput = () => {
                 this.setCustomValidity('');

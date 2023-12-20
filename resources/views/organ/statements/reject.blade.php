@@ -30,6 +30,6 @@
 
     <div class="col-12 mt-4">
         <label for="additional">@lang('organ.recommendation.notification') <span class="required">*</span></label>
-        <textarea id="additional" name="additional">&nbsp;&nbsp;&nbsp;&nbsp;{{$model->additional}}</textarea>
+        <textarea id="additional" name="additional" rows="15">&nbsp;&nbsp;&nbsp;&nbsp;{{$model->additional}}</textarea>
     </div>
 </div>

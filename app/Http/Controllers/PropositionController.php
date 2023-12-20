@@ -199,13 +199,13 @@ class PropositionController extends Controller {
      * @return View|RedirectResponse
      */
     public function organ(): View|RedirectResponse {
+        /* @var User $user */
         try {
             $this->authorize('crud_rec');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        /* @var User $user */
         $user = request()->user();
         return view('organ.propositions.index', new PropositionListViewModel([Proposition::CREATED, Proposition::CREATED_T], $user->organization_id));
     }
@@ -228,9 +228,7 @@ class PropositionController extends Controller {
         return view("organ.statements.upsert", [
             'model' => $recommendation,
             'proposition' => $proposition,
-            'type' => $type,
-            'action' => route('organ.recommendation.store'),
-            'back' => route('organ.propositions')
+            'type' => $type
         ]);
     }
 }

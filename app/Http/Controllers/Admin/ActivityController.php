@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ActivityRequest;
-use App\Services\Service;
 use App\Models\Activity;
+use App\Services\Service;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 
 class ActivityController extends Controller {

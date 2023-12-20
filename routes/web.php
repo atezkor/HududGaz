@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DesignerController;
 use App\Http\Controllers\EquipmentController;
@@ -36,8 +36,8 @@ Route::group(['prefix' => 'admin'], function() {
     resource('mounters', MounterController::class, 'admin.mounters');
     resource('designers', DesignerController::class, 'admin.designers');
 
-    reducer('equipments', EquipmentController::class, 'admin.equipments');
-    reducer('activity-types', ActivityController::class, 'admin.activities');
+    reduced('equipment-types', EquipmentController::class, 'admin.equipment-types');
+    reduced('activity-types', ActivityController::class, 'admin.activities');
 
     readonly('statuses', StatusController::class, 'admin.statuses');
     resource('timetable', TimetableController::class, 'admin.timetable');
