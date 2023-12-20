@@ -9,12 +9,15 @@ use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Response;
+use Illuminate\Http\UploadedFile;
 
 
 class RecommendationService extends CrudService {
     use FileUploadManager, StorageManager;
 
     private string $path = 'public/recommendations/';
+    private string $folder;
+
     private PDF $pdf;
 
     public function __construct(Recommendation $model, PDF $pdf) {
@@ -34,19 +37,23 @@ class RecommendationService extends CrudService {
     }
 
     public function show(Recommendation $recommendation): Response {
+        if ($recommendation->pdf) {
+        }
+
         $proposition = $recommendation->proposition;
-        $organ = $recommendation->org;
+        $organ = $recommendation->organ;
+
 
         $data = [
             'model' => $recommendation,
             'proposition' => $proposition,
             'organ' => $organ,
-            'consumer' => $proposition->applicant,
-            'district' => districts()[$organ->getAttribute('region')],
+            'applicant' => $proposition->applicant,
+            'district' => $organ->district->name,
             'organization' => Organization::Data()
         ];
 
-        if ($recommendation->type == 'accept') {
+        if ($recommendation->type == Recommendation::ACCEPT) {
             $equipments = $recommendation->getEquipments();
 
             $data['equipments'] = $equipments;
@@ -54,10 +61,26 @@ class RecommendationService extends CrudService {
             $data['activity'] = $proposition->activity;
         }
 
-        view()->share($data); // TODO
-
-        $this->pdf->loadView('district.pdf.' . $recommendation->type);
+        view()->share($data);
+        $this->pdf->loadView('organ.pdf.' . $recommendation->type);
         return $this->pdf->stream(time() . '.pdf');
+    }
+
+    public function upload(UploadedFile $pdf, Recommendation $recommendation) {
+        if ($recommendation->pdf) {
+            $this->deleteFile($this->folder, $recommendation->pdf);
+        }
+
+        $recommendation->setAttribute('status', Recommendation::PRESENTED);
+        $recommendation->setAttribute('pdf', $this->storeFile($pdf, $this->folder));
+
+        $recommendation->update();
+        $recommendation->proposition->update(['status' => Proposition::PRESENTED]);
+    }
+
+    public function update($data, $model) {
+        $data['status'] = Recommendation::CREATED;
+        parent::update($data, $model);
     }
 
     /**
@@ -73,14 +96,6 @@ class RecommendationService extends CrudService {
         return $this->fileUrl($this->path, $recommendation->getAttribute('file'));
     }
 
-    public function upload($request, Recommendation $recommendation) {
-        if ($recommendation->file)
-            $this->deleteFile($this->folder, $recommendation->file);
-        $recommendation->setAttribute('status', 2);
-        $recommendation->setAttribute('file', $this->storeFile($request->file('file'), $this->folder));
-        $recommendation->update();
-    }
-
     /**
      * This function for back recommendation to District
      */
@@ -91,10 +106,5 @@ class RecommendationService extends CrudService {
 
         $recommendation->proposition->update(['status' => 6]);
         $recommendation->proposition->applicant->update(['status' => 6]);
-    }
-
-    public function update($data, $model) {
-        $data['status'] = 1;
-        parent::update($data, $model);
     }
 }

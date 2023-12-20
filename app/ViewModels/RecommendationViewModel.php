@@ -2,7 +2,7 @@
 
 namespace App\ViewModels;
 
-use App\Models\{LegalApplicant, Organ, PhysicalApplicant, Proposition, Recommendation};
+use App\Models\{Application, Organ, Proposition, Recommendation};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as Models;
 use Illuminate\Support\Collection;
@@ -24,35 +24,32 @@ class RecommendationViewModel extends ViewModel {
 
     public function recommendations(): Collection {
         return Recommendation::query()
+            ->with('proposition:id,number')
             ->where('status', '=', $this->status)
             ->when($this->organizationId, fn(Builder $query) => $query->where('organization_id', $this->organizationId))
             ->orderBy('proposition_id')
-            ->get(['id', 'status', 'organization_id', 'comment', 'created_at']);
+            ->get(['id', 'proposition_id', 'status', 'organization_id', 'comment', 'created_at']);
     }
 
     public function propositions(): Models {
         return Proposition::query()
+            ->with('recommendation')
             ->whereIn('status', $this->propStatuses)
             ->when($this->organizationId, fn(Builder $query) => $query->where('organization_id', $this->organizationId))
             ->get(['id', 'number', 'type']);
     }
 
-//    function physicals(): Collection {
-//        return PhysicalApplicant::query()->pluck('name');
-//    }
-//
-//    function legals(): Collection {
-//        return LegalApplicant::query()->pluck('name');
-//    }
+    public function organs(): Collection {
+        return Organ::query()->pluck('name', 'id');
+    }
 
+    /* Reference and pointer function */
     public function applicant($physicals, $legals, &$p, &$l, $type): string {
-        if ($type == 1)
+        // @php($l = 0)
+        // @php($p = 0)
+        if ($type == Application::PHYSICAL)
             return $physicals[$p++];
 
         return $legals[$l++];
-    }
-
-    public function organs(): Collection {
-        return Organ::query()->pluck('name', 'id');
     }
 }

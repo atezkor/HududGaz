@@ -13,7 +13,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Recommendation extends Application {
 
     public const CREATED = 1;
-    public const COMPLETED = 5;
+    public const PRESENTED = 2;
+    public const COMPLETED = 4;
+    public const REJECTED = -1;
+
+    public const ACCEPT = "accept";
+    public const REJECT = "reject";
 
     protected $fillable = [
         'proposition_id', 'organization_id', 'type', 'status', 'pdf',

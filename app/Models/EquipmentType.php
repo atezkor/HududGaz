@@ -13,6 +13,6 @@ class EquipmentType extends Model {
     protected $fillable = ['name'];
 
     public function equipments(): HasMany {
-        return $this->hasMany(Equipment::class);
+        return $this->hasMany(Equipment::class, 'equipment_type_id');
     }
 }

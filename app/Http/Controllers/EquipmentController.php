@@ -9,6 +9,7 @@ use App\Services\Service;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Collection;
 
 
 class EquipmentController extends Controller {
@@ -53,22 +54,21 @@ class EquipmentController extends Controller {
     }
 
 
-
     /**
      * Display the specified resource.
      *
-     * @param EquipmentType $equipment
+     * @param EquipmentType $equipmentType
      * @return View|RedirectResponse
      */
-    public function show(EquipmentType $equipment): View|RedirectResponse {
+    public function show(EquipmentType $equipmentType): View|RedirectResponse {
         try {
             $this->authorize('crud_admin');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        $models = $equipment->types()->get();
-        return view('admin.equipments.types', ['equipment' => $equipment, 'method' => 'PUT', 'models' => $models]);
+        $models = $equipmentType->equipments;
+        return view('admin.equipments.types', ['equipment' => $equipmentType, 'method' => 'PUT', 'models' => $models]);
     }
 
     /**
@@ -159,5 +159,13 @@ class EquipmentController extends Controller {
 
         $type->delete();
         return redirect()->back()->with('msg', __('global.messages.del'));
+    }
+
+    public function types(): Collection {
+        return EquipmentType::query()->pluck('name', 'id');
+    }
+
+    public function list(EquipmentType $equipment): Collection {
+        return $equipment->equipments()->pluck('name', 'id');
     }
 }

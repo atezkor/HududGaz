@@ -48,7 +48,7 @@ class HelperSeeder extends Seeder {
                 'organization_id' => 1,
                 'type' => Application::LEGAL,
                 'build_type' => rand(1, 2),
-                'activity_type' => $key + 1,
+                'activity_type_id' => $key + 1,
                 'pdf' => 'test.pdf'
             ]);
 
@@ -69,7 +69,7 @@ class HelperSeeder extends Seeder {
                 'organization_id' => 1,
                 'type' => Application::PHYSICAL,
                 'build_type' => rand(1, 2),
-                'activity_type' => $key + 1,
+                'activity_type_id' => $key + 1,
                 'pdf' => 'test.pdf'
             ]);
 

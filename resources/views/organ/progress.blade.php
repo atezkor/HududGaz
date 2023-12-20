@@ -19,23 +19,21 @@
                                 <th>@lang('global.index')</th>
                                 <th>@lang('global.proposition.number')</th>
                                 <th>@lang('global.consumer')</th>
-                                <th>@lang('district.recommendation.name')</th>
+                                <th>@lang('organ.recommendation.name')</th>
                                 <th>@lang('global.proposition.date')</th>
                                 <th>@lang('global.proposition.limit')</th>
                             </tr>
                         </thead>
                         <tbody>
                         @php($limit = limit(5, 3))
-                        @php($l = 0)
-                        @php($p = 0)
                         @foreach($recommendations as $key => $model)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td>{{$propositions[$key]->number}}</td>
-                                <td>{{$applicant($physicals, $legals, $p, $l, $propositions[$key]->type)}}</td>
+                                <td>{{$model->proposition->number}}</td>
+                                <td>{{$model->proposition->number}}</td>
                                 <td>
-                                    <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
-                                        @lang('district.show')
+                                    <a href="{{route('organ.recommendation.show', $model->id)}}" target="_blank">
+                                        @lang('organ.show')
                                     </a>
                                 </td>
                                 <td>{{$model->created_at}}</td>

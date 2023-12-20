@@ -11,11 +11,7 @@ class PhysicalApplicant extends Model {
 
     protected $fillable = ['proposition_id', 'name', 'surname', 'phone', 'passport', 'tin', 'pin_fl'];
 
-    public function getNameAttribute(): string {
-        return $this->getAttribute('name');
-    }
-
-    public function getPersonNameAttribute() {
+    public function getFullNameAttribute() {
         return $this->getAttribute('name');
     }
 }

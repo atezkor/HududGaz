@@ -17,6 +17,8 @@ class TechCondition extends Application {
 
     protected $fillable = ['proposition_id', 'qrcode', 'status', 'file'];
 
+    public const CREATED = 1;
+
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);
     }

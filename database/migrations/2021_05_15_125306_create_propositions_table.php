@@ -18,7 +18,7 @@ class CreatePropositionsTable extends Migration {
             $table->foreignId('organization_id')->constrained('organs');
             $table->tinyInteger('type');
             $table->tinyInteger('build_type');
-            $table->integer('activity_type')->default(1);
+            $table->integer('activity_type_id')->default(1);
             $table->tinyInteger('status')->default(1);
             $table->string('pdf')->nullable();
             $table->timestamps();

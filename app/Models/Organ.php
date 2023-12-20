@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property-read string district
+ * @property-read District district
  */
 class Organ extends Model {
 
@@ -14,4 +15,8 @@ class Organ extends Model {
         'district_id', 'address', 'address_cyrill',
         'email', 'phone', 'fax'
     ];
+
+    public function district(): BelongsTo {
+        return $this->belongsTo(District::class);
+    }
 }

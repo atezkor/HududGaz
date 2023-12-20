@@ -87,18 +87,18 @@ function districts(): array { # The reason for giving the key is to start from o
 
 function extendedDate($date, bool $reverse = false): string {
     $months = [
-        __('district.january'),
-        __('district.february'),
-        __('district.march'),
-        __('district.april'),
-        __('district.may'),
-        __('district.june'),
-        __('district.july'),
-        __('district.august'),
-        __('district.september'),
-        __('district.october'),
-        __('district.november'),
-        __('district.december'),
+        __('organ.january'),
+        __('organ.february'),
+        __('organ.march'),
+        __('organ.april'),
+        __('organ.may'),
+        __('organ.june'),
+        __('organ.july'),
+        __('organ.august'),
+        __('organ.september'),
+        __('organ.october'),
+        __('organ.november'),
+        __('organ.december'),
     ];
 
     $date = date_create($date);

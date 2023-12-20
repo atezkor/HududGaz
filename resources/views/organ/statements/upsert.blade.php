@@ -91,7 +91,7 @@
 
     function addEquipment(update_data = new Equipment()) { // update_data - for select necessary options and input fields
         submit.attr('disabled', false);
-        ajax("{{route('organ.equipment.add')}}", function(data) {
+        ajax("{{route('organ.equipment.types')}}", function(data) {
             create(data, update_data);
         });
     }
@@ -127,7 +127,7 @@
                 update_data.type = ''; // This after changed equipment, forget equipment-type data come from update data.
             }
 
-            ajax("{{route('organ.equipment.type')}}" + `/${equipment.value}`, function(data) {
+            ajax("{{route('organ.equipment.list')}}" + `/${equipment.value}`, function(data) {
                 fillSelect(type, data, "@lang('organ.equipment.type_hint')", update_data.type);
             });
         }

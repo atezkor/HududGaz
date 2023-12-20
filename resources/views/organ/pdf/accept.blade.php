@@ -2,8 +2,9 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>PDF</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Tavsiyanoma</title>
     <style>
         * {
             padding: 0;
@@ -87,14 +88,14 @@
 <body>
     <div class="text-right">
         <h4>
-            <span class="uppercase">&#8220;@lang('district.pdf.confirmation')&#8221;</span><br>
-            <span>&#8220;{{$organization->branch_name}}&#8221; @lang('district.pdf.gft')</span><br>
-            <span>&#8220;{{$organ->org_name}}&#8221; @lang('district.pdf.section')</span><br>
-            <span>@lang('district.pdf.leader') ____ {{$organ->lead_engineer}}</span>
+            <span class="uppercase">&#8220;@lang('organ.pdf.confirmation')&#8221;</span><br>
+            <span>&#8220;{{$organization->branch_name}}&#8221; @lang('organ.pdf.gft')</span><br>
+            <span>&#8220;{{$organ->org_name}}&#8221; @lang('organ.pdf.section')</span><br>
+            <span>@lang('organ.pdf.leader') ____ {{$organ->lead_engineer}}</span>
         </h4>
     </div>
     <div class="text-center section">
-        <div class="uppercase">@lang('district.pdf.recommendation')</div>
+        <div class="uppercase">@lang('organ.pdf.recommendation')</div>
         <b># {{$model->id}}</b>
     </div>
 
@@ -108,98 +109,104 @@
         <div class="mt-20">
             <ol>
                 <li>
-                    <strong>@lang('district.pdf.object_name')</strong>: {{$model->address}}@lang('district.pdf.in_the') @lang('district.pdf.civil')
-                    <span>{{$consumer->person_name}}@lang('district.pdf.to') @lang('district.pdf.belong_to')</span>
-                @if($proposition->type === 2)
-                    <span>&#8220;{{$activity->activity}}&#8221;</span>
-                @endif
-                    <span class="lowercase">{{$build_type}} @lang('district.pdf.build') @lang('district.pdf.gas_connect')</span>
+                    <strong>@lang('organ.pdf.object_name')</strong>: {{$model->address}}@lang('organ.pdf.in_the') @lang('organ.pdf.civil')
+                    <span>{{$applicant->full_name}}@lang('organ.pdf.to') @lang('organ.pdf.belong_to')</span>
+                    @if($proposition->type == $proposition::LEGAL)
+                        <span>&#8220;{{$activity->activity}}&#8221;</span>
+                    @endif
+                    <span class="lowercase">{{$build_type}} @lang('organ.pdf.build') @lang('organ.pdf.gas_connect')</span>
                 </li>
                 <li>
-                    <strong>@lang('district.pdf.near_address')</strong>: {{$model->access_point}}
-                    <br><br><hr>
-                    <div class="text-center">(@lang('district.pdf.full_address'))</div>
+                    <strong>@lang('organ.pdf.near_address')</strong>: {{$model->access_point}}
+                    <br><br>
+                    <hr>
+                    <div class="text-center">(@lang('organ.pdf.full_address'))</div>
                     <br>
                     <div class="text-center">
-                        <span>@lang("district.pdf.$model->pipeline"): {{$model->length}} @lang('district.pdf.meter')</span>
+                        <span>@lang("organ.pdf.$model->pipeline"): {{$model->length}} @lang('organ.pdf.meter')</span>
                     </div>
                     <hr>
-                    <div class="text-center">(@lang('district.pdf.full_len'))</div>
+                    <div class="text-center">(@lang('organ.pdf.full_len'))</div>
                 </li>
                 <li>
-                    <strong>@lang('district.pdf.diameter_and_depth'):</strong>
-                    {{$model->pipe1}} @lang('district.pdf.millimeter'), {{$model->depth}} @lang('district.pdf.meter')
+                    <strong>@lang('organ.pdf.diameter_and_depth'):</strong>
+                    {{$model->pipe1}} @lang('organ.pdf.millimeter'), {{$model->depth}} @lang('organ.pdf.meter')
                 </li>
                 <li>
-                    <strong>@lang('district.pdf.gas_pressure'):</strong>
+                    <strong>@lang('organ.pdf.gas_pressure'):</strong>
                     <table>
                         <tr>
-                            <td>@lang('district.recommendation.pressure_win'): {{$model->pressure_win}} @lang('district.pdf.atm')</td>
-                            <td>@lang('district.recommendation.pressure_sum'): {{$model->pressure_sum}} @lang('district.pdf.atm')</td>
+                            <td>@lang('organ.recommendation.pressure_win')
+                                : {{$model->pressure_win}} @lang('organ.pdf.atm')</td>
+                            <td>@lang('organ.recommendation.pressure_sum')
+                                : {{$model->pressure_sum}} @lang('organ.pdf.atm')</td>
                         </tr>
                     </table>
                 </li>
                 <li class="text-left">
-                    <strong>@lang('district.pdf.pipe_capability'):</strong>
+                    <strong>@lang('organ.pdf.pipe_capability'):</strong>
                     <span class="f-r">
                         <u>{{$model->capability}} </u>
-                        <span>@lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.second') @lang('district.pdf.year')</span>
+                        <span>@lang('organ.pdf.meter')<sup>3</sup>/@lang('organ.pdf.second') @lang('organ.pdf.year')</span>
                     </span>
                     <div class="clear"></div>
                     <table class="text-right">
                         <tr>
-                            <td class="text-center"><strong>@lang('district.pdf.pipe_real_capacity'):</strong></td>
-                            <td><u>{{$model->capability}}</u> @lang('district.pdf.meter')<sup>3</sup>/@lang('district.pdf.second') @lang('district.pdf.year')</td>
+                            <td class="text-center"><strong>@lang('organ.pdf.pipe_real_capacity'):</strong></td>
+                            <td><u>{{$model->capability}}</u> @lang('organ.pdf.meter')
+                                <sup>3</sup>/@lang('organ.pdf.second') @lang('organ.pdf.year')</td>
                         </tr>
                     </table>
                 </li>
                 <li class="text-left">
-                    <strong>@lang('district.pdf.grc'):</strong> <span class="f-r">{{$model->grc}}-GRS</span>
+                    <strong>@lang('organ.pdf.grc'):</strong> <span class="f-r">{{$model->grc}}-GRS</span>
                     <div class="clear"></div>
                     <table class="text-right">
                         <tr>
-                            <td class="text-center"><strong>@lang('district.pdf.pipe_real_capacity'):</strong></td>
+                            <td class="text-center"><strong>@lang('organ.pdf.pipe_real_capacity'):</strong></td>
                             <td>{{$model->grc}}-GRS</td>
                         </tr>
                     </table>
                 </li>
                 <li>
-                    <strong>@lang('district.pdf.gas_network') </strong>
+                    <strong>@lang('organ.pdf.gas_network') </strong>
                     <span>{{$model->gas_network}}</span>
-                    <span class="lowercase">@lang("district.recommendation.$model->pipe_type")</span>
-                    <span>@lang('district.pdf.noname')</span>
+                    <span class="lowercase">@lang("organ.recommendation.$model->pipe_type")</span>
+                    <span>@lang('organ.pdf.noname')</span>
                 </li>
                 <li>
-                    <strong>@lang('district.pdf.gas_consume'):</strong>
-                    {{$model->consumption}} @lang('district.pdf.meter')<sup>3</sup>.
+                    <strong>@lang('organ.pdf.gas_consume'):</strong>
+                    {{$model->consumption}} @lang('organ.pdf.meter')<sup>3</sup>.
                 </li>
             </ol>
             {!! $model->additional !!}
             <ol start="12">
                 <li>
-                    <span><b>@lang('district.pdf.installed_equipments')</b>:</span>
+                    <span><b>@lang('organ.pdf.installed_equipments')</b>:</span>
                     @foreach ($equipments as $equipment)
-                    <span>{{$equipment->number}} ta</span>
-                    <span>{{$equipment->type}}</span>
-                    <span class="lowercase">{{$equipment->equipment}}</span><span>@if($equipment->note){{' ' . $equipment->note}}@endif</span>@if($loop->last){{'.'}}@else{{','}}@endif
+                        <span>{{$equipment->number}} ta</span>
+                        <span>{{$equipment->type}}</span>
+                        <span class="lowercase">{{$equipment->equipment}}</span>
+                        <span>@if($equipment->note){{' ' . $equipment->note}}@endif</span>@if($loop->last){{'.'}}@else{{','}}@endif
                     @endforeach
                     <div class="text-center">
-                        @lang('district.pdf.type')
+                        @lang('organ.pdf.type')
                     </div>
                 </li>
             </ol>
         </div>
 
         <div class="text-center uppercase my-15">
-            <strong style="font-size: 14px;">@lang('district.pdf.note')</strong>
+            <strong style="font-size: 14px;">@lang('organ.pdf.note')</strong>
         </div>
 
         <div class="text-bold">
             <div>
-                <span>&#8220;{{$organization->branch_name}}&#8221; @lang('district.pdf.gft')</span><br>
+                <span>&#8220;{{$organization->branch_name}}&#8221; @lang('organ.pdf.gft')</span><br>
             </div>
             <div>
-                <span class="f-l">&#8220;{{$organ->org_name}}&#8221; @lang('district.pdf.sec') @lang('district.pdf.engineer'):</span>
+                <span
+                    class="f-l">&#8220;{{$organ->org_name}}&#8221; @lang('organ.pdf.sec') @lang('organ.pdf.engineer'):</span>
                 <span class="f-r">{{$organ->section_leader}}</span>
             </div>
             <div class="clear"></div>

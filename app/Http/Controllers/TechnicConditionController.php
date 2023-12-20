@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
+use App\Models\Organ;
+use App\Models\Proposition;
+use App\Models\Recommendation;
+use App\Models\Status;
+use App\Models\TechCondition;
+use App\Services\RecommendationService;
+use App\Services\TechConditionService;
+use App\ViewModels\TechConditionViewModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use App\Models\TechCondition;
-use App\Models\Recommendation;
-use App\Services\TechConditionService;
-use App\Services\RecommendationService;
-use App\ViewModels\RecommendationViewModel;
-use App\Models\Activity;
-use App\Models\Proposition;
-use App\Models\Organ;
-use App\Models\Status;
-use App\ViewModels\TechConditionViewModel;
 
 
-class TechnicController extends Controller {
+class TechnicConditionController extends Controller {
     use ValidatesRequests;
 
     private TechConditionService $service;
@@ -39,16 +38,6 @@ class TechnicController extends Controller {
         }
 
         return view('technic.index', new TechConditionViewModel());
-    }
-
-    public function recommendations(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_tech');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        return view('technic.recommends', new RecommendationViewModel([4, 5], 2));
     }
 
     public function show(Recommendation $recommendation): RedirectResponse {

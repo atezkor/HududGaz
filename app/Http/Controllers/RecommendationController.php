@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RecommendationRequest;
 use App\Models\CancelledProposition;
-use App\Models\EquipmentType;
 use App\Models\Proposition;
 use App\Models\Recommendation;
 use App\Services\PropositionService;
@@ -14,7 +13,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 
@@ -90,12 +88,12 @@ class RecommendationController extends Controller {
         }
 
         $type = $recommendation->type;
-        return view('district.control.upsert', [
+        return view('organ.statements.upsert', [
             'model' => $recommendation,
             'proposition' => $recommendation->proposition,
             'type' => $type,
-            'action' => route('district.recommendation.update', ['recommendation' => $recommendation]),
-            'back' => route('district.recommendations.cancelled')
+            'action' => route('organ.recommendation.update', $recommendation->id),
+            'back' => route('organ.recommendations.cancelled')
         ]);
     }
 
@@ -117,7 +115,7 @@ class RecommendationController extends Controller {
 
         $this->service->update($data, $recommendation);
         $this->propService->update(['status' => 3], $recommendation->proposition);
-        return redirect()->route('district.recommendations.cancelled');
+        return redirect()->route('organ.recommendations.cancelled');
     }
 
     /**
@@ -133,8 +131,7 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
-        $this->service->upload($request, $recommendation);
-        $this->propService->view($recommendation->proposition, 4);
+        $this->service->upload($request->file('pdf'), $recommendation);
         return redirect()->back();
     }
 
@@ -145,7 +142,8 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
-        return view('district.progress', new RecommendationViewModel([4, 5], 2, request()->user()->organ));
+        $user = request()->user();
+        return view('organ.progress', new RecommendationViewModel([Proposition::PRESENTED, Proposition::COMPLETED], Recommendation::PRESENTED, $user->organization_id));
     }
 
     public function cancelled(): View|RedirectResponse {
@@ -155,7 +153,8 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
-        return view('district.cancelled', new RecommendationViewModel([6], 3, request()->user()->organ));
+        $user = request()->user();
+        return view('organ.cancelled', new RecommendationViewModel([], Recommendation::REJECTED, $user->organization_id));
     }
 
     public function archives(): View|RedirectResponse {
@@ -170,21 +169,22 @@ class RecommendationController extends Controller {
             return '/storage/cancelled/' . $file;
         };
 
-        return view('district.archives',
-            new RecommendationViewModel(
-                [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-                4,
-                request()->user()->organ
-            ),
-            ['models' => $models, 'provider' => $provider]
-        );
+        $user = request()->user();
+        $statuses = [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+        return view('organ.archives', new RecommendationViewModel(
+            $statuses, Recommendation::COMPLETED, $user->organization_id
+        ), [
+            'models' => $models, 'provider' => $provider
+        ]);
     }
 
-    public function add(): Collection {
-        return EquipmentType::query()->pluck('name', 'id');
-    }
+    public function technic(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
 
-    public function types(EquipmentType $equipment): Collection {
-        return $equipment->types()->pluck('type', 'id');
+        return view('technic.recommendations', new RecommendationViewModel([4, 5], 2));
     }
 }

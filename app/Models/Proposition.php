@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  * @property-read string $pdf
  * @property-read int $build_type
- * @property-read Proposition applicant
+ * @property-read PhysicalApplicant|LegalApplicant $applicant
  * @property-read Recommendation recommendation
- * @property-read TechCondition tech_condition
+ * @property-read TechCondition techCondition
  * @property-read Organ organization
  * @property-read Activity activity
  */
@@ -24,6 +24,8 @@ class Proposition extends Application {
     public const CREATED = 1;
     public const CREATED_T = 2;
     public const CREATED_B = 3;
+
+    public const PRESENTED = 4;
 
     public const IN_PROCESS = 4;
     public const COMPLETED = 5;
@@ -45,26 +47,26 @@ class Proposition extends Application {
     }
 
     public function applicant(): HasOne {
-        return $this->type == 1 ? $this->individual() : $this->legal();
+        return $this->type == self::PHYSICAL ? $this->individual() : $this->legal();
     }
 
     public function recommendation(): HasOne {
         return $this->hasOne(Recommendation::class);
     }
 
-    public function tech_condition(): HasOne {
+    public function techCondition(): HasOne {
         return $this->hasOne(TechCondition::class);
     }
 
     public function organization(): BelongsTo {
-        return $this->belongsTo(Organ::class, 'organ');
+        return $this->belongsTo(Organ::class, 'organization_id');
     }
 
     public function activity(): BelongsTo {
-        return $this->belongsTo(Activity::class, 'activity_type');
+        return $this->belongsTo(Activity::class, 'activity_type_id');
     }
 
-    public function buildType(): string {
+    public function buildType(): string { // TODO remove
         return [
             1 => __('global.proposition.residential'),
             2 => __('global.proposition.non_residential')

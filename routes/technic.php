@@ -8,22 +8,22 @@ Route::get('', function() {
 });
 
 Route::resource('propositions', PropositionController::class);
-Route::get('recommendations', [App\Http\Controllers\TechnicController::class, 'recommendations'])->name('technic.recommendations');
-Route::get('recommendations/{recommendation}', [App\Http\Controllers\TechnicController::class, 'show'])->name('technic.recommendation.show');
-Route::post('recommendations/{recommendation}/back', [App\Http\Controllers\TechnicController::class, 'back'])->name('technic.recommendation.back');
+Route::get('recommendations', [App\Http\Controllers\RecommendationController::class, 'technic'])->name('technic.recommendations');
+Route::get('recommendations/{recommendation}', [App\Http\Controllers\TechnicConditionController::class, 'show'])->name('technic.recommendation.show');
+Route::post('recommendations/{recommendation}/back', [App\Http\Controllers\TechnicConditionController::class, 'back'])->name('technic.recommendation.back');
 
-Route::get('tech-conditions', [App\Http\Controllers\TechnicController::class, 'index'])->name('technic.index');
-Route::get('recommendations/{recommendation}/create', [App\Http\Controllers\TechnicController::class, 'create'])->name('technic.tech_condition.create');
-Route::post('recommendation/{recommendation}/store', [App\Http\Controllers\TechnicController::class, 'store'])->name('technic.tech_condition.store');
-Route::get('tech-conditions/{condition}/edit', [App\Http\Controllers\TechnicController::class, 'edit'])->name('technic.tech_condition.edit');
-Route::post('tech-conditions/{condition}/update', [App\Http\Controllers\TechnicController::class, 'update'])->name('technic.tech_condition.update');
+Route::get('tech-conditions', [App\Http\Controllers\TechnicConditionController::class, 'index'])->name('technic.index');
+Route::get('recommendations/{recommendation}/create', [App\Http\Controllers\TechnicConditionController::class, 'create'])->name('technic.tech_condition.create');
+Route::post('recommendation/{recommendation}/store', [App\Http\Controllers\TechnicConditionController::class, 'store'])->name('technic.tech_condition.store');
+Route::get('tech-conditions/{condition}/edit', [App\Http\Controllers\TechnicConditionController::class, 'edit'])->name('technic.tech_condition.edit');
+Route::post('tech-conditions/{condition}/update', [App\Http\Controllers\TechnicConditionController::class, 'update'])->name('technic.tech_condition.update');
 
-Route::get('tech-conditions/{condition}/show', [App\Http\Controllers\TechnicController::class, 'show_condition'])->name('technic.tech_condition.show');
-Route::post('tech-conditions/{condition}/upload', [App\Http\Controllers\TechnicController::class, 'upload'])->name('technic.tech_condition.upload');
+Route::get('tech-conditions/{condition}/show', [App\Http\Controllers\TechnicConditionController::class, 'show_condition'])->name('technic.tech_condition.show');
+Route::post('tech-conditions/{condition}/upload', [App\Http\Controllers\TechnicConditionController::class, 'upload'])->name('technic.tech_condition.upload');
 
-Route::get('region-section', [App\Http\Controllers\TechnicController::class, 'region'])->name('technic.reg_section');
-Route::get('organ-section', [App\Http\Controllers\TechnicController::class, 'organ'])->name('technic.org_section');
-Route::get('more', [App\Http\Controllers\TechnicController::class, 'more'])->name('technic.more');
+Route::get('region-section', [App\Http\Controllers\TechnicConditionController::class, 'region'])->name('technic.reg_section');
+Route::get('organ-section', [App\Http\Controllers\TechnicConditionController::class, 'organ'])->name('technic.org_section');
+Route::get('more', [App\Http\Controllers\TechnicConditionController::class, 'more'])->name('technic.more');
 
 Route::get('propositions/check-for-tin/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'check'])->name('propositions.check-for-tin');
 Route::get('propositions/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'exist'])->name('technic.propositions');

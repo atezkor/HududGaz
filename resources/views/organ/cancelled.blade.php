@@ -1,8 +1,8 @@
 @extends('secondary')
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -19,44 +19,42 @@
                                 <th>@lang('global.index')</th>
                                 <th>@lang('global.proposition.number')</th>
                                 <th>@lang('global.consumer')</th>
-                                <th>@lang('district.recommendation.name')</th>
-                                <th>@lang('district.recommendation.reason')</th>
+                                <th>@lang('organ.recommendation.name')</th>
+                                <th>@lang('organ.recommendation.reason')</th>
                                 <th>@lang('global.proposition.limit')</th>
                                 <th>@lang('global.proposition.action')</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = limitOne(6))
-                        @php($l = 0)
-                        @php($p = 0)
-                        @foreach($recommendations as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$propositions[$key]->number}}</td>
-                                <td>{{$applicant($physicals, $legals, $p, $l, $propositions[$key]->type)}}</td>
-                                <td>
-                                    <a href="{{route('district.recommendation.show', ['recommendation' => $model])}}" target="_blank">
-                                        @lang('district.show')
-                                    </a>
-                                </td>
-                                <td>{{$model->comment}}</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="{{$model->progressColor($model->percent($limit))}}"
-                                             style="width: {{$model->percent($limit)}}%">
+                            @php($limit = limitOne(6))
+                            @foreach($recommendations as $key => $model)
+                                <tr>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$model->proposition->number}}</td>
+                                    <td>{{$model->applicant}}</td>
+                                    <td>
+                                        <a href="{{route('organ.recommendation.show', $model->id)}}" target="_blank">
+                                            @lang('organ.show')
+                                        </a>
+                                    </td>
+                                    <td>{{$model->comment}}</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="{{$model->progressColor($model->percent($limit))}}"
+                                                 style="width: {{$model->percent($limit)}}%">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
-                                </td>
-                                <td>
-                                    <a href="{{route('district.recommendation.edit', ['recommendation' => $model])}}"
-                                       class="btn btn-outline-info">
-                                        <i class="fas fa-tools"></i>
-                                        <span>@lang('district.btn_correction')</span>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('organ.recommendation.edit', $model->id)}}"
+                                           class="btn btn-outline-info">
+                                            <i class="fas fa-tools"></i>
+                                            <span>@lang('organ.btn_correction')</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -65,25 +63,25 @@
     </section>
 @endsection
 @section('js')
-<script src="{{'/js/jquery.min.js'}}"></script>
-<script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
-<script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>
-<script src="{{'/js/datatable/datatables.bootstrap4.min.js'}}"></script>
-<script src="{{'/js/datatable/datatables.responsive.min.js'}}"></script>
-<script src="{{'/js/default.js'}}"></script>
-<script>
-    let lang = {
-        emptyTable: "@lang('global.datatables.emptyTable')",
-        infoEmpty: "@lang('global.datatables.infoEmpty')",
-        sSearch: "@lang('global.datatables.search')",
-        oPaginate: {
-            sPrevious: "@lang('global.datatables.previous')",
-            sNext: "@lang('global.datatables.next')",
-        },
-        sInfo: "@lang('global.datatables.info')",
-        sZeroRecords: "@lang('global.datatables.zeroRecords')",
-        sInfoFiltered: "@lang('global.datatables.infoFiltered')"
-    }
-    datatable(lang, 'table');
-</script>
+    <script src="{{'/js/jquery.min.js'}}"></script>
+    <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+    <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>
+    <script src="{{'/js/datatable/datatables.bootstrap4.min.js'}}"></script>
+    <script src="{{'/js/datatable/datatables.responsive.min.js'}}"></script>
+    <script src="{{'/js/default.js'}}"></script>
+    <script>
+        let lang = {
+            emptyTable: "@lang('global.datatables.emptyTable')",
+            infoEmpty: "@lang('global.datatables.infoEmpty')",
+            sSearch: "@lang('global.datatables.search')",
+            oPaginate: {
+                sPrevious: "@lang('global.datatables.previous')",
+                sNext: "@lang('global.datatables.next')",
+            },
+            sInfo: "@lang('global.datatables.info')",
+            sZeroRecords: "@lang('global.datatables.zeroRecords')",
+            sInfoFiltered: "@lang('global.datatables.infoFiltered')"
+        }
+        datatable(lang, 'table');
+    </script>
 @endsection
