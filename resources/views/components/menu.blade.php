@@ -7,7 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        @php($user = request()->user())
+        @php($user = auth()->user())
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav custom-navbar">
             @php($items = menuItems())

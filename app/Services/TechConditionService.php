@@ -147,6 +147,6 @@ class TechConditionService extends CrudService {
     }
 
     private function uploadFile($file): string {
-        return $this->storeFile($file, $this->folder);
+        return $this->store($file, $this->folder);
     }
 }

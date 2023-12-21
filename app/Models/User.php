@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
-use Laravel\Sanctum\NewAccessToken;
 
 
 /**
@@ -65,8 +64,12 @@ class User extends Authenticatable {
     }
 
     public function getLastToken(): string {
-        $token = $this->tokens()->orderByDesc('id')->firstOr();
+        $token = $this->tokens()->orderByDesc('id')->firstOr(function() {
+            return (object)[];
+        });
+
         $token->plainTextToken = Str::random(40);
-        return (new NewAccessToken($token, $token->getKey() . '|' . $token->plainTextToken))->plainTextToken;
+        //        return (new NewAccessToken($token, $token->getKey() . '|' . $token->plainTextToken))->plainTextToken;
+        return "";
     }
 }

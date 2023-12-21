@@ -23,11 +23,11 @@ class TechnicConditionController extends Controller {
     use ValidatesRequests;
 
     private TechConditionService $service;
-    private RecommendationService $rec_service;
+    private RecommendationService $recService;
 
-    public function __construct(TechConditionService $service, RecommendationService $rec_service) {
+    public function __construct(TechConditionService $service, RecommendationService $recService) {
         $this->service = $service;
-        $this->rec_service = $rec_service;
+        $this->recService = $recService;
     }
 
     public function index(): View|RedirectResponse {
@@ -38,11 +38,6 @@ class TechnicConditionController extends Controller {
         }
 
         return view('technic.index', new TechConditionViewModel());
-    }
-
-    public function show(Recommendation $recommendation): RedirectResponse {
-        $url = $this->rec_service->techShow($recommendation);
-        return redirect("$url");
     }
 
     public function create(Recommendation $recommendation): View|RedirectResponse {
@@ -82,6 +77,11 @@ class TechnicConditionController extends Controller {
         return redirect()->route('technic.index');
     }
 
+    public function show(Recommendation $recommendation): RedirectResponse {
+        $url = $this->recService->review($recommendation);
+        return redirect($url);
+    }
+
     public function show_condition(TechCondition $condition): RedirectResponse {
         return redirect($this->service->get($condition));
     }
@@ -93,7 +93,7 @@ class TechnicConditionController extends Controller {
             return redirect('/');
         }
 
-        $this->rec_service->back($recommendation, $request['comment']);
+        $this->recService->back($recommendation, $request['comment']);
         return redirect()->back();
     }
 
@@ -156,10 +156,20 @@ class TechnicConditionController extends Controller {
             return redirect('/');
         }
 
+        $organs = Organ::query()
+            ->with('district')
+            ->get(['id', 'name']);
+
+        $propositions = Proposition::query()
+            ->get(['organization_id', 'activity_type_id'])
+            ->groupBy('activity_type_id');
+
+        $activityTypes = Activity::query()->pluck('activity', 'id');
+
         return view('technic.reports.region', [
-            'models' => Organ::query()->get(['id', 'org_name', 'region']),
-            'activities' => Activity::query()->pluck('activity', 'id'),
-            'propositions' => Proposition::query()->get(['organ', 'activity_type'])->groupBy('activity_type')
+            'models' => $organs,
+            'activities' => $activityTypes,
+            'propositions' => $propositions
         ]);
     }
 
@@ -170,24 +180,36 @@ class TechnicConditionController extends Controller {
             return redirect('/');
         }
 
+        $models = Organ::query()->pluck('name', 'id');
+        $activityTypes = Activity::query()->pluck('activity', 'id');
+        $propositions = Proposition::query()
+            ->get(['organization_id', 'activity_type_id'])
+            ->groupBy('organization_id');
+
         return view('technic.reports.organ', [
-            'models' => Organ::query()->pluck('org_name', 'id'),
-            'activities' => Activity::query()->pluck('activity', 'id'),
-            'propositions' => Proposition::query()->get(['organ', 'activity_type'])->groupBy('organ')
+            'models' => $models,
+            'activities' => $activityTypes,
+            'propositions' => $propositions
         ]);
     }
 
-    public function more(): View|RedirectResponse {
+    public function detail(): View|RedirectResponse {
         try {
             $this->authorize('show_report');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
+        $statuses = Status::query()->pluck('description', 'id');
+        $activities = Activity::query()->pluck('activity', 'id');
+        $propositions = Proposition::query()
+            ->get(['status', 'activity_type_id'])
+            ->groupBy('status');
+
         return view('technic.reports.more', [
-            'models' => Status::query()->pluck('description', 'id'),
-            'activities' => Activity::query()->pluck('activity', 'id'),
-            'propositions' => Proposition::query()->get(['status', 'activity_type'])->groupBy('status')
+            'models' => $statuses,
+            'activities' => $activities,
+            'propositions' => $propositions
         ]);
     }
 }

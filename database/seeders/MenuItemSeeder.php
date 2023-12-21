@@ -44,7 +44,7 @@ class MenuItemSeeder extends Seeder {
         $this->createMenuItem(User::TECHNIC, 'technic.reports', '#', 'nav-icon fas fa-chart-line');
         $this->createMenuItem(User::TECHNIC, 'technic.region_sec', 'technic.reg_section', 'nav-icon far fa-circle');
         $this->createMenuItem(User::TECHNIC, 'technic.organ_sec', 'technic.org_section', 'nav-icon far fa-circle');
-        $this->createMenuItem(User::TECHNIC, 'technic.more_sec', 'technic.more', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::TECHNIC, 'technic.detail_sec', 'technic.detail', 'nav-icon far fa-circle');
     }
 
     private function organMenuItems() {
@@ -86,7 +86,7 @@ class MenuItemSeeder extends Seeder {
         $this->createMenuItem(User::DIRECTOR, 'admin.mounters', 'director.installers', 'nav-icon fas fa-network-wired');
         $this->createMenuItem(User::DIRECTOR, 'global.documents', '#', 'nav-icon fas fa-folder-open');
         $this->createMenuItem(User::DIRECTOR, 'global.propositions', 'director.propositions', 'nav-icon fas fa-paste');
-        $this->createMenuItem(User::DIRECTOR, 'district.recommendations', 'director.recommendations', 'nav-icon fas fa-paste');
+        $this->createMenuItem(User::DIRECTOR, 'organ.recommendations', 'director.recommendations', 'nav-icon fas fa-paste');
         $this->createMenuItem(User::DIRECTOR, 'technic.tech_conditions', 'director.tech_conditions', 'nav-icon fas fa-paste');
         $this->createMenuItem(User::DIRECTOR, 'designer.projects', 'director.projects', 'nav-icon fas fa-paste');
         $this->createMenuItem(User::DIRECTOR, 'mounter.montages', 'director.montages', 'nav-icon fas fa-paste');

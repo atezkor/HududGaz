@@ -2,39 +2,38 @@
 
 namespace App\ViewModels;
 
+use App\Models\Organ;
+use App\Models\Project;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
-use App\Models\Project;
-use App\Models\Organ;
 
 
 class ProjectViewModel extends ViewModel {
-    private int $designer;
-    private array $status;
-    private string $statement = '>';
 
-    public function __construct(array $status = [1], int $designer = 0) {
-        $this->status = $status;
-        $this->designer = $designer;
+    private int $designerId;
+    private array $statuses;
 
-        if ($designer)
-            $this->statement = '=';
+    public function __construct(int $designerId = 0, array $statuses = [Project::CREATED]) {
+        $this->designerId = $designerId;
+        $this->statuses = $statuses;
     }
 
     function projects(): Collection {
-        return Project::with('applicant')
-            ->where('designer_id', $this->statement, $this->designer)
-            ->whereIn('status', $this->status)
-            ->orderBy('proposition_id')->get();
+        return Project::with('proposition')
+            ->whereIn('status', $this->statuses)
+            ->when($this->designerId, fn(Builder $query) => $query->where('designer_id', $this->designerId))
+            ->orderBy('proposition_id')
+            ->get();
     }
 
     function organs(): Collection {
-        return Organ::query()->pluck('org_name', 'id');
+        return Organ::query()->pluck('name', 'id');
     }
 
-    function limit(): Collection|int {
-        if (count($this->status) > 1)
+    function limit(): Collection|int { // TODO limit
+        if (count($this->statuses))
             return limit(12, 10);
-        return limitOne($this->status[0] + 9);
+        return limitOne($this->statuses[0] + 9);
     }
 }

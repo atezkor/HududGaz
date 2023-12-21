@@ -72,7 +72,7 @@ class RecommendationService extends CrudService {
         }
 
         $recommendation->setAttribute('status', Recommendation::PRESENTED);
-        $recommendation->setAttribute('pdf', $this->storeFile($pdf, $this->folder));
+        $recommendation->setAttribute('pdf', $this->store($pdf, $this->folder));
 
         $recommendation->update();
         $recommendation->proposition->update(['status' => Proposition::PRESENTED]);
@@ -84,16 +84,15 @@ class RecommendationService extends CrudService {
     }
 
     /**
-     * This function allows the person to see the file
+     * This function allows the user to see the file
      */
-    public function techShow(Recommendation $recommendation): string {
+    public function review(Recommendation $recommendation): string {
         $proposition = $recommendation->proposition;
-        if ($proposition->status == 4) {
-            $proposition->update(['status' => 5]);
-            $proposition->applicant->update(['status' => 5]);
+        if ($proposition->status == Proposition::PRESENTED) {
+            $proposition->update(['status' => Proposition::TECHNIC_CHECKED]);
         }
 
-        return $this->fileUrl($this->path, $recommendation->getAttribute('file'));
+        return $this->retrieve($this->path, $recommendation->pdf);
     }
 
     /**

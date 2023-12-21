@@ -6,7 +6,7 @@ return [
     'reports' => "Hisobotlar",
     'region_sec' => "Viloyat kesimida",
     'organ_sec' => "Idoralar kesimida",
-    'more_sec' => "Batafsil",
+    'detail_sec' => "Batafsil",
     'btn_new' => "Ariza qo\u{2018}shish",
     'organ' => "Idora nomi",
     'district' => "Tuman nomi",

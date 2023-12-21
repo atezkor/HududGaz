@@ -5,7 +5,7 @@ use App\Http\Controllers\ProjectController;
 
 
 Route::middleware('auth:sanctum')->group(function() {
-    Route::post('/designer/project/create', [ProjectController::class, 'create'])->name('designer.project.create_api');
+    Route::post('/designer/project/create', [ProjectController::class, 'store'])->name('designer.project.create_api');
 });
 
 Route::any('/{any?}', function() {

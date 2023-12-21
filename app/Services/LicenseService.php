@@ -61,7 +61,7 @@ class LicenseService extends CrudService {
 
     public function upload($file, License $permit) {
         $this->deleteFile('storage/permits/', $permit->file);
-        $filename = $this->storeFile($file, 'permits');
+        $filename = $this->store($file, 'permits');
 
         $permit->update(['file' => $filename, 'status' => 2]);
         $permit->proposition->update(['status' => 20]);

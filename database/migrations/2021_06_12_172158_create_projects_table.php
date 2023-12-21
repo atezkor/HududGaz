@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateProjectsTable extends Migration {
     /**
      * Run the migrations.
@@ -11,7 +12,7 @@ class CreateProjectsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('projects', function(Blueprint $table) {
             $table->id();
             $table->foreignId('proposition_id')
                 ->constrained('propositions')
@@ -20,7 +21,7 @@ class CreateProjectsTable extends Migration {
             $table->unsignedBigInteger('designer_id');
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('organ');
-            $table->string('file')->nullable();
+            $table->string('pdf')->nullable();
             $table->string('comment')->nullable();
             $table->timestamps();
         });

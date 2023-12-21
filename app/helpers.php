@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\District;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +41,10 @@ function getName(): string {
     return App\Models\Organization::Data()->branch_name;
 }
 
+function isPrimaryTheme(): bool {
+    return in_array(request()->user()->role_id, [User::ROLE_ADMIN, User::TECHNIC, User::ENGINEER, User::DIRECTOR]);
+}
+
 function setImage($user): string {
     if ($user->avatar)
         return '/storage/users/' . $user->avatar;
@@ -55,7 +58,9 @@ function formatDate($date, $format = 'd.m.Y'): string {
 }
 
 function menuItems(): Illuminate\Database\Eloquent\Collection {
-    return App\Models\MenuItem::items(auth()->user())->get();
+    /* @var User $user */
+    $user = auth()->user();
+    return App\Models\MenuItem::items($user->role_id)->get();
 }
 
 /* This is function for application term */
@@ -109,8 +114,4 @@ function extendedDate($date, bool $reverse = false): string {
     if ($reverse)
         return $year . '-' . __('global.year') . ' ' . $day . '-' . $months[$month - 1];
     return $day . '-' . $months[$month - 1] . ', ' . $year . '-' . __('global.year');
-}
-
-function isPrimaryTheme(): bool {
-    return in_array(request()->user()->role, [User::ROLE_ADMIN, User::TECHNIC, User::ENGINEER, User::DIRECTOR]);
 }

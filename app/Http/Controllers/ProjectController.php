@@ -2,73 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectCreateRequest;
+use App\Models\Project;
+use App\Models\User;
+use App\Services\ProjectService;
+use App\ViewModels\ProjectViewModel;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use SimpleSoftwareIO\QrCode\Generator;
-use App\Models\Project;
-use App\Services\ProjectService;
-use App\ViewModels\ProjectViewModel;
 
 
 class ProjectController extends Controller {
 
     private ProjectService $service;
-    private Generator $qrcode;
 
-    public function __construct(ProjectService $service, Generator $qrcode) {
+    public function __construct(ProjectService $service) {
         $this->service = $service;
-        $this->qrcode = $qrcode;
     }
 
     public function index(): View|RedirectResponse {
+        /* @var User $user */
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        return view('designer.projects', new ProjectViewModel(designer: request()->user()->organ), [
-            'qrcode' => $this->qrcode->generate(json_encode([
-                'token' => request()->user()->getLastToken(),
-                'url' => route('designer.project.create_api', ['user' => request()->user()])
-            ]))
+        $user = request()->user();
+        return view('designer.projects', new ProjectViewModel($user->organization_id), [
+            'qrcode' => $this->service->qrcode($user)
         ]);
     }
 
-    public function process(): View|RedirectResponse {
+    public function store(ProjectCreateRequest $request): RedirectResponse {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        return view('designer.process', new ProjectViewModel([2, 3], request()->user()->organ));
-    }
-
-    public function cancelled(): View|RedirectResponse {
         try {
-            $this->authorize('crud_project');
-        } catch (AuthorizationException) {
-            return redirect('/');
+            $this->service->create($request->validated());
+            return redirect()->back()->with('msg', __('global.messages.crt'));
+        } catch (Exception $ex) {
+            return redirect()->back()->with('error', __('global.msg.not_found'));
         }
-
-        return view('designer.cancelled', new ProjectViewModel([Project::CANCELLED], request()->user()->organ));
     }
 
-    public function create(Request $request): RedirectResponse {
-        try {
-            $this->authorize('crud_project');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        $this->service->create($request->get('code'));
-        return redirect()->back();
+    public function show(Request $request, Project $project): RedirectResponse {
+        return response()->redirectTo($this->service->show($project, $request->get('show')));
     }
 
-    public function upload(Request $request, Project $project): RedirectResponse|View {
+    public function update(Request $request, Project $project): RedirectResponse|View {
         try {
             $this->authorize('crud_project');
         } catch (AuthorizationException) {
@@ -85,10 +72,6 @@ class ProjectController extends Controller {
         return redirect()->back();
     }
 
-    public function show(Request $request, Project $project): RedirectResponse {
-        return response()->redirectTo($this->service->show($project, $request->get('show')));
-    }
-
     public function delete(Project $project): RedirectResponse {
         try {
             $this->authorize('crud_project');
@@ -100,6 +83,31 @@ class ProjectController extends Controller {
         return redirect()->back();
     }
 
+    public function process(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_project');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $user = request()->user();
+        return view('designer.process', new ProjectViewModel(
+            $user->organization_id,
+            [Project::ACCEPTED, Project::REVIEWED]
+        ));
+    }
+
+    public function cancelled(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_project');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $user = request()->user();
+        return view('designer.cancelled', new ProjectViewModel($user->organization_id, [Project::CANCELLED]));
+    }
+
     public function archive(): View|RedirectResponse {
         try {
             $this->authorize('crud_project');
@@ -107,7 +115,7 @@ class ProjectController extends Controller {
             return redirect('/');
         }
 
-        $organ = request()->user()->organ;
-        return view('designer.archive', new ProjectViewModel([Project::COMPLETED], $organ));
+        $user = request()->user();
+        return view('designer.archive', new ProjectViewModel($user->organization_id, [Project::COMPLETED]));
     }
 }

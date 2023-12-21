@@ -6,7 +6,7 @@ use Illuminate\Http\UploadedFile;
 
 trait FileUploadManager {
 
-    protected function storeFile(UploadedFile $file, $folder): string {
+    protected function store(UploadedFile $file, $folder): string {
         $filename = time() . '.' . $file->extension();
         $file->storeAs("public/$folder", $filename);
         return $filename;

@@ -10,7 +10,7 @@ class MenuItem extends Model {
 
     public $timestamps = false;
 
-    public static function items($user): Builder {
-        return self::query()->where('role', '=', $user->role_id);
+    public static function items(int $roleId): Builder {
+        return self::query()->where('role', $roleId);
     }
 }

@@ -58,7 +58,7 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/default.js'}}"></script>
     <script>
         showNavbar();

@@ -1,5 +1,5 @@
 @php
-    if (in_array(auth()->user()->role ?? 0, [1, 2, 5, 7]))
+    if (isPrimaryTheme())
         $layout = 'layout';
     else
         $layout = 'secondary';
@@ -54,7 +54,7 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>

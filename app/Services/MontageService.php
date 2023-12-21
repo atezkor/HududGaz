@@ -57,7 +57,7 @@ class MontageService extends CrudService {
 
         $montage->update([
             'status' => 2,
-            'file' => $this->storeFile($data['file'], $this->folder)
+            'file' => $this->store($data['file'], $this->folder)
         ]);
 
         $this->propStatus($montage);
@@ -75,7 +75,7 @@ class MontageService extends CrudService {
     public function action($file, Montage $montage) {
         $this->deleteFile($this->folder, $montage->file);
         $this->update(
-            ['status' => 5, 'file' => $this->storeFile($file, $this->folder)],
+            ['status' => 5, 'file' => $this->store($file, $this->folder)],
             $montage
         );
         $this->propStatus($montage);
