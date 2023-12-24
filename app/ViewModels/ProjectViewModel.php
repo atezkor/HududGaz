@@ -2,6 +2,7 @@
 
 namespace App\ViewModels;
 
+use App\Models\Designer;
 use App\Models\Organ;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,6 +30,14 @@ class ProjectViewModel extends ViewModel {
 
     function organs(): Collection {
         return Organ::query()->pluck('name', 'id');
+    }
+
+    public function designers(): Collection {
+        if (!$this->designerId)
+            return new Collection();
+
+        return Designer::query()
+            ->pluck('name', 'id');
     }
 
     function limit(): Collection|int { // TODO limit

@@ -212,4 +212,18 @@ class TechnicConditionController extends Controller {
             'propositions' => $propositions
         ]);
     }
+
+    /**
+     * Director
+     * @return View|RedirectResponse
+     */
+    public function director(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('technic.index', new TechConditionViewModel());
+    }
 }

@@ -106,15 +106,24 @@ class UserController extends Controller {
     }
 
     public function organization(int $role): Collection {
-        switch ($role) {
-            case User::ORGAN:
-                return Organ::query()->pluck('name', 'id');
-            case User::DESIGNER:
-                return Designer::query()->pluck('name', 'id');
-            case User::MOUNTER:
-                return Mounter::query()->pluck('short_name', 'id');
+        return match ($role) {
+            User::ORGAN => Organ::query()->pluck('name', 'id'),
+            User::DESIGNER => Designer::query()->pluck('name', 'id'),
+            User::MOUNTER => Mounter::query()->pluck('short_name', 'id'),
+            default => new Collection(),
+        };
+    }
+
+    public function director(): View|RedirectResponse {
+        try {
+            $this->authorize('res_admin');
+        } catch (AuthorizationException) {
+            return redirect('/');
         }
 
-        return new Collection();
+        return view('director.users', [
+            'models' => User::all(),
+            'branch' => getName()
+        ]);
     }
 }

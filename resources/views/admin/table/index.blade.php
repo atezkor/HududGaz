@@ -109,7 +109,7 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script>
         function remove(btn) {

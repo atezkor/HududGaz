@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Montage;
+use App\Models\User;
+use App\Services\MontageService;
+use App\ViewModels\MontageViewModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use SimpleSoftwareIO\QrCode\Generator;
-use App\Models\Montage;
-use App\Services\MontageService;
-use App\ViewModels\MontageViewModel;
 
 
 class MontageController extends Controller {
@@ -23,13 +24,15 @@ class MontageController extends Controller {
     }
 
     public function index(): View|RedirectResponse {
+        /* @var User $user */
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        return view('installer.index', new MontageViewModel(user: auth()->user()), [
+        $user = auth()->user();
+        return view('installer.montages', new MontageViewModel(organizationId: $user->organization_id), [
             'qrcode' => $this->qrcode->generate(json_encode([
                 'token' => csrf_token(),
                 'url' => route('mounter.project.open')
@@ -37,18 +40,21 @@ class MontageController extends Controller {
         ]);
     }
 
-    public function open(Request $request): RedirectResponse {
+    public function engineer(): View|RedirectResponse {
         try {
-            $this->authorize('crud_montage');
+            $this->authorize('crud_permit');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        $this->service->create($request->get('code'));
-        return redirect()->back();
+        return view('engineer.montages', new MontageViewModel([Montage::CREATED, Montage::REVIEWED]));
     }
 
-    public function upload(Request $request, Montage $montage): RedirectResponse {
+    public function show(Request $request, Montage $montage): RedirectResponse {
+        return redirect($this->service->show($montage, $request->get('show')));
+    }
+
+    public function update(Request $request, Montage $montage): RedirectResponse {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
@@ -65,40 +71,6 @@ class MontageController extends Controller {
         return redirect()->back();
     }
 
-    public function process(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_montage');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        return view('installer.process', new MontageViewModel([2, 3], auth()->user()));
-    }
-
-    public function show(Request $request, Montage $montage): RedirectResponse {
-        return redirect($this->service->show($montage, $request->get('show')));
-    }
-
-    public function cancelled(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_montage');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        return view('installer.cancelled', new MontageViewModel([4], auth()->user()));
-    }
-
-    public function archive(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_montage');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        return view('installer.archive', new MontageViewModel([Montage::COMPLETED]));
-    }
-
     public function delete(Montage $montage): RedirectResponse {
         try {
             $this->authorize('crud_montage');
@@ -108,5 +80,76 @@ class MontageController extends Controller {
 
         $this->service->delete($montage);
         return redirect()->back();
+    }
+
+    public function open(Request $request): RedirectResponse {
+        try {
+            $this->authorize('crud_montage');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $this->service->create($request->get('code'));
+        return redirect()->back();
+    }
+
+    public function process(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_montage');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $user = request()->user();
+        return view('installer.process', new MontageViewModel([Montage::ACCEPTED, Montage::REVIEWED], $user->organization_id));
+    }
+
+    public function cancelled(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_montage');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $user = request()->user();
+        return view('installer.cancelled', new MontageViewModel([Montage::CANCELLED], $user->organization_id));
+    }
+
+    public function archive(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_montage');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $user = request()->user();
+        return view('installer.archive', new MontageViewModel([Montage::COMPLETED], $user->organization_id));
+    }
+
+    /**
+     * Engineer
+     */
+    public function completed(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('installer.archive', new MontageViewModel([Montage::COMPLETED]));
+    }
+
+    /**
+     * Director
+     * @return View|RedirectResponse
+     */
+    public function director(): \Illuminate\Contracts\View\View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('installer.archive', new MontageViewModel([Montage::COMPLETED]));
     }
 }

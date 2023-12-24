@@ -9,11 +9,11 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="{{route('admin.designers.create')}}"
-                           class="btn btn-info">{{__('admin.designer.btn_new')}}</a>
+                           class="btn btn-info">@lang('admin.designer.btn_new')</a>
                         <div class="card-tools mt-2">
                             <div class="input-group w-75 ml-auto">
                                 <input type="search" id="search" oninput="search(this)" class="form-control"
-                                       placeholder="{{__('global.search')}}">
+                                       placeholder="@lang('global.search')">
                             </div>
                         </div>
                     </div>
@@ -21,11 +21,11 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>{{__('global.index')}}</th>
-                                    <th>{{__('admin.org_name')}}</th>
-                                    <th>{{__('admin.org_director')}}</th>
-                                    <th>{{__('admin.address')}}</th>
-                                    <th>{{__('admin.period_activity')}}</th>
+                                    <th>@lang('global.index')</th>
+                                    <th>@lang('admin.org_name')</th>
+                                    <th>@lang('admin.org_director')</th>
+                                    <th>@lang('admin.address')</th>
+                                    <th>@lang('admin.period_activity')</th>
                                     <th style="width: 1px;"></th>
                                 </tr>
                             </thead>

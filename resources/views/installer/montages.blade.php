@@ -1,8 +1,8 @@
 @extends('secondary')
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -26,45 +26,50 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($models as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$model->applicant}}</td>
-                                <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}" target="_blank">
-                                        @lang('global.btn_show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('designer.project.show', ['project' => $model->project])}}" target="_blank">
-                                        @lang('global.btn_show')
-                                    </a>
-                                </td>
-                                <td>{{$organs[$model->organ]}}</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="{{$model->progressColor($model->percent($limit))}}"
-                                             style="width: {{$model->percent($limit)}}%">
+                            @foreach($models as $key => $model)
+                                <tr>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$model->applicant}}</td>
+                                    <td>
+                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                           target="_blank">
+                                            @lang('global.btn_show')
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('designer.project.show', $model->project_id)}}"
+                                           target="_blank">
+                                            @lang('global.btn_show')
+                                        </a>
+                                    </td>
+                                    <td>{{$organs[$model->organ]}}</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="{{$model->progressColor($model->percent($limit))}}"
+                                                 style="width: {{$model->percent($limit)}}%">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
-                                </td>
-                                <td>
-                                    <form action="{{route('mounter.montage.upload', ['montage' => $model])}}" method="post"
-                                          enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="file" id="file{{$key}}" hidden>
-                                        <button type="button" onclick="upload(file{{$key}})" class="btn btn-outline-info text-bold my-0"
-                                               title="@lang('global.btn_upload')">
-                                            <i class="fas fa-upload"></i>
-                                        </button>
-                                        <button type="button" onclick="remove({{$model->id}})" class="btn btn-outline-danger" title="@lang('global.btn_del')">
-                                            <i class="fas fa-ban"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                    </td>
+                                    <td>
+                                        <form action="{{route('mounter.montage.upload', $model)}}"
+                                              method="post"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="file" name="file" id="file{{$key}}" hidden>
+                                            <button type="button" onclick="upload(file{{$key}})"
+                                                    class="btn btn-outline-info text-bold my-0"
+                                                    title="@lang('global.btn_upload')">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" onclick="remove({{$model->id}})"
+                                                    class="btn btn-outline-danger" title="@lang('global.btn_del')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -79,7 +84,8 @@
                                     <h4 id="header" class="modal-title">@lang('mounter.project.read')</h4>
                                 </div>
                                 <div class="col-2">
-                                    <img src="data:image/svg+xml;base64, {{base64_encode($qrcode)}}" alt="QR" class="img-md">
+                                    <img src="data:image/svg+xml;base64, {{base64_encode($qrcode)}}" alt="QR"
+                                         class="img-md">
                                 </div>
                             </div>
                         </div>
@@ -93,8 +99,10 @@
                                            placeholder="@lang('mounter.project.code_read')" autocomplete="off" required>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="submit" id="submit" class="btn btn-primary">@lang('global.btn_read')</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('global.btn_cancel')</button>
+                                    <button type="submit" id="submit"
+                                            class="btn btn-primary">@lang('global.btn_read')</button>
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">@lang('global.btn_cancel')</button>
                                 </div>
                             </form>
                         </div>
@@ -104,7 +112,7 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>

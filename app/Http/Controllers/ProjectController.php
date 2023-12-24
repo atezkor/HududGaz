@@ -36,6 +36,16 @@ class ProjectController extends Controller {
         ]);
     }
 
+    public function engineer(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('engineer.projects', new ProjectViewModel(0, [Project::ACCEPTED, Project::REVIEWED]));
+    }
+
     public function store(ProjectCreateRequest $request): RedirectResponse {
         try {
             $this->authorize('crud_project');
@@ -117,5 +127,32 @@ class ProjectController extends Controller {
 
         $user = request()->user();
         return view('designer.archive', new ProjectViewModel($user->organization_id, [Project::COMPLETED]));
+    }
+
+    /**
+     * Engineer archive
+     */
+    public function completed(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('designer.archive', new ProjectViewModel(0, [Project::COMPLETED]));
+    }
+
+    /**
+     * Director
+     * @return View|RedirectResponse
+     */
+    public function director(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('designer.archive', new ProjectViewModel(0, [Project::COMPLETED]));
     }
 }

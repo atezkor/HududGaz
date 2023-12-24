@@ -101,4 +101,16 @@ class OrganController extends Controller {
         $this->service->delete($organ);
         return redirect()->route('admin.organs.index')->with('msg', __('global.messages.del'));
     }
+
+    public function director(): View|RedirectResponse {
+        try {
+            $this->authorize('res_admin');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('director.organs', [
+            'models' => Organ::all()
+        ]);
+    }
 }

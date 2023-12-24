@@ -231,4 +231,18 @@ class PropositionController extends Controller {
             'type' => $type
         ]);
     }
+
+    /**
+     * This shows all propositions
+     * @return View|RedirectResponse
+     */
+    public function all(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('technic.applications.index', new PropositionListViewModel());
+    }
 }

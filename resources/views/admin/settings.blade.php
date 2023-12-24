@@ -93,10 +93,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="address_cyrill" class="col-sm-2 col-form-label">{{__('admin.organization.address_cyrill')}}</label>
+                                <label for="address_cyrill" class="col-sm-2 col-form-label">{{__('admin.organization.address_cyrillic')}}</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="address_cyrill" id="address_cyrill" class="form-control"
-                                           value="{{$model->address_cyrill}}" placeholder="{{__('admin.organization.address_cyrill')}}">
+                                           value="{{$model->address_cyrill}}" placeholder="{{__('admin.organization.address_cyrillic')}}">
                                 </div>
                             </div>
                             <div class="form-group row">

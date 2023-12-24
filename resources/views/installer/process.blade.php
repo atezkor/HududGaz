@@ -1,8 +1,8 @@
 @extends('secondary')
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -26,36 +26,39 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($models as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$model->applicant}}</td>
-                                <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}" target="_blank">
-                                        @lang('global.btn_show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('designer.project.show', ['project' => $model->project])}}" target="_blank">
-                                        @lang('global.btn_show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('mounter.montage.show', ['montage' => $model])}}" target="_blank">
-                                        @lang('global.btn_show')
-                                    </a>
-                                </td>
-                                <td>{{$organs[$model->organ]}}</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
-                                             style="width: {{$model->percent($model->limit($limit))}}%">
+                            @foreach($models as $key => $model)
+                                <tr>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$model->applicant}}</td>
+                                    <td>
+                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                           target="_blank">
+                                            @lang('global.btn_show')
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('designer.project.show', $model->project_id)}}"
+                                           target="_blank">
+                                            @lang('global.btn_show')
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('mounter.montage.show', $model)}}" target="_blank">
+                                            @lang('global.btn_show')
+                                        </a>
+                                    </td>
+                                    <td>{{$organs[$model->organ]}}</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
+                                                style="width: {{$model->percent($model->limit($limit))}}%">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -63,7 +66,7 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>

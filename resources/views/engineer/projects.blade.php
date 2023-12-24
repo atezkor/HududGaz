@@ -1,8 +1,8 @@
 @extends('layout')
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -27,46 +27,52 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($projects as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$model->applicant->name}}</td>
-                                <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}" target="_blank">
-                                        @lang('engineer.show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('designer.project.show', ['project' => $model, 'show' => true])}}" target="_blank">
-                                        @lang('engineer.show')
-                                    </a>
-                                </td>
-                                <td>{{$designers[$model->designer_id]}}</td>
-                                <td>{{$organs[$model->organ]}}</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
-                                             style="width: {{$model->percent($model->limit($limit))}}%">
+                            @foreach($projects as $key => $model)
+                                <tr>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$model->applicant->name}}</td>
+                                    <td>
+                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                           target="_blank">
+                                            @lang('engineer.show')
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('designer.project.show', $model)}}"
+                                           target="_blank">
+                                            @lang('engineer.show')
+                                        </a>
+                                    </td>
+                                    <td>{{$designers[$model->designer_id]}}</td>
+                                    <td>{{$organs[$model->organ]}}</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
+                                                style="width: {{$model->percent($model->limit($limit))}}%">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
-                                </td>
-                                <td>
-                                    <form action="{{route('engineer.project.confirm', ['project' => $model])}}"
-                                          method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" hidden>
-                                        <label for="file-{{$key}}" class="btn btn-outline-info my-0" title="@lang('global.btn_cfm')">
-                                            <i class="fas fa-check"></i>
-                                        </label>
-                                        <button type="button" onclick="cancel('{{route('engineer.project.cancel', ['project' => $model])}}')"
-                                                class="btn btn-outline-danger" title="@lang('global.btn_cancel')">
-                                            <i class="fas fa-ban"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+                                    </td>
+                                    <td>
+                                        <form action="{{route('engineer.project.confirm', $model)}}"
+                                              method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="file" name="file" id="file-{{$key}}"
+                                                   onchange="this.parentNode.submit()" hidden>
+                                            <label for="file-{{$key}}" class="btn btn-outline-info my-0"
+                                                   title="@lang('global.btn_cfm')">
+                                                <i class="fas fa-check"></i>
+                                            </label>
+                                            <button type="button"
+                                                    onclick="cancel('{{route('engineer.project.cancel', $model)}}')"
+                                                    class="btn btn-outline-danger" title="@lang('global.btn_cancel')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -74,7 +80,7 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>

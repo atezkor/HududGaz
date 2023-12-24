@@ -1,5 +1,5 @@
 @php
-    if (in_array(auth()->user()->role ?? 0, [1, 2, 5, 7]))
+    if (isPrimaryTheme())
         $layout = 'layout';
     else
         $layout = 'secondary';
@@ -29,31 +29,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($models as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$model->applicant}}</td>
-                                <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}"
-                                       target="_blank">
-                                        @lang('designer.show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('designer.project.show', ['project' => $model->project])}}"
-                                       target="_blank">
-                                        @lang('designer.show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('mounter.montage.show', ['montage' => $model])}}"
-                                       target="_blank">
-                                        @lang('designer.show')
-                                    </a>
-                                </td>
-                                <td>{{$organs[$model->organ]}}</td>
-                            </tr>
-                        @endforeach
+                            @foreach($models as $key => $model)
+                                <tr>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$model->applicant}}</td>
+                                    <td>
+                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                           target="_blank">
+                                            @lang('designer.show')
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('designer.project.show', $model->project_id)}}"
+                                           target="_blank">
+                                            @lang('designer.show')
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('mounter.montage.show', $model->id)}}"
+                                           target="_blank">
+                                            @lang('designer.show')
+                                        </a>
+                                    </td>
+                                    <td>{{$organs[$model->organ]}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -61,7 +61,7 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>

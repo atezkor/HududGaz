@@ -170,7 +170,7 @@ class RecommendationController extends Controller {
         };
 
         $user = request()->user();
-        $statuses = [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+        $statuses = [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; // TODO statuses
         return view('organ.archives', new RecommendationViewModel(
             $statuses, Recommendation::COMPLETED, $user->organization_id
         ), [
@@ -186,5 +186,15 @@ class RecommendationController extends Controller {
         }
 
         return view('technic.recommendations', new RecommendationViewModel([4, 5], 2));
+    }
+
+    public function director(): View|RedirectResponse {
+        try {
+            $this->authorize('show_document');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('technic.recommendations', new RecommendationViewModel([Proposition::IN_PROCESS, Proposition::COMPLETED], Recommendation::PRESENTED));
     }
 }

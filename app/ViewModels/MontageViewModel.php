@@ -2,43 +2,44 @@
 
 namespace App\ViewModels;
 
+use App\Models\{Montage, Mounter, Organ};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
-use App\Models\{
-    Montage, Organ
-};
+
 
 class MontageViewModel extends ViewModel {
 
-    private array $status;
-    private int $firm;
-    private string $statement = '>';
+    private array $statuses;
+    private int $firmId;
 
-    public function __construct(array $status = [Montage::CREATED], $user = null) {
-        $this->status = $status;
-        $this->firm = $user->organ ?? 0;
-
-        if ($this->firm)
-            $this->statement = '=';
+    public function __construct(array $statuses = [Montage::CREATED], $organizationId = 0) {
+        $this->statuses = $statuses;
+        $this->firmId = $organizationId;
     }
 
     function models(): Collection {
-        return $this->collections(Montage::query(), $this->status);
+        return Montage::query()
+            ->whereIn('status', $this->statuses)
+            ->when($this->firmId, fn(Builder $query) => $query->where('mounter_id', $this->firmId))
+            ->get();
     }
 
     function organs(): Collection {
-        return Organ::query()->pluck('org_name', 'id');
+        return Organ::query()->pluck('name', 'id');
+    }
+
+    public function mounters(): Collection {
+        if (!$this->firmId)
+            return new Collection();
+
+        return Mounter::query()
+            ->pluck('short_name', 'id');
     }
 
     function limit(): Collection|int {
-        if (count($this->status) > 1)
+        if (count($this->statuses) > 1)
             return limit(17, 15);
         return limitOne(15);
-    }
-
-    private function collections(Builder $query, $status): Collection {
-        return $query->where('mounter_id', $this->statement, $this->firm)
-            ->whereIn('status', $status)->get();
     }
 }

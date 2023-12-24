@@ -124,4 +124,21 @@ class DesignerController extends Controller {
                 ->with('msg_type', 'info');
         }
     }
+
+
+    /**
+     * This view for only director
+     * @return View|RedirectResponse
+     */
+    public function director(): View|RedirectResponse {
+        try {
+            $this->authorize('res_admin');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('director.designers', [
+            'models' => Designer::all()
+        ]);
+    }
 }

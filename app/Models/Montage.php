@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Montage extends Application {
 
     public const CREATED = 1;
+    public const ACCEPTED = 2;
+    public const REVIEWED = 3;
+    public const CANCELLED = 4;
     public const COMPLETED = 5;
 
     protected $fillable = ['proposition_id', 'tech_condition_id', 'project_id', 'mounter_id', 'applicant', 'status', 'organ', 'file', 'comment'];

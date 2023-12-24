@@ -127,4 +127,20 @@ class MounterController extends Controller {
         $this->service->delete($mounter);
         return redirect()->route('admin.mounters.index')->with('msg', __('global.messages.del'));
     }
+
+    /**
+     * This view for only director
+     * @return View|RedirectResponse
+     */
+    public function director(): View|RedirectResponse {
+        try {
+            $this->authorize('res_admin');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('director.mounters', [
+            'models' => Mounter::all()
+        ]);
+    }
 }
