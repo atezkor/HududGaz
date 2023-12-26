@@ -213,8 +213,6 @@
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script src="{{'/js/default.js'}}"></script>
     <script>
-        fileUpload('reset', 'file', 'file_hint', "@lang('technic.proposition.file_hint')")
-
         function changeType(type) {
             $('#type').val(type);
         }
@@ -226,16 +224,6 @@
                 $('#type').val(2);
             }
         });
-
-        function checkTin(type, stir) {
-            $.get(`{{route('technic.check_stir')}}/${type}/${stir}`, function(data) {
-                if (data.length === 0)
-                    return;
-
-                toast(`<a href="{{route('technic.propositions')}}/${type}/${stir}" target="_blank" class="text-danger">Bunday stirli ariza mavjud (${Object.keys(data).length})</a>`,
-                    'warning', 5000)
-            });
-        }
 
         showNavbar();
     </script>

@@ -12,11 +12,11 @@ return [
     'district' => "Tuman nomi",
     'total' => "Jami",
     'btn_create' => "Texnik shart yaratish",
-    'proposition' => [
-        'heading_edit' => "Ariza ma\u{2019}lumotlarini yangilash",
-        'prop_num' => "Ariza raqami",
-        'tin' => "STIR",
+    'applicant' => [
+        'pin_fl' => "JSHSHIR",
         'passport' => "Pasport seriya va raqami",
+        'name' => "Ism",
+        'surname' => "Familiya",
         'full_name' => "To\u{2018}liq ism",
         'legal_tin' => "Yuridik shaxs STIRi",
         'legal_name' => "Yuridik shaxs nomi",
@@ -24,13 +24,17 @@ return [
         'director_pin_fl' => "Rahbarning JSHSHIRi",
         'email' => "Elektron pochtasi",
         'phone' => "Telefon raqam",
+        'has_application' => "Tizimda bu arizachi uchun arizalar mavjud"
+    ],
+    'proposition' => [
+        'heading_edit' => "Ariza ma\u{2019}lumotlarini yangilash",
+        'prop_num' => "Ariza raqami",
         'activity_type' => "Faoliyat turi",
         'build_type' => "Bino turi",
         'organ' => "Tuman idorasi",
         'organ_select' => "Kerakli idorani tanlang",
-        'file' => "Ariza nusxasi",
+        'pdf' => "Ariza nusxasi",
         'file_hint' => "Arizani yuklash",
-        'applications_exist' => 'Bunday stirli arizalar tizimda mavjud',
         'alert_message' => "Arizani o\u{2018}chirib tashlamoqchimisiz?",
         'alert_text' => "O\u{2018}chirish uchun tasdiqlang"
     ],

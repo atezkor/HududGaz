@@ -10,6 +10,8 @@ use App\Utilities\StorageManager;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 
 class PropositionService extends CrudService {
@@ -24,11 +26,21 @@ class PropositionService extends CrudService {
     }
 
     public function create($data) {
-        $data['file'] = $this->createFile($this->path, $data['file']);
-        parent::create($data);
+        try {
+            DB::beginTransaction();
+            if (isset($data['pdf'])) {
+                $data['pdf'] = $this->createFile($this->path, $data['pdf']);
+            }
 
-        $data['proposition_id'] = $this->model->id;
-        $this->createApplicant($data);
+            parent::create($data);
+
+            $data['proposition_id'] = $this->model->id;
+            $this->createApplicant($data);
+            DB::commit();
+        } catch (QueryException $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
     }
 
     public function find(int $id): Model|Proposition {
@@ -63,17 +75,17 @@ class PropositionService extends CrudService {
     /**
      * Check that such tin has existed before.
      */
-    public function checkTin(int $type, int $tin): array {
+    public function checkTin(int $type, int $tinPin): Model {
         if ($type == Application::PHYSICAL)
             return PhysicalApplicant::query()
-                ->where('tin', $tin)
-                ->pluck('tin', 'proposition_id')
-                ->toArray();
+                ->with('propositions:id')
+                ->where('pin_fl', $tinPin)
+                ->firstOrNew();
 
         return LegalApplicant::query()
-            ->where('tin', $tin)
-            ->pluck('tin', 'proposition_id')
-            ->toArray();
+            ->with('propositions:id')
+            ->where('tin', $tinPin)
+            ->firstOrNew();
     }
 
     private function createApplicant(array $data) {

@@ -19,7 +19,7 @@
                 <td>{{$model->legal->tin}}</td>
                 <td>{{$model->organization_id}}</td>
                 <td>
-                    <a href="{{route('propositions.show', ['proposition' => $model])}}" target="_blank">
+                    <a href="{{route('propositions.show', $model->id)}}" target="_blank">
                         @lang('global.proposition.show')
                     </a>
                 </td>

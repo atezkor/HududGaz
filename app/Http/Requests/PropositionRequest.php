@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Application;
 use Illuminate\Foundation\Http\FormRequest;
+
 
 class PropositionRequest extends FormRequest {
     /**
@@ -21,65 +23,69 @@ class PropositionRequest extends FormRequest {
      */
     public function rules(): array {
         $rules = [
-            1 => $this->individual(),
-            2 => $this->legal()
+            Application::PHYSICAL => $this->individual(),
+            Application::LEGAL => $this->legal()
         ];
 
-        return $rules[(int) $this->input('type')];
+        return $rules[(int)$this->input('type')];
     }
 
     public function attributes(): array {
         return [
             'number' => __('global.proposition.number'),
-            'stir' => __('technic.proposition.stir'),
-            'passport' => __('technic.proposition.passport'),
-            'full_name' => __('technic.proposition.full_name'),
-            'legal_stir' => __('technic.proposition.legal_stir'),
-            'legal_name' => __('technic.proposition.legal_name'),
-            'leader' => __('technic.proposition.leader'),
-            'leader_stir' => __('technic.proposition.leader_stir'),
-            'email' => __('technic.proposition.email'),
+            'pin_fl' => __('technic.applicant.pin_fl'),
+            'passport' => __('technic.applicant.passport'),
+            'name' => __('technic.applicant.name'),
+            'surname' => __('technic.applicant.surname'),
+            'legal_tin' => __('technic.applicant.legal_tin'),
+            'legal_name' => __('technic.applicant.legal_name'),
+            'director' => __('technic.applicant.director'),
+            'director_stir' => __('technic.applicant.director_tin'),
+            'email' => __('technic.applicant.email'),
+            'phone' => __('technic.applicant.phone'),
             'activity_type' => __('technic.proposition.activity_type'),
-            'organ' => __('technic.proposition.organ'),
-            'phone' => __('technic.proposition.phone')
+            'organization_id' => __('technic.proposition.organ')
         ];
     }
 
     private function individual(): array {
         return [
             'number' => ['required'],
-            'organ' => ['required'],
+            'organization_id' => ['required'],
             'build_type' => [],
             'type' => ['required'],
             'status' => [],
-            'file' => [],
+            'pdf' => [],
             'delete_at' => [],
 
+            // Applicant
             'proposition_id' => [],
-            'full_name' => ['required'],
+            'name' => ['required'],
+            'surname' => ['required'],
             'phone' => ['required'],
             'passport' => ['required'],
-            'stir' => ['required']
+            'pin_fl' => ['required', 'numeric']
         ];
     }
 
     private function legal(): array {
         return [
             'number' => ['required'],
-            'organ' => ['required'],
+            'organization_id' => ['required'],
             'activity_type' => ['required'],
             'build_type' => [],
             'type' => ['required'],
             'status' => [],
-            'file' => [],
+            'pdf' => [],
             'delete_at' => [],
 
+            // Applicant
             'proposition_id' => [],
-            'legal_stir' => ['required'],
+            'legal_tin' => ['required'],
             'legal_name' => ['required'],
             'email' => ['required'],
-            'leader' => ['required'],
-            'leader_stir' => ['required'],
+            'director' => ['required'],
+            'director_tin' => ['required'],
             'phone' => ['required']
         ];
     }

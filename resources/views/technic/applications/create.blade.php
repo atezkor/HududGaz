@@ -35,34 +35,3 @@
         </div>
     </section>
 @endsection
-@section('js')
-    <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
-    <script src="{{'/js/default.js'}}"></script>
-    <script>
-        fileUpload('reset', 'file', 'file_hint', "@lang('technic.proposition.file_hint')")
-
-        function changeType(type) {
-            $('#type').val(type);
-        }
-
-        $(document).ready(function() {
-            if ({{$model->type ?? $model::PHYSICAL}} === {{$model::LEGAL}}) {
-                $('#legal').tab('show');
-                $('#individual').removeClass('active');
-                $('#type').val({{$model::LEGAL}});
-            }
-        });
-
-        function checkTin(type, tin) {
-            $.get(`{{route('propositions.check-for-tin')}}/${type}/${tin}`, function(data) {
-                if (data.length === 0)
-                    return;
-                let text = `@lang('technic.proposition.applications_exist')(${Object.keys(data).length})`;
-                let dText = `<a href="{{route('technic.propositions')}}/${type}/${tin}" target="_blank" class="text-danger">${text}</a>`
-                toast(dText, 'warning', 2000)
-            });
-        }
-
-        showNavbar();
-    </script>
-@endsection

@@ -14,7 +14,7 @@ class CreatePropositionsTable extends Migration {
     public function up() {
         Schema::create('propositions', function(Blueprint $table) {
             $table->id();
-            $table->integer('number');
+            $table->string('number');
             $table->foreignId('organization_id')->constrained('organs');
             $table->tinyInteger('type');
             $table->tinyInteger('build_type');

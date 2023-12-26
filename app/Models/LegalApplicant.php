@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 class LegalApplicant extends Model {
@@ -14,11 +15,7 @@ class LegalApplicant extends Model {
         'director', 'director_pin_fl'
     ];
 
-    public function getNameAttribute(): string {
-        return $this->getAttribute('name');
-    }
-
-    public function getPersonNameAttribute() {
-        return $this->getAttribute('director');
+    public function propositions(): HasMany {
+        return $this->hasMany(Proposition::class, 'id', 'proposition_id');
     }
 }

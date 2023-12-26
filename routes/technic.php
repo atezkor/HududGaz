@@ -26,4 +26,5 @@ Route::get('organ-section', [App\Http\Controllers\TechnicConditionController::cl
 Route::get('detail', [App\Http\Controllers\TechnicConditionController::class, 'detail'])->name('technic.detail');
 
 Route::get('propositions/check-for-tin/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'check'])->name('propositions.check-for-tin');
+Route::get('propositions/check-for-pinfl/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'check'])->name('propositions.check-for-pin');
 Route::get('propositions/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'exist'])->name('technic.propositions');

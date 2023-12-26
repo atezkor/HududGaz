@@ -13,6 +13,8 @@ use App\Services\PropositionService;
 use App\ViewModels\PropositionListViewModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 
 
@@ -42,7 +44,6 @@ class PropositionController extends Controller {
     /**
      * Show the form for creating a new resource.
      * @return View|RedirectResponse
-     * If Query -> All => pluck return Models
      */
     public function create(): View|RedirectResponse {
         try {
@@ -52,10 +53,7 @@ class PropositionController extends Controller {
         }
 
         $organs = Organ::query()->pluck('name', 'id');
-        $activities = Activity::query()
-            ->skip(1)
-            ->take(5)
-            ->pluck('activity', 'id');
+        $activities = Activity::query()->pluck('activity', 'id'); //->skip(1) //->take(5)
 
         return view('technic.applications.create', [
             'model' => new Proposition(),
@@ -166,11 +164,11 @@ class PropositionController extends Controller {
     /**
      * Check for application with this tin for existing
      * @param int $type
-     * @param int $tin
-     * @return array
+     * @param int $tinPin
+     * @return Model
      */
-    public function check(int $type, int $tin): array {
-        return $this->service->checkTin($type, $tin);
+    public function check(int $type, int $tinPin): Model {
+        return $this->service->checkTin($type, $tinPin);
     }
 
     /**

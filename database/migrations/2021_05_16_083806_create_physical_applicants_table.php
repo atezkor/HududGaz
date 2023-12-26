@@ -19,7 +19,7 @@ class CreatePhysicalApplicantsTable extends Migration {
             $table->string('surname');
             $table->string('phone');
             $table->string('passport');
-            $table->integer('tin');
+            $table->integer('tin')->nullable();
             $table->bigInteger('pin_fl');
 
             $table->foreign('proposition_id')
