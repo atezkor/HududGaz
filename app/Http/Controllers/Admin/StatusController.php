@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StatusRequest;
+use App\Models\Status;
+use App\Services\Service;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Status;
-use App\Services\Service;
-use App\Http\Requests\StatusRequest;
 
 
 class StatusController extends Controller {

@@ -1,16 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\ActivityController;
+use App\Http\Controllers\Admin\DesignerController;
+use App\Http\Controllers\Admin\MounterController;
+use App\Http\Controllers\Admin\MounterEmployeeController;
+use App\Http\Controllers\Admin\OrganController;
+use App\Http\Controllers\Admin\OrganizationController;
+use App\Http\Controllers\Admin\StatusController;
+use App\Http\Controllers\Admin\TimetableController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DesignerController;
 use App\Http\Controllers\EquipmentController;
-use App\Http\Controllers\MounterController;
-use App\Http\Controllers\MounterEmployeeController;
-use App\Http\Controllers\OrganController;
-use App\Http\Controllers\OrganizationController;
-use App\Http\Controllers\StatusController;
-use App\Http\Controllers\TimetableController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication routes
@@ -40,7 +40,7 @@ Route::group(['prefix' => 'admin'], function() {
     reduced('activity-types', ActivityController::class, 'admin.activities');
 
     readonly('statuses', StatusController::class, 'admin.statuses');
-    resource('timetable', TimetableController::class, 'admin.timetable');
+    Route::resource('timetables', TimetableController::class)->names('admin.timetables');
 
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');
     Route::post('equipments/{equipment}/equipment-types', [EquipmentController::class, 'add'])->name('admin.equip_type.add');

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\DesignerRequest;
 use App\Models\Designer;
 use App\Services\DesignerService;
@@ -124,7 +125,6 @@ class DesignerController extends Controller {
                 ->with('msg_type', 'info');
         }
     }
-
 
     /**
      * This view for only director

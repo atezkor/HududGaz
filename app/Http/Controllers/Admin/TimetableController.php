@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Timetable;
+use App\Services\Service;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Timetable;
-use App\Services\Service;
 
 
 class TimetableController extends Controller {
@@ -26,9 +27,11 @@ class TimetableController extends Controller {
         }
 
         $models = Timetable::all();
-        $holidays = $models->where('type', 1);
-        $extra_days = $models->where('type', 2);
-        return view('admin.table.index', ['holidays' => $holidays, 'extra_days' => $extra_days]);
+        $holidays = $models->where('type', Timetable::TYPE_HOLIDAY);
+        $extraDays = $models->where('type', Timetable::TYPE_EXTRA_WORK_DAY);
+//        dd($models);
+
+        return view('admin.timetable.index', compact('holidays', 'extraDays'));
     }
 
     public function create(): View|RedirectResponse {
@@ -38,9 +41,9 @@ class TimetableController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.table.form', [
+        return view('admin.timetable.form', [
             'model' => new Timetable(),
-            'action' => route('admin.timetable.store'),
+            'action' => route('admin.timetables.store'),
             'method' => 'POST'
         ]);
     }
@@ -54,7 +57,7 @@ class TimetableController extends Controller {
 
         $data = $request->all();
         $this->service->create($data);
-        return redirect()->route('admin.timetable.index');
+        return redirect()->route('admin.timetables.index');
     }
 
     public function edit(Timetable $timetable): View|RedirectResponse {
@@ -64,10 +67,10 @@ class TimetableController extends Controller {
             return redirect('/');
         }
 
-        return view('admin.table.form', [
+        return view('admin.timetable.form', [
             'model' => $timetable,
             'method' => 'PUT',
-            'action' => route('admin.timetable.update', ['timetable'=> $timetable])
+            'action' => route('admin.timetables.update', $timetable)
         ]);
     }
 
@@ -80,7 +83,7 @@ class TimetableController extends Controller {
 
         $data = $request->all();
         $this->service->update($data, $timetable);
-        return redirect()->route('admin.timetable.index');
+        return redirect()->route('admin.timetables.index');
     }
 
     public function destroy(Timetable $timetable): RedirectResponse {
@@ -91,6 +94,6 @@ class TimetableController extends Controller {
         }
 
         $this->service->delete($timetable);
-        return redirect()->route('admin.timetable.index');
+        return redirect()->route('admin.timetables.index');
     }
 }

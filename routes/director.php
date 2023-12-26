@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\DesignerController;
+use App\Http\Controllers\Admin\MounterController;
+use App\Http\Controllers\Admin\OrganController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
@@ -10,10 +14,10 @@ Route::get('/', function() {
 Route::get('statistics', [App\Http\Controllers\DirectorController::class, 'index'])->name('director.index');
 
 // Users
-Route::get('users', [App\Http\Controllers\UserController::class, 'director'])->name('director.users');
-Route::get('organs', [App\Http\Controllers\OrganController::class, 'director'])->name('director.organs');
-Route::get('designers', [App\Http\Controllers\DesignerController::class, 'director'])->name('director.designers');
-Route::get('installers', [App\Http\Controllers\MounterController::class, 'director'])->name('director.installers');
+Route::get('users', [UserController::class, 'director'])->name('director.users');
+Route::get('organs', [OrganController::class, 'director'])->name('director.organs');
+Route::get('designers', [DesignerController::class, 'director'])->name('director.designers');
+Route::get('installers', [MounterController::class, 'director'])->name('director.installers');
 
 // Documents
 Route::get('propositions', [App\Http\Controllers\PropositionController::class, 'all'])->name('director.propositions');

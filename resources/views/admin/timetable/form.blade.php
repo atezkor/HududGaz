@@ -10,9 +10,9 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 @if($method == 'POST')
-                                    {{__('admin.timetable.heading_create')}}
+                                    @lang('admin.timetable.heading_create')
                                 @else
-                                    {{__('admin.timetable.heading_edit')}}
+                                    @lang('admin.timetable.heading_edit')
                                 @endif
                             </h3>
                         </div>
@@ -51,7 +51,7 @@
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">@lang('global.btn_save')</button>
                                 <div class="float-right">
-                                    <a href="{{route('admin.timetable.index')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
+                                    <a href="{{route('admin.timetables.index')}}" class="btn btn-outline-secondary">@lang('global.btn_back')</a>
                                     <button type="reset" class="btn btn-default">@lang('global.btn_reset')</button>
                                 </div>
                             </div>

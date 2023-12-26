@@ -34,7 +34,7 @@ class MenuItemSeeder extends Seeder {
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.about_org', 'admin.settings', 'nav-icon far fa-circle');
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.statuses', 'admin.statuses.index', 'nav-icon far fa-circle');
         $this->createMenuItem(User::ROLE_ADMIN, 'admin.activities', 'admin.activities.index', 'nav-icon far fa-circle');
-        $this->createMenuItem(User::ROLE_ADMIN, 'admin.timetables', 'admin.timetable.index', 'nav-icon far fa-circle');
+        $this->createMenuItem(User::ROLE_ADMIN, 'admin.timetables', 'admin.timetables.index', 'nav-icon far fa-circle');
     }
 
     private function technicMenu() {
