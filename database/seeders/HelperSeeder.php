@@ -39,8 +39,8 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertProposition() {
-        $appLegalList = ['Anvar', 'Abror', 'Bekdiyor'];
-        $appPhysicalList = ['Behzod', 'Mirzabek', 'Dilshod'];
+        $appLegalList = ['Anvar', 'Abror'];
+        $appPhysicalList = ['Bekdiyor', 'Mirzabek'];
 
         foreach ($appLegalList as $key => $applicant) {
             $model = Proposition::query()->create([

@@ -35,15 +35,14 @@ class PropositionRequest extends FormRequest {
             'number' => __('global.proposition.number'),
             'pin_fl' => __('technic.applicant.pin_fl'),
             'passport' => __('technic.applicant.passport'),
-            'name' => __('technic.applicant.name'),
+            'name' => $this->get('type') == Application::PHYSICAL ? __('technic.applicant.name') : __('technic.applicant.legal_name'),
             'surname' => __('technic.applicant.surname'),
-            'legal_tin' => __('technic.applicant.legal_tin'),
-            'legal_name' => __('technic.applicant.legal_name'),
+            'tin' => __('technic.applicant.legal_tin'),
             'director' => __('technic.applicant.director'),
-            'director_stir' => __('technic.applicant.director_tin'),
+            'director_pin_fl' => __('technic.applicant.director_pin_fl'),
             'email' => __('technic.applicant.email'),
             'phone' => __('technic.applicant.phone'),
-            'activity_type' => __('technic.proposition.activity_type'),
+            'activity_type_id' => __('technic.proposition.activity_type'),
             'organization_id' => __('technic.proposition.organ')
         ];
     }
@@ -72,7 +71,7 @@ class PropositionRequest extends FormRequest {
         return [
             'number' => ['required'],
             'organization_id' => ['required'],
-            'activity_type' => ['required'],
+            'activity_type_id' => ['required'],
             'build_type' => [],
             'type' => ['required'],
             'status' => [],
@@ -81,11 +80,11 @@ class PropositionRequest extends FormRequest {
 
             // Applicant
             'proposition_id' => [],
-            'legal_tin' => ['required'],
-            'legal_name' => ['required'],
+            'tin' => ['required'],
+            'name' => ['required'],
             'email' => ['required'],
             'director' => ['required'],
-            'director_tin' => ['required'],
+            'director_pin_fl' => ['required'],
             'phone' => ['required']
         ];
     }

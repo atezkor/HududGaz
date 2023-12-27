@@ -14,7 +14,6 @@ use App\ViewModels\PropositionListViewModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 
 
@@ -52,7 +51,7 @@ class PropositionController extends Controller {
             return redirect('/');
         }
 
-        $organs = Organ::query()->pluck('name', 'id');
+        $organs = Organ::all();
         $activities = Activity::query()->pluck('activity', 'id'); //->skip(1) //->take(5)
 
         return view('technic.applications.create', [
@@ -106,13 +105,13 @@ class PropositionController extends Controller {
         }
 
         $applicant = $proposition->applicant;
-        $organs = Organ::query()->pluck('name', 'id');
-        return view('technic.form', [
-            'action' => route('propositions.update', ['proposition' => $proposition]),
-            'method' => 'PUT', 'model' => $proposition,
+        $organs = Organ::all();
+        $activities = Activity::query()->skip(1)->take(5)->pluck('activity', 'id');
+        return view('technic.applications.edit', [
+            'model' => $proposition,
             'applicant' => $applicant,
             'organs' => $organs,
-            'activities' => Activity::query()->skip(1)->take(5)->pluck('activity', 'id')
+            'activities' => $activities
         ]);
     }
 

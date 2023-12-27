@@ -1,4 +1,4 @@
-<table id="table1" class="table table-bordered table-striped table-center">
+<table id="individual-table" class="table table-bordered table-striped table-center">
     <thead>
         <tr>
             <th>@lang('global.index')</th>

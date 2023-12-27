@@ -35,6 +35,7 @@
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{'/js/adminlte.min.js'}}"></script> {{-- Preloader in this --}}
     <script src="{{'/js/sweetalert2.js'}}"></script>
-    @stack('js')
+    @yield('js')
+    @yield('extra')
 </body>
 </html>

@@ -6,15 +6,10 @@
 <form action="{{$action}}" method="post" enctype="multipart/form-data">
     @csrf
     @include('components.errors')
-    <div class="card-body">
-        <div class="form-group row">
-            <label for="number" class="col-2">@lang('technic.proposition.prop_num')</label>
-            <div class="col-10">
-                <input type="text" name="number" id="number" class="form-control"
-                       value="{{ old('number', $model->number) }}" autocomplete="off">
-            </div>
-        </div>
+    @method($method)
 
+    <div class="card-body">
+        <h3 class="text-center">Arizachi ma&#8217;lumotlari</h3>
         <div class="tab-content">
             <div id="individual" class="tap-pane active">
                 <div class="form-group row">
@@ -50,6 +45,14 @@
                     <div class="col-10">
                         <input type="text" name="surname" id="surname" class="form-control"
                                value="{{$applicant->surname}}" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="phone" class="col-2">@lang('technic.applicant.phone')</label>
+                    <div class="col-10">
+                        <input type="tel" name="phone" id="phone" value="{{$applicant->phone}}"
+                               class="form-control" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -99,34 +102,20 @@
                     <label for="email" class="col-2">@lang('technic.applicant.email')</label>
                     <div class="col-10">
                         <input type="email" name="email" id="email"
-                               value="{{$applicant->email}}" class="form-control"
+                               value="{{ $applicant->email }}" class="form-control"
                                autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="activity_type"
-                           class="col-2">@lang('technic.proposition.activity_type')</label>
-                    <div class="col-10">
-                        <select name="activity_type" id="activity_type" class="form-control">
-                            <option value="">@lang('technic.proposition.activity_type')</option>
-                            @foreach($activities as $key => $activity)
-                                <option value="{{$key}}"
-                                        @if($model->activity_type == $key) selected @endif>
-                                    {{$activity}}
-                                </option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
             </div>
         </div>
 
+        <hr>
+        <h3 class="text-center">Ariza ma&#8217;lumotlari</h3>
         <div class="form-group row">
-            <label for="phone" class="col-2">@lang('technic.applicant.phone')</label>
+            <label for="number" class="col-2">@lang('technic.proposition.prop_num')</label>
             <div class="col-10">
-                <input type="tel" name="phone" id="phone" value="{{$applicant->phone}}"
-                       class="form-control" autocomplete="off">
+                <input type="text" name="number" id="number" class="form-control"
+                       value="{{ old('number', $model->number) }}" autocomplete="off">
             </div>
         </div>
 
@@ -150,9 +139,25 @@
             <div class="col-10">
                 <select name="organization_id" id="organization_id" class="form-control">
                     <option value="">@lang('technic.proposition.organ_select')</option>
-                    @foreach($organs as $key => $organ)
-                        <option value="{{$key}}" @if($model->organ == $key) selected @endif>
-                            {{$organ}}
+                    @foreach($organs as $organ)
+                        <option value="{{$organ->id}}" @if($organ->id == $model->organization_id) selected @endif>
+                            {{$organ->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="activity_type_id"
+                   class="col-2">@lang('technic.proposition.activity_type')</label>
+            <div class="col-10">
+                <select name="activity_type_id" id="activity_type_id" class="form-control">
+                    <option value="">@lang('technic.proposition.activity_type')</option>
+                    @foreach($activities as $key => $activity)
+                        <option value="{{$key}}"
+                                @if($model->activity_type_id == $key) selected @endif>
+                            {{ $activity }}
                         </option>
                     @endforeach
                 </select>
@@ -163,8 +168,7 @@
             <label for="pdf" class="col-2">@lang('technic.proposition.pdf')</label>
             <div class="col-10">
                 <div class="custom-file">
-                    <input type="file" name="pdf" id="pdf" class="custom-file-input"
-                           @if($model->id) required @endif>
+                    <input type="file" name="pdf" id="pdf" class="custom-file-input">
                     <label class="custom-file-label" for="pdf">
                         <span id="file_hint">@lang('technic.proposition.file_hint')</span>
                         <span class="btn btn-info"><i class="far fa-file-pdf"></i></span>
@@ -184,15 +188,20 @@
         </div>
     </div>
 </form>
-@push('js')
-    <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+@section('js')
     <script src="{{'/js/default.js'}}"></script>
     <script>
+        function changeType(type) {
+            $('#type').val(type);
+            $("#legal_name").attr('disabled', type !== {{$model::LEGAL}})
+        }
+
         function fileUpload(reset, file, file_hint, text) {
             $(`#${file}`).change(function(input) {
                 try {
                     $(`#${file_hint}`).text(input.target.files[0].name);
-                } catch (e) {}
+                } catch (e) {
+                }
             })
 
             $(`#${reset}`).on('click', function() {
@@ -201,20 +210,6 @@
         }
 
         fileUpload('reset', 'file', 'file_hint', "@lang('technic.proposition.file_hint')")
-
-        function changeType(type) {
-            $('#type').val(type);
-        }
-
-        $(document).ready(function() {
-            if ({{$model->type ?? $model::PHYSICAL}} === {{$model::LEGAL}}) {
-                $('#legal').tab('show');
-                $('#individual').removeClass('active');
-                $('#type').val({{$model::LEGAL}});
-            }
-        });
-
-        showNavbar();
     </script>
 
     <script>
@@ -250,4 +245,4 @@
             }
         }
     </script>
-@endpush
+@endsection

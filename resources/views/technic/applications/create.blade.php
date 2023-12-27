@@ -14,14 +14,14 @@
                         <div class="card-header">
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
-                                    <a href="#individual" class="nav-link active"
+                                    <a href="#individual" id="individual-applicant" class="nav-link active"
                                        onclick="changeType({{ $model::PHYSICAL }})"
                                        data-toggle="tab">
                                         @lang('global.proposition.individual')
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#legal" class="nav-link" onclick="changeType({{ $model::LEGAL }})"
+                                    <a href="#legal" id="legal-applicant" class="nav-link" onclick="changeType({{ $model::LEGAL }})"
                                        data-toggle="tab">
                                         @lang('global.proposition.legal_entity')
                                     </a>
@@ -34,4 +34,18 @@
             </div>
         </div>
     </section>
+@endsection
+@section("extra")
+    <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
+    <script>
+        $(document).ready(function() {
+            let applicationType = {{old('type', $model->type) ?? $model::PHYSICAL}};
+            if (applicationType !== {{$model::PHYSICAL}}) {
+                $('#legal-applicant').tab('show'); // $('#individual').removeClass('active');
+            }
+
+            changeType(applicationType)
+        });
+        showNavbar();
+    </script>
 @endsection
