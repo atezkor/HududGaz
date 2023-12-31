@@ -21,7 +21,7 @@ class Recommendation extends Application {
     public const REJECT = "reject";
 
     protected $fillable = [
-        'proposition_id', 'organization_id', 'type', 'status', 'pdf',
+        'proposition_id', 'organization_id', 'applicant_id', 'type', 'status', 'pdf',
         'address', 'access_point', 'gas_network', 'pipeline', 'pipe_type',
         'length', 'pipe1', 'pipe2', 'depth', 'capability', 'pressure_win', 'pressure_sum',
         'grc', 'consumption', 'equipments',
@@ -36,54 +36,11 @@ class Recommendation extends Application {
         return $this->belongsTo(Organ::class, 'organization_id');
     }
 
-    public function getEquipments() {
-        $equipments = json_decode($this->getAttribute('equipments'));
-        if (!$equipments)
-            return [];
-
-        foreach ($equipments as $key => $equipment) {
-            $equipment->equipment = $this->equipment($equipment->equipment);
-            if (!$equipment->equipment) {
-                unset($equipments[$key]);
-                continue;
-            }
-            $equipment->type = $this->equipType($equipment->type);
-        }
-
-        return $equipments;
+    public function applicant(): BelongsTo {
+        return $this->belongsTo(Applicant::class);
     }
 
     public function limit($limit, $distance = 2) {
         return parent::limit($limit, $distance); // 2, 3 -> x(3) - now only 2
-    }
-
-    public function GasMeters() {
-        $equipments = json_decode($this->getAttribute('equipments'));
-        if (!$equipments)
-            return [];
-
-        foreach ($equipments as $key => $equipment) {
-            if ($equipment->equipment != 1) {
-                unset($equipments[$key]);
-                continue;
-            }
-
-            $equipment->equipment = $this->equipment($equipment->equipment, true);
-            if (!$equipment->equipment) {
-                unset($equipments[$key]);
-                continue;
-            }
-            $equipment->type = $this->equipType($equipment->type);
-        }
-
-        return $equipments;
-    }
-
-    private function equipment(int $id, $meter = false): string {
-        return EquipmentType::query()->where('static', $meter)->find($id)->name ?? '';
-    }
-
-    private function equipType(int $id): string {
-        return Equipment::query()->find($id)->type ?? '';
     }
 }

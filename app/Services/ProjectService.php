@@ -126,4 +126,26 @@ class ProjectService extends CrudService {
         $proposition = $project->proposition;
         $proposition->update(['status' => $project->status + $status]);
     }
+
+    public function GasMeters() {
+        $equipments = json_decode($this->getAttribute('equipments'));
+        if (!$equipments)
+            return [];
+
+        foreach ($equipments as $key => $equipment) {
+            if ($equipment->equipment != 1) {
+                unset($equipments[$key]);
+                continue;
+            }
+
+            $equipment->equipment = $this->equipment($equipment->equipment, true);
+            if (!$equipment->equipment) {
+                unset($equipments[$key]);
+                continue;
+            }
+            $equipment->type = $this->equipType($equipment->type);
+        }
+
+        return $equipments;
+    }
 }

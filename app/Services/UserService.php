@@ -5,6 +5,9 @@ namespace App\Services;
 use App\Models\User;
 use App\Utilities\CryptoHash;
 use App\Utilities\StorageManager;
+use Exception;
+use Illuminate\Support\Facades\Hash;
+use JetBrains\PhpStorm\ArrayShape;
 
 
 class UserService extends CrudService {
@@ -21,11 +24,19 @@ class UserService extends CrudService {
         parent::create($data);
     }
 
-    public function update($data, $model) {
-        if (isset($data['password']))
+    /**
+     * @param array $data
+     * @param User $model
+     * @throws Exception
+     */
+    public function update(array $data, $model) {
+        if (isset($data['password'])) {
+            if (!$this->check($data['password_old'], $model->password)) {
+                throw new Exception(__("global.profile.wrong_pass"));
+            }
+
             $data['password'] = $this->hashed($data['password']);
-        else
-            $data['password'] = $model->password;
+        }
 
         if (isset($data['avatar'])) {
             $this->deleteFile($this->path, $model->avatar);
@@ -43,6 +54,7 @@ class UserService extends CrudService {
         parent::delete($model);
     }
 
+    #[ArrayShape([User::ROLE_ADMIN => "string", User::TECHNIC => "string", User::ORGAN => "string", User::DESIGNER => "string", User::ENGINEER => "string", User::MOUNTER => "string", User::DIRECTOR => "string"])]
     function roles(): array {
         return [
             User::ROLE_ADMIN => __('global.roles.admin'),
@@ -53,5 +65,10 @@ class UserService extends CrudService {
             User::MOUNTER => __('global.roles.mounter'),
             User::DIRECTOR => __('global.roles.director'),
         ];
+    }
+
+    private function check($pass, $hasPass): bool {
+        // $password = auth()->user()->getAuthPassword();
+        return Hash::check($pass, $hasPass);
     }
 }

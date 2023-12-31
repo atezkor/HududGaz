@@ -14,6 +14,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int id
  * @property-read int $role_id
  * @property-read int $organization_id
+ * @property string $password
+ * @property string $avatar
  */
 class User extends Authenticatable {
     use HasFactory, Notifiable, HasApiTokens;

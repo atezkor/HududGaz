@@ -106,7 +106,7 @@ class PropositionController extends Controller {
 
         $applicant = $proposition->applicant;
         $organs = Organ::all();
-        $activities = Activity::query()->skip(1)->take(5)->pluck('activity', 'id');
+        $activities = Activity::query()->pluck('activity', 'id'); // ->skip(1)->take(5)->pluck('activity', 'id');
         return view('technic.applications.edit', [
             'model' => $proposition,
             'applicant' => $applicant,
@@ -156,7 +156,7 @@ class PropositionController extends Controller {
      * @return RedirectResponse
      */
     public function view(Proposition $proposition): RedirectResponse {
-        $url = $this->service->view($proposition, Proposition::CREATED_T);
+        $url = $this->service->view($proposition, Proposition::REVIEWED);
         return redirect($url);
     }
 
@@ -204,7 +204,7 @@ class PropositionController extends Controller {
         }
 
         $user = request()->user();
-        return view('organ.propositions.index', new PropositionListViewModel([Proposition::CREATED, Proposition::CREATED_T], $user->organization_id));
+        return view('organ.propositions.index', new PropositionListViewModel([Proposition::CREATED, Proposition::REVIEWED], $user->organization_id));
     }
 
     /**

@@ -15,7 +15,7 @@ class RecommendationViewModel extends ViewModel {
     private int $status;
     private int $organizationId;
 
-    public function __construct(array $propStatuses = [Proposition::CREATED_B], int $status = Recommendation::CREATED, int $organizationId = 0) {
+    public function __construct(array $propStatuses = [Proposition::ACCEPTED], int $status = Recommendation::CREATED, int $organizationId = 0) {
         $this->propStatuses = $propStatuses;
         $this->status = $status;
 
@@ -24,11 +24,11 @@ class RecommendationViewModel extends ViewModel {
 
     public function recommendations(): Collection {
         return Recommendation::query()
-            ->with('proposition:id,number')
-            ->where('status', '=', $this->status)
+            ->with(['proposition:id,number', 'applicant', 'organ:id,name'])
+            ->where('status', $this->status)
             ->when($this->organizationId, fn(Builder $query) => $query->where('organization_id', $this->organizationId))
             ->orderBy('proposition_id')
-            ->get(['id', 'proposition_id', 'status', 'organization_id', 'comment', 'created_at']);
+            ->get(['id', 'proposition_id', 'applicant_id', 'status', 'organization_id', 'comment', 'created_at']);
     }
 
     public function propositions(): Models {

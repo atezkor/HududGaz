@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Activity;
+use App\Models\Applicant;
 use App\Models\Application;
 use App\Models\Designer;
 use App\Models\Equipment;
@@ -39,6 +40,9 @@ class HelperSeeder extends Seeder {
     }
 
     private function insertProposition() {
+        /**
+         * @var Proposition $model
+         */
         $appLegalList = ['Anvar', 'Abror'];
         $appPhysicalList = ['Bekdiyor', 'Mirzabek'];
 
@@ -52,7 +56,7 @@ class HelperSeeder extends Seeder {
                 'pdf' => 'test.pdf'
             ]);
 
-            LegalApplicant::query()->create([
+            $person = LegalApplicant::query()->create([
                 'proposition_id' => $model->id,
                 'tin' => rand(100000000, 1000000000),
                 'name' => $applicant . ' Industries',
@@ -60,6 +64,14 @@ class HelperSeeder extends Seeder {
                 'email' => strtolower($applicant) . '@mail.uz',
                 'director' => $applicant,
                 'director_pin_fl' => rand(100, 1000000000) . rand(100, 100000)
+            ]);
+
+            Applicant::query()->create([
+                'type' => Applicant::PHYSICAL,
+                'legal_applicant_id' => $person->id,
+                'proposition_id' => $model->id,
+                'name' => $person->name,
+                'tin_pin' => $person->tin
             ]);
         }
 
@@ -73,7 +85,7 @@ class HelperSeeder extends Seeder {
                 'pdf' => 'test.pdf'
             ]);
 
-            PhysicalApplicant::query()->create([
+            $person = PhysicalApplicant::query()->create([
                 'proposition_id' => $model->id,
                 'name' => $applicant,
                 'surname' => "",
@@ -81,6 +93,14 @@ class HelperSeeder extends Seeder {
                 'passport' => "AB8674" . rand(101, 999),
                 'tin' => rand(100000000, 1000000000),
                 'pin_fl' => rand(100000000, 1000000000) . rand(10000, 100000)
+            ]);
+
+            Applicant::query()->create([
+                'type' => Applicant::PHYSICAL,
+                'physical_applicant_id' => $person->id,
+                'proposition_id' => $model->id,
+                'name' => $person->name,
+                'tin_pin' => $person->pin_fl
             ]);
         }
     }

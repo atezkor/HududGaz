@@ -32,26 +32,26 @@
                         </thead>
                         <tbody>
                             @php($limit = limit(5, 3))
-                            @foreach($recommendations as $key => $model)
+                            @foreach($recommendations as $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{$model->proposition->number}}</td>
-                                    <td>{{$model->applicant}}</td>
+                                    <td>{{$model->applicant->name}}</td>
                                     <td>
                                         <a href="{{route('technic.recommendation.show', $model->id)}}" target="_blank">
                                             @lang('technic.recommendation.show')
                                         </a>
                                     </td>
-                                    <td>{{$organs[$model->organization_id]}}</td>
+                                    <td>{{$model->organ->name}}</td>
                                     <td>{{$model->created_at}}</td>
                                     <td>
-                                        <div class="progress progress-xs">
-                                            <div
-                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
-                                                style="width: {{$model->percent($model->limit($limit))}}%">
-                                            </div>
-                                        </div>
-                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+{{--                                        <div class="progress progress-xs">--}}
+{{--                                            <div--}}
+{{--                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"--}}
+{{--                                                style="width: {{$model->percent($model->limit($limit))}}%">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>--}}
                                     </td>
                                     <td>
                                         @if($show)

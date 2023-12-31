@@ -80,7 +80,7 @@ class PropCounterProvider extends ServiceProvider {
     private function applications(int $organId): array {
         $propositions = Proposition::query()
             ->where('organization_id', $organId)
-            ->whereIn('status', [Proposition::CREATED, Proposition::CREATED_T])
+            ->whereIn('status', [Proposition::CREATED, Proposition::REVIEWED])
             ->count();
 
         $recs = Recommendation::query()

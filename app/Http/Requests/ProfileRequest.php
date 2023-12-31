@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 
 class ProfileRequest extends FormRequest {
     /**
@@ -21,31 +20,34 @@ class ProfileRequest extends FormRequest {
      * @return array
      */
     public function rules(): array {
-        if (!$this->check($this->input('old_pass'), auth()->user()->getAuthPassword()) && $this->input('old_pass'))
-            return [
-                "old_pass" => ['email']
-            ];
+        // $hasPass = $this->input('password_old') || $this->input('password') || $this->input('password_confirm');
+        $hasPass = $this->input('pass');
 
-        if ($this->input('password') != $this->input('confirm_pass') &&
-            ($this->input('old_pass') && $this->input('password') && $this->input('confirm_pass')))
-            return [
-                "password" => ['email']
-            ];
+        if ($hasPass) {
+            $pass = $this->input('password');
+            $passConfirm = $this->input('password_confirm');
+            if ($pass != $passConfirm) {
+                return [
+                    'password_old' => ['required'],
+                    'password' => ['required'],
+                    'password_confirm' => ['required', 'confirmed']
+                ];
+            }
 
-        if ($this->input('old_pass') || $this->input('password') || $this->input('confirm_pass'))
             return [
-                "password" => ['required', 'min:6'],
-                "old_pass" => ['required'],
-                "confirm_pass" => ['required', 'min:6']
+                'password_old' => ['required'],
+                'password' => ['required', 'min:6'],
+                'password_confirm' => ['required', 'min:6']
             ];
+        }
 
         return [
             'username' => ['required'],
             'name' => ['required'],
             'lastname' => ['required'],
-            "patronymic" => [],
-            "position" => [],
-            "locale" => [],
+            'patronymic' => [],
+            'position' => [],
+            'locale' => [],
             'avatar' => []
         ];
     }
@@ -55,20 +57,9 @@ class ProfileRequest extends FormRequest {
             'username' => __('global.profile.username'),
             'name' => __('global.profile.name'),
             'lastname' => __('global.profile.lastname'),
+            'password_old' => __('global.profile.pass_old'),
             'password' => __('global.profile.password'),
-            'old_pass' => __('global.profile.old_pass'),
-            'confirm_pass' => __('global.profile.confirm_pass')
+            'password_confirm' => __('global.profile.pass_confirm')
         ];
-    }
-
-    public function messages(): array {
-        return [
-            'old_pass.email' => __('global.profile.wrong_pass'),
-            'password.email' => __('global.profile.not_confirm'),
-        ];
-    }
-
-    private function check($pass, $db_pass): bool {
-        return Hash::check($pass, $db_pass);
     }
 }

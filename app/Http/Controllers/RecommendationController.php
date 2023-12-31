@@ -59,8 +59,6 @@ class RecommendationController extends Controller {
         $data = $request->validated();
         $this->service->create($data);
 
-        $proposition = $this->propService->find($data['proposition_id']);
-        $this->propService->view($proposition, Proposition::CREATED_B); // TODO function
         return redirect()->route('organ.recommendations');
     }
 
@@ -185,7 +183,7 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
-        return view('technic.recommendations', new RecommendationViewModel([4, 5], 2));
+        return view('technic.recommendations', new RecommendationViewModel([], Recommendation::PRESENTED));
     }
 
     public function director(): View|RedirectResponse {

@@ -149,8 +149,9 @@
         </div>
 
         <div class="form-group row">
-            <label for="activity_type_id"
-                   class="col-2">@lang('technic.proposition.activity_type')</label>
+            <label for="activity_type_id" class="col-2">
+                @lang('technic.proposition.activity_type')
+            </label>
             <div class="col-10">
                 <select name="activity_type_id" id="activity_type_id" class="form-control">
                     <option value="">@lang('technic.proposition.activity_type')</option>

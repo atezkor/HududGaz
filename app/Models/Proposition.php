@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  * @property-read string $pdf
  * @property-read int $build_type
- * @property-read PhysicalApplicant|LegalApplicant $applicant
+ * @property-read Applicant $applicant
  * @property-read Recommendation recommendation
  * @property-read TechCondition techCondition
  * @property-read Organ organization
@@ -22,8 +22,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Proposition extends Application {
 
     public const CREATED = 1;
-    public const CREATED_T = 2;
-    public const CREATED_B = 3;
+    public const REVIEWED = 2;
+    public const ACCEPTED = 3;
 
     public const PRESENTED = 4;
 
@@ -52,7 +52,8 @@ class Proposition extends Application {
     }
 
     public function applicant(): HasOne {
-        return $this->type == self::PHYSICAL ? $this->individual() : $this->legal();
+        // $this->type == self::PHYSICAL ? $this->individual() : $this->legal();
+        return $this->hasOne(Applicant::class);
     }
 
     public function recommendation(): HasOne {
@@ -63,7 +64,7 @@ class Proposition extends Application {
         return $this->hasOne(TechCondition::class);
     }
 
-    public function organization(): BelongsTo {
+    public function organ(): BelongsTo {
         return $this->belongsTo(Organ::class, 'organization_id');
     }
 

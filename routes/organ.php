@@ -12,8 +12,8 @@ Route::get('propositions', [PropositionController::class, 'organ'])->name('organ
 Route::get('propositions/{proposition}', [PropositionController::class, 'view'])->name('organ.proposition.show');
 Route::get('propositions/{proposition}/{type}', [PropositionController::class, 'statement'])->name('organ.statement.create');
 
-Route::post('recommendations', [RecommendationController::class, 'store'])->name('organ.recommendation.store');
 Route::get('recommendations', [RecommendationController::class, 'index'])->name('organ.recommendations');
+Route::post('recommendations', [RecommendationController::class, 'store'])->name('organ.recommendation.store');
 Route::get('recommendations/progress', [RecommendationController::class, 'progress'])->name('organ.recommendations.progress');
 Route::get('recommendations/cancelled', [RecommendationController::class, 'cancelled'])->name('organ.recommendations.cancelled');
 Route::get('recommendations/archive', [RecommendationController::class, 'archives'])->name('organ.recommendations.archive');

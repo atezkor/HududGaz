@@ -23,7 +23,7 @@ class PropositionListViewModel extends ViewModel {
 
     function applications(): Models {
         return Proposition::query()
-            ->with('individual')
+            ->with(['individual', 'organ:id,name'])
             ->when($this->organizationId, function(Builder $query) {
                 return $query->where('organization_id', $this->organizationId);
             })
@@ -34,7 +34,7 @@ class PropositionListViewModel extends ViewModel {
 
     function propositions(): Models {
         return Proposition::query()
-            ->with('legal')
+            ->with(['legal', 'organ:id,name'])
             ->when($this->organizationId, function(Builder $query) {
                 return $query->where('organization_id', $this->organizationId);
             })
@@ -44,7 +44,7 @@ class PropositionListViewModel extends ViewModel {
     }
 
     function limit(): Collection {
-        return self::limiter(Proposition::CREATED_T);
+        return self::limiter(Proposition::REVIEWED);
     }
 
     /* This is function for application term */

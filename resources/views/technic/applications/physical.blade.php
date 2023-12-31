@@ -18,7 +18,7 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$model->number}}</td>
                 <td>{{$model->individual->tin}}</td>
-                <td>{{$model->organization_id}}</td>
+                <td>{{$model->organ->name}}</td>
                 <td>
                     <a href="{{route('propositions.show', $model->id)}}" target="_blank">
                         <span>@lang('global.proposition.show')</span>

@@ -2,14 +2,18 @@
 
 namespace App\Services;
 
+use App\Models\Equipment;
+use App\Models\EquipmentType;
 use App\Models\Organization;
 use App\Models\Proposition;
 use App\Models\Recommendation;
 use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
 use Barryvdh\DomPDF\PDF;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 
 
 class RecommendationService extends CrudService {
@@ -31,9 +35,22 @@ class RecommendationService extends CrudService {
      */
     public function create($data) {
         /* @var Proposition $proposition */
+
         $proposition = Proposition::query()->find($data['proposition_id']);
         $data['organization_id'] = $proposition->organization_id;
-        parent::create($data);
+        $data['applicant_id'] = $proposition->applicant->id;
+
+        try {
+            DB::beginTransaction();
+
+            parent::create($data);
+            // Update proposition
+            $proposition->update(['status' => Proposition::ACCEPTED]);
+            DB::commit();
+        } catch (QueryException $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
     }
 
     public function show(Recommendation $recommendation): Response {
@@ -42,7 +59,6 @@ class RecommendationService extends CrudService {
 
         $proposition = $recommendation->proposition;
         $organ = $recommendation->organ;
-
 
         $data = [
             'model' => $recommendation,
@@ -54,7 +70,7 @@ class RecommendationService extends CrudService {
         ];
 
         if ($recommendation->type == Recommendation::ACCEPT) {
-            $equipments = $recommendation->getEquipments();
+            $equipments = $this->getEquipments($recommendation->equipments);
 
             $data['equipments'] = $equipments;
             $data['build_type'] = $proposition->buildType();
@@ -105,5 +121,31 @@ class RecommendationService extends CrudService {
 
         $recommendation->proposition->update(['status' => 6]);
         $recommendation->proposition->applicant->update(['status' => 6]);
+    }
+
+
+    public function getEquipments($equipmentList) {
+        $equipments = json_decode($equipmentList);
+        if (!$equipments)
+            return [];
+
+        foreach ($equipments as $key => $equipment) {
+            $equipment->equipment = $this->equipment($equipment->equipment);
+            if (!$equipment->equipment) {
+                unset($equipments[$key]);
+                continue;
+            }
+            $equipment->type = $this->equipType($equipment->type);
+        }
+
+        return $equipments;
+    }
+
+    private function equipment(int $id, $meter = false): string {
+        return EquipmentType::query()->where('static', $meter)->find($id)->name ?? '';
+    }
+
+    private function equipType(int $id): string {
+        return Equipment::query()->find($id)->type ?? '';
     }
 }

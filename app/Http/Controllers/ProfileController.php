@@ -2,35 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
+use App\Models\User;
+use App\Services\UserService;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Models\User;
-use App\Services\UserService;
-use App\Http\Requests\ProfileRequest;
 
 
 class ProfileController extends Controller {
 
     private UserService $service;
+
     public function __construct(UserService $service) {
         $this->service = $service;
     }
 
-    public function edit($user): View|RedirectResponse {
+    public function edit(int $userId): View|RedirectResponse {
         try {
             $this->authorize('edit_profile');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        $model = request()->user();
-        if ($model->id != $user)
+        $user = request()->user();
+        if ($user->id != $userId)
             return redirect()->back();
 
         return view('profile', [
-            'model' => $model,
-            'action' => route('profile.update', ['user' => $user])
+            'model' => $user
         ]);
     }
 
@@ -41,8 +42,12 @@ class ProfileController extends Controller {
             return redirect('/');
         }
 
-        $data = $request->validated();
-        $this->service->update($data, $user);
-        return redirect()->route('dashboard');
+        try {
+            $data = $request->validated();
+            $this->service->update($data, $user);
+            return redirect()->route('dashboard');
+        } catch (Exception $ex) {
+            return redirect()->back()->with('error', $ex->getMessage());
+        }
     }
 }
