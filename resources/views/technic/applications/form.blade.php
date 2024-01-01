@@ -9,7 +9,7 @@
     @method($method)
 
     <div class="card-body">
-        <h3 class="text-center">Arizachi ma&#8217;lumotlari</h3>
+        <h3 class="text-center">@lang('technic.applicant.info')</h3>
         <div class="tab-content">
             <div id="individual" class="tap-pane active">
                 <div class="form-group row">
@@ -110,7 +110,7 @@
         </div>
 
         <hr>
-        <h3 class="text-center">Ariza ma&#8217;lumotlari</h3>
+        <h3 class="text-center">@lang('technic.proposition.info')</h3>
         <div class="form-group row">
             <label for="number" class="col-2">@lang('technic.proposition.prop_num')</label>
             <div class="col-10">
@@ -210,7 +210,7 @@
             });
         }
 
-        fileUpload('reset', 'file', 'file_hint', "@lang('technic.proposition.file_hint')")
+        fileUpload('reset', 'pdf', 'file_hint', "@lang('technic.proposition.file_hint')")
     </script>
 
     <script>

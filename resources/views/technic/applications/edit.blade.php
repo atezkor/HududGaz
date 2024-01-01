@@ -44,8 +44,6 @@
                 $('#legal-applicant').tab('show'); // $('#individual').removeClass('active');
             }
 
-            console.log(applicationType)
-
             changeType(applicationType)
         });
 

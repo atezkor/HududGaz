@@ -9,5 +9,7 @@ namespace App\Models;
  */
 class CancelledProposition extends Application {
 
-    protected $fillable = ['prop_num', 'applicant', 'proposition', 'recommendation', 'condition', 'reason'];
+    protected $fillable = [
+        'number', 'applicant_id', 'organization_id', 'proposition', 'recommendation', 'condition', 'reason'
+    ];
 }

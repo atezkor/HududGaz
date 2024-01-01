@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property string $type
  * @property string $pdf
+ * @property int $applicant_id
+ * @property string $description
  * @property Proposition $proposition
  * @property Organ $organ
+ * @property Applicant $applicant
  */
 class Recommendation extends Application {
 
@@ -25,9 +28,8 @@ class Recommendation extends Application {
     protected $fillable = [
         'proposition_id', 'organization_id', 'applicant_id', 'type', 'status', 'pdf',
         'address', 'access_point', 'gas_network', 'pipeline', 'pipe_type',
-        'length', 'pipe1', 'pipe2', 'depth', 'capability', 'pressure_win', 'pressure_sum',
-        'grc', 'consumption', 'equipments',
-        'additional', 'description', 'comment'
+        'length', 'pipe_one', 'pipe_two', 'depth', 'capability', 'pressure_win', 'pressure_sum',
+        'grc', 'consumption', 'additional', 'description', 'comment'
     ];
 
     public function proposition(): BelongsTo {

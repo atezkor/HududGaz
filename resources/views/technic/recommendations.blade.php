@@ -35,22 +35,22 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$model->proposition->number}}</td>
-                                    <td>{{$model->applicant->name}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
                                         <a href="{{route('technic.recommendation.show', $model->id)}}" target="_blank">
                                             @lang('technic.recommendation.show')
                                         </a>
                                     </td>
                                     <td>{{$model->organ->name}}</td>
-                                    <td>{{$model->created_at}}</td>
+                                    <td>{{$model->created_at->format('m.d.Y H:i')}}</td>
                                     <td>
-{{--                                        <div class="progress progress-xs">--}}
-{{--                                            <div--}}
-{{--                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"--}}
-{{--                                                style="width: {{$model->percent($model->limit($limit))}}%">--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>--}}
+                                        <div class="progress progress-xs">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
+                                                style="width: {{$model->percent($model->limit($limit))}}%">
+                                            </div>
+                                        </div>
+                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
                                     </td>
                                     <td>
                                         @if($show)

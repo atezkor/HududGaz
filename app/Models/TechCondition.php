@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
 /**
- * @property-read Proposition proposition
  * @property-read int id
- * @property-read Project project
- * @property-read string file
+ * @property string $pdf
  * @property-read string qrcode
+ * @property-read Proposition proposition
+ * @property-read Project project
  */
 class TechCondition extends Application {
 
-    protected $fillable = ['proposition_id', 'qrcode', 'status', 'file'];
+    protected $fillable = ['proposition_id', 'applicant_id', 'qrcode', 'status', 'pdf'];
 
     public const CREATED = 1;
 

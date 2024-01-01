@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateCancelledPropositionsTable extends Migration {
     /**
      * Run the migrations.
@@ -11,10 +12,11 @@ class CreateCancelledPropositionsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('cancelled_propositions', function (Blueprint $table) {
+        Schema::create('cancelled_propositions', function(Blueprint $table) {
             $table->id();
-            $table->integer('prop_num');
-            $table->string('applicant');
+            $table->integer('number');
+            $table->foreignId('applicant_id')->constrained('applicants');
+            $table->foreignId('organization_id')->constrained('organs');
             $table->string('proposition')->nullable();
             $table->string('recommendation')->nullable();
             $table->string('condition')->nullable();

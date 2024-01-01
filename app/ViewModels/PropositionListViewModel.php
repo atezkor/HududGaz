@@ -16,7 +16,7 @@ class PropositionListViewModel extends ViewModel {
     private array $statuses;
     private int $organizationId;
 
-    public function __construct($statuses = [Proposition::CREATED], int $organizationId = 0) {
+    public function __construct($statuses = [Proposition::CREATED, Proposition::REVIEWED], int $organizationId = 0) {
         $this->statuses = $statuses;
         $this->organizationId = $organizationId;
     }

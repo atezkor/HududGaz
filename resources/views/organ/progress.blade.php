@@ -31,8 +31,8 @@
                                     <td>{{$model->proposition->number}}</td>
                                     <td>{{$model->proposition->number}}</td>
                                     <td>
-                                        <a href="{{route('organ.recommendation.show', $model->id)}}" target="_blank">
-                                            @lang('organ.show')
+                                        <a href="{{route('recommendation.view', $model->id)}}" target="_blank">
+                                            @lang('organ.recommendation.view')
                                         </a>
                                     </td>
                                     <td>{{$model->created_at->format('d.m.Y H:i')}}</td>

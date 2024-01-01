@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TechConditionRequest;
 use App\Models\Activity;
 use App\Models\Organ;
 use App\Models\Proposition;
@@ -11,6 +12,7 @@ use App\Models\TechCondition;
 use App\Services\RecommendationService;
 use App\Services\TechConditionService;
 use App\ViewModels\TechConditionViewModel;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -58,6 +60,7 @@ class TechnicConditionController extends Controller {
 
     /**
      * @throws ValidationException
+     * @throws Exception
      */
     public function store(Request $request, Recommendation $recommendation): RedirectResponse {
         try {
@@ -100,24 +103,18 @@ class TechnicConditionController extends Controller {
     }
 
     /**
-     * @param Request $request
+     * @param TechConditionRequest $request
      * @param TechCondition $condition
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function update(Request $request, TechCondition $condition): RedirectResponse {
+    public function update(TechConditionRequest $request, TechCondition $condition): RedirectResponse {
         try {
             $this->authorize('crud_tech');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        $data = $this->validate($request, [
-            'description' => [],
-            'data' => ['required']
-        ], [], [
-            'data' => __('technic.tech_condition.ref')
-        ]);
+        $data = $request->validated();
         $this->service->update($data, $condition);
         return redirect()->route('technic.index');
     }

@@ -29,15 +29,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($propositions as $key => $model)
+                            @foreach($propositions as $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$model->number}}</td>
-                                    <td>{{$model->applicant->name}}</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        <a href="{{route('organ.proposition.show', $model->id)}}" target="_blank">
+                                            <span>{{$model->number}}</span>
+                                        </a>
+                                    </td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
                                         <a href="{{route('organ.recommendation.show', $model->recommendation->id)}}"
                                            target="_blank">
-                                            @lang('organ.show')
+                                            @lang('organ.recommendation.view')
                                         </a>
                                     </td>
                                     <td>{{$model->recommendation->created_at->format('d.m.Y H:i')}}</td>
@@ -54,9 +58,9 @@
                                         <form action="{{route('organ.recommendation.upload', $model->recommendation)}}"
                                               method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="pdf" id="file-{{$key}}" onchange="upload(this)"
+                                            <input type="file" name="pdf" id="file-{{$loop->index}}" onchange="upload(this)"
                                                    hidden>
-                                            <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0"
+                                            <label for="file-{{$loop->index}}" class="btn btn-outline-info text-bold my-0"
                                                    title="@lang('global.btn_upload')">
                                                 <i class="fas fa-upload"></i>
                                             </label>

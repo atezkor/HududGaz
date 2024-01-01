@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 trait StorageManager {
 
     function retrieve($path, $file): string {
-        return Storage::url($path . $file);
+        return Storage::url($path . "/" . $file);
     }
 
     function createFile($path, $file): string {

@@ -13,6 +13,7 @@ return [
     'total' => "Jami",
     'btn_create' => "Texnik shart yaratish",
     'applicant' => [
+        'info' => "Arizachi ma\u{2019}lumotlari",
         'pin_fl' => "JSHSHIR",
         'passport' => "Pasport seriya va raqami",
         'name' => "Ism",
@@ -27,6 +28,7 @@ return [
         'has_application' => "Tizimda bu arizachi uchun arizalar mavjud"
     ],
     'proposition' => [
+        'info' => "Ariza ma\u{2019}lumotlari",
         'heading_edit' => "Ariza ma\u{2019}lumotlarini yangilash",
         'prop_num' => "Ariza raqami",
         'activity_type' => "Faoliyat turi",

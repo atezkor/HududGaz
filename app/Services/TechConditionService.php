@@ -11,6 +11,8 @@ use App\Utilities\CodeGenerator;
 use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
 use Barryvdh\DomPDF\PDF;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Generator;
 
@@ -30,123 +32,141 @@ class TechConditionService extends CrudService {
         $this->qrcode = $qrcode;
     }
 
+    /**
+     * @throws Exception
+     */
     public function create($data, Recommendation $model = null) {
         $proposition = $model->proposition;
-        if (TechCondition::query()->where('proposition_id', $proposition->id)->first())
+        $techCondition = TechCondition::query()
+            ->where('proposition_id', $proposition->id)
+            ->first();
+        if ($techCondition)
             return;
 
-        $filename = time() . '.pdf';
-        $attr = [
+        // Create tech-condition
+        $techCondition = new TechCondition([
             'proposition_id' => $proposition->id,
-            'file' => $filename,
             'qrcode' => $this->qrcodeGenerate(4)
-        ];
-
-        $tech_condition = new TechCondition($attr);
-        $tech_condition->save();
-        $proposition->update(['status' => 7]);
-        $proposition->applicant->update(['status' => 7]);
-        $model->update(['status' => 4, 'description' => $data['description']]);
-
-        $this->createPDF($model, [
-            'condition' => $tech_condition->id,
-            'proposition' => $proposition,
-            'filename' => $filename,
-            'text' => $data['data'],
-            'qrcode' => $this->qrcode->generate($tech_condition->qrcode)
         ]);
+
+        try {
+            DB::beginTransaction();
+
+            // Update proposition status
+            $proposition->update(['status' => Proposition::TC_CREATED]);
+
+            // Update recommendation status
+            $model->update([
+                'status' => Recommendation::COMPLETED,
+                'description' => $data['description']
+            ]);
+
+            // Create pdf file
+            $filename = $this->createPDF($techCondition, $model, $proposition, $data['data']);
+
+            // Technic condition
+            $techCondition->pdf = $filename;
+            $techCondition->save();
+
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
     }
 
     /**
      * This function to showing the tech-condition
      */
     public function get(TechCondition $condition): string {
-        return Storage::url('tech_conditions/' . $condition->file);
+        return Storage::url('tech_conditions/' . $condition->pdf);
     }
 
+    /**
+     * @param array $data
+     * @param TechCondition $model
+     */
     public function update(array $data, $model) {
-        $filename = time() . '.pdf';
-        $this->deleteFile($this->path, $model->file);
-
+        $old = $model->pdf;
         $proposition = $model->proposition;
-        $this->createPDF($proposition->recommendation, [
-            'condition' => $proposition->tech_condition->id,
-            'proposition' => $proposition,
-            'filename' => $filename,
-            'text' => $data['data'],
-            'qrcode' => $this->qrcode->generate($model->qrcode)
-        ]);
-        parent::update(['file' => $filename], $model);
+
+        // Create new pdf file for model
+        $filename = $this->createPDF($model, $proposition->recommendation, $proposition, $data['data']);
+
+        // Delete old pdf file
+        $this->deleteFile($this->path, $old);
+
+        // Update model attributes
+        parent::update(['pdf' => $filename], $model);
     }
 
     public function upload($request, TechCondition $condition) {
         $proposition = $condition->proposition;
         $recommendation = $proposition->recommendation;
-        $this->deleteFile($this->path, $condition->file);
+
+        $filename = $this->store($request->file('pdf'), $this->folder);
         $condition->fill([
-            'file' => $this->uploadFile($request->file('file')),
-            'status' => 2
+            'pdf' => $filename,
+            'status' => Recommendation::PRESENTED
         ]);
 
-        if ($recommendation->type == 'fail') {
+        // Migrate data to reservation table
+        if ($recommendation->type == Recommendation::REJECT) {
             $this->cancel($proposition, $recommendation, $condition);
             return;
         }
 
+        $this->deleteFile($this->path, $condition->pdf);
         $condition->update();
-        $proposition->update(['status' => 8]);
-        $proposition->applicant->update(['status' => 8]);
+        $proposition->update(['status' => Proposition::PROJECT_C]);
     }
 
-    private function createPDF(Recommendation $recommendation, array $addition) {
-        $organ = $recommendation->org;
+    private function createPDF(TechCondition $techCondition, Recommendation $recommendation, Proposition $proposition, string $text): string {
+        $organ = $recommendation->organ;
         $data = [
-            'id' => $addition['condition'],
+            'id' => $techCondition->id,
             'recommendation' => $recommendation,
-            'proposition' => $addition['proposition'],
+            'proposition' => $proposition,
             'organ' => $organ,
+            'district' => $organ->district->name,
             'organization' => Organization::Data()
         ];
 
-        if ($recommendation->type == 'accept') {
-            $equipments = $recommendation->getEquipments();
+        $data['reference'] = $text;
+        if ($recommendation->type == Recommendation::ACCEPT) {
+            $equipments = []; // $recommendation->getEquipments();
 
             $data['equipments'] = $equipments;
-            $data['data'] = $addition['text'];
-            $data['qrcode'] = $addition['qrcode'];
-        } else {
-            $data['reference'] = $addition['text'];
+            $data['qrcode'] = $this->qrcode->generate($techCondition->qrcode);
         }
 
+        $filename = time() . '.pdf';
         view()->share($data);
         $this->pdf->loadView("technic.pdf.$recommendation->type");
-        $this->pdf->save($this->path . $addition['filename']);
+        $this->pdf->save($this->path . $filename);
+
+        return $filename;
     }
 
     private function cancel(Proposition $proposition, Recommendation $recommendation, TechCondition $condition) {
         $cancelled = new CancelledProposition();
-        $applicant = $proposition->applicant;
         $cancelled->fill([
-            'prop_num' => $proposition->getAttribute('number'),
-            'applicant' => $applicant->name,
-            'proposition' => 'p' . $proposition->file,
-            'recommendation' => 'r' . $recommendation->file,
-            'condition' => 'c' . $condition->file,
-            'reason' => $recommendation->getAttribute('description')
+            'number' => $proposition->number,
+            'applicant_id' => $recommendation->applicant_id,
+            'organization_id' => $proposition->organization_id,
+            'proposition' => 'p' . $proposition->pdf,
+            'recommendation' => 'r' . $recommendation->pdf,
+            'condition' => 'c' . $condition->pdf,
+            'reason' => $recommendation->description
         ]);
 
-        $this->move('tech_conditions/', $condition->file, 'c');
-        $this->move('recommendations/', $recommendation->file, 'r');
-        $this->move('propositions/', $proposition->file, 'p');
+        $this->move('tech_conditions/', $condition->pdf, 'c');
+        $this->move('recommendations/', $recommendation->pdf, 'r');
+        $this->move('propositions/', $proposition->pdf, 'p');
 
-        $this->delete($condition);
-        $this->delete($recommendation);
+        // Cascade on delete [Recommendation and TechCondition]
         $this->delete($proposition);
 
         $cancelled->save();
-    }
-
-    private function uploadFile($file): string {
-        return $this->store($file, $this->folder);
     }
 }

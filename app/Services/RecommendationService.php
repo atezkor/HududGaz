@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 class RecommendationService extends CrudService {
     use FileUploadManager, StorageManager;
 
-    private string $path = 'public/recommendations/';
+    private string $path = 'public/recommendations';
     private string $folder;
 
     private PDF $pdf;
@@ -54,9 +54,6 @@ class RecommendationService extends CrudService {
     }
 
     public function show(Recommendation $recommendation): Response {
-        if ($recommendation->pdf) {
-        }
-
         $proposition = $recommendation->proposition;
         $organ = $recommendation->organ;
 
@@ -64,7 +61,7 @@ class RecommendationService extends CrudService {
             'model' => $recommendation,
             'proposition' => $proposition,
             'organ' => $organ,
-            'applicant' => $proposition->applicant,
+            'applicant' => $recommendation->applicant,
             'district' => $organ->district->name,
             'organization' => Organization::Data()
         ];
@@ -131,6 +128,10 @@ class RecommendationService extends CrudService {
         }
     }
 
+    public function view(Recommendation $recommendation): string {
+
+        return $this->retrieve($this->path, $recommendation->pdf);
+    }
 
     public function getEquipments($equipmentList) {
         $equipments = json_decode($equipmentList);

@@ -15,7 +15,9 @@ class LicenseService extends CrudService {
     use FileUploadManager, StorageManager;
 
     private PDF $pdf;
+
     private string $path = "storage/permits/";
+    private string $folder;
 
     public function __construct(PDF $pdf) {
         $this->folder = 'montages';
@@ -29,7 +31,7 @@ class LicenseService extends CrudService {
             'applicant' => $proposition->applicant->name,
             'project_id' => $montage->project->id,
             'montage_id' => $montage->id,
-            'district' => $proposition->organization->district,
+            'district' => $proposition->organ->district->name,
         ]);
         $license->save();
 
@@ -50,7 +52,7 @@ class LicenseService extends CrudService {
             'proposition' => $proposition,
             'recommendation' => $recommendation,
             'organization' => Organization::Data(),
-            'designer' => $license->project->designer->org_name,
+            'designer' => $license->project->designer->name,
             'installer' => $license->montage->mounter->short_name,
             'district' => $district,
             'meters' => $recommendation->GasMeters(),

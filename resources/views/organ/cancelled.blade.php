@@ -31,10 +31,10 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$model->proposition->number}}</td>
-                                    <td>{{$model->applicant->tin_pin}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
                                         <a href="{{route('organ.recommendation.show', $model->id)}}" target="_blank">
-                                            @lang('organ.show')
+                                            @lang('organ.recommendation.view')
                                         </a>
                                     </td>
                                     <td>{{$model->comment}}</td>

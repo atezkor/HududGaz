@@ -11,12 +11,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int status
  * @property int $organization_id
  * @property string $name
+ * @property string $number
  * @property-read string $pdf
  * @property-read int $build_type
  * @property-read Applicant $applicant
+ * @property-read Applicant $petitioner
  * @property-read Recommendation recommendation
  * @property-read TechCondition techCondition
- * @property-read Organ organization
+ * @property-read Organ organ
  * @property-read Activity activity
  */
 class Proposition extends Application {
@@ -54,8 +56,11 @@ class Proposition extends Application {
     }
 
     public function applicant(): HasOne {
-        // $this->type == self::PHYSICAL ? $this->individual() : $this->legal();
         return $this->hasOne(Applicant::class);
+    }
+
+    public function petitioner(): HasOne {
+        return $this->type == self::PHYSICAL ? $this->individual() : $this->legal();
     }
 
     public function recommendation(): HasOne {

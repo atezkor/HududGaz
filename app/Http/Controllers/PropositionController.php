@@ -104,7 +104,7 @@ class PropositionController extends Controller {
             return redirect('/');
         }
 
-        $applicant = $proposition->applicant;
+        $applicant = $proposition->petitioner;
         $organs = Organ::all();
         $activities = Activity::query()->pluck('activity', 'id'); // ->skip(1)->take(5)->pluck('activity', 'id');
         return view('technic.applications.edit', [
@@ -225,7 +225,8 @@ class PropositionController extends Controller {
         return view("organ.statements.upsert", [
             'model' => $recommendation,
             'proposition' => $proposition,
-            'type' => $type
+            'type' => $type,
+            'action' => route('organ.recommendation.store')
         ]);
     }
 

@@ -44,8 +44,8 @@
                    class="form-control" placeholder="@lang('organ.recommendation.len_hint')" required>
         </div>
         <div class="form-group">
-            <label for="pipe1">@lang('organ.recommendation.diameter')<span class="required">*</span></label>
-            <input type="number" name="pipe1" id="pipe1" step="0.01" value="{{$model->pipe1}}"
+            <label for="pipe_one">@lang('organ.recommendation.diameter')<span class="required">*</span></label>
+            <input type="number" name="pipe_one" id="pipe_one" step="0.01" value="{{$model->pipe_one}}"
                    class="form-control" placeholder="@lang('organ.recommendation.diameter_hint')" required>
         </div>
     </div>
@@ -90,7 +90,7 @@
     <div class="card-body col-12 px-2">
         <label for="additional">@lang('organ.recommendation.additional')</label>
         <textarea name="additional" id="additional">
-        @if ($model->status == 3)
+        @if ($model->status == $model::REVIEWED)
             {{$model->additional}}
         @else
             <ol start="9">

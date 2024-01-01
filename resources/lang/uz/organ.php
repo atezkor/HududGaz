@@ -7,7 +7,6 @@
         'archive' => "Arxiv",
         'accept' => "Qa\u{2019}bul qilish",
         'reject' => "Rad etish",
-        'show' => "Tavsiyanomani ko\u{2018}rish",
         'btn_correction' => "To\u{2018}g\u{2018}rilash",
         'file' => "Imzolangan hujjat",
         'file_hint' => "Imzolangan hujjatni yuklang",
@@ -30,6 +29,7 @@
         'december' => "Dekabr",
         'recommendation' => [
             'name' => "Tavsiyanoma",
+            'view' => "Tavsiyanomani ko\u{2018}rish",
             'heading' => "Maydonlarni to\u{2018}ldiring",
             'heading_create' => "Tavsiyanoma qo\u{2018}shish",
             'heading_edit' => "Tavsiyanomani yangilash",

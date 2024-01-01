@@ -18,8 +18,7 @@ class CreateApplicantsTable extends Migration {
             $table->foreignId('physical_applicant_id')->nullable();
             $table->foreignId('legal_applicant_id')->nullable();
             $table->foreignId('proposition_id')
-                ->constrained('propositions')
-                ->cascadeOnDelete();
+                ->constrained('propositions');
             $table->string('name');
             $table->string('tin_pin');
             $table->timestamps();

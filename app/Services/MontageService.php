@@ -13,6 +13,8 @@ use App\Utilities\StorageManager;
 class MontageService extends CrudService {
     use FileUploadManager, StorageManager;
 
+    private string $folder;
+
     public function __construct(Montage $model) {
         $this->model = $model;
         $this->folder = 'montages';
@@ -42,7 +44,6 @@ class MontageService extends CrudService {
         $montage->save();
 
         $proposition->update(['status' => 15]);
-        $applicant->update(['status' => 15]);
 
         return __('global.messages.crt');
     }
@@ -94,6 +95,5 @@ class MontageService extends CrudService {
     private function propStatus(Montage $montage, $status = 14) {
         $proposition = $montage->proposition;
         $proposition->update(['status' => $montage->status + $status]);
-        $proposition->applicant->update(['status' => $montage->status + $status]);
     }
 }

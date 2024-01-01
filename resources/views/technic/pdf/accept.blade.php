@@ -83,7 +83,7 @@
     <div class="text-right text-bold">
         <div>Davlat xizmatlari markazi</div>
         <div>Xorazm viloyati boshqarmasi</div>
-        <div>Yangiariq tuman markazi</div>
+        <div>{{$district}} tuman markazi</div>
     </div>
     <div class="clear"></div>
     <div class="text-center mt-10">
@@ -98,7 +98,7 @@
             @include('technic.tech-conditions.above')
         </div>
         <div>
-            {!! $data !!}
+            {!! $reference !!}
         </div>
     </div>
     <p><br></p>

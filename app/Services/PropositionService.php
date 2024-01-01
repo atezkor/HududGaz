@@ -48,9 +48,9 @@ class PropositionService extends CrudService {
     }
 
     public function update($data, $model) {
-        if (isset($data['file'])) {
-            $data['file'] = $this->createFile($this->path, $data['file']);
-            $this->deleteFile($this->folder, $model->file);
+        if (isset($data['pdf'])) {
+            $data['pdf'] = $this->createFile($this->path, $data['pdf']);
+            $this->deleteFile($this->folder, $model->pdf);
         }
         parent::update($data, $model);
 
@@ -60,7 +60,7 @@ class PropositionService extends CrudService {
     }
 
     public function delete($model) {
-        $this->deleteFile("storage/$this->folder/", $model->file);
+        $this->deleteFile("storage/$this->folder/", $model->pdf);
         parent::delete($model);
     }
 
@@ -69,7 +69,7 @@ class PropositionService extends CrudService {
             $this->update(['status' => $status], $proposition);
         }
 
-        return $this->path . '/' . $proposition->getAttribute('pdf');
+        return $this->path . '/' . $proposition->pdf;
     }
 
     /**

@@ -97,7 +97,6 @@ class RecommendationController extends Controller {
 
     /**
      * Update the specified resource in storage.
-     *
      * @param RecommendationRequest $request
      * @param Recommendation $recommendation
      * @return RedirectResponse
@@ -114,6 +113,11 @@ class RecommendationController extends Controller {
         $this->service->update($data, $recommendation);
         $this->propService->update(['status' => 3], $recommendation->proposition);
         return redirect()->route('organ.recommendations.cancelled');
+    }
+
+    public function view(Recommendation $recommendation): RedirectResponse {
+        $url = $this->service->view($recommendation);
+        return redirect($url);
     }
 
     /**

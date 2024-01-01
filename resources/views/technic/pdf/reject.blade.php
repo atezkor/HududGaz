@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>PDF</title>
+    <title>Texnik shart</title>
     <style>
         * {
             margin: 0;
@@ -77,7 +77,7 @@
         <h4>
             <span>Davlat xizmlatlari agentligi</span><br>
             <span>Xorazm viloyati boshqarmasi</span><br>
-            <span>{{$organ->district}} markaziga</span>
+            <span>{{$district}} markaziga</span>
         </h4>
     </div>
 

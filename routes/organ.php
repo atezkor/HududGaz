@@ -22,6 +22,7 @@ Route::post('recommendations/{recommendation}/upload', [RecommendationController
 Route::get('recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('organ.recommendation.edit');
 Route::post('recommendations/{recommendation}/update', [RecommendationController::class, 'update'])->name('organ.recommendation.update');
 Route::get('recommendations/{recommendation}', [RecommendationController::class, 'show'])->name('organ.recommendation.show');
+Route::get('recommendations/{recommendation}/view', [RecommendationController::class, 'view'])->name('recommendation.view');
 
 Route::get('equipment-types-list', [EquipmentController::class, 'types'])->name('organ.equipment.types');
 Route::get('equipment-list/{equipment?}', [EquipmentController::class, 'list'])->name('organ.equipment.list');
