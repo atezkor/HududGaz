@@ -29,7 +29,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php($limit = limitOne(3))
                             @foreach($propositions as $key => $model)
                                 <tr>
                                     <td>{{$key + 1}}</td>
@@ -41,7 +40,7 @@
                                             @lang('organ.show')
                                         </a>
                                     </td>
-                                    <td>{{$model->recommendation->created_at}}</td>
+                                    <td>{{$model->recommendation->created_at->format('d.m.Y H:i')}}</td>
                                     <td>
                                         <div class="progress progress-xs">
                                             <div

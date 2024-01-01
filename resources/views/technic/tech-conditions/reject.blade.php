@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', getName())
 @section('link')
-    <link rel="stylesheet" href="{{'/css/extra/summernote.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/summernote/summernote.min.css'}}">
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
                                 </div>
 
                                 <div class="form-group mt-5">
-                                    <label for="text">@lang('technic.tech_condition.reference')</label>
+                                    <label for="reference">@lang('technic.tech_condition.reference')</label>
                                     <textarea name="data" id="reference"></textarea>
                                 </div>
                             </div>
@@ -43,9 +43,9 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
-    <script src="{{'/js/extra/summernote.min.js'}}"></script>
+    <script src="{{'/js/summernote/summernote.min.js'}}"></script>
     <script src="{{'/js/default.js'}}"></script>
     <script>
         $('#reference').summernote({

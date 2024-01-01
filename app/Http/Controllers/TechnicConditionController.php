@@ -37,7 +37,7 @@ class TechnicConditionController extends Controller {
             return redirect('/');
         }
 
-        return view('technic.index', new TechConditionViewModel());
+        return view('technic.tech-conditions.index', new TechConditionViewModel());
     }
 
     public function create(Recommendation $recommendation): View|RedirectResponse {
@@ -47,8 +47,8 @@ class TechnicConditionController extends Controller {
             return redirect('/');
         }
 
-        $equipments = $recommendation->getEquipments();
-        return view("technic.control.$recommendation->type", [
+        $equipments = []; // $recommendation->getEquipments(); // TODO property
+        return view("technic.tech-conditions.$recommendation->type", [
             'recommendation' => $recommendation,
             'proposition' => $recommendation->proposition,
             'equipments' => $equipments,
@@ -82,21 +82,6 @@ class TechnicConditionController extends Controller {
         return redirect($url);
     }
 
-    public function show_condition(TechCondition $condition): RedirectResponse {
-        return redirect($this->service->get($condition));
-    }
-
-    public function back(Request $request, Recommendation $recommendation): RedirectResponse {
-        try {
-            $this->authorize('crud_tech');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        $this->recService->back($recommendation, $request['comment']);
-        return redirect()->back();
-    }
-
     public function edit(TechCondition $condition): View|RedirectResponse {
         try {
             $this->authorize('crud_tech');
@@ -105,12 +90,12 @@ class TechnicConditionController extends Controller {
         }
 
         $recommendation = $condition->proposition->recommendation;
-        $equipments = $recommendation->getEquipments();
-        return view("technic.control.$recommendation->type", [
+        $equipments = []; // $recommendation->getEquipments(); TODO property
+        return view("technic.tech-conditions.$recommendation->type", [
             'recommendation' => $recommendation,
             'proposition' => $recommendation->proposition,
             'equipments' => $equipments,
-            'action' => route('technic.tech_condition.update', ['condition' => $condition])
+            'action' => route('technic.tech_condition.update', $condition->id)
         ]);
     }
 
@@ -135,6 +120,21 @@ class TechnicConditionController extends Controller {
         ]);
         $this->service->update($data, $condition);
         return redirect()->route('technic.index');
+    }
+
+    public function show_condition(TechCondition $condition): RedirectResponse {
+        return redirect($this->service->get($condition));
+    }
+
+    public function back(Request $request, Recommendation $recommendation): RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $this->recService->back($recommendation, $request['comment']);
+        return redirect()->back();
     }
 
     public function upload(Request $request, TechCondition $condition): RedirectResponse {

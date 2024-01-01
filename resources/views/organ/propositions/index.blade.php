@@ -57,6 +57,6 @@
             sZeroRecords: "@lang('global.datatables.zeroRecords')",
             sInfoFiltered: "@lang('global.datatables.infoFiltered')"
         }
-        datatable(lang, 'table1', 'table2');
+        datatable(lang, 'table-individual', 'table-legal');
     </script>
 @endsection

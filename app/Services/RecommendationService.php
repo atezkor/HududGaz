@@ -115,12 +115,20 @@ class RecommendationService extends CrudService {
      * This function for back recommendation to District
      */
     public function back(Recommendation $recommendation, string $comment) {
-        $recommendation->setAttribute('comment', $comment);
-        $recommendation->setAttribute('status', 3);
-        $recommendation->update();
+        try {
+            DB::beginTransaction();
 
-        $recommendation->proposition->update(['status' => 6]);
-        $recommendation->proposition->applicant->update(['status' => 6]);
+            $recommendation->setAttribute('comment', $comment);
+            $recommendation->setAttribute('status', Recommendation::REJECTED);
+            $recommendation->update();
+
+            $recommendation->proposition->update(['status' => Proposition::REC_REJECTED]);
+
+            DB::commit();
+        } catch (QueryException $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
 

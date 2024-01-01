@@ -2,7 +2,6 @@
 
 namespace App\ViewModels;
 
-use App\Models\Organ;
 use App\Models\Proposition;
 use App\Models\Status;
 use App\Models\TechCondition;
@@ -21,12 +20,9 @@ class TechConditionViewModel extends ViewModel {
 
     function propositions(): Collection {
         return Proposition::query()
-            ->where('status', 7)
+            ->with(['techCondition', 'organ:id,name'])
+            ->where('status', Proposition::TC_CREATED)
             ->get(['id', 'number', 'organization_id', 'type']);
-    }
-
-    function organs(): Collection {
-        return Organ::query()->pluck('name', 'id');
     }
 
     function limit() {

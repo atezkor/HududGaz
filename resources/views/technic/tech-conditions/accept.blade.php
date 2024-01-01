@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', getName())
 @section('link')
-    <link rel="stylesheet" href="{{'/css/extra/summernote.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/summernote/summernote.min.css'}}">
 @endsection
 
 @section('content')
@@ -24,14 +24,14 @@
                                 <div class="form-group">
                                     <label for="above">@lang('technic.tech_condition.cond_content')</label>
                                     <div id="above" class="list-group-item">
-                                        @include('technic.control.above')
+                                        @include('technic.tech-conditions.above')
                                     </div>
                                 </div>
 
                                 <div class="form-group mt-5">
                                     <label for="data">@lang('technic.tech_condition.cond_content')</label>
                                     <textarea name="data" id="data">
-                                        @include('technic.control.template')
+                                        @include('technic.tech-conditions.template')
                                     </textarea>
                                 </div>
                                 <input type="hidden" name="description" value="{{$recommendation->description}}">
@@ -50,9 +50,9 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
-    <script src="{{'/js/extra/summernote.min.js'}}"></script>
+    <script src="{{'/js/summernote/summernote.min.js'}}"></script>
     <script src="{{'/js/default.js'}}"></script>
     <script>
         $(document).ready(function() {

@@ -1,4 +1,4 @@
-<table id="table2" class="table table-bordered table-striped table-center">
+<table id="table-legal" class="table table-bordered table-striped table-center">
     <thead>
         <tr>
             <th>@lang('global.index')</th>
@@ -21,7 +21,7 @@
                         @lang('global.proposition.show')
                     </a>
                 </td>
-                <td>{{$model->created_at}}</td>
+                <td>{{$model->created_at->format('d.m.Y H:i')}}</td>
                 <td>
                     <div class="progress progress-xs">
                         <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"

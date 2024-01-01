@@ -30,7 +30,9 @@ class Proposition extends Application {
     public const IN_PROCESS = 4;
     public const COMPLETED = 5;
     public const TECHNIC_CHECKED = 5;
+    public const REC_REJECTED = 6;
 
+    public const TC_CREATED = 7;
     public const PROJECT_C = 8;
     public const PROJECT_CANCELLED = 9;
     public const PROJECT_CREATED = 10;

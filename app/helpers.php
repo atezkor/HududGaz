@@ -26,14 +26,6 @@ function reduced($url, $controller, $name) {
     ]);
 }
 
-function readonly($url, $controller, $name) {
-    Route::resource($url, $controller)->names([
-        'index' => $name . '.index',
-        'edit' => $name . '.edit',
-        'update' => $name . '.update'
-    ]);
-}
-
 /**** ~ Route ~ ****/
 
 
@@ -45,22 +37,22 @@ function isPrimaryTheme(): bool {
     return in_array(request()->user()->role_id, [User::ROLE_ADMIN, User::TECHNIC, User::ENGINEER, User::DIRECTOR]);
 }
 
-function setImage($user): string {
+function setImage(User $user): string {
     if ($user->avatar)
         return '/storage/users/' . $user->avatar;
 
     return '/img/avatar.svg';
 }
 
-function formatDate($date, $format = 'd.m.Y'): string {
-    $res = date_create($date);
-    return date_format($res, $format);
-}
-
 function menuItems(): Illuminate\Database\Eloquent\Collection {
     /* @var User $user */
     $user = auth()->user();
     return App\Models\MenuItem::items($user->role_id)->get();
+}
+
+function formatDate($date, $format = 'd.m.Y'): string {
+    $res = date_create($date);
+    return date_format($res, $format);
 }
 
 /* This is function for application term */
@@ -70,24 +62,6 @@ function limit(int $status, int $offset = 0): Illuminate\Support\Collection {
 
 function limitOne(int $status): int {
     return App\Models\Status::query()->find($status)->getAttribute('term');
-}
-
-function districts(): array { # The reason for giving the key is to start from order 1
-    return [
-        1 => __('global.districts.1'),
-        2 => __('global.districts.2'),
-        3 => __('global.districts.3'),
-        4 => __('global.districts.4'),
-        5 => __('global.districts.5'),
-        6 => __('global.districts.6'),
-        7 => __('global.districts.7'),
-        8 => __('global.districts.8'),
-        9 => __('global.districts.9'),
-        10 => __('global.districts.10'),
-        11 => __('global.districts.11'),
-        12 => __('global.districts.12'),
-        13 => __('global.districts.13')
-    ];
 }
 
 function extendedDate($date, bool $reverse = false): string {

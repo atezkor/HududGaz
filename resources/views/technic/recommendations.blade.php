@@ -31,7 +31,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php($limit = limit(5, 3))
                             @foreach($recommendations as $model)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>

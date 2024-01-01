@@ -27,11 +27,11 @@
                         </thead>
                         <tbody>
                             @php($limit = limitOne(6))
-                            @foreach($recommendations as $key => $model)
+                            @foreach($recommendations as $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{$model->proposition->number}}</td>
-                                    <td>{{$model->applicant}}</td>
+                                    <td>{{$model->applicant->tin_pin}}</td>
                                     <td>
                                         <a href="{{route('organ.recommendation.show', $model->id)}}" target="_blank">
                                             @lang('organ.show')

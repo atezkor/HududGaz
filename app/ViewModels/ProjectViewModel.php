@@ -5,6 +5,7 @@ namespace App\ViewModels;
 use App\Models\Designer;
 use App\Models\Organ;
 use App\Models\Project;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
@@ -42,7 +43,17 @@ class ProjectViewModel extends ViewModel {
 
     function limit(): Collection|int { // TODO limit
         if (count($this->statuses))
-            return limit(12, 10);
-        return limitOne($this->statuses[0] + 9);
+            return $this->limitMany(12, 10);
+        return $this->limitOne($this->statuses[0] + 9); // TODO statuses
+    }
+
+    function limitMany(int $status, int $offset = 0): Collection {
+        return Status::query()->offset($offset)
+            ->limit($status - $offset)
+            ->pluck('term', 'id');
+    }
+
+    function limitOne(int $status): int {
+        return Status::query()->find($status)->getAttribute('term');
     }
 }

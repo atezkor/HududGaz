@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\License;
 use App\Models\Montage;
 use App\Models\Project;
@@ -72,7 +73,7 @@ class EngineerController extends Controller {
             ->get();
         return view('engineer.permits', [
             'models' => $models,
-            'districts' => districts()
+            'districts' => District::query()->pluck('name', 'id')
         ]);
     }
 

@@ -23,7 +23,7 @@
                         @lang('global.proposition.show')
                     </a>
                 </td>
-                <td>{{$model->created_at}}</td>
+                <td>{{$model->created_at->format('d.m.Y H:i')}}</td>
                 <td>
                     <div class="progress progress-xs">
                         <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"

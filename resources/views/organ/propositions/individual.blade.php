@@ -1,9 +1,9 @@
-<table id="table1" class="table table-bordered table-striped table-center">
+<table id="table-individual" class="table table-bordered table-striped table-center">
     <thead>
         <tr>
             <th>@lang('global.index')</th>
             <th>@lang('global.proposition.number')</th>
-            <th>@lang('global.proposition.tin')</th>
+            <th>@lang('global.applicant.pin_fl')</th>
             <th>@lang('global.proposition.name')</th>
             <th>@lang('global.proposition.date')</th>
             <th>@lang('global.proposition.limit')</th>
@@ -17,11 +17,11 @@
                 <td>{{$model->number}}</td>
                 <td>{{$model->individual->tin}}</td>
                 <td>
-                    <a href="{{route('organ.proposition.show', ['proposition' => $model])}}" target="_blank">
-                        @lang('global.proposition.show')
+                    <a href="{{route('organ.proposition.show', $model->id)}}" target="_blank">
+                        <span>@lang('global.proposition.show')</span>
                     </a>
                 </td>
-                <td>{{$model->created_at}}</td>
+                <td>{{$model->created_at->format('d.m.Y H:i')}}</td>
                 <td>
                     <div class="progress progress-xs">
                         <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"

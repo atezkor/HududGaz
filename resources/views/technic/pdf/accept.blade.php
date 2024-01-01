@@ -95,7 +95,7 @@
     </div>
     <div class="conditions">
         <div>
-            @include('technic.control.above')
+            @include('technic.tech-conditions.above')
         </div>
         <div>
             {!! $data !!}

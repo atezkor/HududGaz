@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
-use Barryvdh\DomPDF\PDF;
+use App\Models\District;
 use App\Models\License;
 use App\Models\Montage;
 use App\Models\Organization;
 use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
+use Barryvdh\DomPDF\PDF;
 
 
 class LicenseService extends CrudService {
@@ -37,10 +38,12 @@ class LicenseService extends CrudService {
     }
 
     private function createPDF(License $license) {
+        $districts = District::query()->pluck('name', 'id');
+
         $filename = time() . '.pdf';
         $proposition = $license->proposition;
         $recommendation = $proposition->recommendation;
-        $district = districts()[$license->district];
+        $district = $districts[$license->district];
 
         $data = [
             'permit' => $license,

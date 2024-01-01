@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\License;
 use App\Models\Proposition;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -33,7 +34,7 @@ class DirectorController extends Controller {
 
         return view('engineer.permits', [
             'models' => License::all(),
-            'districts' => districts()
+            'districts' => District::query()->pluck('name', 'id')
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property int $id
  * @property string $type
  * @property string $pdf
  * @property Proposition $proposition
@@ -14,8 +15,9 @@ class Recommendation extends Application {
 
     public const CREATED = 1;
     public const PRESENTED = 2;
-    public const COMPLETED = 4;
+    public const REVIEWED = 3;
     public const REJECTED = -1;
+    public const COMPLETED = 5;
 
     public const ACCEPT = "accept";
     public const REJECT = "reject";

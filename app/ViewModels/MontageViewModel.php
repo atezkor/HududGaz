@@ -2,7 +2,7 @@
 
 namespace App\ViewModels;
 
-use App\Models\{Montage, Mounter, Organ};
+use App\Models\{Montage, Mounter, Organ, Status};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
@@ -37,9 +37,21 @@ class MontageViewModel extends ViewModel {
             ->pluck('short_name', 'id');
     }
 
+    /* This is function for application term */
+    // int $status, int $offset = 0
     function limit(): Collection|int {
         if (count($this->statuses) > 1)
-            return limit(17, 15);
-        return limitOne(15);
+            return $this->limitMany(17, 15); // TODO statuses
+        return $this->limitOne(15);
+    }
+
+    function limitMany(int $status, int $offset = 0): Collection {
+        return Status::query()->offset($offset)
+            ->limit($status - $offset)
+            ->pluck('term', 'id');
+    }
+
+    function limitOne(int $status): int {
+        return Status::query()->find($status)->getAttribute('term');
     }
 }

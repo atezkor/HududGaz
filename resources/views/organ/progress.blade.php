@@ -1,8 +1,8 @@
 @extends('secondary')
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -25,28 +25,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($limit = limit(5, 3))
-                        @foreach($recommendations as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$model->proposition->number}}</td>
-                                <td>{{$model->proposition->number}}</td>
-                                <td>
-                                    <a href="{{route('organ.recommendation.show', $model->id)}}" target="_blank">
-                                        @lang('organ.show')
-                                    </a>
-                                </td>
-                                <td>{{$model->created_at}}</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
-                                             style="width: {{$model->percent($model->limit($limit))}}%">
+                            @foreach($recommendations as $model)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->proposition->number}}</td>
+                                    <td>{{$model->proposition->number}}</td>
+                                    <td>
+                                        <a href="{{route('organ.recommendation.show', $model->id)}}" target="_blank">
+                                            @lang('organ.show')
+                                        </a>
+                                    </td>
+                                    <td>{{$model->created_at->format('d.m.Y H:i')}}</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
+                                                style="width: {{$model->percent($model->limit($limit))}}%">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

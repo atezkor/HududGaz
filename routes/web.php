@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin'], function() {
     reduced('equipment-types', EquipmentController::class, 'admin.equipment-types');
     reduced('activity-types', ActivityController::class, 'admin.activities');
 
-    readonly('statuses', StatusController::class, 'admin.statuses');
+    Route::resource('statuses', StatusController::class)->names('admin.statuses');
     Route::resource('timetables', TimetableController::class)->names('admin.timetables');
 
     Route::get('equipments/{equipment}/equipment-types', [EquipmentController::class, 'show'])->name('admin.equip_type');

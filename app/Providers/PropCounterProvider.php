@@ -33,8 +33,12 @@ class PropCounterProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
+        // The reason of not using $user globally is auth()->user() returns null provider level
+
         View::composer('components.menu', function() {
+            /* @var User $user */
             $user = request()->user();
+
             $numbers = match ($user->role_id) {
                 User::ORGAN => $this->applications($user->organization_id),
 //                User::DESIGNER => $this->projects($user->organization_id),
@@ -46,27 +50,30 @@ class PropCounterProvider extends ServiceProvider {
         });
 
         View::composer('components.navbar', function() {
-            $numbers = match (request()->user()->role) {
-                2, 7 => $this->technic(),
+            /* @var User $user */
+            $user = request()->user();
+
+            $numbers = match ($user->role_id) {
+                User::TECHNIC, User::DIRECTOR => $this->technic(),
                 default => [0, 0, 0, 0]
             };
             View::share(['numbers' => $numbers]);
         });
     }
 
-    private function projects($organ): array {
-        return $this->secondary(Project::query(), 'designer_id', $organ);
+    private function projects($organId): array {
+        return $this->secondary(Project::query(), 'designer_id', $organId);
     }
 
-    private function montages($organ): array {
-        return $this->secondary(Montage::query(), 'mounter_id', $organ);
+    private function montages($organId): array {
+        return $this->secondary(Montage::query(), 'mounter_id', $organId);
     }
 
-    private function secondary(Builder $query, $column, $organ): array {
-        $collection = $query->where($column, $organ)
+    private function secondary(Builder $query, $column, $organizationId): array {
+        $collection = $query->where($column, $organizationId)
             ->get('status')->groupBy('status');
-        $counts = $this->countByGroup($collection, [1, 2, 4, 5, 3]);
-        $counts[1] += $counts[4]; // Merge status 2 and 3 -  is process.
+        $counts = $this->countByGroup($collection, [Project::CREATED, Project::ACCEPTED, Project::CANCELLED, Project::COMPLETED, Project::REVIEWED]);
+        $counts[Project::CREATED] += $counts[Project::CANCELLED]; // Merge status 2 and 3 -  is process.
 
         return $counts;
     }
@@ -87,11 +94,14 @@ class PropCounterProvider extends ServiceProvider {
             ->where('organization_id', $organId)
             ->get('status')
             ->groupBy('status');
-        $temp = $this->countByGroup($recs, [Recommendation::CREATED, 2, 3, 4]); // TODO status
+        $temp = $this->countByGroup($recs, [Recommendation::CREATED, Recommendation::PRESENTED, Recommendation::REJECTED, Recommendation::COMPLETED]);
 
         return [
             $propositions,
-            $temp[0], $temp[1], $temp[2], $temp[3]
+            $temp[Recommendation::CREATED],
+            $temp[Recommendation::PRESENTED],
+            $temp[Recommendation::REJECTED],
+            $temp[Recommendation::COMPLETED]
         ];
     }
 
@@ -103,22 +113,22 @@ class PropCounterProvider extends ServiceProvider {
      */
     private function countByGroup(Collection $collection, array $statuses = []): array {
         $numbers = [];
-        foreach ($statuses as $key => $status) {
+        foreach ($statuses as $status) {
             if (isset($collection[$status]))
-                $numbers[$key] = $collection[$status]->count();
+                $numbers[$status] = $collection[$status]->count();
             else
-                $numbers[$key] = 0;
+                $numbers[$status] = 0;
         }
 
         return $numbers;
     }
 
     private function technic(): array {
+        $date = date(DATE_ATOM, time() - Status::query()->sum('term') * 3600);
         return [
             Proposition::query()->whereDate('created_at', now())->count(),
-            Proposition::query()->whereIn('status', [1, 2])->count(),
-            Proposition::query()->where('created_at', '<',
-                date(DATE_ATOM, time() - Status::query()->sum('term') * 3600))->count(),
+            Proposition::query()->whereIn('status', [Proposition::CREATED, Proposition::REVIEWED])->count(),
+            Proposition::query()->where('created_at', '<', $date)->count(),
             Proposition::query()->whereDate('created_at', '>', Carbon::now()->firstOfYear())->count()
         ];
     }

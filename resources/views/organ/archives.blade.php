@@ -37,18 +37,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($propositions as $key => $model)
+                                    @foreach($propositions as $model)
                                         <tr>
-                                            <td>{{$loop->index + 1}}</td>
-                                            <td>{{$model->number}}</td>
-                                            <td>{{$model->applicant}}</td>
+                                            <td>{{$loop->iteration}}</td>
                                             <td>
-                                                <a href="{{route('propositions.show', $model->id)}}"
-                                                   target="_blank">@lang('global.btn_show')</a>
+                                                <a href="{{route('propositions.show', $model->id)}}" target="_blank">
+                                                    <span>{{$model->number}}</span>
+                                                </a>
+                                            </td>
+                                            <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
+                                            <td>
+                                                <a href="{{route('propositions.show', $model->id)}}" target="_blank">
+                                                    <span>@lang('global.btn_show')</span>
+                                                </a>
                                             </td>
                                             <td>
                                                 <a href="{{route('organ.recommendation.show', $model->recommendation->id)}}"
-                                                   target="_blank">@lang('global.btn_show')</a>
+                                                   target="_blank">
+                                                    <span>@lang('global.btn_show')</span>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -72,7 +79,7 @@
                                 <tbody>
                                     @foreach($models as $model)
                                         <tr>
-                                            <td>{{$loop->index + 1}}</td>
+                                            <td>{{$loop->iteration}}</td>
                                             <td>{{$model->prop_num}}</td>
                                             <td>{{$model->applicant}}</td>
                                             <td>
@@ -88,7 +95,7 @@
                                                    target="_blank">@lang('global.btn_show')</a>
                                             </td>
                                             <td>{{$model->reason}}</td>
-                                            <td>{{$model->created_at}}</td>
+                                            <td>{{$model->created_at->format('d.m.Y H:i')}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

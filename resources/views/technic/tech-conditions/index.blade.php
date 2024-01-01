@@ -31,23 +31,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($propositions as $key => $model)
+                            @foreach($propositions as $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$model->number}}</td>
-                                    <td>{{$model->applicant}}</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>
-                                        <a href="{{route('technic.tech_condition.show', ['condition' => $conditions[$key]])}}"
+                                        <a href="{{route('propositions.show', $model->id)}}" target="_blank">
+                                            <span>{{$model->number}}</span>
+                                        </a>
+                                    </td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
+                                    <td>
+                                        <a href="{{route('technic.tech_condition.show', $model->techCondition->id)}}"
                                            target="_blank">
                                             @lang('technic.tech_condition.show')
                                         </a>
                                     </td>
-                                    <td>{{$organs[$model->organization_id]}}</td>
-                                    <td>{{$conditions[$key]->created_at}}</td>
+                                    <td>{{$model->organ->name}}</td>
+                                    <td>{{$model->techCondition->created_at->format('d.m.Y H:i')}}</td>
                                     <td>
                                         <div class="progress progress-xs">
-                                            <div class="{{$conditions[$key]->progressColor($model->percent($limit))}}"
-                                                 style="width: {{$conditions[$key]->percent($limit)}}%">
+                                            <div class="{{$model->techCondition->progressColor($model->percent($limit))}}"
+                                                 style="width: {{$model->techCondition->percent($limit)}}%">
                                             </div>
                                         </div>
                                         <div class="text-center">{{$limit}} @lang('global.hour')</div>
@@ -55,16 +59,16 @@
                                     <td>
                                         @if($show)
                                             <form
-                                                action="{{route('technic.tech_condition.upload', ['condition' => $conditions[$key]])}}"
+                                                action="{{route('technic.tech_condition.upload', $model->techCondition->id)}}"
                                                 method="post" enctype="multipart/form-data">
                                                 @csrf
-                                                <a href="{{route('technic.tech_condition.edit', ['condition' => $conditions[$key]])}}"
+                                                <a href="{{route('technic.tech_condition.edit', $model->techCondition->id)}}"
                                                    class="btn btn-info">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <input type="file" name="file" id="file-{{$key}}"
+                                                <input type="file" name="pdf" id="pdf-{{$model->id}}"
                                                        onchange="this.parentNode.submit()" hidden>
-                                                <label for="file-{{$key}}" class="btn btn-primary text-bold my-0"
+                                                <label for="pdf-{{$model->id}}" class="btn btn-primary text-bold my-0"
                                                        title="@lang('global.btn_upload')">
                                                     <i class="fas fa-upload"></i>
                                                 </label>

@@ -141,7 +141,7 @@ class RecommendationController extends Controller {
         }
 
         $user = request()->user();
-        return view('organ.progress', new RecommendationViewModel([Proposition::PRESENTED, Proposition::COMPLETED], Recommendation::PRESENTED, $user->organization_id));
+        return view('organ.progress', new RecommendationViewModel([], [Recommendation::PRESENTED], $user->organization_id));
     }
 
     public function cancelled(): View|RedirectResponse {
@@ -152,7 +152,7 @@ class RecommendationController extends Controller {
         }
 
         $user = request()->user();
-        return view('organ.cancelled', new RecommendationViewModel([], Recommendation::REJECTED, $user->organization_id));
+        return view('organ.cancelled', new RecommendationViewModel([], [Recommendation::REJECTED], $user->organization_id));
     }
 
     public function archives(): View|RedirectResponse {
@@ -162,17 +162,23 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
+        $user = request()->user();
+
         $models = CancelledProposition::all();
-        $provider = function($file): string {
-            return '/storage/cancelled/' . $file;
+        $provider = function(string $pdf): string {
+            return '/storage/cancelled/' . $pdf;
         };
 
-        $user = request()->user();
-        $statuses = [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; // TODO statuses
+        $statuses = [
+            Proposition::PROJECT_C, Proposition::PROJECT_CREATED,
+            11, 12, 13, 14, 15,
+            16, 17, 18, 19, 20
+        ]; // TODO statuses
         return view('organ.archives', new RecommendationViewModel(
-            $statuses, Recommendation::COMPLETED, $user->organization_id
+            $statuses, [Recommendation::COMPLETED], $user->organization_id
         ), [
-            'models' => $models, 'provider' => $provider
+            'models' => $models,
+            'provider' => $provider
         ]);
     }
 
@@ -183,7 +189,7 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
-        return view('technic.recommendations', new RecommendationViewModel([], Recommendation::PRESENTED));
+        return view('technic.recommendations', new RecommendationViewModel([], [Recommendation::PRESENTED]));
     }
 
     public function director(): View|RedirectResponse {
@@ -193,6 +199,6 @@ class RecommendationController extends Controller {
             return redirect('/');
         }
 
-        return view('technic.recommendations', new RecommendationViewModel([Proposition::IN_PROCESS, Proposition::COMPLETED], Recommendation::PRESENTED));
+        return view('technic.recommendations', new RecommendationViewModel([Proposition::IN_PROCESS, Proposition::COMPLETED], [Recommendation::PRESENTED]));
     }
 }
