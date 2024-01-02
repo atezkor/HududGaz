@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read int id
  * @property string $pdf
  * @property-read string qrcode
+ * @property-read int $applicant_id
  * @property-read Proposition proposition
  * @property-read Project project
  */

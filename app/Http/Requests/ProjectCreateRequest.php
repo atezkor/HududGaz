@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use JetBrains\PhpStorm\ArrayShape;
 
 
 class ProjectCreateRequest extends FormRequest {
@@ -20,6 +21,7 @@ class ProjectCreateRequest extends FormRequest {
      *
      * @return array
      */
+    #[ArrayShape(['code' => "string"])]
     public function rules(): array {
         return [
             'code' => 'required'

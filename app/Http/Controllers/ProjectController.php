@@ -36,16 +36,6 @@ class ProjectController extends Controller {
         ]);
     }
 
-    public function engineer(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_permit');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        return view('engineer.projects', new ProjectViewModel(0, [Project::ACCEPTED, Project::REVIEWED]));
-    }
-
     public function store(ProjectCreateRequest $request): RedirectResponse {
         try {
             $this->authorize('crud_project');
@@ -74,10 +64,10 @@ class ProjectController extends Controller {
 
         if ($request->has('download')) {
             $data = $this->service->generateLetter($project);
-            return view('designer.explanatory-letter', $data);
+            return view('designer.pdf.explanatory-letter', $data);
         }
 
-        $file = $request->validate(['file' => ['required']]);
+        $file = $request->validate(['pdf' => ['required']]);
         $this->service->upload($file, $project);
         return redirect()->back();
     }
@@ -127,6 +117,16 @@ class ProjectController extends Controller {
 
         $user = request()->user();
         return view('designer.archive', new ProjectViewModel($user->organization_id, [Project::COMPLETED]));
+    }
+
+    public function engineer(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        return view('engineer.projects', new ProjectViewModel(0, [Project::ACCEPTED, Project::REVIEWED]));
     }
 
     /**

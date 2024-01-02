@@ -21,10 +21,16 @@ class Project extends Application {
     public const CANCELLED = 4;
     public const COMPLETED = 5;
 
-    protected $fillable = ['proposition_id', 'tech_condition_id', 'designer_id', 'organ', 'status', 'pdf', 'comment'];
+    protected $fillable = [
+        'proposition_id', 'applicant_id', 'tech_condition_id', 'designer_id', 'organ_id', 'status', 'pdf', 'comment'
+    ];
 
     public function proposition(): BelongsTo {
         return $this->belongsTo(Proposition::class);
+    }
+
+    public function applicant(): BelongsTo {
+        return $this->belongsTo(Applicant::class);
     }
 
     public function designer(): BelongsTo {

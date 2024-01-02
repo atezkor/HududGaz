@@ -30,8 +30,8 @@ class ProjectService extends CrudService {
 
     public function create($data): void {
         /**
-         * @var TechCondition $condition
          * @var User $user
+         * @var TechCondition $condition
          */
         $user = auth()->user();
 
@@ -45,15 +45,16 @@ class ProjectService extends CrudService {
         $proposition = $condition->proposition;
         $data = [
             'proposition_id' => $proposition->id,
+            'applicant_id' => $condition->applicant_id,
             'tech_condition_id' => $condition->id,
-            'organ' => $proposition->organ,
-            'designer_id' => $user->organization_id
+            'designer_id' => $user->organization_id,
+            'organ_id' => $proposition->organization_id
         ];
+
+        $proposition->update(['status' => Proposition::PROJECT_CREATED]);
 
         $project = new Project($data);
         $project->save();
-
-        $proposition->update(['status' => Proposition::PROJECT_CREATED]);
     }
 
     public function upload($file, Project $project) {
@@ -81,8 +82,8 @@ class ProjectService extends CrudService {
             'build_type' => $proposition->buildType(),
             'condition' => $project->condition,
             'organization' => Organization::Data()->shareholder_name,
-            'gas_meters' => $recommendation->GasMeters(),
-            'equipments' => $recommendation->getEquipments()
+            'gas_meters' => [], //$recommendation->GasMeters(),
+            'equipments' => [] //$recommendation->getEquipments()
         ];
     }
 

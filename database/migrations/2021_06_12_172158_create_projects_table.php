@@ -17,10 +17,11 @@ class CreateProjectsTable extends Migration {
             $table->foreignId('proposition_id')
                 ->constrained('propositions')
                 ->cascadeOnDelete();
+            $table->foreignId('applicant_id')->nullable();
             $table->unsignedBigInteger('tech_condition_id');
             $table->unsignedBigInteger('designer_id');
+            $table->foreignId('organ_id')->constrained('organs');
             $table->tinyInteger('status')->default(1);
-            $table->tinyInteger('organ');
             $table->string('pdf')->nullable();
             $table->string('comment')->nullable();
             $table->timestamps();
