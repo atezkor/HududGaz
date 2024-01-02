@@ -32,8 +32,11 @@
                                         <th>@lang('global.index')</th>
                                         <th>@lang('global.proposition.number')</th>
                                         <th>@lang('global.consumer')</th>
-                                        <th>@lang('global.proposition.name')</th>
                                         <th>@lang('organ.recommendation.name')</th>
+                                        <th>@lang('global.tech_condition')</th>
+                                        <th>@lang('global.project')</th>
+                                        <th>@lang('global.montage')</th>
+                                        <th>@lang('global.proposition.date')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,16 +50,27 @@
                                             </td>
                                             <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                             <td>
-                                                <a href="{{route('propositions.show', $model->id)}}" target="_blank">
-                                                    <span>@lang('global.btn_show')</span>
-                                                </a>
-                                            </td>
-                                            <td>
                                                 <a href="{{route('organ.recommendation.show', $model->recommendation->id)}}"
                                                    target="_blank">
                                                     <span>@lang('global.btn_show')</span>
                                                 </a>
                                             </td>
+                                            <td>
+                                                <a href="{{route('propositions.show', $model->id)}}" target="_blank">
+                                                    <span>@lang('global.btn_show')</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{route('propositions.show', $model->id)}}" target="_blank">
+                                                    <span>@lang('global.btn_show')</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{route('propositions.show', $model->id)}}" target="_blank">
+                                                    <span>@lang('global.btn_show')</span>
+                                                </a>
+                                            </td>
+                                            <td>{{$model->created_at->format('d.m.Y H:i')}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -80,8 +94,8 @@
                                     @foreach($models as $model)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$model->prop_num}}</td>
-                                            <td>{{$model->applicant}}</td>
+                                            <td>{{$model->number}}</td>
+                                            <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                             <td>
                                                 <a href="{{$provider($model->proposition)}}"
                                                    target="_blank">@lang('global.btn_show')</a>

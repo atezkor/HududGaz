@@ -64,6 +64,9 @@ return [
         'legal_tin' => "Yuridik shaxs STIRi",
         'legal_name' => "Yuridik shaxs nomi"
     ],
+    'tech_condition' => "Texnik shart",
+    'project' => "Loyiha",
+    'montage' => "Ish",
     'datatables' => [
         'search' => "Qidiruv",
         'previous' => "Oldingi",

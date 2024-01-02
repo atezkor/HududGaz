@@ -17,8 +17,7 @@ class CreateApplicantsTable extends Migration {
             $table->tinyInteger('type');
             $table->foreignId('physical_applicant_id')->nullable();
             $table->foreignId('legal_applicant_id')->nullable();
-            $table->foreignId('proposition_id')
-                ->constrained('propositions');
+            $table->foreignId('proposition_id')->nullable();
             $table->string('name');
             $table->string('tin_pin');
             $table->timestamps();

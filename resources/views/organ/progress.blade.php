@@ -28,8 +28,13 @@
                             @foreach($recommendations as $model)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$model->proposition->number}}</td>
-                                    <td>{{$model->proposition->number}}</td>
+                                    <td>
+                                        <a href="{{route('organ.proposition.show', $model->proposition_id)}}"
+                                           target="_blank">
+                                            <span>{{$model->proposition->number}}</span>
+                                        </a>
+                                    </td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
                                         <a href="{{route('recommendation.view', $model->id)}}" target="_blank">
                                             @lang('organ.recommendation.view')

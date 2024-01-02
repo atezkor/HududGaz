@@ -23,13 +23,13 @@ class TechConditionRequest extends FormRequest {
     public function rules(): array {
         return [
             'description' => [],
-            'data' => ['required']
+            'content' => ['required']
         ];
     }
 
     public function attributes(): array {
         return [
-            'data' => __('technic.tech_condition.ref')
+            'content' => __('technic.tech_condition.ref')
         ];
     }
 }

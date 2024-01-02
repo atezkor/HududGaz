@@ -41,7 +41,7 @@
                                     </td>
                                     <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.tech_condition.show', $model->techCondition->id)}}"
+                                        <a href="{{route('technic.tech-condition.view', $model->techCondition->id)}}"
                                            target="_blank">
                                             @lang('technic.tech_condition.show')
                                         </a>
@@ -59,10 +59,10 @@
                                     <td>
                                         @if($show)
                                             <form
-                                                action="{{route('technic.tech_condition.upload', $model->techCondition->id)}}"
+                                                action="{{route('technic.tech-condition.finish', $model->techCondition->id)}}"
                                                 method="post" enctype="multipart/form-data">
                                                 @csrf
-                                                <a href="{{route('technic.tech_condition.edit', $model->techCondition->id)}}"
+                                                <a href="{{route('technic.tech-condition.edit', $model->techCondition->id)}}"
                                                    class="btn btn-info">
                                                     <i class="fas fa-edit"></i>
                                                 </a>

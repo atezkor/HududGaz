@@ -29,8 +29,8 @@
                                 </div>
 
                                 <div class="form-group mt-5">
-                                    <label for="data">@lang('technic.tech_condition.cond_content')</label>
-                                    <textarea name="data" id="data">
+                                    <label for="content">@lang('technic.tech_condition.cond_content')</label>
+                                    <textarea name="content" id="content">
                                         @include('technic.tech-conditions.template')
                                     </textarea>
                                 </div>
@@ -56,7 +56,7 @@
     <script src="{{'/js/default.js'}}"></script>
     <script>
         $(document).ready(function() {
-           $('#data').summernote();
+           $('#content').summernote();
         });
 
         showNavbar();

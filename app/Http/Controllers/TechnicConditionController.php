@@ -9,7 +9,6 @@ use App\Models\Proposition;
 use App\Models\Recommendation;
 use App\Models\Status;
 use App\Models\TechCondition;
-use App\Services\RecommendationService;
 use App\Services\TechConditionService;
 use App\ViewModels\TechConditionViewModel;
 use Exception;
@@ -25,11 +24,9 @@ class TechnicConditionController extends Controller {
     use ValidatesRequests;
 
     private TechConditionService $service;
-    private RecommendationService $recService;
 
-    public function __construct(TechConditionService $service, RecommendationService $recService) {
+    public function __construct(TechConditionService $service) {
         $this->service = $service;
-        $this->recService = $recService;
     }
 
     public function index(): View|RedirectResponse {
@@ -54,7 +51,7 @@ class TechnicConditionController extends Controller {
             'recommendation' => $recommendation,
             'proposition' => $recommendation->proposition,
             'equipments' => $equipments,
-            'action' => route('technic.tech_condition.store', ['recommendation' => $recommendation])
+            'action' => route('technic.tech-condition.store', ['recommendation' => $recommendation])
         ]);
     }
 
@@ -71,18 +68,17 @@ class TechnicConditionController extends Controller {
 
         $data = $this->validate($request, [
             'description' => [],
-            'data' => ['required']
+            'content' => ['required']
         ], [], [
-            'data' => __('technic.tech_condition.ref')
+            'content' => __('technic.tech_condition.ref')
         ]);
         $this->service->create($data, $recommendation);
 
         return redirect()->route('technic.index');
     }
 
-    public function show(Recommendation $recommendation): RedirectResponse {
-        $url = $this->recService->review($recommendation);
-        return redirect($url);
+    public function show(TechCondition $condition): RedirectResponse {
+        return redirect($this->service->get($condition));
     }
 
     public function edit(TechCondition $condition): View|RedirectResponse {
@@ -98,7 +94,7 @@ class TechnicConditionController extends Controller {
             'recommendation' => $recommendation,
             'proposition' => $recommendation->proposition,
             'equipments' => $equipments,
-            'action' => route('technic.tech_condition.update', $condition->id)
+            'action' => route('technic.tech-condition.update', $condition->id)
         ]);
     }
 
@@ -119,29 +115,14 @@ class TechnicConditionController extends Controller {
         return redirect()->route('technic.index');
     }
 
-    public function show_condition(TechCondition $condition): RedirectResponse {
-        return redirect($this->service->get($condition));
-    }
-
-    public function back(Request $request, Recommendation $recommendation): RedirectResponse {
+    public function finish(Request $request, TechCondition $condition): RedirectResponse {
         try {
             $this->authorize('crud_tech');
         } catch (AuthorizationException) {
             return redirect('/');
         }
 
-        $this->recService->back($recommendation, $request['comment']);
-        return redirect()->back();
-    }
-
-    public function upload(Request $request, TechCondition $condition): RedirectResponse {
-        try {
-            $this->authorize('crud_tech');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        $this->service->upload($request, $condition);
+        $this->service->finish($request, $condition);
         return redirect()->route('technic.index');
     }
 

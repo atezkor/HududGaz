@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PropositionRequest;
 use App\Models\Activity;
+use App\Models\CancelledProposition;
 use App\Models\Organ;
 use App\Models\PhysicalApplicant;
 use App\Models\Proposition;
@@ -11,6 +12,7 @@ use App\Models\Recommendation;
 use App\Models\User;
 use App\Services\PropositionService;
 use App\ViewModels\PropositionListViewModel;
+use App\ViewModels\RecommendationViewModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
@@ -242,5 +244,33 @@ class PropositionController extends Controller {
         }
 
         return view('technic.applications.index', new PropositionListViewModel());
+    }
+
+    public function archive(): View|RedirectResponse {
+        try {
+            $this->authorize('crud_rec');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $user = request()->user();
+
+        $models = CancelledProposition::all();
+        $provider = function(string $pdf): string {
+            return '/storage/cancelled/' . $pdf;
+        };
+
+        $statuses = [
+            // These are also finished, because they have passed next stage
+            Proposition::PROJECT_C, Proposition::PROJECT_CREATED,
+            11, 12, 13, 14, 15,
+            16, 17, 18, 19, 20
+        ]; // TODO statuses
+        return view('organ.archives', new RecommendationViewModel(
+            $statuses, [Recommendation::COMPLETED], $user->organization_id
+        ), [
+            'models' => $models,
+            'provider' => $provider
+        ]);
     }
 }

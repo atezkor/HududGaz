@@ -36,7 +36,7 @@ class RecommendationViewModel extends ViewModel {
             ->with('recommendation')
             ->whereIn('status', $this->propStatuses)
             ->when($this->organizationId, fn(Builder $query) => $query->where('organization_id', $this->organizationId))
-            ->get(['id', 'number', 'type']);
+            ->get(['id', 'number', 'type', 'created_at']);
     }
 
     public function organs(): Collection {

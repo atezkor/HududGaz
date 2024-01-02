@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RecommendationRequest;
-use App\Models\CancelledProposition;
 use App\Models\Proposition;
 use App\Models\Recommendation;
 use App\Services\PropositionService;
@@ -137,6 +136,17 @@ class RecommendationController extends Controller {
         return redirect()->back();
     }
 
+    public function back(Request $request, Recommendation $recommendation): RedirectResponse {
+        try {
+            $this->authorize('crud_tech');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $this->service->back($recommendation, $request['comment']);
+        return redirect()->back();
+    }
+
     public function progress(): View|RedirectResponse {
         try {
             $this->authorize('crud_rec');
@@ -157,33 +167,6 @@ class RecommendationController extends Controller {
 
         $user = request()->user();
         return view('organ.cancelled', new RecommendationViewModel([], [Recommendation::REJECTED], $user->organization_id));
-    }
-
-    public function archives(): View|RedirectResponse {
-        try {
-            $this->authorize('crud_rec');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        $user = request()->user();
-
-        $models = CancelledProposition::all();
-        $provider = function(string $pdf): string {
-            return '/storage/cancelled/' . $pdf;
-        };
-
-        $statuses = [
-            Proposition::PROJECT_C, Proposition::PROJECT_CREATED,
-            11, 12, 13, 14, 15,
-            16, 17, 18, 19, 20
-        ]; // TODO statuses
-        return view('organ.archives', new RecommendationViewModel(
-            $statuses, [Recommendation::COMPLETED], $user->organization_id
-        ), [
-            'models' => $models,
-            'provider' => $provider
-        ]);
     }
 
     public function technic(): View|RedirectResponse {

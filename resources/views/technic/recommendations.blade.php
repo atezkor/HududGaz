@@ -37,7 +37,7 @@
                                     <td>{{$model->proposition->number}}</td>
                                     <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.recommendation.show', $model->id)}}" target="_blank">
+                                        <a href="{{route('technic.recommendation.view', $model->id)}}" target="_blank">
                                             @lang('technic.recommendation.show')
                                         </a>
                                     </td>
@@ -54,12 +54,12 @@
                                     </td>
                                     <td>
                                         @if($show)
-                                            <a href="{{route('technic.tech_condition.create', ['recommendation' => $model])}}"
+                                            <a href="{{route('technic.tech-condition.create', ['recommendation' => $model])}}"
                                                class="btn btn-outline-info" title="@lang('technic.btn_create')">
-                                                <i class="fas fa-plus"></i>
+                                                <i class="fas fa-check"></i>
                                             </a>
                                             <button type="button"
-                                                    onclick="back('{{route('technic.recommendation.back', ['recommendation' => $model])}}')"
+                                                    onclick="back('{{route('technic.recommendation.back', $model)}}')"
                                                     class="btn btn-outline-secondary"
                                                     title="@lang('global.btn_cancel')">
                                                 <i class="fas fa-undo"></i>

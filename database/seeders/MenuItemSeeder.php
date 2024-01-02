@@ -52,7 +52,7 @@ class MenuItemSeeder extends Seeder {
         $this->createMenuItem(User::ORGAN, 'organ.recommendations', 'organ.recommendations', 'bg-info');
         $this->createMenuItem(User::ORGAN, 'organ.progress', 'organ.recommendations.progress', 'bg-success');
         $this->createMenuItem(User::ORGAN, 'organ.cancelled', 'organ.recommendations.cancelled', 'bg-danger');
-        $this->createMenuItem(User::ORGAN, 'organ.archive', 'organ.recommendations.archive', 'bg-secondary');
+        $this->createMenuItem(User::ORGAN, 'organ.archive', 'organ.propositions.archive', 'bg-secondary');
     }
 
     private function designer() {

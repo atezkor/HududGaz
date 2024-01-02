@@ -6,7 +6,7 @@
         <br>
     </li>
     <li>
-        <span>Gaz quvuriga ulanish joyi, harakatdagi yer osti/usti, <u class="text-lowercase">@lang("district.recommendation.$recommendation->pipe_type")</u> gaz tarmog&#8216;iga,</span>
+        <span>Gaz quvuriga ulanish joyi, harakatdagi yer osti/usti, <u class="text-lowercase">@lang("organ.recommendation.$recommendation->pipe_type")</u> gaz tarmog&#8216;iga,</span>
         <span>ulanish nuqtasiga bo&#8216;lgan masofa: {{$recommendation->length}} p/m, D-{{$recommendation->pipe_one}} mm,</span>
         <span>o&#8216;rt. qishgi - {{$recommendation->pressure_win}} kgc/cm<sup>2</sup>, o&#8216;rt. yozgi - {{$recommendation->pressure_sum}} kgc/cm<sup>2</sup>, <b><u>{{$recommendation->grc}}</u></b>-GFT</span>
     </li>

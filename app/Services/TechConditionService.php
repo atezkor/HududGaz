@@ -20,19 +20,22 @@ use SimpleSoftwareIO\QrCode\Generator;
 class TechConditionService extends CrudService {
     use FileUploadManager, StorageManager, CodeGenerator;
 
+    private string $path = 'storage';
+    private string $folder;
+
     private PDF $pdf;
     private Generator $qrcode;
-    private string $path = 'storage/tech_conditions/';
-    private string $folder;
 
     public function __construct(TechCondition $model, PDF $pdf, Generator $qrcode) {
         $this->folder = 'tech_conditions';
+        $this->path = "$this->path/$this->folder/";
         $this->model = $model;
         $this->pdf = $pdf;
         $this->qrcode = $qrcode;
     }
 
     /**
+     * @param array $data
      * @throws Exception
      */
     public function create($data, Recommendation $model = null) {
@@ -46,6 +49,7 @@ class TechConditionService extends CrudService {
         // Create tech-condition
         $techCondition = new TechCondition([
             'proposition_id' => $proposition->id,
+            'applicant_id' => $model->applicant_id,
             'qrcode' => $this->qrcodeGenerate(4)
         ]);
 
@@ -62,7 +66,7 @@ class TechConditionService extends CrudService {
             ]);
 
             // Create pdf file
-            $filename = $this->createPDF($techCondition, $model, $proposition, $data['data']);
+            $filename = $this->createPDF($techCondition, $model, $proposition, $data['content']);
 
             // Technic condition
             $techCondition->pdf = $filename;
@@ -79,7 +83,7 @@ class TechConditionService extends CrudService {
      * This function to showing the tech-condition
      */
     public function get(TechCondition $condition): string {
-        return Storage::url('tech_conditions/' . $condition->pdf);
+        return Storage::url("$this->folder/$condition->pdf");
     }
 
     /**
@@ -91,7 +95,7 @@ class TechConditionService extends CrudService {
         $proposition = $model->proposition;
 
         // Create new pdf file for model
-        $filename = $this->createPDF($model, $proposition->recommendation, $proposition, $data['data']);
+        $filename = $this->createPDF($model, $proposition->recommendation, $proposition, $data['content']);
 
         // Delete old pdf file
         $this->deleteFile($this->path, $old);
@@ -100,7 +104,7 @@ class TechConditionService extends CrudService {
         parent::update(['pdf' => $filename], $model);
     }
 
-    public function upload($request, TechCondition $condition) {
+    public function finish($request, TechCondition $condition) {
         $proposition = $condition->proposition;
         $recommendation = $proposition->recommendation;
 
@@ -112,7 +116,7 @@ class TechConditionService extends CrudService {
 
         // Migrate data to reservation table
         if ($recommendation->type == Recommendation::REJECT) {
-            $this->cancel($proposition, $recommendation, $condition);
+            $this->reject($proposition, $recommendation, $condition);
             return;
         }
 
@@ -121,7 +125,7 @@ class TechConditionService extends CrudService {
         $proposition->update(['status' => Proposition::PROJECT_C]);
     }
 
-    private function createPDF(TechCondition $techCondition, Recommendation $recommendation, Proposition $proposition, string $text): string {
+    private function createPDF(TechCondition $techCondition, Recommendation $recommendation, Proposition $proposition, string $content): string {
         $organ = $recommendation->organ;
         $data = [
             'id' => $techCondition->id,
@@ -132,7 +136,7 @@ class TechConditionService extends CrudService {
             'organization' => Organization::Data()
         ];
 
-        $data['reference'] = $text;
+        $data['reference'] = $content;
         if ($recommendation->type == Recommendation::ACCEPT) {
             $equipments = []; // $recommendation->getEquipments();
 
@@ -148,7 +152,7 @@ class TechConditionService extends CrudService {
         return $filename;
     }
 
-    private function cancel(Proposition $proposition, Recommendation $recommendation, TechCondition $condition) {
+    private function reject(Proposition $proposition, Recommendation $recommendation, TechCondition $condition) {
         $cancelled = new CancelledProposition();
         $cancelled->fill([
             'number' => $proposition->number,
@@ -160,11 +164,14 @@ class TechConditionService extends CrudService {
             'reason' => $recommendation->description
         ]);
 
-        $this->move('tech_conditions/', $condition->pdf, 'c');
+        $this->move("$this->folder/", $condition->pdf, 'c');
         $this->move('recommendations/', $recommendation->pdf, 'r');
         $this->move('propositions/', $proposition->pdf, 'p');
 
         // Cascade on delete [Recommendation and TechCondition]
+        $proposition->applicant->update([
+            'proposition_id' => 0
+        ]);
         $this->delete($proposition);
 
         $cancelled->save();

@@ -26,7 +26,7 @@
 
                                 <div class="form-group mt-5">
                                     <label for="reference">@lang('technic.tech_condition.reference')</label>
-                                    <textarea name="data" id="reference"></textarea>
+                                    <textarea name="content" id="reference"></textarea>
                                 </div>
                             </div>
                             <div class="card-footer">

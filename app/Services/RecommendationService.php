@@ -99,13 +99,11 @@ class RecommendationService extends CrudService {
     /**
      * This function allows the user to see the file
      */
-    public function review(Recommendation $recommendation): string {
+    public function review(Recommendation $recommendation): void {
         $proposition = $recommendation->proposition;
         if ($proposition->status == Proposition::PRESENTED) {
             $proposition->update(['status' => Proposition::TECHNIC_CHECKED]);
         }
-
-        return $this->retrieve($this->path, $recommendation->pdf);
     }
 
     /**
@@ -129,7 +127,7 @@ class RecommendationService extends CrudService {
     }
 
     public function view(Recommendation $recommendation): string {
-
+        $this->review($recommendation);
         return $this->retrieve($this->path, $recommendation->pdf);
     }
 
