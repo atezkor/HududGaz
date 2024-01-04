@@ -1,8 +1,8 @@
 @extends('secondary')
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -25,43 +25,46 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($projects as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$model->applicant}}</td>
-                                <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}"
-                                       target="_blank">
-                                        @lang('designer.show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('designer.project.show', ['project' => $model])}}"
-                                       target="_blank">
-                                        @lang('designer.show')
-                                    </a>
-                                </td>
-                                <td>{{$organs[$model->organ]}}</td>
-                                <td>{{$model->comment}}</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="{{$model->progressColor($model->percent($limit))}}"
-                                             style="width: {{$model->percent($limit)}}%">
+                            @foreach($projects as $model)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
+                                    <td>
+                                        <a href="{{route('technic.tech-condition.view', $model->tech_condition_id)}}"
+                                           target="_blank">
+                                            @lang('designer.show')
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('designer.project.show', $model->id)}}"
+                                           target="_blank">
+                                            @lang('designer.show')
+                                        </a>
+                                    </td>
+                                    <td>{{$organs[$model->organ_id]}}</td>
+                                    <td>{{$model->comment}}</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="{{$model->progressColor($model->percent($limit))}}"
+                                                 style="width: {{$model->percent($limit)}}%">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center">{{$limit}} @lang('global.hour')</div>
-                                </td>
-                                <td>
-                                    <form action="{{route('designer.project.upload', ['project' => $model])}}" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" hidden>
-                                        <label for="file-{{$key}}" class="btn btn-outline-info my-0" title="@lang('global.btn_upload')">
-                                            <i class="fas fa-upload"></i>
-                                        </label>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                    </td>
+                                    <td>
+                                        <form action="{{route('designer.project.finish', $model->id)}}" method="post"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="file" name="pdf" id="pdf-{{$model->id}}"
+                                                   onchange="this.parentNode.submit()" hidden>
+                                            <label for="pdf-{{$model->id}}" class="btn btn-outline-info my-0"
+                                                   title="@lang('global.btn_upload')">
+                                                <i class="fas fa-upload"></i>
+                                            </label>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

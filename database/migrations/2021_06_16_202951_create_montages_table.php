@@ -11,7 +11,7 @@ class CreateMontagesTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('montages', function (Blueprint $table) {
+        Schema::create('montages', function(Blueprint $table) {
             $table->id();
             $table->foreignId('proposition_id')
                 ->constrained('propositions')
@@ -19,10 +19,10 @@ class CreateMontagesTable extends Migration {
             $table->unsignedBigInteger('tech_condition_id');
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('mounter_id');
-            $table->string('applicant');
+            $table->foreignId('applicant_id')->constrained('applicants');
+            $table->foreignId('organ_id')->constrained('organs');
             $table->integer('status')->default(1);
-            $table->tinyInteger('organ');
-            $table->string('file')->nullable();
+            $table->string('pdf')->nullable();
             $table->string('comment')->nullable();
             $table->timestamps();
         });

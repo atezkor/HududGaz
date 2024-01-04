@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Montage\MontageAcceptRequest;
 use App\Models\Montage;
 use App\Models\User;
 use App\Services\MontageService;
 use App\ViewModels\MontageViewModel;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use SimpleSoftwareIO\QrCode\Generator;
 
 
 class MontageController extends Controller {
 
-    private Generator $qrcode;
     private MontageService $service;
 
-    public function __construct(MontageService $service, Generator $generator) {
+    public function __construct(MontageService $service) {
         $this->service = $service;
-        $this->qrcode = $generator;
     }
 
     public function index(): View|RedirectResponse {
@@ -33,10 +32,7 @@ class MontageController extends Controller {
 
         $user = auth()->user();
         return view('installer.montages', new MontageViewModel(organizationId: $user->organization_id), [
-            'qrcode' => $this->qrcode->generate(json_encode([
-                'token' => csrf_token(),
-                'url' => route('mounter.project.open')
-            ]))
+            'qrcode' => $this->service->qrcode()
         ]);
     }
 
@@ -48,6 +44,21 @@ class MontageController extends Controller {
         }
 
         return view('engineer.montages', new MontageViewModel([Montage::CREATED, Montage::REVIEWED]));
+    }
+
+    public function store(MontageAcceptRequest $request): RedirectResponse {
+        try {
+            $this->authorize('crud_montage');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        try {
+            $this->service->create($request->get('code'));
+            return redirect()->back()->with('msg', __('global.messages.crt'));
+        } catch (Exception $ex) {
+            return redirect()->back()->with('error', __('global.msg.not_found'));
+        }
     }
 
     public function show(Request $request, Montage $montage): RedirectResponse {
@@ -79,17 +90,6 @@ class MontageController extends Controller {
         }
 
         $this->service->delete($montage);
-        return redirect()->back();
-    }
-
-    public function open(Request $request): RedirectResponse {
-        try {
-            $this->authorize('crud_montage');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        $this->service->create($request->get('code'));
         return redirect()->back();
     }
 

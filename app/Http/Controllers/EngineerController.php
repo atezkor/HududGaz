@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\District;
 use App\Models\License;
 use App\Models\Montage;
-use App\Models\Project;
 use App\Services\LicenseService;
 use App\Services\MontageService;
-use App\Services\ProjectService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,31 +15,12 @@ use Illuminate\View\View;
 
 class EngineerController extends Controller {
 
-    private ProjectService $projectService;
     private MontageService $montageService;
     private LicenseService $licenseService;
 
-    public function __construct(ProjectService $projectService, MontageService $montageService, LicenseService $licenseService) {
-        $this->projectService = $projectService;
+    public function __construct(MontageService $montageService, LicenseService $licenseService) {
         $this->montageService = $montageService;
         $this->licenseService = $licenseService;
-    }
-
-    public function project(Request $request, Project $project): RedirectResponse {
-        try {
-            $this->authorize('crud_permit');
-        } catch (AuthorizationException) {
-            return redirect('/');
-        }
-
-        if ($request->has('comment')) {
-            $data = $request->validate(['comment' => ['required']])['comment'];
-            $this->projectService->cancel($data, $project);
-            return redirect()->back();
-        }
-
-        $this->projectService->confirm($request->file('file'), $project);
-        return redirect()->back();
     }
 
     public function montage(Request $request, Montage $montage): RedirectResponse {
@@ -52,7 +31,7 @@ class EngineerController extends Controller {
         }
 
         if ($request->has('comment')) {
-            $this->montageService->cancel($request->comment, $montage);
+            $this->montageService->cancel($request->get('comment'), $montage);
             return redirect()->back();
         }
 

@@ -38,6 +38,9 @@ class Proposition extends Application {
     public const PROJECT_C = 8;
     public const PROJECT_CANCELLED = 9;
     public const PROJECT_CREATED = 10;
+    public const PROJECT_FINISHED = 14;
+
+    public const MONTAGE_CREATED = 15;
 
     public const ACCEPT = "accept";
     public const REJECT = "reject";

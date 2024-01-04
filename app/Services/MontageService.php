@@ -2,12 +2,17 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Montage;
+use App\Models\Proposition;
 use App\Models\TechCondition;
+use App\Models\User;
 use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Generator;
 
 
 class MontageService extends CrudService {
@@ -15,37 +20,53 @@ class MontageService extends CrudService {
 
     private string $folder;
 
-    public function __construct(Montage $model) {
+    private Generator $qrcode;
+
+    public function __construct(Montage $model, Generator $generator) {
         $this->model = $model;
         $this->folder = 'montages';
+
+        $this->qrcode = $generator;
     }
 
-    public function create($data): string {
+    public function create($data): void {
+        /**
+         * @var User $user
+         * @var TechCondition $condition
+         */
+
+        $user = auth()->user();
+
         $condition = TechCondition::query()
             ->where('qrcode', $data)
             ->whereHas('proposition', function(Builder $query) {
-                $query->where('status', 14);
-            })->first();
+                $query->where('status', Proposition::PROJECT_FINISHED);
+            })->firstOrFail();
 
-        if (!$condition)
-            return __('global.msg.not_found');
-
-        $proposition = $condition->getAttribute('proposition');
-        $applicant = $proposition->applicant;
+        $proposition = $condition->proposition;
         $data = [
-            'proposition_id' => $proposition->id,
-            'tech_condition_id' => $condition->getAttribute('id'),
+            'proposition_id' => $condition->proposition_id,
+            'tech_condition_id' => $condition->id,
             'project_id' => $condition->project->id,
-            'applicant' => $applicant->name,
-            'mounter_id' => auth()->user()->organ ?? 0,
-            'organ' => $proposition->organ
+            'mounter_id' => $user->organization_id,
+            'applicant_id' => $condition->applicant_id,
+            'organ_id' => $proposition->organization_id
         ];
-        $montage = new Montage($data);
-        $montage->save();
 
-        $proposition->update(['status' => 15]);
+        try {
+            DB::beginTransaction();
 
-        return __('global.messages.crt');
+            $proposition->update(['status' => Proposition::MONTAGE_CREATED]);
+
+            $montage = new Montage($data);
+            $montage->save();
+
+            DB::commit();
+        } catch (QueryException $ex) {
+            DB::rollBack();
+
+            throw $ex;
+        }
     }
 
     public function updatePart($data, $model) {
@@ -90,6 +111,13 @@ class MontageService extends CrudService {
     public function delete($model) {
         $this->propStatus($model, -$model->status);
         parent::delete($model);
+    }
+
+    public function qrcode() {
+        return $this->qrcode->size(500)->generate(json_encode([
+            'token' => csrf_token(),
+            'url' => route('mounter.project.open')
+        ]));
     }
 
     private function propStatus(Montage $montage, $status = 14) {

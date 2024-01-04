@@ -2,7 +2,7 @@
 
 namespace App\ViewModels;
 
-use App\Models\{Montage, Mounter, Organ, Status};
+use App\Models\{Montage, Mounter, Organ, Proposition, Status};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
@@ -30,7 +30,7 @@ class MontageViewModel extends ViewModel {
     }
 
     public function mounters(): Collection {
-        if (!$this->firmId)
+        if ($this->firmId)
             return new Collection();
 
         return Mounter::query()
@@ -41,8 +41,8 @@ class MontageViewModel extends ViewModel {
     // int $status, int $offset = 0
     function limit(): Collection|int {
         if (count($this->statuses) > 1)
-            return $this->limitMany(17, 15); // TODO statuses
-        return $this->limitOne(15);
+            return $this->limitMany(17, Proposition::MONTAGE_CREATED); // TODO statuses
+        return $this->limitOne(Proposition::MONTAGE_CREATED);
     }
 
     function limitMany(int $status, int $offset = 0): Collection {

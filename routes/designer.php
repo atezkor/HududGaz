@@ -12,7 +12,7 @@ Route::get('process', [App\Http\Controllers\ProjectController::class, 'process']
 Route::get('cancelled', [App\Http\Controllers\ProjectController::class, 'cancelled'])->name('designer.projects.cancelled');
 Route::get('completed', [App\Http\Controllers\ProjectController::class, 'archive'])->name('designer.projects.accomplished');
 
-Route::get('projects/{project}/show', [App\Http\Controllers\ProjectController::class, 'show'])->name('designer.project.show');
-Route::post('projects/{project}/upload', [App\Http\Controllers\ProjectController::class, 'update'])->name('designer.project.upload');
+Route::get('projects/{project}/view', [App\Http\Controllers\ProjectController::class, 'show'])->name('designer.project.show');
+Route::post('projects/{project}/finish', [App\Http\Controllers\ProjectController::class, 'update'])->name('designer.project.finish');
 Route::post('project/delete/{project?}', [App\Http\Controllers\ProjectController::class, 'delete'])->name('designer.project.delete');
 

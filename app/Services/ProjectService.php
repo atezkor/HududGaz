@@ -28,6 +28,9 @@ class ProjectService extends CrudService {
         $this->qrcode = $qrcode;
     }
 
+    /**
+     * @param array $data
+     */
     public function create($data): void {
         /**
          * @var User $user
@@ -62,7 +65,7 @@ class ProjectService extends CrudService {
             $this->deleteFile($this->directory, $project->pdf);
 
         $data = [
-            'pdf' => $this->store($file['file'], $this->directory),
+            'pdf' => $this->store($file['pdf'], $this->directory),
             'status' => Project::ACCEPTED
         ];
 
@@ -88,8 +91,8 @@ class ProjectService extends CrudService {
     }
 
     public function show(Project $project, $show = null): string {
-        if ($project->status == 2 && $show) {
-            $project->update(['status' => 3]);
+        if ($project->status == Project::ACCEPTED && $show) {
+            $project->update(['status' => Project::REVIEWED]);
             $this->propStatus($project);
         }
 
@@ -100,13 +103,13 @@ class ProjectService extends CrudService {
         $this->deleteFile($this->directory, $project->pdf);
         $this->update([
             'status' => Project::COMPLETED,
-            'file' => $this->store($file, $this->directory)
+            'pdf' => $this->store($file, $this->directory)
         ], $project);
 
         $this->propStatus($project);
     }
 
-    public function cancel(string $comment, Project $project) {
+    public function cancel(Project $project, string $comment) {
         $this->update(['status' => Project::CANCELLED, 'comment' => $comment], $project);
         $this->propStatus($project);
     }
@@ -117,13 +120,13 @@ class ProjectService extends CrudService {
     }
 
     public function qrcode(User $user) {
-        return $this->qrcode->generate(json_encode([
+        return $this->qrcode->size(500)->generate(json_encode([
             'token' => $user->getLastToken(),
             'url' => route('designer.project.create_api', ['user' => $user->id])
         ]));
     }
 
-    private function propStatus(Project $project, $status = 9) {
+    private function propStatus(Project $project, $status = Proposition::PROJECT_CANCELLED) {
         $proposition = $project->proposition;
         $proposition->update(['status' => $project->status + $status]);
     }

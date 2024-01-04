@@ -26,12 +26,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($models as $key => $model)
+                            @foreach($models as $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$model->applicant}}</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                        <a href="{{route('technic.tech-condition.view', $model->tech_condition_id)}}"
                                            target="_blank">
                                             @lang('global.btn_show')
                                         </a>
@@ -42,7 +42,7 @@
                                             @lang('global.btn_show')
                                         </a>
                                     </td>
-                                    <td>{{$organs[$model->organ]}}</td>
+                                    <td>{{$organs[$model->organ_id]}}</td>
                                     <td>
                                         <div class="progress progress-xs">
                                             <div class="{{$model->progressColor($model->percent($limit))}}"
@@ -56,8 +56,8 @@
                                               method="post"
                                               enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="file" id="file{{$key}}" hidden>
-                                            <button type="button" onclick="upload(file{{$key}})"
+                                            <input type="file" name="pdf" id="pdf-{{$model->id}}" hidden>
+                                            <button type="button" onclick="upload(pdf-{{$model->id}})"
                                                     class="btn btn-outline-info text-bold my-0"
                                                     title="@lang('global.btn_upload')">
                                                 <i class="fas fa-upload"></i>

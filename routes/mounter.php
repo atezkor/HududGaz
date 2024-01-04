@@ -11,7 +11,7 @@ Route::get('process', [App\Http\Controllers\MontageController::class, 'process']
 Route::get('cancelled', [App\Http\Controllers\MontageController::class, 'cancelled'])->name('mounter.cancelled');
 Route::get('accomplished', [App\Http\Controllers\MontageController::class, 'archive'])->name('mounter.archive');
 
-Route::post('project/open', [App\Http\Controllers\MontageController::class, 'open'])->name('mounter.project.open');
+Route::post('project/open', [App\Http\Controllers\MontageController::class, 'store'])->name('mounter.project.open');
 Route::post('montages/{montage}/upload', [App\Http\Controllers\MontageController::class, 'update'])->name('mounter.montage.upload');
 Route::get('montages/{montage}/show', [App\Http\Controllers\MontageController::class, 'show'])->name('mounter.montage.show');
 Route::post('montage/delete/{montage?}', [App\Http\Controllers\MontageController::class, 'delete'])->name('mounter.montage.delete');

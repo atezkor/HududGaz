@@ -41,8 +41,8 @@ class PropCounterProvider extends ServiceProvider {
 
             $numbers = match ($user->role_id) {
                 User::ORGAN => $this->applications($user->organization_id),
-//                User::DESIGNER => $this->projects($user->organization_id),
-//                User::MOUNTER => $this->montages($user->organization_id),
+                User::DESIGNER => $this->projects($user->organization_id),
+                User::MOUNTER => $this->montages($user->organization_id),
                 default => [0, 0, 0, 0, 0]
             };
 
@@ -61,12 +61,12 @@ class PropCounterProvider extends ServiceProvider {
         });
     }
 
-    private function projects($organId): array {
-        return $this->secondary(Project::query(), 'designer_id', $organId);
+    private function projects(int $organId): array {
+        return array_values($this->secondary(Project::query(), 'designer_id', $organId));
     }
 
     private function montages($organId): array {
-        return $this->secondary(Montage::query(), 'mounter_id', $organId);
+        return array_values($this->secondary(Montage::query(), 'mounter_id', $organId));
     }
 
     private function secondary(Builder $query, $column, $organizationId): array {

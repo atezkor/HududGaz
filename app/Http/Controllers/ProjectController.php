@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProjectCreateRequest;
+use App\Http\Requests\Project\ProjectAcceptRequest;
+use App\Http\Requests\Project\ProjectCreateRequest;
+use App\Http\Requests\Project\ProjectRejectRequest;
 use App\Models\Project;
 use App\Models\User;
 use App\Services\ProjectService;
@@ -80,6 +82,40 @@ class ProjectController extends Controller {
         }
 
         $this->service->delete($project);
+        return redirect()->back();
+    }
+
+    /**
+     * Engineer route
+     * @param ProjectAcceptRequest $request
+     * @param Project $project
+     * @return RedirectResponse
+     */
+    public function accept(ProjectAcceptRequest $request, Project $project): RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $this->service->confirm($request->file('pdf'), $project);
+        return redirect()->back();
+    }
+
+    /**
+     * Engineer route
+     * @param ProjectRejectRequest $request
+     * @param Project $project
+     * @return RedirectResponse
+     */
+    public function reject(ProjectRejectRequest $request, Project $project): RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        $this->service->cancel($project, $request->get('comment'));
         return redirect()->back();
     }
 

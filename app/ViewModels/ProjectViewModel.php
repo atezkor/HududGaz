@@ -22,7 +22,7 @@ class ProjectViewModel extends ViewModel {
     }
 
     function projects(): Collection {
-        return Project::with('proposition')
+        return Project::with(['proposition', 'applicant:id,name,tin_pin'])
             ->whereIn('status', $this->statuses)
             ->when($this->designerId, fn(Builder $query) => $query->where('designer_id', $this->designerId))
             ->orderBy('proposition_id')
@@ -34,7 +34,7 @@ class ProjectViewModel extends ViewModel {
     }
 
     public function designers(): Collection {
-        if (!$this->designerId)
+        if ($this->designerId)
             return new Collection();
 
         return Designer::query()
@@ -42,7 +42,7 @@ class ProjectViewModel extends ViewModel {
     }
 
     function limit(): Collection|int { // TODO limit
-        if (count($this->statuses))
+        if (count($this->statuses) > 1)
             return $this->limitMany(12, 10);
         return $this->limitOne($this->statuses[0] + 9); // TODO statuses
     }

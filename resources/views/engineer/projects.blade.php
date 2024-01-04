@@ -27,24 +27,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($projects as $key => $model)
+                            @foreach($projects as $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$model->applicant->name}}</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                        <a href="{{route('technic.tech-condition.view', $model->tech_condition_id)}}"
                                            target="_blank">
                                             @lang('engineer.show')
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('designer.project.show', $model)}}"
+                                        <a href="{{route('designer.project.show', $model->id)}}"
                                            target="_blank">
                                             @lang('engineer.show')
                                         </a>
                                     </td>
                                     <td>{{$designers[$model->designer_id]}}</td>
-                                    <td>{{$organs[$model->organ]}}</td>
+                                    <td>{{$organs[$model->organ_id]}}</td>
                                     <td>
                                         <div class="progress progress-xs">
                                             <div
@@ -58,9 +58,9 @@
                                         <form action="{{route('engineer.project.confirm', $model)}}"
                                               method="post" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="file" id="file-{{$key}}"
+                                            <input type="file" name="pdf" id="pdf-{{$model->id}}"
                                                    onchange="this.parentNode.submit()" hidden>
-                                            <label for="file-{{$key}}" class="btn btn-outline-info my-0"
+                                            <label for="pdf-{{$model->id}}" class="btn btn-outline-info my-0"
                                                    title="@lang('global.btn_cfm')">
                                                 <i class="fas fa-check"></i>
                                             </label>

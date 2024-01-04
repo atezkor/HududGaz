@@ -45,13 +45,13 @@
                                         <div class="text-center">{{$limit}} @lang('global.hour')</div>
                                     </td>
                                     <td>
-                                        <form action="{{route('designer.project.upload', $model->id)}}"
+                                        <form action="{{route('designer.project.finish', $model->id)}}"
                                               method="post"
                                               enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="file" id="file-{{$model->id}}"
+                                            <input type="file" name="pdf" id="pdf-{{$model->id}}"
                                                    onchange="upload(this)" hidden>
-                                            <label for="file-{{$model->id}}" class="btn btn-outline-info text-bold my-0"
+                                            <label for="pdf-{{$model->id}}" class="btn btn-outline-info text-bold my-0"
                                                    title="@lang('global.btn_upload')">
                                                 <i class="fas fa-upload"></i>
                                             </label>
