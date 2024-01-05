@@ -57,7 +57,8 @@ return [
         'individual' => "Jismoniy shaxs",
         'legal_entity' => "Yuridik shaxs",
         'residential' => "Turar",
-        'non_residential' => "Noturar"
+        'non_residential' => "Noturar",
+        'comment' => "Izoh"
     ],
     'applicant' => [
         'pin_fl' => "JSHSHIR",

@@ -22,48 +22,51 @@
                                 <th>@lang('mounter.project.name')</th>
                                 <th>@lang('mounter.montage')</th>
                                 <th>@lang('mounter.organ')</th>
+                                <th>@lang('global.proposition.comment')</th>
                                 <th>@lang('global.proposition.limit')</th>
                                 <th>@lang('global.proposition.action')</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($models as $key => $model)
+                            @foreach($models as $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$model->applicant}}</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                        <a href="{{route('mounter.tech-condition.view', $model->tech_condition_id)}}"
                                            target="_blank">
                                             @lang('global.btn_show')
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('designer.project.show', $model->project_id)}}"
+                                        <a href="{{route('mounter.project.view', $model->project_id)}}"
                                            target="_blank">
                                             @lang('global.btn_show')
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('mounter.montage.show', $model->id)}}" target="_blank">
+                                        <a href="{{route('mounter.montage.view', $model->id)}}" target="_blank">
                                             @lang('global.btn_show')
                                         </a>
                                     </td>
-                                    <td>{{$organs[$model->organ]}}</td>
+                                    <td>{{$organs[$model->organ_id]}}</td>
+                                    <td>{{$model->comment}}</td>
                                     <td>
                                         <div class="progress progress-xs">
-                                            <div class="{{$model->progressColor($model->percent($limit))}}"
-                                                 style="width: {{$model->percent($limit)}}%">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($limit($model->status)))}}"
+                                                style="width: {{$model->percent($limit($model->status))}}%">
                                             </div>
                                         </div>
-                                        <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                        <div class="text-center">{{$limit($model->status)}} @lang('global.hour')</div>
                                     </td>
                                     <td>
-                                        <form action="{{route('mounter.montage.upload', $model->id)}}" method="post"
+                                        <form action="{{route('mounter.montage.finish', $model->id)}}" method="post"
                                               enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="file" id="file-{{$key}}"
+                                            <input type="file" name="pdf" id="pdf-{{$model->id}}"
                                                    onchange="this.parentElement.submit()" hidden>
-                                            <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0"
+                                            <label for="pdf-{{$model->id}}" class="btn btn-outline-info text-bold my-0"
                                                    title="@lang('global.btn_upload')">
                                                 <i class="fas fa-upload"></i>
                                             </label>

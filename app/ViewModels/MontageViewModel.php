@@ -13,9 +13,12 @@ class MontageViewModel extends ViewModel {
     private array $statuses;
     private int $firmId;
 
+    private Collection $limits;
+
     public function __construct(array $statuses = [Montage::CREATED], $organizationId = 0) {
         $this->statuses = $statuses;
         $this->firmId = $organizationId;
+        $this->limits = Status::query()->pluck('term', 'id');
     }
 
     function models(): Collection {
@@ -39,19 +42,7 @@ class MontageViewModel extends ViewModel {
 
     /* This is function for application term */
     // int $status, int $offset = 0
-    function limit(): Collection|int {
-        if (count($this->statuses) > 1)
-            return $this->limitMany(17, Proposition::MONTAGE_CREATED); // TODO statuses
-        return $this->limitOne(Proposition::MONTAGE_CREATED);
-    }
-
-    function limitMany(int $status, int $offset = 0): Collection {
-        return Status::query()->offset($offset)
-            ->limit($status - $offset)
-            ->pluck('term', 'id');
-    }
-
-    function limitOne(int $status): int {
-        return Status::query()->find($status)->getAttribute('term');
+    function limit(int $status): int {
+        return $this->limits[$status + Proposition::PROJECT_FINISHED];
     }
 }

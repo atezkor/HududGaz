@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Montage\MontageAcceptRequest;
+use App\Http\Requests\Montage\MontageCreateRequest;
+use App\Http\Requests\Montage\MontageFinishRequest;
+use App\Http\Requests\Montage\MontageRejectRequest;
 use App\Models\Montage;
 use App\Models\User;
 use App\Services\MontageService;
@@ -43,10 +46,10 @@ class MontageController extends Controller {
             return redirect('/');
         }
 
-        return view('engineer.montages', new MontageViewModel([Montage::CREATED, Montage::REVIEWED]));
+        return view('engineer.montages', new MontageViewModel([Montage::ACCEPTED, Montage::REVIEWED]));
     }
 
-    public function store(MontageAcceptRequest $request): RedirectResponse {
+    public function store(MontageCreateRequest $request): RedirectResponse {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
@@ -62,10 +65,10 @@ class MontageController extends Controller {
     }
 
     public function show(Request $request, Montage $montage): RedirectResponse {
-        return redirect($this->service->show($montage, $request->get('show')));
+        return redirect($this->service->view($montage, $request->get('show')));
     }
 
-    public function update(Request $request, Montage $montage): RedirectResponse {
+    public function update(MontageFinishRequest $request, Montage $montage): RedirectResponse {
         try {
             $this->authorize('crud_montage');
         } catch (AuthorizationException) {
@@ -77,9 +80,12 @@ class MontageController extends Controller {
             redirect()->back();
         }
 
-        $data = $request->validate(['file' => ['required']]);
-        $this->service->upload($data, $montage);
-        return redirect()->back();
+        try {
+            $this->service->finish($montage, $request->file('pdf'));
+            return redirect()->back();
+        } catch (Exception $ex) {
+            return redirect()->back();
+        }
     }
 
     public function delete(Montage $montage): RedirectResponse {
@@ -91,6 +97,37 @@ class MontageController extends Controller {
 
         $this->service->delete($montage);
         return redirect()->back();
+    }
+
+    public function confirm(MontageAcceptRequest $request, Montage $montage): RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        try {
+            $this->service->accept($montage, $request->file('pdf'));
+            // $this->licenseService->createLicense($montage); // TODO
+            return redirect()->back();
+        } catch (Exception $ex) {
+            return redirect()->back();
+        }
+    }
+
+    public function reject(MontageRejectRequest $request, Montage $montage): RedirectResponse {
+        try {
+            $this->authorize('crud_permit');
+        } catch (AuthorizationException) {
+            return redirect('/');
+        }
+
+        try {
+            $this->service->cancel($montage, $request->get('reason'));
+            return redirect()->back();
+        } catch (Exception $ex) {
+            return redirect()->back();
+        }
     }
 
     public function process(): View|RedirectResponse {

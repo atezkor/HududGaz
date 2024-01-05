@@ -1,8 +1,8 @@
 @extends('layout')
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -28,51 +28,59 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($models as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$model->applicant}}</td>
-                                <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}" target="_blank">
-                                        @lang('global.btn_show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('designer.project.show', ['project' => $model->project])}}" target="_blank">
-                                        @lang('global.btn_show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('mounter.montage.show', ['montage' => $model, 'show' => true])}}" target="_blank">
-                                        @lang('global.btn_show')
-                                    </a>
-                                </td>
-                                <td>{{$mounters[$model->mounter_id]}}</td>
-                                <td>{{$organs[$model->organ]}}</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
-                                             style="width: {{$model->percent($model->limit($limit))}}%">
+                            @foreach($models as $model)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
+                                    <td>
+                                        <a href="{{route('engineer.tech-condition.view', $model->tech_condition_id)}}"
+                                           target="_blank">
+                                            <span>@lang('global.btn_show')</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('engineer.project.view', $model->project_id)}}"
+                                           target="_blank">
+                                            <span>@lang('global.btn_show')</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('engineer.montage.view', ['montage' => $model->id, 'show' => true])}}"
+                                           target="_blank">
+                                            <span>@lang('global.btn_show')</span>
+                                        </a>
+                                    </td>
+                                    <td>{{$mounters[$model->mounter_id]}}</td>
+                                    <td>{{$organs[$model->organ_id]}}</td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($limit($model->status)))}}"
+                                                style="width: {{$model->percent($limit($model->status))}}%">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
-                                </td>
-                                <td>
-                                    <form action="{{route('engineer.montage.confirm', ['montage' => $model])}}" method="post"
-                                          enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="file" id="file-{{$key}}" onchange="this.parentNode.submit()" hidden>
-                                        <label for="file-{{$key}}" class="btn btn-outline-info text-bold my-0" title="@lang('global.btn_upload')">
-                                            <i class="fas fa-upload"></i>
-                                        </label>
-                                        <button type="button" onclick="cancel('{{route('engineer.montage.cancel', ['montage' => $model])}}')"
-                                                class="btn btn-outline-danger" title="@lang('global.btn_cancel')">
-                                            <i class="fas fa-ban"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <div class="text-center">{{$limit($model->status)}} @lang('global.hour')</div>
+                                    </td>
+                                    <td>
+                                        <form action="{{route('engineer.montage.confirm', $model->id)}}"
+                                              method="post"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="file" name="pdf" id="pdf-{{$model->id}}"
+                                                   onchange="this.parentNode.submit()" hidden>
+                                            <label for="pdf-{{$model->id}}" class="btn btn-outline-info text-bold my-0"
+                                                   title="@lang('global.btn_upload')">
+                                                <i class="fas fa-upload"></i>
+                                            </label>
+                                            <button type="button"
+                                                    onclick="cancel('{{route('engineer.montage.reject', $model->id)}}')"
+                                                    class="btn btn-outline-danger" title="@lang('global.btn_cancel')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -80,7 +88,7 @@
         </div>
     </section>
 @endsection
-@section('javascript')
+@section('js')
     <script src="{{'/js/jquery.min.js'}}"></script>
     <script src="{{'/js/bootstrap.bundle.min.js'}}"></script>
     <script src="{{'/js/datatable/datatables.jquery.min.js'}}"></script>
@@ -122,7 +130,7 @@
                         },
                         credentials: "same-origin",
                         body: JSON.stringify({
-                            comment: value
+                            reason: value
                         })
                     }).then(response => {
                         if (!response.ok) {

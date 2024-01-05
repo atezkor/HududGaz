@@ -32,13 +32,13 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.tech-condition.view', $model->tech_condition_id)}}"
+                                        <a href="{{route('engineer.tech-condition.view', $model->tech_condition_id)}}"
                                            target="_blank">
                                             @lang('engineer.show')
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('designer.project.show', $model->id)}}"
+                                        <a href="{{route('engineer.project.view', $model->id)}}"
                                            target="_blank">
                                             @lang('engineer.show')
                                         </a>

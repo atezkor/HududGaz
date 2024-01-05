@@ -23,6 +23,7 @@
                                 <th>@lang('mounter.organ')</th>
                                 <th>@lang('global.proposition.limit')</th>
                                 <th>@lang('global.proposition.action')</th>
+                                <th>@lang('global.proposition.date')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,13 +32,13 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.tech-condition.view', $model->tech_condition_id)}}"
+                                        <a href="{{route('mounter.tech-condition.view', $model->tech_condition_id)}}"
                                            target="_blank">
                                             @lang('global.btn_show')
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('designer.project.show', $model->project_id)}}"
+                                        <a href="{{route('mounter.project.view', $model->project_id)}}"
                                            target="_blank">
                                             @lang('global.btn_show')
                                         </a>
@@ -45,19 +46,19 @@
                                     <td>{{$organs[$model->organ_id]}}</td>
                                     <td>
                                         <div class="progress progress-xs">
-                                            <div class="{{$model->progressColor($model->percent($limit))}}"
-                                                 style="width: {{$model->percent($limit)}}%">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($limit($model->status)))}}"
+                                                style="width: {{$model->percent($limit($model->status))}}%">
                                             </div>
                                         </div>
-                                        <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                        <div class="text-center">{{$limit($model->status)}} @lang('global.hour')</div>
                                     </td>
                                     <td>
-                                        <form action="{{route('mounter.montage.upload', $model)}}"
-                                              method="post"
+                                        <form action="{{route('mounter.montage.finish', $model)}}" method="post"
                                               enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="pdf" id="pdf-{{$model->id}}" hidden>
-                                            <button type="button" onclick="upload(pdf-{{$model->id}})"
+                                            <input type="file" name="pdf" id="pdf_{{$model->id}}" hidden>
+                                            <button type="button" onclick="finish(pdf_{{$model->id}})"
                                                     class="btn btn-outline-info text-bold my-0"
                                                     title="@lang('global.btn_upload')">
                                                 <i class="fas fa-upload"></i>
@@ -67,6 +68,9 @@
                                                 <i class="fas fa-ban"></i>
                                             </button>
                                         </form>
+                                    </td>
+                                    <td>
+                                        <span>{{$model->created_at->format('d.m.Y H:i')}}</span>
                                     </td>
                                 </tr>
                             @endforeach
@@ -138,7 +142,7 @@
             $('#number').val(null);
         }
 
-        function upload(input) {
+        function finish(input) {
             Swal.fire({
                 title: "@lang('mounter.alert_title')",
                 text: "@lang('mounter.alert_text')",

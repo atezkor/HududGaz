@@ -34,7 +34,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('designer.project.show', ['project' => $model])}}"
+                                        <a href="{{route('designer.project.view', ['project' => $model])}}"
                                            target="_blank">
                                             @lang('designer.show')
                                         </a>

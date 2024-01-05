@@ -23,39 +23,43 @@
                                 <th>@lang('mounter.montage')</th>
                                 <th>@lang('mounter.organ')</th>
                                 <th>@lang('global.proposition.limit')</th>
+                                <th>@lang('global.proposition.date')</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($models as $key => $model)
+                            @foreach($models as $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$model->applicant}}</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                        <a href="{{route('mounter.tech-condition.view', $model->tech_condition_id)}}"
                                            target="_blank">
-                                            @lang('global.btn_show')
+                                            <span>@lang('global.btn_show')</span>
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('designer.project.show', $model->project_id)}}"
+                                        <a href="{{route('mounter.project.view', $model->project_id)}}"
                                            target="_blank">
-                                            @lang('global.btn_show')
+                                            <span>@lang('global.btn_show')</span>
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('mounter.montage.show', $model)}}" target="_blank">
-                                            @lang('global.btn_show')
+                                        <a href="{{route('mounter.montage.view', $model)}}" target="_blank">
+                                            <span>@lang('global.btn_show')</span>
                                         </a>
                                     </td>
-                                    <td>{{$organs[$model->organ]}}</td>
+                                    <td>{{$organs[$model->organ_id]}}</td>
                                     <td>
                                         <div class="progress progress-xs">
                                             <div
-                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
-                                                style="width: {{$model->percent($model->limit($limit))}}%">
+                                                class="{{$model->progressColor($model->percent($limit($model->status)))}}"
+                                                style="width: {{$model->percent($limit($model->status))}}%">
                                             </div>
                                         </div>
-                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+                                        <div class="text-center">{{$limit($model->status)}} @lang('global.hour')</div>
+                                    </td>
+                                    <td>
+                                        <span>{{$model->created_at->format('d.m.Y H:i')}}</span>
                                     </td>
                                 </tr>
                             @endforeach

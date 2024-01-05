@@ -4,7 +4,7 @@ namespace App\Http\Requests\Montage;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MontageAcceptRequest extends FormRequest {
+class MontageFinishRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -19,9 +19,10 @@ class MontageAcceptRequest extends FormRequest {
      *
      * @return array
      */
-    public function rules(): array {
+    public function rules() {
         return [
-            'pdf' => "required"
+            'pdf' => ['required'],
+            'diameter' => []
         ];
     }
 }

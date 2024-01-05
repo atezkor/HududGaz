@@ -7,8 +7,8 @@
 @extends($layout)
 @section('title', getName())
 @section('link')
-<link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
-<link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/datatables.bootstrap4.min.css'}}">
+    <link rel="stylesheet" href="{{'/css/datatable/responsive.bootstrap4.min.css'}}">
 @endsection
 
 @section('content')
@@ -25,28 +25,34 @@
                                 <th>@lang('designer.tech_condition')</th>
                                 <th>@lang('designer.project.name')</th>
                                 <th>@lang('designer.organ')</th>
+                                <th>@lang('global.proposition.date')</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($projects as $key => $model)
-                            <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$model->applicant}}</td>
-                                <td>
-                                    <a href="{{route('technic.tech_condition.show', ['condition' => $model->tech_condition_id])}}"
-                                       target="_blank">
-                                        @lang('designer.show')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{route('designer.project.show', ['project' => $model])}}"
-                                       target="_blank">
-                                        @lang('designer.show')
-                                    </a>
-                                </td>
-                                <td>{{$organs[$model->organ]}}</td>
-                            </tr>
-                        @endforeach
+                            @foreach($projects as $model)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
+                                    <td>
+                                        <a href="{{route('designer.tech-condition.view', $model->tech_condition_id)}}"
+                                           target="_blank">
+                                            <span>@lang('designer.show')</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('designer.project.view', $model->id)}}"
+                                           target="_blank">
+                                            <span>@lang('designer.show')</span>
+                                        </a>
+                                    </td>
+                                    <td>{{$organs[$model->organ_id]}}</td>
+                                    <td>
+                                        <span>{{$model->created_at->format('d.m.Y H:i')}}</span>
+                                        <span>-</span>
+                                        <span>{{$model->updated_at->format('d.m.Y H:i')}}</span>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

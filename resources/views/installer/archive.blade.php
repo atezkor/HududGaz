@@ -26,32 +26,38 @@
                                 <th>@lang('mounter.project.name')</th>
                                 <th>@lang('mounter.montage')</th>
                                 <th>@lang('mounter.organ')</th>
+                                <th>@lang('global.proposition.date')</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($models as $key => $model)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$model->applicant}}</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$model->applicant->name}} ({{$model->applicant->tin_pin}})</td>
                                     <td>
-                                        <a href="{{route('technic.tech_condition.show', $model->tech_condition_id)}}"
+                                        <a href="{{route('mounter.tech-condition.view', $model->tech_condition_id)}}"
                                            target="_blank">
                                             @lang('designer.show')
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('designer.project.show', $model->project_id)}}"
+                                        <a href="{{route('mounter.project.view', $model->project_id)}}"
                                            target="_blank">
                                             @lang('designer.show')
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('mounter.montage.show', $model->id)}}"
+                                        <a href="{{route('mounter.montage.view', $model->id)}}"
                                            target="_blank">
                                             @lang('designer.show')
                                         </a>
                                     </td>
-                                    <td>{{$organs[$model->organ]}}</td>
+                                    <td>{{$organs[$model->organ_id]}}</td>
+                                    <td>
+                                        <span>{{$model->created_at->format('d.m.Y H:i')}}</span>
+                                        <span>-</span>
+                                        <span>{{$model->updated_at->format('d.m.Y H:i')}}</span>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

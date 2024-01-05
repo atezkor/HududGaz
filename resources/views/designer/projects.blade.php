@@ -32,7 +32,7 @@
                                     <td>
                                         <a href="{{route('technic.tech-condition.view', $model->tech_condition_id)}}"
                                            target="_blank">
-                                            @lang('designer.show')
+                                            <span>@lang('designer.show')</span>
                                         </a>
                                     </td>
                                     <td>{{$organs[$model->organ_id]}}</td>

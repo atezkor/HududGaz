@@ -8,10 +8,11 @@ use App\Models\TechCondition;
 use App\Models\User;
 use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Generator;
 
 
@@ -69,43 +70,82 @@ class MontageService extends CrudService {
         }
     }
 
-    public function updatePart($data, $model) {
-        $model->proposition->recommendation->update(['pipe2' => $data]);
-    }
-
-    public function upload($data, Montage $montage) {
-        if ($this->model->file)
-            $this->deleteFile($this->folder, $this->model->file);
-
-        $montage->update([
-            'status' => 2,
-            'file' => $this->store($data['file'], $this->folder)
-        ]);
-
-        $this->propStatus($montage);
-    }
-
-    public function show(Montage $montage, $show = false): string {
-        if ($montage->status == 2 && $show) {
-            $montage->update(['status' => 3]);
+    public function view(Montage $montage, $show = false): string {
+        if ($montage->status == Montage::ACCEPTED && $show) {
+            $montage->update(['status' => Montage::REVIEWED]);
             $this->propStatus($montage);
         }
 
-        return Storage::url("$this->folder/" . $montage->file);
+        return $this->retrieve($this->folder, $montage->pdf);
     }
 
-    public function action($file, Montage $montage) {
-        $this->deleteFile($this->folder, $montage->file);
-        $this->update(
-            ['status' => 5, 'file' => $this->store($file, $this->folder)],
-            $montage
-        );
-        $this->propStatus($montage);
+    public function updatePart(array $data, Montage $model) {
+        $model->proposition->recommendation->update(['pipe_two' => $data]);
     }
 
-    public function cancel(string $comment, Montage $montage) {
-        $this->update(['status' => 4, 'comment' => $comment], $montage);
-        $this->propStatus($montage);
+    /**
+     * @throws Exception
+     */
+    public function finish(Montage $montage, $pdf) {
+        $old = $this->model->pdf;
+
+        try {
+            DB::beginTransaction();
+
+            $montage->update([
+                'status' => Montage::ACCEPTED,
+                'pdf' => $this->store($pdf, $this->folder)
+            ]);
+
+            $this->propStatus($montage);
+
+            $this->deleteFile($this->folder, $old);
+
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function accept(Montage $montage, UploadedFile $pdf) {
+        try {
+            DB::beginTransaction();
+            $old = $montage->pdf;
+            $this->update([
+                'status' => Montage::COMPLETED,
+                'pdf' => $this->store($pdf, $this->folder)
+            ],
+                $montage
+            );
+            $this->propStatus($montage);
+            $this->deleteFile($this->folder, $old);
+
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function cancel(Montage $montage, string $reason) {
+        try {
+            DB::beginTransaction();
+
+            $this->update(['status' => Montage::CANCELLED, 'comment' => $reason], $montage);
+            $this->propStatus($montage);
+
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
     }
 
     public function delete($model) {
@@ -114,13 +154,13 @@ class MontageService extends CrudService {
     }
 
     public function qrcode() {
-        return $this->qrcode->size(500)->generate(json_encode([
+        return $this->qrcode->size(400)->generate(json_encode([
             'token' => csrf_token(),
             'url' => route('mounter.project.open')
         ]));
     }
 
-    private function propStatus(Montage $montage, $status = 14) {
+    private function propStatus(Montage $montage, $status = Proposition::PROJECT_FINISHED) {
         $proposition = $montage->proposition;
         $proposition->update(['status' => $montage->status + $status]);
     }
