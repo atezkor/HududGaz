@@ -110,7 +110,7 @@ class RecommendationController extends Controller {
         $data = $request->validated();
 
         $this->service->update($data, $recommendation);
-        $this->propService->update(['status' => 3], $recommendation->proposition);
+        $this->propService->update(['status' => Proposition::ACCEPTED], $recommendation->proposition);
         return redirect()->route('organ.recommendations.cancelled');
     }
 

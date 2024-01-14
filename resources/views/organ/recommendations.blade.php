@@ -48,19 +48,23 @@
                                     <td>
                                         <div class="progress progress-xs">
                                             <div
-                                                class="{{$model->recommendation->progressColor($model->recommendation->percent($limit))}}"
-                                                style="width: {{$model->recommendation->percent($limit)}}%">
+                                                class="{{$model->progressColor($model->percent($limit($model->recommendation->status)))}}"
+                                                style="width: {{$model->percent($limit($model->recommendation->status))}}%">
                                             </div>
                                         </div>
-                                        <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                        <div class="text-center">
+                                            <span>{{$limit($model->recommendation->status)}} @lang('global.hour')</span>
+                                        </div>
                                     </td>
                                     <td>
                                         <form action="{{route('organ.recommendation.upload', $model->recommendation)}}"
                                               method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="pdf" id="file-{{$loop->index}}" onchange="upload(this)"
+                                            <input type="file" name="pdf" id="file-{{$loop->index}}"
+                                                   onchange="upload(this)"
                                                    hidden>
-                                            <label for="file-{{$loop->index}}" class="btn btn-outline-info text-bold my-0"
+                                            <label for="file-{{$loop->index}}"
+                                                   class="btn btn-outline-info text-bold my-0"
                                                    title="@lang('global.btn_upload')">
                                                 <i class="fas fa-upload"></i>
                                             </label>

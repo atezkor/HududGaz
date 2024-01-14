@@ -12,11 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class PhysicalApplicant extends Model {
 
-    protected $fillable = ['proposition_id', 'name', 'surname', 'phone', 'passport', 'tin', 'pin_fl'];
-
-    public function getFullNameAttribute() {
-        return $this->getAttribute('name');
-    }
+    protected $fillable = ['name', 'surname', 'phone', 'passport', 'tin', 'pin_fl'];
 
     public function propositions(): HasMany {
         return $this->hasMany(Proposition::class, 'id', 'proposition_id');

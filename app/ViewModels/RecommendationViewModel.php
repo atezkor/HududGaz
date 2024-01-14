@@ -15,11 +15,14 @@ class RecommendationViewModel extends ViewModel {
     private array $statuses;
     private int $organizationId;
 
+    private Collection $limits;
+
     public function __construct(array $propStatuses = [Proposition::ACCEPTED], array $statuses = [Recommendation::CREATED], int $organizationId = 0) {
         $this->propStatuses = $propStatuses;
         $this->statuses = $statuses;
 
         $this->organizationId = $organizationId;
+        $this->limits = Status::query()->pluck('term', 'id');
     }
 
     public function recommendations(): Collection {
@@ -43,20 +46,8 @@ class RecommendationViewModel extends ViewModel {
         return Organ::query()->pluck('name', 'id');
     }
 
-    function limit(): Collection|int {
-        if (count($this->propStatuses) < 1)
-            return $this->limitMany(Recommendation::COMPLETED, Recommendation::REVIEWED);
-        return $this->limitOne(Proposition::ACCEPTED);
-    }
-
-    function limitMany(int $status, int $offset = 0): Collection {
-        return Status::query()->offset($offset)
-            ->limit($status - $offset)
-            ->pluck('term', 'id');
-    }
-
-    function limitOne(int $status): int {
-        return Status::query()->find($status)->getAttribute('term');
+    function limit(int $status): int {
+        return $this->limits[$status + Proposition::PROJECT_FINISHED];
     }
 
     /* Reference and pointer function */

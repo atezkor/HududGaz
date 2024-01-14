@@ -36,7 +36,7 @@ class LicenseController extends Controller {
     }
 
     public function show(License $permit): RedirectResponse {
-        return redirect('storage/permits/' . $permit->file);
+        return redirect('storage/permits/' . $permit->pdf);
     }
 
     public function upload(Request $request, License $permit): RedirectResponse {
@@ -46,7 +46,7 @@ class LicenseController extends Controller {
             return redirect('/');
         }
 
-        $this->service->upload($request->file('file'), $permit);
+        $this->service->upload($request->file('pdf'), $permit);
         return redirect()->back();
     }
 }

@@ -11,7 +11,7 @@ class CreateLicensesTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('licenses', function (Blueprint $table) {
+        Schema::create('licenses', function(Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposition_id');
             $table->string('applicant');
@@ -19,7 +19,7 @@ class CreateLicensesTable extends Migration {
             $table->unsignedBigInteger('montage_id');
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('district');
-            $table->string('file')->nullable();
+            $table->string('pdf')->nullable();
         });
     }
 

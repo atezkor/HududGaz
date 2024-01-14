@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property Proposition proposition
- * @property Project project
+ * @property string $pdf
+ * @property string $district
  * @property Montage montage
- * @property string district
- * @property string file
+ * @property Project project
+ * @property Proposition proposition
  */
 class License extends Model {
     use HasFactory;
 
     public const CREATED = 1;
+    public const PRESENTED = 2;
 
     public $timestamps = false;
     protected $fillable = ['proposition_id', 'applicant', 'project_id', 'montage_id', 'district', 'status', 'file'];

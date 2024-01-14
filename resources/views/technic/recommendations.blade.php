@@ -46,11 +46,11 @@
                                     <td>
                                         <div class="progress progress-xs">
                                             <div
-                                                class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
-                                                style="width: {{$model->percent($model->limit($limit))}}%">
+                                                class="{{$model->progressColor($model->percent($limit($model->status)))}}"
+                                                style="width: {{$model->percent($limit($model->status))}}%">
                                             </div>
                                         </div>
-                                        <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+                                        <div class="text-center">{{$limit($model->status)}} @lang('global.hour')</div>
                                     </td>
                                     <td>
                                         @if($show)

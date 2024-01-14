@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Utilities\FileUploadManager;
 use App\Utilities\StorageManager;
 use Barryvdh\DomPDF\PDF;
+use Illuminate\Http\UploadedFile;
 
 
 class LicenseService extends CrudService {
@@ -55,20 +56,20 @@ class LicenseService extends CrudService {
             'designer' => $license->project->designer->name,
             'installer' => $license->montage->mounter->short_name,
             'district' => $district,
-            'meters' => $recommendation->GasMeters(),
-            'equipments' => $recommendation->getEquipments()
+            'meters' => [], // $recommendation->GasMeters(), // TODO
+            'equipments' => [] // $recommendation->getEquipments() // TODO
         ];
 
         view()->share($data);
         $this->pdf->loadView('engineer.permit')->save($this->path . $filename);
-        $license->update(['file' => $filename]);
+        $license->update(['pdf' => $filename]);
     }
 
-    public function upload($file, License $permit) {
-        $this->deleteFile('storage/permits/', $permit->file);
+    public function upload(UploadedFile $file, License $permit) {
+        $this->deleteFile('storage/permits/', $permit->pdf);
         $filename = $this->store($file, 'permits');
 
-        $permit->update(['file' => $filename, 'status' => 2]);
+        $permit->update(['pdf' => $filename, 'status' => License::PRESENTED]);
         $permit->proposition->update(['status' => 20]);
     }
 }

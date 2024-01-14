@@ -38,11 +38,14 @@
                                     <td>{{$organs[$model->organ_id]}}</td>
                                     <td>
                                         <div class="progress progress-xs">
-                                            <div class="{{'$model->progressColor($model->percent($limit))'}}"
-                                                 style="width: {{'$model->percent($limit)'}}%">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($limit($model->status)))}}"
+                                                style="width: {{$model->percent($limit($model->status))}}%">
                                             </div>
                                         </div>
-                                        <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                        <div class="text-center">
+                                            <span>{{$limit($model->status)}} @lang('global.hour')</span>
+                                        </div>
                                     </td>
                                     <td>
                                         <form action="{{route('designer.project.finish', $model->id)}}"

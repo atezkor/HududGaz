@@ -6,7 +6,9 @@
 <form action="{{$action}}" method="post" enctype="multipart/form-data">
     @csrf
     @include('components.errors')
-    @method($method)
+    @if($model->id)
+        @method($method)
+    @endif
 
     <div class="card-body">
         <h3 class="text-center">@lang('technic.applicant.info')</h3>
@@ -215,7 +217,7 @@
 
     <script>
         function checkTin(type, tin) {
-            $.get(`{{route('propositions.check-for-tin')}}/${type}/${tin}`, function(model) {
+            $.get(`{{route('applicants.check-for-tin')}}/${type}/${tin}`, function(model) {
                 $("#passport").val(model.passport)
                 $("#phone").val(model.phone)
                 $("#legal_name").val(model.name)
@@ -228,7 +230,7 @@
         }
 
         function checkByPinFl(type, pinFl) {
-            $.get(`{{route('propositions.check-for-pin')}}/${type}/${pinFl}`, function(model) {
+            $.get(`{{route('applicants.check-for-pin')}}/${type}/${pinFl}`, function(model) {
                 $("#passport").val(model.passport)
                 $("#phone").val(model.phone)
                 $("#name").val(model.name)

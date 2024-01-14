@@ -16,9 +16,13 @@ class PropositionListViewModel extends ViewModel {
     private array $statuses;
     private int $organizationId;
 
+    private Collection $limits;
+
     public function __construct($statuses = [Proposition::CREATED, Proposition::REVIEWED], int $organizationId = 0) {
         $this->statuses = $statuses;
         $this->organizationId = $organizationId;
+
+        $this->limits = Status::query()->pluck('term', 'id');
     }
 
     function applications(): Models {
@@ -43,28 +47,8 @@ class PropositionListViewModel extends ViewModel {
             ->get();
     }
 
-    function limit(): Collection {
-        return self::limiter(Proposition::REVIEWED);
-    }
-
     /* This is function for application term */
-    function limit3(int $status): Collection {
-        return Status::query()->offset(0)
-            ->limit($status)
-            ->pluck('term', 'id');
-    }
-
-    /* This is function for application term */
-    private static function limiter(int $status, int $offset = 0): Collection {
-        return Status::query()
-            ->offset($offset)
-            ->limit($status - $offset)
-            ->pluck('term', 'id');
-    }
-
-    /* This is function for application term */
-    // int $status, int $offset = 0
-    function limitX(int $status): int {
-        return $status; // $this->limits[$status + Proposition::PROJECT_FINISHED];
+    function limit(int $status): int {
+        return $this->limits[$status + Proposition::PROJECT_FINISHED];
     }
 }

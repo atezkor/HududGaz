@@ -8,6 +8,7 @@ use App\Http\Requests\Montage\MontageFinishRequest;
 use App\Http\Requests\Montage\MontageRejectRequest;
 use App\Models\Montage;
 use App\Models\User;
+use App\Services\LicenseService;
 use App\Services\MontageService;
 use App\ViewModels\MontageViewModel;
 use Exception;
@@ -20,9 +21,11 @@ use Illuminate\View\View;
 class MontageController extends Controller {
 
     private MontageService $service;
+    private LicenseService $licenseService;
 
-    public function __construct(MontageService $service) {
+    public function __construct(MontageService $service, LicenseService $licenseService) {
         $this->service = $service;
+        $this->licenseService = $licenseService;
     }
 
     public function index(): View|RedirectResponse {
@@ -108,7 +111,7 @@ class MontageController extends Controller {
 
         try {
             $this->service->accept($montage, $request->file('pdf'));
-            // $this->licenseService->createLicense($montage); // TODO
+            $this->licenseService->createLicense($montage);
             return redirect()->back();
         } catch (Exception $ex) {
             return redirect()->back();

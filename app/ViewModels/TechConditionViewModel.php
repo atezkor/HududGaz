@@ -26,6 +26,6 @@ class TechConditionViewModel extends ViewModel {
     }
 
     function limit() {
-        return Status::query()->find(7)->getAttribute('term');
+        return Status::query()->find(Proposition::TC_CREATED)->getAttribute('term');
     }
 }

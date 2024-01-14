@@ -62,7 +62,9 @@ class PropositionService extends CrudService {
         }
         parent::update($data, $model);
 
-        $this->applicantService->update($data, $model->applicant);
+        if (isset($data['proposition_id'])) {
+            $this->applicantService->update($data, $model->applicant);
+        }
     }
 
     public function delete($model) {

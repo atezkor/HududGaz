@@ -12,7 +12,6 @@
         </tr>
     </thead>
     <tbody>
-        @php($limit = $limit3)
         @foreach($applications as $model)
             <tr>
                 <td>{{$loop->iteration}}</td>
@@ -27,11 +26,12 @@
                 <td>{{$model->created_at->format('d.m.Y H:i')}}</td>
                 <td>
                     <div class="progress progress-xs">
-                        <div class="{{$model->progressColor($model->percent($limitX($model->status)))}}"
-                             style="width: {{$model->percent($limitX($model->status))}}%">
+                        <div
+                            class="{{$model->progressColor($model->percent($limit($model->status)))}}"
+                            style="width: {{$model->percent($limit($model->status))}}%">
                         </div>
                     </div>
-                    <div class="text-center">{{$limitX($model->status)}} @lang('global.hour')</div>
+                    <div class="text-center">{{$limit($model->status)}} @lang('global.hour')</div>
                 </td>
                 <td>
                     <form action="{{route('propositions.destroy', $model->id)}}" method="post">

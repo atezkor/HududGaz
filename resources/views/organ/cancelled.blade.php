@@ -26,7 +26,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php($limit = $limitOne(6))
                             @foreach($recommendations as $model)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
@@ -40,11 +39,14 @@
                                     <td>{{$model->comment}}</td>
                                     <td>
                                         <div class="progress progress-xs">
-                                            <div class="{{$model->progressColor($model->percent($limit))}}"
-                                                 style="width: {{$model->percent($limit)}}%">
+                                            <div
+                                                class="{{$model->progressColor($model->percent($limit($model->status)))}}"
+                                                style="width: {{$model->percent($limit($model->status))}}%">
                                             </div>
                                         </div>
-                                        <div class="text-center">{{$limit}} @lang('global.hour')</div>
+                                        <div class="text-center">
+                                            <span>{{$limit($model->status)}} @lang('global.hour')</span>
+                                        </div>
                                     </td>
                                     <td>
                                         <a href="{{route('organ.recommendation.edit', $model->id)}}"

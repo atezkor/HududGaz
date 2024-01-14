@@ -8,9 +8,11 @@ Route::get('', function() {
 });
 
 Route::resource('propositions', PropositionController::class);
-Route::get('propositions/check-for-tin/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'check'])->name('propositions.check-for-tin');
-Route::get('propositions/check-for-pinfl/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'check'])->name('propositions.check-for-pin');
 Route::get('propositions/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'exist'])->name('technic.propositions');
+
+# Applicant
+Route::get('applicants/check-for-tin/{type?}/{tin?}', [App\Http\Controllers\PropositionController::class, 'check'])->name('applicants.check-for-tin');
+Route::get('applicants/check-for-pinfl/{type?}/{pin?}', [App\Http\Controllers\PropositionController::class, 'check'])->name('applicants.check-for-pin');
 
 Route::get('recommendations', [App\Http\Controllers\RecommendationController::class, 'technic'])->name('technic.recommendations');
 Route::get('recommendations/{recommendation}', [App\Http\Controllers\RecommendationController::class, 'view'])->name('technic.recommendation.view');

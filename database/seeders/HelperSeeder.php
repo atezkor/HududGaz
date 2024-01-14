@@ -67,7 +67,7 @@ class HelperSeeder extends Seeder {
             ]);
 
             Applicant::query()->create([
-                'type' => Applicant::PHYSICAL,
+                'type' => Applicant::LEGAL,
                 'legal_applicant_id' => $person->id,
                 'proposition_id' => $model->id,
                 'name' => $person->name,

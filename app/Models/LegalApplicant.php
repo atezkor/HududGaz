@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class LegalApplicant extends Model {
 
     protected $fillable = [
-        'proposition_id', 'tin', 'name', 'email', 'phone',
+        'tin', 'name', 'email', 'phone',
         'director', 'director_pin_fl'
     ];
 
