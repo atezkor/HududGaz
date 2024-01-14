@@ -42,6 +42,7 @@ class HelperSeeder extends Seeder {
     private function insertProposition() {
         /**
          * @var Proposition $model
+         * @var PhysicalApplicant|LegalApplicant $person
          */
         $appLegalList = ['Anvar', 'Abror'];
         $appPhysicalList = ['Bekdiyor', 'Mirzabek'];
@@ -57,7 +58,6 @@ class HelperSeeder extends Seeder {
             ]);
 
             $person = LegalApplicant::query()->create([
-                'proposition_id' => $model->id,
                 'tin' => rand(100000000, 1000000000),
                 'name' => $applicant . ' Industries',
                 'phone' => "+998 99 555 15 55",
@@ -86,7 +86,6 @@ class HelperSeeder extends Seeder {
             ]);
 
             $person = PhysicalApplicant::query()->create([
-                'proposition_id' => $model->id,
                 'name' => $applicant,
                 'surname' => "",
                 'phone' => "+998 99 555 15 55",

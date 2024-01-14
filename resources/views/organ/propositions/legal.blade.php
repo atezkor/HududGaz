@@ -15,7 +15,7 @@
             <tr>
                 <td>{{$loop->index + 1}}</td>
                 <td>{{$model->number}}</td>
-                <td>{{$model->legal->tin}}</td>
+                <td>{{$model->applicant->tin_pin}}</td>
                 <td>
                     <a href="{{route('organ.proposition.show', ['proposition' => $model])}}" target="_blank">
                         @lang('global.proposition.show')

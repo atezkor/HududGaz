@@ -20,9 +20,13 @@ class PropositionService extends CrudService {
     private string $path = 'storage/propositions';
     private string $folder;
 
-    public function __construct(Proposition $model) {
+    private ApplicantService $applicantService;
+
+    public function __construct(Proposition $model, ApplicantService $applicantService) {
         $this->model = $model;
         $this->folder = 'propositions';
+
+        $this->applicantService = $applicantService;
     }
 
     public function create($data) {
@@ -35,7 +39,7 @@ class PropositionService extends CrudService {
             parent::create($data);
 
             $data['proposition_id'] = $this->model->id;
-            $this->createApplicant($data);
+            $this->applicantService->create($data);
             DB::commit();
         } catch (QueryException $ex) {
             DB::rollBack();
@@ -47,6 +51,10 @@ class PropositionService extends CrudService {
         return Proposition::query()->find($id);
     }
 
+    /**
+     * @param $data
+     * @param Proposition $model
+     */
     public function update($data, $model) {
         if (isset($data['pdf'])) {
             $data['pdf'] = $this->createFile($this->path, $data['pdf']);
@@ -54,9 +62,7 @@ class PropositionService extends CrudService {
         }
         parent::update($data, $model);
 
-        $applicant = $model->applicant;
-        $applicant->fill($data);
-        $applicant->save();
+        $this->applicantService->update($data, $model->applicant);
     }
 
     public function delete($model) {
@@ -86,15 +92,6 @@ class PropositionService extends CrudService {
             ->with('propositions:id')
             ->where('tin', $tinPin)
             ->firstOrNew();
-    }
-
-    private function createApplicant(array $data) {
-        if (intval($data['type']) === Application::PHYSICAL)
-            $model = new PhysicalApplicant();
-        else
-            $model = new LegalApplicant();
-        $model->fill($data);
-        $model->save();
     }
 
     public function exist($type, $tin): Collection {

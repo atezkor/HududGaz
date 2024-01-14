@@ -20,7 +20,6 @@ class CreateApplicantsTable extends Migration {
             $table->foreignId('proposition_id')->nullable();
             $table->string('name');
             $table->string('tin_pin');
-            $table->timestamps();
         });
     }
 

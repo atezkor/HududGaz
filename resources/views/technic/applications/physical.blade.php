@@ -12,12 +12,12 @@
         </tr>
     </thead>
     <tbody>
-        @php($limit = limit(3))
+        @php($limit = $limit3)
         @foreach($applications as $model)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$model->number}}</td>
-                <td>{{$model->individual->pin_fl}}</td>
+                <td>{{$model->applicant->tin_pin}}</td>
                 <td>{{$model->organ->name}}</td>
                 <td>
                     <a href="{{route('propositions.show', $model->id)}}" target="_blank">
@@ -27,11 +27,11 @@
                 <td>{{$model->created_at->format('d.m.Y H:i')}}</td>
                 <td>
                     <div class="progress progress-xs">
-                        <div class="{{$model->progressColor($model->percent($model->limit($limit)))}}"
-                             style="width: {{$model->percent($model->limit($limit))}}%">
+                        <div class="{{$model->progressColor($model->percent($limitX($model->status)))}}"
+                             style="width: {{$model->percent($limitX($model->status))}}%">
                         </div>
                     </div>
-                    <div class="text-center">{{$model->limit($limit)}} @lang('global.hour')</div>
+                    <div class="text-center">{{$limitX($model->status)}} @lang('global.hour')</div>
                 </td>
                 <td>
                     <form action="{{route('propositions.destroy', $model->id)}}" method="post">

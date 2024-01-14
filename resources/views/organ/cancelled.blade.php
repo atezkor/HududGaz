@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php($limit = limitOne(6))
+                            @php($limit = $limitOne(6))
                             @foreach($recommendations as $model)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>

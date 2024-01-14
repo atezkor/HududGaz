@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $tin
+ */
 class LegalApplicant extends Model {
-
-    public $timestamps = false;
 
     protected $fillable = [
         'proposition_id', 'tin', 'name', 'email', 'phone',

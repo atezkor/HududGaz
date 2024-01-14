@@ -106,7 +106,7 @@ class PropositionController extends Controller {
             return redirect('/');
         }
 
-        $applicant = $proposition->petitioner;
+        $applicant = $proposition->applicant->petitioner;
         $organs = Organ::all();
         $activities = Activity::query()->pluck('activity', 'id'); // ->skip(1)->take(5)->pluck('activity', 'id');
         return view('technic.applications.edit', [

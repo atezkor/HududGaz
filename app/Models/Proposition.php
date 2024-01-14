@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read string $pdf
  * @property-read int $build_type
  * @property-read Applicant $applicant
- * @property-read Applicant $petitioner
  * @property-read Recommendation recommendation
  * @property-read TechCondition techCondition
  * @property-read Organ organ
@@ -50,20 +49,8 @@ class Proposition extends Application {
         'activity_type', 'build_type', 'status', 'pdf'
     ];
 
-    public function individual(): HasOne {
-        return $this->hasOne(PhysicalApplicant::class);
-    }
-
-    public function legal(): HasOne {
-        return $this->hasOne(LegalApplicant::class);
-    }
-
     public function applicant(): HasOne {
         return $this->hasOne(Applicant::class);
-    }
-
-    public function petitioner(): HasOne {
-        return $this->type == self::PHYSICAL ? $this->individual() : $this->legal();
     }
 
     public function recommendation(): HasOne {

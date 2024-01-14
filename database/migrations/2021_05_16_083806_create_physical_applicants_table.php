@@ -14,18 +14,13 @@ class CreatePhysicalApplicantsTable extends Migration {
     public function up() {
         Schema::create('physical_applicants', function(Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proposition_id')->index();
             $table->string('name');
             $table->string('surname');
             $table->string('phone');
             $table->string('passport');
             $table->integer('tin')->nullable();
-            $table->bigInteger('pin_fl');
-
-            $table->foreign('proposition_id')
-                ->references('id')
-                ->on('propositions')
-                ->onDelete('cascade');
+            $table->bigInteger('pin_fl')->unique();
+            $table->timestamps();
         });
     }
 

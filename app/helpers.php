@@ -55,15 +55,6 @@ function formatDate($date, $format = 'd.m.Y'): string {
     return date_format($res, $format);
 }
 
-/* This is function for application term */
-function limit(int $status, int $offset = 0): Illuminate\Support\Collection {
-    return App\Models\Status::query()->offset($offset)->limit($status - $offset)->pluck('term', 'id');
-}
-
-function limitOne(int $status): int {
-    return App\Models\Status::query()->find($status)->getAttribute('term');
-}
-
 function extendedDate($date, bool $reverse = false): string {
     $months = [
         __('organ.january'),

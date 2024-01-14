@@ -13,18 +13,13 @@ class CreateLegalApplicantsTable extends Migration {
     public function up() {
         Schema::create('legal_applicants', function(Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proposition_id')->index();
             $table->string('name');
-            $table->integer('tin');
+            $table->integer('tin')->unique();
             $table->string('phone');
             $table->string('email');
             $table->string('director');
-            $table->string('director_pin_fl');
-
-            $table->foreign('proposition_id')
-                ->references('id')
-                ->on('propositions')
-                ->onDelete('cascade');
+            $table->string('director_pin_fl')->unique();
+            $table->timestamps();
         });
     }
 
