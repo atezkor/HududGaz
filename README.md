@@ -74,7 +74,8 @@ Front-End
 - [Source Sans Pro](https://fonts.adobe.com/fonts/source-sans)
 
 Voila (uala)
-# Havolalar
+### Havolalar
 - https://benjamincrozat.com/install-php-mac-laravel-valet
 - https://www.w3docs.com/
 - https://remark.js.org/
+- [Xarita](https://invest.gov.uz/regionalnaya-karta/)
